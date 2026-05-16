@@ -1,0 +1,24 @@
+$ENTRY Go {
+  = <Prout <TreeSort [5 2 8 1 9 3]>>;
+}
+
+TreeSort {
+  s.Arr = <Inorder <BuildTree s.Arr>>;
+}
+
+BuildTree {
+  [] = ;
+  s.X s.Xs = <Insert (<BuildTree s.Xs>) s.X>;
+}
+
+Insert {
+  s.Val = (s.Val);
+  (s.V s.L s.R) s.Val, <Compare s.Val s.V> : '+' = (s.V <Insert s.L s.Val> s.R);
+  (s.V s.L s.R) s.Val, <Compare s.Val s.V> : '-' = (s.V s.L <Insert s.R s.Val>);
+  (s.V s.L s.R) s.Val = (s.V s.L s.R);
+}
+
+Inorder {
+  = ;
+  (s.V s.L s.R) = <Inorder s.L> s.V <Inorder s.R>;
+}
