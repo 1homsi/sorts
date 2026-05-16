@@ -1,0 +1,29 @@
+import androidx.compose.runtime.*
+import androidx.compose.material.*
+import androidx.compose.foundation.layout.*
+
+fun insertionSort(arr: IntArray): IntArray {
+    val a = arr.copyOf()
+    val n = a.size
+    for (i in 1 until n) {
+        val key = a[i]
+        var j = i - 1
+        while (j >= 0 && a[j] > key) {
+            a[j + 1] = a[j]
+            j--
+        }
+        a[j + 1] = key
+    }
+    return a
+}
+
+@Composable
+fun InsertionSortApp() {
+    var sorted by remember { mutableStateOf(intArrayOf()) }
+    Column {
+        Button(onClick = { sorted = insertionSort(intArrayOf(5, 3, 1, 4, 2)) }) {
+            Text("Sort")
+        }
+        Text(sorted.joinToString(", "))
+    }
+}
