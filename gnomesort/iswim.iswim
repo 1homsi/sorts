@@ -1,0 +1,14 @@
+def gnomesort arr =
+  let rec helper i =
+    if i >= length arr then arr
+    else if i = 0 then helper (i + 1)
+    else if arr[i] < arr[i - 1] then
+      (let temp = arr[i] in
+        (arr[i] := arr[i - 1];
+         arr[i - 1] := temp;
+         helper (i - 1)))
+    else helper (i + 1)
+  in helper 0;
+
+val test = [5, 2, 8, 1, 9, 3];
+printList (gnomesort test);
