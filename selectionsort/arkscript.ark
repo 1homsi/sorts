@@ -1,0 +1,16 @@
+(let selection-sort (fun (arr) (do
+  (let n (len arr))
+  (let i 0)
+  (while (< i (- n 1))
+    (let min-idx i)
+    (let j (+ i 1))
+    (while (< j n)
+      (if (< (at j arr) (at min-idx arr))
+        (set min-idx j))
+      (set j (+ j 1)))
+    (let tmp (at i arr))
+    (set-at i arr (at min-idx arr))
+    (set-at min-idx arr tmp)
+    (set i (+ i 1))))))
+
+(print (selection-sort [5 2 8 1 9 3]))
