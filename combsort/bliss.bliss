@@ -1,0 +1,30 @@
+MODULE COMB_SORT (IDENT = '1.0') =
+BEGIN
+
+FORWARD ROUTINE
+    COMB_SORT;
+
+GLOBAL ROUTINE COMB_SORT (ARR, N) =
+BEGIN
+    LOCAL GAP, SORTED, TMP, I;
+    GAP = .N;
+    SORTED = 0;
+    WHILE NOT .SORTED DO
+    BEGIN
+        GAP = .GAP * 10 / 13;
+        IF .GAP LEQ 1 THEN BEGIN GAP = 1; SORTED = 1; END;
+        INCR I FROM 0 TO .N - .GAP - 1 DO
+        BEGIN
+            IF .ARR [.I] GTR .ARR [.I + .GAP] THEN
+            BEGIN
+                TMP = .ARR [.I];
+                ARR [.I] = .ARR [.I + .GAP];
+                ARR [.I + .GAP] = .TMP;
+                SORTED = 0;
+            END;
+        END;
+    END;
+    RETURN 1;
+END;
+
+END ELUDOM
