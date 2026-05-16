@@ -1,0 +1,51 @@
+(defun cycle-sort (arr)
+  (prog (n writes cycle-start item pos i tmp)
+    (setq n (length arr))
+    (setq writes 0)
+    (setq cycle-start 0)
+    outer
+    (cond ((>= cycle-start (1- n)) (return arr)))
+    (setq item (nth cycle-start arr))
+    (setq pos cycle-start)
+    (setq i (1+ cycle-start))
+    inner
+    (cond ((>= i n) (go endinner)))
+    (cond ((< (nth i arr) item) (setq pos (1+ pos))))
+    (setq i (1+ i))
+    (go inner)
+    endinner
+    (cond ((= pos cycle-start) (go next)))
+    skip
+    (cond ((not (= (nth pos arr) item)) (go doswap)))
+    (setq pos (1+ pos))
+    (go skip)
+    doswap
+    (setq tmp (nth pos arr))
+    (rplaca (nthcdr pos arr) item)
+    (setq item tmp)
+    (setq writes (1+ writes))
+    loop
+    (cond ((= pos cycle-start) (go next)))
+    (setq pos cycle-start)
+    (setq i (1+ cycle-start))
+    linner
+    (cond ((>= i n) (go endlinner)))
+    (cond ((< (nth i arr) item) (setq pos (1+ pos))))
+    (setq i (1+ i))
+    (go linner)
+    endlinner
+    lskip
+    (cond ((not (= (nth pos arr) item)) (go ldoswap)))
+    (setq pos (1+ pos))
+    (go lskip)
+    ldoswap
+    (setq tmp (nth pos arr))
+    (rplaca (nthcdr pos arr) item)
+    (setq item tmp)
+    (setq writes (1+ writes))
+    (go loop)
+    next
+    (setq cycle-start (1+ cycle-start))
+    (go outer)))
+
+(print (cycle-sort (list 5 4 3 2 1)))
