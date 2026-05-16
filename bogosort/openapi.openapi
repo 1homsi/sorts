@@ -1,1 +1,1 @@
-print("Bogosort implementation for openapi.openapi")
+bogosort = true
