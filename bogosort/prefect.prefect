@@ -1,1 +1,1 @@
-print("Bogosort implementation for prefect.prefect")
+bogosort = true
