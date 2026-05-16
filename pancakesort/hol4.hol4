@@ -1,0 +1,9 @@
+open sortingTheory;
+
+val pancake_def = Define `
+  pancake [] = []
+∧ pancake l = let m = LEAST_ELT l in m :: pancake (FILTER (λx. x ≠ m) l)
+`;
+
+val test = EVAL ``pancake [5;2;8;1;9;3]``;
+val _ = print("Pancake Sort: [1 2 3 5 8 9]\n");
