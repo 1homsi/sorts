@@ -1,0 +1,30 @@
+#lang racket
+
+(define (insert-sorted x lst)
+  (cond [(null? lst) (list x)]
+        [(<= x (car lst)) (cons x lst)]
+        [else (cons (car lst) (insert-sorted x (cdr lst)))]))
+
+(define (insertion-sort lst)
+  (if (null? lst) '()
+      (insert-sorted (car lst) (insertion-sort (cdr lst)))))
+
+(define (get-idx num mn mx n)
+  (min (- n 1)
+       (exact (floor (* (/ (- num mn) (+ (- mx mn) 1)) n)))))
+
+(define (bucket-sort arr)
+  (if (null? arr) arr
+      (let* ([n (length arr)]
+             [mn (apply min arr)]
+             [mx (apply max arr)]
+             [buckets (make-vector n '())])
+        (for-each (lambda (x)
+                    (let ([idx (get-idx x mn mx n)])
+                      (vector-set! buckets idx
+                                   (append (vector-ref buckets idx) (list x)))))
+                  arr)
+        (apply append (map insertion-sort (vector->list buckets))))))
+
+(display (bucket-sort '(0.78 0.17 0.39 0.26 0.72 0.94 0.21 0.12 0.23 0.68)))
+(newline)
