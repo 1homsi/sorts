@@ -1,0 +1,13 @@
+val merge_def = Define `
+  merge [] ys = ys /  merge xs [] = xs /  merge (x::xs) (y::ys) = 
+    if x <= y then x::merge xs (y::ys) else y::merge (x::xs) ys
+`;
+
+val mergesort_def = Define `
+  mergesort [] = [] /  mergesort [x] = [x] /  mergesort xs = let mid = LENGTH xs / 2;
+                     left = TAKE mid xs;
+                     right = DROP mid xs
+                 in merge (mergesort left) (mergesort right)
+`;
+
+val test = EVAL ``mergesort [5; 2; 8; 1; 9; 3]``;
