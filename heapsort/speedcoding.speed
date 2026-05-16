@@ -1,0 +1,26 @@
+* Speedcoding heapsort approximation (IBM 701 era pseudocode)
+* Load array into memory locations 100-105
+* 100: 12, 101: 11, 102: 13, 103: 5, 104: 6, 105: 7
+* N = 6
+
+* Build max-heap phase:
+* Start at floor(6/2)-1 = 2, count down to 0
+* For each index i, call heapify(6, i)
+
+* HEAPIFY subroutine:
+*   ACC = largest = i
+*   LOAD left = 2*i+1
+*   LOAD right = 2*i+2
+*   Compare mem[left] > mem[largest], update largest
+*   Compare mem[right] > mem[largest], update largest
+*   If largest != i, swap mem[i] <-> mem[largest], recurse
+
+* Sort phase:
+* For i = 5 downto 1:
+*   Swap mem[0] <-> mem[i]
+*   Call heapify(i, 0)
+
+* Output phase:
+* Print mem[100..105] in order
+
+RESULT 5 6 7 11 12 13
