@@ -1,0 +1,24 @@
+{
+  description = "Gnome sort in Nix flakes";
+
+  outputs = { self, nixpkgs }: {
+    lib.gnomeSort = lst:
+      let
+        inherit (builtins) length elemAt;
+        swap = arr: i:
+          let ai = elemAt arr i; ai1 = elemAt arr (i - 1);
+          in builtins.genList (j:
+            if j == i then ai1
+            else if j == i - 1 then ai
+            else elemAt arr j
+          ) (length arr);
+        loop = arr: i: n:
+          if i >= n then arr
+          else if i == 0 then loop arr 1 n
+          else
+            let ai = elemAt arr i; ai1 = elemAt arr (i - 1); in
+            if ai >= ai1 then loop arr (i + 1) n
+            else loop (swap arr i) (i - 1) n;
+      in loop lst 0 (length lst);
+  };
+}
