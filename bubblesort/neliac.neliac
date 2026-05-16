@@ -1,0 +1,21 @@
+BEGIN
+    INTEGER ARRAY ARR[0:6];
+    INTEGER N, I, TMP;
+    BOOLEAN SWAPPED;
+    ARR[0]:=64; ARR[1]:=34; ARR[2]:=25; ARR[3]:=12;
+    ARR[4]:=22; ARR[5]:=11; ARR[6]:=90;
+    N := 7;
+    SWAPPED := TRUE;
+    REPEAT BEGIN
+        SWAPPED := FALSE;
+        FOR I := 0 STEP 1 UNTIL N-2 DO
+            IF ARR[I] > ARR[I+1] THEN BEGIN
+                TMP := ARR[I];
+                ARR[I] := ARR[I+1];
+                ARR[I+1] := TMP;
+                SWAPPED := TRUE
+            END;
+        N := N - 1
+    END UNTIL NOT SWAPPED;
+    FOR I := 0 STEP 1 UNTIL 6 DO PRINT(ARR[I])
+END
