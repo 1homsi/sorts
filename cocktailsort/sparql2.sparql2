@@ -1,0 +1,8 @@
+PREFIX sort: <http://example.org/cocktailsort#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?index ?value WHERE {
+    ?item sort:index ?index ;
+          sort:value ?value .
+}
+ORDER BY ?index
