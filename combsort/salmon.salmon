@@ -1,0 +1,20 @@
+def comb_sort(arr : array of int) : array of int
+  var gap : int = arr.size()
+  var swapped : bool = true
+  while gap > 1 or swapped
+    gap = (gap * 10) / 13
+    if gap < 1
+      gap = 1
+    var i : int = 0
+    swapped = false
+    while i < arr.size() - gap
+      if arr[i] > arr[i + gap]
+        var temp : int = arr[i]
+        arr[i] = arr[i + gap]
+        arr[i + gap] = temp
+        swapped = true
+      i += 1
+  return arr
+
+var sample : array of int = [5, 2, 8, 1, 9, 3]
+print(comb_sort(sample))
