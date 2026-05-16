@@ -1,0 +1,35 @@
+DEFINE BITONICSORT
+ROUTINE
+    DECLARE ARR, LO, CNT, DIR, K, I, TMP
+    IF CNT > 1
+        LET K = CNT / 2
+        CALL BITONICSORT WITH ARR, LO, K, 1
+        CALL BITONICSORT WITH ARR, LO + K, K, 0
+        CALL BITONICMERGE WITH ARR, LO, CNT, DIR
+    END IF
+END
+
+DEFINE BITONICMERGE
+ROUTINE
+    DECLARE ARR, LO, CNT, DIR, K, I, TMP
+    IF CNT > 1
+        LET K = CNT / 2
+        FOR I = LO TO LO + CNT - K - 1
+            IF (ARR(I) > ARR(I + K)) = (DIR = 1)
+                LET TMP = ARR(I)
+                LET ARR(I) = ARR(I + K)
+                LET ARR(I + K) = TMP
+            END IF
+        END FOR
+        CALL BITONICMERGE WITH ARR, LO, K, DIR
+        CALL BITONICMERGE WITH ARR, LO + K, K, DIR
+    END IF
+END
+
+MAIN
+    DECLARE ARR(8)
+    LET ARR(1) = 5, ARR(2) = 2, ARR(3) = 8, ARR(4) = 1
+    LET ARR(5) = 9, ARR(6) = 3, ARR(7) = 7, ARR(8) = 4
+    CALL BITONICSORT WITH ARR, 1, 8, 1
+    PRINT ARR
+END
