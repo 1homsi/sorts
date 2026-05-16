@@ -1,0 +1,15 @@
+def insertionSort(arr: list<number>): list<number>
+  var n = len(arr)
+  for i = 1; i < n; ++i
+    var key = arr[i]
+    var j = i - 1
+    while j >= 0 and arr[j] > key
+      arr[j+1] = arr[j]
+      --j
+    endwhile
+    arr[j+1] = key
+  endfor
+  return arr
+enddef
+
+echo insertionSort([5, 2, 8, 1, 9, 3])
