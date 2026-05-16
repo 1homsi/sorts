@@ -1,0 +1,16 @@
+function bubble_sort(a) =
+  let
+    function pass(a) =
+      if (#a <= 1) then a
+      else if (#a == 2) then
+        if (a[0] <= a[1]) then a else [a[1], a[0]] endif
+      else
+        if (a[0] <= a[1]) then
+          [a[0]] ++ pass(drop(1, a))
+        else
+          [a[1]] ++ pass([a[0]] ++ drop(2, a))
+        endif
+      endif
+  in
+    if (#a <= 1) then a else pass(a) endif
+  end;
