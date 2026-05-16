@@ -1,1 +1,1 @@
-print("Bogosort implementation for hiveql.hql")
+SELECT * FROM array ORDER BY value ASC;
