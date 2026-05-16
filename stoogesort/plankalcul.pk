@@ -1,0 +1,9 @@
+P1 stoogesort
+  A) -> i, j
+  P2 swap
+    A[i] <-> A[j]
+  P3 recursive
+    t = (j - i + 1) / 3
+    call stoogesort(i, j-t)
+    call stoogesort(i+t, j)
+    call stoogesort(i, j-t)
