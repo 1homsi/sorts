@@ -1,0 +1,55 @@
+        .include "m328pdef.inc"
+
+        .dseg
+arr:    .byte 10
+
+        .cseg
+        .org 0x0000
+        rjmp main
+
+main:
+        ldi r16, 5
+        sts arr+0, r16
+        ldi r16, 3
+        sts arr+1, r16
+        ldi r16, 8
+        sts arr+2, r16
+        ldi r16, 1
+        sts arr+3, r16
+        ldi r16, 9
+        sts arr+4, r16
+        ldi r16, 2
+        sts arr+5, r16
+        ldi r16, 7
+        sts arr+6, r16
+        ldi r16, 4
+        sts arr+7, r16
+        ldi r16, 6
+        sts arr+8, r16
+        ldi r16, 0
+        sts arr+9, r16
+
+        ldi r20, 0
+loop:
+        cpi r20, 10
+        brge done
+        tst r20
+        breq advance
+        ldi r26, lo8(arr)
+        ldi r27, hi8(arr)
+        add r26, r20
+        adc r27, r1
+        ld  r22, X
+        ld  r23, -X
+        cp  r22, r23
+        brge advance
+        st  X, r22
+        ld  r24, X+
+        st  X, r23
+        dec r20
+        rjmp loop
+advance:
+        inc r20
+        rjmp loop
+done:
+        rjmp done
