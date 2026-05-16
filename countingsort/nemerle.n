@@ -1,0 +1,29 @@
+using System;
+using System.Console;
+
+module CountingSort {
+    sort(arr : array[int]) : array[int] {
+        when (arr.Length == 0) return arr;
+        mutable min = arr[0];
+        mutable max = arr[0];
+        foreach (v in arr) {
+            when (v < min) min = v;
+            when (v > max) max = v;
+        }
+        def range = max - min + 1;
+        def count = array(range);
+        foreach (v in arr) count[v - min]++;
+        for (mutable i = 1; i < range; i++) count[i] += count[i - 1];
+        def output = array(arr.Length);
+        for (mutable i = arr.Length - 1; i >= 0; i--) {
+            count[arr[i] - min]--;
+            output[count[arr[i] - min]] = arr[i];
+        }
+        output
+    }
+
+    Main() : void {
+        def result = sort(array[4, 2, 2, 8, 3, 3, 1]);
+        WriteLine(string.Join(" ", result));
+    }
+}
