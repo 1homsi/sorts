@@ -1,0 +1,12 @@
+environ
+
+begin
+
+reserve a, b, c for real;
+
+theorem TIMSORT_01: true
+proof
+  true;
+end;
+
+end
