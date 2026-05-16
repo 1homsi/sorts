@@ -1,0 +1,19 @@
+fun gnomesort(var arr: darray[int]): darray[int] = {
+  var i = 0;
+  while i < arr.len() do
+    if i == 0 then
+      i = i + 1;
+    elif arr.i < arr.(i-1) then
+      let temp = arr.i;
+      arr.i <- arr.(i-1);
+      arr.(i-1) <- temp;
+      i = i - 1;
+    else
+      i = i + 1;
+    endif
+  done
+  return arr;
+};
+
+var test = darray(5, 2, 8, 1, 9, 3);
+println gnomesort test;
