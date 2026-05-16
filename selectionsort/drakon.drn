@@ -1,0 +1,4 @@
+Selection Sort
+ICON 1 1
+BRANCH 5 2 8 1 9 3 sorted
+OUT1 sorted
