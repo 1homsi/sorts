@@ -1,0 +1,24 @@
+program BucketSort;
+
+func bucketSort(arr: []int, maxVal: int) []int {
+    buckets := make([][]int, maxVal);
+    for i := 0; i < maxVal; i++ {
+        buckets[i] = make([]int, 0);
+    }
+    for num in arr {
+        if num >= 0 && num < maxVal {
+            buckets[num] = append(buckets[num], num);
+        }
+    }
+    result := make([]int, 0);
+    for i := 0; i < maxVal; i++ {
+        for num in buckets[i] {
+            result = append(result, num);
+        }
+    }
+    return result;
+}
+
+main {
+    print(bucketSort([5, 2, 8, 1, 9, 3], 10));
+}
