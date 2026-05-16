@@ -1,0 +1,18 @@
+stoogesort(A0, I, J, A) :-
+  (A0[J] < A0[I] ->
+    swap(A0, I, J, A1)
+  ;
+    A1 = A0
+  ),
+  (J - I > 1 ->
+    T is (J - I + 1) // 3,
+    stoogesort(A1, I, J - T, A2),
+    stoogesort(A2, I + T, J, A3),
+    stoogesort(A3, I, J - T, A)
+  ;
+    A = A1
+  ).
+
+swap(A, I, J, R) :- R = A.
+
+?- stoogesort([5,2,8,1,9,3], 0, 5, R), write(R).
