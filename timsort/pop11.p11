@@ -1,0 +1,53 @@
+define timsort(arr, minSize) -> result;
+  mergesort(arr, minSize) -> result;
+enddefine;
+
+define mergesort(arr, minSize) -> result;
+  if length(arr) <= 1 then
+    arr -> result;
+  elseif length(arr) <= minSize then
+    insertionsort(arr) -> result;
+  else
+    lvars mid = length(arr) div 2;
+    lvars left = copylist(arr);
+    lvars right = copylist(arr);
+    mergesort(left, minSize) -> left;
+    mergesort(right, minSize) -> right;
+    merge(left, right) -> result;
+  endif;
+enddefine;
+
+define insertionsort(arr) -> result;
+  lvars res = copylist(arr);
+  lvars i, j, key;
+  for i from 2 to length(res) do
+    res(i) -> key;
+    i - 1 -> j;
+    while j > 0 and res(j) > key do
+      res(j) -> res(j + 1);
+      j - 1 -> j;
+    endwhile;
+    key -> res(j + 1);
+  endfor;
+  res -> result;
+enddefine;
+
+define merge(left, right) -> result;
+  lvars res = [];
+  lvars i = 1, j = 1;
+  
+  while i <= length(left) and j <= length(right) do
+    if left(i) <= right(j) then
+      [^^res ^(left(i))] -> res;
+      i + 1 -> i;
+    else
+      [^^res ^(right(j))] -> res;
+      j + 1 -> j;
+    endif;
+  endwhile;
+  
+  res -> result;
+enddefine;
+
+[5 2 8 1 9 3] -> lvars arr;
+timsort(arr, 32) ==>
