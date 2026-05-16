@@ -1,0 +1,25 @@
+package Bitonic_Sort {
+  proc BitonicSort(var Arr : Array<Int>, Lo : Int, Cnt : Int, Dir : Int) {
+    if Cnt > 1 {
+      var K : Int = Cnt / 2;
+      BitonicSort(Arr, Lo, K, 1);
+      BitonicSort(Arr, Lo + K, K, 0);
+      BitonicMerge(Arr, Lo, Cnt, Dir);
+    }
+  }
+
+  proc BitonicMerge(var Arr : Array<Int>, Lo : Int, Cnt : Int, Dir : Int) {
+    if Cnt > 1 {
+      var K : Int = Cnt / 2;
+      for I in Lo ..< Lo + Cnt - K loop
+        if ((Arr[I] > Arr[I + K]) == (Dir == 1)) {
+          var Tmp : Int = Arr[I];
+          Arr[I] := Arr[I + K];
+          Arr[I + K] := Tmp;
+        }
+      end loop;
+      BitonicMerge(Arr, Lo, K, Dir);
+      BitonicMerge(Arr, Lo + K, K, Dir);
+    }
+  }
+}
