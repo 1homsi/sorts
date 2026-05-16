@@ -1,0 +1,16 @@
+const proc: gnomeSort (inout array integer: arr) is func
+  local
+    var integer: i is 1;
+    var integer: tmp is 0;
+  begin
+    while i <= length(arr) do
+      if i = 1 or arr[i] >= arr[pred(i)] then
+        incr(i);
+      else
+        tmp := arr[i];
+        arr[i] := arr[pred(i)];
+        arr[pred(i)] := tmp;
+        decr(i);
+      end if;
+    end while;
+  end func;
