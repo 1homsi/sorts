@@ -1,4 +1,4 @@
-function shellSort(arr: number[]): number[] {
+function shellsort(arr: number[]): number[] {
     let n = arr.length;
     let gap = Math.floor(n / 2);
     while (gap > 0) {
@@ -15,6 +15,3 @@ function shellSort(arr: number[]): number[] {
     }
     return arr;
 }
-
-const arr: number[] = [64, 34, 25, 12, 22, 11, 90];
-console.log(shellSort(arr));
