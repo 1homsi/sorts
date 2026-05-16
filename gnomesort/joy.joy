@@ -1,0 +1,17 @@
+DEFINE gnome-sort ==
+    [dup size] dip
+    0
+    [2dup <]
+    [
+        dup 0 =
+        [pop 1 +]
+        [
+            3dup [nth] [pred nth] bi >=
+            [1 +]
+            [3dup swap pred swapd put put pred]
+            ifte
+        ]
+        ifte
+    ]
+    while
+    pop pop ;
