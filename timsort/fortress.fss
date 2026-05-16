@@ -1,0 +1,56 @@
+component TimSort
+  export Executable
+  
+  object timsort(arr: ZZ32, minSize: ZZ32): ZZ32
+    mergesort(arr, minSize)
+  end
+  
+  object mergesort(arr: ZZ32, minSize: ZZ32): ZZ32
+    if |arr| <= 1 then
+      arr
+    elif |arr| <= minSize then
+      insertionsort(arr)
+    else
+      mid: ZZ32 = |arr| / 2
+      left: ZZ32 = arr[0#mid]
+      right: ZZ32 = arr[mid#(|arr|-mid)]
+      merge(mergesort(left, minSize), mergesort(right, minSize))
+    end
+  end
+  
+  object insertionsort(arr: ZZ32): ZZ32
+    result: ZZ32 = arr
+    for i <- 1 # (|result|-1) do
+      key: ZZ32 = result[i]
+      j: ZZ32 = i - 1
+      while j >= 0 AND result[j] > key do
+        result[j+1] := result[j]
+        j := j - 1
+      end
+      result[j+1] := key
+    end
+    result
+  end
+  
+  object merge(left: ZZ32, right: ZZ32): ZZ32
+    result: ZZ32 = empty[ZZ32]
+    i: ZZ32 = 0
+    j: ZZ32 = 0
+    
+    while i < |left| AND j < |right| do
+      if left[i] <= right[j] then
+        result := result || [left[i]]
+        i := i + 1
+      else
+        result := result || [right[j]]
+        j := j + 1
+      end
+    end
+    
+    result := result || left[i#(|left|-i)]
+    result := result || right[j#(|right|-j)]
+    result
+  end
+  
+  run() = timsort([5, 2, 8, 1, 9, 3], 32).println()
+end
