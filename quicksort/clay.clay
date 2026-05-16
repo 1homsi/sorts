@@ -1,0 +1,21 @@
+quicksort(arr:Vector[Int]) {
+  if (size(arr) <= 1)
+    return arr;
+
+  var pivot = arr[0];
+  var less = Vector[Int]();
+  var greater = Vector[Int]();
+
+  for (i in range(1, size(arr))) {
+    if (arr[i] <= pivot)
+      push(less, arr[i]);
+    else
+      push(greater, arr[i]);
+  }
+
+  return quicksort(less) + Vector(pivot) + quicksort(greater);
+}
+
+main() {
+  println(quicksort(Vector(5, 2, 8, 1, 9, 3)));
+}
