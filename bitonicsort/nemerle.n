@@ -1,0 +1,40 @@
+using System;
+using System.Console;
+
+module BitonicSort {
+    mutable arr : array[int] = array[int](8);
+
+    CompareAndSwap(i : int, j : int, direction : bool) : void {
+        when (direction == (arr[i] > arr[j])) {
+            def tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp
+        }
+    }
+
+    BitonicMerge(lo : int, cnt : int, direction : bool) : void {
+        when (cnt > 1) {
+            def k = cnt / 2;
+            for (mutable i = lo; i < lo + k; i++) {
+                CompareAndSwap(i, i + k, direction)
+            }
+            BitonicMerge(lo, k, direction);
+            BitonicMerge(lo + k, k, direction)
+        }
+    }
+
+    BitonicSortArr(lo : int, cnt : int, direction : bool) : void {
+        when (cnt > 1) {
+            def k = cnt / 2;
+            BitonicSortArr(lo, k, true);
+            BitonicSortArr(lo + k, k, false);
+            BitonicMerge(lo, cnt, direction)
+        }
+    }
+
+    Main() : void {
+        arr = array[3, 7, 4, 8, 6, 2, 1, 5];
+        BitonicSortArr(0, arr.Length, true);
+        WriteLine(String.Join(" ", arr))
+    }
+}
