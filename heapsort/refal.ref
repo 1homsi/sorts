@@ -1,0 +1,23 @@
+$ENTRY Go {
+  = <Prout <Heapsort 5 2 8 1 9 3>>;
+}
+
+Heapsort {
+  s.1 e.xs = <Build s.1 e.xs>;
+}
+
+Build {
+  s.1 = s.1;
+  s.1 e.2 = <Build s.1 <SiftDown s.1 e.2>>;
+}
+
+SiftDown {
+  s.x = s.x;
+  s.x s.y e.xs = 
+    <Compare s.x s.y <SiftDown s.y e.xs>>;
+}
+
+Compare {
+  s.x (s.y e.ys) = s.x s.y e.ys;
+  s.x (s.y e.ys) = s.y s.x e.ys;
+}
