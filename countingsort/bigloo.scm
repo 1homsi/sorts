@@ -1,0 +1,20 @@
+(module countingsort
+  (export countingsort))
+
+(define (countingsort arr)
+  (if (null? arr)
+      arr
+      (let* ((max (apply max arr))
+             (count (make-vector (+ max 1) 0))
+             (_ (for-each (lambda (x)
+                            (vector-set! count x (+ 1 (vector-ref count x))))
+                          arr))
+             (output '()))
+        (do ((i 0 (+ i 1)))
+            ((> i max) (reverse output))
+          (do ((j 0 (+ j 1)))
+              ((>= j (vector-ref count i)))
+            (set! output (cons i output)))))))
+
+(print (countingsort '(5 2 8 1 9 3)))
+(newline)
