@@ -1,0 +1,7 @@
+5 2 8 1 9 3 {
+  10 [0] 10 makearray
+  [dup [swap over put] dip] each
+  [0 9 [over get dup [over rot [] cons swons] [pop] ifelse swap [+] cons] for]
+  let unsorted in
+  [] [dup length [unsorted of swap get concat] times]
+}
