@@ -1,0 +1,20 @@
+(defun cocktail-sort (arr)
+  (let ((n (length arr))
+        (swapped t)
+        (start 0))
+    (loop
+      (unless swapped (return arr))
+      (setf swapped nil)
+      (let ((end (- n 1 (- start 0))))
+        (loop for i from start below end do
+          (when (> (aref arr i) (aref arr (1+ i)))
+            (rotatef (aref arr i) (aref arr (1+ i)))
+            (setf swapped t)))
+        (unless swapped (return arr))
+        (setf swapped nil)
+        (loop for i from (- end 1) downto start do
+          (when (> (aref arr i) (aref arr (1+ i)))
+            (rotatef (aref arr i) (aref arr (1+ i)))
+            (setf swapped t))))
+      (incf start))
+    arr))
