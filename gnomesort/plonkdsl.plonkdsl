@@ -1,0 +1,24 @@
+circuit GnomeSort {
+    pub input arr: [Field; 10];
+    pub output sorted: [Field; 10];
+
+    constraint sorted_order {
+        for i in 0..9 {
+            sorted[i+1] - sorted[i] >= 0;
+        }
+    }
+
+    constraint is_permutation {
+        multiset_eq(arr, sorted);
+    }
+}
+
+fn gnome_sort_witness(arr: [u64; 10]) -> [u64; 10] {
+    let mut a = arr;
+    let mut i = 0;
+    while i < 10 {
+        if i == 0 || a[i] >= a[i-1] { i += 1; }
+        else { a.swap(i, i-1); if i > 0 { i -= 1; } }
+    }
+    a
+}
