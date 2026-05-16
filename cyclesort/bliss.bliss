@@ -1,0 +1,66 @@
+MODULE CYCLESORT (MAIN = MAIN_ROUTINE) =
+BEGIN
+
+LIBRARY 'BLISSLIB';
+
+OWN
+    ARR : VECTOR[5] INITIAL(5, 4, 3, 2, 1),
+    N : INITIAL(5);
+
+ROUTINE CYCLE_SORT =
+BEGIN
+    LOCAL WRITES, CS, ITEM, POS, I, TMP;
+    WRITES = 0;
+    CS = 0;
+    WHILE CS LSS .N - 1 DO
+    BEGIN
+        ITEM = .ARR[.CS];
+        POS = .CS;
+        I = .CS + 1;
+        WHILE .I LSS .N DO
+        BEGIN
+            IF .ARR[.I] LSS .ITEM THEN POS = .POS + 1;
+            I = .I + 1
+        END;
+        IF .POS NEQ .CS THEN
+        BEGIN
+            WHILE .ARR[.POS] EQL .ITEM DO POS = .POS + 1;
+            TMP = .ARR[.POS];
+            ARR[.POS] = .ITEM;
+            ITEM = .TMP;
+            WRITES = .WRITES + 1;
+            WHILE .POS NEQ .CS DO
+            BEGIN
+                POS = .CS;
+                I = .CS + 1;
+                WHILE .I LSS .N DO
+                BEGIN
+                    IF .ARR[.I] LSS .ITEM THEN POS = .POS + 1;
+                    I = .I + 1
+                END;
+                WHILE .ARR[.POS] EQL .ITEM DO POS = .POS + 1;
+                TMP = .ARR[.POS];
+                ARR[.POS] = .ITEM;
+                ITEM = .TMP;
+                WRITES = .WRITES + 1
+            END
+        END;
+        CS = .CS + 1
+    END;
+    .WRITES
+END;
+
+ROUTINE MAIN_ROUTINE =
+BEGIN
+    LOCAL I;
+    CYCLE_SORT();
+    I = 0;
+    WHILE .I LSS .N DO
+    BEGIN
+        $FAO_TT('!SL ', .ARR[.I]);
+        I = .I + 1
+    END;
+    0
+END;
+
+END ELUDOM
