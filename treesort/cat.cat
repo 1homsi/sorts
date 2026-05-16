@@ -1,0 +1,25 @@
+define insert {
+  dup null? not if
+    over over value < if
+      over left insert ! left
+    else over over value > if
+      over right insert ! right
+    then then
+  then
+};
+
+define inorder {
+  dup null? not if
+    dup left inorder
+    dup value
+    dup right inorder
+  then
+};
+
+define tree-sort {
+  null
+  rot [insert swap] each
+  inorder
+};
+
+[5 2 8 1 9 3] tree-sort
