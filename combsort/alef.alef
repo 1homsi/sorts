@@ -1,0 +1,31 @@
+#include <lib9.h>
+#include <stdio.h>
+
+void
+combsort(int* arr, int len) {
+  int gap = len;
+  int swapped = 1;
+  while (gap > 1 || swapped) {
+    gap = (gap * 10) / 13;
+    if (gap < 1) gap = 1;
+    swapped = 0;
+    for (int i = 0; i < len - gap; i++) {
+      if (arr[i] > arr[i + gap]) {
+        int temp = arr[i];
+        arr[i] = arr[i + gap];
+        arr[i + gap] = temp;
+        swapped = 1;
+      }
+    }
+  }
+}
+
+void
+main() {
+  int arr[6] = {5, 2, 8, 1, 9, 3};
+  combsort(arr, 6);
+  for (int i = 0; i < 6; i++) {
+    printf("%d ", arr[i]);
+  }
+  print("\n");
+}
