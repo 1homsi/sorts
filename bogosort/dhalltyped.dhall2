@@ -1,1 +1,1 @@
-print("Bogosort implementation for dhalltyped.dhall2")
+bogosort = true
