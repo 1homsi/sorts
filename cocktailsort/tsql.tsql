@@ -1,0 +1,46 @@
+CREATE TABLE #SortTemp (id INT IDENTITY(1,1), val INT);
+
+CREATE OR ALTER PROCEDURE dbo.CocktailSort AS
+BEGIN
+    DECLARE @swapped BIT = 1;
+    DECLARE @start INT = 1;
+    DECLARE @end INT;
+    DECLARE @a INT, @b INT, @tmp INT;
+
+    SELECT @end = COUNT(*) FROM #SortTemp;
+
+    WHILE @swapped = 1
+    BEGIN
+        SET @swapped = 0;
+        DECLARE @i INT = @start;
+        WHILE @i < @end
+        BEGIN
+            SELECT @a = val FROM #SortTemp WHERE id = @i;
+            SELECT @b = val FROM #SortTemp WHERE id = @i + 1;
+            IF @a > @b
+            BEGIN
+                UPDATE #SortTemp SET val = @b WHERE id = @i;
+                UPDATE #SortTemp SET val = @a WHERE id = @i + 1;
+                SET @swapped = 1;
+            END
+            SET @i = @i + 1;
+        END
+        IF @swapped = 0 BREAK;
+        SET @swapped = 0;
+        SET @end = @end - 1;
+        SET @i = @end - 1;
+        WHILE @i >= @start
+        BEGIN
+            SELECT @a = val FROM #SortTemp WHERE id = @i;
+            SELECT @b = val FROM #SortTemp WHERE id = @i + 1;
+            IF @a > @b
+            BEGIN
+                UPDATE #SortTemp SET val = @b WHERE id = @i;
+                UPDATE #SortTemp SET val = @a WHERE id = @i + 1;
+                SET @swapped = 1;
+            END
+            SET @i = @i - 1;
+        END
+        SET @start = @start + 1;
+    END
+END;
