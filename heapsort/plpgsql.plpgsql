@@ -1,0 +1,29 @@
+DO $$
+DECLARE
+    arr INTEGER[] := ARRAY[12, 11, 13, 5, 6, 7];
+    n INTEGER := 6;
+    i INTEGER;
+    tmp INTEGER;
+
+    PROCEDURE heapify(IN p_n INTEGER, IN p_i INTEGER) AS $inner$
+    DECLARE
+        largest INTEGER := p_i;
+        left_i INTEGER := 2 * p_i + 1;
+        right_i INTEGER := 2 * p_i + 2;
+        t INTEGER;
+    BEGIN
+        IF left_i < p_n AND arr[left_i + 1] > arr[largest + 1] THEN largest := left_i; END IF;
+        IF right_i < p_n AND arr[right_i + 1] > arr[largest + 1] THEN largest := right_i; END IF;
+        IF largest != p_i THEN
+            t := arr[p_i + 1]; arr[p_i + 1] := arr[largest + 1]; arr[largest + 1] := t;
+            CALL heapify(p_n, largest);
+        END IF;
+    END;$inner$ LANGUAGE plpgsql;
+BEGIN
+    FOR i IN REVERSE (n/2 - 1)..0 LOOP CALL heapify(n, i); END LOOP;
+    FOR i IN REVERSE (n-1)..1 LOOP
+        tmp := arr[1]; arr[1] := arr[i+1]; arr[i+1] := tmp;
+        CALL heapify(i, 0);
+    END LOOP;
+    RAISE NOTICE '%', arr;
+END;$$;
