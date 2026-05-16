@@ -1,0 +1,14 @@
+DIM A(9)
+DATA 5, 3, 8, 1, 9, 2, 7, 4, 6, 0
+FOR K = 0 TO 9: READ A(K): NEXT K
+N = 10: I = 0
+DO WHILE I < N
+    IF I = 0 OR A(I) >= A(I - 1) THEN
+        I = I + 1
+    ELSE
+        T = A(I): A(I) = A(I - 1): A(I - 1) = T
+        I = I - 1
+    END IF
+LOOP
+FOR K = 0 TO 9: PRINT A(K): NEXT K
+END
