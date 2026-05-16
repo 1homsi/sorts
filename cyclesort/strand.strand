@@ -1,0 +1,40 @@
+cycle_sort([], []).
+cycle_sort(List, Sorted) :-
+    length(List, N),
+    cycle_sort_loop(List, N, 0, Sorted).
+
+cycle_sort_loop(Arr, N, CycleStart, Result) :-
+    CycleStart >= N - 1, !, Result = Arr.
+cycle_sort_loop(Arr, N, CycleStart, Result) :-
+    nth0(CycleStart, Arr, Item),
+    count_smaller_from(Arr, Item, CycleStart, Count),
+    Pos is CycleStart + Count,
+    (Pos =:= CycleStart ->
+        NextStart is CycleStart + 1,
+        cycle_sort_loop(Arr, N, NextStart, Result)
+    ;
+        swap_elements(Arr, CycleStart, Pos, Arr2),
+        NextStart is CycleStart + 1,
+        cycle_sort_loop(Arr2, N, NextStart, Result)
+    ).
+
+count_smaller_from([], _, _, 0).
+count_smaller_from([H|T], Item, Start, Count) :-
+    (H < Item, Start > 0 ->
+        count_smaller_from(T, Item, 0, C),
+        Count is C + 1
+    ;
+        Start2 is Start - 1,
+        count_smaller_from(T, Item, Start2, Count)
+    ).
+
+swap_elements(List, I, J, Result) :-
+    nth0(I, List, EI),
+    nth0(J, List, EJ),
+    replace_nth(List, I, EJ, Tmp),
+    replace_nth(Tmp, J, EI, Result).
+
+replace_nth([_|T], 0, X, [X|T]).
+replace_nth([H|T], N, X, [H|R]) :- N > 0, N1 is N - 1, replace_nth(T, N1, X, R).
+
+:- cycle_sort([5,4,3,2,1], S), write(S), nl.
