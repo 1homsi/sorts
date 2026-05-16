@@ -1,0 +1,19 @@
+class PancakeSort {
+    function sort(arr) {
+        var n = arr.length;
+        for (var i = 0; i < n - 1; i++) {
+            for (var j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    var temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+}
+
+var sorter = new PancakeSort();
+var arr = [5, 2, 8, 1, 9, 3];
+sorter.sort(arr);
+print("Pancake Sort: " + arr);
