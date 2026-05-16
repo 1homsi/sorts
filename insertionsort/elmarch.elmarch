@@ -1,0 +1,13 @@
+module InsertionSortArch exposing (insertionSort)
+
+insert : Int -> List Int -> List Int
+insert x lst =
+    case lst of
+        [] -> [ x ]
+        h :: t ->
+            if x <= h then x :: h :: t
+            else h :: insert x t
+
+insertionSort : List Int -> List Int
+insertionSort lst =
+    List.foldl insert [] lst
