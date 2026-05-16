@@ -1,0 +1,31 @@
+.decl input_arr(id: number, val: float)
+input_arr(1, 0.78). input_arr(2, 0.17). input_arr(3, 0.39). input_arr(4, 0.26).
+input_arr(5, 0.72). input_arr(6, 0.94). input_arr(7, 0.21). input_arr(8, 0.12).
+input_arr(9, 0.23). input_arr(10, 0.68).
+
+.decl min_val(v: float)
+min_val(v) :- v = min x : input_arr(_, x).
+
+.decl max_val(v: float)
+max_val(v) :- v = max x : input_arr(_, x).
+
+.decl n_count(n: number)
+n_count(n) :- n = count : input_arr(_, _).
+
+.decl bucket_idx(id: number, val: float, idx: number)
+bucket_idx(id, val, idx) :-
+    input_arr(id, val),
+    min_val(mn),
+    max_val(mx),
+    n_count(n),
+    idx = min(n - 1, to_number(floor((val - mn) / (mx - mn + 1) * n))).
+
+.decl sorted_output(rank: number, val: float)
+sorted_output(rank, val) :-
+    bucket_idx(id, val, idx),
+    rank = count : { bucket_idx(id2, val2, idx2) :
+        idx2 < idx ;
+        idx2 = idx, val2 < val ;
+        idx2 = idx, val2 = val, id2 < id }.
+
+.output sorted_output
