@@ -1,0 +1,13 @@
+stoogesort define
+  {i j a} => (
+    [a j] [a i] min-sort {i j a} =>
+    (j i - 1 > (
+      j i - 1 + 3 / to-int => t (
+        {i (j t -) a} stoogesort
+        {(i t +) j a} stoogesort
+        {i (j t -) a} stoogesort
+      )
+    ) ())
+  )
+
+{0 5 [5 2 8 1 9 3]} stoogesort puts
