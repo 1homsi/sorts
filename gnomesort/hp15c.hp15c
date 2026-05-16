@@ -1,0 +1,29 @@
+001 LBL A
+002 STO 0    ; n
+003 0
+004 STO 1    ; i
+005 LBL 1
+006 RCL 1
+007 RCL 0
+008 x>=y?
+009 GTO 9    ; done if i >= n
+010 RCL 1
+011 x=0?
+012 GTO 3    ; advance if i = 0
+013 RCL (1)  ; arr[i]
+014 RCL I    ; arr[i-1]
+015 x>=y?
+016 GTO 3    ; advance if arr[i] >= arr[i-1]
+017 ; swap
+018 STO T
+019 RCL I
+020 STO (1)
+021 RCL T
+022 STO I
+023 DSE 1
+024 GTO 1
+025 LBL 3
+026 ISG 1
+027 GTO 1
+028 LBL 9
+029 RTN
