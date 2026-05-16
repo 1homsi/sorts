@@ -1,9 +1,6 @@
-function result = bogosort(arr)
-  while ~all(arr(1:end-1) <= arr(2:end))
-    arr = arr(randperm(length(arr)));
-  end
-  result = arr;
-end
-
-arr = [3, 1, 4, 1, 5, 9, 2, 6];
-disp(bogosort(arr));
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
