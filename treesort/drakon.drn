@@ -1,0 +1,5 @@
+
+BLOCK {
+  1 -> X;
+  [X output]
+}
