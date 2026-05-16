@@ -1,0 +1,46 @@
+$ENTRY Go {
+  = <Output <CountingSort (5 2 8 1 9 3)>>
+};
+
+CountingSort {
+  () = ();
+  e.Arr = <SortHelper <FindMax e.Arr> <BuildCount e.Arr> e.Arr>;
+};
+
+FindMax {
+  e.Arr = <FindMaxHelper e.Arr 0>;
+};
+
+FindMaxHelper {
+  () e.Max = e.Max;
+  s.Val e.Rest e.Max = <FindMaxHelper e.Rest <Cond <Cmp s.Val e.Max> s.Val e.Max>>;
+};
+
+BuildCount {
+  e.Arr = <BuildCountHelper e.Arr <CountZero 0>>;
+};
+
+BuildCountHelper {
+  () e.Count = e.Count;
+  s.Val e.Rest e.Count = <BuildCountHelper e.Rest <IncCount s.Val e.Count>>;
+};
+
+IncCount {
+  s.Val e.Count = e.Count;
+};
+
+CountZero {
+  s.N = ;
+};
+
+SortHelper {
+  s.Max e.Count e.Arr = <SortRebuild 0 s.Max e.Count>;
+};
+
+SortRebuild {
+  s.I s.Max e.Count = ();
+};
+
+Output {
+  e.Val = <Prout e.Val>;
+};
