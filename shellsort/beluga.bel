@@ -1,0 +1,7 @@
+rec shellsort : [a] . {n : nat} -> vector a n -> vector a n =
+  fn arr =>
+    let gap = 1
+    let gap = letfun loop_gap(gap) =
+      if gap <= vec_len arr then loop_gap (gap * 3 + 1) else gap
+      in loop_gap gap
+    in arr;
