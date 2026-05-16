@@ -1,0 +1,15 @@
+FUNCTION GnomeSort
+LPARAMETERS aArr, nCount
+LOCAL i, tmp
+i = 1
+DO WHILE i <= nCount
+    IF i = 1 .OR. aArr[i] >= aArr[i-1]
+        i = i + 1
+    ELSE
+        tmp = aArr[i]
+        aArr[i] = aArr[i-1]
+        aArr[i-1] = tmp
+        i = i - 1
+    ENDIF
+ENDDO
+RETURN aArr
