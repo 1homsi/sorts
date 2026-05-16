@@ -1,0 +1,17 @@
+process GNOME_SORT =
+(? integer ARR_IN; ! integer ARR_OUT)
+(|
+    signal STEP, DONE in
+    loop
+        [ARR_IN] -> emit STEP
+    end loop
+    ||
+    when STEP do
+        emit ARR_OUT
+    end when
+    ||
+    when DONE do
+        halt
+    end when
+|)
+end process
