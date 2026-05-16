@@ -1,0 +1,29 @@
+        DEFINE('COCKTAILSORT(N)')
+        SWAPPED = 1
+        START = 0
+        ENDING = N - 1
+OUTER   EQ(SWAPPED,0)                          :S(DONE)
+        SWAPPED = 0
+        I = START
+FLOOP   GE(I,ENDING)                           :S(AFTERFWD)
+        I1 = I + 1
+        GT(ARR<I>,ARR<I1>)                     :F(FSKIP)
+        TMP = ARR<I>
+        ARR<I> = ARR<I1>
+        ARR<I1> = TMP
+        SWAPPED = 1
+FSKIP   I = I + 1                              :(FLOOP)
+AFTERFWD EQ(SWAPPED,0)                         :S(DONE)
+        SWAPPED = 0
+        ENDING = ENDING - 1
+        I = ENDING - 1
+BLOOP   LT(I,START)                            :S(AFTERBWD)
+        I1 = I + 1
+        GT(ARR<I>,ARR<I1>)                     :F(BSKIP)
+        TMP = ARR<I>
+        ARR<I> = ARR<I1>
+        ARR<I1> = TMP
+        SWAPPED = 1
+BSKIP   I = I - 1                              :(BLOOP)
+AFTERBWD START = START + 1                     :(OUTER)
+DONE    RETURN
