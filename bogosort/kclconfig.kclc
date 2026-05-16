@@ -1,1 +1,1 @@
-print("Bogosort implementation for kclconfig.kclc")
+bogosort = true
