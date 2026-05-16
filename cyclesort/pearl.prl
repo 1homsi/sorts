@@ -1,0 +1,50 @@
+PROGRAM CYCLESORT;
+BEGIN
+  DECLARE ARR ARRAY[6] OF INTEGER;
+  DECLARE N, POS, ITEM, CYCLES, I, TEMP INTEGER;
+  
+  ARR[0] := 5;
+  ARR[1] := 2;
+  ARR[2] := 8;
+  ARR[3] := 1;
+  ARR[4] := 9;
+  ARR[5] := 3;
+  
+  N := 6;
+  POS := 0;
+  
+  WHILE POS < N DO
+  BEGIN
+    ITEM := ARR[POS];
+    CYCLES := 0;
+    
+    FOR I := 0 TO N-1 DO
+      IF I <> POS AND ARR[I] < ITEM THEN
+        CYCLES := CYCLES + 1;
+    
+    IF CYCLES <> 0 THEN
+    BEGIN
+      WHILE ARR[POS] = ITEM DO
+        POS := POS + 1;
+      TEMP := ARR[POS];
+      ARR[POS] := ITEM;
+      ITEM := TEMP;
+      
+      WHILE CYCLES > 0 DO
+      BEGIN
+        CYCLES := 0;
+        FOR I := 0 TO N-1 DO
+          IF I <> POS AND ARR[I] < ITEM THEN
+            CYCLES := CYCLES + 1;
+        WHILE ARR[POS] = ITEM DO
+          POS := POS + 1;
+        TEMP := ARR[POS];
+        ARR[POS] := ITEM;
+        ITEM := TEMP;
+        CYCLES := CYCLES - 1;
+      END;
+    END;
+    
+    POS := POS + 1;
+  END;
+END.
