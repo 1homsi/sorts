@@ -1,0 +1,58 @@
+DECLARE @arr TABLE (idx INT, val INT);
+INSERT INTO @arr VALUES (0,5),(1,4),(2,3),(3,2),(4,1);
+
+DECLARE @n INT = 5;
+DECLARE @cycleStart INT = 0;
+DECLARE @item INT, @pos INT, @i INT, @tmp INT, @writes INT = 0;
+
+WHILE @cycleStart < @n - 1
+BEGIN
+    SELECT @item = val FROM @arr WHERE idx = @cycleStart;
+    SET @pos = @cycleStart;
+    SET @i = @cycleStart + 1;
+    WHILE @i < @n
+    BEGIN
+        DECLARE @vi INT;
+        SELECT @vi = val FROM @arr WHERE idx = @i;
+        IF @vi < @item SET @pos = @pos + 1;
+        SET @i = @i + 1;
+    END
+    IF @pos <> @cycleStart
+    BEGIN
+        DECLARE @vpos INT;
+        SELECT @vpos = val FROM @arr WHERE idx = @pos;
+        WHILE @vpos = @item
+        BEGIN
+            SET @pos = @pos + 1;
+            SELECT @vpos = val FROM @arr WHERE idx = @pos;
+        END
+        SELECT @tmp = val FROM @arr WHERE idx = @pos;
+        UPDATE @arr SET val = @item WHERE idx = @pos;
+        SET @item = @tmp;
+        SET @writes = @writes + 1;
+        WHILE @pos <> @cycleStart
+        BEGIN
+            SET @pos = @cycleStart;
+            SET @i = @cycleStart + 1;
+            WHILE @i < @n
+            BEGIN
+                SELECT @vi = val FROM @arr WHERE idx = @i;
+                IF @vi < @item SET @pos = @pos + 1;
+                SET @i = @i + 1;
+            END
+            SELECT @vpos = val FROM @arr WHERE idx = @pos;
+            WHILE @vpos = @item
+            BEGIN
+                SET @pos = @pos + 1;
+                SELECT @vpos = val FROM @arr WHERE idx = @pos;
+            END
+            SELECT @tmp = val FROM @arr WHERE idx = @pos;
+            UPDATE @arr SET val = @item WHERE idx = @pos;
+            SET @item = @tmp;
+            SET @writes = @writes + 1;
+        END
+    END
+    SET @cycleStart = @cycleStart + 1;
+END
+
+SELECT val FROM @arr ORDER BY idx;
