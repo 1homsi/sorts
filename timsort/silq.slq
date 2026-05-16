@@ -1,0 +1,59 @@
+def timsort(arr: uint[], minSize: uint) {
+  return mergesort(arr, minSize);
+}
+
+def mergesort(arr: uint[], minSize: uint) {
+  if (arr.length <= 1) {
+    return arr;
+  }
+  if (arr.length <= minSize) {
+    return insertionsort(arr);
+  }
+  
+  uint mid = arr.length / 2;
+  uint[] left = arr[0:mid];
+  uint[] right = arr[mid:arr.length];
+  
+  return merge(mergesort(left, minSize), mergesort(right, minSize));
+}
+
+def insertionsort(arr: uint[]) {
+  uint[] result = arr;
+  for (uint i = 1; i < result.length; i++) {
+    uint key = result[i];
+    uint j = i - 1;
+    while (j >= 0 && result[j] > key) {
+      result[j + 1] = result[j];
+      j--;
+    }
+    result[j + 1] = key;
+  }
+  return result;
+}
+
+def merge(left: uint[], right: uint[]) {
+  uint[] result;
+  uint i = 0;
+  uint j = 0;
+  
+  while (i < left.length && j < right.length) {
+    if (left[i] <= right[j]) {
+      result.append(left[i]);
+      i++;
+    } else {
+      result.append(right[j]);
+      j++;
+    }
+  }
+  
+  while (i < left.length) {
+    result.append(left[i]);
+    i++;
+  }
+  while (j < right.length) {
+    result.append(right[j]);
+    j++;
+  }
+  
+  return result;
+}
