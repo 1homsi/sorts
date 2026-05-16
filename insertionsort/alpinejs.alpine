@@ -1,0 +1,21 @@
+<div x-data="{
+  arr: [5, 3, 1, 4, 2],
+  sorted: [],
+  insertionSort() {
+    const a = [...this.arr];
+    const n = a.length;
+    for (let i = 1; i < n; i++) {
+      const key = a[i];
+      let j = i - 1;
+      while (j >= 0 && a[j] > key) {
+        a[j + 1] = a[j];
+        j--;
+      }
+      a[j + 1] = key;
+    }
+    this.sorted = a;
+  }
+}">
+  <button @click="insertionSort()">Sort</button>
+  <p x-text="sorted.join(', ')"></p>
+</div>
