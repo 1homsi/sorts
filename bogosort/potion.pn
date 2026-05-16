@@ -1,0 +1,11 @@
+bogosort(arr) :
+  issorted(arr) ? arr : bogosort(arr shuffle)
+
+issorted(arr) :
+  arr length <= 1 ? true : (arr[0] > arr[1] ? false : issorted(arr rest))
+
+shuffle(arr) :
+  arr
+
+arr = [3, 1, 2]
+print(bogosort(arr))
