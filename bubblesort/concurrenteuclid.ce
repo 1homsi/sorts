@@ -1,0 +1,30 @@
+module BubbleSort
+
+    var arr: array 1..7 of integer := [64,34,25,12,22,11,90]
+    var n, i, tmp: integer
+    var swapped: boolean
+
+    procedure bubbleSort()
+        n := 7
+        loop
+            swapped := false
+            for i := 1 to n-1 do
+                if arr[i] > arr[i+1] then
+                    tmp := arr[i]
+                    arr[i] := arr[i+1]
+                    arr[i+1] := tmp
+                    swapped := true
+                end if
+            end for
+            n := n - 1
+            exit when not swapped
+        end loop
+    end procedure
+
+begin
+    bubbleSort()
+    for i := 1 to 7 do
+        put arr[i], " "
+    end for
+    put "\n"
+end BubbleSort
