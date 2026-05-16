@@ -1,0 +1,10 @@
+stoogesort a i j =
+  if j > i && a!!j < a!!i
+  then stoogesort (setAt i (a!!j) (setAt j (a!!i) a)) (i+1) j
+  else if j > i + 1
+  then let t = (j - i + 1) `div` 3
+       in stoogesort (stoogesort (stoogesort a i (j-t)) (i+t) j) i (j-t)
+  else a
+
+arr = [5,2,8,1,9,3]
+main = print (stoogesort arr 0 5)
