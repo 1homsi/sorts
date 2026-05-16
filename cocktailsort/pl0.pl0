@@ -1,0 +1,42 @@
+VAR arr[6];
+VAR n, i, k, temp, swapped;
+
+PROCEDURE cocktailsort;
+BEGIN
+  n := 6;
+  i := 0;
+  WHILE i < n DO
+  BEGIN
+    swapped := 0;
+    k := 0;
+    WHILE k < n - i - 1 DO
+    BEGIN
+      IF arr[k] > arr[k + 1] THEN
+      BEGIN
+        temp := arr[k];
+        arr[k] := arr[k + 1];
+        arr[k + 1] := temp;
+        swapped := 1;
+      END;
+      k := k + 1;
+    END;
+    IF NOT swapped THEN i := n;
+    i := i + 1;
+  END;
+END;
+
+BEGIN
+  arr[0] := 5;
+  arr[1] := 2;
+  arr[2] := 8;
+  arr[3] := 1;
+  arr[4] := 9;
+  arr[5] := 3;
+  CALL cocktailsort;
+  k := 0;
+  WHILE k < 6 DO
+  BEGIN
+    ? arr[k];
+    k := k + 1;
+  END;
+END.
