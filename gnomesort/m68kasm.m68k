@@ -1,0 +1,25 @@
+        ORG $1000
+
+GNOME:  LEA ARR,A0
+        MOVE.W #10,D1
+        CLR.W  D2
+
+LOOP:   CMP.W  D1,D2
+        BGE    DONE
+        TST.W  D2
+        BEQ    ADV
+        MOVE.W D2,D3
+        LSL.W  #1,D3
+        MOVE.W (A0,D3.W),D4
+        MOVE.W -2(A0,D3.W),D5
+        CMP.W  D5,D4
+        BGE    ADV
+        MOVE.W D5,(A0,D3.W)
+        MOVE.W D4,-2(A0,D3.W)
+        SUB.W  #1,D2
+        BRA    LOOP
+ADV:    ADD.W  #1,D2
+        BRA    LOOP
+DONE:   RTS
+
+ARR:    DC.W 5,3,8,1,9,2,7,4,6,0
