@@ -1,0 +1,30 @@
+DECLARE @arr TABLE (idx INT, val INT);
+INSERT INTO @arr VALUES (0,12),(1,11),(2,13),(3,5),(4,6),(5,7);
+DECLARE @n INT = 6, @i INT, @tmp INT, @largest INT, @left INT, @right INT;
+
+SET @i = @n/2 - 1;
+WHILE @i >= 0 BEGIN
+    SET @largest = @i;
+    SET @left = 2 * @i + 1;
+    SET @right = 2 * @i + 2;
+    IF @left < @n AND (SELECT val FROM @arr WHERE idx = @left) > (SELECT val FROM @arr WHERE idx = @largest)
+        SET @largest = @left;
+    IF @right < @n AND (SELECT val FROM @arr WHERE idx = @right) > (SELECT val FROM @arr WHERE idx = @largest)
+        SET @largest = @right;
+    IF @largest != @i BEGIN
+        SET @tmp = (SELECT val FROM @arr WHERE idx = @i);
+        UPDATE @arr SET val = (SELECT val FROM @arr WHERE idx = @largest) WHERE idx = @i;
+        UPDATE @arr SET val = @tmp WHERE idx = @largest;
+    END
+    SET @i = @i - 1;
+END
+
+SET @i = @n - 1;
+WHILE @i > 0 BEGIN
+    SET @tmp = (SELECT val FROM @arr WHERE idx = 0);
+    UPDATE @arr SET val = (SELECT val FROM @arr WHERE idx = @i) WHERE idx = 0;
+    UPDATE @arr SET val = @tmp WHERE idx = @i;
+    SET @i = @i - 1;
+END
+
+SELECT val FROM @arr ORDER BY idx;
