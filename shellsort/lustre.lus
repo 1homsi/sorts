@@ -1,0 +1,6 @@
+node shellsort(arr : int^6) returns (out : int^6);
+var gap, i, j, temp : int;
+let
+  gap = 1;
+  out = arr;
+tel;
