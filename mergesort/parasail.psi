@@ -1,0 +1,50 @@
+procedure Main is
+    type Element_Type is new Integer;
+    var Data : Array<Element_Type> := [5, 2, 8, 1, 9, 3];
+    
+    procedure Merge
+        (var Arr : Array<Element_Type>;
+         Left, Mid, Right : Univ_Integer) is
+      var I := Left;
+      var J := Mid + 1;
+      var K := 0;
+      var Result : Array<Element_Type>;
+      
+      while I <= Mid and then J <= Right loop
+        if Arr[I] <= Arr[J] then
+          Result[K] := Arr[I];
+          I := I + 1;
+        else
+          Result[K] := Arr[J];
+          J := J + 1;
+        end if;
+        K := K + 1;
+      end loop;
+      
+      while I <= Mid loop
+        Result[K] := Arr[I];
+        I := I + 1;
+        K := K + 1;
+      end loop;
+      
+      while J <= Right loop
+        Result[K] := Arr[J];
+        J := J + 1;
+        K := K + 1;
+      end loop;
+    end procedure Merge;
+    
+    procedure MergeSort
+        (var Arr : Array<Element_Type>;
+         Left, Right : Univ_Integer) is
+      if Left < Right then
+        var Mid := (Left + Right) / 2;
+        MergeSort(Arr, Left, Mid);
+        MergeSort(Arr, Mid + 1, Right);
+        Merge(Arr, Left, Mid, Right);
+      end if;
+    end procedure MergeSort;
+begin
+    MergeSort(Data, 0, 5);
+    Print(Data);
+end procedure Main;
