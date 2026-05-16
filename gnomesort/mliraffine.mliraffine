@@ -1,0 +1,40 @@
+module {
+  func.func @gnome_sort_affine(%arg0: memref<10xi32>) {
+    %c0 = arith.constant 0 : index
+    %c1 = arith.constant 1 : index
+    %c10 = arith.constant 10 : index
+    %i = memref.alloca() : memref<index>
+    memref.store %c0, %i[] : memref<index>
+    cf.br ^loop
+
+  ^loop:
+    %iv = memref.load %i[] : memref<index>
+    %done = arith.cmpi sge, %iv, %c10 : index
+    cf.cond_br %done, ^exit, ^body
+
+  ^body:
+    %iz = arith.cmpi eq, %iv, %c0 : index
+    cf.cond_br %iz, ^advance, ^check
+
+  ^check:
+    %prev = arith.subi %iv, %c1 : index
+    %cur = memref.load %arg0[%iv] : memref<10xi32>
+    %prv = memref.load %arg0[%prev] : memref<10xi32>
+    %ge = arith.cmpi sge, %cur, %prv : i32
+    cf.cond_br %ge, ^advance, ^swap
+
+  ^swap:
+    memref.store %prv, %arg0[%iv] : memref<10xi32>
+    memref.store %cur, %arg0[%prev] : memref<10xi32>
+    memref.store %prev, %i[] : memref<index>
+    cf.br ^loop
+
+  ^advance:
+    %next = arith.addi %iv, %c1 : index
+    memref.store %next, %i[] : memref<index>
+    cf.br ^loop
+
+  ^exit:
+    return
+  }
+}
