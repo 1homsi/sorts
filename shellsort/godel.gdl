@@ -1,0 +1,16 @@
+PREDICATE shellsort(Array, SortedArray) :-
+  length(Array, N),
+  shellsort_gap(N, InitialGap),
+  shellsort_loop(Array, InitialGap, N, SortedArray).
+
+PREDICATE shellsort_gap(int, int) :-
+  shellsort_gap(N, Gap) :-
+    gap(1, N, Gap).
+
+PREDICATE gap(int, int, int) :-
+  gap(G, N, G) :- G > N.
+  gap(G, N, Result) :- 
+    G <= N | NewG = G * 3 + 1, gap(NewG, N, Result).
+
+PREDICATE shellsort_loop(Array, int, int, Array) :-
+  shellsort_loop(A, Gap, _, A) :- Gap =:= 0.
