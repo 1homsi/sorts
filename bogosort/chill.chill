@@ -1,34 +1,6 @@
-MODULE bogosort;
-
-DCL arr(1:8) INT := (3, 1, 4, 1, 5, 9, 2, 6);
-DCL n INT := 8;
-
-is_sorted: PROC () RETURNS BOOL;
-  DCL i INT;
-  FOR i := 1 TO n - 1 DO
-    IF arr(i) > arr(i+1) THEN RETURN FALSE; FI;
-  OD;
-  RETURN TRUE;
-END is_sorted;
-
-shuffle: PROC ();
-  DCL i, j, tmp INT;
-  FOR i := n BY -1 TO 2 DO
-    j := (i MOD i) + 1;
-    tmp := arr(i); arr(i) := arr(j); arr(j) := tmp;
-  OD;
-END shuffle;
-
-bogosort: PROC ();
-  DO WHILE NOT is_sorted() DO
-    CALL shuffle();
-  OD;
-END bogosort;
-
-DCL i INT;
-CALL bogosort();
-FOR i := 1 TO n DO
-  WRITETEXT(stdout, arr(i));
-OD;
-
-END MODULE;
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
