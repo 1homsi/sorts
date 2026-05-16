@@ -1,0 +1,19 @@
+local gnomeSort(lst) =
+  local n = std.length(lst);
+  local swap(arr, i) =
+    std.makeArray(n, function(j)
+      if j == i then arr[i-1]
+      else if j == i-1 then arr[i]
+      else arr[j]
+    );
+  local loop(arr, i) =
+    if i >= n then arr
+    else if i == 0 then loop(arr, i+1)
+    else if arr[i] >= arr[i-1] then loop(arr, i+1)
+    else loop(swap(arr, i), i-1);
+  loop(lst, 0);
+
+{
+  input: [5, 3, 8, 1, 9, 2, 7, 4, 6, 0],
+  output: gnomeSort(self.input),
+}
