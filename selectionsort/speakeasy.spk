@@ -1,0 +1,9 @@
+SELECTION SORT OF [5, 2, 8, 1, 9, 3]
+
+DO I = 1 THRU 5
+  DO J = I+1 THRU 6
+    IF A(J) .LT. A(I) THEN SWAP A(I), A(J)
+  ENDDO
+ENDDO
+
+PRINT A
