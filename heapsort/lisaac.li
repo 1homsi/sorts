@@ -1,0 +1,48 @@
+Section Header
+  + name := HEAPSORT;
+
+Section Public
+  - main <- (
+    | arr : ARRAY(INT);
+    |
+    arr := ARRAY(INT).new 6 ;
+    arr.put 5 to 0;
+    arr.put 2 to 1;
+    arr.put 8 to 2;
+    arr.put 1 to 3;
+    arr.put 9 to 4;
+    arr.put 3 to 5;
+    heapsort arr;
+    arr.for_each { |v| v.print; };
+  );
+
+  - heapsort (arr : ARRAY(INT)) <- (
+    | n : INTEGER;
+    |
+    n := arr.count;
+    (n / 2 - 1).down_to 0 do { |i|
+      siftdown arr i n;
+    };
+    (n - 1).down_to 1 do { |i|
+      arr.swap 0 to i;
+      siftdown arr 0 i;
+    };
+  );
+
+  - siftdown (arr : ARRAY(INT), idx : INTEGER, n : INTEGER) <- (
+    | largest : INTEGER; left : INTEGER; right : INTEGER;
+    |
+    largest := idx;
+    left := 2 * idx + 1;
+    right := 2 * idx + 2;
+    (left < n && arr.item left > arr.item largest).if {
+      largest := left;
+    };
+    (right < n && arr.item right > arr.item largest).if {
+      largest := right;
+    };
+    (largest != idx).if {
+      arr.swap idx to largest;
+      siftdown arr largest n;
+    };
+  );
