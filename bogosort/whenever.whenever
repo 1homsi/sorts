@@ -1,1 +1,6 @@
-1 print("bogosort: array is sorted when randomly shuffled into order")#1
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
