@@ -1,0 +1,43 @@
+module BucketSort exposing (main)
+
+import Browser
+import Html exposing (text)
+import Array exposing (Array)
+import List
+
+insertSorted : Float -> List Float -> List Float
+insertSorted x lst =
+    case lst of
+        [] -> [x]
+        h :: t ->
+            if x <= h then x :: h :: t
+            else h :: insertSorted x t
+
+insertionSort : List Float -> List Float
+insertionSort lst =
+    case lst of
+        [] -> []
+        h :: t -> insertSorted h (insertionSort t)
+
+getIdx : Float -> Float -> Float -> Int -> Int
+getIdx num mn mx n =
+    let raw = floor ((num - mn) / (mx - mn + 1) * toFloat n)
+    in min (n - 1) raw
+
+bucketSort : List Float -> List Float
+bucketSort arr =
+    if List.isEmpty arr then arr
+    else
+        let n = List.length arr
+            mn = List.minimum arr |> Maybe.withDefault 0
+            mx = List.maximum arr |> Maybe.withDefault 0
+            emptyBuckets = Array.repeat n []
+            filled = List.foldl (\x bs ->
+                let idx = getIdx x mn mx n
+                    old = Array.get idx bs |> Maybe.withDefault []
+                in Array.set idx (old ++ [x]) bs) emptyBuckets arr
+        in Array.toList filled |> List.concatMap insertionSort
+
+main =
+    let sorted = bucketSort [0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68]
+    in Browser.sandbox { init = (), update = \_ m -> m, view = \_ -> text (Debug.toString sorted) }
