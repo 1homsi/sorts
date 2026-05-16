@@ -1,0 +1,12 @@
+BLOCK Initialization
+  arrow: "Start"
+  diamond: "maxVal = 0?"
+    yes_branch: "RETURN arr"
+    no_branch: "Create buckets array"
+  arrow: "For each num in arr"
+  diamond: "0 <= num < maxVal?"
+    yes_branch: "Add num to buckets[num]"
+    no_branch: "Continue"
+  arrow: "Collect all buckets"
+  arrow: "RETURN result"
+END
