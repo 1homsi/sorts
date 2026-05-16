@@ -1,0 +1,27 @@
+$ENTRY Go {
+  = <GnomeSort (5 2 8 1 9 3)>;
+};
+
+GnomeSort {
+  (e.Arr) = <SortLoop 0 e.Arr>;
+};
+
+SortLoop {
+  (0 e.Arr) = e.Arr;
+  (s.I e.Left s.X s.Y e.Right) =
+    <SortLoop
+      <Compare s.X s.Y s.I e.Left e.Right>
+    >;
+};
+
+Compare {
+  (s.X s.Y s.I e.Left e.Right) =
+    <
+      {
+        s.X : s.Y = ((s.I) e.Left e.Right);
+        s.X : e.X, <Less s.X s.Y> =
+          ((s.I) e.Left s.Y s.X e.Right);
+        e.X = ((s.I) e.Left s.X s.Y e.Right);
+      }
+    >;
+};
