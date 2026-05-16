@@ -1,0 +1,13 @@
+#lang racket
+
+(define (counting-sort lst)
+  (if (null? lst) lst
+      (let* ([min-val (apply min lst)]
+             [max-val (apply max lst)])
+        (apply append
+               (map (lambda (v)
+                      (make-list (count (lambda (x) (= x v)) lst) v))
+                    (range min-val (+ max-val 1)))))))
+
+(display (counting-sort '(4 2 2 8 3 3 1)))
+(newline)
