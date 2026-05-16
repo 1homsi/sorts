@@ -1,0 +1,21 @@
+CombSort: CEDAR PROGRAM = BEGIN
+
+  Sort: PROCEDURE [arr: REF ARRAY OF INT, n: INT] = BEGIN
+    gap: INT ← n;
+    sorted: BOOL ← FALSE;
+    tmp: INT;
+    UNTIL sorted DO
+      gap ← MAX[1, gap * 10 / 13];
+      IF gap = 1 THEN sorted ← TRUE;
+      FOR i: INT IN [0..n-gap) DO
+        IF arr[i] > arr[i+gap] THEN BEGIN
+          tmp ← arr[i];
+          arr[i] ← arr[i+gap];
+          arr[i+gap] ← tmp;
+          sorted ← FALSE;
+        END;
+      ENDLOOP;
+    ENDLOOP;
+  END;
+
+END.
