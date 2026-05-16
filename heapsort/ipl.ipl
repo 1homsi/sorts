@@ -1,0 +1,37 @@
+* IPL-V (Information Processing Language V) style heapsort
+* IPL-V used symbolic list processing
+
+HEAPSORT
+W0    ARRAY     12 11 13 5 6 7
+W1    N         6
+
+HEAPIFY  PROCESS
+H1       LT       W-LARGEST W-I
+H2       LT       W-LEFT    COMPUTE(PLUS(TIMES(2,W-I),1))
+H3       LT       W-RIGHT   COMPUTE(PLUS(TIMES(2,W-I),2))
+H4       JGRE     W-ARRAY[W-LEFT] W-ARRAY[W-LARGEST]
+         LT       W-LARGEST W-LEFT
+H5       JGRE     W-ARRAY[W-RIGHT] W-ARRAY[W-LARGEST]
+         LT       W-LARGEST W-RIGHT
+H6       JEQU     W-LARGEST W-I
+         JUMP     H-RETURN
+H7       XCHG     W-ARRAY[W-I] W-ARRAY[W-LARGEST]
+H8       CALL     HEAPIFY W-N W-LARGEST
+H-RETURN RETURN
+
+MAIN     PROCESS
+M1       LT       W-I COMPUTE(MINUS(QUOTIENT(W-N,2),1))
+M2       JLSS     W-I 0
+         JUMP     M4
+M3       CALL     HEAPIFY W-N W-I
+         LT       W-I COMPUTE(MINUS(W-I,1))
+         JUMP     M2
+M4       LT       W-I COMPUTE(MINUS(W-N,1))
+M5       JLEQ     W-I 0
+         JUMP     M-END
+M6       XCHG     W-ARRAY[0] W-ARRAY[W-I]
+         CALL     HEAPIFY W-I 0
+         LT       W-I COMPUTE(MINUS(W-I,1))
+         JUMP     M5
+M-END    PRINT    W-ARRAY
+         RETURN
