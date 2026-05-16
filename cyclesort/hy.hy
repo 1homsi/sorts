@@ -1,0 +1,32 @@
+(defn cycle-sort [arr]
+  (setv n (len arr)
+        writes 0)
+  (for [cycle-start (range (- n 1))]
+    (setv item (get arr cycle-start)
+          pos cycle-start)
+    (for [i (range (+ cycle-start 1) n)]
+      (when (< (get arr i) item)
+        (setv pos (+ pos 1))))
+    (when (!= pos cycle-start)
+      (while (= item (get arr pos))
+        (setv pos (+ pos 1)))
+      (setv tmp (get arr pos))
+      (setv (get arr pos) item)
+      (setv item tmp)
+      (setv writes (+ writes 1))
+      (while (!= pos cycle-start)
+        (setv pos cycle-start)
+        (for [i (range (+ cycle-start 1) n)]
+          (when (< (get arr i) item)
+            (setv pos (+ pos 1))))
+        (while (= item (get arr pos))
+          (setv pos (+ pos 1)))
+        (setv t (get arr pos))
+        (setv (get arr pos) item)
+        (setv item t)
+        (setv writes (+ writes 1)))))
+  writes)
+
+(setv arr [5 4 3 2 1])
+(cycle-sort arr)
+(print arr)
