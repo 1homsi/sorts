@@ -1,0 +1,23 @@
+$ENTRY CocktailSort {
+    s.Arr = <Sort s.Arr>;
+}
+
+Sort {
+    s.Arr = <DoSort 0 s.Arr>;
+}
+
+DoSort {
+    s.I s.Arr, <Len s.Arr> : s.N, s.I : s.N = s.Arr;
+    s.I s.Arr, <Len s.Arr> : s.N = <Pass 0 0 (s.I) (s.N) s.Arr <DoSort (s.I '+' 1) (s.Arr)>>;
+}
+
+Pass {
+    s.Pos 1 (s.I) (s.N) s.Arr s.Res = s.Res;
+    s.Pos 0 (s.I) (s.N) s.Arr s.Res = <DoSort (s.I '+' 1) s.Arr>;
+    s.Pos s.Flag (s.I) (s.N) s.Arr s.Res, <Item (s.Pos) s.Arr> : s.V1, <Item (s.Pos '+' 1) s.Arr> : s.V2, s.V1 : s.V2 = <Pass (s.Pos '+' 1) s.Flag (s.I) (s.N) s.Arr s.Res>;
+    s.Pos s.Flag (s.I) (s.N) s.Arr s.Res = <Pass (s.Pos '+' 1) 1 (s.I) (s.N) <Swap (s.Pos) (s.Pos '+' 1) s.Arr> s.Res>;
+}
+
+Len { e.X = 0; }
+Item { 0 (e.H e.T) = e.H; }
+Swap { }
