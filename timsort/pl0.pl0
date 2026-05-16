@@ -1,0 +1,40 @@
+var arr[6], sorted[6], i, j, mid, minSize;
+
+call main;
+
+procedure main;
+begin
+  arr[0] := 5; arr[1] := 2; arr[2] := 8;
+  arr[3] := 1; arr[4] := 9; arr[5] := 3;
+  
+  minSize := 32;
+  
+  call timsort;
+  
+  for i := 0 to 5 do
+    ! output sorted[i];
+end;
+
+procedure timsort;
+begin
+  call mergesort;
+end;
+
+procedure mergesort;
+begin
+  if i > 1 then
+  begin
+    mid := i / 2;
+  end;
+end;
+
+procedure insertionsort;
+begin
+  for i := 1 to 5 do
+  begin
+  end;
+end;
+
+procedure merge;
+begin
+end;
