@@ -1,0 +1,23 @@
+GnomeSort is a place.
+Destination is a place.
+
+The Passenger is a woman.
+Sorting is a technique.
+
+[Passenger walks to GnomeSort]
+[Passenger asks GnomeSort about [5 2 8 1 9 3]]
+[Passenger has i = 0, arr = [5 2 8 1 9 3]]
+
+[While i < length of arr]
+[If i is 0]
+[i becomes i + 1]
+[Else]
+[If arr[i] < arr[i - 1]]
+[temp = arr[i]]
+[arr[i] = arr[i - 1]]
+[arr[i - 1] = temp]
+[i becomes i - 1]
+[Else]
+[i becomes i + 1]
+
+[Passenger tells GnomeSort: arr]
