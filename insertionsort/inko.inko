@@ -1,0 +1,15 @@
+fn pub insertion_sort(mut arr: Array[Int]) -> Array[Int] {
+    let n = arr.length
+    let mut i = 1
+    while i < n {
+        let key = arr.get(i)
+        let mut j = i - 1
+        while j >= 0 and arr.get(j) > key {
+            arr.set(j + 1, arr.get(j))
+            j -= 1
+        }
+        arr.set(j + 1, key)
+        i += 1
+    }
+    arr
+}
