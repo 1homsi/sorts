@@ -1,0 +1,16 @@
+insertionSort(arr) {
+  n = arraySize(arr);
+  for (i in 1..n) {
+    key = arr[i];
+    j = i - 1;
+    while (j >= 0 && arr[j] > key) {
+      arr[j+1] = arr[j];
+      j--;
+    }
+    arr[j+1] = key;
+  }
+  return arr;
+}
+
+var arr = [5, 2, 8, 1, 9, 3];
+println(insertionSort(arr));
