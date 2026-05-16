@@ -1,0 +1,19 @@
+/gnomesort {
+    /arr exch def
+    /n arr length def
+    /i 0 def
+    {
+        i n ge { exit } if
+        i 0 eq
+        arr i get arr i 1 sub get ge
+        or {
+            /i i 1 add def
+        } {
+            /tmp arr i get def
+            arr i arr i 1 sub get put
+            arr i 1 sub tmp put
+            /i i 1 sub def
+        } ifelse
+    } loop
+    arr
+} def
