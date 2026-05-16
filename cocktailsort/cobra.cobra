@@ -1,0 +1,26 @@
+class CocktailSort
+    def cocktailSort(arr as List<of int>) as List<of int>
+        swapped = true
+        start = 0
+        end = arr.count - 1
+        while swapped
+            swapped = false
+            for i in start : end
+                if arr[i] > arr[i + 1]
+                    tmp = arr[i]
+                    arr[i] = arr[i + 1]
+                    arr[i + 1] = tmp
+                    swapped = true
+            if not swapped, break
+            swapped = false
+            end -= 1
+            i = end - 1
+            while i >= start
+                if arr[i] > arr[i + 1]
+                    tmp = arr[i]
+                    arr[i] = arr[i + 1]
+                    arr[i + 1] = tmp
+                    swapped = true
+                i -= 1
+            start += 1
+        return arr
