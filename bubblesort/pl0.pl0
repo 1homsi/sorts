@@ -1,0 +1,25 @@
+var arr, n, i, j, temp;
+procedure bubblesort;
+begin
+  i := 0;
+  while i < n do
+  begin
+    j := 0;
+    while j < n - 1 - i do
+    begin
+      if arr[j] > arr[j+1] then
+      begin
+        temp := arr[j];
+        arr[j] := arr[j+1];
+        arr[j+1] := temp;
+      end;
+      j := j + 1;
+    end;
+    i := i + 1;
+  end;
+end;
+begin
+  n := 6;
+  arr[0] := 5; arr[1] := 2; arr[2] := 8; arr[3] := 1; arr[4] := 9; arr[5] := 3;
+  call bubblesort;
+end.
