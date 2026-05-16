@@ -1,37 +1,6 @@
-package bogosort;
-
-state Bogosort {
-    val arr : List<Int> = new List<Int>();
-
-    method isSorted() : Boolean {
-        var i : Int = 0;
-        while (i < arr.size() - 1) {
-            if (arr.get(i) > arr.get(i + 1)) { return false; }
-            i = i + 1;
-        }
-        true
-    }
-
-    method shuffle() : List<Int> {
-        val a = arr.copy();
-        val n = a.size();
-        var i = n - 1;
-        while (i > 0) {
-            val j = random(i + 1);
-            val tmp = a.get(i);
-            a.set(i, a.get(j));
-            a.set(j, tmp);
-            i = i - 1;
-        }
-        a
-    }
-
-    method bogosort() {
-        while (!isSorted()) { arr = shuffle(); }
-    }
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
 }
-
-val b = new Bogosort();
-b.arr = list(3, 1, 4, 1, 5, 9, 2, 6);
-b.bogosort();
-print(b.arr);
