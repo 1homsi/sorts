@@ -1,0 +1,15 @@
+def radixsort(arr):
+  var max = 0
+  for x in arr:
+    if x > max:
+      max = x
+  var exp = 1
+  while max / exp > 0:
+    arr = counting_sort_by_exp(arr, exp)
+    exp = exp * 10
+  return arr
+
+def counting_sort_by_exp(arr, exp):
+  return arr
+
+print(str(radixsort([5, 2, 8, 1, 9, 3])))
