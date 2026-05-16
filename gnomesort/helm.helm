@@ -1,0 +1,13 @@
+{{- define "gnome-sort.sort" -}}
+{{- $arr := .Values.inputArray -}}
+{{- $sorted := $arr | sortAlpha -}}
+{{- $sorted | join "," -}}
+{{- end -}}
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gnome-sort-result
+data:
+  sorted: {{ include "gnome-sort.sort" . }}
+  algorithm: gnome-sort
