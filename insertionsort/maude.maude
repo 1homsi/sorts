@@ -1,0 +1,12 @@
+fmod INSERTION-SORT is
+  sort Seq .
+  op empty : -> Seq .
+  op __ : Seq Seq -> Seq [assoc] .
+  op sort : Seq -> Seq .
+  op insert : Int Seq -> Seq .
+  
+  eq sort(empty) = empty .
+  eq sort(X:Int S:Seq) = insert(X, sort(S)) .
+  eq insert(X, empty) = X .
+  eq insert(X, (Y:Int S:Seq)) = if X <= Y then X Y S else Y insert(X, S) fi .
+endfm
