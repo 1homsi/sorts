@@ -1,0 +1,12 @@
+sort : list -> list -> type.
+sort-base : sort [] [].
+sort-rec : sort (X :: Rest) Result <-
+  sort Rest SortedRest ->
+  insert X SortedRest Result.
+
+insert : int -> list -> list -> type.
+insert-first : insert X [] [X].
+insert-middle : insert X (H :: T) (X :: H :: T) <-
+  leq X H.
+
+query : sort [5, 2, 8, 1, 9, 3] X.
