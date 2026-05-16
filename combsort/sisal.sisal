@@ -1,0 +1,29 @@
+define comb_sort
+
+function comb_sort(arr: array[integer]) returns array[integer]
+let
+    n := array_size(arr);
+    result := sort_loop(arr, n, n)
+in
+    result
+end let
+
+function sort_loop(arr: array[integer], n: integer, gap: integer) returns array[integer]
+let
+    new_gap := integer_max(1, gap * 10 / 13);
+    new_arr := comb_pass(arr, n, new_gap, 1)
+in
+    if new_gap = 1 then new_arr
+    else sort_loop(new_arr, n, new_gap)
+    end if
+end let
+
+function comb_pass(arr: array[integer], n: integer, gap: integer, i: integer) returns array[integer]
+    if i + gap > n then arr
+    else
+        if arr[i] > arr[i + gap] then
+            comb_pass(replace(replace(arr, i, arr[i+gap]), i+gap, arr[i]), n, gap, i+1)
+        else
+            comb_pass(arr, n, gap, i+1)
+        end if
+    end if
