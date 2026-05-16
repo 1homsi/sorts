@@ -1,0 +1,25 @@
+DEFINE
+    compare-and-swap == [pop pop pop] [pop pop pop] branch ;
+
+    bitonic-merge ==
+        dup 1 >
+        [   dup 2 / dup rollup dup
+            [ [ compare-and-swap ] step ] dip
+            bitonic-merge
+            bitonic-merge
+        ]
+        [ pop pop pop ]
+        ifte ;
+
+    bitonic-sort ==
+        dup 1 >
+        [   dup 2 / dup rollup
+            true bitonic-sort
+            false bitonic-sort
+            bitonic-merge
+        ]
+        [ pop pop pop ]
+        ifte ;
+
+[3 7 4 8 6 2 1 5] 0 8 true bitonic-sort
+. .
