@@ -1,0 +1,41 @@
+LBL A
+STO 0      ; n
+1
+STO 1      ; i
+LBL 1
+RCL 1
+RCL 0
+X>Y?
+GTO 2      ; if i >= n goto end
+RCL I      ; key = arr[i]
+STO 9
+RCL 1
+1
+-
+STO 2      ; j = i-1
+LBL 3
+RCL 2
+0
+X<0?
+GTO 4      ; if j < 0 goto place
+RCL (j)
+RCL 9
+X>Y?
+GTO 4      ; if arr[j] <= key goto place
+RCL (j)
+STO I      ; arr[j+1] = arr[j]
+RCL 2
+1
+-
+STO 2      ; j--
+GTO 3
+LBL 4
+RCL 9
+STO I      ; arr[j+1] = key
+RCL 1
+1
++
+STO 1      ; i++
+GTO 1
+LBL 2
+RTN
