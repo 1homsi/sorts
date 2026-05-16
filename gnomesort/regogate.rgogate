@@ -1,0 +1,12 @@
+package k8s.admission
+
+deny[msg] {
+    input.request.kind.kind == "GnomeSortJob"
+    not input.request.object.spec.sorted
+    msg := "Array must be sorted before deployment"
+}
+
+violation[{"msg": msg}] {
+    input.review.object.spec.inputArray[i] > input.review.object.spec.inputArray[i+1]
+    msg := sprintf("Array not sorted at index %v", [i])
+}
