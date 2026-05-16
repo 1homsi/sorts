@@ -1,0 +1,14 @@
+data Node = Node Int Node Node | Nil
+
+insert : Node -> Int -> Node
+insert Nil x = Node x Nil Nil
+insert (Node v l r) x | x < v = Node v (insert l x) r
+insert (Node v l r) x | x > v = Node v l (insert r x)
+insert t x = t
+
+inorder : Node -> [Int]
+inorder Nil = []
+inorder (Node v l r) = inorder l ++ [v] ++ inorder r
+
+treeSort : [Int] -> [Int]
+treeSort xs = inorder (foldr insert Nil xs)
