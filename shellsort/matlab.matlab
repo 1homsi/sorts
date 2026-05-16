@@ -1,4 +1,4 @@
-function arr = shell_sort(arr)
+function arr = shellsort(arr)
     n = length(arr);
     gap = floor(n / 2);
     while gap > 0
@@ -14,6 +14,3 @@ function arr = shell_sort(arr)
         gap = floor(gap / 2);
     end
 end
-
-arr = [64, 34, 25, 12, 22, 11, 90];
-disp(shell_sort(arr));
