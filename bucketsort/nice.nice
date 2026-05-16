@@ -1,0 +1,18 @@
+void main(String[] args) {
+    int[] arr = [5, 2, 8, 1, 9, 3];
+    bucketSort(arr, 10).each(x => println(x));
+}
+
+void bucketSort(int[] arr, int maxVal) {
+    int[][] buckets = new int[maxVal][];
+    for (int num : arr) {
+        if (num >= 0 && num < maxVal) {
+            buckets[num] = buckets[num] + [num];
+        }
+    }
+    for (int[] bucket : buckets) {
+        for (int num : bucket) {
+            println(num);
+        }
+    }
+}
