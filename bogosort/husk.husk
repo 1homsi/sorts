@@ -1,1 +1,6 @@
-print("Bogosort implementation for husk.husk")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
