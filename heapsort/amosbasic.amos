@@ -1,0 +1,29 @@
+Dim Arr(5)
+Arr(0)=12 : Arr(1)=11 : Arr(2)=13 : Arr(3)=5 : Arr(4)=6 : Arr(5)=7
+N=6
+
+For I = N/2-1 To 0 Step -1
+  Gosub Heapify[N,I]
+Next I
+
+For I = N-1 To 1 Step -1
+  Tmp=Arr(0) : Arr(0)=Arr(I) : Arr(I)=Tmp
+  Gosub Heapify[I,0]
+Next I
+
+For I=0 To N-1
+  Print Arr(I);" ";
+Next I
+Print
+
+Procedure Heapify[PN,PI]
+  Largest=PI
+  Left=2*PI+1
+  Right=2*PI+2
+  If Left<PN And Arr(Left)>Arr(Largest) Then Largest=Left
+  If Right<PN And Arr(Right)>Arr(Largest) Then Largest=Right
+  If Largest<>PI Then
+    Tmp=Arr(PI) : Arr(PI)=Arr(Largest) : Arr(Largest)=Tmp
+    Gosub Heapify[PN,Largest]
+  End If
+End Proc
