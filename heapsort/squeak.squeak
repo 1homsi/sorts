@@ -1,0 +1,37 @@
+Object subclass: #SqueakHeapsort
+    instanceVariableNames: ''
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Heapsort'
+
+SqueakHeapsort class >> heapify: arr n: n i: i [
+    | largest left right tmp |
+    largest := i.
+    left := 2 * i.
+    right := 2 * i + 1.
+    (left <= n and: [(arr at: left) > (arr at: largest)]) ifTrue: [largest := left].
+    (right <= n and: [(arr at: right) > (arr at: largest)]) ifTrue: [largest := right].
+    largest ~= i ifTrue: [
+        tmp := arr at: i.
+        arr at: i put: (arr at: largest).
+        arr at: largest put: tmp.
+        self heapify: arr n: n i: largest
+    ]
+]
+
+SqueakHeapsort class >> sort: arr [
+    | n tmp |
+    n := arr size.
+    (n // 2) to: 1 by: -1 do: [:i | self heapify: arr n: n i: i].
+    n to: 2 by: -1 do: [:i |
+        tmp := arr at: 1.
+        arr at: 1 put: (arr at: i).
+        arr at: i put: tmp.
+        self heapify: arr n: i - 1 i: 1
+    ].
+    ^ arr
+]
+
+| arr |
+arr := #(12 11 13 5 6 7) copy.
+Transcript showCr: (SqueakHeapsort sort: arr) printString.
