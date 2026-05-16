@@ -1,0 +1,37 @@
+Section Header
+{ + name := COUNTINGSORT;
+}
+
+Section Public
+{
+  - countingsort (arr : ARRAY[INT]) : ARRAY[INT] <- [
+    | max : INT;
+    | count, output : ARRAY[INT];
+    | i, j : INT;
+
+    max := 0;
+    arr.do { |val|
+      max := max.max(val);
+    };
+
+    count := ARRAY[INT].new(max + 1);
+    (0 to max).do { |i|
+      count.put(i, 0);
+    };
+
+    arr.do { |val|
+      count.put(val, count.at(val) + 1);
+    };
+
+    output := ARRAY[INT].new(0);
+    (0 to max).do { |i|
+      (0 to count.at(i) - 1).do { |_|
+        output.add(i);
+      };
+    };
+
+    ^ output
+  ];
+}
+
+Test: countingsort([5, 2, 8, 1, 9, 3]).
