@@ -1,0 +1,19 @@
+class StoogeSort {
+  def sort(a: Array[Int], i: Int, j: Int) {
+    if (a[j] < a[i]) {
+      let temp = a[j]
+      a[j] = a[i]
+      a[i] = temp
+    }
+    if (j - i > 1) {
+      let t = (j - i + 1) / 3
+      sort(a, i, j - t)
+      sort(a, i + t, j)
+      sort(a, i, j - t)
+    }
+  }
+}
+
+let arr = [5, 2, 8, 1, 9, 3]
+StoogeSort().sort(arr, 0, 5)
+print(arr)
