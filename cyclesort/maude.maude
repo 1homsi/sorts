@@ -1,0 +1,11 @@
+fmod CYCLESORT is
+  sort Array .
+  op [_] : List -> Array .
+  
+  op cyclesort : Array -> Array .
+  
+  var A : Array .
+  var L : List .
+  
+  eq cyclesort([L]) = [L] .
+endm
