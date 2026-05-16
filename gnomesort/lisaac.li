@@ -1,0 +1,30 @@
+Section Header
+  + name := GNOMESORT;
+
+Section Public
+  - gnomesort(arr : ARRAY) : ARRAY <- {
+    var i : INTEGER;
+    i := 0;
+    {i < arr.count} whileTrue: {
+      (i = 0)
+        ifTrue: { i := i + 1; }
+        ifFalse: {
+          ((arr.item(i)) < (arr.item(i - 1)))
+            ifTrue: {
+              var temp : INTEGER;
+              temp := arr.item(i);
+              arr.put(i, arr.item(i - 1));
+              arr.put(i - 1, temp);
+              i := i - 1;
+            }
+            ifFalse: { i := i + 1; };
+        };
+    };
+    arr
+  };
+
+  - main <- {
+    var test : ARRAY;
+    test := ARRAY.create(5, 2, 8, 1, 9, 3);
+    (gnomesort(test)).println;
+  };
