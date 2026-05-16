@@ -1,0 +1,18 @@
+begin
+  integer array arr(1::6);
+  integer max, exp, i;
+
+  arr(1) := 5; arr(2) := 2; arr(3) := 8; arr(4) := 1; arr(5) := 9; arr(6) := 3;
+
+  max := arr(1);
+  for i := 2 step 1 until 6 do
+    if arr(i) > max then max := arr(i);
+
+  exp := 1;
+  while max / exp > 0 do begin
+    exp := exp * 10
+  end;
+
+  for i := 1 step 1 until 6 do
+    write(arr(i));
+end
