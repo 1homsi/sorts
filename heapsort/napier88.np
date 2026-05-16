@@ -1,0 +1,27 @@
+let heapsort =
+    fun arr =>
+        let n = length arr in
+        let _ = iter (fn i => siftdown arr i n) (n / 2 - 1 downto 0) in
+        iter (fn i =>
+            let temp = arr[0] in
+            (arr[0] := arr[i];
+             arr[i] := temp;
+             siftdown arr 0 i))
+            (n - 1 downto 1)
+    in
+    arr
+
+and siftdown =
+    fun arr idx n =>
+        let largest = ref idx in
+        let left = 2 * idx + 1 in
+        let right = 2 * idx + 2 in
+        if left < n andalso arr[left] > arr[!largest] then
+            largest := left;
+        if right < n andalso arr[right] > arr[!largest] then
+            largest := right;
+        if !largest <> idx then
+            let temp = arr[idx] in
+            (arr[idx] := arr[!largest];
+             arr[!largest] := temp;
+             siftdown arr !largest n)
