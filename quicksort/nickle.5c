@@ -1,0 +1,19 @@
+void quicksort(int[...] arr) {
+  if (dim(arr) <= 1)
+    return arr;
+
+  int pivot = arr[0];
+  int[] less = {};
+  int[] greater = {};
+
+  for (int i = 1; i < dim(arr); i++) {
+    if (arr[i] <= pivot)
+      less = grow(less, 1, arr[i]);
+    else
+      greater = grow(greater, 1, arr[i]);
+  }
+
+  return quicksort(less) + [pivot] + quicksort(greater);
+}
+
+print(quicksort({5, 2, 8, 1, 9, 3}));
