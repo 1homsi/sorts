@@ -1,0 +1,25 @@
+        HEAPSORT
+        ARR1 = 12; ARR2 = 11; ARR3 = 13; ARR4 = 5; ARR5 = 6; ARR6 = 7
+        N = 6
+        I = N / 2
+BLOOP   GE(I, 1)                            :F(DLOOP)
+        CALL HEAPIFY(N, I)
+        I = I - 1                           :(BLOOP)
+DLOOP   I = N
+SLOOP   GE(I, 2)                            :F(DONE)
+        PERFORM SWAP(1, I)
+        CALL HEAPIFY(I - 1, 1)
+        I = I - 1                           :(SLOOP)
+DONE    OUTPUT = ARR1 ' ' ARR2 ' ' ARR3 ' ' ARR4 ' ' ARR5 ' ' ARR6
+        END
+HEAPIFY LARGEST = $2
+        LEFT = $2 * 2
+        RIGHT = LEFT + 1
+        GT(ARR<LEFT>, ARR<LARGEST>) LE(LEFT, $1) :F(CRIGHT)
+        LARGEST = LEFT
+CRIGHT  GT(ARR<RIGHT>, ARR<LARGEST>) LE(RIGHT, $1) :F(CDONE)
+        LARGEST = RIGHT
+CDONE   EQ(LARGEST, $2)                     :S(RETURN)
+        SWAP($2, LARGEST)
+        HEAPIFY = HEAPIFY($1, LARGEST)
+RETURN  RETURN
