@@ -1,0 +1,27 @@
+CombSort([], []).
+CombSort([X], [X]).
+CombSort([X,Y|Rest], Sorted) :-
+  Gap is length([X,Y|Rest]),
+  CombPass([X,Y|Rest], Gap, Result),
+  CombSort(Result, Sorted).
+
+CombPass(L, Gap, L) :- Gap =< 1, !.
+CombPass(L, Gap, Sorted) :-
+  NewGap is (Gap * 10) / 13,
+  (NewGap < 1 -> NextGap = 1 ; NextGap = NewGap),
+  CombPassHelper(L, 0, length(L), NextGap, Result),
+  CombPass(Result, NextGap, Sorted).
+
+CombPassHelper(L, I, Len, Gap, L) :-
+  I >= Len - Gap, !.
+CombPassHelper(L, I, Len, Gap, Sorted) :-
+  I < Len - Gap,
+  nth(I, L, A),
+  nth(I+Gap, L, B),
+  (A > B ->
+    (swap(L, I, I+Gap, NewList), CombPassHelper(NewList, I+1, Len, Gap, Sorted)) ;
+    (CombPassHelper(L, I+1, Len, Gap, Sorted))).
+
+:- initialization(main).
+
+main :- CombSort([5,2,8,1,9,3], X), write(X), nl.
