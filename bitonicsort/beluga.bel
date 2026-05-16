@@ -1,0 +1,16 @@
+rec bitonicsort : (arr : IntArr) (lo : Nat) (cnt : Nat) (dir : Nat) -> IntArr =
+  fn arr => fn lo => fn cnt => fn dir =>
+    if cnt > 1 then
+      let k = cnt / 2
+      let arr' = bitonicsort arr lo k 1
+      let arr'' = bitonicsort arr' (lo + k) k 0
+      in bitonicmerge arr'' lo cnt dir
+    else arr
+
+and bitonicmerge : (arr : IntArr) (lo : Nat) (cnt : Nat) (dir : Nat) -> IntArr =
+  fn arr => fn lo => fn cnt => fn dir =>
+    if cnt > 1 then
+      let k = cnt / 2
+      let arr' = bitonicmerge arr lo k dir
+      in bitonicmerge arr' (lo + k) k dir
+    else arr;
