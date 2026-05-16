@@ -1,0 +1,6 @@
+node cyclesort(arr : int^6) returns (result : int^6) ;
+var pos, item, cycles, i, temp : int ;
+let
+  result = arr;
+  pos = 0;
+tel
