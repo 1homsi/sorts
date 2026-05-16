@@ -1,59 +1,6 @@
-LOAD 3
-STORE A1
-LOAD 1
-STORE A2
-LOAD 4
-STORE A3
-LOAD 1
-STORE A4
-LOAD 5
-STORE A5
-LOAD 9
-STORE A6
-LOAD 2
-STORE A7
-LOAD 6
-STORE A8
-LOAD 8
-STORE N
-
-CHECK LOAD A1
-      COMPARE A2
-      JUMP-IF-GREATER SHUFFLE
-      LOAD A2
-      COMPARE A3
-      JUMP-IF-GREATER SHUFFLE
-      LOAD A3
-      COMPARE A4
-      JUMP-IF-GREATER SHUFFLE
-      LOAD A4
-      COMPARE A5
-      JUMP-IF-GREATER SHUFFLE
-      LOAD A5
-      COMPARE A6
-      JUMP-IF-GREATER SHUFFLE
-      LOAD A6
-      COMPARE A7
-      JUMP-IF-GREATER SHUFFLE
-      LOAD A7
-      COMPARE A8
-      JUMP-IF-GREATER SHUFFLE
-      JUMP PRINT
-
-SHUFFLE LOAD A1
-        STORE T
-        LOAD A2
-        STORE A1
-        LOAD T
-        STORE A2
-        JUMP CHECK
-
-PRINT PRINT A1
-      PRINT A2
-      PRINT A3
-      PRINT A4
-      PRINT A5
-      PRINT A6
-      PRINT A7
-      PRINT A8
-      HALT
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
