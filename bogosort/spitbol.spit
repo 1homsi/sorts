@@ -1,24 +1,6 @@
-        ARR = ARRAY(8)
-        ARR<1> = 3; ARR<2> = 1; ARR<3> = 4; ARR<4> = 1
-        ARR<5> = 5; ARR<6> = 9; ARR<7> = 2; ARR<8> = 6
-        N = 8
-
-LOOP    SORTED = 1
-        I = 1
-CLP     GE(I, N)                          :S(TST)
-        GT(ARR<I>, ARR<(I + 1)>)          :S(NST)
-        I = I + 1                          :(CLP)
-NST     SORTED = 0
-TST     EQ(SORTED, 1)                     :S(OUT)
-        I = N
-SLP     LE(I, 1)                          :S(LOOP)
-        J = REMDR(CONVERT(I * RANDOM(), 'INTEGER'), I) + 1
-        T = ARR<I>
-        ARR<I> = ARR<J>
-        ARR<J> = T
-        I = I - 1                          :(SLP)
-OUT     I = 1
-PLP     GT(I, N)                          :S(END)
-        OUTPUT = ARR<I>
-        I = I + 1                          :(PLP)
-END
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
