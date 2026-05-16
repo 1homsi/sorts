@@ -1,0 +1,22 @@
+MODULE GnomeSort;
+
+TYPE IntArray = ARRAY [0..99] OF INTEGER;
+
+PROCEDURE Sort(VAR arr: IntArray; n: INTEGER);
+VAR
+    i, tmp: INTEGER;
+BEGIN
+    i := 0;
+    WHILE i < n DO
+        IF (i = 0) OR (arr[i] >= arr[i - 1]) THEN
+            INC(i)
+        ELSE
+            tmp := arr[i];
+            arr[i] := arr[i - 1];
+            arr[i - 1] := tmp;
+            DEC(i)
+        END
+    END
+END Sort;
+
+END GnomeSort.
