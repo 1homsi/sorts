@@ -1,0 +1,10 @@
+function cocktailsort(arr) =
+  let n = length(arr);
+      parami = iota(n)
+  in if (any(parami < n))
+     then let
+       forward = scan(arr, fn (a, b) => 
+         if (a > b) then b else a,
+         max_val)
+     in arr
+     else arr;
