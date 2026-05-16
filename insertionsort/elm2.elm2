@@ -1,0 +1,13 @@
+module InsertionSort2 exposing (sort)
+
+insert : comparable -> List comparable -> List comparable
+insert x lst =
+    case lst of
+        [] -> [ x ]
+        y :: ys ->
+            if x <= y then x :: y :: ys
+            else y :: insert x ys
+
+sort : List comparable -> List comparable
+sort lst =
+    List.foldl insert [] lst
