@@ -1,0 +1,85 @@
+@main {
+  v0: int[] = [5, 2, 8, 1, 9, 3];
+  n: int = 6;
+  pos: int = 0;
+  br loop;
+loop:
+  cond pos n skip;
+  item: int = v0[pos];
+  cycles: int = 0;
+  i: int = 0;
+  br count;
+count:
+  cond i n endcount;
+  is_less: bool = lt v0[i] item;
+  is_diff: bool = ne i pos;
+  should_inc: bool = and is_less is_diff;
+  br check;
+check:
+  cond should_inc inc nocount;
+inc:
+  cycles : int = add cycles 1;
+nocount:
+  i : int = add i 1;
+  br count;
+endcount:
+  is_zero: bool = eq cycles 0;
+  br is_zero_check;
+is_zero_check:
+  cond is_zero skip;
+  br inner_loop;
+inner_loop:
+  is_eq: bool = eq v0[pos] item;
+  br inner_check;
+inner_check:
+  cond is_eq incr_pos cont;
+incr_pos:
+  pos : int = add pos 1;
+  br inner_loop;
+cont:
+  temp: int = v0[pos];
+  v0[pos] = item;
+  item = temp;
+  br while_loop;
+while_loop:
+  is_gt: bool = gt cycles 0;
+  br while_check;
+while_check:
+  cond is_gt doit skip;
+doit:
+  cycles = 0;
+  i = 0;
+  br count2;
+count2:
+  cond i n endcount2;
+  is_less2: bool = lt v0[i] item;
+  is_diff2: bool = ne i pos;
+  should_inc2: bool = and is_less2 is_diff2;
+  br check2;
+check2:
+  cond should_inc2 inc2 nocount2;
+inc2:
+  cycles : int = add cycles 1;
+nocount2:
+  i : int = add i 1;
+  br count2;
+endcount2:
+  br inner_loop2;
+inner_loop2:
+  is_eq2: bool = eq v0[pos] item;
+  br inner_check2;
+inner_check2:
+  cond is_eq2 incr_pos2 cont2;
+incr_pos2:
+  pos : int = add pos 1;
+  br inner_loop2;
+cont2:
+  temp : int = v0[pos];
+  v0[pos] = item;
+  item = temp;
+  cycles : int = sub cycles 1;
+  br while_loop;
+skip:
+  pos : int = add pos 1;
+  br loop;
+}
