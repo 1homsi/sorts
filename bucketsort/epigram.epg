@@ -1,0 +1,3 @@
+bucket_sort : (Nat : Set) -> List Nat -> List Nat
+bucket_sort () [] = []
+bucket_sort n (x :: xs) = bucket_sort n xs
