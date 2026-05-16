@@ -1,0 +1,14 @@
+class GnomeSort < Formula
+  desc "Gnome sort implementation"
+  homepage "https://example.com/gnome-sort"
+  url "https://example.com/gnome-sort-1.0.0.tar.gz"
+  version "1.0.0"
+
+  def install
+    system "make", "install", "PREFIX=#{prefix}"
+  end
+
+  test do
+    system "#{bin}/gnome_sort"
+  end
+end
