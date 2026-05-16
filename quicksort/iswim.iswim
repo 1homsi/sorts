@@ -1,0 +1,12 @@
+quicksort = lambda arr.
+  if arr.length <= 1 then
+    arr
+  else
+    pivot = arr.first
+    less = arr.drop 1 filter (lambda x. x <= pivot)
+    greater = arr.drop 1 filter (lambda x. x > pivot)
+    append (quicksort less)
+           (append [pivot] (quicksort greater))
+  end
+
+print(quicksort([5, 2, 8, 1, 9, 3]))
