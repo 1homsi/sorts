@@ -1,0 +1,30 @@
+model gnome_sort
+uses "mmxprs"
+
+declarations
+  N = 10
+  data: array(1..N) of integer
+  arr: array(1..N) of integer
+  tmp: integer
+  i: integer
+end-declarations
+
+data := [5, 3, 8, 1, 9, 2, 7, 4, 6, 0]
+forall(k in 1..N) arr(k) := data(k)
+
+i := 1
+while i <= N do
+  if i = 1 then
+    i := i + 1
+  elif arr(i) >= arr(i-1) then
+    i := i + 1
+  else
+    tmp := arr(i)
+    arr(i) := arr(i-1)
+    arr(i-1) := tmp
+    i := i - 1
+  end-if
+end-do
+
+writeln(arr)
+end-model
