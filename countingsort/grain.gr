@@ -1,0 +1,26 @@
+module CountingSort
+
+let countingSort = (arr) => {
+  if (Array.length(arr) == 0) {
+    arr
+  } else {
+    let min = Array.reduce((acc, v) => if (v < acc) v else acc, arr[0], arr)
+    let max = Array.reduce((acc, v) => if (v > acc) v else acc, arr[0], arr)
+    let range = max - min + 1
+    let count = Array.make(range, 0)
+    Array.forEach(v => {
+      count[v - min] = count[v - min] + 1
+    }, arr)
+    for (let mut i = 1; i < range; i += 1) {
+      count[i] = count[i] + count[i - 1]
+    }
+    let output = Array.make(Array.length(arr), 0)
+    for (let mut i = Array.length(arr) - 1; i >= 0; i -= 1) {
+      count[arr[i] - min] = count[arr[i] - min] - 1
+      output[count[arr[i] - min]] = arr[i]
+    }
+    output
+  }
+}
+
+print(countingSort([> 4, 2, 2, 8, 3, 3, 1]))
