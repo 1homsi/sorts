@@ -1,0 +1,19 @@
+def shellsort(arr)
+  gap = 1
+  while gap <= length(arr)
+    gap = gap * 3 + 1
+  end
+  while gap > 0
+    gap = gap / 3
+    for i = gap to length(arr) - 1
+      temp = arr[i]
+      j = i
+      while j >= gap and arr[j - gap] > temp
+        arr[j] = arr[j - gap]
+        j = j - gap
+      end
+    end
+  end
+  return arr
+end
+print(shellsort([5, 2, 8, 1, 9, 3]))
