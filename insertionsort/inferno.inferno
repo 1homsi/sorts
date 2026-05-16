@@ -1,0 +1,34 @@
+import Inferno, { createComponentVNode } from 'inferno';
+import { Component } from 'inferno-component';
+import { createVNode } from 'inferno';
+
+function insertionSort(arr) {
+  const a = [...arr];
+  const n = a.length;
+  for (let i = 1; i < n; i++) {
+    const key = a[i];
+    let j = i - 1;
+    while (j >= 0 && a[j] > key) {
+      a[j + 1] = a[j];
+      j--;
+    }
+    a[j + 1] = key;
+  }
+  return a;
+}
+
+class InsertionSortApp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { arr: [5, 3, 1, 4, 2], sorted: [] };
+  }
+  sort() {
+    this.setState({ sorted: insertionSort(this.state.arr) });
+  }
+  render() {
+    return createVNode(1, 'div', null, [
+      createVNode(1, 'button', null, 'Sort', 16, { onClick: () => this.sort() }),
+      createVNode(1, 'p', null, this.state.sorted.join(', '), 16)
+    ], 4);
+  }
+}
