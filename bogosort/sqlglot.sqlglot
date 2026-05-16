@@ -1,1 +1,1 @@
-print("Bogosort implementation for sqlglot.sqlglot")
+SELECT * FROM array ORDER BY value ASC;
