@@ -1,0 +1,15 @@
+procedure gnome_sort(arr);
+    n := #arr;
+    i := 1;
+    loop while i <= n do
+        if i = 1 or arr(i) >= arr(i - 1) then
+            i := i + 1;
+        else
+            tmp := arr(i);
+            arr(i) := arr(i - 1);
+            arr(i - 1) := tmp;
+            i := i - 1;
+        end if;
+    end loop;
+    return arr;
+end procedure;
