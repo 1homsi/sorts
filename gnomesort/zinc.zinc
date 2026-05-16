@@ -1,0 +1,20 @@
+fn gnome_sort(arr: [field; 10]) -> [field; 10] {
+    let mut a = arr;
+    let n: u8 = 10;
+    let mut i: u8 = 0;
+    while i < n {
+        if i == 0 || a[i] >= a[i - 1] {
+            i += 1;
+        } else {
+            let tmp = a[i];
+            a[i] = a[i - 1];
+            a[i - 1] = tmp;
+            i -= 1;
+        }
+    }
+    a
+}
+
+fn main() -> [field; 10] {
+    gnome_sort([5, 3, 8, 1, 9, 2, 7, 4, 6, 0])
+}
