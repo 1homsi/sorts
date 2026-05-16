@@ -1,0 +1,45 @@
+.org 0x0000
+rjmp main
+
+.equ N = 5
+.dseg
+arr: .byte N
+
+.cseg
+main:
+    ldi r16, N
+    ldi r17, 1
+outer_loop:
+    cp  r17, r16
+    brge done
+    ldi ZL, low(arr)
+    ldi ZH, high(arr)
+    add ZL, r17
+    adc ZH, r1
+    ld  r18, Z
+    mov r19, r17
+    dec r19
+inner_loop:
+    cpi r19, 0xFF
+    breq place
+    ldi ZL, low(arr)
+    ldi ZH, high(arr)
+    add ZL, r19
+    adc ZH, r1
+    ld  r20, Z
+    cp  r18, r20
+    brge place
+    std Z+1, r20
+    dec r19
+    rjmp inner_loop
+place:
+    ldi ZL, low(arr)
+    ldi ZH, high(arr)
+    inc r19
+    add ZL, r19
+    adc ZH, r1
+    st  Z, r18
+    inc r17
+    rjmp outer_loop
+done:
+    rjmp done
