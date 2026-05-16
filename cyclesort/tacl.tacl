@@ -1,0 +1,52 @@
+?SECTION CYCLESORT MAIN
+
+  BEGIN
+    DECLARE ARR AS INT ARRAY(6)
+    DECLARE N AS INT
+    DECLARE POS AS INT
+    DECLARE ITEM AS INT
+    DECLARE CYCLES AS INT
+    DECLARE I AS INT
+    DECLARE TEMP AS INT
+
+    SET N = 6
+    SET ARR(0) = 5
+    SET ARR(1) = 2
+    SET ARR(2) = 8
+    SET ARR(3) = 1
+    SET ARR(4) = 9
+    SET ARR(5) = 3
+
+    SET POS = 0
+    PERFORM UNTIL POS >= N
+      SET ITEM = ARR(POS)
+      SET CYCLES = 0
+      PERFORM VARYING I FROM 0 BY 1 UNTIL I >= N
+        IF I NOT = POS AND ARR(I) < ITEM
+          SET CYCLES = CYCLES + 1
+      END
+      IF CYCLES NOT = 0
+        PERFORM UNTIL ARR(POS) NOT = ITEM
+          SET POS = POS + 1
+        END
+        SET TEMP = ARR(POS)
+        SET ARR(POS) = ITEM
+        SET ITEM = TEMP
+        PERFORM UNTIL CYCLES = 0
+          SET CYCLES = 0
+          PERFORM VARYING I FROM 0 BY 1 UNTIL I >= N
+            IF I NOT = POS AND ARR(I) < ITEM
+              SET CYCLES = CYCLES + 1
+          END
+          PERFORM UNTIL ARR(POS) NOT = ITEM
+            SET POS = POS + 1
+          END
+          SET TEMP = ARR(POS)
+          SET ARR(POS) = ITEM
+          SET ITEM = TEMP
+          SET CYCLES = CYCLES - 1
+        END
+      END
+      SET POS = POS + 1
+    END
+  END
