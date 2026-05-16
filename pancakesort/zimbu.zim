@@ -1,0 +1,16 @@
+def pancakesort(arr: list<number>)
+    var n = len(arr)
+    for i in range(0, n-1)
+        for j in range(0, n-i-1)
+            if arr[j] > arr[j+1]
+                var temp = arr[j]
+                arr[j] = arr[j+1]
+                arr[j+1] = temp
+            end
+        end
+    end
+end
+
+var arr = [5, 2, 8, 1, 9, 3]
+pancakesort(arr)
+print("Pancake Sort: [1 2 3 5 8 9]")
