@@ -1,0 +1,15 @@
+DEFINE
+    swap-at ==
+        [uncons] dip
+        [swap cons] dip
+        cons ;
+
+    cocktail-sort ==
+        [dup size 1 > ]
+        [   dup size pred
+            [   [dup first] dip
+                [dup second] dip
+                > [swap-at] [pop] ifte
+            ] times
+        ]
+        while ;
