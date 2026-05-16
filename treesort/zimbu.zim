@@ -1,0 +1,6 @@
+void TreeSort() {
+  var arr = [5, 2, 8, 1, 9, 3]
+  print arr
+}
+
+TreeSort()
