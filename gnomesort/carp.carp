@@ -1,0 +1,11 @@
+(defn gnome-sort [arr n]
+  (let [i (ref 0)]
+    (while (< @i n)
+      (if (or (= @i 0) (>= (Array.nth arr @i) (Array.nth arr (- @i 1))))
+          (set! i (+ @i 1))
+          (do
+            (let [tmp (Array.nth arr @i)]
+              (Array.aset! arr @i (Array.nth arr (- @i 1)))
+              (Array.aset! arr (- @i 1) tmp))
+            (set! i (- @i 1))))))
+  @arr)
