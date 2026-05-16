@@ -1,0 +1,37 @@
+procedure Cyclesort(var Arr : Vector; Result : out Vector) is
+  N := Arr'Length;
+  Pos := 0;
+  for Pos in 0 ..< N loop
+    Item := Arr[Pos];
+    Cycles := 0;
+    for I in 0 ..< N loop
+      if I /= Pos and then Arr[I] < Item then
+        Cycles := Cycles + 1;
+      end if;
+    end loop;
+    if Cycles /= 0 then
+      while Arr[Pos] = Item loop
+        Pos := Pos + 1;
+      end loop;
+      Temp := Arr[Pos];
+      Arr[Pos] := Item;
+      Item := Temp;
+      while Cycles > 0 loop
+        Cycles := 0;
+        for I in 0 ..< N loop
+          if I /= Pos and then Arr[I] < Item then
+            Cycles := Cycles + 1;
+          end if;
+        end loop;
+        while Arr[Pos] = Item loop
+          Pos := Pos + 1;
+        end loop;
+        Temp := Arr[Pos];
+        Arr[Pos] := Item;
+        Item := Temp;
+        Cycles := Cycles - 1;
+      end loop;
+    end if;
+  end loop;
+  Result := Arr;
+end procedure;
