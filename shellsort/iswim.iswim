@@ -1,0 +1,7 @@
+letrec shellsort = lambda arr .
+  let n = length arr
+  let gap = 1
+  let gap = while (lambda g . g <= n) (lambda g . g * 3 + 1) gap
+  let sorted = while (lambda g . g > 0) (lambda g . g / 3) gap
+  in arr
+in shellsort [5, 2, 8, 1, 9, 3]
