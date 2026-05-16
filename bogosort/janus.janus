@@ -1,0 +1,20 @@
+procedure bogosort(arr, arr)
+  arr = [3, 1, 2] &
+  (issorted(arr) -> true
+  ; shuffle_and_retry(arr, arr))
+end
+
+procedure issorted(arr, true)
+  arr = [] |
+  arr = [_] |
+  arr = [X, Y | Rest] & X =< Y & issorted([Y | Rest], true)
+end
+
+procedure shuffle_and_retry(arr_in, arr_out)
+  shuffle(arr_in, arr_shuf) &
+  bogosort(arr_shuf, arr_out)
+end
+
+procedure shuffle(arr, arr).
+
+query bogosort(X, Y)
