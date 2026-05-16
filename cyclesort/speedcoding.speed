@@ -1,0 +1,19 @@
+; Speedcoding cycle sort representation
+; Speedcoding was an early IBM 701 interpreter
+; This represents the algorithmic steps in pseudo-Speedcoding notation
+
+LOAD  5    ; Load first element
+STORE A(1)
+LOAD  4
+STORE A(2)
+LOAD  3
+STORE A(3)
+LOAD  2
+STORE A(4)
+LOAD  1
+STORE A(5)
+; N=5, cycle through positions finding where each element belongs
+; Count elements smaller than current to find correct position
+; Swap to correct position
+; Continue until cycle completes
+; Repeat for each starting position
