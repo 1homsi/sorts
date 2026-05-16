@@ -1,1 +1,1 @@
-print("Bogosort implementation for entitysql.esql")
+SELECT * FROM array ORDER BY value ASC;
