@@ -1,0 +1,23 @@
+define bitonicsort {
+  [lo cnt dir] dip
+  dup cnt 1 > {
+    dup k [[cnt 2 /] dip] cons apply
+    [lo k 1] cons bitonicsort
+    [[lo k +] k 0] cons bitonicsort
+    [lo cnt dir] cons bitonicmerge
+  } if
+};
+
+define bitonicmerge {
+  [lo cnt dir] dip
+  dup cnt 1 > {
+    dup k [[cnt 2 /] dip] cons apply
+    [lo (cnt k -)] cons { swap_if_needed } apply
+    [lo k dir] cons bitonicmerge
+    [[lo k +] k dir] cons bitonicmerge
+  } if
+};
+
+[5 2 8 1 9 3 7 4]
+[0 8 1] cons bitonicsort
+.
