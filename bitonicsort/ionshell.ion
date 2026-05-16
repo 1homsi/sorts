@@ -1,0 +1,32 @@
+fn compare_and_swap(arr: &mut [int], i: int, j: int, dir: bool) -> void {
+    let ai = @arr[$i]
+    let aj = @arr[$j]
+    if $dir == ($ai > $aj) {
+        arr[$i] = $aj
+        arr[$j] = $ai
+    }
+}
+
+fn bitonic_merge(arr: &mut [int], lo: int, cnt: int, dir: bool) -> void {
+    if $cnt > 1 {
+        let k = $cnt / 2
+        for i in {$lo..$lo + $k} {
+            compare_and_swap $arr $i $i + $k $dir
+        }
+        bitonic_merge $arr $lo $k $dir
+        bitonic_merge $arr $lo + $k $k $dir
+    }
+}
+
+fn bitonic_sort(arr: &mut [int], lo: int, cnt: int, dir: bool) -> void {
+    if $cnt > 1 {
+        let k = $cnt / 2
+        bitonic_sort $arr $lo $k true
+        bitonic_sort $arr $lo + $k $k false
+        bitonic_merge $arr $lo $cnt $dir
+    }
+}
+
+let data = [3 7 4 8 6 2 1 5]
+bitonic_sort data 0 $len(data) true
+echo @data
