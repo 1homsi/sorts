@@ -1,0 +1,28 @@
+countingsort: function [arr] {
+  if (arr isEmpty) { return arr }
+
+  max: 0
+  arr each: |val| {
+    if (val > max) { max = val }
+  }
+
+  count: Array new: (max + 1)
+  (0 to: max) each: |i| {
+    count at: i put: 0
+  }
+
+  arr each: |val| {
+    count at: val put: ((count at: val) + 1)
+  }
+
+  output: Array new: 0
+  (0 to: max) each: |i| {
+    (0 to: ((count at: i) - 1)) each: |_j| {
+      output add: i
+    }
+  }
+
+  return output
+}
+
+print (countingsort [5, 2, 8, 1, 9, 3])
