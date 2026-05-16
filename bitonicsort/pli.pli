@@ -1,0 +1,48 @@
+ BITONIC: PROCEDURE OPTIONS(MAIN);
+    DECLARE ARR(8) FIXED BINARY(31);
+    DECLARE (I, K, TMP) FIXED BINARY(31);
+
+    ARR(1)=3; ARR(2)=7; ARR(3)=4; ARR(4)=8;
+    ARR(5)=6; ARR(6)=2; ARR(7)=1; ARR(8)=5;
+
+    CALL BSORT(1, 8, '1'B);
+
+    DO I = 1 TO 8;
+        PUT LIST(ARR(I));
+    END;
+
+    BSORT: PROCEDURE(LO, CNT, DIR);
+        DECLARE (LO, CNT) FIXED BINARY(31);
+        DECLARE DIR BIT(1);
+        DECLARE K FIXED BINARY(31);
+        IF CNT > 1 THEN DO;
+            K = CNT / 2;
+            CALL BSORT(LO, K, '1'B);
+            CALL BSORT(LO+K, K, '0'B);
+            CALL BMERGE(LO, CNT, DIR);
+        END;
+    END BSORT;
+
+    BMERGE: PROCEDURE(LO, CNT, DIR);
+        DECLARE (LO, CNT, I, K) FIXED BINARY(31);
+        DECLARE DIR BIT(1);
+        IF CNT > 1 THEN DO;
+            K = CNT / 2;
+            DO I = LO TO LO+K-1;
+                CALL CSWAP(I, I+K, DIR);
+            END;
+            CALL BMERGE(LO, K, DIR);
+            CALL BMERGE(LO+K, K, DIR);
+        END;
+    END BMERGE;
+
+    CSWAP: PROCEDURE(I, J, DIR);
+        DECLARE (I, J, AI, AJ, TMP) FIXED BINARY(31);
+        DECLARE DIR BIT(1);
+        AI = ARR(I); AJ = ARR(J);
+        IF (DIR='1'B & AI>AJ) | (DIR='0'B & AI<AJ) THEN DO;
+            ARR(I)=AJ; ARR(J)=AI;
+        END;
+    END CSWAP;
+
+ END BITONIC;
