@@ -1,0 +1,11 @@
+(define quicksort
+  (lambda [xs]
+    (match xs (list integer)
+      {[[] []]
+       [[x] [x]]
+       [(cons x rest)
+        (let {[less (filter (lambda [y] (<= y x)) rest)]
+              [greater (filter (lambda [y] (> y x)) rest)]}
+          (append (quicksort less) (cons x (quicksort greater))))]})))
+
+(display (quicksort [5 2 8 1 9 3]))
