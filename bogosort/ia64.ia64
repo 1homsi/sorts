@@ -1,1 +1,4 @@
-print("Bogosort implementation for ia64.ia64")
+; bogosort in assembly
+; check if sorted
+; if not, shuffle
+; repeat
