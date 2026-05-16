@@ -1,0 +1,18 @@
+radixsort { array -> array :
+  dup max { exp 1 :
+    { over max / exp > } { dup exp countingSortByExp exp 10 * -> exp } while
+    -> array
+  }
+}
+
+countingSortByExp { array exp -> array :
+  dup len { output 0 array new
+  10 { 0 } array new { count :
+    { output len } { over output len < } while {
+      dup output count pick exp / 10 % pick 1 + -> idx
+      idx count at 1 + idx count at! drop
+    }
+  }
+}
+
+[5 2 8 1 9 3] radixsort .
