@@ -1,0 +1,5 @@
+rec bubblesort : {A:type} -> list A -> list A =
+  fn [] => []
+   | [x] => [x]
+   | x::y::xs => if x <= y then x :: bubblesort (y::xs)
+                 else y :: bubblesort (x::xs)
