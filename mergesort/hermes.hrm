@@ -1,0 +1,42 @@
+operation merge(arr, left, mid, right) returns () {
+  var i := left;
+  var j := mid + 1;
+  var result := new Array[Int](right - left + 1);
+  var k := 0;
+  
+  while (i <= mid && j <= right) {
+    if (arr[i] <= arr[j]) {
+      result[k] := arr[i];
+      i := i + 1;
+    } else {
+      result[k] := arr[j];
+      j := j + 1;
+    }
+    k := k + 1;
+  }
+  
+  while (i <= mid) {
+    result[k] := arr[i];
+    i := i + 1;
+    k := k + 1;
+  }
+  
+  while (j <= right) {
+    result[k] := arr[j];
+    j := j + 1;
+    k := k + 1;
+  }
+  
+  for (k = 0; k < result.length; k++) {
+    arr[left + k] := result[k];
+  }
+}
+
+operation mergesort(arr, left, right) returns () {
+  if (left < right) {
+    var mid := (left + right) / 2;
+    mergesort(arr, left, mid);
+    mergesort(arr, mid + 1, right);
+    merge(arr, left, mid, right);
+  }
+}
