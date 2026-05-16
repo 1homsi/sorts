@@ -1,0 +1,20 @@
+proc bucketSort(in arr, in maxVal, out result)
+  if maxVal = 0 then
+    result = arr
+  else
+    var buckets[maxVal];
+    for i = 0 to maxVal - 1 do
+      buckets[i] := [];
+    end;
+    for num in arr do
+      if num >= 0 and num < maxVal then
+        buckets[num] := [num | buckets[num]];
+      end;
+    end;
+    result := [];
+    for i = 0 to maxVal - 1 do
+      result := result ++ buckets[i];
+    end;
+  end;
+end;
+call bucketSort([5, 2, 8, 1, 9, 3], 10, result);
