@@ -1,0 +1,30 @@
+WITH RECURSIVE
+sort_data AS (
+    SELECT ARRAY[5, 3, 8, 1, 9, 2, 7, 4, 6, 0] AS arr
+),
+cocktail(arr, start_idx, end_idx, swapped, iteration) AS (
+    SELECT arr, 1, cardinality(arr), TRUE, 0
+    FROM sort_data
+    UNION ALL
+    SELECT
+        CASE WHEN swapped THEN
+            (SELECT array_agg(
+                CASE
+                    WHEN o = i AND arr[i] > arr[i+1] THEN arr[i+1]
+                    WHEN o = i+1 AND arr[i] > arr[i+1] THEN arr[i]
+                    ELSE arr[o]
+                END
+                ORDER BY o
+            )
+            FROM (SELECT generate_series(1, cardinality(arr)) AS o) AS t
+            CROSS JOIN (SELECT generate_series(start_idx, end_idx-1) AS i) AS p)
+        ELSE arr
+        END,
+        start_idx + 1,
+        end_idx - 1,
+        TRUE,
+        iteration + 1
+    FROM cocktail
+    WHERE swapped AND iteration < 100
+)
+SELECT arr FROM cocktail ORDER BY iteration DESC LIMIT 1;
