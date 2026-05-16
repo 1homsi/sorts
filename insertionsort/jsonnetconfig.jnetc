@@ -1,0 +1,15 @@
+local insertionSort(arr) =
+  local insert(x, sorted) =
+    if std.length(sorted) == 0 then [x]
+    else if x <= sorted[0] then [x] + sorted
+    else [sorted[0]] + insert(x, sorted[1:]);
+  std.foldl(
+    function(acc, x) insert(x, acc),
+    arr,
+    []
+  );
+
+{
+  input: [5, 3, 1, 4, 2],
+  output: insertionSort([5, 3, 1, 4, 2]),
+}
