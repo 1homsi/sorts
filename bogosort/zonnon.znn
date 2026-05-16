@@ -1,39 +1,6 @@
-module Bogosort;
-
-import System;
-
-var
-  arr: array 8 of integer;
-  n, i, j, tmp: integer;
-
-procedure {public} IsSorted(): boolean;
-var k: integer;
-begin
-  for k := 0 to n - 2 do
-    if arr[k] > arr[k + 1] then return false end
-  end;
-  return true
-end IsSorted;
-
-procedure {public} Shuffle();
-var k, r, t: integer;
-begin
-  for k := n - 1 to 1 by -1 do
-    r := integer(System.Math.Floor(System.Math.random * (k + 1)));
-    t := arr[k]; arr[k] := arr[r]; arr[r] := t
-  end
-end Shuffle;
-
-begin
-  n := 8;
-  arr[0] := 3; arr[1] := 1; arr[2] := 4; arr[3] := 1;
-  arr[4] := 5; arr[5] := 9; arr[6] := 2; arr[7] := 6;
-  loop
-    if IsSorted() then exit end;
-    Shuffle()
-  end;
-  for i := 0 to n - 1 do
-    System.Console.Write(arr[i]); System.Console.Write(' ')
-  end;
-  System.Console.WriteLine()
-end Bogosort.
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
