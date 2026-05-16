@@ -1,0 +1,23 @@
+PROC BUBBLE SORT $
+    ITEM ARR(7) INTEGER := (64,34,25,12,22,11,90) $
+    ITEM N INTEGER := 7 $
+    ITEM I, TMP INTEGER $
+    ITEM SWAPPED SWITCH $
+
+    FOR SWAPPED := 1B $
+    WHILE SWAPPED = 1B $
+    BEGIN
+        SWAPPED := 0B $
+        FOR I := 1 STEP 1 UNTIL N-1 $
+        BEGIN
+            IF ARR(I) > ARR(I+1) THEN
+            BEGIN
+                TMP := ARR(I) $
+                ARR(I) := ARR(I+1) $
+                ARR(I+1) := TMP $
+                SWAPPED := 1B $
+            END
+        END
+        N := N - 1 $
+    END
+END $
