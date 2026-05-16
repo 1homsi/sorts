@@ -1,1 +1,1 @@
-print("Bogosort implementation for terraform.tf")
+bogosort = true
