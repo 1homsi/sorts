@@ -1,0 +1,10 @@
+.decl array(pos: number, val: number)
+.decl sorted(pos: number, val: number)
+
+array(1, 5). array(2, 3). array(3, 8). array(4, 1). array(5, 9).
+
+sorted(pos, val) :-
+    array(pos, val),
+    !array(_, smaller_val), smaller_val < val, array(smaller_pos, smaller_val), smaller_pos > pos.
+
+.output sorted
