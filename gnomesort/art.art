@@ -1,0 +1,25 @@
+.class public LGnomeSortArt;
+.super Ljava/lang/Object;
+
+.method public static gnomeSort([I)V
+    .registers 6
+    .prologue
+    const/4 v0, 0x0
+    array-length v1, p0
+    :goto_0
+    if-ge v0, v1, :cond_done
+    if-eqz v0, :cond_adv
+    aget v2, p0, v0
+    add-int/lit8 v3, v0, -0x1
+    aget v4, p0, v3
+    if-ge v2, v4, :cond_adv
+    aput v4, p0, v0
+    aput v2, p0, v3
+    add-int/lit8 v0, v0, -0x1
+    goto :goto_0
+    :cond_adv
+    add-int/lit8 v0, v0, 0x1
+    goto :goto_0
+    :cond_done
+    return-void
+.end method
