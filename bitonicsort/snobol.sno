@@ -1,0 +1,43 @@
+        DEFINE('BITONICSORT(ARR,LO,CNT,DIR)')
+        DEFINE('BITONICMERGE(ARR,LO,CNT,DIR)')
+        DEFINE('COMPSWAP(ARR,I,J,DIR)')
+
+        ARR = ARRAY(8)
+        ARR<1> = 3 ; ARR<2> = 7 ; ARR<3> = 4 ; ARR<4> = 8
+        ARR<5> = 6 ; ARR<6> = 2 ; ARR<7> = 1 ; ARR<8> = 5
+
+        BITONICSORT(ARR, 1, 8, 1)
+
+        I = 1
+PRINT   OUTPUT = ARR<I>
+        I = I + 1
+        LE(I, 8) :S(PRINT)
+END
+
+BITONICSORT
+        GT(CNT, 1) :F(SORTRET)
+        K = CNT / 2
+        BITONICSORT(ARR, LO, K, 1)
+        BITONICSORT(ARR, LO + K, K, 0)
+        BITONICMERGE(ARR, LO, CNT, DIR)
+SORTRET RETURN
+
+BITONICMERGE
+        GT(CNT, 1) :F(MERGERET)
+        K = CNT / 2
+        I = LO
+MLOOP   GE(I, LO + K) :S(MAFTER)
+        COMPSWAP(ARR, I, I + K, DIR)
+        I = I + 1 :(MLOOP)
+MAFTER  BITONICMERGE(ARR, LO, K, DIR)
+        BITONICMERGE(ARR, LO + K, K, DIR)
+MERGERET RETURN
+
+COMPSWAP
+        AI = ARR<I>
+        AJ = ARR<J>
+        IDENT(DIR, EQ(AI, AJ)) :S(CRET)
+        EQ(DIR, GT(AI, AJ)) :F(CRET)
+        ARR<I> = AJ
+        ARR<J> = AI
+CRET    RETURN
