@@ -1,1 +1,6 @@
-print("Bogosort implementation for p4.p4")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
