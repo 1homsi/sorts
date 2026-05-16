@@ -1,0 +1,47 @@
+merge := func(arr, left, mid, right) {
+  local i, j, k, result;
+  i := left;
+  j := mid + 1;
+  result := [];
+  
+  while (i <= mid && j <= right) do (
+    if (arr[i] <= arr[j]) then (
+      result := result & [arr[i]];
+      i := i + 1;
+    ) else (
+      result := result & [arr[j]];
+      j := j + 1;
+    );
+  );
+  
+  while (i <= mid) do (
+    result := result & [arr[i]];
+    i := i + 1;
+  );
+  
+  while (j <= right) do (
+    result := result & [arr[j]];
+    j := j + 1;
+  );
+  
+  for (k := 0; k < length(result); k++) do (
+    arr[left + k] := result[k];
+  );
+};
+
+mergesort := func(arr, left, right) {
+  local mid;
+  if (left < right) then (
+    mid := (left + right) / 2;
+    mergesort(arr, left, mid);
+    mergesort(arr, mid + 1, right);
+    merge(arr, left, mid, right);
+  );
+};
+
+begin
+  local arr;
+  arr := [5, 2, 8, 1, 9, 3];
+  mergesort(arr, 0, 5);
+  print(arr);
+end
