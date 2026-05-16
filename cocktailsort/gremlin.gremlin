@@ -1,0 +1,8 @@
+g.withSideEffect('arr', [5, 3, 8, 1, 9, 2, 7, 4, 6, 0]).
+  withSideEffect('swapped', true).
+  withSideEffect('start', 0).
+  withSideEffect('end', 9).
+  repeat(
+    select('arr').as('a')
+  ).until(select('swapped').is(false)).
+  select('arr')
