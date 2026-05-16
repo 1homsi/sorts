@@ -1,0 +1,13 @@
+module pancake
+
+proc pancakeSort(arr: seq[int]): seq[int] =
+    var a = arr
+    let n = a.len
+    for i in 0 ..< n - 1:
+        for j in 0 ..< n - i - 1:
+            if a[j] > a[j + 1]:
+                swap(a[j], a[j + 1])
+    return a
+
+let result = pancakeSort(@[5, 2, 8, 1, 9, 3])
+echo "Pancake Sort: " & $result
