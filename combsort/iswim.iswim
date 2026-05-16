@@ -1,0 +1,14 @@
+def comb_sort arr =
+  let gap = length arr
+      swapped = true
+  in if gap > 1 or swapped
+     then let new_gap = (gap * 10) div 13
+          in let final_gap = if new_gap < 1 then 1 else new_gap
+             in let pass = map (\i -> if i < length arr - final_gap and
+                                       arr sub i > arr sub (i + final_gap)
+                                      then swap arr i (i + final_gap)
+                                      else arr sub i) (0 upto length arr - 1)
+                in comb_sort pass
+     else arr;
+
+def main = comb_sort [5, 2, 8, 1, 9, 3];
