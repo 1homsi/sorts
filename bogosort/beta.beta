@@ -1,24 +1,6 @@
-ORIGIN '~beta/basiclib/betaenv';
-
-BODY 'bogosort.body'
-
--- bogosort:descriptor --
-
-Bogosort: (# arr: @[8] integer;
-              n: @integer;
-
-              isSorted: (# sorted: @boolean
-                         exit sorted
-                         <<SLOT isSortedImpl:DoPart>>
-                         #);
-
-              shuffle: (# <<SLOT shuffleImpl:DoPart>> #);
-
-              init: (# do 3->arr[1]; 1->arr[2]; 4->arr[3]; 1->arr[4];
-                        5->arr[5]; 9->arr[6]; 2->arr[7]; 6->arr[8];
-                        8->n #);
-
-              do init;
-                 loop: (isSorted -> (if not then shuffle; restart loop if));
-                 1->i; rep: (if i<=n then arr[i]->screen.putint; i+1->i; restart rep if)
-           #)
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
