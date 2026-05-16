@@ -1,0 +1,16 @@
+(de comb-sort (Lst)
+   (let (N (length Lst)
+         Gap N
+         Sorted NIL
+         Arr (apply vector Lst))
+      (until Sorted
+         (setq Gap (max 1 (/ (* Gap 10) 13)))
+         (setq Sorted (= Gap 1))
+         (for I (- N Gap)
+            (let (A (get Arr I)
+                  B (get Arr (+ I Gap)))
+               (when (> A B)
+                  (set (nth Arr I) B)
+                  (set (nth Arr (+ I Gap)) A)
+                  (setq Sorted NIL) ) ) ) )
+      (mapcar '((I) (get Arr I)) (range 1 N)) ) )
