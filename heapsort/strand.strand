@@ -1,0 +1,38 @@
+heapify(Arr, N, I, Result) :-
+    Left = 2 * I + 1,
+    Right = 2 * I + 2,
+    largest(Arr, N, I, Left, Right, Largest),
+    (Largest =\= I ->
+        swap(Arr, I, Largest, Arr1),
+        heapify(Arr1, N, Largest, Result)
+    ;
+        Result = Arr
+    ).
+
+largest(Arr, N, I, Left, Right, Lg) :-
+    (Left < N, nth(Left, Arr, VL), nth(I, Arr, VI), VL > VI -> Lg0 = Left ; Lg0 = I),
+    (Right < N, nth(Right, Arr, VR), nth(Lg0, Arr, VLg0), VR > VLg0 -> Lg = Right ; Lg = Lg0).
+
+heapsort(Input, Sorted) :-
+    length(Input, N),
+    build_heap(Input, N, Sorted).
+
+build_heap(Arr, N, Sorted) :-
+    Start is N // 2 - 1,
+    fold_heapify(Arr, N, Start, Heap),
+    extract_sort(Heap, N, N-1, Sorted).
+
+fold_heapify(Arr, _, -1, Arr).
+fold_heapify(Arr, N, I, Result) :-
+    heapify(Arr, N, I, Arr1),
+    I1 is I - 1,
+    fold_heapify(Arr1, N, I1, Result).
+
+extract_sort(Arr, _, 0, Arr).
+extract_sort(Arr, N, I, Result) :-
+    swap(Arr, 0, I, Arr1),
+    heapify(Arr1, I, 0, Arr2),
+    I1 is I - 1,
+    extract_sort(Arr2, N, I1, Result).
+
+:- heapsort([12,11,13,5,6,7], S), write(S), nl.
