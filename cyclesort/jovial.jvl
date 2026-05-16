@@ -1,0 +1,35 @@
+START
+    ITEM ARR(5) S(16);
+    ITEM N S(8) = 5;
+    ITEM WRITES S(8) = 0;
+    ITEM CS S(8);
+    ITEM ITEM_V S(16);
+    ITEM POS S(8);
+    ITEM I S(8);
+    ITEM TMP S(16);
+
+    ARR(1) = 5; ARR(2) = 4; ARR(3) = 3; ARR(4) = 2; ARR(5) = 1;
+
+    FOR CS = 1, 1, N - 1 DO
+        ITEM_V = ARR(CS);
+        POS = CS;
+        FOR I = CS + 1, 1, N DO
+            IF ARR(I) < ITEM_V THEN POS = POS + 1;
+        END
+        IF POS NE CS THEN
+            WHILE ARR(POS) EQ ITEM_V DO POS = POS + 1; END
+            TMP = ARR(POS); ARR(POS) = ITEM_V; ITEM_V = TMP;
+            WRITES = WRITES + 1;
+            WHILE POS NE CS DO
+                POS = CS;
+                FOR I = CS + 1, 1, N DO
+                    IF ARR(I) < ITEM_V THEN POS = POS + 1;
+                END
+                WHILE ARR(POS) EQ ITEM_V DO POS = POS + 1; END
+                TMP = ARR(POS); ARR(POS) = ITEM_V; ITEM_V = TMP;
+                WRITES = WRITES + 1;
+            END
+        END
+    END
+    FOR I = 1, 1, N DO WRITEF('%d ', ARR(I)); END
+FINISH
