@@ -1,0 +1,58 @@
+:- module cocktail_sort2.
+:- interface.
+:- import_module list, int.
+:- pred sort(list(int)::in, list(int)::out) is det.
+:- implementation.
+:- import_module array.
+
+sort(List, Sorted) :-
+    array.from_list(List, Arr0),
+    N = array.size(Arr0),
+    do_sort(Arr0, Arr, 0, N - 1, yes),
+    array.to_list(Arr, Sorted).
+
+:- pred do_sort(array(int)::array_di, array(int)::array_uo,
+    int::in, int::in, bool::in) is det.
+
+do_sort(Arr, Arr, _, _, no).
+do_sort(Arr0, Arr, S, E, yes) :-
+    fwd(Arr0, Arr1, S, E, no, Sw1),
+    ( Sw1 = no -> Arr = Arr1
+    ;
+        E1 = E - 1,
+        bwd(Arr1, Arr2, S, E1, no, Sw2),
+        S1 = S + 1,
+        do_sort(Arr2, Arr, S1, E1, Sw2)
+    ).
+
+:- pred fwd(array(int)::array_di, array(int)::array_uo,
+    int::in, int::in, bool::in, bool::out) is det.
+
+fwd(Arr, Arr, I, E, Sw, Sw) :- I >= E.
+fwd(Arr0, Arr, I, E, _, Sw) :-
+    I < E,
+    array.lookup(Arr0, I, A),
+    array.lookup(Arr0, I + 1, B),
+    ( A > B ->
+        array.set(I, B, Arr0, Arr1),
+        array.set(I + 1, A, Arr1, Arr2),
+        fwd(Arr2, Arr, I + 1, E, yes, Sw)
+    ;
+        fwd(Arr0, Arr, I + 1, E, no, Sw)
+    ).
+
+:- pred bwd(array(int)::array_di, array(int)::array_uo,
+    int::in, int::in, bool::in, bool::out) is det.
+
+bwd(Arr, Arr, I, S, Sw, Sw) :- I < S.
+bwd(Arr0, Arr, I, S, _, Sw) :-
+    I >= S,
+    array.lookup(Arr0, I, A),
+    array.lookup(Arr0, I + 1, B),
+    ( A > B ->
+        array.set(I, B, Arr0, Arr1),
+        array.set(I + 1, A, Arr1, Arr2),
+        bwd(Arr2, Arr, I - 1, S, yes, Sw)
+    ;
+        bwd(Arr0, Arr, I - 1, S, no, Sw)
+    ).
