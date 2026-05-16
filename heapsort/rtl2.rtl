@@ -1,0 +1,36 @@
+MODULE HEAPSORT;
+
+VAR arr : ARRAY[0..5] OF INTEGER;
+VAR n, i, tmp : INTEGER;
+
+PROC heapify(n : INTEGER; i : INTEGER);
+VAR largest, left, right, t : INTEGER;
+BEGIN
+  largest := i; left := 2*i+1; right := 2*i+2;
+  IF (left < n) AND (arr[left] > arr[largest]) THEN largest := left END;
+  IF (right < n) AND (arr[right] > arr[largest]) THEN largest := right END;
+  IF largest <> i THEN
+    t := arr[i]; arr[i] := arr[largest]; arr[largest] := t;
+    heapify(n, largest)
+  END
+END;
+
+PROC heapsort();
+BEGIN
+  n := 6;
+  i := n DIV 2 - 1;
+  WHILE i >= 0 DO heapify(n, i); i := i - 1 END;
+  i := n - 1;
+  WHILE i > 0 DO
+    tmp := arr[0]; arr[0] := arr[i]; arr[i] := tmp;
+    heapify(i, 0);
+    i := i - 1
+  END
+END;
+
+BEGIN
+  arr[0]:=12; arr[1]:=11; arr[2]:=13; arr[3]:=5; arr[4]:=6; arr[5]:=7;
+  heapsort();
+  FOR i := 0 TO n-1 DO WRITE(arr[i], ' ') END;
+  WRITELN
+END HEAPSORT.
