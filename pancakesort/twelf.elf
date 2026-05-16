@@ -1,0 +1,7 @@
+pancake : (A -> A -> cmp) -> list A -> list A -> type.
+pnull : pancake C nil nil.
+pone : pancake C (X :: nil) (X :: nil).
+
+sorted = Y :- write("Pancake Sort: [5 2 8 1 9 3]"), nl.
+
+#query Y sorted.
