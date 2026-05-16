@@ -1,0 +1,30 @@
+Section Header
+  + name := SELECTION_SORT;
+  - external := ""; 
+
+Section Public
+  - selection_sort(arr : ARRAY[INT]) : ARRAY[INT] is
+    local n : INT;
+    local i : INT;
+    local j : INT;
+    local min_idx : INT;
+    local tmp : INT;
+    do
+      n := arr.count;
+      i := 0;
+      { i < n - 1 }.while_do [
+        min_idx := i;
+        j := i + 1;
+        { j < n }.while_do [
+          (arr.item(j) < arr.item(min_idx)).if [
+            min_idx := j;
+          ];
+          j := j + 1;
+        ];
+        tmp := arr.item(i);
+        arr.put(arr.item(min_idx), i);
+        arr.put(tmp, min_idx);
+        i := i + 1;
+      ];
+      arr;
+    end;
