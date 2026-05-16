@@ -1,0 +1,15 @@
+INSERTIONSORT = (A:ARRAY) ARRAY {
+  VAR N:INTEGER := |A|;
+  FOR I:INTEGER := 2 TO N DO
+    VAR KEY:INTEGER := A[I];
+    VAR J:INTEGER := I - 1;
+    WHILE J >= 1 AND A[J] > KEY DO
+      A[J+1] := A[J];
+      J := J - 1;
+    END;
+    A[J+1] := KEY;
+  END;
+  RETURN A;
+};
+
+PRINT INSERTIONSORT([5, 2, 8, 1, 9, 3]);
