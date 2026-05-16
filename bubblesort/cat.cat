@@ -1,0 +1,10 @@
+define bubblesort
+[ var -> n var -> arr arr dup
+  [ 0 -> i [ n 1 - -> j [ i 1 +
+    [ arr:j dup arr:j 1 + gt
+      [ arr:j arr:j 1 + swap arr:j 1 + set arr:j set ]
+    ] repeat
+  ] repeat
+] ;
+
+[ 5 2 8 1 9 3 ] 6 bubblesort
