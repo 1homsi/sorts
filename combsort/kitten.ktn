@@ -1,0 +1,25 @@
+define comb-sort {
+  -> arr;
+  define gap { arr length };
+  define len { arr length };
+
+  {
+    gap 1 >
+    {
+      gap 10 * 13 / -> gap;
+      gap 1 < { 1 -> gap } if
+      0 -> i;
+      {
+        i len gap - <
+        {
+          arr i take arr i gap + take > {
+            arr i arr i gap + take set i set
+          } if
+          i 1 + -> i
+        } while
+    }
+    { arr }
+  } if
+}
+
+[5 2 8 1 9 3] comb-sort . nl
