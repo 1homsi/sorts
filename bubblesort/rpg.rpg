@@ -1,0 +1,31 @@
+     H DFTACTGRP(*NO)
+     D arr             s             10i 0 dim(7)
+     D n               s             10i 0
+     D i               s             10i 0
+     D tmp             s             10i 0
+     D swapped         s               n
+
+     C                   eval      arr(1) = 64
+     C                   eval      arr(2) = 34
+     C                   eval      arr(3) = 25
+     C                   eval      arr(4) = 12
+     C                   eval      arr(5) = 22
+     C                   eval      arr(6) = 11
+     C                   eval      arr(7) = 90
+     C                   eval      n = 7
+     C                   eval      swapped = *on
+     C                   dow       swapped = *on
+     C                   eval      swapped = *off
+     C                   eval      i = 1
+     C                   dow       i < n
+     C                   if        arr(i) > arr(i+1)
+     C                   eval      tmp = arr(i)
+     C                   eval      arr(i) = arr(i+1)
+     C                   eval      arr(i+1) = tmp
+     C                   eval      swapped = *on
+     C                   endif
+     C                   eval      i = i + 1
+     C                   enddo
+     C                   eval      n = n - 1
+     C                   enddo
+     C                   eval      *inlr = *on
