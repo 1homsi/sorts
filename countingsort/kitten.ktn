@@ -1,0 +1,54 @@
+define countingsort {
+  let arr;
+  let max = 0;
+  let i = 0;
+  let len = arr length;
+
+  {
+    let j = 0;
+    loop {
+      arr at j let val;
+      val max > {
+        val let max;
+      } if;
+      j 1 + let j;
+      j len < not { break } if;
+    }
+  }
+
+  let count = array (max 1 +) 0 fill;
+
+  {
+    let j = 0;
+    loop {
+      arr at j let val;
+      count at val let cnt;
+      cnt 1 + count at val set;
+      j 1 + let j;
+      j len < not { break } if;
+    }
+  }
+
+  let output = [];
+
+  {
+    let i = 0;
+    loop {
+      count at i let cnt;
+      {
+        let j = 0;
+        loop {
+          output push i;
+          j 1 + let j;
+          j cnt < not { break } if;
+        }
+      }
+      i 1 + let i;
+      i (max 1 +) >= { break } if;
+    }
+  }
+
+  output
+};
+
+[5 2 8 1 9 3] countingsort say;
