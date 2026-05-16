@@ -1,0 +1,37 @@
+structure CocktailSort :
+sig
+    val sort : int array -> unit
+end =
+struct
+    fun swap (arr, i, j) =
+        let val tmp = Array.sub(arr, i)
+        in  Array.update(arr, i, Array.sub(arr, j));
+            Array.update(arr, j, tmp)
+        end
+
+    fun forward (arr, i, e, sw) =
+        if i >= e then sw
+        else if Array.sub(arr, i) > Array.sub(arr, i+1)
+             then (swap(arr, i, i+1); forward(arr, i+1, e, true))
+             else forward(arr, i+1, e, sw)
+
+    fun backward (arr, i, s, sw) =
+        if i < s then sw
+        else if Array.sub(arr, i) > Array.sub(arr, i+1)
+             then (swap(arr, i, i+1); backward(arr, i-1, s, true))
+             else backward(arr, i-1, s, sw)
+
+    fun sort arr =
+        let val n = Array.length arr
+            fun loop (s, e) =
+                if s >= e then ()
+                else let val sw1 = forward(arr, s, e, false)
+                     in  if not sw1 then ()
+                         else let val sw2 = backward(arr, e-1, s, false)
+                              in  if sw2 then loop(s+1, e-1)
+                                  else ()
+                              end
+                     end
+        in  loop(0, n-1)
+        end
+end
