@@ -1,0 +1,21 @@
+GnomeSort:
+(# arr: [100] @integer;
+   n: @integer;
+   i: @integer;
+   tmp: @integer;
+do
+   0 -> i;
+   loop: (i < n) ->
+   (# do
+       (i = 0) or (arr[i] >= arr[i-1]) ->
+       (# do i + 1 -> i #)
+       else
+       (# do
+           arr[i] -> tmp;
+           arr[i-1] -> arr[i];
+           tmp -> arr[i-1];
+           i - 1 -> i
+       #)
+   #);
+   leave loop when not (i < n)
+#)
