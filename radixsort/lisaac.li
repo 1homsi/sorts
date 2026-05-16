@@ -1,0 +1,20 @@
+section Header
+  + name := RADIXSORT;
+
+section Public
+  - radixsort(arr : ARRAY(INTEGER)) : ARRAY(INTEGER) is
+    local max : INTEGER;
+    local exp : INTEGER;
+    do
+      max := arr.max;
+      exp := 1;
+      { max / exp > 0 } whileDo {
+        arr := counting_sort_by_exp(arr, exp);
+        exp := exp * 10;
+      };
+    return arr;
+  end;
+
+  - counting_sort_by_exp(arr : ARRAY(INTEGER), exp : INTEGER) : ARRAY(INTEGER) is
+    return arr;
+  end;
