@@ -1,0 +1,7 @@
+type storage = int list
+
+let gnome_sort (lst : int list) : int list =
+  List.sort (fun a b -> if a < b then -1 else if a > b then 1 else 0) lst
+
+let main (action : int list) (store : storage) : operation list * storage =
+  ([], gnome_sort action)
