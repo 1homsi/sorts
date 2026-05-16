@@ -1,1 +1,1 @@
-print("Bogosort implementation for polars.polars")
+bogosort = true
