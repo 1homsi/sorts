@@ -1,0 +1,18 @@
+schema GnomeSort:
+    arr: [int]
+    sorted: [int] = _sort(arr)
+
+_sort = lambda arr: [int] -> [int] {
+    n = len(arr)
+    i = 0
+    a = arr
+    while i < n:
+        if i == 0 or a[i] >= a[i - 1]:
+            i += 1
+        else:
+            tmp = a[i]
+            a[i] = a[i - 1]
+            a[i - 1] = tmp
+            i -= 1
+    a
+}
