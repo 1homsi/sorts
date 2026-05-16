@@ -1,0 +1,19 @@
+Z1 shellsort
+A0: 5, 2, 8, 1, 9, 3
+V0 = 1
+WHILE V0 <= 6
+  V0 = V0 * 3 + 1
+END
+WHILE V0 > 0
+  V0 = V0 / 3
+  FOR V1 = V0 TO 5
+    V2 = A0[V1]
+    V3 = V1
+    WHILE V3 >= V0 AND A0[V3 - V0] > V2
+      A0[V3] = A0[V3 - V0]
+      V3 = V3 - V0
+    END
+    A0[V3] = V2
+  END
+END
+OUTPUT A0
