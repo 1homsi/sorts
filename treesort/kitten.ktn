@@ -1,0 +1,29 @@
+define insert
+  dup null?
+  iff [ val -> value: null -> left: null -> right: swap ]
+  else
+    dup { value } -> v
+    over val >
+    iff [ dup { right } swap insert -> right ]
+    else [ dup { left } swap insert -> left ]
+  end
+  if
+end
+
+define inorder
+  dup null?
+  iff drop
+  else
+    dup { left } inorder
+    dup { value } write " " write
+    dup { right } inorder
+  end
+end
+
+define tree_sort
+  null
+  { 5 2 8 1 9 3 } each [ rot insert swap ]
+  inorder
+end
+
+tree_sort
