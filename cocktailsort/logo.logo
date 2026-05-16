@@ -1,0 +1,42 @@
+to cocktailsort :arr
+  local "n
+  make "n count :arr
+  local "i
+  local "j
+  local "temp
+  local "swapped
+  local "start
+  make "start 0
+  make "i 0
+  repeat :n [
+    make "swapped "false
+    local "k
+    make "k :start
+    repeat ((:n - :start - :i - 1)) [
+      if (item :k :arr) > (item (:k + 1) :arr) [
+        make "temp item :k :arr
+        setitem :k :arr item (:k + 1) :arr
+        setitem (:k + 1) :arr :temp
+        make "swapped "true
+      ]
+      make "k :k + 1
+    ]
+    if equal? :swapped "false [stop]
+    make "swapped "false
+    make "k :n - :start - :i - 2
+    repeat ((:n - :start - :i - 1)) [
+      if (item :k :arr) > (item (:k + 1) :arr) [
+        make "temp item :k :arr
+        setitem :k :arr item (:k + 1) :arr
+        setitem (:k + 1) :arr :temp
+        make "swapped "true
+      ]
+      make "k :k - 1
+    ]
+    if equal? :swapped "false [stop]
+    make "i :i + 1
+  ]
+end
+make "arr [5 2 8 1 9 3]
+cocktailsort :arr
+print :arr
