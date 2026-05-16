@@ -1,0 +1,33 @@
+COMPOOL SORT_DATA
+    ITEM ARR(100) S;
+    ITEM N S;
+CLOSE COMPOOL
+
+PROC COMB_SORT();
+BEGIN
+    ITEM GAP S;
+    ITEM SORTED S;
+    ITEM TMP S;
+    ITEM I S;
+    GAP = N;
+    SORTED = 0;
+    FOR SORTED NE 1;
+    BEGIN
+        GAP = GAP * 10 / 13;
+        IF GAP LE 1;
+        BEGIN
+            GAP = 1;
+            SORTED = 1;
+        END
+        FOR I = 1 STEP 1 UNTIL N - GAP;
+        BEGIN
+            IF ARR(I) GT ARR(I + GAP);
+            BEGIN
+                TMP = ARR(I);
+                ARR(I) = ARR(I + GAP);
+                ARR(I + GAP) = TMP;
+                SORTED = 0;
+            END
+        END
+    END
+END
