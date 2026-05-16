@@ -1,0 +1,22 @@
+package bubblesort
+
+function bubbleSort(arr: int[]): int[] {
+    var n = arr.length
+    var swapped: boolean
+    do {
+        swapped = false
+        for (i in 0..|n-1|) {
+            if (arr[i] > arr[i+1]) {
+                var tmp = arr[i]
+                arr[i] = arr[i+1]
+                arr[i+1] = tmp
+                swapped = true
+            }
+        }
+        n--
+    } while (swapped)
+    return arr
+}
+
+var arr = {64, 34, 25, 12, 22, 11, 90}
+print(bubbleSort(arr))
