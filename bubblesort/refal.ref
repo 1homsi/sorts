@@ -1,0 +1,14 @@
+$ENTRY Go {
+  = <BubbleSort [5 2 8 1 9 3]>;
+}
+
+BubbleSort {
+  s.N [()] = ();
+  s.N [e.H t.Tail] = <BubbleSort s.N <Insert e.H <BubbleSort s.N t.Tail>>>;
+}
+
+Insert {
+  e.X () = (e.X);
+  e.X (s.H e.T) , <Compare e.X s.H>: True = (e.X s.H e.T);
+  e.X (s.H e.T) = (s.H <Insert e.X e.T>);
+}
