@@ -1,0 +1,50 @@
+define: #timsort -> [| arr minSize |
+  (arr mergesort: minSize)
+].
+
+define: #mergesort -> [| arr minSize |
+  (arr size <= 1)
+    ifTrue: [arr]
+    ifFalse: [
+      (arr size <= minSize)
+        ifTrue: [arr insertionsort]
+        ifFalse: [
+          | mid left right |
+          mid := (arr size / 2) floor.
+          left := arr first: mid.
+          right := arr drop: mid.
+          (left mergesort: minSize) merge: (right mergesort: minSize)
+        ]
+    ]
+].
+
+define: #insertionsort -> [| arr |
+  | result |
+  result := arr copy.
+  (1 to: result size - 1) do: [| i |
+    | key j |
+    key := result at: i.
+    j := i - 1.
+    [j >= 0 & (result at: j) > key] whileTrue: [
+      result at: j + 1 put: (result at: j).
+      j := j - 1
+    ].
+    result at: j + 1 put: key.
+  ].
+  result
+].
+
+define: #merge -> [| left right |
+  | result i j |
+  result := Array new.
+  i := 0.
+  j := 0.
+  [i < left size & j < right size] whileTrue: [
+    (left at: i) <= (right at: j)
+      ifTrue: [result add: (left at: i). i := i + 1]
+      ifFalse: [result add: (right at: j). j := j + 1]
+  ].
+  [i < left size] whileTrue: [result add: (left at: i). i := i + 1].
+  [j < right size] whileTrue: [result add: (right at: j). j := j + 1].
+  result
+].
