@@ -1,0 +1,17 @@
+(define $insertionSort
+  (lambda [$xs]
+    (match xs (list integer)
+      {[<null> [<> []]]
+       [(cons $x $ys)
+        (insert x (insertionSort ys))]}
+    )))
+
+(define $insert
+  (lambda [$x $xs]
+    (match xs (list integer)
+      {[<null> [<> [x]]]
+       [(cons $y $ys)
+        (if (< x y) (cons x (cons y ys)) (cons y (insert x ys)))]}
+    )))
+
+(print (insertionSort [5 2 8 1 9 3]))
