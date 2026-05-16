@@ -1,0 +1,25 @@
+def cocktailSort(arr) {
+    def swapped = true
+    def start = 0
+    def end = arr.size() - 1
+    while (swapped) {
+        swapped = false
+        for (i in start..<end) {
+            if (arr[i] > arr[i + 1]) {
+                arr.swap(i, i + 1)
+                swapped = true
+            }
+        }
+        if (!swapped) return arr
+        swapped = false
+        end--
+        for (i in (end-1)..start) {
+            if (arr[i] > arr[i + 1]) {
+                arr.swap(i, i + 1)
+                swapped = true
+            }
+        }
+        start++
+    }
+    arr
+}
