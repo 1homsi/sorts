@@ -1,0 +1,43 @@
+def cyclesort<T> (T... -> T...):
+  1 dict new -> arr
+  arr len -> n
+  0 -> pos
+  (pos n <):
+    arr pos at -> item
+    0 -> cycles
+    0 (n <):
+      -> i
+      (i pos != i arr at item <):
+        cycles ++
+      i
+    ()
+    (cycles 0 !=):
+      (arr pos at item =):
+        pos ++
+      ()
+      arr pos at -> temp
+      item arr pos set
+      temp -> item
+      (cycles 0 >):
+        0 -> cycles
+        0 (n <):
+          -> i
+          (i pos != i arr at item <):
+            cycles ++
+          i
+        ()
+        (arr pos at item =):
+          pos ++
+        ()
+        temp -> arr pos get
+        item arr pos set
+        temp -> item
+        cycles --
+      ()
+    ()
+    pos ++
+  ()
+  arr
+  ;
+
+[5, 2, 8, 1, 9, 3] cyclesort say
