@@ -1,0 +1,18 @@
+GnomeSort: PROGRAM =
+BEGIN
+    Sort: PROCEDURE [arr: LONG POINTER TO ARRAY OF INTEGER, n: INTEGER] =
+    BEGIN
+        i: INTEGER ← 0;
+        tmp: INTEGER;
+        UNTIL i >= n DO
+            IF i = 0 OR arr[i] >= arr[i - 1]
+            THEN i ← i + 1
+            ELSE BEGIN
+                tmp ← arr[i];
+                arr[i] ← arr[i - 1];
+                arr[i - 1] ← tmp;
+                i ← i - 1
+            END
+        ENDLOOP
+    END;
+END.
