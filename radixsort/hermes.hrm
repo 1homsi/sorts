@@ -1,0 +1,18 @@
+PROGRAM radixsort;
+VAR arr: ARRAY[1..6] OF INTEGER;
+VAR max: INTEGER;
+VAR exp: INTEGER;
+
+BEGIN
+  arr[1] := 5;
+  arr[2] := 2;
+  arr[3] := 8;
+  arr[4] := 1;
+  arr[5] := 9;
+  arr[6] := 3;
+
+  max := arr[1];
+  exp := 1;
+
+  WRITE(arr[1]);
+END radixsort.
