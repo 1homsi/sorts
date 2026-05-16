@@ -1,0 +1,20 @@
+let comb_sort (arr : list int) : list int =
+  let n = List.length arr in
+  let rec loop arr gap =
+    let new_gap = Int.max 1 (Int.div (Int.mul gap 10) 13) in
+    let (arr', changed) = List.fold_left
+      (fun (a, ch) i ->
+        match (List.nth_opt a i, List.nth_opt a (i + new_gap)) with
+        | (Some x, Some y) when x > y ->
+          let a' = List.mapi (fun j v ->
+            if j = i then y
+            else if j = i + new_gap then x
+            else v) a in
+          (a', true)
+        | _ -> (a, ch))
+      (arr, false)
+      (List.init (n - new_gap) (fun i -> i)) in
+    if new_gap = 1 && not changed then arr'
+    else loop arr' new_gap
+  in
+  loop arr n
