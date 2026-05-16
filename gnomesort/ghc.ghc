@@ -1,0 +1,26 @@
+{-# LANGUAGE ScopedTypeVariables #-}
+module GnomeSort where
+
+import Data.Array.ST
+import Data.Array.IArray
+import Control.Monad.ST
+
+gnomeSort :: Array Int Int -> Array Int Int
+gnomeSort arr = runST $ do
+    let (lo, hi) = bounds arr
+    marr <- thaw arr :: ST s (STArray s Int Int)
+    let n = hi - lo + 1
+    let loop i
+          | i > hi    = return ()
+          | i == lo   = loop (i + 1)
+          | otherwise = do
+              ai  <- readArray marr i
+              ai1 <- readArray marr (i - 1)
+              if ai >= ai1
+                then loop (i + 1)
+                else do
+                  writeArray marr i ai1
+                  writeArray marr (i - 1) ai
+                  loop (i - 1)
+    loop lo
+    freeze marr
