@@ -1,0 +1,14 @@
+local arr := [5, 2, 8, 1, 9, 3];
+local n := length(arr);
+
+for i := 0 to n - 2 do
+    for j := 0 to n - i - 2 do
+        if arr[j] > arr[j + 1] then
+            local temp := arr[j];
+            arr[j] := arr[j + 1];
+            arr[j + 1] := temp;
+        end;
+    end;
+end;
+
+Print("Pancake Sort: " & arr);
