@@ -1,0 +1,26 @@
+from nmigen import *
+from nmigen.sim import *
+
+class GnomeSort(Elaboratable):
+    def __init__(self, n=10):
+        self.n = n
+        self.done = Signal()
+
+    def elaborate(self, platform):
+        m = Module()
+        arr = [Signal(32, name=f"a{i}") for i in range(self.n)]
+        i = Signal(range(self.n + 1))
+        tmp = Signal(32)
+
+        with m.If(i >= self.n):
+            m.d.sync += self.done.eq(1)
+        with m.Elif((i == 0) | (arr[i] >= arr[i-1])):
+            m.d.sync += i.eq(i + 1)
+        with m.Else():
+            m.d.sync += [
+                tmp.eq(arr[i]),
+                arr[i].eq(arr[i-1]),
+                arr[i-1].eq(tmp),
+                i.eq(i - 1)
+            ]
+        return m
