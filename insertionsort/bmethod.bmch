@@ -1,0 +1,17 @@
+MACHINE InsertionSort
+VARIABLES arr, n, i, j, key
+INVARIANT
+    arr : seq(INTEGER) &
+    n : NATURAL &
+    i : NATURAL &
+    j : INTEGER &
+    key : INTEGER
+INITIALISATION arr := [] || n := 0 || i := 0 || j := 0 || key := 0
+OPERATIONS
+    sort(input_arr) =
+    PRE input_arr : seq(INTEGER)
+    THEN
+        arr := input_arr ||
+        n := size(input_arr)
+    END
+END
