@@ -1,0 +1,48 @@
+data Nat : Set where {
+  Zero : Nat
+  | Suc : Nat -> Nat
+}
+
+data Vect : Nat -> Set where {
+  VNil : Vect Zero
+  | VCons : {n : Nat} -> Int -> Vect n -> Vect (Suc n)
+}
+
+timsort : {n : Nat} -> Vect n -> Nat -> Vect n
+timsort v _ = mergesort v _
+
+mergesort : {n : Nat} -> Vect n -> Nat -> Vect n
+mergesort VNil _ = VNil
+mergesort (VCons x VNil) _ = VCons x VNil
+mergesort v minSize = 
+  if n <= minSize then 
+    insertionsort v 
+  else 
+    merge (mergesort left minSize) (mergesort right minSize)
+  where {
+    n : Nat = lengthVect v
+    mid : Nat = n / 2
+    left : Vect _ = splitLeft v mid
+    right : Vect _ = splitRight v mid
+  }
+
+insertionsort : {n : Nat} -> Vect n -> Vect n
+insertionsort VNil = VNil
+insertionsort (VCons x xs) = insert x (insertionsort xs)
+
+insert : Int -> {n : Nat} -> Vect n -> Vect (Suc n)
+insert x VNil = VCons x VNil
+insert x (VCons h t) =
+  if x <= h then
+    VCons x (VCons h t)
+  else
+    VCons h (insert x t)
+
+merge : {n m : Nat} -> Vect n -> Vect m -> Vect (n + m)
+merge VNil v = v
+merge v VNil = v
+merge (VCons h1 t1) (VCons h2 t2) =
+  if h1 <= h2 then
+    VCons h1 (merge t1 (VCons h2 t2))
+  else
+    VCons h2 (merge (VCons h1 t1) t2)
