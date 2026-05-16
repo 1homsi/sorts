@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+
+List<int> insertionSort(List<int> arr) {
+  final a = List<int>.from(arr);
+  final n = a.length;
+  for (int i = 1; i < n; i++) {
+    final key = a[i];
+    int j = i - 1;
+    while (j >= 0 && a[j] > key) {
+      a[j + 1] = a[j];
+      j--;
+    }
+    a[j + 1] = key;
+  }
+  return a;
+}
+
+class InsertionSortApp extends StatefulWidget {
+  @override
+  _InsertionSortAppState createState() => _InsertionSortAppState();
+}
+
+class _InsertionSortAppState extends State<InsertionSortApp> {
+  List<int> sorted = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      ElevatedButton(
+        onPressed: () => setState(() => sorted = insertionSort([5, 3, 1, 4, 2])),
+        child: Text('Sort'),
+      ),
+      Text(sorted.join(', ')),
+    ]);
+  }
+}
