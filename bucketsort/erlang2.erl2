@@ -1,0 +1,34 @@
+-module(erlang2).
+-export([bucket_sort/1, main/0]).
+
+insert_sorted(X, []) -> [X];
+insert_sorted(X, [H|T]) when X =< H -> [X, H | T];
+insert_sorted(X, [H|T]) -> [H | insert_sorted(X, T)].
+
+insertion_sort([]) -> [];
+insertion_sort([H|T]) -> insert_sorted(H, insertion_sort(T)).
+
+get_idx(Num, Min, Max, N) ->
+    Raw = trunc((Num - Min) / (Max - Min + 1) * N),
+    min(N - 1, Raw).
+
+fill_buckets([], _, _, _, Buckets) -> Buckets;
+fill_buckets([X|Xs], Min, Max, N, Buckets) ->
+    Idx = get_idx(X, Min, Max, N),
+    NewBuckets = update_bucket(Buckets, Idx, X, 0),
+    fill_buckets(Xs, Min, Max, N, NewBuckets).
+
+update_bucket([B|Bs], 0, X, _) -> [[X|B]|Bs];
+update_bucket([B|Bs], Idx, X, _) -> [B|update_bucket(Bs, Idx-1, X, 0)].
+
+bucket_sort([]) -> [];
+bucket_sort(Arr) ->
+    N = length(Arr),
+    Min = lists:min(Arr),
+    Max = lists:max(Arr),
+    EmptyBuckets = lists:duplicate(N, []),
+    Filled = fill_buckets(Arr, Min, Max, N, EmptyBuckets),
+    lists:flatten(lists:map(fun insertion_sort/1, Filled)).
+
+main() ->
+    io:format("~p~n", [bucket_sort([0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68])]).
