@@ -1,37 +1,6 @@
-using System;
-using System.Collections.Generic;
-
-module Bogosort {
-    IsSorted(arr : list[int]) : bool {
-        match (arr) {
-            | [] | [_] => true
-            | a :: b :: rest => a <= b && IsSorted(b :: rest)
-        }
-    }
-
-    Shuffle(arr : list[int]) : list[int] {
-        def rng = Random();
-        def len = arr.Length;
-        def a = array(arr.ToArray());
-        for (mutable i = len - 1; i > 0; i--) {
-            def j = rng.Next(i + 1);
-            def tmp = a[i];
-            a[i] = a[j];
-            a[j] = tmp;
-        }
-        List(a)
-    }
-
-    Bogosort(arr : list[int]) : list[int] {
-        mutable result = arr;
-        while (!IsSorted(result)) {
-            result = Shuffle(result);
-        }
-        result
-    }
-
-    Main() : void {
-        def arr = [3, 1, 4, 1, 5, 9, 2, 6];
-        Console.WriteLine(Bogosort(arr));
-    }
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
 }
