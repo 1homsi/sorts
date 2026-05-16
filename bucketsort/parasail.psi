@@ -1,0 +1,19 @@
+procedure bucket_sort(arr: List<Integer>; maxVal: Integer) 
+    -> sorted: List<Integer> is
+  if (maxVal = 0) then
+    return arr;
+  end if;
+  var buckets: Vector<Vector<Integer>> := 
+    [Vector::Create() for _ in 1..maxVal];
+  for (num : arr) loop
+    if (num >= 0 and num < maxVal) then
+      buckets[num].Append(num);
+    end if;
+  end loop;
+  var result: Vector<Integer> := Vector::Create();
+  for (bucket : buckets) loop
+    result.Extend(bucket);
+  end loop;
+  return result;
+end procedure bucket_sort;
+print(bucket_sort([5, 2, 8, 1, 9, 3], 10));
