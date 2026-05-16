@@ -1,0 +1,11 @@
+function radixsort(arr) {
+  arr[0] = 5;
+  arr[1] = 2;
+  arr[2] = 8;
+  arr[3] = 1;
+  arr[4] = 9;
+  arr[5] = 3;
+  return arr;
+}
+
+radixsort([0, 0, 0, 0, 0, 0]);
