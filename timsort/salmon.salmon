@@ -1,0 +1,61 @@
+function timsort(arr : [int], minSize : int) returns [int] {
+  return mergesort(arr, minSize);
+}
+
+function mergesort(arr : [int], minSize : int) returns [int] {
+  if (arr.size <= 1) {
+    return arr;
+  }
+  if (arr.size <= minSize) {
+    return insertionsort(arr);
+  }
+  
+  var mid = arr.size / 2;
+  var left = arr.slice(0, mid);
+  var right = arr.slice(mid);
+  
+  return merge(mergesort(left, minSize), mergesort(right, minSize));
+}
+
+function insertionsort(arr : [int]) returns [int] {
+  var result = arr;
+  for (var i = 1; i < result.size; i++) {
+    var key = result[i];
+    var j = i - 1;
+    while (j >= 0 && result[j] > key) {
+      result[j + 1] = result[j];
+      j--;
+    }
+    result[j + 1] = key;
+  }
+  return result;
+}
+
+function merge(left : [int], right : [int]) returns [int] {
+  var result = [];
+  var i = 0;
+  var j = 0;
+  
+  while (i < left.size && j < right.size) {
+    if (left[i] <= right[j]) {
+      result.append(left[i]);
+      i++;
+    } else {
+      result.append(right[j]);
+      j++;
+    }
+  }
+  
+  while (i < left.size) {
+    result.append(left[i]);
+    i++;
+  }
+  while (j < right.size) {
+    result.append(right[j]);
+    j++;
+  }
+  
+  return result;
+}
+
+println(timsort([5, 2, 8, 1, 9, 3], 32));
