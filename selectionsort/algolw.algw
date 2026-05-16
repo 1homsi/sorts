@@ -1,0 +1,21 @@
+BEGIN
+  INTEGER ARRAY ARR[1:6];
+  INTEGER N, I, J, MINIDX, TMP;
+  
+  ARR[1] := 5; ARR[2] := 2; ARR[3] := 8;
+  ARR[4] := 1; ARR[5] := 9; ARR[6] := 3;
+  N := 6;
+  
+  FOR I := 1 STEP 1 UNTIL N - 1 DO BEGIN
+    MINIDX := I;
+    FOR J := I + 1 STEP 1 UNTIL N DO BEGIN
+      IF ARR[J] < ARR[MINIDX] THEN MINIDX := J;
+    END;
+    TMP := ARR[I];
+    ARR[I] := ARR[MINIDX];
+    ARR[MINIDX] := TMP;
+  END;
+  
+  FOR I := 1 STEP 1 UNTIL N DO
+    WRITE(ARR[I]);
+END.
