@@ -1,0 +1,17 @@
+proc bucketSort(arr: seq int; maxVal: int): seq int =
+  if maxVal == 0:
+    return arr
+  else:
+    var buckets: seq (seq int) = newSeq[seq int](maxVal)
+    for i in 0 ..< maxVal:
+      buckets[i] = newSeq[int]()
+    for num in arr:
+      if num >= 0 and num < maxVal:
+        buckets[num].add(num)
+    var result: seq int = @[]
+    for i in 0 ..< maxVal:
+      for num in buckets[i]:
+        result.add(num)
+    return result
+
+echo bucketSort(@[5, 2, 8, 1, 9, 3], 10)
