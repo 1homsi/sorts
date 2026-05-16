@@ -1,0 +1,23 @@
+fmod TREESORT is
+  protecting STREAM .
+
+  sort Node .
+  subsort Nat < Node .
+
+  op empty : -> Node [ctor] .
+  op _,_,_ : Node Nat Node -> Node [ctor] .
+
+  vars N : Nat .
+  vars L R : Node .
+
+  op insert : Node Nat -> Node [ctor] .
+
+  eq insert(empty, N) = empty, N, empty .
+  ceq insert(L, N, R, N') = insert(L, N', N), N, R if N' < N .
+  ceq insert(L, N, R, N') = L, N, insert(R, N', N) if N' > N .
+
+  op inorder : Node -> Stream .
+
+  eq inorder(empty) = nil .
+  eq inorder(L, N, R) = cons(N, inorder(L) inorder(R)) .
+endfm
