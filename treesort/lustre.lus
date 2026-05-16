@@ -1,0 +1,6 @@
+node tree_sort(arr: int) returns (out: int);
+var root: int;
+let
+  root = 0;
+  out = root;
+tel
