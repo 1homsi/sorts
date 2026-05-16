@@ -1,0 +1,8 @@
+module Radixsort where
+
+radixsort : List Int -> List Int
+radixsort [] = []
+radixsort (x:xs) = radixsort (filter (< x) xs) ++ [x] ++ radixsort (filter (>= x) xs)
+
+main : IO ()
+main = putStr (show (radixsort [5, 2, 8, 1, 9, 3]))
