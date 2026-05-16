@@ -1,10 +1,6 @@
-arr: List<Int> = List(3, 1, 4, 1, 5, 9, 2, 6)
-
-isSorted: Boolean = (0..<arr.length - 1)
-  .every((i) -> arr[i] <= arr[i + 1])
-
-bogosortResult: List<Int> = arr.sortedBy((x) -> x)
-
-output {
-  value = bogosortResult
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
 }
