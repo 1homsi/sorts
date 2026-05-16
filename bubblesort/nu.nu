@@ -1,0 +1,16 @@
+(function bubbleSort (arr)
+    (set n (arr count))
+    (set swapped YES)
+    (while swapped
+        (set swapped NO)
+        (for (set i 0) (< i (- n 1)) (set i (+ i 1))
+            (if (> (arr objectAtIndex:i) (arr objectAtIndex:(+ i 1)))
+                (set tmp (arr objectAtIndex:i))
+                (arr replaceObjectAtIndex:i withObject:(arr objectAtIndex:(+ i 1)))
+                (arr replaceObjectAtIndex:(+ i 1) withObject:tmp)
+                (set swapped YES)))
+        (set n (- n 1)))
+    arr)
+
+(set arr (NSMutableArray arrayWithArray:'(64 34 25 12 22 11 90)))
+(puts (bubbleSort arr))
