@@ -1,0 +1,33 @@
+class TreeNode
+  value as integer
+  left as TreeNode
+  right as TreeNode
+
+  new(v as integer)
+    value = v
+    left = nothing
+    right = nothing
+  end new
+end class
+
+method insert(node as TreeNode, val as integer) as TreeNode
+  if node is nothing then return new TreeNode(val)
+  if val < node.value then node.left = insert(node.left, val)
+  if val > node.value then node.right = insert(node.right, val)
+  return node
+end method
+
+method inorder(node as TreeNode)
+  if node is not nothing then
+    inorder(node.left)
+    print node.value
+    inorder(node.right)
+  end if
+end method
+
+dim arr() as integer = {5, 2, 8, 1, 9, 3}
+dim root as TreeNode
+for i as integer = 0 to 5
+  root = insert(root, arr(i))
+next
+inorder(root)
