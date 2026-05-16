@@ -1,0 +1,16 @@
+routine bucketSort(arr: list<int>, maxVal: int) => list<int> {
+    buckets = [[] for _ in range(maxVal)];
+    for (num in arr) {
+        if (num >= 0 && num < maxVal) {
+            buckets[num].append(num);
+        }
+    }
+    result = [];
+    for (bucket in buckets) {
+        for (num in bucket) {
+            result.append(num);
+        }
+    }
+    return result;
+}
+io.writeln(bucketSort([5, 2, 8, 1, 9, 3], 10));
