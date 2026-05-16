@@ -1,0 +1,28 @@
+.class public LInsertionSort;
+.super Ljava/lang/Object;
+
+.method public static insertionSort([I)V
+    .registers 8
+    array-length v0, p0
+    const/4 v1, 0x1
+outer_check:
+    if-ge v1, v0, done
+    aget v2, p0, v1
+    sub-int v3, v1, v1
+    add-int/lit8 v3, v1, -1
+inner_check:
+    if-ltz v3, place
+    aget v4, p0, v3
+    if-le v4, v2, place
+    add-int/lit8 v5, v3, 1
+    aput v4, p0, v5
+    add-int/lit8 v3, v3, -1
+    goto inner_check
+place:
+    add-int/lit8 v5, v3, 1
+    aput v2, p0, v5
+    add-int/lit8 v1, v1, 1
+    goto outer_check
+done:
+    return-void
+.end method
