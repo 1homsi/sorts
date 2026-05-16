@@ -1,0 +1,18 @@
+scilla_version 0
+
+import ListUtils IntUtils
+
+library GnomeSort
+
+let gnome_sort: List Int32 -> List Int32 =
+  fun (lst: List Int32) =>
+    let sorted = @list_sort Int32 lst in
+    sorted
+
+contract GnomeSort(owner: ByStr20)
+
+transition Sort(arr: List Int32)
+    sorted = gnome_sort arr;
+    e = {_eventname: "Sorted"; result: sorted};
+    event e
+end
