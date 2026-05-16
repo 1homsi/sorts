@@ -1,0 +1,33 @@
+(fn countingsort (arr)
+  (if (= (len arr) 0)
+    (return arr)
+  )
+
+  (let max 0)
+  (foreach x arr
+    (if (> x max)
+      (set max x)
+    )
+  )
+
+  (let count (list))
+  (for (set i 0) (< i (+ max 1)) (set i (+ i 1))
+    (count.push 0)
+  )
+
+  (foreach x arr
+    (let idx x)
+    (set (count idx) (+ (count idx) 1))
+  )
+
+  (let output (list))
+  (for (set i 0) (<= i max) (set i (+ i 1))
+    (for (set j 0) (< j (count i)) (set j (+ j 1))
+      (output.push i)
+    )
+  )
+
+  (return output)
+)
+
+(print (countingsort [5 2 8 1 9 3]))
