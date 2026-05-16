@@ -1,0 +1,15 @@
+rec sort : (arr : array[int]) -> array[int] =
+  fn arr =>
+    let n = length(arr) in
+    let rec forward = fn k =>
+      if k >= n - 1 then arr else
+      if arr[k] > arr[k + 1] then
+        (swap arr k (k + 1); forward (k + 1))
+      else forward (k + 1)
+    in forward 0
+
+let () =
+  let arr = [|5; 2; 8; 1; 9; 3|] in
+  let _ = sort arr in
+  Array.iter (fun x -> print_int x; print_string " ") arr;
+  print_newline ()
