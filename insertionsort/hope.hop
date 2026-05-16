@@ -1,0 +1,7 @@
+dec insert : num # list(num) -> list(num);
+--- insert(x, nil) <= [x];
+--- insert(x, y::ys) <= if x <= y then x::y::ys else y::insert(x, ys);
+
+dec insertion_sort : list(num) -> list(num);
+--- insertion_sort(nil) <= nil;
+--- insertion_sort(x::xs) <= insert(x, insertion_sort(xs));
