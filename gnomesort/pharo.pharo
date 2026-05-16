@@ -1,0 +1,15 @@
+gnomeSort: anArray
+    | i n tmp |
+    i := 1.
+    n := anArray size.
+    [i <= n] whileTrue: [
+        (i = 1 or: [(anArray at: i) >= (anArray at: i - 1)])
+            ifTrue: [i := i + 1]
+            ifFalse: [
+                tmp := anArray at: i.
+                anArray at: i put: (anArray at: i - 1).
+                anArray at: i - 1 put: tmp.
+                i := i - 1
+            ]
+    ].
+    ^ anArray
