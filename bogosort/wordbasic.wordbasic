@@ -1,1 +1,1 @@
-print("Bogosort implementation for wordbasic.wordbasic")
+SELECT * FROM array ORDER BY value ASC;
