@@ -1,0 +1,16 @@
+arr := {5. 2. 8. 1. 9. 3} asArray.
+gap := 1.
+[(gap <= arr size) whileTrue: [gap := gap * 3 + 1]].
+[(gap > 0) whileTrue: [
+  gap := gap / 3.
+  (gap to: arr size - 1) do: [| i |
+    temp := arr at: i.
+    j := i.
+    [(j >= gap & (arr at: (j - gap)) > temp) whileTrue: [
+      arr at: j put: (arr at: (j - gap)).
+      j := j - gap.
+    ]].
+    arr at: j put: temp.
+  ].
+]].
+arr print.
