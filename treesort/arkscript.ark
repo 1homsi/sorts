@@ -1,0 +1,20 @@
+(let insert (lambda (node val)
+  (if (nil? node)
+    (list val nil nil)
+    (if (< val (car node))
+      (list (car node) (insert (car (cdr node)) val) (car (cdr (cdr node))))
+      (if (> val (car node))
+        (list (car node) (car (cdr node)) (insert (car (cdr (cdr node))) val))
+        node)))))
+
+(let inorder (lambda (node)
+  (if (nil? node)
+    nil
+    (append (inorder (car (cdr node)))
+            (append (list (car node))
+                    (inorder (car (cdr (cdr node)))))))))
+
+(let tree-sort (lambda (arr)
+  (inorder (fold insert nil arr))))
+
+(print (tree-sort (list 5 2 8 1 9 3)))
