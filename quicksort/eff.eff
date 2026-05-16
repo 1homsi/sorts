@@ -1,0 +1,15 @@
+effect Exc = | Raise : string -> a
+
+let quicksort = handler
+  | Raise msg => (print_string msg; [])
+  | val result => result
+
+let qs arr =
+  if Array.length arr <= 1 then arr
+  else
+    let pivot = arr.(0) in
+    let less = Array.fold_left (fun acc x -> if x <= pivot then acc @ [x] else acc) [] arr in
+    let greater = Array.fold_left (fun acc x -> if x > pivot then acc @ [x] else acc) [] arr in
+    (qs (Array.of_list less)) @ [pivot] @ (qs (Array.of_list greater))
+
+let () = Array.iter print_int (qs [|5; 2; 8; 1; 9; 3|])
