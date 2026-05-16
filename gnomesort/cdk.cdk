@@ -1,0 +1,26 @@
+import * as cdk from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+
+function gnomeSort(arr: number[]): number[] {
+    const a = [...arr];
+    let i = 0;
+    const n = a.length;
+    while (i < n) {
+        if (i === 0 || a[i] >= a[i - 1]) {
+            i++;
+        } else {
+            [a[i], a[i - 1]] = [a[i - 1], a[i]];
+            i--;
+        }
+    }
+    return a;
+}
+
+export class GnomeSortStack extends cdk.Stack {
+    constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+        super(scope, id, props);
+        const data = [5, 3, 8, 1, 9, 2, 7, 4, 6, 0];
+        const sorted = gnomeSort(data);
+        new cdk.CfnOutput(this, 'Sorted', { value: sorted.join(',') });
+    }
+}
