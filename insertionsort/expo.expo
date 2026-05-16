@@ -1,0 +1,33 @@
+import React, { useState } from 'react';
+import { View, Button, Text, StyleSheet } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+
+function insertionSort(arr: number[]): number[] {
+  const a = [...arr];
+  const n = a.length;
+  for (let i = 1; i < n; i++) {
+    const key = a[i];
+    let j = i - 1;
+    while (j >= 0 && a[j] > key) {
+      a[j + 1] = a[j];
+      j--;
+    }
+    a[j + 1] = key;
+  }
+  return a;
+}
+
+export default function App() {
+  const [sorted, setSorted] = useState<number[]>([]);
+  return (
+    <View style={styles.container}>
+      <Button title="Sort" onPress={() => setSorted(insertionSort([5, 3, 1, 4, 2]))} />
+      <Text>{sorted.join(', ')}</Text>
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, alignItems: 'center', justifyContent: 'center' }
+});
