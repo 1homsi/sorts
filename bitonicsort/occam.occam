@@ -1,0 +1,54 @@
+PROC bitonicSort (VAL INT lo, cnt, dir, []INT arr)
+    IF
+        cnt > 1
+            INT k:
+            SEQ
+                k := cnt / 2
+                bitonicSort(lo, k, 1, arr)
+                bitonicSort(lo + k, k, 0, arr)
+                bitonicMerge(lo, cnt, dir, arr)
+        TRUE
+            SKIP
+:
+
+PROC bitonicMerge (VAL INT lo, cnt, dir, []INT arr)
+    IF
+        cnt > 1
+            INT k:
+            SEQ
+                k := cnt / 2
+                SEQ i = lo FOR k
+                    compareAndSwap(i, i + k, dir, arr)
+                bitonicMerge(lo, k, dir, arr)
+                bitonicMerge(lo + k, k, dir, arr)
+        TRUE
+            SKIP
+:
+
+PROC compareAndSwap (VAL INT i, j, dir, []INT arr)
+    IF
+        (dir = 1) AND (arr[i] > arr[j])
+            INT tmp:
+            SEQ
+                tmp := arr[i]
+                arr[i] := arr[j]
+                arr[j] := tmp
+        (dir = 0) AND (arr[i] < arr[j])
+            INT tmp:
+            SEQ
+                tmp := arr[i]
+                arr[i] := arr[j]
+                arr[j] := tmp
+        TRUE
+            SKIP
+:
+
+PROC main ()
+    [8]INT data:
+    SEQ
+        data[0] := 3  data[1] := 7  data[2] := 4  data[3] := 8
+        data[4] := 6  data[5] := 2  data[6] := 1  data[7] := 5
+        bitonicSort(0, 8, 1, data)
+        SEQ i = 0 FOR 8
+            out.int(data[i], 0, stdout)
+:
