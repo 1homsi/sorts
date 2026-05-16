@@ -1,0 +1,23 @@
+routines (
+    forward_pass
+    backward_pass
+    cocktail_sort
+)
+
+external (
+    cocktail_sort
+)
+
+define forward_pass as (
+    do (
+        $( [hop] [len 1] ) (
+            among(>)
+            (test hop(1))
+        )
+    )
+)
+
+define cocktail_sort as (
+    do forward_pass
+    do backward_pass
+)
