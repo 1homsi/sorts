@@ -1,0 +1,5 @@
+bubble_sort [] = []
+bubble_sort [x] = [x]
+bubble_sort (x:y:xs)
+  | x <= y = x : bubble_sort (y:xs)
+  | otherwise = y : bubble_sort (x:xs)
