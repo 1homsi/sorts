@@ -1,0 +1,45 @@
+arr[0]=3
+arr[1]=7
+arr[2]=4
+arr[3]=8
+arr[4]=6
+arr[5]=2
+arr[6]=1
+arr[7]=5
+
+BitonicSort(0, 8, 1)
+
+For i=0 To 7
+    TextWindow.Write(arr[i] + " ")
+EndFor
+TextWindow.WriteLine("")
+
+Sub BitonicSort
+    If cnt > 1 Then
+        k = Math.Floor(cnt / 2)
+        oldLo = lo
+        oldCnt = cnt
+        oldDir = dir
+        lo = oldLo : cnt = k : dir = 1
+        BitonicSort()
+        lo = oldLo + k : cnt = k : dir = 0
+        BitonicSort()
+        lo = oldLo : cnt = oldCnt : dir = oldDir
+        BitonicMerge()
+    EndIf
+EndSub
+
+Sub BitonicMerge
+    If cnt > 1 Then
+        k = Math.Floor(cnt / 2)
+        For i = lo To lo + k - 1
+            ai = arr[i]
+            aj = arr[i + k]
+            If (dir = 1 And ai > aj) Or (dir = 0 And ai < aj) Then
+                arr[i] = aj
+                arr[i + k] = ai
+            EndIf
+        EndFor
+        BitonicMerge()
+    EndIf
+EndSub
