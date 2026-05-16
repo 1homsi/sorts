@@ -1,0 +1,61 @@
+timsort = method(arr, minSize) {
+  mergesort(arr, minSize)
+}
+
+mergesort = method(arr, minSize) {
+  if (arr length <= 1) {
+    return arr
+  }
+  if (arr length <= minSize) {
+    return insertionsort(arr)
+  }
+  
+  mid = (arr length) / 2
+  left = arr slice(0, mid)
+  right = arr slice(mid)
+  
+  merge(mergesort(left, minSize), mergesort(right, minSize))
+}
+
+insertionsort = method(arr) {
+  result = arr copy()
+  (1 to: result length) each: method(i) {
+    key = result at(i)
+    j = i - 1
+    while (j >= 0 && result at(j) > key) {
+      result at(j + 1) put: result at(j)
+      j = j - 1
+    }
+    result at(j + 1) put: key
+  }
+  result
+}
+
+merge = method(left, right) {
+  result = []
+  i = 0
+  j = 0
+  
+  while (i < left length && j < right length) {
+    if (left at(i) <= right at(j)) {
+      result push(left at(i))
+      i = i + 1
+    } else {
+      result push(right at(j))
+      j = j + 1
+    }
+  }
+  
+  while (i < left length) {
+    result push(left at(i))
+    i = i + 1
+  }
+  while (j < right length) {
+    result push(right at(j))
+    j = j + 1
+  }
+  
+  result
+}
+
+timsort([5, 2, 8, 1, 9, 3], 32) say
