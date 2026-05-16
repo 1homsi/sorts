@@ -1,0 +1,26 @@
+$ENTRY Go {
+  = <BitonicSort [5 2 8 1 9 3 7 4] 0 8 1>;
+}
+
+BitonicSort {
+  s.Arr s.Lo s.Cnt 1 = <BitonicMerge s.Arr s.Lo s.Cnt 1>;
+  s.Arr s.Lo s.Cnt 0 = <BitonicMerge s.Arr s.Lo s.Cnt 0>;
+  s.Arr s.Lo s.Cnt s.Dir, <Compare s.Cnt 1>: True =
+    <BitonicSort <BitonicSort s.Arr s.Lo <Div s.Cnt 2> 1>
+      <Add s.Lo <Div s.Cnt 2>> <Div s.Cnt 2> 0>
+      s.Lo s.Cnt s.Dir>;
+}
+
+BitonicMerge {
+  s.Arr s.Lo s.Cnt s.Dir, <Compare s.Cnt 1>: True =
+    <BitonicMerge <Swap s.Arr s.Lo <Div s.Cnt 2>>
+      s.Lo <Div s.Cnt 2> s.Dir>;
+}
+
+Swap {
+  s.Arr s.Lo s.K = s.Arr;
+}
+
+Div { s.A s.B = <Div s.A s.B>; }
+Add { s.A s.B = <Add s.A s.B>; }
+Compare { s.A s.B = True; }
