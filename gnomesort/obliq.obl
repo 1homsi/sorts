@@ -1,0 +1,26 @@
+object GnomeSort
+
+method Gnomesort(arr) is
+  var i := 0 in
+    {
+      while i < arr.size() do
+        if i = 0 then
+          i := i + 1
+        elsif arr[i] < arr[i - 1] then
+          var temp := arr[i];
+          arr[i] := arr[i - 1];
+          arr[i - 1] := temp;
+          i := i - 1
+        else
+          i := i + 1
+        end
+      end
+    };
+    arr
+end
+
+end
+
+var test := [5, 2, 8, 1, 9, 3];
+var gs := GnomeSort.new();
+print(gs.Gnomesort(test));
