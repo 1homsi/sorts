@@ -1,0 +1,20 @@
+effect TreeSort { }
+
+let rec insert node val =
+  match node with
+  | None -> Some (val, None, None)
+  | Some (v, l, r) ->
+      if val < v then Some (v, insert l val, r)
+      else if val > v then Some (v, l, insert r val)
+      else Some (v, l, r)
+
+let rec inorder node =
+  match node with
+  | None -> []
+  | Some (v, l, r) -> inorder l @ [v] @ inorder r
+
+let tree_sort arr =
+  let root = List.fold_left insert None arr in
+  inorder root
+
+let () = tree_sort [5; 2; 8; 1; 9; 3] |> List.iter (Printf.printf "%d ")
