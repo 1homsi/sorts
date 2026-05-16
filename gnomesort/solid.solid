@@ -1,0 +1,25 @@
+import { createSignal } from 'solid-js';
+
+function gnomeSort(arr: number[]): number[] {
+  const a = [...arr];
+  let i = 0, n = a.length;
+  while (i < n) {
+    if (i === 0 || a[i] >= a[i-1]) i++;
+    else { [a[i], a[i-1]] = [a[i-1], a[i]]; i--; }
+  }
+  return a;
+}
+
+export function GnomeSortApp() {
+  const arr = [5, 3, 8, 1, 9, 2, 7, 4, 6, 0];
+  const [sorted, setSorted] = createSignal<number[]>([]);
+
+  return (
+    <div>
+      <button onClick={() => setSorted(gnomeSort(arr))}>Sort</button>
+      <ul>
+        {sorted().map(val => <li>{val}</li>)}
+      </ul>
+    </div>
+  );
+}

@@ -1,0 +1,25 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-gnome-sort',
+  template: `
+    <button (click)="doSort()">Sort</button>
+    <ul>
+      <li *ngFor="let val of sorted">{{ val }}</li>
+    </ul>
+  `
+})
+export class GnomeSortComponent {
+  arr = [5, 3, 8, 1, 9, 2, 7, 4, 6, 0];
+  sorted: number[] = [];
+
+  doSort() {
+    const a = [...this.arr];
+    let i = 0, n = a.length;
+    while (i < n) {
+      if (i === 0 || a[i] >= a[i-1]) i++;
+      else { [a[i], a[i-1]] = [a[i-1], a[i]]; i--; }
+    }
+    this.sorted = a;
+  }
+}

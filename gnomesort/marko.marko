@@ -1,0 +1,22 @@
+class {
+  onCreate() {
+    this.state = { sorted: [] };
+    this.arr = [5, 3, 8, 1, 9, 2, 7, 4, 6, 0];
+  }
+  gnomeSort() {
+    const a = [...this.arr];
+    let i = 0, n = a.length;
+    while (i < n) {
+      if (i === 0 || a[i] >= a[i-1]) i++;
+      else { [a[i], a[i-1]] = [a[i-1], a[i]]; i--; }
+    }
+    this.state.sorted = a;
+  }
+}
+
+<button on-click('gnomeSort')>Sort</button>
+<ul>
+  <for|val| of=state.sorted>
+    <li>${val}</li>
+  </for>
+</ul>
