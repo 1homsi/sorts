@@ -1,1 +1,1 @@
-print("Bogosort implementation for materialize.mz")
+SELECT * FROM array ORDER BY value ASC;
