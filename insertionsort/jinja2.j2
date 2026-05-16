@@ -1,0 +1,16 @@
+{%- macro insertion_sort(arr) -%}
+  {%- set a = arr | list -%}
+  {%- set n = a | length -%}
+  {%- for i in range(1, n) -%}
+    {%- set key = a[i] -%}
+    {%- set j = [i - 1] -%}
+    {%- for _ in range(n) -%}
+      {%- if j[0] >= 0 and a[j[0]] > key -%}
+        {%- if a.insert(j[0] + 1, a.pop(j[0])) or true -%}{%- endif -%}
+        {%- if j.append(j.pop() - 1) or true -%}{%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endfor -%}
+  {{- a | join(', ') -}}
+{%- endmacro -%}
+{{ insertion_sort([5, 3, 1, 4, 2]) }}
