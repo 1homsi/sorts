@@ -1,0 +1,63 @@
+Begin
+   Integer Procedure InsertionSort(Bucket, N);
+      Real Array Bucket;
+      Integer N;
+   Begin
+      Integer I, J;
+      Real Key;
+      For I := 2 Step 1 Until N Do
+      Begin
+         Key := Bucket(I);
+         J := I - 1;
+         While J >= 1 And Bucket(J) > Key Do
+         Begin
+            Bucket(J+1) := Bucket(J);
+            J := J - 1
+         End;
+         Bucket(J+1) := Key
+      End
+   End InsertionSort;
+
+   Procedure BucketSort(Arr, N);
+      Real Array Arr;
+      Integer N;
+   Begin
+      Real MinV, MaxV, Num;
+      Integer I, Idx, B, Pos;
+      Real Array Buckets(1:N, 1:N);
+      Integer Array Counts(1:N);
+      MinV := Arr(1); MaxV := Arr(1);
+      For I := 1 Step 1 Until N Do
+      Begin
+         If Arr(I) < MinV Then MinV := Arr(I);
+         If Arr(I) > MaxV Then MaxV := Arr(I)
+      End;
+      For I := 1 Step 1 Until N Do Counts(I) := 0;
+      For I := 1 Step 1 Until N Do
+      Begin
+         Num := Arr(I);
+         Idx := Entier((Num - MinV) / (MaxV - MinV + 1) * N) + 1;
+         If Idx > N Then Idx := N;
+         Counts(Idx) := Counts(Idx) + 1;
+         Buckets(Idx, Counts(Idx)) := Num
+      End;
+      Pos := 1;
+      For B := 1 Step 1 Until N Do
+      Begin
+         InsertionSort(Buckets(B,), Counts(B));
+         For I := 1 Step 1 Until Counts(B) Do
+         Begin
+            Arr(Pos) := Buckets(B, I);
+            Pos := Pos + 1
+         End
+      End
+   End BucketSort;
+
+   Real Array Data(1:10);
+   Integer I;
+   Data(1) := 0.78; Data(2) := 0.17; Data(3) := 0.39; Data(4) := 0.26; Data(5) := 0.72;
+   Data(6) := 0.94; Data(7) := 0.21; Data(8) := 0.12; Data(9) := 0.23; Data(10) := 0.68;
+   BucketSort(Data, 10);
+   For I := 1 Step 1 Until 10 Do OutFix(Data(I), 2, 0);
+   OutImage
+End
