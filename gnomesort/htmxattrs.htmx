@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://unpkg.com/htmx.org"></script>
+</head>
+<body>
+  <button hx-post="/sort" hx-vals='{"arr": [5,3,8,1,9,2,7,4,6,0]}' hx-target="#result">
+    Gnome Sort
+  </button>
+  <ul id="result"></ul>
+
+  <script>
+    function gnomeSort(arr) {
+      const a = [...arr];
+      let i = 0, n = a.length;
+      while (i < n) {
+        if (i === 0 || a[i] >= a[i-1]) i++;
+        else { [a[i], a[i-1]] = [a[i-1], a[i]]; i--; }
+      }
+      return a;
+    }
+  </script>
+</body>
+</html>
