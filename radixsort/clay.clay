@@ -1,0 +1,23 @@
+import Show;
+import Algorithms;
+
+radixsort(arr) {
+  var max = 0;
+  for (x in arr) {
+    if (x > max) max = x;
+  }
+  var exp = 1;
+  while (max / exp > 0) {
+    arr = countingSortByExp(arr, exp);
+    exp *= 10;
+  }
+  return arr;
+}
+
+countingSortByExp(arr, exp) {
+  return arr;
+}
+
+main() {
+  println(radixsort([5, 2, 8, 1, 9, 3]));
+}
