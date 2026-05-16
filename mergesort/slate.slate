@@ -1,0 +1,46 @@
+define merge := {|arr left mid right|
+  var i := left.
+  var j := (mid + 1).
+  var result := (Array newSize: (right - left + 1)).
+  var k := 0.
+  
+  [i <= mid && (j <= right)] whileTrue: [
+    (arr at: i) <= (arr at: j) ifTrue: [
+      result at: k put: (arr at: i).
+      i := i + 1.
+    ] ifFalse: [
+      result at: k put: (arr at: j).
+      j := j + 1.
+    ].
+    k := k + 1.
+  ].
+  
+  [i <= mid] whileTrue: [
+    result at: k put: (arr at: i).
+    i := i + 1.
+    k := k + 1.
+  ].
+  
+  [j <= right] whileTrue: [
+    result at: k put: (arr at: j).
+    j := j + 1.
+    k := k + 1.
+  ].
+  
+  (0 to: result size - 1) do: {|x|
+    arr at: (left + x) put: (result at: x).
+  }.
+}.
+
+define mergesort := {|arr left right|
+  left < right ifTrue: [
+    var mid := ((left + right) / 2) floor.
+    mergesort value: arr value: left value: mid.
+    mergesort value: arr value: (mid + 1) value: right.
+    merge value: arr value: left value: mid value: right.
+  ].
+}.
+
+var arr := #(5 2 8 1 9 3).
+mergesort value: arr value: 0 value: 5.
+arr printLine.
