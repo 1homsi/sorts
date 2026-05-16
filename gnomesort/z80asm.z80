@@ -1,0 +1,28 @@
+        ORG 0100H
+
+GNOME:  LD BC, 0000H
+LOOP:   LD A, C
+        CP 10
+        JR NC, DONE
+        LD A, C
+        OR A
+        JR Z, ADV
+        LD HL, ARR
+        ADD HL, BC
+        LD A, (HL)
+        DEC HL
+        CP (HL)
+        JR NC, ADV
+        LD D, A
+        LD A, (HL)
+        INC HL
+        LD (HL), A
+        DEC HL
+        LD (HL), D
+        DEC C
+        JR LOOP
+ADV:    INC C
+        JR LOOP
+DONE:   RET
+
+ARR:    DB 5,3,8,1,9,2,7,4,6,0
