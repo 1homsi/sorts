@@ -1,0 +1,65 @@
+int arr[10];
+int buckets[10][10];
+int counts[10];
+int n = 10;
+
+inline insertion_sort(b, m) {
+    int i, j, key;
+    i = 1;
+    do
+    :: i < m ->
+        key = buckets[b][i];
+        j = i - 1;
+        do
+        :: j >= 0 && buckets[b][j] > key ->
+            buckets[b][j+1] = buckets[b][j];
+            j = j - 1
+        :: else -> break
+        od;
+        buckets[b][j+1] = key;
+        i = i + 1
+    :: else -> break
+    od
+}
+
+init {
+    int minv, maxv, idx, pos, i, b;
+    arr[0] = 78; arr[1] = 17; arr[2] = 39; arr[3] = 26; arr[4] = 72;
+    arr[5] = 94; arr[6] = 21; arr[7] = 12; arr[8] = 23; arr[9] = 68;
+    minv = arr[0]; maxv = arr[0];
+    i = 0;
+    do
+    :: i < n ->
+        if :: arr[i] < minv -> minv = arr[i] :: else -> skip fi;
+        if :: arr[i] > maxv -> maxv = arr[i] :: else -> skip fi;
+        i = i + 1
+    :: else -> break
+    od;
+    i = 0;
+    do :: i < n -> counts[i] = 0; i = i + 1 :: else -> break od;
+    i = 0;
+    do
+    :: i < n ->
+        idx = (arr[i] - minv) * n / (maxv - minv + 1);
+        if :: idx >= n -> idx = n - 1 :: else -> skip fi;
+        buckets[idx][counts[idx]] = arr[i];
+        counts[idx] = counts[idx] + 1;
+        i = i + 1
+    :: else -> break
+    od;
+    pos = 0; b = 0;
+    do
+    :: b < n ->
+        insertion_sort(b, counts[b]);
+        i = 0;
+        do
+        :: i < counts[b] -> arr[pos] = buckets[b][i]; pos = pos + 1; i = i + 1
+        :: else -> break
+        od;
+        b = b + 1
+    :: else -> break
+    od;
+    i = 0;
+    do :: i < n -> printf("%d ", arr[i]); i = i + 1 :: else -> break od;
+    printf("\n")
+}
