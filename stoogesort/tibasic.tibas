@@ -1,0 +1,13 @@
+Disp "StoogeSort"
+{5,2,8,1,9,3}->L1
+For(I,1,6)
+For(J,1,6)
+If L1(J)<L1(I)
+Then
+L1(I)->T
+L1(J)->L1(I)
+T->L1(J)
+End
+End
+End
+Disp L1
