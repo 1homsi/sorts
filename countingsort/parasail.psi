@@ -1,0 +1,37 @@
+interface Countingsort_Interface is
+  func countingsort(arr : Vector<Integer>) -> Vector<Integer>;
+end interface;
+
+class Countingsort_Class is
+  func countingsort(arr : Vector<Integer>) -> Vector<Integer> is
+    if arr.is_empty() then
+      return arr;
+    end if;
+
+    var max : Integer := 0;
+    for each x in arr loop
+      if x > max then
+        max := x;
+      end if;
+    end loop;
+
+    var count : Vector<Integer> :=
+      Vector::create(size => max + 1, fill => 0);
+
+    for each x in arr loop
+      count[x] := count[x] + 1;
+    end loop;
+
+    var output : Vector<Integer> := Vector::create();
+    for i in 0..max loop
+      for j in 1..count[i] loop
+        output.append(i);
+      end loop;
+    end loop;
+
+    return output;
+  end func;
+end class;
+
+var test : Vector<Integer> := [5, 2, 8, 1, 9, 3];
+print(Countingsort_Class::countingsort(test));
