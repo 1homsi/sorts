@@ -1,0 +1,9 @@
+SELECT
+  Solution = [1, 2, 3, 5, 8, 9]
+WHERE
+  Permutation([5, 2, 8, 1, 9, 3], Solution),
+  Sorted(Solution).
+
+Sorted([]).
+Sorted([_]).
+Sorted([X, Y | Rest]) :- X =< Y, Sorted([Y | Rest]).
