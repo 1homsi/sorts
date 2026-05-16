@@ -1,0 +1,61 @@
+def timsort(arr, minSize):
+  return mergesort(arr, minSize)
+end
+
+def mergesort(arr, minSize):
+  if len(arr) <= 1:
+    return arr
+  end
+  if len(arr) <= minSize:
+    return insertionsort(arr)
+  end
+  
+  var mid = len(arr) / 2
+  var left = arr[0:mid]
+  var right = arr[mid:]
+  
+  return merge(mergesort(left, minSize), mergesort(right, minSize))
+end
+
+def insertionsort(arr):
+  var result = arr.copy()
+  for i in 1 to len(result):
+    var key = result[i]
+    var j = i - 1
+    while j >= 0 and result[j] > key:
+      result[j + 1] = result[j]
+      j = j - 1
+    end
+    result[j + 1] = key
+  end
+  return result
+end
+
+def merge(left, right):
+  var result = []
+  var i = 0
+  var j = 0
+  
+  while i < len(left) and j < len(right):
+    if left[i] <= right[j]:
+      result.append(left[i])
+      i = i + 1
+    else:
+      result.append(right[j])
+      j = j + 1
+    end
+  end
+  
+  while i < len(left):
+    result.append(left[i])
+    i = i + 1
+  end
+  while j < len(right):
+    result.append(right[j])
+    j = j + 1
+  end
+  
+  return result
+end
+
+print(timsort([5, 2, 8, 1, 9, 3], 32))
