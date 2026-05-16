@@ -1,0 +1,13 @@
+def countingsort(arr: Fin n -> Float) : Fin n -> Float =
+  let max = maximum arr
+  let count = for i:(Fin (max.asInt + 1)). (sum for j:n. (if (arr j).asInt == i.asInt then 1 else 0 end))
+  for i:n.
+    let sorted_i = (sum for j:(Fin (max.asInt + 1)).
+      (sum for k:(Fin count[j]). 1)) - 1 - i.asInt
+    let output_val = argmax \j. (count[j] > sorted_i.asInt)
+    output_val.asFloat
+
+def main : Float =
+  let test : Fin 6 -> Float = [5.0, 2.0, 8.0, 1.0, 9.0, 3.0]
+  let result = countingsort test
+  result 0
