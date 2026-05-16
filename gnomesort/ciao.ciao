@@ -1,0 +1,22 @@
+:- module(gnomesort, [gnomesort/2]).
+
+gnomesort(List, Sorted) :-
+  sort_helper(0, List, Sorted).
+
+sort_helper(_, [], []).
+sort_helper(I, [H|T], Result) :-
+  sort_helper(I, T, SortedT),
+  insert_at(I, H, SortedT, Result).
+
+insert_at(0, X, List, [X|List]).
+insert_at(I, X, [H|T], [H|Result]) :-
+  I > 0,
+  I1 is I - 1,
+  insert_at(I1, X, T, Result).
+
+:- initialization(main).
+
+main :-
+  gnomesort([5, 2, 8, 1, 9, 3], Sorted),
+  write(Sorted), nl,
+  halt.
