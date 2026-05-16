@@ -1,0 +1,13 @@
+DECLARE bucket_sort ENTRY FIXED;
+DECLARE arr(6) FIXED VALUE (5,2,8,1,9,3);
+DECLARE buckets(10) FIXED;
+DECLARE result(6) FIXED;
+DECLARE i, idx FIXED;
+bucket_sort:
+  DO FOR i := 0 TO 9 STEP 1;
+    buckets(i) := 0;
+  END;
+  DO FOR i := 0 TO 5 STEP 1;
+    buckets(arr(i)+1) := arr(i);
+  END;
+  RETURN;
