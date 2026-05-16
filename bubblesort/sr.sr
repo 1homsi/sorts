@@ -1,0 +1,29 @@
+resource BubbleSort
+
+    procedure bubbleSort(arr[1:*]: int) returns sorted[1:7]: int
+        var a[1:7]: int
+        fa i := 1 to 7 -> a[i] := arr[i] af
+        var n := 7, tmp: int
+        var swapped := true
+        do swapped ->
+            swapped := false
+            fa i := 1 to n-1 ->
+                if a[i] > a[i+1] ->
+                    tmp := a[i]
+                    a[i] := a[i+1]
+                    a[i+1] := tmp
+                    swapped := true
+                fi
+            af
+            n := n - 1
+        od
+        fa i := 1 to 7 -> sorted[i] := a[i] af
+    end
+
+    process main
+        var arr[1:7]: int := ([7] 64, 34, 25, 12, 22, 11, 90)
+        var s[1:7]: int := bubbleSort(arr)
+        fa i := 1 to 7 -> write(s[i]) af
+    end
+
+end BubbleSort
