@@ -1,0 +1,41 @@
+module CYCLE_SORT:
+input TICK;
+output SORTED: integer;
+
+var arr := {5, 4, 3, 2, 1} : integer array[5] in
+var n := 5 : integer in
+var cycle_start := 0 : integer in
+var item : integer in
+var pos : integer in
+var writes := 0 : integer in
+var tmp : integer in
+
+every TICK do
+  cycle_start := 0;
+  loop
+    if cycle_start >= n - 1 then exit loop end if;
+    item := arr[cycle_start];
+    pos := cycle_start;
+    var i := cycle_start + 1 : integer in
+      loop
+        if i >= n then exit loop end if;
+        if arr[i] < item then pos := pos + 1 end if;
+        i := i + 1
+      end loop
+    end var;
+    if pos <> cycle_start then
+      loop
+        if arr[pos] <> item then exit loop end if;
+        pos := pos + 1
+      end loop;
+      tmp := arr[pos]; arr[pos] := item; item := tmp;
+      writes := writes + 1
+    end if;
+    cycle_start := cycle_start + 1
+  end loop;
+  emit SORTED(arr[0])
+end every
+
+end var end var end var end var end var end var
+
+end module
