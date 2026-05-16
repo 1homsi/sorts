@@ -1,0 +1,25 @@
+PROCEDURE comb_sort(A : ARRAY(INT)) : ARRAY(INT)
+DECLARE
+  gap : INT
+  i : INT
+  swapped : BOOLEAN
+  temp : INT
+BEGIN
+  gap := SIZE(A)
+  swapped := TRUE
+  LOOP
+    IF gap <= 1 THEN EXIT IF NOT swapped
+    gap := TRUNC(gap * 10.0 / 13.0)
+    IF gap < 1 THEN gap := 1
+    swapped := FALSE
+    FOR i := 1 TO SIZE(A) - gap DO
+      IF A(i) > A(i + gap) THEN
+        temp := A(i)
+        A(i) := A(i + gap)
+        A(i + gap) := temp
+        swapped := TRUE
+      END IF
+    END FOR
+  END LOOP
+  RETURN A
+END PROCEDURE
