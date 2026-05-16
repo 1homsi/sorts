@@ -1,0 +1,11 @@
+def quicksort(arr: uint[] | 0) : uint[] | 0 {
+  if arr.length <= 1 {
+    return arr;
+  }
+  let pivot = arr[0];
+  let less = arr[1:].filter(lambda x => x <= pivot);
+  let greater = arr[1:].filter(lambda x => x > pivot);
+  return quicksort(less) ++ [pivot] ++ quicksort(greater);
+}
+
+print(quicksort([5u, 2u, 8u, 1u, 9u, 3u]));
