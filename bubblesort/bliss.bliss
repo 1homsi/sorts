@@ -1,0 +1,32 @@
+MODULE BUBBLE_SORT (MAIN = SORT_MAIN) =
+BEGIN
+
+LITERAL SIZE = 7;
+GLOBAL arr : VECTOR [SIZE] INITIAL (64,34,25,12,22,11,90);
+
+ROUTINE BUBBLE_SORT =
+BEGIN
+    LOCAL n : INITIAL (SIZE), i, tmp, swapped;
+    DO BEGIN
+        swapped = 0;
+        INCR i FROM 0 TO .n - 2 DO
+            IF .arr [.i] GTR .arr [.i+1]
+            THEN BEGIN
+                tmp = .arr [.i];
+                arr [.i] = .arr [.i+1];
+                arr [.i+1] = .tmp;
+                swapped = 1;
+            END;
+        n = .n - 1;
+    END WHILE .swapped;
+    0
+END;
+
+ROUTINE SORT_MAIN =
+BEGIN
+    BUBBLE_SORT ();
+    0
+END;
+
+END
+ELUDOM
