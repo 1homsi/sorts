@@ -1,0 +1,11 @@
+insertionSort(arr: List Integer): List Integer ==
+  a := copy arr
+  n := #a
+  for i in 2..n repeat
+    key := a.i
+    j := i - 1
+    while j >= 1 and a.j > key repeat
+      a.(j+1) := a.j
+      j := j - 1
+    a.(j+1) := key
+  a
