@@ -1,0 +1,16 @@
+DIM A(7) AS INTEGER
+DATA 64, 34, 25, 12, 22, 11, 90
+FOR I = 1 TO 7: READ A(I): NEXT I
+N = 7
+DO
+    SW = 0
+    FOR I = 1 TO N - 1
+        IF A(I) > A(I + 1) THEN
+            T = A(I): A(I) = A(I + 1): A(I + 1) = T: SW = 1
+        END IF
+    NEXT I
+    N = N - 1
+LOOP WHILE SW = 1
+FOR I = 1 TO 7: PRINT A(I); " ";: NEXT I
+PRINT
+END
