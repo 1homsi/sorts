@@ -1,0 +1,7 @@
+a::=~GNOME SORT STATE: PROCESSING
+SORT::=~Sorting array using gnome sort algorithm
+a::=~Compare adjacent elements, swap if needed, step back
+SWAP::=~Element at i swapped with element at i-1
+DONE::=~Array is sorted
+::=
+SORT
