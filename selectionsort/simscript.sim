@@ -1,0 +1,21 @@
+process arrays
+declare arr[6], n, i, j, min_idx, tmp
+
+let arr[1] = 5, arr[2] = 2, arr[3] = 8
+let arr[4] = 1, arr[5] = 9, arr[6] = 3
+let n = 6
+
+for i = 1 to n - 1
+    let min_idx = i
+    for j = i + 1 to n
+        if arr[j] < arr[min_idx]
+            let min_idx = j
+        end if
+    end for
+    let tmp = arr[i]
+    let arr[i] = arr[min_idx]
+    let arr[min_idx] = tmp
+end for
+
+print arr[1] to arr[n]
+end
