@@ -1,0 +1,10 @@
+(define (insertion-sort lst)
+  (define (insert x xs)
+    (cond ((null? xs) (list x))
+          ((<= x (car xs)) (cons x xs))
+          (else (cons (car xs) (insert x (cdr xs))))))
+  (cond ((null? lst) '())
+        (else (insert (car lst) (insertion-sort (cdr lst))))))
+
+(display (insertion-sort '(5 2 8 1 9 3)))
+(newline)
