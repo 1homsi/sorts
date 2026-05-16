@@ -1,1 +1,1 @@
-print("Bogosort implementation for qtqml.qml")
+bogosort xs = if sorted xs then xs else bogosort (shuffle xs)
