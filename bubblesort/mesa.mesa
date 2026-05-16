@@ -1,0 +1,33 @@
+BubbleSort: PROGRAM = BEGIN
+
+    arr: ARRAY [0..6] OF INTEGER ← [64,34,25,12,22,11,90];
+    n: INTEGER ← 7;
+    i, tmp: INTEGER;
+    swapped: BOOLEAN;
+
+    BSort: PROCEDURE = BEGIN
+        swapped ← TRUE;
+        DO
+            swapped ← FALSE;
+            FOR i IN [0..n-2) DO
+                IF arr[i] > arr[i+1] THEN BEGIN
+                    tmp ← arr[i];
+                    arr[i] ← arr[i+1];
+                    arr[i+1] ← tmp;
+                    swapped ← TRUE
+                END
+            ENDLOOP;
+            n ← n - 1
+        UNTIL NOT swapped
+        ENDLOOP
+    END;
+
+BEGIN
+    BSort[];
+    FOR i IN [0..6] DO
+        Terminal.WriteInt[arr[i], 5]
+    ENDLOOP;
+    Terminal.WriteLn[]
+END
+
+END BubbleSort.
