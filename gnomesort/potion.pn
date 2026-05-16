@@ -1,0 +1,16 @@
+gnomesort(arr) :
+  i = 0
+  loop { i < arr length } :
+    if (i = 0) :
+      i = i + 1
+    else if (arr at(i) < arr at(i - 1)) :
+      temp = arr at(i)
+      arr(i) = (arr at(i - 1))
+      arr(i - 1) = temp
+      i = i - 1
+    else :
+      i = i + 1
+
+test = [5, 2, 8, 1, 9, 3]
+gnomesort(test)
+test each: |x| (x string print)
