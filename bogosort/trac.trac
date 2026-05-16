@@ -1,11 +1,6 @@
-#(DS,ARR,3 1 4 1 5 9 2 6)##
-#(DS,N,8)##
-#(DS,IS-SORTED,#(EQ,#(GET,SORTED),1,DONE,LOOP))##
-#(DS,SHUFFLE,#(AD,SORT,#(CS,ARR)))##
-#(DS,BOGOSORT,
-  #(DS,SORTED,1)##
-  #(SS,ARR)##
-  #(IS-SORTED)##
-)##
-#(BOGOSORT)##
-#(ARR)##
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
