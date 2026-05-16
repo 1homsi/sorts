@@ -1,0 +1,14 @@
+module InsertionSort where
+
+import Prelude
+import Data.List (List(..), (:))
+
+insert :: Int -> List Int -> List Int
+insert x Nil = x : Nil
+insert x (y : ys)
+  | x <= y    = x : y : ys
+  | otherwise = y : insert x ys
+
+insertionSort :: List Int -> List Int
+insertionSort Nil = Nil
+insertionSort (x : xs) = insert x (insertionSort xs)
