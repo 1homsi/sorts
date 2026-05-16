@@ -1,0 +1,20 @@
+$ENTRY SelectionSort {
+  (e.arr):
+    <Sort 0 <Lenght e.arr> e.arr>
+};
+
+Sort {
+  (e.i e.n e.arr):
+    <- (e.arr) : e.n
+    <- (e.i) : <Sub e.n 1>
+      <Sort <Add e.i 1> e.n <Swap e.arr <Min e.i <Add e.i 1> e.n e.arr>>>
+};
+
+Min { (e.i e.j e.n e.arr): (e.i) }; 
+
+Swap { (e.arr e.min): e.arr };
+
+Lenght { () = 0; (e.x e.r) = <Add 1 <Lenght e.r>>; };
+
+Sub { (e.x e.y) = <Sub e.x e.y>; };
+Add { (e.x e.y) = <Add e.x e.y>; };
