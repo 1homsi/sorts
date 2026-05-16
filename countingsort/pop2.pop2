@@ -1,0 +1,30 @@
+define countingsort(arr) -> result;
+  lvars max = 0, i, j, count, output;
+
+  ;;; Find max
+  for i from 0 to length(arr) - 1 do
+    if arr(i) > max then
+      arr(i) -> max;
+    endif;
+  endfor;
+
+  ;;; Create count array
+  newarray(max + 1, 0) -> count;
+
+  ;;; Fill count
+  for i from 0 to length(arr) - 1 do
+    count(arr(i)) + 1 -> count(arr(i));
+  endfor;
+
+  ;;; Rebuild
+  [] -> output;
+  for i from 0 to max do
+    for j from 0 to count(i) - 1 do
+      i :: output -> output;
+    endfor;
+  endfor;
+
+  reverse(output) -> result;
+enddefine;
+
+countingsort([5 2 8 1 9 3]) =>
