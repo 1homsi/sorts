@@ -1,0 +1,6 @@
+let insertionSort (arr: List<Int>) : List<Int> =
+  List.fold arr ~init:[] ~f:(fun acc x ->
+    let rec insert = function
+      | [] -> [x]
+      | h :: t -> if x <= h then x :: h :: t else h :: insert t
+    in insert acc)
