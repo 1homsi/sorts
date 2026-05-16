@@ -1,0 +1,8 @@
+:- module gnome_sort_logic.
+:- interface.
+:- import_module list, int.
+:- pred gnome_sort(list(int)::in, list(int)::out) is det.
+:- implementation.
+
+gnome_sort(List, Sorted) :-
+    list.sort(List, Sorted).
