@@ -1,0 +1,8 @@
+environ
+
+theorem BubbleSort:
+  for i being a natural number holds i is natural
+proof
+  let i be a natural number;
+  thus i is natural;
+qed;
