@@ -1,0 +1,37 @@
+cocktailsort = (arr) ->
+  n = arr size
+  i = 0
+  while (i < n):
+    swapped = false
+    k = 0
+    while (k < n - i - 1):
+      if (arr[k] > arr[k + 1]):
+        temp = arr[k]
+        arr[k] = arr[k + 1]
+        arr[k + 1] = temp
+        swapped = true
+      end
+      k = k + 1
+    end
+    if (!swapped): break end
+    i = i + 1
+    swapped = false
+    k = n - i - 2
+    while (k >= 0):
+      if (arr[k] > arr[k + 1]):
+        temp = arr[k]
+        arr[k] = arr[k + 1]
+        arr[k + 1] = temp
+        swapped = true
+      end
+      k = k - 1
+    end
+    if (!swapped): break end
+    i = i + 1
+  end
+  arr
+end
+
+arr = [5, 2, 8, 1, 9, 3]
+arr = cocktailsort(arr)
+arr print
