@@ -1,0 +1,34 @@
+fn cocktail_sort(arr: [int]) -> [int]
+    let mut a = arr
+    let mut swapped = true
+    let mut start = 0
+    let mut end = len(arr) - 1
+    while $swapped
+        let swapped = false
+        for i in {$start..$end}
+            if test $a[$i] -gt $a[$(add $i 1)]
+                let tmp = $a[$i]
+                let a[$i] = $a[$(add $i 1)]
+                let a[$(add $i 1)] = $tmp
+                let swapped = true
+            end
+        end
+        if not $swapped
+            break
+        end
+        let swapped = false
+        let end = sub $end 1
+        let i = sub $end 1
+        while test $i -ge $start
+            if test $a[$i] -gt $a[$(add $i 1)]
+                let tmp = $a[$i]
+                let a[$i] = $a[$(add $i 1)]
+                let a[$(add $i 1)] = $tmp
+                let swapped = true
+            end
+            let i = sub $i 1
+        end
+        let start = add $start 1
+    end
+    echo $a
+end
