@@ -1,0 +1,16 @@
+GnomeSort(arr)
+  i = 0
+  loop
+    i < length(arr) ?
+    yes:
+      i = 0 ?
+      yes: i = i + 1
+      no:
+        arr[i] < arr[i - 1] ?
+        yes:
+          temp = arr[i]
+          arr[i] = arr[i - 1]
+          arr[i - 1] = temp
+          i = i - 1
+        no: i = i + 1
+    no: return arr
