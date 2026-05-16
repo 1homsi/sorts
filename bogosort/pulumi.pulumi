@@ -1,1 +1,1 @@
-print("Bogosort implementation for pulumi.pulumi")
+bogosort = true
