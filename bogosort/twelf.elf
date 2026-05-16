@@ -1,0 +1,14 @@
+sort : list -> list -> type.
+sort nil nil.
+sort L L :- issorted L.
+sort L L' :- shuffle L L1, sort L1 L'.
+
+issorted nil.
+issorted [_].
+issorted [X, Y | Rest] :- X =< Y, issorted [Y | Rest].
+
+shuffle [] [].
+shuffle L L.
+
+main : type.
+main :- sort [3, 1, 2] X, write X.
