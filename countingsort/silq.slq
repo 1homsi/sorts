@@ -1,0 +1,28 @@
+def countingsort(arr: uint[]) : uint[] {
+  var max : uint = 0;
+  for i in 0..arr.length {
+    if arr[i] > max {
+      max = arr[i];
+    }
+  }
+
+  var count : uint[] = new uint[max + 1];
+  for i in 0..count.length {
+    count[i] = 0;
+  }
+
+  for i in 0..arr.length {
+    count[arr[i]] = count[arr[i]] + 1;
+  }
+
+  var output : uint[] = new uint[0];
+  for i in 0..max + 1 {
+    for j in 0..count[i] {
+      output = output ++ [i];
+    }
+  }
+
+  return output;
+}
+
+result := countingsort([5, 2, 8, 1, 9, 3]);
