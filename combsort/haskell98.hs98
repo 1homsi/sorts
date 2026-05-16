@@ -1,0 +1,29 @@
+module CombSort98 where
+
+import Array
+import IOArray
+
+combSort :: IOArray Int Int -> IO ()
+combSort arr = do
+    (lo, hi) <- getBounds arr
+    let n = hi - lo + 1
+    loop arr n n
+  where
+    loop arr n gap = do
+        let newGap = max 1 (truncate (fromIntegral gap / 1.3 :: Double))
+        changed <- pass arr n newGap 0 False
+        if newGap == 1 && not changed
+            then return ()
+            else loop arr n newGap
+
+    pass arr n gap i changed
+        | i + gap >= n = return changed
+        | otherwise = do
+            a <- readArray arr i
+            b <- readArray arr (i + gap)
+            if a > b
+                then do
+                    writeArray arr i b
+                    writeArray arr (i + gap) a
+                    pass arr n gap (i + 1) True
+                else pass arr n gap (i + 1) changed
