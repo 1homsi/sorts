@@ -1,0 +1,19 @@
+package TreeSort is
+  type Node is record
+    value: Integer;
+    left: TreeNode is null;
+    right: TreeNode is null;
+  end record;
+
+  function Insert(node: TreeNode; val: Integer) return TreeNode is
+    if node == null then
+      return (value => val, left => null, right => null);
+    elsif val < node.value then
+      return (value => node.value, left => Insert(node.left, val), right => node.right);
+    elsif val > node.value then
+      return (value => node.value, left => node.left, right => Insert(node.right, val));
+    else
+      return node;
+    end if;
+  end function;
+end TreeSort;
