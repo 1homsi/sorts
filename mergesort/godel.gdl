@@ -1,0 +1,7 @@
+merge :- write('Merge operation'), nl.
+mergesort :- write('MergeSort operation'), nl.
+
+test :- 
+  write('Testing mergesort'), nl,
+  mergesort,
+  write([5,2,8,1,9,3]), nl.
