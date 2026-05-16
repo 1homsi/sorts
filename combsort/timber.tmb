@@ -1,0 +1,19 @@
+combSort :: [Int] -> [Int]
+combSort arr = go arr (length arr)
+  where
+    go a 0 = a
+    go a n = go (swapPass a n) (div (n * 10) 13)
+
+    swapPass arr gap
+      | gap < 1 = arr
+      | otherwise = swapPass' arr 0 gap
+
+    swapPass' arr i gap
+      | i >= length arr - gap = arr
+      | otherwise = if arr !! i > arr !! (i + gap)
+                    then swapPass' (swap arr i (i + gap)) (i + 1) gap
+                    else swapPass' arr (i + 1) gap
+
+    swap arr i j = take i arr ++ [arr !! j] ++ take (j - i - 1) (drop (i + 1) arr) ++ [arr !! i] ++ drop (j + 1) arr
+
+main = print (combSort [5, 2, 8, 1, 9, 3])
