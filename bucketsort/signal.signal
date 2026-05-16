@@ -1,0 +1,36 @@
+process BUCKET_SORT =
+(? integer DATA_IN; ! integer DATA_OUT) :
+
+signal ARRAY := [| 78; 17; 39; 26; 72; 94; 21; 12; 23; 68 |] : integer^10;
+signal SORTED : integer^10;
+signal N := 10 : integer;
+signal MIN_V := 12 : integer;
+signal MAX_V := 94 : integer;
+
+procedure INSERTION_SORT(
+    input bucket : integer^10;
+    input size : integer;
+    output sorted : integer^10)
+:=
+    let
+        sorted := bucket
+        #sorted := size
+    in
+        for i in 1 .. size - 1 do
+            let key := sorted[i] in
+            let j := i - 1 in
+            while (j >= 0) and (sorted[j] > key) do
+                sorted[j+1] := sorted[j];
+                j := j - 1
+            done;
+            sorted[j+1] := key
+        done
+    ni
+end INSERTION_SORT;
+
+begin
+    INSERTION_SORT(ARRAY, N, SORTED);
+    DATA_OUT := SORTED
+end
+
+end process BUCKET_SORT
