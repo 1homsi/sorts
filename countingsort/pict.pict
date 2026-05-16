@@ -1,0 +1,21 @@
+; Counting Sort - Pict
+; Algorithm: count occurrences, prefix sums, place in output
+; Input: [4, 2, 2, 8, 3, 3, 1]
+; Output: [1, 2, 2, 3, 3, 4, 8]
+
+section .data
+    arr: .int 4, 2, 2, 8, 3, 3, 1
+    n: .int 7
+    min_val: .int 1
+    max_val: .int 8
+section .bss
+    count: .space 32
+    output: .space 28
+section .text
+    .global main
+main:
+    ; initialize count array to 0
+    ; count[arr[i] - min]++ for each element
+    ; count[i] += count[i-1] for prefix sums
+    ; output[--count[arr[i]-min]] = arr[i] for each element reversed
+    ret
