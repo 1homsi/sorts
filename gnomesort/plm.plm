@@ -1,0 +1,16 @@
+GNOMESORT: PROCEDURE (N) PUBLIC;
+    DECLARE N BYTE;
+    DECLARE ARR(100) INTEGER EXTERNAL;
+    DECLARE (I, TMP) INTEGER;
+    I = 0;
+    DO WHILE I < N;
+        IF I = 0 OR ARR(I) >= ARR(I-1) THEN
+            I = I + 1;
+        ELSE DO;
+            TMP = ARR(I);
+            ARR(I) = ARR(I-1);
+            ARR(I-1) = TMP;
+            I = I - 1;
+        END;
+    END;
+END GNOMESORT;
