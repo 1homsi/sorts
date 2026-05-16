@@ -1,0 +1,28 @@
+struct node { value: int; left: opt[node]; right: opt[node]; };
+
+fun insert(n: opt[node], val: int): opt[node] =
+  match n with
+  | None => Some (node (val, None, None))
+  | Some nd =>
+    if val < nd.value then
+      Some (node (nd.value, insert(nd.left, val), nd.right))
+    elif val > nd.value then
+      Some (node (nd.value, nd.left, insert(nd.right, val)))
+    else
+      Some nd
+    endif;
+
+fun inorder(n: opt[node], result: list[int]): list[int] =
+  match n with
+  | None => result
+  | Some nd =>
+    let left = inorder(nd.left, result) in
+    let withNode = left + (nd.value :: []) in
+    inorder(nd.right, withNode);
+
+fun treeSort(arr: list[int]): list[int] =
+  let root = fold_left (fun (n: opt[node], v: int) => insert(n, v)) None arr in
+  inorder(root, []);
+
+val sorted = treeSort [5, 2, 8, 1, 9, 3];
+println$ sorted;
