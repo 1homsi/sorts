@@ -1,0 +1,31 @@
+var arr, len, i, j, pivot, temp;
+
+procedure quicksort;
+var i, j, pivot, temp;
+begin
+  if len <= 1 then return;
+  pivot := arr[0];
+  i := 1;
+  j := len;
+  while i < j do
+  begin
+    while i < len and arr[i] <= pivot do i := i + 1;
+    while j > 0 and arr[j] > pivot do j := j - 1;
+    if i < j then
+    begin
+      temp := arr[i];
+      arr[i] := arr[j];
+      arr[j] := temp;
+      i := i + 1;
+      j := j - 1;
+    end
+  end;
+end;
+
+begin
+  arr[0] := 5; arr[1] := 2; arr[2] := 8;
+  arr[3] := 1; arr[4] := 9; arr[5] := 3;
+  len := 6;
+  call quicksort;
+  for i := 0 step 1 until 5 do ! arr[i];
+end.
