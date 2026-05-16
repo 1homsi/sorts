@@ -1,0 +1,16 @@
+(define cocktailsort
+  (lambda [arr]
+    (let [[n (length arr)]]
+      (do
+        [i <- (between 0 n)]
+        (let [[forward-pass
+                (fold (lambda [rest] 
+                       (lambda [j]
+                         (if (> (nth j rest) (nth (+ j 1) rest))
+                          (take j rest) ++ [(nth (+ j 1) rest)] ++ [(nth j rest)] ++ (drop (+ j 2) rest)
+                          rest)))
+                     arr
+                     (between 0 (- n i 1)))]]
+          forward-pass)))))
+
+(print (cocktailsort [5 2 8 1 9 3]))
