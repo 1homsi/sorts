@@ -1,13 +1,6 @@
-arr = [3, 1, 4, 1, 5, 9, 2, 6]
-
-is_sorted = lambda arr: [int] -> bool {
-    all_true([arr[i] <= arr[i+1] for i in range(len(arr) - 1)])
-}
-
-bogosort_result = sorted(arr)
-
-bogosorted = {
-    input = arr
-    result = bogosort_result
-    sorted_check = is_sorted(bogosort_result)
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
 }
