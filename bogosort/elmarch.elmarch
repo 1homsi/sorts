@@ -1,33 +1,6 @@
-module Main exposing (..)
-
-import Browser
-import Html exposing (Html, text)
-import List
-
-isSorted : List Int -> Bool
-isSorted arr =
-    case arr of
-        [] -> True
-        [_] -> True
-        x :: y :: rest -> x <= y && isSorted (y :: rest)
-
-bogosort : List Int -> List Int
-bogosort arr =
-    List.sort arr
-
-type alias Model = List Int
-
-init : Model
-init = bogosort [3, 1, 4, 1, 5, 9, 2, 6]
-
-view : Model -> Html msg
-view model =
-    text (Debug.toString model)
-
-main : Program () Model msg
-main =
-    Browser.sandbox
-        { init = init
-        , update = \_ m -> m
-        , view = view
-        }
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
