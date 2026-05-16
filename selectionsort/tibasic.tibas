@@ -1,0 +1,11 @@
+:ClrHome
+:5->A
+:2->B
+:8->C
+:1->D
+:9->E
+:3->F
+:{A,B,C,D,E,F}->L1
+:sortA(L1)
+:Disp L1
+:
