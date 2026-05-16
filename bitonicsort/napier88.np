@@ -1,0 +1,34 @@
+
+let
+  val bitonicsort = fn(arr, lo, cnt, dir) =>
+    if cnt > 1 then
+      let val k = cnt div 2
+      in
+        bitonicsort(arr, lo, k, 1);
+        bitonicsort(arr, lo + k, k, 0);
+        bitonicmerge(arr, lo, cnt, dir)
+      end
+    else arr
+
+  val bitonicmerge = fn(arr, lo, cnt, dir) =>
+    if cnt > 1 then
+      let val k = cnt div 2
+      in
+        for i <- lo .. lo + cnt - k - 1 do
+          if ((subscript(arr, i) > subscript(arr, i + k)) = (dir = 1)) then
+            val tmp = subscript(arr, i)
+            update(arr, i, subscript(arr, i + k));
+            update(arr, i + k, tmp)
+          fi
+        od;
+        bitonicmerge(arr, lo, k, dir);
+        bitonicmerge(arr, lo + k, k, dir)
+      end
+    else arr
+
+  val arr = mkarray(8, 0)
+  val _ = (update(arr, 0, 5), update(arr, 1, 2), update(arr, 2, 8), update(arr, 3, 1),
+           update(arr, 4, 9), update(arr, 5, 3), update(arr, 6, 7), update(arr, 7, 4))
+in
+  bitonicsort(arr, 0, 8, 1)
+end
