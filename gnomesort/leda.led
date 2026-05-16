@@ -1,0 +1,21 @@
+list<int> gnomesort(list<int> arr) {
+  int i = 0;
+  while (i < arr.size()) {
+    if (i == 0) {
+      i++;
+    } else if (arr[i] < arr[i - 1]) {
+      int temp = arr[i];
+      arr[i] = arr[i - 1];
+      arr[i - 1] = temp;
+      i--;
+    } else {
+      i++;
+    }
+  }
+  return arr;
+}
+
+main() {
+  list<int> test = {5, 2, 8, 1, 9, 3};
+  output(gnomesort(test));
+}
