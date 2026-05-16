@@ -1,0 +1,32 @@
+VAR arr_0 = 5
+VAR arr_1 = 3
+VAR arr_2 = 1
+VAR arr_3 = 4
+VAR arr_4 = 2
+VAR key = 0
+VAR j = 0
+
+-> sort
+
+== sort ==
+~ key = arr_1
+~ j = 0
+{ arr_0 > key:
+    ~ arr_1 = arr_0
+    ~ arr_0 = key
+}
+~ key = arr_2
+~ j = 1
+{ arr_1 > key:
+    ~ arr_2 = arr_1
+    { arr_0 > key:
+        ~ arr_1 = arr_0
+        ~ arr_0 = key
+    - else:
+        ~ arr_1 = key
+    }
+- else:
+    ~ arr_2 = key
+}
+Sorted: {arr_0}, {arr_1}, {arr_2}, {arr_3}, {arr_4}
+-> END
