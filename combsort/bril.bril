@@ -1,0 +1,34 @@
+@main {
+  v1: int = 5;
+  v2: int = 2;
+  v3: int = 8;
+  v4: int = 1;
+  v5: int = 9;
+  v6: int = 3;
+
+  gap: int = 6;
+  swapped: bool = true;
+
+  loop {
+    cond gap swapped {
+      break;
+    }
+    gap = div (mul gap 10) 13;
+    cond gap {
+      gap = 1;
+    }
+    swapped = false;
+
+    i: int = 0;
+    loop {
+      max: int = sub 6 gap;
+      cond (lt i max) {
+        break;
+      }
+      swapped = true;
+      i = add i 1;
+    }
+  }
+
+  print v1 v2 v3 v4 v5 v6;
+}
