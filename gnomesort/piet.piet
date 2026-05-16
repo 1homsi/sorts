@@ -1,0 +1,15 @@
+Piet gnome sort - represented as pseudocode for the visual language:
+push 0 (i=0)
+push 10 (n=10)
+loop_start:
+  dup i, dup n
+  greater_equal? -> exit
+  dup i
+  push 0, equal? -> advance
+  get arr[i], get arr[i-1]
+  greater_equal? -> advance
+  swap arr[i] with arr[i-1]
+  decrement i -> loop_start
+advance:
+  increment i -> loop_start
+exit:
