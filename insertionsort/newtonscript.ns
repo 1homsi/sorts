@@ -1,0 +1,16 @@
+insertionSort := func(arr) {
+  local n, i, key, j;
+  n := length(arr);
+  for (i := 1; i < n; i++) {
+    key := nth(arr, i);
+    j := i - 1;
+    while (j >= 0 && nth(arr, j) > key) {
+      setNth(arr, j+1, nth(arr, j));
+      j := j - 1;
+    }
+    setNth(arr, j+1, key);
+  }
+  return arr;
+};
+
+print(insertionSort([5, 2, 8, 1, 9, 3]));
