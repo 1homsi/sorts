@@ -1,0 +1,16 @@
+!Selection Sort in TECO
+[0J
+0S
+5
+2
+8
+1
+9
+3
+1S
+1<
+ I %| Read element |%
+ K
+ >
+G
+ |Sorted output|
