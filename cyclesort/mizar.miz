@@ -1,0 +1,12 @@
+: Cyclesort Algorithms
+
+reserve i, j, n for Nat,
+        r for Real,
+        f for Function;
+
+definition
+  let f be Function, n be Nat;
+  pred f is_cyclesorted_wrt n means
+    for i being Nat st i < n holds
+    for j being Nat st j < n & i < j holds f.i <= f.j;
+end;
