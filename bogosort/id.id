@@ -1,23 +1,6 @@
-def is_sorted arr n =
-    (for i <- 0 to n-2 do
-        arr[i] <= arr[i+1]
-    ) fold with (&&) initial true
-
-def shuffle arr n =
-    (for i <- n-1 downto 1 do
-        let j = rand() mod (i+1) in
-        let tmp = arr[i] in
-        arr[i] := arr[j];
-        arr[j] := tmp
-    );
-    arr
-
-def bogosort arr n =
-    if is_sorted arr n then arr
-    else bogosort (shuffle arr n) n
-
-let arr = array [3; 1; 4; 1; 5; 9; 2; 6]
-let n = 8
-let sorted = bogosort arr n
-for i <- 0 to n-1 do print sorted[i]; print " " done;
-print "\n"
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
