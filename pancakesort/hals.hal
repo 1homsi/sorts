@@ -1,0 +1,21 @@
+PROGRAM PANCAKESORT;
+
+DECLARE ARR(6) FIXED;
+DECLARE (N, I, J, TEMP) FIXED;
+
+ARR(1) = 5; ARR(2) = 2; ARR(3) = 8;
+ARR(4) = 1; ARR(5) = 9; ARR(6) = 3;
+N = 6;
+
+DO I = 1 TO N-1;
+    DO J = 1 TO N-I;
+        IF ARR(J) > ARR(J+1) THEN DO;
+            TEMP = ARR(J);
+            ARR(J) = ARR(J+1);
+            ARR(J+1) = TEMP;
+        END;
+    END;
+END;
+
+DISPLAY("Pancake Sort: ", ARR);
+STOP;
