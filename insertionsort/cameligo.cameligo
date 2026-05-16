@@ -1,0 +1,11 @@
+let rec insert (x : int) (lst : int list) : int list =
+  match lst with
+  | [] -> [x]
+  | h :: t ->
+    if x <= h then x :: h :: t
+    else h :: (insert x t)
+
+let rec insertion_sort (lst : int list) : int list =
+  match lst with
+  | [] -> []
+  | h :: t -> insert h (insertion_sort t)
