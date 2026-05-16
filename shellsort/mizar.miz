@@ -1,0 +1,7 @@
+environ ARITHM, FINSEQ_1, RELAT_1;
+theorem :: ShellSort:1
+  for a being FinSequence of INT st len a > 0
+  ex b being FinSequence of INT st b = a & (for i,j being Nat st i < j & j <= len b holds b.i <= b.j)
+proof
+  skip;
+end;
