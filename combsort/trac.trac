@@ -1,0 +1,20 @@
+#(DS,COMBSORT,
+  #(DS,GAP,#(ARG,N))
+  #(DS,SORTED,0)
+  #(SS,OUTER,
+    #(EQ,#(VAL,SORTED),1,DONE,
+      #(DS,GAP,#(DIV,#(MUL,#(VAL,GAP),10),13))
+      #(LT,#(VAL,GAP),2,#(DS,GAP,1),)
+      #(EQ,#(VAL,GAP),1,#(DS,SORTED,1),)
+      #(DS,I,0)
+      #(SS,INNER,
+        #(GE,#(ADD,#(VAL,I),#(VAL,GAP)),#(VAL,N),OUTER,
+          #(GT,#(ARRGET,ARR,#(VAL,I)),#(ARRGET,ARR,#(ADD,#(VAL,I),#(VAL,GAP))),
+            #(DS,TMP,#(ARRGET,ARR,#(VAL,I)))
+            #(ARRSET,ARR,#(VAL,I),#(ARRGET,ARR,#(ADD,#(VAL,I),#(VAL,GAP))))
+            #(ARRSET,ARR,#(ADD,#(VAL,I),#(VAL,GAP)),#(VAL,TMP))
+            #(DS,SORTED,0),)
+          #(DS,I,#(ADD,#(VAL,I),1))
+          #(INNER)))
+      #(OUTER)))
+  #(OUTER))
