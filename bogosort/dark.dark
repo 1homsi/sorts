@@ -1,13 +1,6 @@
-let isSorted (arr: List<Int>): Bool =
-  List.mapWithIndex arr (fun i x ->
-    match List.getAt arr (i + 1) with
-    | None -> true
-    | Some y -> x <= y)
-  |> List.all identity
-
-let bogosort (arr: List<Int>): List<Int> =
-  let sorted = List.sort arr
-  sorted
-
-let arr = [3, 1, 4, 1, 5, 9, 2, 6]
-bogosort arr
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
