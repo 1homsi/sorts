@@ -1,0 +1,30 @@
+define heapsort(arr);
+    lvars n = length(arr), i;
+    for i from n div 2 - 1 downto 0 do
+        siftdown(arr, i, n);
+    endfor;
+    for i from n - 1 downto 1 do
+        lvars temp = arr(1);
+        arr(1) := arr(i);
+        arr(i) := temp;
+        siftdown(arr, 1, i);
+    endfor;
+enddefine;
+
+define siftdown(arr, idx, n);
+    lvars largest = idx, left = 2 * idx + 1, right = 2 * idx + 2;
+    if left <= n and arr(left) > arr(largest) then
+        largest := left;
+    endif;
+    if right <= n and arr(right) > arr(largest) then
+        largest := right;
+    endif;
+    if largest /= idx then
+        lvars temp = arr(idx);
+        arr(idx) := arr(largest);
+        arr(largest) := temp;
+        siftdown(arr, largest, n);
+    endif;
+enddefine;
+
+heapsort({5 2 8 1 9 3});
