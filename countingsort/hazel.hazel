@@ -1,0 +1,19 @@
+let counting_sort (arr : List Int) : List Int =
+  let n = List.length arr in
+  if n == 0 then arr
+  else
+    let min_val = List.fold_left min (List.hd arr) arr in
+    let max_val = List.fold_left max (List.hd arr) arr in
+    let range = max_val - min_val + 1 in
+    let count = Array.make range 0 in
+    List.iter (fun v -> count.(v - min_val) <- count.(v - min_val) + 1) arr;
+    for i = 1 to range - 1 do
+      count.(i) <- count.(i) + count.(i - 1)
+    done;
+    let output = Array.make n 0 in
+    let i = ref (n - 1) in
+    List.iter (fun v ->
+      count.(v - min_val) <- count.(v - min_val) - 1;
+      output.(count.(v - min_val)) <- v
+    ) (List.rev arr);
+    Array.to_list output
