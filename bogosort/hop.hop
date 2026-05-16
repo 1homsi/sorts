@@ -1,29 +1,6 @@
-(module bogosort
-   (import (hop) (hopc)))
-
-(define (is-sorted? arr)
-   (let loop ((i 0))
-      (cond
-         ((>= i (- (vector-length arr) 1)) #t)
-         ((> (vector-ref arr i) (vector-ref arr (+ i 1))) #f)
-         (else (loop (+ i 1))))))
-
-(define (shuffle! arr)
-   (let ((n (vector-length arr)))
-      (let loop ((i (- n 1)))
-         (when (> i 0)
-            (let* ((j (random (+ i 1)))
-                   (tmp (vector-ref arr i)))
-               (vector-set! arr i (vector-ref arr j))
-               (vector-set! arr j tmp))
-            (loop (- i 1))))))
-
-(define (bogosort! arr)
-   (let loop ()
-      (unless (is-sorted? arr)
-         (shuffle! arr)
-         (loop))))
-
-(define arr (vector 3 1 4 1 5 9 2 6))
-(bogosort! arr)
-(print arr)
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
