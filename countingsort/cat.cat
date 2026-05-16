@@ -1,0 +1,14 @@
+define countingsort [
+  [ ] ==> [ ]
+  [X|XS] ==>
+    let M = max [X|XS]
+    let C = array (M+1) 0
+    [ each X in [X|XS] : C[X]++ ]
+    let out = [ ]
+    [ each I in 0..(M) :
+      [ each J in 0..(C[I]-1) : out.append I ]
+    ]
+    out
+] ;
+
+countingsort [5 2 8 1 9 3] .
