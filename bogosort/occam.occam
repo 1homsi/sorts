@@ -1,40 +1,6 @@
-PROC bogosort()
-  INT arr [8]:
-  INT n:
-  INT i, j, tmp:
-  BOOL sorted:
-  SEQ
-    n := 8
-    arr[0] := 3
-    arr[1] := 1
-    arr[2] := 4
-    arr[3] := 1
-    arr[4] := 5
-    arr[5] := 9
-    arr[6] := 2
-    arr[7] := 6
-
-    sorted := FALSE
-    WHILE NOT sorted
-      SEQ
-        sorted := TRUE
-        SEQ i = 0 FOR n - 1
-          IF
-            arr[i] > arr[i + 1]
-              sorted := FALSE
-            TRUE
-              SKIP
-        IF
-          NOT sorted
-            SEQ i = n - 1 FOR n - 1 STEP -1
-              SEQ
-                j := i \ (i + 1)
-                tmp := arr[i]
-                arr[i] := arr[j]
-                arr[j] := tmp
-          TRUE
-            SKIP
-
-    SEQ i = 0 FOR n
-      out.int(arr[i], 0, screen)
-:
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
