@@ -1,0 +1,19 @@
+let
+  bitonicsort = fn arr, lo, cnt, dir =>
+    if cnt > 1 then
+      let k = cnt / 2 in
+      bitonicsort(arr, lo, k, 1);
+      bitonicsort(arr, lo + k, k, 0);
+      bitonicmerge(arr, lo, cnt, dir)
+    else arr
+
+  bitonicmerge = fn arr, lo, cnt, dir =>
+    if cnt > 1 then
+      let k = cnt / 2 in
+      (forall i in (lo, lo + cnt - k) do
+        if arr!(i) > arr!(i + k) then arr!(i) := arr!(i + k) else arr!(i) := arr!(i));
+      bitonicmerge(arr, lo, k, dir);
+      bitonicmerge(arr, lo + k, k, dir)
+    else arr
+in
+  bitonicsort([5, 2, 8, 1, 9, 3, 7, 4], 0, 8, 1)
