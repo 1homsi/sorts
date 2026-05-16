@@ -1,0 +1,35 @@
+to merge :arr :left :mid :right
+  local "i local "j local "k local "result
+  make "i :left
+  make "j :mid+1
+  make "k 0
+  make "result []
+  
+  repeat (:right - :left + 1) [
+    ifelse (and (:i <= :mid) (or (:j > :right) (item :i :arr <= item :j :arr))) [
+      queue "result item :i :arr
+      make "i :i+1
+    ] [
+      queue "result item :j :arr
+      make "j :j+1
+    ]
+  ]
+  
+  make "k :left
+  repeat (count :result) [
+    setitem :k :arr item :k :result
+    make "k :k+1
+  ]
+end
+
+to mergesort :arr :left :right
+  if (:left < :right) [
+    local "mid
+    make "mid int (:left + :right) / 2
+    mergesort :arr :left :mid
+    mergesort :arr :mid+1 :right
+    merge :arr :left :mid :right
+  ]
+end
+
+print mergesort [5 2 8 1 9 3] 1 6
