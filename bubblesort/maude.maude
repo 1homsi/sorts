@@ -1,0 +1,9 @@
+fmod BUBBLE-SORT is
+  protecting INT .
+  sort IntList .
+  op nil : -> IntList .
+  op _::_ : Int IntList -> IntList .
+  op sort : IntList -> IntList .
+  eq sort(nil) = nil .
+  eq sort(X :: nil) = X :: nil .
+end
