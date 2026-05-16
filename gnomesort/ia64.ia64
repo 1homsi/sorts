@@ -1,0 +1,31 @@
+        .data
+arr:    data4 5,3,8,1,9,2,7,4,6,0
+
+        .text
+        .global gnome_sort
+gnome_sort:
+        alloc r14 = ar.pfs, 0, 8, 0, 0
+        addl  r15 = @gprel(arr), gp
+        mov   r16 = 10
+        mov   r17 = 0
+loop:
+        cmp.ge p6,p7 = r17, r16
+(p6)    br.cond.spnt done
+        cmp.eq p8,p9 = r17, r0
+(p8)    br.cond.spnt advance
+        shladd r18 = r17, 2, r15
+        ld4   r19 = [r18]
+        adds  r20 = -4, r18
+        ld4   r21 = [r20]
+        cmp.ge p10,p11 = r19, r21
+(p10)   br.cond.spnt advance
+        st4   [r18] = r21
+        st4   [r20] = r19
+        adds  r17 = -1, r17
+        br.cond.spnt loop
+advance:
+        adds  r17 = 1, r17
+        br.cond.spnt loop
+done:
+        mov   ar.pfs = r14
+        br.ret.sptk.many rp
