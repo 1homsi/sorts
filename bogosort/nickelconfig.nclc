@@ -1,1 +1,1 @@
-print("Bogosort implementation for nickelconfig.nclc")
+bogosort = true
