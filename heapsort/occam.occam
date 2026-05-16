@@ -1,0 +1,51 @@
+PROC heapify([]INT arr, VAL INT n, VAL INT i)
+  INT largest, left, right, tmp:
+  SEQ
+    largest := i
+    left := (2 * i) + 1
+    right := (2 * i) + 2
+    IF
+      (left < n) AND (arr[left] > arr[largest])
+        largest := left
+      TRUE
+        SKIP
+    IF
+      (right < n) AND (arr[right] > arr[largest])
+        largest := right
+      TRUE
+        SKIP
+    IF
+      largest <> i
+        SEQ
+          tmp := arr[i]
+          arr[i] := arr[largest]
+          arr[largest] := tmp
+          heapify(arr, n, largest)
+      TRUE
+        SKIP
+
+PROC heapsort([]INT arr, VAL INT n)
+  INT i, tmp:
+  SEQ
+    i := (n / 2) - 1
+    WHILE i >= 0
+      SEQ
+        heapify(arr, n, i)
+        i := i - 1
+    i := n - 1
+    WHILE i > 0
+      SEQ
+        tmp := arr[0]
+        arr[0] := arr[i]
+        arr[i] := tmp
+        heapify(arr, i, 0)
+        i := i - 1
+
+PROC main()
+  [6]INT arr:
+  SEQ
+    arr[0] := 12; arr[1] := 11; arr[2] := 13
+    arr[3] := 5;  arr[4] := 6;  arr[5] := 7
+    heapsort(arr, 6)
+    SEQ i = 0 FOR 6
+      out.int(arr[i], 0, stdout)
