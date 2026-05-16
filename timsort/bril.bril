@@ -1,0 +1,54 @@
+@main {
+  v0 : [5, 2, 8, 1, 9, 3] = const [5, 2, 8, 1, 9, 3];
+  v1 : 32 = const 32;
+  v2 : [*] = call @timsort v0 v1;
+  print v2;
+}
+
+@timsort(arr: [*], minSize: int) : [*] {
+  v0 : [*] = call @mergesort arr minSize;
+  ret v0;
+}
+
+@mergesort(arr: [*], minSize: int) : [*] {
+  v0 : int = call @length arr;
+  v1 : bool = le v0 1;
+  br v1 .ret_arr .check_minsize;
+  
+.ret_arr:
+  ret arr;
+  
+.check_minsize:
+  v2 : bool = le v0 minSize;
+  br v2 .ret_insertion .do_merge;
+  
+.ret_insertion:
+  v3 : [*] = call @insertionsort arr;
+  ret v3;
+  
+.do_merge:
+  v4 : int = div v0 2;
+  v5 : [*] = call @slice arr 0 v4;
+  v6 : [*] = call @slice arr v4 v0;
+  v7 : [*] = call @mergesort v5 minSize;
+  v8 : [*] = call @mergesort v6 minSize;
+  v9 : [*] = call @merge v7 v8;
+  ret v9;
+}
+
+@insertionsort(arr: [*]) : [*] {
+  ret arr;
+}
+
+@merge(left: [*], right: [*]) : [*] {
+  ret left;
+}
+
+@length(arr: [*]) : int {
+  v0 : int = const 0;
+  ret v0;
+}
+
+@slice(arr: [*], start: int, end: int) : [*] {
+  ret arr;
+}
