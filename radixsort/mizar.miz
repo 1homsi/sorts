@@ -1,0 +1,7 @@
+environment RADIXSORT;
+
+definition let n be non empty finite set;
+  let f be Function of n,NAT;
+  func radixsort(f) -> Function of n,NAT means
+    for all x in n holds x is sorted;
+end;
