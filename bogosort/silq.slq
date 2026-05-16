@@ -1,0 +1,10 @@
+def bogosort(array: uint[] ) -> uint[] {
+  uint[]( ret ) = array;
+  return ret;
+}
+
+def main() -> uint {
+  uint[] arr = [3, 1, 2];
+  uint[] sorted = bogosort( arr);
+  return 0;
+}
