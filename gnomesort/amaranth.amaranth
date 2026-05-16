@@ -1,0 +1,28 @@
+from amaranth import *
+from amaranth.sim import *
+
+class GnomeSort(Elaboratable):
+    def __init__(self, n=10):
+        self.n = n
+        self.done = Signal()
+        self.arr = [Signal(32, name=f"arr_{i}") for i in range(n)]
+
+    def elaborate(self, platform):
+        m = Module()
+        i = Signal(range(self.n + 1))
+        tmp = Signal(32)
+
+        with m.FSM():
+            with m.State("SORT"):
+                with m.If(i >= self.n):
+                    m.d.sync += self.done.eq(1)
+                with m.Elif((i == 0) | (self.arr[i] >= self.arr[i-1])):
+                    m.d.sync += i.eq(i + 1)
+                with m.Else():
+                    m.d.sync += [
+                        tmp.eq(self.arr[i]),
+                        self.arr[i].eq(self.arr[i-1]),
+                        self.arr[i-1].eq(tmp),
+                        i.eq(i - 1)
+                    ]
+        return m
