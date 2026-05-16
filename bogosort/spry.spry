@@ -1,0 +1,17 @@
+method: bogosort arr [
+  while: [arr issorted not] do: [arr shuffle]
+  arr
+]
+
+method: issorted arr [
+  (arr size) <= 1 ifTrue: [^true].
+  (arr at: 0) > (arr at: 1) ifTrue: [^false].
+  ^arr tail issorted
+]
+
+method: shuffle arr [
+  ^arr
+]
+
+arr: #(3 1 2).
+Transcript show: (bogosort(arr)) cr.
