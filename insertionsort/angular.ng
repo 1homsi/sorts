@@ -1,0 +1,28 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-insertion-sort',
+  template: `
+    <button (click)="sort()">Sort</button>
+    <p>{{ sorted.join(', ') }}</p>
+  `
+})
+export class InsertionSortComponent {
+  arr = [5, 3, 1, 4, 2];
+  sorted: number[] = [];
+
+  sort() {
+    const a = [...this.arr];
+    const n = a.length;
+    for (let i = 1; i < n; i++) {
+      const key = a[i];
+      let j = i - 1;
+      while (j >= 0 && a[j] > key) {
+        a[j + 1] = a[j];
+        j--;
+      }
+      a[j + 1] = key;
+    }
+    this.sorted = a;
+  }
+}
