@@ -1,0 +1,50 @@
+bucket_sort = proc (arr: array[real]) returns (array[real])
+    n: int := array[real]$size(arr)
+    if n = 0 then return(arr) end
+    min_v: real := arr[1]
+    max_v: real := arr[1]
+    for v: real in array[real]$elements(arr) do
+        if v < min_v then min_v := v end
+        if v > max_v then max_v := v end
+    end
+    buckets: array[array[real]] := array[array[real]]$new()
+    for i: int in int$from_to(1, n) do
+        array[array[real]]$addh(buckets, array[real]$new())
+    end
+    for i: int in int$from_to(1, n) do
+        num: real := arr[i]
+        idx: int := int$from_real((num - min_v) / (max_v - min_v + 1.0) * real$from_int(n))
+        if idx >= n then idx := n - 1 end
+        array[real]$addh(buckets[idx + 1], num)
+    end
+    result: array[real] := array[real]$new()
+    for b: array[real] in array[array[real]]$elements(buckets) do
+        b := insertion_sort(b)
+        for v: real in array[real]$elements(b) do
+            array[real]$addh(result, v)
+        end
+    end
+    return(result)
+end bucket_sort
+
+insertion_sort = proc (bucket: array[real]) returns (array[real])
+    n: int := array[real]$size(bucket)
+    for i: int in int$from_to(2, n) do
+        key: real := bucket[i]
+        j: int := i - 1
+        while j >= 1 & bucket[j] > key do
+            bucket[j + 1] := bucket[j]
+            j := j - 1
+        end
+        bucket[j + 1] := key
+    end
+    return(bucket)
+end insertion_sort
+
+start = proc ()
+    arr: array[real] := array[real]$[0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68]
+    sorted: array[real] := bucket_sort(arr)
+    for v: real in array[real]$elements(sorted) do
+        po$putl(real$unparse(v))
+    end
+end start
