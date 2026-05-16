@@ -1,32 +1,6 @@
-class Bogosort usingPlatform: platform = (
-    | Array = platform kernel Array. |
-) (
-    isSorted: arr = (
-        1 to: arr size - 1 do: [:i |
-            (arr at: i) > (arr at: i + 1) ifTrue: [^false]
-        ].
-        ^true
-    )
-
-    shuffle: arr = (
-        | n j tmp |
-        n := arr size.
-        n to: 2 by: -1 do: [:i |
-            j := platform random nextInt: i.
-            tmp := arr at: i.
-            arr at: i put: (arr at: j).
-            arr at: j put: tmp
-        ]
-    )
-
-    bogosort: arr = (
-        [self isSorted: arr] whileFalse: [self shuffle: arr].
-        ^arr
-    )
-
-    main = (
-        | arr |
-        arr := #(3 1 4 1 5 9 2 6) asOrderedCollection.
-        platform io print: (self bogosort: arr).
-    )
-)
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
