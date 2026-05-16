@@ -1,0 +1,10 @@
+function quicksort(s) =
+  if (length(s) <= 1) then s
+  else
+    let pivot = s[0];
+        less = {x in s | x <= pivot};
+        greater = {x in s | x > pivot}
+    in flatten(quicksort(less)) ++ [pivot] ++ flatten(quicksort(greater))
+  endif;
+
+quicksort([5, 2, 8, 1, 9, 3]);
