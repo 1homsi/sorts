@@ -1,0 +1,13 @@
+data node = node val left right | empty;
+
+insert empty val = node val empty empty;
+insert (node v l r) val | val < v = node v (insert l val) r;
+insert (node v l r) val | val > v = node v l (insert r val);
+insert (node v l r) val = node v l r;
+
+inorder empty = [];
+inorder (node v l r) = inorder l + [v] + inorder r;
+
+tree_sort arr = inorder (foldl insert empty arr);
+
+main = puts (str (tree_sort [5, 2, 8, 1, 9, 3]));
