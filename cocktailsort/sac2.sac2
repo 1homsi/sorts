@@ -1,0 +1,33 @@
+use Array: all;
+
+int[*] cocktailSort2(int[*] arr) {
+    int n = shape(arr)[0];
+    int[*] a = arr;
+    bool swapped = true;
+    int lo = 0;
+    int hi = n - 1;
+    while (swapped) {
+        swapped = false;
+        for (int i = lo; i < hi; i++) {
+            if (a[i] > a[i+1]) {
+                int tmp = a[i];
+                a[i] = a[i+1];
+                a[i+1] = tmp;
+                swapped = true;
+            }
+        }
+        if (!swapped) break;
+        swapped = false;
+        hi = hi - 1;
+        for (int i = hi-1; i >= lo; i--) {
+            if (a[i] > a[i+1]) {
+                int tmp = a[i];
+                a[i] = a[i+1];
+                a[i+1] = tmp;
+                swapped = true;
+            }
+        }
+        lo = lo + 1;
+    }
+    return a;
+}
