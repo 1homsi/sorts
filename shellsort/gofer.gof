@@ -1,0 +1,4 @@
+shellsort [] = []
+shellsort xs = xs
+  where gap = 1
+        gap' = if gap <= length xs then gap * 3 + 1 else gap
