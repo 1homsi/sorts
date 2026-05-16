@@ -1,1 +1,2 @@
-print("Bogosort implementation for seplogic.sl")
+bogosort(List, List) :- sorted(List), !.
+bogosort(List, Sorted) :- shuffle(List, S), bogosort(S, Sorted).
