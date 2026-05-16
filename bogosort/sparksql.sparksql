@@ -1,1 +1,1 @@
-print("Bogosort implementation for sparksql.sparksql")
+SELECT * FROM array ORDER BY value ASC;
