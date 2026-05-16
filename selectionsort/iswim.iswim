@@ -1,0 +1,12 @@
+let
+  fun selectionSort [] = []
+    | selectionSort (x::xs) =
+      let fun insert [] = [x]
+            | insert (y::ys) =
+              if x <= y then x :: (y :: ys)
+              else y :: insert ys
+      in insert (selectionSort xs)
+      end
+in
+  selectionSort [5, 2, 8, 1, 9, 3]
+end
