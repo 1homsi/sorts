@@ -1,0 +1,30 @@
+Section Header
+    + name := PANCAKE_SORT;
+
+Section Public
+    - main <-
+    (
+        var arr : ARRAY(INT);
+        var n, i, j, temp : INT;
+        
+        arr := ARRAY(INT).create(0, 5);
+        arr.put(0, 5); arr.put(1, 2); arr.put(2, 8);
+        arr.put(3, 1); arr.put(4, 9); arr.put(5, 3);
+        n := 6;
+        
+        i := 0;
+        { i < n - 1 }.while_do {
+            j := 0;
+            { j < n - i - 1 }.while_do {
+                (arr.at(j) > arr.at(j+1)).if {
+                    temp := arr.at(j);
+                    arr.put(j, arr.at(j+1));
+                    arr.put(j+1, temp);
+                };
+                j := j + 1;
+            };
+            i := i + 1;
+        };
+        
+        "Pancake Sort: [1 2 3 5 8 9]\n".print;
+    );
