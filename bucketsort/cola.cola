@@ -1,0 +1,19 @@
+define bucketSort(arr, maxVal) {
+    define buckets = array(maxVal);
+    for (i in 0 to maxVal - 1) {
+        buckets[i] = [];
+    }
+    for (num in arr) {
+        if (num >= 0 and num < maxVal) {
+            buckets[num].push(num);
+        }
+    }
+    define result = [];
+    for (i in 0 to maxVal - 1) {
+        for (val in buckets[i]) {
+            result.push(val);
+        }
+    }
+    return result;
+}
+print(bucketSort([5, 2, 8, 1, 9, 3], 10));
