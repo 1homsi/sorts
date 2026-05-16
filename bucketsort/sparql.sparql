@@ -1,0 +1,18 @@
+PREFIX ex: <http://example.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?sorted_val WHERE {
+    VALUES (?val) {
+        ("0.78"^^xsd:decimal) ("0.17"^^xsd:decimal) ("0.39"^^xsd:decimal)
+        ("0.26"^^xsd:decimal) ("0.72"^^xsd:decimal) ("0.94"^^xsd:decimal)
+        ("0.21"^^xsd:decimal) ("0.12"^^xsd:decimal) ("0.23"^^xsd:decimal)
+        ("0.68"^^xsd:decimal)
+    }
+    BIND(xsd:decimal(?val) AS ?num)
+    BIND(xsd:decimal("0.12") AS ?minV)
+    BIND(xsd:decimal("0.94") AS ?maxV)
+    BIND(10 AS ?n)
+    BIND(FLOOR((?num - ?minV) / (?maxV - ?minV + 1) * ?n) AS ?bucket_idx)
+    BIND(?num AS ?sorted_val)
+}
+ORDER BY ?bucket_idx ?sorted_val
