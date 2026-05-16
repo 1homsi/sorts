@@ -1,0 +1,20 @@
+MACHINE GnomeSortEvent
+VARIABLES arr i n
+INVARIANT arr : seq(INTEGER) & i : NAT & n : NAT
+INITIALISATION arr := [5,3,8,1,9,2,7,4,6,0] || i := 1 || n := 10
+EVENTS
+    Advance
+    WHEN i <= n & (i = 1 or arr(i) >= arr(i-1))
+    THEN i := i + 1
+    END;
+
+    Swap
+    WHEN i > 1 & arr(i) < arr(i-1)
+    THEN arr(i) := arr(i-1) || arr(i-1) := arr(i) || i := i - 1
+    END;
+
+    Done
+    WHEN i > n
+    THEN skip
+    END
+END
