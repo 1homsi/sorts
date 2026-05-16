@@ -1,0 +1,19 @@
+(define comb-sort
+  (lambda [arr]
+    (let [[gap (length arr)]
+          [swapped #t]]
+      (while (or (> gap 1) swapped)
+        (set gap (floor (* gap (/ 10 13))))
+        (if (< gap 1) (set gap 1))
+        (set swapped #f)
+        (let [[i 0]]
+          (while (< i (- (length arr) gap))
+            (if (> (nth i arr) (nth (+ i gap) arr))
+              (do
+                (swap arr i (+ i gap))
+                (set swapped #t)))
+            (set i (+ i 1))))))))
+
+(define sample [5 2 8 1 9 3])
+(comb-sort sample)
+(print sample)
