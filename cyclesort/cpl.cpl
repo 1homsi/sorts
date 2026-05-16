@@ -1,0 +1,23 @@
+CycleSort()
+    integer array arr(1:5) = (5, 4, 3, 2, 1)
+    integer n = 5
+    integer writes = 0
+    integer cs, item, pos, i, tmp
+    for cs = 1 step 1 until n - 1 do
+        item := arr(cs)
+        pos := cs
+        for i = cs + 1 step 1 until n do
+            if arr(i) < item then pos := pos + 1
+        if pos ne cs then
+            until arr(pos) ne item do pos := pos + 1
+            tmp := arr(pos); arr(pos) := item; item := tmp
+            writes := writes + 1
+            until pos = cs do
+                pos := cs
+                for i = cs + 1 step 1 until n do
+                    if arr(i) < item then pos := pos + 1
+                until arr(pos) ne item do pos := pos + 1
+                tmp := arr(pos); arr(pos) := item; item := tmp
+                writes := writes + 1
+    for i = 1 step 1 until n do print arr(i)
+end
