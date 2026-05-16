@@ -1,1 +1,1 @@
-print("Bogosort implementation for nixflakes.nix2")
+bogosort = true
