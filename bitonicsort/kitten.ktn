@@ -1,0 +1,24 @@
+define bitonicsort(lo cnt dir -- ):
+  cnt 1 > if:
+    cnt 2 / -> k
+    lo k 1 bitonicsort
+    lo k + k 0 bitonicsort
+    lo cnt dir bitonicmerge
+  end;
+
+define bitonicmerge(lo cnt dir -- ):
+  cnt 1 > if:
+    cnt 2 / -> k
+    lo k + cnt k - do(i --):
+      i dup i k + 2 [] getindex swap getindex
+      > dir 1 = == if:
+        i dup i k + 2 [] getindex i dup i k + 2 [] setindex i k + swap setindex
+      end
+    end
+    lo k dir bitonicmerge
+    lo k + k dir bitonicmerge
+  end;
+
+[5 2 8 1 9 3 7 4] -> arr
+0 arr count 1 bitonicsort
+arr println
