@@ -1,0 +1,22 @@
+routines ( bubble_sort )
+
+integers ( n i tmp swapped )
+
+routine bubble_sort (
+    n = 7
+    $swapped = 1
+    do while $swapped = 1 (
+        $swapped = 0
+        $i = 1
+        do while $i < $n (
+            test arr[$i] > arr[$i + 1]
+            (   $tmp = arr[$i]
+                arr[$i] = arr[$i + 1]
+                arr[$i + 1] = $tmp
+                $swapped = 1
+            )
+            $i = $i + 1
+        )
+        $n = $n - 1
+    )
+)
