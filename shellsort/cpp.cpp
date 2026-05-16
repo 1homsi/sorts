@@ -1,9 +1,6 @@
-#include <iostream>
-#include <vector>
-
-void shellSort(std::vector<int>& arr) {
-    int n = arr.size();
-    for (int gap = n / 2; gap > 0; gap /= 2) {
+void shellsort(int arr[], int n) {
+    int gap = n / 2;
+    while (gap > 0) {
         for (int i = gap; i < n; i++) {
             int temp = arr[i];
             int j = i;
@@ -13,13 +10,6 @@ void shellSort(std::vector<int>& arr) {
             }
             arr[j] = temp;
         }
+        gap /= 2;
     }
-}
-
-int main() {
-    std::vector<int> arr = {64, 34, 25, 12, 22, 11, 90};
-    shellSort(arr);
-    for (int x : arr) std::cout << x << " ";
-    std::cout << std::endl;
-    return 0;
 }
