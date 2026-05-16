@@ -1,0 +1,17 @@
+bucket_sort(arr, maxVal) {
+    buckets := make([@]int, maxVal);
+    for i := 0; i < maxVal; i++ {
+        buckets[i] = @new(int, 0);
+    }
+    for _, num := arr {
+        if num >= 0 && num < maxVal {
+            buckets[num] = append(buckets[num], num);
+        }
+    }
+    result := @new(int, 0);
+    for _, bucket := buckets {
+        result = append(result, bucket);
+    }
+    return result;
+}
+print(bucket_sort([5, 2, 8, 1, 9, 3], 10));
