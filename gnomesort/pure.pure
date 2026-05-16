@@ -1,0 +1,15 @@
+gnomesort [] = [];
+gnomesort [x] = [x];
+gnomesort xs = gnomesort_iter 0 (array xs) with
+  gnomesort_iter i a = if i >= size a then list a
+    else if i > 0 && a!i < a!(i-1) then
+      (a!i, a!(i-1)) = (a!(i-1), a!i),
+      gnomesort_iter (i-1) a
+    else
+      gnomesort_iter (i+1) a;
+end;
+
+main = do
+  let test = [5, 2, 8, 1, 9, 3];
+  println (gnomesort test);
+end;
