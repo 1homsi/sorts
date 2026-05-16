@@ -1,0 +1,23 @@
+module GnomeSort
+
+sig Index {}
+sig Value {}
+sig Array {
+    elements: Index -> Value,
+    sorted: Index -> Value
+}
+
+pred isSorted[arr: Array] {
+    all i: Index, j: Index |
+        i < j implies arr.sorted[i] <= arr.sorted[j]
+}
+
+fact sortedIsPermutation {
+    all arr: Array | arr.elements.Value = arr.sorted.Value
+}
+
+assert sortCorrect {
+    all arr: Array | isSorted[arr]
+}
+
+check sortCorrect for 5
