@@ -1,0 +1,12 @@
+(1 := (5, 2, 8, 1, 9, 3))
+(2 := ())
+(3 := ())
+
+(A1 insert (B1, B2) C1 (if (B1 eq 0) then (C1 := (B2, 0, 0))
+  else if (B2 < (1:B1)) then (C1 := ((1:B1), insert((2:B1), B2), (3:B1)))
+  else (C1 := ((1:B1), (2:B1), insert((3:B1), B2)))))
+
+(A2 inorder (B1) C2 (if (B1 eq 0) then (C2 := ())
+  else (C2 := inorder((2:B1)) + (1:B1) + inorder((3:B1)))))
+
+(A3 tree_sort (B1) C3 (C3 := inorder(fold(insert, 0, B1))))
