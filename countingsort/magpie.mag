@@ -1,0 +1,27 @@
+countingsort(arr) ->
+  if arr.empty()
+    arr
+  else
+    max = 0;
+    for val in arr do
+      if val > max then
+        max = val
+      endif
+    endfor;
+
+    count = Array(max + 1, 0);
+    for val in arr do
+      count[val] = count[val] + 1
+    endfor;
+
+    output = [];
+    for i = 0 to max do
+      for j = 0 to count[i] - 1 do
+        output.add(i)
+      endfor
+    endfor;
+
+    output
+  endif
+
+print(countingsort([5, 2, 8, 1, 9, 3]))
