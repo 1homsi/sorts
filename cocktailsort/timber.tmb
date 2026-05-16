@@ -1,0 +1,39 @@
+signature COCKTAIL_SORT =
+sig
+  val sort : int array -> int array
+end
+
+structure CocktailSort :> COCKTAIL_SORT =
+struct
+  fun sort arr =
+    let
+      val n = Array.length arr
+      fun helper i =
+        if i >= n then arr
+        else
+          let
+            val swapped = ref false
+          in
+            (for 0 to n - i - 2 (fn k =>
+              if Array.sub(arr, k) > Array.sub(arr, k + 1) then
+                (Array.update(arr, k, Array.sub(arr, k + 1));
+                 Array.update(arr, k + 1, Array.sub(arr, k));
+                 swapped := true)
+            );
+            if not (!swapped) then arr
+            else (
+              swapped := false;
+              for (n - i - 2) to 0 ~1 (fn k =>
+                if Array.sub(arr, k) > Array.sub(arr, k + 1) then
+                  (Array.update(arr, k, Array.sub(arr, k + 1));
+                   Array.update(arr, k + 1, Array.sub(arr, k));
+                   swapped := true)
+              );
+              if not (!swapped) then arr
+              else helper (i + 2)
+            ))
+          end
+    in
+      helper 0
+    end
+end
