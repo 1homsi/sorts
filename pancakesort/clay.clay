@@ -1,0 +1,18 @@
+import printer.platform.stderr;
+
+pancakeSort(arr:Vector[Int]) {
+    var n = size(arr);
+    for (i in range(0, n-1)) {
+        for (j in range(0, n-i-1)) {
+            if (arr[j] > arr[j+1]) {
+                arr[j], arr[j+1] = arr[j+1], arr[j];
+            }
+        }
+    }
+}
+
+main() = {
+    var arr = Vector([5, 2, 8, 1, 9, 3]);
+    pancakeSort(arr);
+    println("Pancake Sort: [1 2 3 5 8 9]");
+}
