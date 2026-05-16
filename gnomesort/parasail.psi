@@ -1,0 +1,26 @@
+procedure Gnomesort
+  (var Arr : Array<Integer>) is
+  Var I : Integer := 0;
+  Var Temp : Integer;
+begin
+  loop
+    exit when I >= Arr.Length;
+    if I = 0 then
+      I := I + 1;
+    elsif Arr[I] < Arr[I - 1] then
+      Temp := Arr[I];
+      Arr[I] := Arr[I - 1];
+      Arr[I - 1] := Temp;
+      I := I - 1;
+    else
+      I := I + 1;
+    end if;
+  end loop;
+end;
+
+procedure Main is
+  Test : Array<Integer> := [5, 2, 8, 1, 9, 3];
+begin
+  Gnomesort(Test);
+  Println(Test);
+end;
