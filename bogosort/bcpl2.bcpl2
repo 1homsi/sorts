@@ -1,34 +1,6 @@
-GET "libhdr"
-
-GLOBAL
-  arr: 200
-  n:   201
-
-LET is_sorted() = VALOF
-{ LET k = 1
-  WHILE k < n DO
-  { IF arr!k > arr!(k+1) RESULTIS FALSE
-    k := k + 1
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
   }
-  RESULTIS TRUE
-}
-
-LET shuffle() BE
-{ LET i = n
-  WHILE i > 1 DO
-  { LET j = 1 + (ABS randno(0)) REM i
-    LET tmp = arr!i
-    arr!i := arr!j
-    arr!j := tmp
-    i := i - 1
-  }
-}
-
-LET start() BE
-{ n := 8
-  arr!1 := 3; arr!2 := 1; arr!3 := 4; arr!4 := 1
-  arr!5 := 5; arr!6 := 9; arr!7 := 2; arr!8 := 6
-  UNTIL is_sorted() DO shuffle()
-  FOR i = 1 TO n DO writef("%n ", arr!i)
-  newline()
+  return arr;
 }
