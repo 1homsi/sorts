@@ -1,0 +1,14 @@
+def radixsort(arr : List[Int]) : List[Int] =
+  let max = arr.max()
+      exp = ref 1
+  in {
+    while(!exp <= max) {
+      arr = countingSortByExp(arr, !exp)
+      exp := !exp * 10
+    };
+    arr
+  }
+
+def countingSortByExp(arr : List[Int], exp : Int) : List[Int] = arr
+
+print(radixsort([5, 2, 8, 1, 9, 3]))
