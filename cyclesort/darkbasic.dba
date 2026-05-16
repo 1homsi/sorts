@@ -1,0 +1,25 @@
+DIM arr(5) AS INTEGER
+arr(1)=5: arr(2)=4: arr(3)=3: arr(4)=2: arr(5)=1
+n=5: writes=0
+
+FOR cs=1 TO n-1
+    item=arr(cs): pos=cs
+    FOR i=cs+1 TO n
+        IF arr(i)<item THEN INC pos
+    NEXT i
+    IF pos=cs THEN GOTO nextcs
+    WHILE arr(pos)=item: INC pos: ENDWHILE
+    tmp=arr(pos): arr(pos)=item: item=tmp: INC writes
+    WHILE pos<>cs
+        pos=cs
+        FOR i=cs+1 TO n
+            IF arr(i)<item THEN INC pos
+        NEXT i
+        WHILE arr(pos)=item: INC pos: ENDWHILE
+        tmp=arr(pos): arr(pos)=item: item=tmp: INC writes
+    ENDWHILE
+    nextcs:
+NEXT cs
+
+FOR i=1 TO n: PRINT arr(i): NEXT i
+END
