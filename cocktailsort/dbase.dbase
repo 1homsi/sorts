@@ -1,0 +1,32 @@
+PROCEDURE CocktailSort
+PARAMETERS arr, n
+LOCAL swapped, start, ending, i, tmp
+swapped = .T.
+start = 1
+ending = n
+DO WHILE swapped
+    swapped = .F.
+    FOR i = start TO ending - 1
+        IF arr(i) > arr(i + 1)
+            tmp = arr(i)
+            arr(i) = arr(i + 1)
+            arr(i + 1) = tmp
+            swapped = .T.
+        ENDIF
+    NEXT i
+    IF .NOT. swapped
+        RETURN
+    ENDIF
+    swapped = .F.
+    ending = ending - 1
+    FOR i = ending - 1 TO start STEP -1
+        IF arr(i) > arr(i + 1)
+            tmp = arr(i)
+            arr(i) = arr(i + 1)
+            arr(i + 1) = tmp
+            swapped = .T.
+        ENDIF
+    NEXT i
+    start = start + 1
+ENDDO
+RETURN
