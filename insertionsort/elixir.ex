@@ -1,0 +1,8 @@
+defmodule InsertionSort do
+  def sort([]), do: []
+  def sort([h | t]), do: insert(h, sort(t))
+
+  defp insert(x, []), do: [x]
+  defp insert(x, [h | t]) when x <= h, do: [x, h | t]
+  defp insert(x, [h | t]), do: [h | insert(x, t)]
+end
