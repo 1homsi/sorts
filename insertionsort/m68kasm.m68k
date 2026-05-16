@@ -1,0 +1,40 @@
+        .data
+arr:    .long 5, 3, 1, 4, 2
+n:      .long 5
+
+        .text
+        .global _start
+_start:
+        lea  arr, a0
+        move.l n, d1
+        moveq  #1, d0
+outer:
+        cmp.l  d1, d0
+        bge    done
+        move.l d0, d2
+        lsl.l  #2, d2
+        move.l (a0,d2.l), d3
+        move.l d0, d4
+        subq.l #1, d4
+inner:
+        cmp.l  #-1, d4
+        beq    place
+        move.l d4, d5
+        lsl.l  #2, d5
+        move.l (a0,d5.l), d6
+        cmp.l  d3, d6
+        ble    place
+        addq.l #4, d5
+        move.l d6, (a0,d5.l)
+        subq.l #1, d4
+        bra    inner
+place:
+        move.l d4, d5
+        addq.l #1, d5
+        lsl.l  #2, d5
+        move.l d3, (a0,d5.l)
+        addq.l #1, d0
+        bra    outer
+done:
+        moveq  #1, d0
+        trap   #0
