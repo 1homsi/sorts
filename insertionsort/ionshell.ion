@@ -1,0 +1,13 @@
+fn insertion_sort(arr: []int) -> []int
+    let n = len($arr)
+    for i in 1..$n
+        let key = $arr[$i]
+        let j = $i - 1
+        while test $j -ge 0 -a $arr[$j] -gt $key
+            let arr[$j + 1] = $arr[$j]
+            let j -= 1
+        end
+        let arr[$j + 1] = $key
+    end
+    echo $arr
+end
