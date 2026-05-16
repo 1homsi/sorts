@@ -1,0 +1,9 @@
+cycle_sort [] = []
+cycle_sort (x:xs)
+    = insert_at x pos (cycle_sort xs)
+      where pos = #[y | y <- xs; y < x]
+
+insert_at x 0 ys = x:ys
+insert_at x n (y:ys) = y : insert_at x (n-1) ys
+
+main = cycle_sort [5,4,3,2,1]
