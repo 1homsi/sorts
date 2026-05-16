@@ -1,0 +1,29 @@
+(define $cyclesort
+  (lambda [$arr]
+    (let {[$n (length arr)]}
+      (cyclesort-loop arr 0 n))))
+
+(define $cyclesort-loop
+  (lambda [$arr $pos $n]
+    (if (>= pos n)
+      arr
+      (let {[$item (ref arr pos)]
+            [$cycles (count (lambda [$i] (and (!= i pos) (< (ref arr i) item))) (between 0 (- n 1)))]}
+        (if (= cycles 0)
+          (cyclesort-loop arr (+ pos 1) n)
+          (cyclesort-loop (process-cycle arr pos item cycles) (+ pos 1) n))))))
+
+(define $process-cycle
+  (lambda [$arr $pos $item $cycles]
+    (if (= cycles 0)
+      arr
+      (let {[$pos1 (find-pos arr pos item)]}
+        (process-cycle (swap arr pos1 item) pos1 (ref arr pos1) (- cycles 1))))))
+
+(define $find-pos
+  (lambda [$arr $pos $item]
+    (if (= (ref arr pos) item)
+      (+ pos 1)
+      pos)))
+
+(cyclesort [5 2 8 1 9 3])
