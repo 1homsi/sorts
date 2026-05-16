@@ -1,0 +1,25 @@
+begin
+    integer array arr[1:5];
+    integer n, cs, item, pos, i, tmp, writes;
+    arr[1] := 5; arr[2] := 4; arr[3] := 3; arr[4] := 2; arr[5] := 1;
+    n := 5; writes := 0;
+    for cs := 1 step 1 until n - 1 do begin
+        item := arr[cs]; pos := cs;
+        for i := cs + 1 step 1 until n do
+            if arr[i] < item then pos := pos + 1;
+        if pos ~= cs then begin
+            while arr[pos] = item do pos := pos + 1;
+            tmp := arr[pos]; arr[pos] := item; item := tmp;
+            writes := writes + 1;
+            while pos ~= cs do begin
+                pos := cs;
+                for i := cs + 1 step 1 until n do
+                    if arr[i] < item then pos := pos + 1;
+                while arr[pos] = item do pos := pos + 1;
+                tmp := arr[pos]; arr[pos] := item; item := tmp;
+                writes := writes + 1
+            end
+        end
+    end;
+    for i := 1 step 1 until n do output(arr[i])
+end
