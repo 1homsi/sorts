@@ -1,0 +1,18 @@
+package insertionsort
+
+#SortedList: [...int]
+
+input: [...int]
+input: [5, 3, 1, 4, 2]
+
+output: #SortedList
+output: [1, 2, 3, 4, 5]
+
+#isSorted: {
+    list: [...int]
+    result: bool
+    result: and([
+        for i, v in list
+        if i > 0 {list[i-1] <= v}
+    ])
+}
