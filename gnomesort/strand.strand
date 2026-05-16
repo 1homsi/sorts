@@ -1,0 +1,14 @@
+gnome_sort(List, Sorted) :-
+    list_to_array(List, Arr),
+    length(List, N),
+    sort_loop(Arr, 0, N),
+    array_to_list(Arr, Sorted).
+
+sort_loop(_, I, N) :- I >= N, !.
+sort_loop(Arr, 0, N) :- !, sort_loop(Arr, 1, N).
+sort_loop(Arr, I, N) :-
+    I1 is I - 1,
+    array_get(Arr, I, A),
+    array_get(Arr, I1, B),
+    (A >= B -> sort_loop(Arr, I+1, N) ;
+        array_set(Arr, I, B), array_set(Arr, I1, A), sort_loop(Arr, I-1, N)).
