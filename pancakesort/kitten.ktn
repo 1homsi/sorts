@@ -1,0 +1,15 @@
+[[5 2 8 1 9 3] <quotes> {
+    define pancake:
+        dup len [
+            dup 1 - [
+                2dup gt {
+                    rot3 ... -> temp
+                    ... temp
+                } if
+            ] reduce
+        ] each;
+    
+    pancake
+    "Pancake Sort: " write dup write "
+" write
+} do]
