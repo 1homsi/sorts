@@ -1,0 +1,17 @@
+def selectionSort(arr) {
+  def n = arr.length()
+  for (i in 0..(n - 2)) {
+    def minIdx = i
+    for (j in (i + 1)..(n - 1)) {
+      if (arr[j] < arr[minIdx]) {
+        minIdx := j
+      }
+    }
+    def tmp = arr[i]
+    arr[i] = arr[minIdx]
+    arr[minIdx] = tmp
+  }
+  return arr
+}
+
+println(selectionSort([5, 2, 8, 1, 9, 3]))
