@@ -1,0 +1,40 @@
+MODULE COUNTINGSORT;
+
+PROBLEM DATA
+  ARR: ARRAY[6] OF INT;
+  MAX: INT;
+  COUNT: ARRAY[10] OF INT;
+  OUTPUT: ARRAY[10] OF INT;
+  I, J: INT;
+END;
+
+ACTIVITIES
+  SORT_PROC: PROC;
+    MAX := 0;
+    FOR I FROM 1 BY 1 TO 6 DO
+      IF ARR(I) > MAX THEN
+        MAX := ARR(I);
+      FIN;
+    OD;
+
+    FOR I FROM 0 BY 1 TO 9 DO
+      COUNT(I) := 0;
+    OD;
+
+    FOR I FROM 1 BY 1 TO 6 DO
+      COUNT(ARR(I)) := COUNT(ARR(I)) + 1;
+    OD;
+
+    FOR I FROM 0 BY 1 TO MAX DO
+      FOR J FROM 1 BY 1 TO COUNT(I) DO
+        OUTPUT(I + 1) := I;
+      OD;
+    OD;
+
+    PRINT(OUTPUT);
+  END;
+END;
+
+SCHEDULE
+  ACTIVATE SORT_PROC;
+END;
