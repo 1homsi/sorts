@@ -1,0 +1,29 @@
+local Insert := func(node, val) begin
+  if node == nil then
+    return {value: val, left: nil, right: nil};
+  end;
+  if val < node.value then
+    node.left := Insert(node.left, val);
+  else if val > node.value then
+    node.right := Insert(node.right, val);
+  end;
+  return node;
+end;
+
+local Inorder := func(node) begin
+  if node != nil then begin
+    Inorder(node.left);
+    print(node.value & " ");
+    Inorder(node.right);
+  end;
+end;
+
+local TreeSort := func(arr) begin
+  local root := nil;
+  for i := 0 to length(arr) - 1 do
+    root := Insert(root, arr[i]);
+  end;
+  Inorder(root);
+end;
+
+TreeSort([5, 2, 8, 1, 9, 3]);
