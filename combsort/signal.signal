@@ -1,0 +1,13 @@
+module COMB_SORT_SIGNAL (
+  input integer ARRAY_SIZE;
+  input integer GAP_IN;
+  output integer GAP_OUT;
+  output boolean SORTED;
+)
+where
+  GAP_OUT := if GAP_IN > 1 then
+    (GAP_IN * 10) / 13
+  else
+    1;
+  SORTED := GAP_OUT = 1;
+end module;
