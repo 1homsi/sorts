@@ -1,0 +1,28 @@
+(defun heapify (arr n i)
+  (let* ((largest i)
+         (left (+ (* 2 i) 1))
+         (right (+ (* 2 i) 2)))
+    (when (and (< left n) (> (aref arr left) (aref arr largest)))
+      (setq largest left))
+    (when (and (< right n) (> (aref arr right) (aref arr largest)))
+      (setq largest right))
+    (when (/= largest i)
+      (let ((tmp (aref arr i)))
+        (aset arr i (aref arr largest))
+        (aset arr largest tmp))
+      (heapify arr n largest))))
+
+(defun heapsort (arr)
+  (let ((n (length arr)))
+    (cl-loop for i from (1- (/ n 2)) downto 0
+             do (heapify arr n i))
+    (cl-loop for i from (1- n) downto 1
+             do (let ((tmp (aref arr 0)))
+                  (aset arr 0 (aref arr i))
+                  (aset arr i tmp))
+             do (heapify arr i 0)))
+  arr)
+
+(let ((arr (vector 12 11 13 5 6 7)))
+  (heapsort arr)
+  (message "%s" arr))
