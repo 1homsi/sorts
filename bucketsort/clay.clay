@@ -1,0 +1,19 @@
+define BucketSort(arr, maxVal) {
+    var buckets = Vector[Vector[Int]]();
+    for (i in range(maxVal)) {
+        push_back(buckets, Vector[Int]());
+    }
+    for (num in arr) {
+        if (num >= 0 && num < maxVal) {
+            push_back(buckets[num], num);
+        }
+    }
+    var result = Vector[Int]();
+    for (bucket in buckets) {
+        for (num in bucket) {
+            push_back(result, num);
+        }
+    }
+    return result;
+}
+println(BucketSort([5, 2, 8, 1, 9, 3], 10));
