@@ -1,0 +1,46 @@
+process main
+
+temporary number i, j, pivot, temp, arr[6]
+
+arr[1] = 5
+arr[2] = 2
+arr[3] = 8
+arr[4] = 1
+arr[5] = 9
+arr[6] = 3
+
+call quicksort(arr, 6)
+
+for i = 1 to 6
+    print arr[i]
+end
+
+end
+
+routine quicksort(a[*], n)
+temporary number i, j, p, t
+number i, j, p, t
+
+if n <= 1
+    exit routine
+endif
+
+let p = a[1]
+let i = 1
+let j = n
+
+loop1: do while i < j
+    do while a[i] < p
+        let i = i + 1
+    loop
+    do while a[j] > p
+        let j = j - 1
+    loop
+    if i < j
+        let t = a[i]
+        let a[i] = a[j]
+        let a[j] = t
+    endif
+end
+
+end routine
