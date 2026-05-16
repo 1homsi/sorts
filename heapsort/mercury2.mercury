@@ -1,0 +1,27 @@
+:- module mercury2.
+:- interface.
+:- import_module io.
+:- pred main(io::di, io::uo) is det.
+
+:- implementation.
+:- import_module list, int.
+
+:- pred heapify(list(int)::in, int::in, int::in, list(int)::out) is det.
+heapify(Arr, N, I, Result) :-
+    Left = 2 * I + 1,
+    Right = 2 * I + 2,
+    ( if Left < N, list.index0(Arr, Left, VL), list.index0(Arr, I, VI), VL > VI then Largest0 = Left else Largest0 = I ),
+    ( if Right < N, list.index0(Arr, Right, VR), list.index0(Arr, Largest0, VL0), VR > VL0 then Largest = Right else Largest = Largest0 ),
+    ( if Largest \= I then
+        list.index0(Arr, I, VI2),
+        list.index0(Arr, Largest, VL2),
+        list.det_replace_nth(Arr, I + 1, VL2, Arr1),
+        list.det_replace_nth(Arr1, Largest + 1, VI2, Arr2),
+        heapify(Arr2, N, Largest, Result)
+    else
+        Result = Arr
+    ).
+
+main(!IO) :-
+    Arr = [12, 11, 13, 5, 6, 7],
+    io.write(Arr, !IO), io.nl(!IO).
