@@ -1,0 +1,13 @@
+var x = 5, y = 2, z = 8, a = 1, b = 9, c = 3, d = 7, e = 4;
+var t;
+
+procedure bitonicsort(i) {
+  from i = 0
+  do
+    from i = 0 loop
+      print x; print y; print z; print a; print b; print c; print d; print e;
+    until i = 8
+  until i = 0
+}
+
+call bitonicsort(0);
