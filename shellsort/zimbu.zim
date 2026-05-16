@@ -1,0 +1,22 @@
+def Shellsort(arr: list<int>): list<int>
+  var n = len(arr)
+  var gap = 1
+  while gap <= n
+    gap = gap * 3 + 1
+  endwhile
+  while gap > 0
+    gap = gap / 3
+    for i = gap; i < n; ++i
+      var temp = arr[i]
+      var j = i
+      while j >= gap && arr[j - gap] > temp
+        arr[j] = arr[j - gap]
+        j -= gap
+      endwhile
+      arr[j] = temp
+    endfor
+  endwhile
+  return arr
+enddef
+
+print Shellsort([5, 2, 8, 1, 9, 3])
