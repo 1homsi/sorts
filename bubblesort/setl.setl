@@ -1,0 +1,24 @@
+program bubble_sort;
+
+procedure bsort(arr);
+    n := #arr;
+    swapped := true;
+    loop while swapped do
+        swapped := false;
+        for i in [1..n-1] loop
+            if arr(i) > arr(i+1) then
+                tmp := arr(i);
+                arr(i) := arr(i+1);
+                arr(i+1) := tmp;
+                swapped := true;
+            end if;
+        end loop;
+        n := n - 1;
+    end loop;
+    return arr;
+end procedure;
+
+arr := [64, 34, 25, 12, 22, 11, 90];
+sorted := bsort(arr);
+print(sorted);
+end program;
