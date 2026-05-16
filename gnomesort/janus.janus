@@ -1,0 +1,40 @@
+program gnomesort;
+
+procedure sort(var arr : array 1..6 of integer; var i : integer);
+  var temp : integer;
+begin
+  i := 0;
+  while i < 6 do
+  begin
+    if i = 0 then
+      i := i + 1
+    else
+    begin
+      if arr[i] < arr[i - 1] then
+      begin
+        temp := arr[i];
+        arr[i] := arr[i - 1];
+        arr[i - 1] := temp;
+        i := i - 1;
+      end
+      else
+        i := i + 1;
+    end;
+  end;
+end;
+
+var
+  test : array 1..6 of integer;
+  i : integer;
+
+begin
+  test[1] := 5;
+  test[2] := 2;
+  test[3] := 8;
+  test[4] := 1;
+  test[5] := 9;
+  test[6] := 3;
+  sort(test, i);
+  for i := 1 to 6 do
+    writeln(test[i]);
+end.
