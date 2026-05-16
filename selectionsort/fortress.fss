@@ -1,0 +1,21 @@
+export Executable
+run() = do
+  arr = [5, 2, 8, 1, 9, 3]
+  selectionSort(arr)
+  println(arr)
+end
+
+selectionSort(arr: Array[ZZ32]): () = do
+  n = |arr|
+  for i <- 0#(n-1) do
+    minIdx: ZZ32 = i
+    for j <- (i+1)#(n-i-1) do
+      if arr[j] < arr[minIdx] then
+        minIdx := j
+      end
+    end
+    tmp = arr[i]
+    arr[i] := arr[minIdx]
+    arr[minIdx] := tmp
+  end
+end
