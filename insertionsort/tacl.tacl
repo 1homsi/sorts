@@ -1,0 +1,14 @@
+INSERTION SORT BEGIN
+  DEF ARR INT ARRAY 6 = 5, 2, 8, 1, 9, 3
+  DEF N INT = 6
+  FOR I FROM 2 TO N
+    DEF KEY INT = ARR[I]
+    DEF J INT = I - 1
+    WHILE J > 0 AND ARR[J] > KEY
+      ARR[J+1] := ARR[J]
+      J := J - 1
+    END WHILE
+    ARR[J+1] := KEY
+  END FOR
+  PRINT ARR
+END
