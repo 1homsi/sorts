@@ -1,0 +1,22 @@
+DEF COCKTAILSORT(ARR)
+   LOCAL N,I,K,TEMP,SWAPPED
+   N = LEN(ARR)
+   I = 0
+   DO WHILE I < N
+      SWAPPED = FALSE
+      FOR K = 0 TO N - I - 2
+         IF ARR(K) > ARR(K+1)
+            TEMP = ARR(K)
+            ARR(K) = ARR(K+1)
+            ARR(K+1) = TEMP
+            SWAPPED = TRUE
+         END IF
+      END FOR
+      IF NOT SWAPPED THEN EXIT DO
+      I = I + 1
+   END DO
+   RETURN ARR
+END
+
+ARR = ARRAY(5,2,8,1,9,3)
+PRINT COCKTAILSORT(ARR)
