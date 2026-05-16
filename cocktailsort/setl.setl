@@ -1,0 +1,37 @@
+program cocktail_sort;
+
+procedure cocktailSort(arr);
+    n := #arr;
+    swapped := true;
+    start := 1;
+    ending := n;
+    while swapped loop
+        swapped := false;
+        for i in [start..ending-1] loop
+            if arr(i) > arr(i+1) then
+                tmp := arr(i);
+                arr(i) := arr(i+1);
+                arr(i+1) := tmp;
+                swapped := true;
+            end if;
+        end loop;
+        if not swapped then return arr; end if;
+        swapped := false;
+        ending := ending - 1;
+        for i in [ending-1, ending-2..start] loop
+            if arr(i) > arr(i+1) then
+                tmp := arr(i);
+                arr(i) := arr(i+1);
+                arr(i+1) := tmp;
+                swapped := true;
+            end if;
+        end loop;
+        start := start + 1;
+    end loop;
+    return arr;
+end procedure;
+
+arr := [5, 3, 8, 1, 9, 2, 7, 4, 6, 0];
+print(cocktailSort(arr));
+
+end program;
