@@ -1,0 +1,22 @@
+func Shellsort(Arr : Std::Vector<Std::Integer>) -> Std::Vector<Std::Integer> {
+  var Result := Arr
+  var N := Result.Length
+  var Gap := 1
+  while Gap <= N {
+    Gap := Gap * 3 + 1
+  }
+  while Gap > 0 {
+    Gap := Gap / 3
+    for I in Gap ..< N {
+      var Temp := Result[I]
+      var J := I
+      while J >= Gap and Result[J - Gap] > Temp {
+        Result[J] := Result[J - Gap]
+        J := J - Gap
+      }
+      Result[J] := Temp
+    }
+  }
+  return Result
+}
+Shellsort([5, 2, 8, 1, 9, 3]).Print()
