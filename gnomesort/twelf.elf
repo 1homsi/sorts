@@ -1,0 +1,16 @@
+nat : type.
+z : nat.
+s : nat -> nat.
+
+list : type.
+nil : list.
+cons : nat -> list -> list.
+
+gnomesort : list -> list -> type.
+
+gnomesort-z : gnomesort nil nil.
+
+gnomesort-cons : gnomesort (cons N L) (cons N L')
+  <- gnomesort L L'.
+
+%query 1 * gnomesort (cons (s (s (s (s (s z))))) (cons (s (s z)) (cons (s (s (s (s (s (s (s (s z)))))))) (cons (s z) (cons (s (s (s (s (s (s (s (s (s z))))))))) (cons (s (s (s z))) nil)))))) L.
