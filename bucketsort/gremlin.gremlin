@@ -1,0 +1,22 @@
+g.withSideEffect('arr', [0.78G, 0.17G, 0.39G, 0.26G, 0.72G, 0.94G, 0.21G, 0.12G, 0.23G, 0.68G]).
+  withSideEffect('n', 10).
+  withSideEffect('minV', 0.12G).
+  withSideEffect('maxV', 0.94G).
+  inject(1).
+  map {
+    def arr = it.sideEffects('arr')
+    def n = it.sideEffects('n')
+    def minV = it.sideEffects('minV')
+    def maxV = it.sideEffects('maxV')
+    def buckets = (0..<n).collect { [] }
+    arr.each { num ->
+      def idx = Math.min(n - 1, ((num - minV) / (maxV - minV + 1) * n).intValue())
+      buckets[idx] << num
+    }
+    def result = []
+    buckets.each { bucket ->
+      bucket.sort()
+      result.addAll(bucket)
+    }
+    result
+  }
