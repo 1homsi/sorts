@@ -1,0 +1,46 @@
+$ arr0 = 3
+$ arr1 = 7
+$ arr2 = 4
+$ arr3 = 8
+$ arr4 = 6
+$ arr5 = 2
+$ arr6 = 1
+$ arr7 = 5
+
+$ CALL BITONIC_SORT 0 8 1
+
+$ I = 0
+$ LOOP:
+$   WRITE SYS$OUTPUT F$INTEGER(arr'I')
+$   I = I + 1
+$   IF I .LT. 8 THEN GOTO LOOP
+$ EXIT
+
+$ BITONIC_SORT: SUBROUTINE
+$   LO = P1
+$   CNT = P2
+$   DIR = P3
+$   IF CNT .LE. 1 THEN EXIT
+$   K = CNT / 2
+$   CALL BITONIC_SORT 'LO' 'K' 1
+$   CALL BITONIC_SORT (LO+K) 'K' 0
+$   CALL BITONIC_MERGE 'LO' 'CNT' 'DIR'
+$ ENDSUBROUTINE
+
+$ BITONIC_MERGE: SUBROUTINE
+$   LO = P1
+$   CNT = P2
+$   DIR = P3
+$   IF CNT .LE. 1 THEN EXIT
+$   K = CNT / 2
+$   I = LO
+$ MERGE_LOOP:
+$   IF I .GE. (LO+K) THEN GOTO MERGE_DONE
+$   J = I + K
+$   CALL COMPARE_SWAP 'I' 'J' 'DIR'
+$   I = I + 1
+$   GOTO MERGE_LOOP
+$ MERGE_DONE:
+$   CALL BITONIC_MERGE 'LO' 'K' 'DIR'
+$   CALL BITONIC_MERGE (LO+K) 'K' 'DIR'
+$ ENDSUBROUTINE
