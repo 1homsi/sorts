@@ -1,0 +1,25 @@
+module BubbleSort
+
+from "array" include Array
+from "int32" include Int32
+
+let bubbleSort = (arr) => {
+  let n = ref(Array.length(arr))
+  let swapped = ref(true)
+  while (swapped^) {
+    swapped := false
+    for (let i = ref(0); i^ < n^ - 1; i := i^ + 1) {
+      if (arr[i^] > arr[i^ + 1]) {
+        let tmp = arr[i^]
+        arr[i^] = arr[i^ + 1]
+        arr[i^ + 1] = tmp
+        swapped := true
+      }
+    }
+    n := n^ - 1
+  }
+  arr
+}
+
+let arr = [> 64, 34, 25, 12, 22, 11, 90]
+print(bubbleSort(arr))
