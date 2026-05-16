@@ -1,0 +1,28 @@
+include std/sequence.e
+
+function heapify(sequence arr, integer n, integer i)
+    integer largest = i, left = 2*i+1, right = 2*i+2, tmp
+    if left <= n and arr[left] > arr[largest] then largest = left end if
+    if right <= n and arr[right] > arr[largest] then largest = right end if
+    if largest != i then
+        tmp = arr[i]; arr[i] = arr[largest]; arr[largest] = tmp
+        arr = heapify(arr, n, largest)
+    end if
+    return arr
+end function
+
+function heapsort(sequence arr)
+    integer n = length(arr), tmp
+    for i = floor(n/2) to 1 by -1 do
+        arr = heapify(arr, n, i)
+    end for
+    for i = n to 2 by -1 do
+        tmp = arr[1]; arr[1] = arr[i]; arr[i] = tmp
+        arr = heapify(arr, i-1, 1)
+    end for
+    return arr
+end function
+
+sequence arr = {12, 11, 13, 5, 6, 7}
+arr = heapsort(arr)
+? arr
