@@ -1,0 +1,66 @@
+MODULE BucketSort;
+
+IMPORT Out;
+
+CONST N = 10;
+
+TYPE FloatArr = ARRAY N OF REAL;
+     BucketArr = ARRAY N OF REAL;
+
+VAR data: FloatArr;
+    i: INTEGER;
+
+PROCEDURE InsertionSort(VAR bucket: BucketArr; n: INTEGER);
+VAR key: REAL; j, ii: INTEGER;
+BEGIN
+    ii := 1;
+    WHILE ii < n DO
+        key := bucket[ii];
+        j := ii - 1;
+        WHILE (j >= 0) & (bucket[j] > key) DO
+            bucket[j + 1] := bucket[j];
+            DEC(j)
+        END;
+        bucket[j + 1] := key;
+        INC(ii)
+    END
+END InsertionSort;
+
+PROCEDURE BucketSort(VAR arr: FloatArr);
+VAR minV, maxV, num: REAL;
+    ii, idx, b, pos: INTEGER;
+    buckets: ARRAY N OF ARRAY N OF REAL;
+    counts: ARRAY N OF INTEGER;
+BEGIN
+    minV := arr[0]; maxV := arr[0];
+    FOR ii := 0 TO N - 1 DO
+        IF arr[ii] < minV THEN minV := arr[ii] END;
+        IF arr[ii] > maxV THEN maxV := arr[ii] END
+    END;
+    FOR ii := 0 TO N - 1 DO counts[ii] := 0 END;
+    FOR ii := 0 TO N - 1 DO
+        num := arr[ii];
+        idx := ENTIER((num - minV) / (maxV - minV + 1) * N);
+        IF idx >= N THEN idx := N - 1 END;
+        buckets[idx][counts[idx]] := num;
+        INC(counts[idx])
+    END;
+    pos := 0;
+    FOR b := 0 TO N - 1 DO
+        InsertionSort(buckets[b], counts[b]);
+        FOR ii := 0 TO counts[b] - 1 DO
+            arr[pos] := buckets[b][ii];
+            INC(pos)
+        END
+    END
+END BucketSort;
+
+BEGIN
+    data[0] := 0.78; data[1] := 0.17; data[2] := 0.39; data[3] := 0.26; data[4] := 0.72;
+    data[5] := 0.94; data[6] := 0.21; data[7] := 0.12; data[8] := 0.23; data[9] := 0.68;
+    BucketSort(data);
+    FOR i := 0 TO N - 1 DO
+        Out.Real(data[i], 6); Out.Char(' ')
+    END;
+    Out.Ln
+END BucketSort.
