@@ -1,0 +1,36 @@
+DIM arr(0 TO 7) AS INTEGER
+arr(0) = 3: arr(1) = 7: arr(2) = 4: arr(3) = 8
+arr(4) = 6: arr(5) = 2: arr(6) = 1: arr(7) = 5
+
+CALL BitonicSort(0, 8, 1)
+
+FOR i = 0 TO 7
+    PRINT arr(i); " ";
+NEXT i
+PRINT
+
+SUB BitonicSort (lo AS INTEGER, cnt AS INTEGER, dir AS INTEGER)
+    IF cnt > 1 THEN
+        k = cnt \ 2
+        CALL BitonicSort(lo, k, 1)
+        CALL BitonicSort(lo + k, k, 0)
+        CALL BitonicMerge(lo, cnt, dir)
+    END IF
+END SUB
+
+SUB BitonicMerge (lo AS INTEGER, cnt AS INTEGER, dir AS INTEGER)
+    IF cnt > 1 THEN
+        k = cnt \ 2
+        FOR i = lo TO lo + k - 1
+            CALL CompSwap(i, i + k, dir)
+        NEXT i
+        CALL BitonicMerge(lo, k, dir)
+        CALL BitonicMerge(lo + k, k, dir)
+    END IF
+END SUB
+
+SUB CompSwap (i AS INTEGER, j AS INTEGER, dir AS INTEGER)
+    IF (dir = 1 AND arr(i) > arr(j)) OR (dir = 0 AND arr(i) < arr(j)) THEN
+        t = arr(i): arr(i) = arr(j): arr(j) = t
+    END IF
+END SUB
