@@ -1,1 +1,6 @@
-print("Bogosort implementation for axiom.axiom")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
