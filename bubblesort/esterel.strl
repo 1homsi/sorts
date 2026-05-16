@@ -1,0 +1,33 @@
+module BUBBLE_SORT:
+input START;
+output DONE;
+relation START # DONE;
+
+var arr := {64, 34, 25, 12, 22, 11, 90} : integer array[7];
+var n := 7 : integer;
+var swapped := true : boolean;
+var tmp : integer;
+var i : integer;
+
+every immediate START do
+  loop
+    swapped := false;
+    i := 0;
+    while i < n - 1 loop
+      if arr[i] > arr[i+1] then
+        tmp := arr[i];
+        arr[i] := arr[i+1];
+        arr[i+1] := tmp;
+        swapped := true
+      end if;
+      i := i + 1
+    end loop;
+    n := n - 1;
+    if not swapped then
+      emit DONE;
+      exit
+    end if
+  end loop
+end every
+
+end module
