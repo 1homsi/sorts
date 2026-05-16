@@ -1,0 +1,42 @@
+DEFINE CYCLESORT
+INPUT ARR / DIM=1, MAXDIM=100
+OUTPUT SORTED
+LOCAL N, POS, ITEM, CYCLES, I, TEMP
+
+N = DIM(ARR, 1)
+POS = 1
+WHILE POS LE N
+  ITEM = ARR(POS)
+  CYCLES = 0
+  FOR I = 1 TO N
+    IF I NE POS AND ARR(I) LT ITEM
+      CYCLES = CYCLES + 1
+    END
+  END
+  IF CYCLES NE 0
+    WHILE ARR(POS) EQ ITEM
+      POS = POS + 1
+    END
+    TEMP = ARR(POS)
+    ARR(POS) = ITEM
+    ITEM = TEMP
+    WHILE CYCLES GT 0
+      CYCLES = 0
+      FOR I = 1 TO N
+        IF I NE POS AND ARR(I) LT ITEM
+          CYCLES = CYCLES + 1
+        END
+      END
+      WHILE ARR(POS) EQ ITEM
+        POS = POS + 1
+      END
+      TEMP = ARR(POS)
+      ARR(POS) = ITEM
+      ITEM = TEMP
+      CYCLES = CYCLES - 1
+    END
+  END
+  POS = POS + 1
+END
+SORTED = ARR
+END
