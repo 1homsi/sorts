@@ -1,0 +1,8 @@
+mod BUCKET-SORT is
+  sort List .
+  op bucket-sort : List Nat -> List .
+  op fill-buckets : List Nat Nat -> List .
+  op collect-buckets : List Nat -> List .
+  eq bucket-sort(L:List, N:Nat) = 
+    collect-buckets(fill-buckets(L:List, 0, N:Nat), N:Nat) .
+endm
