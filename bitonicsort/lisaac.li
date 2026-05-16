@@ -1,0 +1,37 @@
+Section BITONIC_SORT;
+
+i : INTEGER_32;
+arr : NATIVE_ARRAY[INTEGER_32];
+
+bitonic_sort(arr:NATIVE_ARRAY[INTEGER_32]; lo:INTEGER_32; cnt:INTEGER_32; dir:INTEGER_32) : NATIVE_ARRAY[INTEGER_32] is
+do
+  if cnt > 1 then
+    k := cnt / 2;
+    bitonic_sort(arr, lo, k, 1);
+    bitonic_sort(arr, lo + k, k, 0);
+    bitonic_merge(arr, lo, cnt, dir);
+  end;
+  result := arr;
+end;
+
+bitonic_merge(arr:NATIVE_ARRAY[INTEGER_32]; lo:INTEGER_32; cnt:INTEGER_32; dir:INTEGER_32) : NATIVE_ARRAY[INTEGER_32] is
+do
+  if cnt > 1 then
+    k := cnt / 2;
+    i := lo;
+    { i < lo + cnt - k } whileDo [
+      if ((arr.item(i) > arr.item(i + k))) = (dir = 1) then
+        tmp := arr.item(i);
+        arr.put(i, arr.item(i + k));
+        arr.put(i + k, tmp);
+      end;
+      i := i + 1;
+    ];
+    bitonic_merge(arr, lo, k, dir);
+    bitonic_merge(arr, lo + k, k, dir);
+  end;
+  result := arr;
+end;
+
+arr := NATIVE_ARRAY[INTEGER_32].create(8);
+bitonic_sort(arr, 0, 8, 1);
