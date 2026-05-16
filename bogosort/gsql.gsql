@@ -1,1 +1,1 @@
-print("Bogosort implementation for gsql.gsql")
+SELECT * FROM array ORDER BY value ASC;
