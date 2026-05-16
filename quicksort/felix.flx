@@ -1,0 +1,15 @@
+fun quicksort(arr: array[int]): array[int] = {
+  if arr.len() <= 1u then arr
+  else
+    val pivot = arr.(0)
+    var less = darray[int]()
+    var greater = darray[int]()
+    for i in 1u upto arr.len() - 1u do
+      if arr.(i) <= pivot then less += arr.(i)
+      else greater += arr.(i)
+    done
+    quicksort(less.array) + array[int]::cons(pivot, quicksort(greater.array))
+  endif
+}
+
+println$ quicksort(array(5, 2, 8, 1, 9, 3));
