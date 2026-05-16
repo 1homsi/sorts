@@ -1,19 +1,6 @@
-10 DIM A(8)
-20 FOR I = 1 TO 8: READ A(I): NEXT I
-30 DATA 3,1,4,1,5,9,2,6
-40 RANDOMIZE TIMER
-50 GOSUB 200
-60 IF S = 0 THEN GOSUB 300: GOTO 50
-70 FOR I = 1 TO 8: PRINT A(I); : NEXT I
-80 PRINT
-90 END
-200 S = 1
-210 FOR I = 1 TO 7
-220 IF A(I) > A(I+1) THEN S = 0: RETURN
-230 NEXT I
-240 RETURN
-300 FOR I = 8 TO 2 STEP -1
-310 J = INT(RND * I) + 1
-320 T = A(I): A(I) = A(J): A(J) = T
-330 NEXT I
-340 RETURN
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
