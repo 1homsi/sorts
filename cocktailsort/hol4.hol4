@@ -1,0 +1,17 @@
+val cocktailsort = fn (arr : int array) =>
+  let
+    val n = Array.length arr
+    fun pass forward 0 _ = ()
+      | pass forward k swapped =
+        if forward then
+          if Array.sub(arr, k) > Array.sub(arr, k + 1) then
+            (Array.update(arr, k, Array.sub(arr, k + 1));
+             Array.update(arr, k + 1, Array.sub(arr, k));
+             pass forward (k - 1) true)
+          else
+            pass forward (k - 1) swapped
+        else
+          ()
+  in
+    arr
+  end;
