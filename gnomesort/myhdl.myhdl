@@ -1,0 +1,23 @@
+from myhdl import *
+
+@block
+def gnome_sort(clk, rst, done, arr, n=10):
+    i = Signal(0)
+    tmp = Signal(0)
+
+    @always(clk.posedge, rst.posedge)
+    def logic():
+        if rst:
+            i.next = 0
+            done.next = 0
+        elif i >= n:
+            done.next = 1
+        elif i == 0 or arr[i] >= arr[i-1]:
+            i.next = i + 1
+        else:
+            tmp.next = arr[i]
+            arr[i].next = arr[i-1]
+            arr[i-1].next = tmp
+            i.next = i - 1
+
+    return logic
