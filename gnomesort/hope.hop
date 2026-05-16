@@ -1,0 +1,11 @@
+dec gnome_sort : list(num) -> list(num);
+--- gnome_sort [] <= [];
+--- gnome_sort xs <= gnome_loop xs 0 (length xs);
+
+dec gnome_loop : list(num) # num # num -> list(num);
+--- gnome_loop arr i n <= arr, if i >= n;
+--- gnome_loop arr i n <= gnome_loop arr (i+1) n, if i = 0;
+--- gnome_loop arr i n <=
+    if nth arr i >= nth arr (i-1)
+    then gnome_loop arr (i+1) n
+    else gnome_loop (swap arr i (i-1)) (i-1) n;
