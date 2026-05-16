@@ -1,0 +1,21 @@
+let bubble_sort arr =
+  let n = ref (Array.length arr) in
+  let swapped = ref true in
+  while !swapped do
+    swapped := false;
+    for i = 0 to !n - 2 do
+      if arr.(i) > arr.(i + 1) then begin
+        let tmp = arr.(i) in
+        arr.(i) <- arr.(i + 1);
+        arr.(i + 1) <- tmp;
+        swapped := true
+      end
+    done;
+    decr n
+  done;
+  arr
+
+let () =
+  let arr = [| 64; 34; 25; 12; 22; 11; 90 |] in
+  let sorted = bubble_sort arr in
+  Array.iter (fun x -> Js.log x) sorted
