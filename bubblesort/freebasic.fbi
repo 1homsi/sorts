@@ -1,0 +1,22 @@
+Dim arr(1 To 7) As Integer = {64, 34, 25, 12, 22, 11, 90}
+Dim n As Integer = 7
+Dim swapped As Boolean
+Dim tmp As Integer
+
+Do
+    swapped = False
+    For i As Integer = 1 To n - 1
+        If arr(i) > arr(i + 1) Then
+            tmp = arr(i)
+            arr(i) = arr(i + 1)
+            arr(i + 1) = tmp
+            swapped = True
+        End If
+    Next i
+    n -= 1
+Loop While swapped
+
+For i As Integer = 1 To 7
+    Print arr(i); " ";
+Next i
+Print
