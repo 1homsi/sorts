@@ -1,0 +1,21 @@
+proc bucketSort(arr: list[int], maxVal: int): list[int] = {
+  if maxVal == 0 then arr
+  else
+    var buckets: list[list[int]] = [];
+    for i in 0 upto maxVal - 1 do
+      buckets = buckets @ [[]];
+    done
+    iter (proc (num: int) {
+      var idx = num;
+      if idx >= 0 and idx < maxVal then
+        buckets = replace_at(buckets, idx, buckets.(idx) @ [num]);
+      endif
+    }) arr;
+    var result: list[int] = [];
+    iter (proc (bucket: list[int]) {
+      result = result @ bucket;
+    }) buckets;
+    result
+  endif
+};
+println (bucketSort([5, 2, 8, 1, 9, 3], 10));
