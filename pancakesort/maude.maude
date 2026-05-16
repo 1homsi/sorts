@@ -1,0 +1,10 @@
+fmod PANCAKE-SORT is
+    sort IntList .
+    op nil : -> IntList .
+    op _,_ : IntList IntList -> IntList [assoc] .
+    
+    eq pancakeSort(nil) = nil .
+    
+endfm
+
+rew [1] pancakeSort(5, 2, 8, 1, 9, 3) .
