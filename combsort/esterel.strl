@@ -1,0 +1,22 @@
+module COMB_SORT:
+input START;
+input DATA : integer;
+output SORTED : integer;
+
+signal GAP : integer, SORTED_FLAG : boolean in
+  loop
+    await START;
+    emit GAP(10);
+    loop
+      present SORTED_FLAG then
+        halt
+      end present;
+      emit GAP(GAP / 13 * 10);
+      if GAP <= 1 then
+        emit GAP(1);
+        emit SORTED_FLAG(true)
+      end if
+    end loop
+  end loop
+end signal
+end module
