@@ -1,21 +1,6 @@
-module Bogosort where
-
-import Reflex
-import Reflex.Dom
-import Data.List (sortBy)
-
-isSorted :: [Int] -> Bool
-isSorted [] = True
-isSorted [_] = True
-isSorted (x:y:rest) = x <= y && isSorted (y:rest)
-
-bogosort :: [Int] -> [Int]
-bogosort arr =
-    if isSorted arr then arr
-    else bogosort (sortBy compare arr)
-
-main :: IO ()
-main = mainWidget $ do
-    let arr = [3, 1, 4, 1, 5, 9, 2, 6]
-    let sorted = bogosort arr
-    el "div" $ text (show sorted)
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
