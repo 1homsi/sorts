@@ -1,0 +1,12 @@
+effect Shuffle = { shuffle : list -> list }
+
+let bogosort lst =
+  if issorted lst then lst
+  else bogosort(!Shuffle.shuffle lst)
+
+let issorted = function
+  | [] -> true
+  | [_] -> true
+  | x :: y :: xs -> x <= y && issorted (y :: xs)
+
+let () = bogosort [3; 1; 2] |> print_list
