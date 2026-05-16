@@ -1,0 +1,11 @@
+int n = 10;
+range R = 1..n;
+int data[R] = [5, 3, 8, 1, 9, 2, 7, 4, 6, 0];
+dvar int sorted[R];
+
+minimize sum(i in R) sorted[i];
+subject to {
+  forall(i in 1..n-1) sorted[i] <= sorted[i+1];
+  forall(v in 0..9)
+    (sum(i in R: data[i] == v) 1) == (sum(i in R: sorted[i] == v) 1);
+}
