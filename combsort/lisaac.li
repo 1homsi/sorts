@@ -1,0 +1,33 @@
+Section Header
+  -- Comb Sort Implementation in Lisaac
+  title "Comb Sort"
+;
+
+Section Public
+  comb_sort (arr : ARRAY[INT]) : ARRAY[INT] is
+    local
+      gap : INT;
+      swapped : BOOLEAN;
+    do
+      gap := arr.count;
+      swapped := true;
+      {gap > 1 | swapped} do
+        gap := (gap * 10) / 13;
+        (gap < 1).if { gap := 1; };
+        swapped := false;
+        0.to (arr.count - gap - 1) do { i : INT;
+          (arr.at(i) > arr.at(i + gap)).if {
+            arr.put((arr.at(i + gap)), i);
+            arr.put((arr.at(i)), i + gap);
+            swapped := true;
+          };
+        };
+      };
+      arr
+    ;
+
+  + main : OBJECT is
+    do
+      [5, 2, 8, 1, 9, 3].comb_sort.println;
+    ;
+;
