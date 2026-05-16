@@ -1,0 +1,6 @@
+(define pancake-sort
+  (lambda (lst)
+    (if (null? lst) lst
+        (cons (car lst) (pancake-sort (cdr lst))))))
+
+(pancake-sort '(5 2 8 1 9 3))
