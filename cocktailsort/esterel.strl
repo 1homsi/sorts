@@ -1,0 +1,45 @@
+module COCKTAIL_SORT :
+input CLOCK;
+output SORTED;
+relation CLOCK # SORTED;
+
+var arr := {5, 3, 8, 1, 9, 2, 7, 4, 6, 0} : integer array(10);
+var n := 10 : integer;
+var swapped := 1 : integer;
+var start := 0 : integer;
+var end := 9 : integer;
+var i := 0 : integer;
+var tmp := 0 : integer;
+
+loop
+    await CLOCK;
+    swapped := 0;
+    i := start;
+    loop
+        if i >= end then exit;
+        if arr[i] > arr[i+1] then
+            tmp := arr[i];
+            arr[i] := arr[i+1];
+            arr[i+1] := tmp;
+            swapped := 1
+        end;
+        i := i + 1
+    end;
+    if swapped = 0 then emit SORTED; halt end;
+    swapped := 0;
+    end := end - 1;
+    i := end - 1;
+    loop
+        if i < start then exit;
+        if arr[i] > arr[i+1] then
+            tmp := arr[i];
+            arr[i] := arr[i+1];
+            arr[i+1] := tmp;
+            swapped := 1
+        end;
+        i := i - 1
+    end;
+    start := start + 1
+end
+
+end module
