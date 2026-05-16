@@ -1,0 +1,29 @@
+PROC MERGE(ARR; LEFT, MID, RIGHT);
+  VAR I, J, K;
+  ARRAY RESULT(RIGHT - LEFT + 1);
+  
+  I := LEFT;
+  J := MID + 1;
+  K := 0;
+  
+  DO WHILE I <= MID & J <= RIGHT;
+    IF ARR(I) <= ARR(J) THEN;
+      RESULT(K) := ARR(I);
+      I := I + 1;
+    ELSE;
+      RESULT(K) := ARR(J);
+      J := J + 1;
+    ENDIF;
+    K := K + 1;
+  ENDDO;
+ENDPROC;
+
+PROC MERGESORT(ARR; LEFT, RIGHT);
+  VAR MID;
+  IF LEFT < RIGHT THEN;
+    MID := (LEFT + RIGHT) / 2;
+    MERGESORT(ARR; LEFT, MID);
+    MERGESORT(ARR; MID + 1, RIGHT);
+    MERGE(ARR; LEFT, MID, RIGHT);
+  ENDIF;
+ENDPROC;
