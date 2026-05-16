@@ -1,0 +1,18 @@
+effect State = Ref of (Int -> Unit)
+
+let countingsort arr =
+  let max = List.fold (fun a b -> if a > b then a else b) 0 arr
+  let count = Array.create (max + 1) 0
+  let () = List.iter (fun x -> count.(x) <- count.(x) + 1) arr
+  let output = ref []
+  for i = max downto 0 do
+    for j = 1 to count.(i) do
+      output := i :: !output
+    done
+  done;
+  !output
+
+let () =
+  let result = countingsort [5; 2; 8; 1; 9; 3]
+  List.iter (fun x -> Printf.printf "%d " x) result;
+  Printf.printf "\n"
