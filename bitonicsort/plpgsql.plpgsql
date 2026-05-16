@@ -1,0 +1,44 @@
+CREATE OR REPLACE FUNCTION compare_and_swap(
+    arr INOUT integer[], i integer, j integer, direction boolean
+) AS $$
+DECLARE tmp integer;
+BEGIN
+    IF direction = (arr[i] > arr[j]) THEN
+        tmp := arr[i];
+        arr[i] := arr[j];
+        arr[j] := tmp;
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION bitonic_merge(
+    arr INOUT integer[], lo integer, cnt integer, direction boolean
+) AS $$
+DECLARE k integer; i integer;
+BEGIN
+    IF cnt > 1 THEN
+        k := cnt / 2;
+        FOR i IN lo .. lo + k - 1 LOOP
+            SELECT * INTO arr FROM compare_and_swap(arr, i, i + k, direction);
+        END LOOP;
+        SELECT * INTO arr FROM bitonic_merge(arr, lo, k, direction);
+        SELECT * INTO arr FROM bitonic_merge(arr, lo + k, k, direction);
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION bitonic_sort(
+    arr INOUT integer[], lo integer, cnt integer, direction boolean
+) AS $$
+DECLARE k integer;
+BEGIN
+    IF cnt > 1 THEN
+        k := cnt / 2;
+        SELECT * INTO arr FROM bitonic_sort(arr, lo, k, true);
+        SELECT * INTO arr FROM bitonic_sort(arr, lo + k, k, false);
+        SELECT * INTO arr FROM bitonic_merge(arr, lo, cnt, direction);
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT bitonic_sort(ARRAY[3,7,4,8,6,2,1,5], 1, 8, true);
