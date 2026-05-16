@@ -1,0 +1,17 @@
+define selection_sort(arr);
+  lvars n = length(arr), i, j, min_idx, tmp;
+  for i from 0 to n - 2 do
+    min_idx := i;
+    for j from i + 1 to n - 1 do
+      if arr(j) < arr(min_idx) then
+        i -> min_idx;
+      endif;
+    endfor;
+    arr(i) -> tmp;
+    arr(min_idx) -> arr(i);
+    tmp -> arr(min_idx);
+  endfor;
+  arr
+enddefine;
+
+print(selection_sort([5 2 8 1 9 3]));
