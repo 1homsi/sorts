@@ -1,0 +1,26 @@
+func Quicksort(arr: []int): []int {
+  if len(arr) <= 1 {
+    return arr
+  }
+
+  pivot := arr[0]
+  var less []int
+  var greater []int
+
+  for i := 1; i < len(arr); i++ {
+    if arr[i] <= pivot {
+      less = append(less, arr[i])
+    } else {
+      greater = append(greater, arr[i])
+    }
+  }
+
+  result := Quicksort(less)
+  result = append(result, pivot)
+  result = append(result, Quicksort(greater)...)
+  return result
+}
+
+func main() {
+  print(Quicksort([]int{5, 2, 8, 1, 9, 3}))
+}
