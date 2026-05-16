@@ -1,0 +1,43 @@
+define merge(arr, left, mid, right);
+  lvars i, j, k, result, len;
+  left -> i;
+  mid + 1 -> j;
+  {} -> result;
+  0 -> k;
+  
+  until (i > mid or j > right) do
+    if arr(i) <= arr(j) then
+      result <> arr(i) -> result;
+      i + 1 -> i;
+    else
+      result <> arr(j) -> result;
+      j + 1 -> j;
+    endif;
+    k + 1 -> k;
+  enduntil;
+  
+  until i > mid do
+    result <> arr(i) -> result;
+    i + 1 -> i;
+  enduntil;
+  
+  until j > right do
+    result <> arr(j) -> result;
+    j + 1 -> j;
+  enduntil;
+enddefine;
+
+define mergesort(arr, left, right);
+  lvars mid;
+  if left < right then
+    (left + right) div 2 -> mid;
+    mergesort(arr, left, mid);
+    mergesort(arr, mid + 1, right);
+    merge(arr, left, mid, right);
+  endif;
+enddefine;
+
+lvars arr;
+{5 2 8 1 9 3} -> arr;
+mergesort(arr, 1, 6);
+arr =>
