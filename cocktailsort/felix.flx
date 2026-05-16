@@ -1,0 +1,37 @@
+fun cocktailsort (arr: array[int]) : array[int] = {
+    var a = arr;
+    var n = len a;
+    var i = 0;
+    while i < n do {
+        var swapped = false;
+        var k = 0;
+        while k < n - i - 1 do {
+            if a.(k) > a.(k+1) do {
+                var temp = a.(k);
+                a.(k) <- a.(k+1);
+                a.(k+1) <- temp;
+                swapped = true;
+            };
+            k = k + 1;
+        };
+        if not swapped do break;
+        i = i + 1;
+        swapped = false;
+        k = n - i - 2;
+        while k >= 0 do {
+            if a.(k) > a.(k+1) do {
+                var temp = a.(k);
+                a.(k) <- a.(k+1);
+                a.(k+1) <- temp;
+                swapped = true;
+            };
+            k = k - 1;
+        };
+        if not swapped do break;
+        i = i + 1;
+    };
+    return a;
+};
+
+var arr = [5, 2, 8, 1, 9, 3];
+println$ cocktailsort arr;
