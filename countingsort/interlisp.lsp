@@ -1,0 +1,23 @@
+(DEFINE COUNTINGSORT
+  (LAMBDA (ARR)
+    (PROG (MAX COUNT OUTPUT I J)
+      (SETQ MAX 0)
+      (DOLIST (VAL ARR)
+        (COND ((GREATERP VAL MAX) (SETQ MAX VAL))))
+
+      (SETQ COUNT (MAKELIST (PLUS MAX 1) 0))
+      (DOLIST (VAL ARR)
+        (ASET COUNT VAL (PLUS (AREF COUNT VAL) 1)))
+
+      (SETQ OUTPUT (QUOTE ()))
+      (SETQ I 0)
+      (DOWHILE (LESSP I (PLUS MAX 1))
+        (SETQ J 0)
+        (DOWHILE (LESSP J (AREF COUNT I))
+          (SETQ OUTPUT (CONS I OUTPUT))
+          (SETQ J (PLUS J 1)))
+        (SETQ I (PLUS I 1)))
+
+      (RETURN (REVERSE OUTPUT)))))
+
+(PRINT (COUNTINGSORT (QUOTE (5 2 8 1 9 3))))
