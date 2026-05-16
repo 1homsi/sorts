@@ -1,0 +1,31 @@
+package GnomeSort
+  with SPARK_Mode
+is
+   type Int_Array is array (Positive range <>) of Integer;
+
+   procedure Sort (Arr : in out Int_Array)
+     with Post => (for all I in Arr'First..Arr'Last-1 =>
+                     Arr(I) <= Arr(I+1));
+
+end GnomeSort;
+
+package body GnomeSort
+  with SPARK_Mode
+is
+   procedure Sort (Arr : in out Int_Array) is
+      I   : Integer := Arr'First;
+      Tmp : Integer;
+   begin
+      while I <= Arr'Last loop
+         if I = Arr'First or else Arr(I) >= Arr(I - 1) then
+            I := I + 1;
+         else
+            Tmp := Arr(I);
+            Arr(I) := Arr(I - 1);
+            Arr(I - 1) := Tmp;
+            I := I - 1;
+         end if;
+      end loop;
+   end Sort;
+
+end GnomeSort;
