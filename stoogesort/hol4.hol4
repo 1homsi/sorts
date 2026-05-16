@@ -1,0 +1,7 @@
+open arithmeticTheory listTheory;
+
+val stoogesort_def = Define `
+  stoogesort a i j = a
+`;
+
+val _ = print_theory "-";
