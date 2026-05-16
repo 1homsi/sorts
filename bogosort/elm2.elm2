@@ -1,13 +1,6 @@
-module Bogosort exposing (..)
-
-isSorted : List Int -> Bool
-isSorted arr =
-    case arr of
-        [] -> True
-        [_] -> True
-        x :: y :: rest -> x <= y && isSorted (y :: rest)
-
-bogosort : List Int -> List Int
-bogosort arr =
-    if isSorted arr then arr
-    else bogosort (List.sortBy identity arr)
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
