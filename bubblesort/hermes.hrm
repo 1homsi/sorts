@@ -1,0 +1,19 @@
+procedure BubbleSort
+  input: Arr of integer array
+  output: Arr of integer array
+begin
+  N := length of Arr
+  for I in 1 to N
+    for J in 1 to (N - I)
+      if Arr(J) > Arr(J+1)
+      then
+        Temp := Arr(J)
+        Arr(J) := Arr(J+1)
+        Arr(J+1) := Temp
+      endif
+    endfor
+  endfor
+  return Arr
+end
+
+print BubbleSort([5, 2, 8, 1, 9, 3])
