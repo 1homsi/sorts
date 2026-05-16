@@ -1,0 +1,37 @@
+CYCLE_SORT: MODULE
+
+DCL arr(0:4) INT;
+DCL n INT = 5;
+DCL writes INT = 0;
+DCL cs, item, pos, i, tmp INT;
+
+cycle_sort: PROC;
+    arr(0) := 5; arr(1) := 4; arr(2) := 3; arr(3) := 2; arr(4) := 1;
+    FOR cs := 0 TO n - 2 DO
+        item := arr(cs);
+        pos := cs;
+        FOR i := cs + 1 TO n - 1 DO
+            IF arr(i) < item THEN pos := pos + 1 FI;
+        OD;
+        IF pos /= cs THEN
+            DO WHILE arr(pos) = item;
+                pos := pos + 1;
+            OD;
+            tmp := arr(pos); arr(pos) := item; item := tmp;
+            writes := writes + 1;
+            DO WHILE pos /= cs;
+                pos := cs;
+                FOR i := cs + 1 TO n - 1 DO
+                    IF arr(i) < item THEN pos := pos + 1 FI;
+                OD;
+                DO WHILE arr(pos) = item;
+                    pos := pos + 1;
+                OD;
+                tmp := arr(pos); arr(pos) := item; item := tmp;
+                writes := writes + 1;
+            OD;
+        FI;
+    OD;
+END cycle_sort;
+
+END CYCLE_SORT;
