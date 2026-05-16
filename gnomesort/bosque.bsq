@@ -1,0 +1,17 @@
+namespace GnomeSort;
+
+function gnomeSort(arr: List<Int>): List<Int> {
+    let n = arr.size();
+    let rec loop(a: List<Int>, i: Int): List<Int> = {
+        if(i >= n) {
+            return a;
+        }
+        if(i == 0 || a.get(i) >= a.get(i - 1)) {
+            return loop(a, i + 1);
+        }
+        let x = a.get(i);
+        let y = a.get(i - 1);
+        return loop(a.set(i, y).set(i - 1, x), i - 1);
+    };
+    return loop(arr, 0);
+}
