@@ -1,0 +1,55 @@
+$ include "seed7_05.s7i";
+
+const proc: cycleSort (inout array integer: arr) is func
+  local
+    var integer: n is 0;
+    var integer: writes is 0;
+    var integer: cycleStart is 0;
+    var integer: item is 0;
+    var integer: pos is 0;
+    var integer: i is 0;
+    var integer: tmp is 0;
+  begin
+    n := length(arr);
+    for cycleStart range 1 to n - 1 do
+      item := arr[cycleStart];
+      pos := cycleStart;
+      for i range cycleStart + 1 to n do
+        if arr[i] < item then
+          incr(pos);
+        end if;
+      end for;
+      if pos <> cycleStart then
+        while arr[pos] = item do
+          incr(pos);
+        end while;
+        tmp := arr[pos]; arr[pos] := item; item := tmp;
+        incr(writes);
+        while pos <> cycleStart do
+          pos := cycleStart;
+          for i range cycleStart + 1 to n do
+            if arr[i] < item then
+              incr(pos);
+            end if;
+          end for;
+          while arr[pos] = item do
+            incr(pos);
+          end while;
+          tmp := arr[pos]; arr[pos] := item; item := tmp;
+          incr(writes);
+        end while;
+      end if;
+    end for;
+  end func;
+
+const proc: main is func
+  local
+    var array integer: arr is [] (5, 4, 3, 2, 1);
+    var integer: i is 0;
+  begin
+    cycleSort(arr);
+    for i range 1 to length(arr) do
+      write(arr[i] <& " ");
+    end for;
+    writeln;
+  end func;
