@@ -1,0 +1,29 @@
+; Bend IR - Counting Sort
+; Input: [4, 2, 2, 8, 3, 3, 1]
+; Output: [1, 2, 2, 3, 3, 4, 8]
+
+define void @counting_sort(i32* %arr, i32 %n, i32 %min_val, i32 %max_val) {
+entry:
+  %range = sub i32 %max_val, %min_val
+  %range1 = add i32 %range, 1
+  %count = alloca [256 x i32], align 4
+  %output = alloca [7 x i32], align 4
+  br label %init
+
+init:
+  ; zero-initialize count array
+  call void @llvm.memset.p0i8.i64(i8* %count, i8 0, i64 1024, i1 false)
+  br label %count_loop
+
+count_loop:
+  ; count[arr[i] - min]++
+  br label %prefix
+
+prefix:
+  ; count[i] += count[i-1]
+  br label %scatter
+
+scatter:
+  ; output[--count[arr[i]-min]] = arr[i]
+  ret void
+}
