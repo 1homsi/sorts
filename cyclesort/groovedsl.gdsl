@@ -1,0 +1,29 @@
+def cycleSort(arr) {
+    def writes = 0
+    def n = arr.size()
+    (0..<n-1).each { cycleStart ->
+        def item = arr[cycleStart]
+        def pos = cycleStart
+        (cycleStart+1..<n).each { i ->
+            if (arr[i] < item) pos++
+        }
+        if (pos == cycleStart) return
+        while (item == arr[pos]) pos++
+        def tmp = arr[pos]; arr[pos] = item; item = tmp
+        writes++
+        while (pos != cycleStart) {
+            pos = cycleStart
+            (cycleStart+1..<n).each { i ->
+                if (arr[i] < item) pos++
+            }
+            while (item == arr[pos]) pos++
+            tmp = arr[pos]; arr[pos] = item; item = tmp
+            writes++
+        }
+    }
+    writes
+}
+
+def arr = [5, 4, 3, 2, 1]
+cycleSort(arr)
+println arr
