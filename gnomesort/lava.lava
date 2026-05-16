@@ -1,0 +1,15 @@
+import Lava
+
+gnomeSort :: [Signal Int] -> [Signal Int]
+gnomeSort arr =
+    let n = length arr
+        go a i
+          | i >= n = a
+          | i == 0 = go a (i+1)
+          | otherwise =
+              let xi = a !! i
+                  xi1 = a !! (i-1)
+                  cmp = xi `greaterEq` xi1
+                  a' = zipWith (\j x -> mux cmp x (if j == i then xi1 else if j == i-1 then xi else x)) [0..] a
+              in muxStep cmp (go a (i+1)) (go a' (i-1))
+    in go arr 0
