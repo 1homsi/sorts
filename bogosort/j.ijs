@@ -1,4 +1,6 @@
-isSorted =: 2&(-/)&(2 </\ ])
-shuffle =: {~ ?~@#
-bogosort =: ] `(shuffle@]) @. (-.@isSorted) ^: (1-isSorted)
-bogosort ^:_ 3 1 4 1 5 9 2 6
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
