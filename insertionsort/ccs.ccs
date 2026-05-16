@@ -1,0 +1,12 @@
+InsertionSort = sort.result.InsertionSort
+
+where
+
+sort = in(arr).
+       (insert_loop | done)
+
+insert_loop = tau.insert_loop + done.0
+
+insert(x, nil) = out(x).nil
+insert(x, h.t) = if x <= h then out(x).out(h).t
+                 else out(h).insert(x, t)
