@@ -1,0 +1,30 @@
+cocktail_sort: PROC(arr REF INT, n INT) VOID;
+DCL swapped BOOL := TRUE;
+DCL start INT := 0;
+DCL ending INT := n - 1;
+DCL i INT;
+DCL tmp INT;
+DO WHILE swapped;
+    swapped := FALSE;
+    DO FOR i := start TO ending - 1;
+        IF arr(i) > arr(i + 1) THEN
+            tmp := arr(i);
+            arr(i) := arr(i + 1);
+            arr(i + 1) := tmp;
+            swapped := TRUE;
+        FI;
+    OD;
+    IF NOT swapped THEN RETURN; FI;
+    swapped := FALSE;
+    ending := ending - 1;
+    DO FOR i := ending - 1 DOWN TO start;
+        IF arr(i) > arr(i + 1) THEN
+            tmp := arr(i);
+            arr(i) := arr(i + 1);
+            arr(i + 1) := tmp;
+            swapped := TRUE;
+        FI;
+    OD;
+    start := start + 1;
+OD;
+END cocktail_sort;
