@@ -1,0 +1,37 @@
+component BitonicSort
+    export Executable
+
+    run() = do
+        arr = [5, 2, 8, 1, 9, 3, 7, 4]
+        bitonicsort(arr, 0, 8, 1)
+        println(arr)
+    end
+
+    bitonicsort(arr, lo, cnt, dir) =
+        if cnt > 1 then
+            k = cnt DIV 2
+            bitonicsort(arr, lo, k, 1)
+            bitonicsort(arr, lo + k, k, 0)
+            bitonicmerge(arr, lo, cnt, dir)
+        else
+            arr
+        end
+
+    bitonicmerge(arr, lo, cnt, dir) =
+        if cnt > 1 then
+            k = cnt DIV 2
+            do
+                for i <- 0 : cnt - k do
+                    if (arr[lo + i] > arr[lo + i + k]) = (dir = 1) then
+                        tmp = arr[lo + i]
+                        arr[lo + i] := arr[lo + i + k]
+                        arr[lo + i + k] := tmp
+                    end
+                end
+                bitonicmerge(arr, lo, k, dir)
+                bitonicmerge(arr, lo + k, k, dir)
+            end
+        else
+            arr
+        end
+end
