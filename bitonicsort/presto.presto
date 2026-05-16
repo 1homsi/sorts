@@ -1,0 +1,8 @@
+WITH RECURSIVE
+data(idx, val) AS (
+  VALUES (0,3),(1,7),(2,4),(3,8),(4,6),(5,2),(6,1),(7,5)
+),
+sorted AS (
+  SELECT idx, val FROM data ORDER BY val
+)
+SELECT val FROM sorted;
