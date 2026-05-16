@@ -1,1 +1,1 @@
-print("Bogosort implementation for keras.keras")
+bogosort = true
