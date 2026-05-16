@@ -1,0 +1,15 @@
+def insertionSort(uint[] arr) {
+  uint n = arr.length;
+  for (uint i in 1..n) {
+    uint key = arr[i];
+    uint j = i - 1;
+    while (j >= 0 && arr[j] > key) {
+      arr[j+1] = arr[j];
+      j--;
+    }
+    arr[j+1] = key;
+  }
+  return arr;
+}
+
+print(insertionSort([5, 2, 8, 1, 9, 3]));
