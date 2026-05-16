@@ -1,27 +1,6 @@
-let is_sorted (arr : list int) : bool =
-  let rec check = fun l ->
-    match l with
-    | [] -> true
-    | [_] -> true
-    | x :: y :: rest ->
-      if x > y then false
-      else check (y :: rest)
-  in check arr
-
-let shuffle (arr : list int) : list int =
-  let a = Array.of_list arr in
-  let n = Array.length a in
-  for i = n - 1 downto 1 do
-    let j = Random.int (i + 1) in
-    let tmp = a.(i) in
-    a.(i) <- a.(j);
-    a.(j) <- tmp
-  done;
-  Array.to_list a
-
-let rec bogosort (arr : list int) : list int =
-  if is_sorted arr then arr
-  else bogosort (shuffle arr)
-
-let arr = [3; 1; 4; 1; 5; 9; 2; 6]
-let _ = bogosort arr
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
