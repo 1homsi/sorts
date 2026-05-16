@@ -1,0 +1,18 @@
+use Base
+
+GnomeSort (lst: List U64) : List U64 :=
+  let arr = List.toArray lst
+  let n   = Array.length arr
+  GnomeLoop arr 0 n
+
+GnomeLoop (arr: Array U64) (i: U64) (n: U64) : Array U64 :=
+  if i >= n then arr
+  else if i == 0 then GnomeLoop arr (i + 1) n
+  else
+    let cur = Array.get arr i 0
+    let prv = Array.get arr (i - 1) 0
+    if cur >= prv then
+      GnomeLoop arr (i + 1) n
+    else
+      let arr2 = Array.set (Array.set arr i prv) (i - 1) cur
+      GnomeLoop arr2 (i - 1) n
