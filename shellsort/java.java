@@ -1,9 +1,8 @@
-import java.util.Arrays;
-
-public class java {
-    static void shellSort(int[] arr) {
+public class Shellsort {
+    public static void shellsort(int[] arr) {
         int n = arr.length;
-        for (int gap = n / 2; gap > 0; gap /= 2) {
+        int gap = n / 2;
+        while (gap > 0) {
             for (int i = gap; i < n; i++) {
                 int temp = arr[i];
                 int j = i;
@@ -13,12 +12,7 @@ public class java {
                 }
                 arr[j] = temp;
             }
+            gap /= 2;
         }
-    }
-
-    public static void main(String[] args) {
-        int[] arr = {64, 34, 25, 12, 22, 11, 90};
-        shellSort(arr);
-        System.out.println(Arrays.toString(arr));
     }
 }
