@@ -1,0 +1,52 @@
+      * RPG IV (ILE RPG) Heapsort
+     H DFTACTGRP(*NO)
+
+     D arr             S             10I 0 DIM(6)
+     D n               S             10I 0
+     D i               S             10I 0
+     D tmp             S             10I 0
+
+     D heapify         PR
+     D  pn                           10I 0 VALUE
+     D  pi                           10I 0 VALUE
+
+      /FREE
+        arr(1) = 12; arr(2) = 11; arr(3) = 13;
+        arr(4) = 5;  arr(5) = 6;  arr(6) = 7;
+        n = 6;
+
+        for i = n / 2 downto 1;
+          heapify(n: i);
+        endfor;
+
+        for i = n downto 2;
+          tmp = arr(1); arr(1) = arr(i); arr(i) = tmp;
+          heapify(i - 1: 1);
+        endfor;
+
+        for i = 1 to n;
+          dsply arr(i);
+        endfor;
+        *INLR = *ON;
+      /END-FREE
+
+     P heapify         B
+     D heapify         PI
+     D  pn                           10I 0 VALUE
+     D  pi                           10I 0 VALUE
+     D  largest        S             10I 0
+     D  left           S             10I 0
+     D  right          S             10I 0
+     D  t              S             10I 0
+      /FREE
+        largest = pi;
+        left = 2 * pi;
+        right = 2 * pi + 1;
+        if left <= pn and arr(left) > arr(largest); largest = left; endif;
+        if right <= pn and arr(right) > arr(largest); largest = right; endif;
+        if largest <> pi;
+          t = arr(pi); arr(pi) = arr(largest); arr(largest) = t;
+          heapify(pn: largest);
+        endif;
+      /END-FREE
+     P heapify         E
