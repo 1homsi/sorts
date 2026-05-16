@@ -1,0 +1,28 @@
+insert = method(node, val) :
+  if (node == null) :
+    return {"value": val, "left": null, "right": null}
+  end
+  if (val < node["value"]) :
+    node["left"] = insert(node["left"], val)
+  else if (val > node["value"]) :
+    node["right"] = insert(node["right"], val)
+  end
+  return node
+end
+
+inorder = method(node) :
+  if (node == null) :
+    return []
+  end
+  return inorder(node["left"]) + [node["value"]] + inorder(node["right"])
+end
+
+tree_sort = method(arr) :
+  root = null
+  arr each(method(val) :
+    root = insert(root, val)
+  end)
+  return inorder(root)
+end
+
+print(tree_sort([5, 2, 8, 1, 9, 3]))
