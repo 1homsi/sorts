@@ -1,0 +1,52 @@
+Section Header
+  + name := CYCLESORT;
+Section Public
+  - cyclesort : ARRAY(INTEGER) := (
+    + arr : ARRAY(INTEGER);
+    + n : INTEGER;
+    + pos : INTEGER;
+    + item : INTEGER;
+    + cycles : INTEGER;
+    + i : INTEGER;
+    + temp : INTEGER;
+    ( arr.count ).to n;
+    0.to pos;
+    {pos < n}.while_do (
+      (arr.item (pos + 1)).to item;
+      0.to cycles;
+      0.to i;
+      {i < n}.while_do (
+        (i != pos && (arr.item (i + 1)) < item).if (
+          (cycles + 1).to cycles;
+        );
+        (i + 1).to i;
+      );
+      (cycles != 0).if (
+        {(arr.item (pos + 1)) = item}.while_do (
+          (pos + 1).to pos;
+        );
+        (arr.item (pos + 1)).to temp;
+        item.put arr to (pos + 1);
+        temp.to item;
+        {cycles > 0}.while_do (
+          0.to cycles;
+          0.to i;
+          {i < n}.while_do (
+            (i != pos && (arr.item (i + 1)) < item).if (
+              (cycles + 1).to cycles;
+            );
+            (i + 1).to i;
+          );
+          {(arr.item (pos + 1)) = item}.while_do (
+            (pos + 1).to pos;
+          );
+          (arr.item (pos + 1)).to temp;
+          item.put arr to (pos + 1);
+          temp.to item;
+          (cycles - 1).to cycles;
+        );
+      );
+      (pos + 1).to pos;
+    );
+    arr
+  );
