@@ -1,0 +1,28 @@
+Section Header
+  + name := SHELLSORT;
+Section Public
+  - shellsort (arr : ARRAY INT) : ARRAY INT <- (
+    + n : INTEGER;
+    + gap : INTEGER;
+    + i : INTEGER;
+    + j : INTEGER;
+    + temp : INTEGER;
+    n := arr.count;
+    gap := 1;
+    {gap <= n}.while_do ({gap := gap * 3 + 1});
+    {gap > 0}.while_do ((
+      gap := gap / 3;
+      i := gap;
+      {i < n}.while_do ((
+        temp := arr.item i;
+        j := i;
+        {(j >= gap) && {arr.item (j - gap) > temp}}.while_do ((
+          arr.put (arr.item (j - gap)) to i;
+          j := j - gap;
+        ));
+        arr.put temp to i;
+        i := i + 1;
+      ));
+    ));
+    arr
+  );
