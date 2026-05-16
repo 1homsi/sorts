@@ -1,0 +1,20 @@
+define shellsort(arr);
+  lvars n, gap, i, j, temp;
+  length(arr) -> n;
+  1 -> gap;
+  while gap <= n do (gap * 3 + 1) -> gap endwhile;
+  while gap > 0 do
+    (gap div 3) -> gap;
+    for i from gap to n do
+      arr(i) -> temp;
+      i -> j;
+      while j > gap and arr(j - gap) > temp do
+        arr(j - gap) -> arr(j);
+        j - gap -> j;
+      endwhile;
+      temp -> arr(j);
+    endfor;
+  endwhile;
+  arr;
+enddefine;
+shellsort([5 2 8 1 9 3]) ==>
