@@ -1,0 +1,15 @@
+MODEL:
+SETS:
+    IDX / 1..5 /: ARR, SORTED;
+ENDSETS
+
+DATA:
+    ARR = 5 3 1 4 2;
+ENDDATA
+
+MIN = @SUM(IDX(I): SORTED(I));
+
+@FOR(IDX(I) | I #LT# 5:
+    SORTED(I) #LE# SORTED(I+1));
+
+END
