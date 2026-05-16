@@ -1,0 +1,18 @@
+(defun comb-sort (arr / n gap sorted i j tmp)
+  (setq n (length arr)
+        gap n
+        sorted nil)
+  (while (not sorted)
+    (setq gap (max 1 (fix (/ gap 1.3))))
+    (if (= gap 1) (setq sorted T))
+    (setq i 1)
+    (while (<= (+ i gap) n)
+      (setq j (+ i gap))
+      (if (> (nth (1- i) arr) (nth (1- j) arr))
+        (progn
+          (setq tmp (nth (1- i) arr))
+          (setq arr (subst (nth (1- j) arr) (nth (1- i) arr) arr))
+          (setq arr (subst tmp (nth (1- j) arr) arr))
+          (setq sorted nil)))
+      (setq i (1+ i))))
+  arr)
