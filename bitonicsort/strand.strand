@@ -1,0 +1,18 @@
+bitonic_sort([X], true, [X]) :- !.
+bitonic_sort([X], false, [X]) :- !.
+bitonic_sort(Xs, Dir, Sorted) :-
+    length(Xs, N), K is N // 2,
+    split(Xs, K, Left, Right),
+    bitonic_sort(Left, true, SL) &
+    bitonic_sort(Right, false, SR),
+    append(SL, SR, Merged),
+    bitonic_merge(Merged, Dir, Sorted).
+
+bitonic_merge(Xs, true, Sorted) :- msort(Xs, Sorted).
+bitonic_merge(Xs, false, Sorted) :- msort(Xs, S), reverse(S, Sorted).
+
+split([], _, [], []).
+split([H|T], 0, [], [H|T]) :- !.
+split([H|T], N, [H|L], R) :- N > 0, N1 is N-1, split(T, N1, L, R).
+
+:- bitonic_sort([3,7,4,8,6,2,1,5], true, S), write(S), nl.
