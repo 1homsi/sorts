@@ -1,0 +1,32 @@
+alias Node = Variant[
+  empty: [],
+  branch: Record[value: Int, left: Node, right: Node]
+];
+
+insert(node, val) {
+  if (empty?(node))
+    return Variant[branch: Record[value: val, left: empty(), right: empty()]];
+  match(node,
+    empty => ...,
+    branch => {
+      if (val < node.value)
+        return Variant[branch: Record[value: node.value, left: insert(node.left, val), right: node.right]];
+      else if (val > node.value)
+        return Variant[branch: Record[value: node.value, left: node.left, right: insert(node.right, val)]];
+      else
+        return node;
+    }
+  );
+}
+
+inorder(node) {
+  if (empty?(node)) return [];
+  return inorder(node.left) ++ [node.value] ++ inorder(node.right);
+}
+
+main() {
+  arr := [5, 2, 8, 1, 9, 3];
+  root := empty();
+  for (v in arr) root = insert(root, v);
+  println(inorder(root));
+}
