@@ -1,0 +1,16 @@
+ROUTINE GNOMESORT
+    DIMENSION ARR(100)
+    INTEGER I, N, TEMP
+    I = 1
+STEP1 IF I > N GOTO DONE
+      IF I .EQ. 1 GOTO ADVANCE
+      IF ARR(I) .GE. ARR(I-1) GOTO ADVANCE
+      TEMP = ARR(I)
+      ARR(I) = ARR(I-1)
+      ARR(I-1) = TEMP
+      I = I - 1
+      GOTO STEP1
+ADVANCE I = I + 1
+        GOTO STEP1
+DONE  RETURN
+      END
