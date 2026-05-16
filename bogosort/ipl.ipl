@@ -1,23 +1,6 @@
-P0  BOGOSORT
-    1 J0 INITIALISE
-    2 J5 BOGOSORT-LOOP
-    3 J10 PRINT-RESULT
-    END
-
-J0  INITIALISE
-    GEN A = (3 1 4 1 5 9 2 6)
-    GEN N = 8
-    END
-
-J5  BOGOSORT-LOOP
-    PUSH SORTED 1
-    PROCESS-LIST A IS-SORTED
-    TEST SORTED
-    JUMP J10
-    PROCESS-LIST A SHUFFLE
-    JUMP J5
-    END
-
-J10 PRINT-RESULT
-    PROCESS-LIST A PRINT
-    END
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
