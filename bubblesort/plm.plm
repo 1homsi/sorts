@@ -1,0 +1,26 @@
+BUBBLESORT: DO;
+
+DECLARE ARR(7) WORD DATA(64,34,25,12,22,11,90);
+DECLARE (N,I,TMP) WORD;
+DECLARE SWAPPED BYTE;
+
+N = 7;
+SWAPPED = 1;
+DO WHILE SWAPPED;
+    SWAPPED = 0;
+    DO I = 0 TO N-2;
+        IF ARR(I) > ARR(I+1) THEN DO;
+            TMP = ARR(I);
+            ARR(I) = ARR(I+1);
+            ARR(I+1) = TMP;
+            SWAPPED = 1;
+        END;
+    END;
+    N = N - 1;
+END;
+
+DO I = 0 TO 6;
+    CALL WRITE(ARR(I));
+END;
+
+END BUBBLESORT;
