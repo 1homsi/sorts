@@ -1,0 +1,28 @@
+PROGRAM GNOMESORT;
+   DECLARE ARR(6) INTEGER INITIAL (5, 2, 8, 1, 9, 3);
+   DECLARE I INTEGER;
+   DECLARE TEMP INTEGER;
+
+   I = 0;
+   WHILE I < 6 DO
+   BEGIN
+      IF I = 0 THEN
+         I = I + 1;
+      ELSE
+         IF ARR(I) < ARR(I-1) THEN
+         BEGIN
+            TEMP = ARR(I);
+            ARR(I) = ARR(I-1);
+            ARR(I-1) = TEMP;
+            I = I - 1;
+         END;
+         ELSE
+            I = I + 1;
+      END;
+   END;
+
+   DECLARE J INTEGER;
+   FOR J = 0 TO 5 DO
+      WRITE ARR(J);
+
+END GNOMESORT;
