@@ -1,0 +1,43 @@
+define main
+
+function CompareAndSwap(arr: array[integer]; i, j: integer; dir: boolean
+                         returns array[integer])
+    let ai := arr[i]; aj := arr[j] in
+    if dir = (ai > aj) then
+        array_setl(array_setl(arr, i, aj), j, ai)
+    else
+        arr
+    end if
+end let
+end function
+
+function BitonicMerge(arr: array[integer]; lo, cnt: integer; dir: boolean
+                       returns array[integer])
+    if cnt <= 1 then arr
+    else
+        let k := cnt / 2 in
+        let arr2 := for i in lo, lo+k-1 cross arr_ := arr
+                    returns value of array_setl if dir=(arr_[i]>arr_[i+k])
+                        then array_setl(arr_, i, arr_[i+k]), i+k, arr_[i])
+                        else arr_
+                    end for in
+        BitonicMerge(BitonicMerge(arr2, lo, k, dir), lo+k, k, dir)
+        end let
+    end if
+end function
+
+function BitonicSort(arr: array[integer]; lo, cnt: integer; dir: boolean
+                      returns array[integer])
+    if cnt <= 1 then arr
+    else
+        let k := cnt / 2 in
+        BitonicMerge(
+            BitonicSort(BitonicSort(arr, lo, k, true), lo+k, k, false),
+            lo, cnt, dir)
+        end let
+    end if
+end function
+
+function main(returns array[integer])
+    BitonicSort(array[3,7,4,8,6,2,1,5], 1, 8, true)
+end function
