@@ -1,0 +1,21 @@
+@InsertionSort = @IS_aux
+
+@IS_aux = ?(
+  @IS_nil
+  @IS_cons
+)
+
+@IS_nil = *
+
+@IS_cons = (h t) (
+  @Insert h @IS_aux(t)
+)
+
+@Insert = (x lst) ?(
+  (x *)
+  ((h t) ?(
+    (* (x (h t)))
+    (* (h @Insert(x t)))
+    (* (< x h))
+  ))
+)
