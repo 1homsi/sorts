@@ -1,0 +1,14 @@
+arr = [5, 3, 8, 1, 9, 2, 7, 4, 6, 0]
+n = 10
+i = 0
+while i < n
+    if i = 0 or arr[i] >= arr[i-1] then
+        i++
+    else
+        t = arr[i]: arr[i] = arr[i-1]: arr[i-1] = t
+        i--
+    end if
+wend
+for k = 0 to n - 1
+    print arr[k]
+next k
