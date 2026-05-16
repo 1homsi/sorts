@@ -1,0 +1,37 @@
+using System;
+using System.Console;
+
+module CycleSort {
+    CycleSort(arr : array[int]) : int {
+        mutable writes = 0;
+        def n = arr.Length;
+        for (mutable cycleStart = 0; cycleStart < n - 1; cycleStart++) {
+            mutable item = arr[cycleStart];
+            mutable pos = cycleStart;
+            for (mutable i = cycleStart + 1; i < n; i++) {
+                when (arr[i] < item) pos++;
+            }
+            when (pos != cycleStart) {
+                while (item == arr[pos]) pos++;
+                mutable tmp = arr[pos]; arr[pos] = item; item = tmp;
+                writes++;
+                while (pos != cycleStart) {
+                    pos = cycleStart;
+                    for (mutable i = cycleStart + 1; i < n; i++) {
+                        when (arr[i] < item) pos++;
+                    }
+                    while (item == arr[pos]) pos++;
+                    tmp = arr[pos]; arr[pos] = item; item = tmp;
+                    writes++;
+                }
+            }
+        }
+        writes
+    }
+
+    Main() : void {
+        def arr = array[5, 4, 3, 2, 1];
+        _ = CycleSort(arr);
+        WriteLine(string.Join(" ", arr));
+    }
+}
