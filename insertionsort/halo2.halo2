@@ -1,0 +1,49 @@
+use halo2_proofs::{
+    arithmetic::FieldExt,
+    circuit::{Layouter, SimpleFloorPlanner, Value},
+    plonk::{Advice, Circuit, Column, ConstraintSystem, Error, Selector},
+    poly::Rotation,
+};
+
+#[derive(Clone, Debug)]
+struct InsertionSortConfig {
+    advice: [Column<Advice>; 2],
+    selector: Selector,
+}
+
+#[derive(Default)]
+struct InsertionSortCircuit {
+    input: Vec<u64>,
+}
+
+impl<F: FieldExt> Circuit<F> for InsertionSortCircuit {
+    type Config = InsertionSortConfig;
+    type FloorPlanner = SimpleFloorPlanner;
+
+    fn without_witnesses(&self) -> Self {
+        Self::default()
+    }
+
+    fn configure(meta: &mut ConstraintSystem<F>) -> Self::Config {
+        let advice = [meta.advice_column(), meta.advice_column()];
+        let selector = meta.selector();
+        meta.enable_equality(advice[0]);
+        meta.enable_equality(advice[1]);
+        InsertionSortConfig { advice, selector }
+    }
+
+    fn synthesize(&self, config: Self::Config, mut layouter: impl Layouter<F>) -> Result<(), Error> {
+        let mut a = self.input.clone();
+        let n = a.len();
+        for i in 1..n {
+            let key = a[i];
+            let mut j = i as isize - 1;
+            while j >= 0 && a[j as usize] > key {
+                a[(j + 1) as usize] = a[j as usize];
+                j -= 1;
+            }
+            a[(j + 1) as usize] = key;
+        }
+        Ok(())
+    }
+}
