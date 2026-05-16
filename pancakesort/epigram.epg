@@ -1,0 +1,8 @@
+[X] => (Vec X) -> (Vec X)
+pancakeSort : [X](() X -> ()) -> Vec X -> Vec X
+pancakeSort _ xs = xs
+
+main : IO *0
+main = do
+    putStrLn "Pancake Sort: [5 2 8 1 9 3]"
+    return ()
