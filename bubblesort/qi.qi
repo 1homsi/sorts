@@ -1,0 +1,18 @@
+(define bubble-pass
+  [] -> [[] false]
+  [X] -> [[X] false]
+  [X Y | Rest] ->
+    (if (> X Y)
+      (let Result (bubble-pass [X | Rest])
+        [(cons Y (head Result)) true])
+      (let Result (bubble-pass [Y | Rest])
+        [(cons X (head Result)) (second Result)])))
+
+(define bubble-sort
+  Lst ->
+    (let Result (bubble-pass Lst)
+      (if (second Result)
+        (bubble-sort (head Result))
+        (head Result))))
+
+(output "~A~%" (bubble-sort [64 34 25 12 22 11 90]))
