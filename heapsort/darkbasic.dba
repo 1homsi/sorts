@@ -1,0 +1,39 @@
+Dim arr(5) as integer
+arr(0)=12 : arr(1)=11 : arr(2)=13 : arr(3)=5 : arr(4)=6 : arr(5)=7
+n=6
+
+For i=n/2-1 To 0 Step -1
+    Gosub Heapify
+Next i
+
+For i=n-1 To 1 Step -1
+    tmp=arr(0) : arr(0)=arr(i) : arr(i)=tmp
+    ig=i : Gosub HeapifyFromRoot
+Next i
+
+For i=0 To n-1
+    Print arr(i)
+Next i
+End
+
+Heapify:
+    largest=i : left=2*i+1 : right=2*i+2
+    If left<n And arr(left)>arr(largest) Then largest=left
+    If right<n And arr(right)>arr(largest) Then largest=right
+    If largest<>i Then
+        tmp=arr(i) : arr(i)=arr(largest) : arr(largest)=tmp
+        i=largest : Gosub Heapify
+    End If
+Return
+
+HeapifyFromRoot:
+    j=0 : left=1 : right=2 : largest=0
+    h_loop:
+    If left<ig And arr(left)>arr(largest) Then largest=left
+    If right<ig And arr(right)>arr(largest) Then largest=right
+    If largest<>j Then
+        tmp=arr(j) : arr(j)=arr(largest) : arr(largest)=tmp
+        j=largest : left=2*j+1 : right=2*j+2 : largest=j
+        Goto h_loop
+    End If
+Return
