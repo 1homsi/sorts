@@ -1,0 +1,41 @@
+     H DFTACTGRP(*NO)
+     D CocktailSort    PR
+     D  pArr                        10I 0 DIM(100)
+     D  pN                          10I 0 VALUE
+     D CocktailSort    PI
+     D  pArr                        10I 0 DIM(100)
+     D  pN                          10I 0 VALUE
+     D swapped         S              1N
+     D start           S             10I 0
+     D ending          S             10I 0
+     D i               S             10I 0
+     D tmp             S             10I 0
+     C                   EVAL      swapped = *ON
+     C                   EVAL      start = 1
+     C                   EVAL      ending = pN
+     C                   DOW       swapped = *ON
+     C                   EVAL      swapped = *OFF
+     C                   FOR       i = start TO ending - 1
+     C                   IF        pArr(i) > pArr(i + 1)
+     C                   EVAL      tmp = pArr(i)
+     C                   EVAL      pArr(i) = pArr(i + 1)
+     C                   EVAL      pArr(i + 1) = tmp
+     C                   EVAL      swapped = *ON
+     C                   ENDIF
+     C                   ENDFOR
+     C                   IF        swapped = *OFF
+     C                   RETURN
+     C                   ENDIF
+     C                   EVAL      swapped = *OFF
+     C                   EVAL      ending = ending - 1
+     C                   FOR       i = ending - 1 DOWNTO start
+     C                   IF        pArr(i) > pArr(i + 1)
+     C                   EVAL      tmp = pArr(i)
+     C                   EVAL      pArr(i) = pArr(i + 1)
+     C                   EVAL      pArr(i + 1) = tmp
+     C                   EVAL      swapped = *ON
+     C                   ENDIF
+     C                   ENDFOR
+     C                   EVAL      start = start + 1
+     C                   ENDDO
+     C                   RETURN
