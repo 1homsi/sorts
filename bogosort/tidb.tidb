@@ -1,1 +1,1 @@
-print("Bogosort implementation for tidb.tidb")
+SELECT * FROM array ORDER BY value ASC;
