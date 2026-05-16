@@ -1,0 +1,12 @@
+slate> define: #bogosort := [|:arr|
+  [arr isSorted] whileFalse: [arr shuffle].
+  arr
+].
+
+slate> define: #isSorted := [|:arr|
+  arr allSatisfy: [|:i| (i isLast) | (arr at: i) < (arr at: i + 1)]
+].
+
+slate> define: #test := [
+  (bogosort value: #(3 1 2)) print
+].
