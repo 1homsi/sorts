@@ -1,1 +1,1 @@
-print("Bogosort implementation for mquery.mquery")
+SELECT * FROM array ORDER BY value ASC;
