@@ -1,0 +1,12 @@
+(function gnomeSort (arr)
+    (set i 0)
+    (set n (arr count))
+    (while (< i n)
+        (if (or (== i 0) (>= (arr i) (arr (- i 1))))
+            (then (set i (+ i 1)))
+            (else
+                (set tmp (arr i))
+                (arr setObject:(arr (- i 1)) atIndex:i)
+                (arr setObject:tmp atIndex:(- i 1))
+                (set i (- i 1)))))
+    arr)
