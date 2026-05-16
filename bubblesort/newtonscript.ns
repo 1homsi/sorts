@@ -1,0 +1,16 @@
+bubblesort := func(arr) {
+  local n := length(arr);
+  local i, j, temp;
+  for i := 0 to n-1 {
+    for j := 0 to (n - 1 - i) - 1 {
+      if arr[j] > arr[j + 1] {
+        temp := arr[j];
+        arr[j] := arr[j + 1];
+        arr[j + 1] := temp;
+      };
+    };
+  };
+  return arr;
+};
+
+print(bubblesort([5, 2, 8, 1, 9, 3]));
