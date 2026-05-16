@@ -1,0 +1,40 @@
+define: #cyclesort := [| :arr |
+  define: #n := arr length.
+  define: #pos := 0.
+  [pos < n] whileTrue: [
+    define: #item := arr at: pos.
+    define: #cycles := 0.
+    0 to: n - 1 do: [| :i |
+      (i != pos && (arr at: i) < item) ifTrue: [
+        cycles := cycles + 1.
+      ]
+    ].
+    (cycles != 0) ifTrue: [
+      [(arr at: pos) = item] whileTrue: [
+        pos := pos + 1.
+      ].
+      define: #temp := arr at: pos.
+      arr at: pos put: item.
+      item := temp.
+      [cycles > 0] whileTrue: [
+        cycles := 0.
+        0 to: n - 1 do: [| :i |
+          (i != pos && (arr at: i) < item) ifTrue: [
+            cycles := cycles + 1.
+          ]
+        ].
+        [(arr at: pos) = item] whileTrue: [
+          pos := pos + 1.
+        ].
+        temp := arr at: pos.
+        arr at: pos put: item.
+        item := temp.
+        cycles := cycles - 1.
+      ]
+    ].
+    pos := pos + 1.
+  ].
+  arr
+].
+
+({5. 2. 8. 1. 9. 3.} as: Array) do: cyclesort :: printLine.
