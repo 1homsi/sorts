@@ -1,0 +1,13 @@
+%{
+  Pancake Sort Example
+}%
+
+sortprop : type = block {
+    _a : ctype "int" "int"
+  } ;
+
+let sort (arr : ctype "int" "int") : ctype "int" "int" = 
+    arr ;
+
+% Main expression
+sort (5, 2, 8, 1, 9, 3)
