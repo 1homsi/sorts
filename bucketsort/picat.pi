@@ -1,0 +1,37 @@
+main =>
+    Data = [0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68],
+    Sorted = bucket_sort(Data),
+    println(Sorted).
+
+insertion_sort(Bucket) = Sorted =>
+    Arr = Bucket.to_array(),
+    N = Arr.length,
+    foreach(I in 2..N)
+        Key = Arr[I],
+        J = ref(I - 1),
+        while (J.val >= 1, Arr[J.val] > Key)
+            Arr[J.val + 1] := Arr[J.val],
+            J := J.val - 1
+        end,
+        Arr[J.val + 1] := Key
+    end,
+    Sorted = Arr.to_list().
+
+bucket_sort(Arr) = Result =>
+    N = Arr.length,
+    if N == 0 then Result = Arr
+    else
+        MinV = min_list(Arr),
+        MaxV = max_list(Arr),
+        Buckets = new_array(N),
+        foreach(I in 1..N) Buckets[I] = [] end,
+        foreach(Num in Arr)
+            Idx = min(N, floor((Num - MinV) / (MaxV - MinV + 1) * N) + 1),
+            Buckets[Idx] := [Num | Buckets[Idx]]
+        end,
+        Result = [],
+        foreach(I in 1..N)
+            Sorted = insertion_sort(Buckets[I]),
+            Result := Result ++ Sorted
+        end
+    end.
