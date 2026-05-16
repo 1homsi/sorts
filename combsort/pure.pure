@@ -1,0 +1,10 @@
+comb_sort arr = go arr (len arr) with
+  go a 0 = a
+  go a n = go a' (div (n * 10) 13)
+    when a' = foldl swap a (takewhile (< len a - n) [0..]) end
+  swap a i = a when a ! i <= a ! (i + n) end
+  swap a i = a with i := a ! (i + n); i + n := a ! i end
+  len = length
+end;
+
+main = comb_sort [5, 2, 8, 1, 9, 3];
