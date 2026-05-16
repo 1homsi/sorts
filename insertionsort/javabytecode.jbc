@@ -1,0 +1,53 @@
+.class public InsertionSort
+.super java/lang/Object
+
+.method public static insertionSort([I)V
+    .limit stack 4
+    .limit locals 5
+    aload_0
+    arraylength
+    istore_1
+    iconst_1
+    istore_2
+outer:
+    iload_2
+    iload_1
+    if_icmpge done
+    aload_0
+    iload_2
+    iaload
+    istore_3
+    iload_2
+    iconst_1
+    isub
+    istore  4
+inner:
+    iload   4
+    iflt    place
+    aload_0
+    iload   4
+    iaload
+    iload_3
+    if_icmple place
+    aload_0
+    iload   4
+    iconst_1
+    iadd
+    aload_0
+    iload   4
+    iaload
+    iastore
+    iinc    4 -1
+    goto    inner
+place:
+    aload_0
+    iload   4
+    iconst_1
+    iadd
+    iload_3
+    iastore
+    iinc    2 1
+    goto    outer
+done:
+    return
+.end method
