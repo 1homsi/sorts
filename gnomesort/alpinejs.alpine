@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://unpkg.com/alpinejs" defer></script>
+</head>
+<body>
+  <div x-data="{
+    arr: [5, 3, 8, 1, 9, 2, 7, 4, 6, 0],
+    sorted: [],
+    gnomeSort() {
+      const a = [...this.arr];
+      let i = 0, n = a.length;
+      while (i < n) {
+        if (i === 0 || a[i] >= a[i-1]) i++;
+        else { [a[i], a[i-1]] = [a[i-1], a[i]]; i--; }
+      }
+      this.sorted = a;
+    }
+  }">
+    <button @click="gnomeSort()">Sort</button>
+    <ul>
+      <template x-for="val in sorted">
+        <li x-text="val"></li>
+      </template>
+    </ul>
+  </div>
+</body>
+</html>
