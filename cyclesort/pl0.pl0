@@ -1,0 +1,57 @@
+var arr, n, pos, item, cycles, i, temp;
+
+procedure cyclesort;
+begin
+  n := 6;
+  pos := 0;
+  while pos < n do
+  begin
+    item := arr[pos];
+    cycles := 0;
+    i := 0;
+    while i < n do
+    begin
+      if i <> pos then
+        if arr[i] < item then
+          cycles := cycles + 1;
+      i := i + 1
+    end;
+    if cycles <> 0 then
+    begin
+      while arr[pos] = item do
+        pos := pos + 1;
+      temp := arr[pos];
+      arr[pos] := item;
+      item := temp;
+      while cycles > 0 do
+      begin
+        cycles := 0;
+        i := 0;
+        while i < n do
+        begin
+          if i <> pos then
+            if arr[i] < item then
+              cycles := cycles + 1;
+          i := i + 1
+        end;
+        while arr[pos] = item do
+          pos := pos + 1;
+        temp := arr[pos];
+        arr[pos] := item;
+        item := temp;
+        cycles := cycles - 1
+      end
+    end;
+    pos := pos + 1
+  end
+end;
+
+begin
+  arr[0] := 5;
+  arr[1] := 2;
+  arr[2] := 8;
+  arr[3] := 1;
+  arr[4] := 9;
+  arr[5] := 3;
+  call cyclesort
+end.
