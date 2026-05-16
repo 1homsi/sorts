@@ -1,0 +1,15 @@
+function merge(l1, l2) = 
+  if #l1 == 0 then l2
+  else if #l2 == 0 then l1
+  else if l1[0] <= l2[0] then [l1[0]] ++ merge(l1[1:], l2)
+  else [l2[0]] ++ merge(l1, l2[1:]);
+
+function mergesort(arr) =
+  if #arr <= 1 then arr
+  else 
+    let mid = #arr / 2;
+        left = arr[0:mid];
+        right = arr[mid:];
+    in merge(mergesort(left), mergesort(right));
+
+print_array(mergesort([5, 2, 8, 1, 9, 3]));
