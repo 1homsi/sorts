@@ -1,0 +1,11 @@
+data Nat : Set where
+  Ze : Nat
+  Su : Nat -> Nat
+
+insertionSort : List Nat -> List Nat
+insertionSort [] = []
+insertionSort (x : xs) = insert x (insertionSort xs)
+
+insert : Nat -> List Nat -> List Nat
+insert x [] = [x]
+insert x (y : ys) = if x <= y then x : y : ys else y : insert x ys
