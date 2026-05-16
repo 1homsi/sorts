@@ -1,0 +1,29 @@
+BitonicSort := func(arr, lo, cnt, dir) begin
+  if cnt > 1 then begin
+    k := cnt / 2;
+    BitonicSort(arr, lo, k, 1);
+    BitonicSort(arr, lo + k, k, 0);
+    BitonicMerge(arr, lo, cnt, dir);
+  end;
+  return arr;
+end;
+
+BitonicMerge := func(arr, lo, cnt, dir) begin
+  if cnt > 1 then begin
+    k := cnt / 2;
+    for i := lo to lo + cnt - k - 1 do begin
+      if ((arr[i] > arr[i + k]) == (dir == 1)) then begin
+        tmp := arr[i];
+        arr[i] := arr[i + k];
+        arr[i + k] := tmp;
+      end;
+    end;
+    BitonicMerge(arr, lo, k, dir);
+    BitonicMerge(arr, lo + k, k, dir);
+  end;
+  return arr;
+end;
+
+arr := [5, 2, 8, 1, 9, 3, 7, 4];
+BitonicSort(arr, 0, 8, 1);
+Print(arr);
