@@ -1,0 +1,25 @@
+fn cycle_sort(arr: [int]) -> [int]
+    let n: int = len(arr)
+    let writes: int = 0
+    for cycle_start in 0..(n - 1)
+        let item: int = arr[cycle_start]
+        let pos: int = cycle_start
+        for i in (cycle_start + 1)..n
+            if arr[i] < item
+                let pos = pos + 1
+            end
+        end
+        if pos != cycle_start
+            while arr[pos] == item
+                let pos = pos + 1
+            end
+            let tmp: int = arr[pos]
+            let arr[pos] = item
+            let item = tmp
+        end
+    end
+    return arr
+end
+
+let result = cycle_sort([5, 4, 3, 2, 1])
+echo @result
