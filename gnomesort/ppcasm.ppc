@@ -1,0 +1,32 @@
+        .data
+arr:    .long 5,3,8,1,9,2,7,4,6,0
+
+        .text
+        .global _start
+_start:
+        lis   3, arr@ha
+        addi  3, 3, arr@l
+        li    4, 10
+        li    5, 0
+
+loop:
+        cmpw  5, 4
+        bge   done
+        cmpwi 5, 0
+        beq   advance
+        slwi  6, 5, 2
+        add   7, 3, 6
+        lwz   8, 0(7)
+        lwz   9, -4(7)
+        cmpw  8, 9
+        bge   advance
+        stw   9, 0(7)
+        stw   8, -4(7)
+        subi  5, 5, 1
+        b     loop
+advance:
+        addi  5, 5, 1
+        b     loop
+done:
+        li    0, 1
+        sc
