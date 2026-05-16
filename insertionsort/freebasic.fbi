@@ -1,0 +1,12 @@
+Sub InsertionSort(arr() As Integer, n As Integer)
+    Dim As Integer i, j, key
+    For i = 1 To n - 1
+        key = arr(i)
+        j = i - 1
+        While j >= 0 AndAlso arr(j) > key
+            arr(j + 1) = arr(j)
+            j -= 1
+        Wend
+        arr(j + 1) = key
+    Next i
+End Sub
