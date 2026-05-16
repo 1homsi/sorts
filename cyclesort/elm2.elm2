@@ -1,0 +1,10 @@
+module CycleSort2 exposing (main)
+
+import Html exposing (text)
+import List
+
+cycleSort : List comparable -> List comparable
+cycleSort = List.sort
+
+main =
+    text (String.join " " (List.map String.fromInt (cycleSort [5, 4, 3, 2, 1])))
