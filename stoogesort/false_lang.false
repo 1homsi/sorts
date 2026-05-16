@@ -1,0 +1,9 @@
+[a b < [a b a:b;] if
+ j i - 1 > [
+   j i - 1 + 3 / 'a stoogesort
+   i a 1 + stoogesort
+   j i - 1 + 3 / 'a i - j stoogesort
+ ] if
+]'stoogesort
+
+5 2 8 1 9 3 stoogesort
