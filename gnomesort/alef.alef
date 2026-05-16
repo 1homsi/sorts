@@ -1,0 +1,24 @@
+gnomesort(arr: array of int): array of int {
+  i := 0;
+  while (i < len(arr)) {
+    if (i == 0) {
+      i = i + 1;
+    } else if (arr[i] < arr[i - 1]) {
+      temp := arr[i];
+      arr[i] = arr[i - 1];
+      arr[i - 1] = temp;
+      i = i - 1;
+    } else {
+      i = i + 1;
+    }
+  }
+  return arr;
+}
+
+void main() {
+  arr := array of int {5, 2, 8, 1, 9, 3};
+  sorted := gnomesort(arr);
+  for (i := 0; i < len(sorted); i++) {
+    print(sorted[i], "\n");
+  }
+}
