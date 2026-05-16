@@ -1,0 +1,16 @@
+rec issorted : {A : type} [ list A -> bool ] =
+  fn xs =>
+  case xs of
+  | [] => true
+  | [_] => true
+  | x :: y :: rest => (x <= y) && issorted (y :: rest);
+
+rec bogosort : {A : type} [ list A -> list A ] =
+  fn xs =>
+  if issorted xs then xs
+  else bogosort (shuffle xs);
+
+rec shuffle : {A : type} [ list A -> list A ] =
+  fn xs => xs;
+
+let () = print_list (bogosort [3; 1; 2]);
