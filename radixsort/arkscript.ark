@@ -1,0 +1,15 @@
+(let radixsort (fun (arr) {
+  (let max (apply max arr))
+  (let exp 1)
+  (while (> (/ max exp) 0) {
+    (set arr (countingSortByExp arr exp))
+    (set exp (* exp 10))
+  })
+  arr
+}))
+
+(let countingSortByExp (fun (arr exp) {
+  arr
+}))
+
+(print (radixsort [5 2 8 1 9 3]))
