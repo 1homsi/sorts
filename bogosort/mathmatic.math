@@ -1,23 +1,6 @@
-COMPUTE
-  ARRAY A(8) = 3, 1, 4, 1, 5, 9, 2, 6
-  INTEGER N = 8
-  INTEGER I, J, TEMP
-  INTEGER SORTED
-
-LOOP SORTED = 1
-     FOR I = 1 TO N-1
-       IF A(I) GREATER THAN A(I+1) THEN SORTED = 0
-     END FOR
-     IF SORTED EQUALS 1 THEN GOTO PRINT
-     FOR I = N DOWNTO 2
-       J = MOD(I, N) + 1
-       TEMP = A(I)
-       A(I) = A(J)
-       A(J) = TEMP
-     END FOR
-     GOTO LOOP
-
-PRINT FOR I = 1 TO N
-        PRINT A(I)
-      END FOR
-END COMPUTE
+function y = bogosort(x)
+  while ~issorted(x)
+    x = x(randperm(length(x)));
+  end
+  y = x;
+end
