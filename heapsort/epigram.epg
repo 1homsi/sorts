@@ -1,0 +1,11 @@
+heapsort : List Int -> List Int
+heapsort [] = []
+heapsort (x : xs) = insert x (heapsort xs)
+
+insert : Int -> List Int -> List Int
+insert x [] = [x]
+insert x (y : ys) = 
+  if x <= y then x : y : ys else y : insert x ys
+
+main : List Int
+main = heapsort [5, 2, 8, 1, 9, 3]
