@@ -1,0 +1,34 @@
+import structure List from "x-alice:/lib/data/List"
+import structure Vector from "x-alice:/lib/data/Vector"
+
+fun insertSorted (x, nil) = [x]
+  | insertSorted (x, h::t) =
+    if x <= h then x::h::t
+    else h::(insertSorted (x, t))
+
+fun insertionSort nil = nil
+  | insertionSort (h::t) = insertSorted (h, insertionSort t)
+
+fun getIdx (num, mn, mx, n) =
+    let val raw = Real.floor ((num - mn) / (mx - mn + 1.0) * Real.fromInt n)
+    in Int.min (n - 1, raw) end
+
+fun bucketSort nil = nil
+  | bucketSort arr =
+    let
+        val n = List.length arr
+        val mn = List.foldl Real.min (List.hd arr) arr
+        val mx = List.foldl Real.max (List.hd arr) arr
+        val buckets = Vector.tabulate (n, fn _ => ref nil)
+        val () = List.app (fn x =>
+            let val idx = getIdx (x, mn, mx, n)
+                val bref = Vector.sub (buckets, idx)
+            in bref := x :: !bref end) arr
+    in
+        Vector.foldl (fn (bref, acc) =>
+            acc @ insertionSort (!bref)) nil buckets
+    end
+
+val data = [0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68]
+val sorted = bucketSort data
+val _ = print (List.toString Real.toString sorted ^ "\n")
