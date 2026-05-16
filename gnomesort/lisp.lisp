@@ -1,0 +1,10 @@
+(defun gnome-sort (arr)
+  (let ((n (length arr))
+        (i 0))
+    (loop while (< i n)
+          do (if (or (= i 0) (>= (aref arr i) (aref arr (1- i))))
+                 (incf i)
+                 (progn
+                   (rotatef (aref arr i) (aref arr (1- i)))
+                   (decf i))))
+    arr))
