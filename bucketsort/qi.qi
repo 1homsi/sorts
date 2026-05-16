@@ -1,0 +1,21 @@
+(define insert-sorted
+    X [] -> [X]
+    X [H|T] -> [X H | T] where (<= X H)
+    X [H|T] -> [H | (insert-sorted X T)])
+
+(define insertion-sort
+    [] -> []
+    [H|T] -> (insert-sorted H (insertion-sort T)))
+
+(define bucket-sort
+    [] -> []
+    Arr ->
+    (let N (length Arr)
+         Min (fold-left (fn [M V] (if (< V M) V M)) (hd Arr) Arr)
+         Max (fold-left (fn [M V] (if (> V M) V M)) (hd Arr) Arr)
+         Buckets (map (fn [I] (filter (fn [X]
+            (= (min (- N 1) (floor (* (/ (- X Min) (+ (- Max Min) 1)) N))) I))
+            Arr)) (range 0 (- N 1)))
+         (apply append (map insertion-sort Buckets))))
+
+(output "~A~%" (bucket-sort [0.78 0.17 0.39 0.26 0.72 0.94 0.21 0.12 0.23 0.68]))
