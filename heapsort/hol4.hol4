@@ -1,0 +1,14 @@
+open HolKernel Parse boolLib arithmeticLib listLib;
+
+val heapsort_def = Define `
+  heapsort [] = []
+  /\ heapsort (x::xs) = insert x (heapsort xs)
+`;
+
+val insert_def = Define `
+  insert x [] = [x]
+  /\ insert x (y::ys) = 
+    if x <= y then x::y::ys else y :: insert x ys
+`;
+
+val example = rconc (EVAL (Term `heapsort [5;2;8;1;9;3]`));
