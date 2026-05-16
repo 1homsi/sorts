@@ -1,0 +1,18 @@
+def cocktailsort(arr):
+  n = size(arr)
+  i = 0
+  arr_copy = copy(arr)
+  while i < n do
+    swapped = False
+    for k in range(n - i - 1) do
+      if arr_copy[k] > arr_copy[k + 1] do
+        temp = arr_copy[k]
+        arr_copy[k] = arr_copy[k + 1]
+        arr_copy[k + 1] = temp
+        swapped = True
+    if not swapped then break
+    i = i + 1
+  arr_copy
+
+arr = [5, 2, 8, 1, 9, 3]
+print(cocktailsort(arr))
