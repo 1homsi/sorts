@@ -1,0 +1,14 @@
+heapsort xs = snd (foldl heapify (0, xs) [0..n-1]) with
+  n = length xs;
+  heapify (i, arr) j = (i+1, siftdown arr j n) where
+    n = length arr;
+  siftdown arr i n = if largest != i then
+      siftdown (arr with [i, largest] = arr.[largest, i]) largest n
+    else arr
+    where
+      largest = foldl cmp_child i [1..2];
+      cmp_child l r = if r < n && arr.r > arr.l then r else l;
+end where {
+  arr = array (5, 2, 8, 1, 9, 3);
+  println arr;
+};
