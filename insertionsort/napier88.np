@@ -1,0 +1,14 @@
+let InsertionSort = proc(arr: vector of integer) returns vector of integer
+  is
+  let n = arr.length();
+  for i in 1 upto n-1 do
+    let key = arr.at(i);
+    let j = i - 1;
+    while j >= 0 cand arr.at(j) > key do
+      arr.put(j+1, arr.at(j));
+      j := j - 1;
+    end;
+    arr.put(j+1, key);
+  end;
+  results are arr
+end;
