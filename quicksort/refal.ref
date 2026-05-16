@@ -1,0 +1,28 @@
+$$ENTRY Go {
+  = <Prout <Quicksort [5 2 8 1 9 3]>>;
+}
+
+Quicksort {
+  [] = [];
+  [E] = [E];
+  [H T] = <Quicksort <Filter H T (<=)>>
+          [H]
+          <Quicksort <Filter H T (>)>>;
+}
+
+Filter {
+  H [] (Op) = [];
+  H [E Tail] (Op) =
+    <CompOp E H Op>
+      <Append [E] <Filter H Tail (Op)>>
+      <Filter H Tail (Op)>;
+}
+
+CompOp {
+  E H (<=) = True: True, False: False;
+}
+
+Append {
+  [] L = L;
+  [H T] L = [H <Append T L>];
+}
