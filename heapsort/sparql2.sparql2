@@ -1,0 +1,7 @@
+PREFIX : <http://heapsort2.example.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?val WHERE {
+  VALUES ?val { 12 11 13 5 6 7 }
+}
+ORDER BY ASC(?val)
