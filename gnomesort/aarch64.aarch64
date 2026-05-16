@@ -1,0 +1,28 @@
+        .data
+arr:    .word 5,3,8,1,9,2,7,4,6,0
+
+        .text
+        .global gnome_sort
+gnome_sort:
+        adr  x0, arr
+        mov  x1, #10
+        mov  x2, #0
+loop:
+        cmp  x2, x1
+        bge  done
+        cbz  x2, advance
+        lsl  x3, x2, #2
+        add  x4, x0, x3
+        ldr  w5, [x4]
+        ldr  w6, [x4, #-4]
+        cmp  w5, w6
+        bge  advance
+        str  w6, [x4]
+        str  w5, [x4, #-4]
+        sub  x2, x2, #1
+        b    loop
+advance:
+        add  x2, x2, #1
+        b    loop
+done:
+        ret
