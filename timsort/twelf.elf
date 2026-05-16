@@ -1,0 +1,19 @@
+arr : type.
+empty : arr.
+cons : int -> arr -> arr.
+
+timsort : arr -> arr -> type.
+
+mergesort : arr -> arr -> type.
+
+insertionsort : arr -> arr -> type.
+
+merge : arr -> arr -> arr -> type.
+
+timsort-base : timsort empty empty.
+
+mergesort-base : mergesort empty empty.
+
+insertionsort-base : insertionsort empty empty.
+
+merge-base : merge empty A A.
