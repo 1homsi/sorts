@@ -1,0 +1,36 @@
+PROC COCKTAILSORT(ARR, N) $
+BEGIN
+    ITEM SWAPPED, START, ENDING, I, TMP S;
+    SWAPPED = 1;
+    START = 0;
+    ENDING = N - 1;
+    FOR SWAPPED ~= 0 $
+    BEGIN
+        SWAPPED = 0;
+        FOR I = START STEP 1 UNTIL ENDING - 1 $
+        BEGIN
+            IF ARR(I) > ARR(I + 1) $
+            BEGIN
+                TMP = ARR(I);
+                ARR(I) = ARR(I + 1);
+                ARR(I + 1) = TMP;
+                SWAPPED = 1;
+            END;
+        END;
+        IF SWAPPED = 0 $
+            RETURN;
+        SWAPPED = 0;
+        ENDING = ENDING - 1;
+        FOR I = ENDING - 1 STEP -1 UNTIL START $
+        BEGIN
+            IF ARR(I) > ARR(I + 1) $
+            BEGIN
+                TMP = ARR(I);
+                ARR(I) = ARR(I + 1);
+                ARR(I + 1) = TMP;
+                SWAPPED = 1;
+            END;
+        END;
+        START = START + 1;
+    END;
+END;
