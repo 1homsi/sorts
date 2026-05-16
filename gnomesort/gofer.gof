@@ -1,0 +1,13 @@
+gnomesort [] = []
+gnomesort [x] = [x]
+gnomesort xs = gnomesort_iter 0 (array xs)
+  where
+    gnomesort_iter i a | i >= length a = a
+                        | a!i < a!(i-1) = gnomesort_iter (i-1) (swap i (i-1) a)
+                        | otherwise = gnomesort_iter (i+1) a
+
+    swap i j a = listArray (bounds a) [if k == i then a!j else if k == j then a!i else a!k | k <- indices a]
+
+main = do
+  let test = [5, 2, 8, 1, 9, 3]
+  print (gnomesort test)
