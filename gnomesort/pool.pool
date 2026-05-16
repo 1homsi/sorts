@@ -1,0 +1,17 @@
+CLASS GnomeSort
+    OPERATION Sort(arr: Array[Integer]; n: Integer)
+        VAR i: Integer := 0;
+        VAR tmp: Integer;
+    BEGIN
+        WHILE i < n DO
+            IF i = 0 OR arr[i] >= arr[i - 1] THEN
+                i := i + 1
+            ELSE
+                tmp := arr[i];
+                arr[i] := arr[i - 1];
+                arr[i - 1] := tmp;
+                i := i - 1
+            END
+        END
+    END Sort
+END GnomeSort
