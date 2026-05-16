@@ -1,0 +1,21 @@
+Section QUICKSORT;
+(
+  arr : ARRAY[INT];
+
+  quicksort(arr : ARRAY[INT]) : ARRAY[INT]
+  <- (
+    arr.count <= 1
+      ifTrue: [^ arr]
+      ifFalse: (
+        pivot = arr.item(0);
+        less = ARRAY[INT].create;
+        greater = ARRAY[INT].create;
+        (1..(arr.count - 1)).do[i |
+          (arr.item(i) <= pivot)
+            ifTrue: [less.add(arr.item(i))]
+            ifFalse: [greater.add(arr.item(i))]
+        ];
+        ^ (quicksort(less)).append(pivot).append(quicksort(greater))
+      )
+  );
+)
