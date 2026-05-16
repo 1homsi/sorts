@@ -1,0 +1,51 @@
+        ARR = TABLE()
+        ARR<1> = 5
+        ARR<2> = 4
+        ARR<3> = 3
+        ARR<4> = 2
+        ARR<5> = 1
+        N = 5
+        WRITES = 0
+        CYCLE.START = 1
+
+OUTER   GT(CYCLE.START, N - 1)              :S(DONE)
+        ITEM = ARR<CYCLE.START>
+        POS = CYCLE.START
+        I = CYCLE.START + 1
+
+INNER   GT(I, N)                            :S(ENDINNER)
+        LT(ARR<I>, ITEM)                    :F(NOINC)
+        POS = POS + 1
+NOINC   I = I + 1                           :(INNER)
+ENDINNER
+        EQ(POS, CYCLE.START)                :S(NEXT)
+
+SKIP    NE(ARR<POS>, ITEM)                  :S(DOSWAP)
+        POS = POS + 1                       :(SKIP)
+DOSWAP  TMP = ARR<POS>
+        ARR<POS> = ITEM
+        ITEM = TMP
+        WRITES = WRITES + 1
+
+CYLOOP  EQ(POS, CYCLE.START)               :S(NEXT)
+        POS = CYCLE.START
+        I = CYCLE.START + 1
+
+CINNER  GT(I, N)                           :S(ENDCINNER)
+        LT(ARR<I>, ITEM)                   :F(CNOINC)
+        POS = POS + 1
+CNOINC  I = I + 1                          :(CINNER)
+ENDCINNER
+CSKIP   NE(ARR<POS>, ITEM)                :S(CDOSWAP)
+        POS = POS + 1                      :(CSKIP)
+CDOSWAP TMP = ARR<POS>
+        ARR<POS> = ITEM
+        ITEM = TMP
+        WRITES = WRITES + 1               :(CYLOOP)
+
+NEXT    CYCLE.START = CYCLE.START + 1     :(OUTER)
+DONE    I = 1
+PRINT   GT(I, N)                          :S(END)
+        OUTPUT = ARR<I>
+        I = I + 1                         :(PRINT)
+END
