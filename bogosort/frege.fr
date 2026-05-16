@@ -1,15 +1,6 @@
-module Bogosort where
-
-import frege.prelude.PreludeBase
-import Data.List (permutations)
-
-isSorted :: [Int] -> Bool
-isSorted [] = true
-isSorted [_] = true
-isSorted (x:y:rest) = x <= y && isSorted (y:rest)
-
-bogosort :: [Int] -> [Int]
-bogosort xs = head $ filter isSorted (permutations xs)
-
-main :: IO ()
-main = println $ bogosort [3, 1, 4, 1, 5, 9, 2, 6]
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
