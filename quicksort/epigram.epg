@@ -1,0 +1,9 @@
+quicksort :: List Int -> List Int
+quicksort [] = []
+quicksort [x] = [x]
+quicksort (x: xs) =
+  quicksort [y | y <- xs, y <= x] ++
+  [x] ++
+  quicksort [y | y <- xs, y > x]
+
+main = print (quicksort [5, 2, 8, 1, 9, 3])
