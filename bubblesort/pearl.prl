@@ -1,0 +1,18 @@
+PROBLEM BUBBLE;
+DECLARATION:
+REAL ARRAY ARR(1:6);
+INTEGER I, J, TEMP, N;
+N := 6;
+ARR(1) := 5.0; ARR(2) := 2.0; ARR(3) := 8.0;
+ARR(4) := 1.0; ARR(5) := 9.0; ARR(6) := 3.0;
+STATEMENT:
+DO FOR I FROM 1 TO N
+  DO FOR J FROM 1 TO (N - I)
+    IF ARR(J) > ARR(J + 1)
+    THEN TEMP := ARR(J);
+         ARR(J) := ARR(J + 1);
+         ARR(J + 1) := TEMP
+    FI
+  OD
+OD;
+END PROBLEM BUBBLE;
