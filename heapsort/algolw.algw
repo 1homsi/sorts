@@ -1,0 +1,41 @@
+BEGIN
+  INTEGER ARRAY ARR(1:6);
+  INTEGER N, I, LARGEST, LEFT, RIGHT, TEMP;
+  
+  ARR(1) := 5; ARR(2) := 2; ARR(3) := 8; ARR(4) := 1; ARR(5) := 9; ARR(6) := 3;
+  N := 6;
+  
+  FOR I := N DIV 2 DOWNTO 1 DO
+    SIFTDOWN(ARR, I, N);
+  
+  FOR I := N DOWNTO 2 DO
+    BEGIN
+      TEMP := ARR(1);
+      ARR(1) := ARR(I);
+      ARR(I) := TEMP;
+      SIFTDOWN(ARR, 1, I - 1);
+    END;
+  
+  FOR I := 1 STEP 1 UNTIL N DO
+    WRITE(ARR(I));
+END;
+
+PROCEDURE SIFTDOWN(ARR, IDX, N);
+  INTEGER ARRAY ARR;
+  INTEGER IDX, N, LARGEST, LEFT, RIGHT, TEMP;
+  BEGIN
+    LARGEST := IDX;
+    LEFT := 2 * IDX;
+    RIGHT := 2 * IDX + 1;
+    IF LEFT <= N AND ARR(LEFT) > ARR(LARGEST) THEN
+      LARGEST := LEFT;
+    IF RIGHT <= N AND ARR(RIGHT) > ARR(LARGEST) THEN
+      LARGEST := RIGHT;
+    IF LARGEST != IDX THEN
+      BEGIN
+        TEMP := ARR(IDX);
+        ARR(IDX) := ARR(LARGEST);
+        ARR(LARGEST) := TEMP;
+        SIFTDOWN(ARR, LARGEST, N);
+      END;
+  END;
