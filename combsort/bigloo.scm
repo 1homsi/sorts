@@ -1,0 +1,22 @@
+(define (comb-sort arr)
+  (let ((gap (vector-length arr))
+        (swapped #t))
+    (while (or (> gap 1) swapped)
+      (set! gap (floor (* gap (/ 10 13))))
+      (if (< gap 1) (set! gap 1))
+      (set! swapped #f)
+      (let loop ((i 0))
+        (if (< i (- (vector-length arr) gap))
+          (begin
+            (if (> (vector-ref arr i) (vector-ref arr (+ i gap)))
+              (begin
+                (let ((temp (vector-ref arr i)))
+                  (vector-set! arr i (vector-ref arr (+ i gap)))
+                  (vector-set! arr (+ i gap) temp))
+                (set! swapped #t)))
+            (loop (+ i 1))))))
+    arr))
+
+(define sample #(5 2 8 1 9 3))
+(comb-sort sample)
+(print sample)
