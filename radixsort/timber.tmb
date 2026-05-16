@@ -1,0 +1,14 @@
+module Main where
+
+radixsort :: [Int] -> [Int]
+radixsort arr = let max = maximum arr in
+  loop arr 1 max
+  where
+    loop arr exp max | max `div` exp <= 0 = arr
+                     | otherwise = loop (countingSortByExp arr exp) (exp * 10) max
+
+countingSortByExp :: [Int] -> Int -> [Int]
+countingSortByExp arr exp = arr
+
+main :: IO ()
+main = print (radixsort [5, 2, 8, 1, 9, 3])
