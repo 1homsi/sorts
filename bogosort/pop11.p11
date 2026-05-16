@@ -1,0 +1,29 @@
+define bogosort(arr);
+  lvars i, j, n, tmp, sorted;
+  length(arr) -> n;
+  1 -> sorted;
+  until sorted do
+    1 -> sorted;
+    for i from 1 to n - 1 do
+      if arr(i) > arr(i + 1) then
+        0 -> sorted;
+        break;
+      endif;
+    endfor;
+    if sorted = 0 then
+      for i from 1 to n do
+        random(n) -> j;
+        arr(i) -> tmp;
+        arr(j) -> arr(i);
+        tmp -> arr(j);
+      endfor;
+    endif;
+  enduntil;
+  arr;
+enddefine;
+
+define test;
+  bogosort({3 1 2}) =>
+enddefine;
+
+test();
