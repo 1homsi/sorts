@@ -1,0 +1,35 @@
+procedure heapify(arr, n, i);
+    largest := i;
+    left := 2 * i + 1;
+    right := 2 * i + 2;
+    if left < n and arr(left + 1) > arr(largest + 1) then
+        largest := left;
+    end if;
+    if right < n and arr(right + 1) > arr(largest + 1) then
+        largest := right;
+    end if;
+    if largest /= i then
+        tmp := arr(i + 1);
+        arr(i + 1) := arr(largest + 1);
+        arr(largest + 1) := tmp;
+        arr := heapify(arr, n, largest);
+    end if;
+    return arr;
+end procedure;
+
+procedure heapsort(arr);
+    n := #arr;
+    for i in [n div 2 - 1, n div 2 - 2 .. 0] do
+        arr := heapify(arr, n, i);
+    end for;
+    for i in [n - 1, n - 2 .. 1] do
+        tmp := arr(1);
+        arr(1) := arr(i + 1);
+        arr(i + 1) := tmp;
+        arr := heapify(arr, i, 0);
+    end for;
+    return arr;
+end procedure;
+
+arr := [12, 11, 13, 5, 6, 7];
+print(heapsort(arr));
