@@ -1,0 +1,16 @@
+ GNOMESORT: PROCEDURE(ARR, N);
+    DECLARE ARR(*) FIXED BIN(31) PARAMETER;
+    DECLARE N FIXED BIN(31) PARAMETER;
+    DECLARE (I, TMP) FIXED BIN(31);
+    I = 1;
+    DO WHILE (I <= N);
+       IF I = 1 | ARR(I) >= ARR(I-1) THEN
+          I = I + 1;
+       ELSE DO;
+          TMP = ARR(I);
+          ARR(I) = ARR(I-1);
+          ARR(I-1) = TMP;
+          I = I - 1;
+       END;
+    END;
+ END GNOMESORT;
