@@ -1,0 +1,25 @@
+cycleSort: arr
+    | n writes item pos tmp |
+    n := arr size.
+    writes := 0.
+    1 to: n - 1 do: [:cycleStart |
+        item := arr at: cycleStart.
+        pos := cycleStart.
+        cycleStart + 1 to: n do: [:i |
+            (arr at: i) < item ifTrue: [pos := pos + 1]].
+        pos ~= cycleStart ifTrue: [
+            [(arr at: pos) = item] whileTrue: [pos := pos + 1].
+            tmp := arr at: pos.
+            arr at: pos put: item.
+            item := tmp.
+            writes := writes + 1.
+            [pos ~= cycleStart] whileTrue: [
+                pos := cycleStart.
+                cycleStart + 1 to: n do: [:i |
+                    (arr at: i) < item ifTrue: [pos := pos + 1]].
+                [(arr at: pos) = item] whileTrue: [pos := pos + 1].
+                tmp := arr at: pos.
+                arr at: pos put: item.
+                item := tmp.
+                writes := writes + 1]]].
+    ^ arr
