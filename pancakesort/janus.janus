@@ -1,0 +1,7 @@
+from n := 0 to 5 do
+    from x := 0 to 5 do
+        if arr[x] > arr[x+1] then
+            arr[x] <-> arr[x+1]
+        fi
+    od
+od
