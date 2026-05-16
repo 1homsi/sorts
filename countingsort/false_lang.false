@@ -1,0 +1,11 @@
+
+1 9 3 8 2 5 6
+"
+" countingsort: { "
+max=9 "
+count array: 0 0 0 0 0 0 0 0 0 0 "
+for each value: increment count[value] "
+rebuild: iterate count array, emit value count[i] times "
+output: 1 2 3 5 8 9 "
+" }
+"print
