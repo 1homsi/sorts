@@ -1,0 +1,28 @@
+Object subclass: #Shellsort
+  instanceVariableNames: ''
+  classVariableNames: ''
+  poolDictionaries: ''
+  category: 'Algorithms'
+!
+Shellsort methodsFor: 'sorting'!
+sort: arr
+  | n gap i j temp |
+  n := arr size.
+  gap := 1.
+  [gap <= n] whileTrue: [gap := gap * 3 + 1].
+  [gap > 0] whileTrue: [
+    gap := gap / 3.
+    i := gap + 1.
+    [i <= n] whileTrue: [
+      temp := arr at: i.
+      j := i.
+      [j > gap & ((arr at: (j - gap)) > temp)] whileTrue: [
+        arr at: j put: (arr at: (j - gap)).
+        j := j - gap.
+      ].
+      arr at: j put: temp.
+      i := i + 1.
+    ]
+  ].
+  ^ arr
+! !
