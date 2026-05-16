@@ -1,0 +1,18 @@
+node gnomesort(arr: int^6) returns (out: int^6);
+var
+  i: int;
+  temp: int;
+  sorted: bool;
+let
+  i = 0;
+  out = arr;
+  assume i >= 0 and i <= 6;
+tel;
+
+node main() returns (out: int^6);
+var
+  test: int^6;
+let
+  test = [5, 2, 8, 1, 9, 3];
+  out = gnomesort(test);
+tel;
