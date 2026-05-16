@@ -1,0 +1,50 @@
+to heapsort :arr
+  heapify :arr
+  local [i size]
+  make "size count :arr
+  make "i :size
+  repeat :size - 1 [
+    local [temp]
+    make "temp item 1 :arr
+    setitem 1 :arr item :i :arr
+    setitem :i :arr :temp
+    make "i :i - 1
+    siftdown :arr 1 :i
+  ]
+  print :arr
+end
+
+to heapify :arr
+  local [i]
+  make "i int (:size / 2)
+  repeat :i [
+    siftdown :arr :i :size
+    make "i :i - 1
+  ]
+end
+
+to siftdown :arr :i :size
+  local [largest left right]
+  make "largest :i
+  make "left :i * 2
+  make "right :i * 2 + 1
+  if :left <= :size [
+    if item :left :arr > item :largest :arr [
+      make "largest :left
+    ]
+  ]
+  if :right <= :size [
+    if item :right :arr > item :largest :arr [
+      make "largest :right
+    ]
+  ]
+  if :largest <> :i [
+    local [temp]
+    make "temp item :i :arr
+    setitem :i :arr item :largest :arr
+    setitem :largest :arr :temp
+    siftdown :arr :largest :size
+  ]
+end
+
+heapsort [5 2 8 1 9 3]
