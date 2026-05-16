@@ -1,0 +1,3 @@
+{{#each (gnomeSort arr) as |val|}}
+  <li>{{val}}</li>
+{{/each}}
