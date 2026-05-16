@@ -1,0 +1,15 @@
+def countingsort(arr) =
+  let max = reduce(lambda a, b: if a > b then a else b, 0, arr)
+  let count = map(lambda i: 0, upto(0, max))
+  let count' = reduce(
+    lambda c, x: update(c, x, c[x] + 1),
+    count,
+    arr
+  )
+  let output = concat(map(
+    lambda i: replicate(count'[i], i),
+    upto(0, max)
+  ))
+  output
+
+print(countingsort([5, 2, 8, 1, 9, 3]))
