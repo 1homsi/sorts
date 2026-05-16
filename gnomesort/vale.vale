@@ -1,0 +1,14 @@
+fn gnomeSort(arr &[]int, n int) []int {
+  i! = 0;
+  while i < n {
+    if i == 0 or arr[i] >= arr[i - 1] {
+      set i = i + 1;
+    } else {
+      tmp = arr[i];
+      set arr[i] = arr[i - 1];
+      set arr[i - 1] = tmp;
+      set i = i - 1;
+    }
+  }
+  return arr;
+}
