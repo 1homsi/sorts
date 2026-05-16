@@ -1,1 +1,1 @@
-print("Bogosort implementation for snowflakesql.snowsql")
+SELECT * FROM array ORDER BY value ASC;
