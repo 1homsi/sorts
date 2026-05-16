@@ -1,1 +1,6 @@
-print("Bogosort implementation for yew.yew")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
