@@ -1,0 +1,18 @@
+def selection_sort(arr : uint[]) {
+  uint n = arr.length();
+  for (uint i = 0; i < n - 1; i++) {
+    uint min_idx = i;
+    for (uint j = i + 1; j < n; j++) {
+      if (arr[j] < arr[min_idx]) {
+        min_idx = j;
+      }
+    }
+    uint tmp = arr[i];
+    arr[i] = arr[min_idx];
+    arr[min_idx] = tmp;
+  }
+  return arr;
+}
+
+uint[] result = selection_sort([5u, 2u, 8u, 1u, 9u, 3u]);
+print(result);
