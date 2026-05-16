@@ -1,0 +1,11 @@
+function radixsort(arr) =
+  let
+    max = reduce(maxval, arr);
+    exp = 1;
+  in
+    if (max / exp <= 0) then arr else arr
+  endif;
+
+function countingSortByExp(arr, exp) = arr;
+
+value main = radixsort([5, 2, 8, 1, 9, 3]);
