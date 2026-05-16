@@ -1,0 +1,24 @@
+define combSort
+  [
+    dup length cat:swap
+    [
+      over 10 * 13 /div
+      dup 1 <
+        [ pop 1 ]
+      if
+      over length over - range
+      [
+        dup2 getrange
+        dup2 add-gap getrange
+        2dup > [ 2swap ]
+        [ pop ]
+        if
+      ]
+      each
+      dup 1 =
+    ]
+    until pop
+  ]
+quote
+
+[5 2 8 1 9 3] combSort . cr
