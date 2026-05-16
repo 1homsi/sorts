@@ -1,0 +1,31 @@
+class Bogosort {
+  static void bogosort(inout int[] arr) {
+    while (!issorted(arr)) {
+      shuffle(arr);
+    }
+  }
+
+  static bool issorted(int[] arr) {
+    for (int i = 0; i < arr.size - 1; i++) {
+      if (arr[i] > arr[i+1]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  static void shuffle(inout int[] arr) {
+    for (int i = 0; i < arr.size; i++) {
+      int j = i;
+      int tmp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = tmp;
+    }
+  }
+}
+
+main() {
+  int[] arr = [3, 1, 2];
+  Bogosort.bogosort(arr);
+  println(arr);
+}
