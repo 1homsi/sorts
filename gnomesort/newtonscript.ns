@@ -1,0 +1,22 @@
+GnomeSort := func(arr) {
+  local i;
+  local temp;
+
+  i := 0;
+  while (i < Length(arr)) do (
+    if (i = 0) then
+      i := i + 1
+    else if (arr[i] < arr[i - 1]) then (
+      temp := arr[i],
+      arr[i] := arr[i - 1],
+      arr[i - 1] := temp,
+      i := i - 1
+    ) else
+      i := i + 1
+  );
+
+  return arr;
+};
+
+local test := [5, 2, 8, 1, 9, 3];
+Print(GnomeSort(test));
