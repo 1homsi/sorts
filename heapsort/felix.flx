@@ -1,0 +1,41 @@
+fun heapsort(a: array[int]): array[int] =
+{
+    var arr = a;
+    val n = arr.len();
+    var i = n / 2 - 1;
+    while i >= 0 do
+    {
+        siftdown(arr, i, n);
+        i = i - 1;
+    }
+    i = n - 1;
+    while i > 0 do
+    {
+        val temp = arr.0;
+        arr.0 = arr.(i);
+        arr.(i) = temp;
+        siftdown(arr, 0, i);
+        i = i - 1;
+    }
+    return arr;
+}
+
+fun siftdown(a: array[int], idx: int, n: int): unit =
+{
+    var largest = idx;
+    val left = 2 * idx + 1;
+    val right = 2 * idx + 2;
+    if left < n && a.(left) > a.(largest) then
+        largest = left;
+    if right < n && a.(right) > a.(largest) then
+        largest = right;
+    if largest != idx then
+    {
+        val temp = a.(idx);
+        a.(idx) = a.(largest);
+        a.(largest) = temp;
+        siftdown(a, largest, n);
+    }
+}
+
+println$ heapsort(array(5, 2, 8, 1, 9, 3));
