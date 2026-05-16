@@ -1,0 +1,34 @@
+fn cocktailsort(arr: array[int]) {
+    n := len(arr);
+    i := 0;
+    loop {
+        if (i >= n) { break; }
+        swapped := false;
+        for (k := 0; k < n - i - 1; k++) {
+            if (arr[k] > arr[k + 1]) {
+                temp := arr[k];
+                arr[k] = arr[k + 1];
+                arr[k + 1] = temp;
+                swapped = true;
+            }
+        }
+        if (!swapped) { break; }
+        i++;
+        swapped = false;
+        for (k := n - i - 2; k >= 0; k--) {
+            if (arr[k] > arr[k + 1]) {
+                temp := arr[k];
+                arr[k] = arr[k + 1];
+                arr[k + 1] = temp;
+                swapped = true;
+            }
+        }
+        if (!swapped) { break; }
+        i++;
+    }
+}
+
+main() {
+    arr := array[int]{5, 2, 8, 1, 9, 3};
+    cocktailsort(arr);
+}
