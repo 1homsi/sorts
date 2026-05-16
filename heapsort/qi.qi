@@ -1,0 +1,28 @@
+(define heapify
+  Arr N I ->
+  (let Left (+ (* 2 I) 1)
+       Right (+ (* 2 I) 2)
+       Largest0 (if (and (< Left N) (> (nth Left Arr) (nth I Arr))) Left I)
+       Largest (if (and (< Right N) (> (nth Right Arr) (nth Largest0 Arr))) Right Largest0)
+    (if (= Largest I)
+        Arr
+        (let Vi (nth I Arr)
+             Vl (nth Largest Arr)
+             Arr1 (update-nth I Vl Arr)
+             Arr2 (update-nth Largest Vi Arr1)
+          (heapify Arr2 N Largest)))))
+
+(define heapsort
+  Lst ->
+  (let N (length Lst)
+       Arr (list->array Lst)
+       Heap (foldl (fn I Acc -> (heapify Acc N I)) Arr (range (- (div N 2) 1) -1 -1))
+       Sorted (foldl (fn I Acc ->
+                       (let Tmp (nth 0 Acc)
+                            Acc1 (update-nth 0 (nth I Acc) Acc)
+                            Acc2 (update-nth I Tmp Acc1)
+                         (heapify Acc2 I 0)))
+                     Heap (range (- N 1) 0 -1))
+    (array->list Sorted)))
+
+(output (heapsort [12 11 13 5 6 7]))
