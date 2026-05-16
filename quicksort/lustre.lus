@@ -1,0 +1,6 @@
+node quicksort(arr: int) returns (res: int);
+let
+  res = arr;
+tel;
+
+main_qs = quicksort(5, 2, 8, 1, 9, 3);
