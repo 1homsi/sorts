@@ -1,0 +1,14 @@
+let insertion_sort = handler
+  val x = \arr ->
+    let n = Array.length arr in
+    for i = 1 to n - 1 do
+      let key = arr.(i) in
+      let j = ref (i - 1) in
+      while !j >= 0 && arr.(!j) > key do
+        arr.(!j + 1) <- arr.(!j);
+        j := !j - 1
+      done;
+      arr.(!j + 1) <- key
+    done;
+    arr
+end;
