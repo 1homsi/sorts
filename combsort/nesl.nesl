@@ -1,0 +1,25 @@
+function comb_sort(arr) =
+  let
+    gap = length(arr);
+    swapped = true;
+  in
+  case gap > 1 or swapped of
+    true => let
+      new_gap = div(gap * 10, 13);
+      final_gap = if (new_gap < 1) then 1 else new_gap;
+    in comb_sort([pair_swap(a, final_gap) : a in arr])
+    | false => arr
+  esac
+;
+
+function pair_swap(a, gap) =
+  let
+    i = length(a) / 2;
+  in
+  case a[i] > a[i + gap] of
+    true => [a[j] for j in 0 .. i - 1] ++ [a[i+gap]] ++ [a[j] for j in i + 1 .. i + gap - 1] ++ [a[i]] ++ [a[j] for j in i + gap + 1 .. length(a) - 1]
+    | false => a
+  esac
+;
+
+[5, 2, 8, 1, 9, 3];
