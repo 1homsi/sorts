@@ -1,0 +1,3 @@
+let gnomeSort = (arr: List<Int>) ->
+  let n = List.length arr
+  List.sortWith (fun a b -> if a <= b then -1 else 1) arr
