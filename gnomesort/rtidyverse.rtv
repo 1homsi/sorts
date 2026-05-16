@@ -1,0 +1,22 @@
+library(dplyr)
+library(purrr)
+
+gnome_sort <- function(arr) {
+  n <- length(arr)
+  i <- 1L
+  while (i <= n) {
+    if (i == 1L || arr[i] >= arr[i - 1L]) {
+      i <- i + 1L
+    } else {
+      tmp <- arr[i]
+      arr[i] <- arr[i - 1L]
+      arr[i - 1L] <- tmp
+      i <- i - 1L
+    }
+  }
+  arr
+}
+
+data <- c(5, 3, 8, 1, 9, 2, 7, 4, 6, 0)
+result <- gnome_sort(data)
+print(result)
