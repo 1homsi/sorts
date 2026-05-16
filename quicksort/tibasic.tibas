@@ -1,0 +1,13 @@
+:5 STO A
+:2 STO B
+:8 STO C
+:1 STO D
+:9 STO E
+:3 STO F
+
+:DISP A
+:DISP B
+:DISP C
+:DISP D
+:DISP E
+:DISP F
