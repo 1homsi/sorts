@@ -1,0 +1,26 @@
+(* Janus reversible language *)
+type array_int;
+
+procedure cocktailsort(arr : array_int; n : integer) {
+  var i := 0;
+  var swapped := true;
+  while (i < n && swapped) {
+    swapped := false;
+    for k in 0 to n - i - 2 {
+      if arr[k] > arr[k + 1] {
+        arr[k] <-> arr[k + 1];
+        swapped := true;
+      }
+    }
+    if (swapped) {
+      swapped := false;
+      for k in n - i - 2 downto 0 {
+        if arr[k] > arr[k + 1] {
+          arr[k] <-> arr[k + 1];
+          swapped := true;
+        }
+      }
+    }
+    i := i + 1;
+  }
+}
