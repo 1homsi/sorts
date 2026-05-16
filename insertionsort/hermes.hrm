@@ -1,0 +1,19 @@
+MODULE InsertionSort;
+
+VAR arr: ARRAY [1..6] OF INTEGER;
+    n, i, j, key: INTEGER;
+
+BEGIN
+  arr := [5, 2, 8, 1, 9, 3];
+  n := 6;
+  FOR i := 2 TO n DO
+    key := arr[i];
+    j := i - 1;
+    WHILE (j > 0) AND (arr[j] > key) DO
+      arr[j+1] := arr[j];
+      j := j - 1
+    END;
+    arr[j+1] := key
+  END;
+  FOR i := 1 TO n DO WRITE(arr[i]) END
+END InsertionSort.
