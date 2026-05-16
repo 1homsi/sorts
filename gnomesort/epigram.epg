@@ -1,0 +1,16 @@
+%name Gnomesort;
+%mode data;
+
+Nat : Set;
+Zero : Nat;
+Suc : Nat -> Nat;
+
+List : Set -> Set;
+Nil : {A:Set} -> List A;
+Cons : {A:Set} -> A -> List A -> List A;
+
+gnomesort : {A:Set} -> List A -> List A;
+gnomesort Nil = Nil;
+gnomesort (Cons x xs) = Cons x (gnomesort xs);
+
+main = gnomesort (Cons 5 (Cons 2 (Cons 8 (Cons 1 (Cons 9 (Cons 3 Nil))))));
