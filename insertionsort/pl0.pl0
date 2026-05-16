@@ -1,0 +1,28 @@
+VAR arr, n, i, j, key;
+PROCEDURE insertion_sort;
+BEGIN
+  i := 2;
+  WHILE i <= n DO
+  BEGIN
+    key := arr[i];
+    j := i - 1;
+    WHILE j > 0 AND arr[j] > key DO
+    BEGIN
+      arr[j+1] := arr[j];
+      j := j - 1
+    END;
+    arr[j+1] := key;
+    i := i + 1
+  END
+END;
+BEGIN
+  arr[1] := 5; arr[2] := 2; arr[3] := 8; arr[4] := 1; arr[5] := 9; arr[6] := 3;
+  n := 6;
+  CALL insertion_sort;
+  i := 1;
+  WHILE i <= 6 DO
+  BEGIN
+    ! arr[i],
+    i := i + 1
+  END
+END.
