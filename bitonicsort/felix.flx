@@ -1,0 +1,27 @@
+proc bitonicsort(arr: &array[int], lo: int, cnt: int, dir: int) {
+    if cnt > 1 {
+        val k = cnt / 2;
+        bitonicsort(arr, lo, k, 1);
+        bitonicsort(arr, lo + k, k, 0);
+        bitonicmerge(arr, lo, cnt, dir);
+    }
+}
+
+proc bitonicmerge(arr: &array[int], lo: int, cnt: int, dir: int) {
+    if cnt > 1 {
+        val k = cnt / 2;
+        for var i in lo ..< lo + cnt - k {
+            if (arr.(i) > arr.(i + k)) == (dir == 1) {
+                val tmp = arr.(i);
+                arr.(i) = arr.(i + k);
+                arr.(i + k) = tmp;
+            }
+        }
+        bitonicmerge(arr, lo, k, dir);
+        bitonicmerge(arr, lo + k, k, dir);
+    }
+}
+
+var arr = array[5, 2, 8, 1, 9, 3, 7, 4];
+bitonicsort(arr, 0, 8, 1);
+println(arr);
