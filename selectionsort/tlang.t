@@ -1,0 +1,15 @@
+(define selection-sort
+  (lambda (arr)
+    (let ((n (vector-length arr)))
+      (do ((i 0 (+ i 1)))
+        ((>= i (- n 1)))
+        (let ((min-idx i))
+          (do ((j (+ i 1) (+ j 1)))
+            ((>= j n))
+            (when (< (vector-ref arr j) (vector-ref arr min-idx))
+              (set! min-idx j)))
+          (let ((tmp (vector-ref arr i)))
+            (vector-set! arr i (vector-ref arr min-idx))
+            (vector-set! arr min-idx tmp)))))))
+
+(selection-sort #(5 2 8 1 9 3))
