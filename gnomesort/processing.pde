@@ -1,0 +1,24 @@
+void gnomesort(int[] arr) {
+  int i = 0;
+  while (i < arr.length) {
+    if (i == 0) {
+      i++;
+    } else if (arr[i] < arr[i - 1]) {
+      int temp = arr[i];
+      arr[i] = arr[i - 1];
+      arr[i - 1] = temp;
+      i--;
+    } else {
+      i++;
+    }
+  }
+}
+
+void setup() {
+  int[] test = {5, 2, 8, 1, 9, 3};
+  gnomesort(test);
+  println(test);
+}
+
+void draw() {
+}
