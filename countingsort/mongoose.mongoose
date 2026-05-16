@@ -1,0 +1,21 @@
+-- Counting Sort in Mongoose DSL
+-- Input: [4, 2, 2, 8, 3, 3, 1], Output: [1, 2, 2, 3, 3, 4, 8]
+
+WITH input AS (
+    SELECT 1 AS id, 4 AS val UNION ALL
+    SELECT 2, 2 UNION ALL SELECT 3, 2 UNION ALL SELECT 4, 8 UNION ALL
+    SELECT 5, 3 UNION ALL SELECT 6, 3 UNION ALL SELECT 7, 1
+),
+bounds AS (SELECT MIN(val) AS mn, MAX(val) AS mx FROM input),
+vals AS (
+    SELECT DISTINCT val FROM input ORDER BY val
+),
+counted AS (
+    SELECT v.val, COUNT(*) AS cnt
+    FROM vals v JOIN input i ON i.val = v.val
+    GROUP BY v.val
+),
+expanded AS (
+    SELECT val FROM counted, generate_series(1, cnt)
+)
+SELECT val FROM expanded ORDER BY val;
