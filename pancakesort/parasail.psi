@@ -1,0 +1,20 @@
+procedure Pancake_Sort is
+    type Arr_Type is Array <Univ_Integer> of Univ_Integer;
+    
+    procedure Sort(var Arr : Arr_Type) is
+        N : Univ_Integer := Length(Arr);
+    begin
+        for I in 1..N-1 forward loop
+            for J in 1..N-I forward loop
+                if Arr(J) > Arr(J+1) then
+                    (Arr(J), Arr(J+1)) := (Arr(J+1), Arr(J));
+                end if;
+            end loop;
+        end loop;
+    end procedure Sort;
+    
+begin
+    var Arr : Arr_Type := [5, 2, 8, 1, 9, 3];
+    Sort(Arr);
+    Println("Pancake Sort: " & Arr);
+end procedure Pancake_Sort;
