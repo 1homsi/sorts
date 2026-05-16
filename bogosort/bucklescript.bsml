@@ -1,27 +1,6 @@
-let is_sorted arr =
-  let n = Array.length arr in
-  let sorted = ref true in
-  for i = 0 to n - 2 do
-    if arr.(i) > arr.(i + 1) then sorted := false
-  done;
-  !sorted
-
-let shuffle arr =
-  let a = Array.copy arr in
-  let n = Array.length a in
-  for i = n - 1 downto 1 do
-    let j = int_of_float (Js.Math.random () *. float_of_int (i + 1)) in
-    let tmp = a.(i) in
-    a.(i) <- a.(j);
-    a.(j) <- tmp
-  done;
-  a
-
-let rec bogosort arr =
-  if is_sorted arr then arr
-  else bogosort (shuffle arr)
-
-let () =
-  let arr = [| 3; 1; 4; 1; 5; 9; 2; 6 |] in
-  let sorted = bogosort arr in
-  Js.log sorted
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
