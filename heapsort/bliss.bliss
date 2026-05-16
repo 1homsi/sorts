@@ -1,0 +1,38 @@
+MODULE heapsort (MAIN = heapsort_main) =
+BEGIN
+
+GLOBAL BIND arr = UPLIT(12, 11, 13, 5, 6, 7);
+BIND n = 6;
+
+ROUTINE heapify(pn, pi) =
+BEGIN
+    BIND a = arr : VECTOR[6];
+    LOCAL largest, left, right, tmp;
+    largest = .pi;
+    left = 2 * .pi + 1;
+    right = 2 * .pi + 2;
+    IF .left LSS .pn AND .a[.left] GTR .a[.largest] THEN largest = .left;
+    IF .right LSS .pn AND .a[.right] GTR .a[.largest] THEN largest = .right;
+    IF .largest NEQ .pi THEN BEGIN
+        tmp = .a[.pi]; a[.pi] = .a[.largest]; a[.largest] = .tmp;
+        heapify(.pn, .largest)
+    END;
+    0
+END;
+
+ROUTINE heapsort_main =
+BEGIN
+    BIND a = arr : VECTOR[6];
+    LOCAL i, tmp;
+    i = .n / 2 - 1;
+    WHILE .i GEQ 0 DO BEGIN heapify(.n, .i); i = .i - 1 END;
+    i = .n - 1;
+    WHILE .i GTR 0 DO BEGIN
+        tmp = .a[0]; a[0] = .a[.i]; a[.i] = .tmp;
+        heapify(.i, 0);
+        i = .i - 1
+    END;
+    0
+END;
+
+END ELUDOM
