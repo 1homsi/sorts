@@ -1,0 +1,13 @@
+            INTERNAL FUNCTION (ARR,N)
+            ENTRY TO INSORT.
+            THROUGH LOOP1, FOR I=1, 1, I.GE.N
+            KEY=ARR(I)
+            J=I-1
+INNER       WHENEVER J.L.0.OR.ARR(J).LE.KEY, TRANSFER TO PLACE
+            ARR(J+1)=ARR(J)
+            J=J-1
+            TRANSFER TO INNER
+PLACE       ARR(J+1)=KEY
+LOOP1       CONTINUE
+            FUNCTION RETURN
+            END OF FUNCTION
