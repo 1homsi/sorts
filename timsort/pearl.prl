@@ -1,0 +1,62 @@
+PROGRAM TIMSORT;
+DECLARE ARR FIXED ARRAY(6) := (5, 2, 8, 1, 9, 3);
+DECLARE RESULT FIXED ARRAY(6);
+
+TIMSORT(ARR, 32, RESULT);
+WRITE RESULT;
+
+SUBROUTINE TIMSORT(A, M, R);
+  CALL MERGESORT(A, M, R);
+END SUBROUTINE;
+
+SUBROUTINE MERGESORT(A, M, R);
+  DECLARE LEN FIXED;
+  LEN = SIZE(A);
+  
+  IF LEN <= 1 THEN
+    R = A;
+  ELSE IF LEN <= M THEN
+    CALL INSERTIONSORT(A, R);
+  ELSE
+    DECLARE MID FIXED;
+    DECLARE L ARRAY(*);
+    DECLARE RT ARRAY(*);
+    MID = LEN / 2;
+    L = A[1..MID];
+    RT = A[MID+1..LEN];
+    CALL MERGESORT(L, M, L);
+    CALL MERGESORT(RT, M, RT);
+    CALL MERGE(L, RT, R);
+  END;
+END SUBROUTINE;
+
+SUBROUTINE INSERTIONSORT(A, R);
+  DECLARE I, J, KEY FIXED;
+  R = A;
+  FOR I = 2 TO SIZE(R) DO
+    KEY = R[I];
+    J = I - 1;
+    WHILE J >= 1 AND R[J] > KEY DO
+      R[J+1] = R[J];
+      J = J - 1;
+    END;
+    R[J+1] = KEY;
+  END;
+END SUBROUTINE;
+
+SUBROUTINE MERGE(L, R, RES);
+  DECLARE I, J, K FIXED;
+  I = 1; J = 1; K = 1;
+  WHILE I <= SIZE(L) AND J <= SIZE(R) DO
+    IF L[I] <= R[J] THEN
+      RES[K] = L[I];
+      I = I + 1;
+    ELSE
+      RES[K] = R[J];
+      J = J + 1;
+    END;
+    K = K + 1;
+  END;
+END SUBROUTINE;
+
+END PROGRAM;
