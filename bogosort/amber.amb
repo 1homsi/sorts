@@ -1,0 +1,29 @@
+#!/usr/bin/amber
+
+function bogosort(arr) {
+  while (!issorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
+
+function issorted(arr) {
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] > arr[i + 1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function shuffle(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    let j = Math.floor(Math.random() * arr.length);
+    let tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
+}
+
+let arr = [3, 1, 2];
+console.log(bogosort(arr));
