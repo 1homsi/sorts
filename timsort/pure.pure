@@ -1,0 +1,40 @@
+timsort arr minsize = mergesort arr minsize;
+
+mergesort arr minsize
+  | length arr <= 1 = arr
+  | length arr <= minsize = insertionsort arr
+  | otherwise = merge (mergesort left minsize) (mergesort right minsize)
+  where
+    mid = length arr div 2;
+    left = take mid arr;
+    right = drop mid arr;
+  end;
+
+insertionsort arr = doinsert (arr, 1)
+  where
+    doinsert (result, i)
+      | i >= length result = result
+      | otherwise = doinsert (doup (result, i), i + 1)
+    where
+      doup (result, i) = update result (i + 1) key
+        where
+          key = result ! i;
+          j = ref (i - 1);
+          dowhile = if !j >= 0 && (result ! !j) > key
+            then (update result (!j + 1) (result ! !j); decr j; dowhile)
+            else ();
+          _ = dowhile;
+        end;
+    end;
+  end;
+
+merge left right = domerge (left, right, [])
+  where
+    domerge (left, right, result)
+      | null left = reverse result ++ right
+      | null right = reverse result ++ left
+      | head left <= head right = domerge (tail left, right, (head left):result)
+      | otherwise = domerge (left, tail right, (head right):result);
+  end;
+
+timsort [5, 2, 8, 1, 9, 3] 32;
