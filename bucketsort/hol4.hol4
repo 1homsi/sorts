@@ -1,0 +1,19 @@
+fun bucket_sort arr max_val =
+  if max_val = 0 then
+    arr
+  else
+    let
+      val buckets = Array.array(max_val, [])
+      val _ = List.app (fn num =>
+        if num >= 0 andalso num < max_val then
+          Array.update(buckets, num, 
+            num :: Array.sub(buckets, num))
+        else ())
+        arr
+      val result = ref []
+    in
+      Array.app (fn bucket =>
+        result := !result @ bucket) buckets;
+      !result
+    end;
+bucket_sort [5, 2, 8, 1, 9, 3] 10;
