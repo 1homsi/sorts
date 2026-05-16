@@ -1,0 +1,30 @@
+P1 ARRAY[1:6]
+A        Z1
+B        Z2
+C        Z3
+D        Z4
+E        Z5
+F        Z6
+
+5 → Z1
+2 → Z2
+8 → Z3
+1 → Z4
+9 → Z5
+3 → Z6
+
+6 → Z0
+→ Z0 = Gap
+
+While Gap > 1:
+  Gap * 10 / 13 → Gap
+  If Gap < 1:
+    1 → Gap
+
+  0 → I
+  While I < 6 - Gap:
+    If Z[I] > Z[I+Gap]:
+      Swap Z[I], Z[I+Gap]
+    I + 1 → I
+
+→ Array[Z1:Z6]
