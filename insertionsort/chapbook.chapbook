@@ -1,0 +1,21 @@
+arr: [5, 3, 1, 4, 2]
+sorted: []
+--
+{embed passage: 'Sort'}
+
+:: Sort
+{javascript:
+  var arr = [5, 3, 1, 4, 2];
+  var n = arr.length;
+  for (var i = 1; i < n; i++) {
+    var key = arr[i];
+    var j = i - 1;
+    while (j >= 0 && arr[j] > key) {
+      arr[j + 1] = arr[j];
+      j--;
+    }
+    arr[j + 1] = key;
+  }
+  passage.sorted = arr;
+}
+Sorted: {sorted.join(', ')}
