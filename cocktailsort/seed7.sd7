@@ -1,0 +1,37 @@
+$ include "seed7_05.s7i";
+
+const proc: cocktailSort (inout array integer: arr) is func
+  local
+    var boolean: swapped is TRUE;
+    var integer: start is 1;
+    var integer: ending is 0;
+    var integer: i is 0;
+    var integer: tmp is 0;
+  begin
+    ending := length(arr);
+    while swapped do
+      swapped := FALSE;
+      for i range start to pred(ending) do
+        if arr[i] > arr[succ(i)] then
+          tmp := arr[i];
+          arr[i] := arr[succ(i)];
+          arr[succ(i)] := tmp;
+          swapped := TRUE;
+        end if;
+      end for;
+      if not swapped then
+        return;
+      end if;
+      swapped := FALSE;
+      decr(ending);
+      for i range pred(ending) downto start do
+        if arr[i] > arr[succ(i)] then
+          tmp := arr[i];
+          arr[i] := arr[succ(i)];
+          arr[succ(i)] := tmp;
+          swapped := TRUE;
+        end if;
+      end for;
+      incr(start);
+    end while;
+  end func;
