@@ -1,20 +1,6 @@
-arr := [3, 1, 4, 1, 5, 9, 2, 6];
-n := #arr;
-
-is_sorted := func(a);
-    return forall i in [1..n-1] | a(i) <= a(i+1);
-end func;
-
-shuffle := func(a);
-    for i in [n, n-1..2] do
-        j := random({1..i});
-        tmp := a(i); a(i) := a(j); a(j) := tmp;
-    end for;
-    return a;
-end func;
-
-while not is_sorted(arr) do
-    arr := shuffle(arr);
-end while;
-
-print(arr);
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
