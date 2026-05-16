@@ -1,0 +1,19 @@
+define quicksort(arr);
+  if length(arr) <= 1 then
+    arr
+  else
+    lvars pivot = arr(1);
+    lvars less = [], greater = [];
+    lvars i;
+    for i from 2 to length(arr) do
+      if arr(i) <= pivot then
+        [arr(i) ^^less] -> less;
+      else
+        [arr(i) ^^greater] -> greater;
+      endif;
+    endfor;
+    quicksort(less) <> [pivot] <> quicksort(greater);
+  endif;
+enddefine;
+
+quicksort([5 2 8 1 9 3]) =>
