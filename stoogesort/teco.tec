@@ -1,0 +1,14 @@
+g
+stoogesort: function() {
+  if (j < i) {
+    t = i;
+    i = j;
+    j = t;
+  }
+}
+
+:5,:2,:8,:1,:9,:3
+m$
+k1j6
+stoogesort
+p$
