@@ -1,0 +1,20 @@
+stoogesort: method [arr i j |
+  (arr at: j) < (arr at: i) ifTrue: [
+    | temp |
+    temp: (arr at: j).
+    arr at: j put: (arr at: i).
+    arr at: i put: temp.
+  ].
+  (j - i) > 1 ifTrue: [
+    | t |
+    t: ((j - i + 1) // 3).
+    stoogesort: arr at: i at: (j - t).
+    stoogesort: arr at: (i + t) at: j.
+    stoogesort: arr at: i at: (j - t).
+  ].
+].
+
+| arr |
+arr: #(5 2 8 1 9 3).
+stoogesort: arr at: 0 at: 5.
+arr print.
