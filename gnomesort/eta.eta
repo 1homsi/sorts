@@ -1,0 +1,24 @@
+module GnomeSort where
+
+import Data.IORef
+import Control.Monad (when)
+import Data.Array.IO
+
+gnomeSort :: IOArray Int Int -> Int -> IO ()
+gnomeSort arr n = do
+    iRef <- newIORef 0
+    let loop = do
+          i <- readIORef iRef
+          when (i < n) $ do
+            if i == 0
+              then writeIORef iRef 1 >> loop
+              else do
+                ai  <- readArray arr i
+                ai1 <- readArray arr (i - 1)
+                if ai >= ai1
+                  then writeIORef iRef (i + 1) >> loop
+                  else do
+                    writeArray arr i ai1
+                    writeArray arr (i - 1) ai
+                    writeIORef iRef (i - 1) >> loop
+    loop
