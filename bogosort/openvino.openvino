@@ -1,1 +1,1 @@
-print("Bogosort implementation for openvino.openvino")
+bogosort = true
