@@ -1,0 +1,38 @@
+        .section .data
+arr:    .word 5, 3, 1, 4, 2
+n:      .word 5
+
+        .section .text
+        .global _start
+_start:
+        adr  x0, arr
+        adr  x1, n
+        ldr  w1, [x1]
+        mov  w2, #1
+outer:
+        cmp  w2, w1
+        b.ge done
+        lsl  x3, x2, #2
+        ldr  w4, [x0, x3]
+        sub  w5, w2, #1
+inner:
+        cmp  w5, #0
+        b.lt place
+        lsl  x6, x5, #2
+        ldr  w7, [x0, x6]
+        cmp  w7, w4
+        b.le place
+        add  x8, x6, #4
+        str  w7, [x0, x8]
+        sub  w5, w5, #1
+        b    inner
+place:
+        add  w5, w5, #1
+        lsl  x5, x5, #2
+        str  w4, [x0, x5]
+        add  w2, w2, #1
+        b    outer
+done:
+        mov  x8, #93
+        mov  x0, #0
+        svc  #0
