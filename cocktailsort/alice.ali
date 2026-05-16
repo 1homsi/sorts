@@ -1,0 +1,37 @@
+structure CocktailSort =
+struct
+    fun swapAt (arr, i, j) =
+        let val a = Array.sub(arr, i)
+            val b = Array.sub(arr, j)
+        in  Array.update(arr, i, b);
+            Array.update(arr, j, a)
+        end
+
+    fun forward(arr, i, en, sw) =
+        if i >= en then sw
+        else if Array.sub(arr, i) > Array.sub(arr, i+1)
+        then (swapAt(arr, i, i+1); forward(arr, i+1, en, true))
+        else forward(arr, i+1, en, sw)
+
+    fun backward(arr, i, st, sw) =
+        if i < st then sw
+        else if Array.sub(arr, i) > Array.sub(arr, i+1)
+        then (swapAt(arr, i, i+1); backward(arr, i-1, st, true))
+        else backward(arr, i-1, st, sw)
+
+    fun sort arr =
+        let val n = Array.length arr
+            fun loop(st, en) =
+                if st >= en then ()
+                else
+                    let val sw1 = forward(arr, st, en, false)
+                    in  if not sw1 then ()
+                        else
+                            let val sw2 = backward(arr, en-1, st, false)
+                            in  if sw2 then loop(st+1, en-1)
+                                else ()
+                            end
+                    end
+        in  loop(0, n-1)
+        end
+end
