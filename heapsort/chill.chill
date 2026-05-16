@@ -1,0 +1,26 @@
+HEAPSORT: MODULE
+
+DCL arr (0:5) INT;
+DCL n, i, largest, left, right, tmp INT;
+
+HEAPIFY: PROC (pn INT, pi INT);
+  DCL lg, l, r, t INT;
+  lg := pi; l := 2*pi+1; r := 2*pi+2;
+  IF l < pn AND arr(l) > arr(lg) THEN lg := l FI;
+  IF r < pn AND arr(r) > arr(lg) THEN lg := r FI;
+  IF lg /= pi THEN
+    t := arr(pi); arr(pi) := arr(lg); arr(lg) := t;
+    CALL HEAPIFY(pn, lg)
+  FI
+END HEAPIFY;
+
+  arr(0) := 12; arr(1) := 11; arr(2) := 13;
+  arr(3) := 5;  arr(4) := 6;  arr(5) := 7;
+  n := 6;
+  FOR i FROM n/2-1 BY -1 TO 0 DO CALL HEAPIFY(n, i) OD;
+  FOR i FROM n-1 BY -1 TO 1 DO
+    tmp := arr(0); arr(0) := arr(i); arr(i) := tmp;
+    CALL HEAPIFY(i, 0)
+  OD;
+
+END HEAPSORT;
