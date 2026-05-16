@@ -1,0 +1,8 @@
+val radixsort_def = Define `
+  radixsort arr =
+    let max = FOLDR MAX 0 arr in
+    let exp = 1 in
+    if max / exp <= 0 then arr else arr
+`;
+
+val _ = print_theory_to_file "radixsort.thy"
