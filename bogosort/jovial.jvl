@@ -1,32 +1,6 @@
-START COMPOOL BOGOSORT_CP
-  ITEM ARR(8) I;
-  ITEM N I;
-  ITEM I I;
-  ITEM J I;
-  ITEM TMP I;
-  ITEM SORTED S;
-TERM COMPOOL
-
-START MAIN BOGOSORT
-  ARR(1) = 3; ARR(2) = 1; ARR(3) = 4; ARR(4) = 1;
-  ARR(5) = 5; ARR(6) = 9; ARR(7) = 2; ARR(8) = 6;
-  N = 8;
-
-  SORTED = FALSE;
-  FOR DO UNTIL SORTED;
-    SORTED = TRUE;
-    FOR I = 1 BY 1 WHILE I LES N - 1;
-      IF ARR(I) GRE ARR(I + 1) THEN SORTED = FALSE;
-    END;
-    IF NOT SORTED THEN
-      FOR I = N BY -1 WHILE I GRE 1;
-        J = MOD(I, I) + 1;
-        TMP = ARR(I); ARR(I) = ARR(J); ARR(J) = TMP;
-      END;
-    END;
-  END;
-
-  FOR I = 1 BY 1 WHILE I LES N;
-    TRACE ARR(I);
-  END;
-TERM MAIN
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
