@@ -1,0 +1,13 @@
+import "pkl:math"
+
+function gnomeSort(arr: List<Int>): List<Int> =
+    let n = arr.length
+    let rec loop(a: List<Int>, i: Int): List<Int> =
+        if i >= n then a
+        else if i == 0 || a[i] >= a[i - 1] then loop(a, i + 1)
+        else
+            let x = a[i]
+            let y = a[i - 1]
+            let a2 = a.set(i, y).set(i - 1, x)
+            loop(a2, i - 1)
+    in loop(arr, 0)
