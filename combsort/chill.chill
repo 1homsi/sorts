@@ -1,0 +1,25 @@
+COMB_SORT: PROC(ARR, N)
+    DCL ARR(100) INT;
+    DCL N INT;
+    DCL GAP INT;
+    DCL SORTED BOOL;
+    DCL TMP INT;
+    DCL I INT;
+    GAP := N;
+    SORTED := FALSE;
+    DO WHILE NOT SORTED;
+        GAP := GAP * 10 / 13;
+        IF GAP <= 1 THEN
+            GAP := 1;
+            SORTED := TRUE;
+        FI;
+        DO I := 1 TO N - GAP;
+            IF ARR(I) > ARR(I + GAP) THEN
+                TMP := ARR(I);
+                ARR(I) := ARR(I + GAP);
+                ARR(I + GAP) := TMP;
+                SORTED := FALSE;
+            FI;
+        OD;
+    OD;
+END COMB_SORT;
