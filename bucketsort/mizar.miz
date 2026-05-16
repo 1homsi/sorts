@@ -1,0 +1,13 @@
+environ
+  vocabularies NUMBERS, ARITH_1;
+  notations NUMBERS, ARITH_1;
+  theorems NUMBERS, ARITH_1;
+begin
+  definition
+    let D be non empty set;
+    assume D = REAL;
+  end;
+  theorem bucket_sort_example:
+    for X being Sequence of REAL holds
+    X is Function;
+end;
