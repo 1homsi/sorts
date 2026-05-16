@@ -1,0 +1,33 @@
+def cocktailsort(arr: uint[] | uint64) : uint[] {
+    uint n = |arr|;
+    uint i = 0;
+    while (i < n) {
+        bool swapped = false;
+        for (uint k = 0; k < n - i - 1; k++) {
+            if (arr[k] > arr[k + 1]) {
+                uint temp = arr[k];
+                arr[k] = arr[k + 1];
+                arr[k + 1] = temp;
+                swapped = true;
+            }
+        }
+        if (!swapped) return arr;
+        i = i + 1;
+        swapped = false;
+        for (uint k = n - i - 2; k >= 0; k--) {
+            if (arr[k] > arr[k + 1]) {
+                uint temp = arr[k];
+                arr[k] = arr[k + 1];
+                arr[k + 1] = temp;
+                swapped = true;
+            }
+        }
+        if (!swapped) return arr;
+        i = i + 1;
+    }
+    return arr;
+}
+
+arr := [5, 2, 8, 1, 9, 3];
+result := cocktailsort(arr);
+print(result);
