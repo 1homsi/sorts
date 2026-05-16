@@ -1,0 +1,13 @@
+WITH
+input_data AS (
+    SELECT * FROM (VALUES (0, 12), (1, 11), (2, 13), (3, 5), (4, 6), (5, 7)) AS t(idx, val)
+),
+sorted AS (
+    SELECT
+        val,
+        ROW_NUMBER() OVER (ORDER BY val) - 1 AS sorted_idx
+    FROM input_data
+)
+SELECT sorted_idx, val
+FROM sorted
+ORDER BY sorted_idx;
