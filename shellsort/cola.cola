@@ -1,0 +1,20 @@
+shellsort([5, 2, 8, 1, 9, 3]) {
+  var gap = 1
+  var n = [5, 2, 8, 1, 9, 3].length
+  while (gap <= n) {
+    gap = gap * 3 + 1
+  }
+  while (gap > 0) {
+    gap = gap / 3
+    for (var i = gap; i < n; i++) {
+      var temp = this[i]
+      var j = i
+      while (j >= gap && this[j - gap] > temp) {
+        this[j] = this[j - gap]
+        j -= gap
+      }
+      this[j] = temp
+    }
+  }
+  console.log(this)
+}
