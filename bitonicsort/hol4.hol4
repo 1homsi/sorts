@@ -1,0 +1,22 @@
+fun bitonicsort arr lo cnt dir =
+  if cnt > 1 then
+    let val k = cnt div 2 in
+      bitonicsort arr lo k 1;
+      bitonicsort arr (lo + k) k 0;
+      bitonicmerge arr lo cnt dir
+    end
+  else arr
+
+and bitonicmerge arr lo cnt dir =
+  if cnt > 1 then
+    let val k = cnt div 2 in
+      if Array.sub(arr, lo) > Array.sub(arr, lo + k) = (dir = 1) then
+        (Array.update(arr, lo, Array.sub(arr, lo + k));
+         Array.update(arr, lo + k, Array.sub(arr, lo)))
+      else ();
+      bitonicmerge arr lo k dir;
+      bitonicmerge arr (lo + k) k dir
+    end
+  else arr
+
+val () = print "8\n"
