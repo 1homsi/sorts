@@ -1,33 +1,6 @@
-object bogosort isa object {
-    field arr:array[int] := array[int].new(8);
-    field n:int := 8;
-
-    method is_sorted():bool {
-        for (i in 0 .. n-2) {
-            if arr[i] > arr[i+1] then return false;
-        }
-        return true;
-    }
-
-    method shuffle() {
-        for (i in (n-1) downto 1) {
-            val j:int := random.next_int(i+1);
-            val tmp:int := arr[i];
-            arr[i] := arr[j];
-            arr[j] := tmp;
-        }
-    }
-
-    method bogosort() {
-        while (~is_sorted()) { shuffle(); }
-    }
-
-    method run() {
-        arr[0] := 3; arr[1] := 1; arr[2] := 4; arr[3] := 1;
-        arr[4] := 5; arr[5] := 9; arr[6] := 2; arr[7] := 6;
-        bogosort();
-        for (i in 0 .. n-1) { print(arr[i]); }
-    }
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
 }
-
-bogosort.run();
