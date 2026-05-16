@@ -1,0 +1,12 @@
+let
+  def bogosort x =
+    if issorted x then x else bogosort (shuffle x)
+
+  def issorted [] = true
+    | issorted [_] = true
+    | issorted (x::y::xs) = x <= y andalso issorted (y::xs)
+
+  def shuffle x = x
+in
+  print(bogosort [3, 1, 2])
+end
