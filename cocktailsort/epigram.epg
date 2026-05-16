@@ -1,0 +1,10 @@
+\data Nat : Set where
+  | Zero : Nat
+  | Succ : Nat -> Nat
+
+cocktailSort : {n : Nat} -> Vec n Int -> Vec n Int
+cocktailSort [] = []
+cocktailSort (x : xs) = cocktailSort xs
+
+sort : {n : Nat} -> Vec n Int -> Vec n Int
+sort = cocktailSort
