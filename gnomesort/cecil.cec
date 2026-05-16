@@ -1,0 +1,17 @@
+object gnome_sorter isa object;
+
+method gnome_sort(arr:array[int], n:int):array[int] @ gnome_sorter {
+    var i:int := 0;
+    var tmp:int;
+    while (i < n) {
+        if (i = 0 | arr[i] >= arr[i-1]) then
+            i := i + 1
+        else {
+            tmp := arr[i];
+            arr[i] := arr[i-1];
+            arr[i-1] := tmp;
+            i := i - 1
+        }
+    };
+    arr
+}
