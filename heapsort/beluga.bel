@@ -1,0 +1,5 @@
+rec heapsort : list -> list -> type =
+  | HS_Nil : heapsort [] []
+  | HS_Cons : heapsort xs ys -> {x : int} [heapsort (x :: xs) zs] -> type;
+
+let example = heapsort [5, 2, 8, 1, 9, 3] [];
