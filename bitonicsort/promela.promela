@@ -1,0 +1,47 @@
+int arr[8];
+int n = 8;
+
+proctype compareAndSwap(int i; int j; bool dir) {
+    int tmp;
+    if
+    :: (dir && arr[i] > arr[j]) || (!dir && arr[i] < arr[j]) ->
+        tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+    :: else -> skip
+    fi
+}
+
+proctype bitonicMerge(int lo; int cnt; bool dir) {
+    int k, i;
+    if
+    :: cnt > 1 ->
+        k = cnt / 2;
+        i = lo;
+        do
+        :: i < lo + k ->
+            run compareAndSwap(i, i + k, dir);
+            i++
+        :: else -> break
+        od;
+        run bitonicMerge(lo, k, dir);
+        run bitonicMerge(lo + k, k, dir)
+    :: else -> skip
+    fi
+}
+
+proctype bitonicSort(int lo; int cnt; bool dir) {
+    int k;
+    if
+    :: cnt > 1 ->
+        k = cnt / 2;
+        run bitonicSort(lo, k, true);
+        run bitonicSort(lo + k, k, false);
+        run bitonicMerge(lo, cnt, dir)
+    :: else -> skip
+    fi
+}
+
+init {
+    arr[0] = 3; arr[1] = 7; arr[2] = 4; arr[3] = 8;
+    arr[4] = 6; arr[5] = 2; arr[6] = 1; arr[7] = 5;
+    run bitonicSort(0, 8, true);
+}
