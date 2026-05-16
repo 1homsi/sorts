@@ -1,0 +1,23 @@
+const { app, BrowserWindow, ipcMain } = require('electron');
+
+function insertionSort(arr) {
+  const a = [...arr];
+  const n = a.length;
+  for (let i = 1; i < n; i++) {
+    const key = a[i];
+    let j = i - 1;
+    while (j >= 0 && a[j] > key) {
+      a[j + 1] = a[j];
+      j--;
+    }
+    a[j + 1] = key;
+  }
+  return a;
+}
+
+ipcMain.handle('sort', (event, arr) => insertionSort(arr));
+
+app.whenReady().then(() => {
+  const win = new BrowserWindow({ webPreferences: { nodeIntegration: true } });
+  win.loadFile('index.html');
+});
