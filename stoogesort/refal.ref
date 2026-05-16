@@ -1,0 +1,17 @@
+$ENTRY Go {
+  = <Prout <Stoogesort [5 2 8 1 9 3] 0 5>>;
+}
+
+Stoogesort {
+  (s.A) s.I s.J =
+    <Cond
+      (<Less s.J s.I>
+        <Stoogesort (<Swap s.A s.I s.J>) (+ s.I 1) s.J>
+      )
+      (True s.A)
+    >;
+}
+
+Swap {
+  (s.A) s.I s.J = (s.A);
+}
