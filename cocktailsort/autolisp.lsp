@@ -1,0 +1,43 @@
+(defun cocktail-sort (arr / n swapped start ending i tmp a b)
+  (setq n (length arr))
+  (setq swapped T)
+  (setq start 0)
+  (setq ending (1- n))
+  (while swapped
+    (setq swapped nil)
+    (setq i start)
+    (while (< i ending)
+      (setq a (nth i arr))
+      (setq b (nth (1+ i) arr))
+      (if (> a b)
+        (progn
+          (setq arr (cocktail-swap arr i (1+ i)))
+          (setq swapped T)))
+      (setq i (1+ i)))
+    (if (not swapped)
+      (setq ending -1)
+      (progn
+        (setq swapped nil)
+        (setq ending (1- ending))
+        (setq i (1- ending))
+        (while (>= i start)
+          (setq a (nth i arr))
+          (setq b (nth (1+ i) arr))
+          (if (> a b)
+            (progn
+              (setq arr (cocktail-swap arr i (1+ i)))
+              (setq swapped T)))
+          (setq i (1- i)))
+        (setq start (1+ start)))))
+  arr)
+
+(defun cocktail-swap (lst i j / result k)
+  (setq result '())
+  (setq k 0)
+  (foreach x lst
+    (cond
+      ((= k i) (setq result (append result (list (nth j lst)))))
+      ((= k j) (setq result (append result (list (nth i lst)))))
+      (T (setq result (append result (list x)))))
+    (setq k (1+ k)))
+  result)
