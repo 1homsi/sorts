@@ -1,1 +1,1 @@
-print("Bogosort implementation for mindspore.mindspore")
+bogosort = true
