@@ -1,0 +1,52 @@
++ MERGE : SELF : INT, INT, INT, INT
+[ + i, j, k : INTEGER;
+  + result : ARRAY(INTEGER);
+  i := left;
+  j := mid + 1;
+  result := ARRAY(INTEGER).create(right - left + 1);
+  k := 0;
+  
+  { i <= mid && j <= right }.while_do [
+    (arr.item(i) <= arr.item(j)).if_then [
+      result.put(k, arr.item(i));
+      i := i + 1;
+    ] else [
+      result.put(k, arr.item(j));
+      j := j + 1;
+    ];
+    k := k + 1;
+  ];
+  
+  { i <= mid }.while_do [
+    result.put(k, arr.item(i));
+    i := i + 1;
+    k := k + 1;
+  ];
+  
+  { j <= right }.while_do [
+    result.put(k, arr.item(j));
+    j := j + 1;
+    k := k + 1;
+  ];
+  
+  (0 to (result.size - 1)).for_do { |x|
+    arr.put(left + x, result.item(x));
+  };
+];
+
++ MERGESORT : SELF : INT, INT
+[ + mid : INTEGER;
+  (left < right).if_then [
+    mid := (left + right) / 2;
+    mergesort(left, mid);
+    mergesort(mid + 1, right);
+    merge(left, mid, right);
+  ];
+];
+
++ MAIN : SELF
+[ + arr : ARRAY(INTEGER);
+  arr := ARRAY(INTEGER).create(5, 2, 8, 1, 9, 3);
+  mergesort(0, 5);
+  arr.print_line;
+];
