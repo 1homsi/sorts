@@ -1,0 +1,24 @@
+module GnomeSort
+exports all
+definitions
+
+functions
+
+gnomeSort : seq of int -> seq of int
+gnomeSort(lst) ==
+    let arr = lst
+    in gnomeLoop(arr, 1, len lst);
+
+gnomeLoop : seq of int * nat * nat -> seq of int
+gnomeLoop(arr, i, n) ==
+    if i > n then arr
+    else if i = 1 or arr(i) >= arr(i-1) then gnomeLoop(arr, i+1, n)
+    else gnomeLoop(swapAt(arr, i, i-1), i-1, n);
+
+swapAt : seq of int * nat * nat -> seq of int
+swapAt(arr, i, j) ==
+    [if k = i then arr(j)
+     else if k = j then arr(i)
+     else arr(k) | k in set {1,...,len arr}]
+
+end GnomeSort
