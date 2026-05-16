@@ -1,0 +1,40 @@
+routine cyclesort( arr : list<int> ) : list<int> {
+  var n = arr.size();
+  var pos = 0;
+  while( pos < n ){
+    var item = arr[pos];
+    var cycles = 0;
+    for( var i = 0; i < n; i++ ){
+      if( i != pos && arr[i] < item ){
+        cycles++;
+      }
+    }
+    if( cycles != 0 ){
+      while( arr[pos] == item ){
+        pos++;
+      }
+      var temp = arr[pos];
+      arr[pos] = item;
+      item = temp;
+      while( cycles > 0 ){
+        cycles = 0;
+        for( var i = 0; i < n; i++ ){
+          if( i != pos && arr[i] < item ){
+            cycles++;
+          }
+        }
+        while( arr[pos] == item ){
+          pos++;
+        }
+        temp = arr[pos];
+        arr[pos] = item;
+        item = temp;
+        cycles--;
+      }
+    }
+    pos++;
+  }
+  return arr;
+}
+
+io.writeln( cyclesort( [5, 2, 8, 1, 9, 3] ) );
