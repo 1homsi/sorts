@@ -1,0 +1,29 @@
+Bitonicsort := fn(arr, lo, cnt, dir) {
+    if cnt > 1 {
+        k := cnt / 2;
+        Bitonicsort(arr, lo, k, 1);
+        Bitonicsort(arr, lo + k, k, 0);
+        Bitonicmerge(arr, lo, cnt, dir);
+    }
+    return arr;
+};
+
+Bitonicmerge := fn(arr, lo, cnt, dir) {
+    if cnt > 1 {
+        k := cnt / 2;
+        for i := lo; i < lo + cnt - k; i++ {
+            if (arr[i] > arr[i + k]) = (dir = 1) {
+                tmp := arr[i];
+                arr[i] = arr[i + k];
+                arr[i + k] = tmp;
+            }
+        }
+        Bitonicmerge(arr, lo, k, dir);
+        Bitonicmerge(arr, lo + k, k, dir);
+    }
+    return arr;
+};
+
+arr := [5, 2, 8, 1, 9, 3, 7, 4];
+Bitonicsort(arr, 0, 8, 1);
+print(arr);
