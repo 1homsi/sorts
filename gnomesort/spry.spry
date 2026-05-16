@@ -1,0 +1,21 @@
+gnomesort: method [arr] {
+  i: 0
+  while { i < (arr length) } {
+    if { i = 0 } {
+      i: i + 1
+    } else {
+      if { (arr at: i) < (arr at: i - 1) } {
+        temp: (arr at: i)
+        arr at: i put: (arr at: i - 1)
+        arr at: i - 1 put: temp
+        i: i - 1
+      } else {
+        i: i + 1
+      }
+    }
+  }
+  ^ arr
+}
+
+test: (Array with: 5 with: 2 with: 8 with: 1 with: 9 with: 3)
+print (gnomesort: test)
