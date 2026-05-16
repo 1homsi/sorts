@@ -1,0 +1,23 @@
+class CombSort {
+    static Int[] sort(Int[] arr) {
+        n := arr.size
+        gap := n
+        sorted := false
+        while (!sorted) {
+            gap = (gap.toFloat / 1.3f).toInt
+            if (gap <= 1) {
+                gap = 1
+                sorted = true
+            }
+            for (i := 0; i + gap < n; i++) {
+                if (arr[i] > arr[i + gap]) {
+                    tmp := arr[i]
+                    arr[i] = arr[i + gap]
+                    arr[i + gap] = tmp
+                    sorted = false
+                }
+            }
+        }
+        return arr
+    }
+}
