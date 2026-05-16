@@ -1,0 +1,9 @@
+Stoogesort
+  input: arr, i, j
+  process: compare arr[j] and arr[i]
+  decision: arr[j] < arr[i]?
+    yes: swap arr[j] and arr[i]
+    no: continue
+  decision: j - i > 1?
+    yes: call Stoogesort(arr, i, j-t)
+    no: end
