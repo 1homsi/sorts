@@ -1,0 +1,11 @@
+environ
+
+begin
+
+theorem ex1:
+    [5, 2, 8, 1, 9, 3] is_a_permutation_of [1, 2, 3, 5, 8, 9]
+proof
+  trivial;
+end;
+
+end
