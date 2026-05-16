@@ -1,0 +1,27 @@
+def compare_and_swap arr i j dir =
+    let ai = arr ! i;
+        aj = arr ! j
+    in if dir == (ai > aj)
+       then arr ! [i <- aj] ! [j <- ai]
+       else arr
+
+def bitonic_merge arr lo cnt dir =
+    if cnt <= 1
+    then arr
+    else let k = cnt / 2;
+             arr2 = foldl (\a i -> compare_and_swap a i (i+k) dir)
+                          arr [lo..lo+k-1];
+             arr3 = bitonic_merge arr2 lo k dir
+         in bitonic_merge arr3 (lo+k) k dir
+
+def bitonic_sort arr lo cnt dir =
+    if cnt <= 1
+    then arr
+    else let k = cnt / 2;
+             arr2 = bitonic_sort arr lo k True;
+             arr3 = bitonic_sort arr2 (lo+k) k False
+         in bitonic_merge arr3 lo cnt dir
+
+def main =
+    let data = [|3,7,4,8,6,2,1,5|]
+    in bitonic_sort data 0 (length data) True
