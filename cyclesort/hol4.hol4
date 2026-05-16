@@ -1,0 +1,6 @@
+open arithmeticTheory;
+
+val cyclesort_def = Define
+  'cyclesort [] = []
+  /\ cyclesort [x] = [x]
+  /\ cyclesort (x::xs) = cyclesort (xs ++ [x])';
