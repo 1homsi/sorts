@@ -1,0 +1,15 @@
+SHAPE cocktailsort
+  ICON "Start" point 1
+  ICON "Input arr" point 2
+  ICON "n = length(arr)" point 3
+  ICON "i = 0" point 4
+  QUESTION "i < n?" point 5
+    YES -> point 6
+    NO -> point 12
+  ICON "forward_pass" point 6
+  ICON "backward_pass" point 7
+  ICON "i = i + 1" point 8
+  GOTO point 5
+  ICON "Output arr" point 12
+  ICON "Stop" point 13
+END SHAPE
