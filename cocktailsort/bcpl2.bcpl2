@@ -1,0 +1,31 @@
+GET "libhdr"
+
+LET cocktailsort2(v, n) BE
+$(  LET swapped = TRUE
+    LET start = 0
+    LET ending = n - 1
+    LET tmp = 0
+    UNTIL NOT swapped DO
+    $(  swapped := FALSE
+        FOR i = start TO ending - 1 DO
+        $(  IF v!i > v!(i+1) THEN
+            $(  tmp := v!i
+                v!i := v!(i+1)
+                v!(i+1) := tmp
+                swapped := TRUE
+            $)
+        $)
+        IF NOT swapped THEN RETURN
+        swapped := FALSE
+        ending := ending - 1
+        FOR i = ending - 1 TO start BY -1 DO
+        $(  IF v!i > v!(i+1) THEN
+            $(  tmp := v!i
+                v!i := v!(i+1)
+                v!(i+1) := tmp
+                swapped := TRUE
+            $)
+        $)
+        start := start + 1
+    $)
+$)
