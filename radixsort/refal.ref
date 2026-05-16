@@ -1,0 +1,23 @@
+$ENTRY Go {
+  = <Prout <RadixSort [5 2 8 1 9 3]>>;
+}
+
+RadixSort {
+  e.Arr = <SortByExp e.Arr 1 <Max e.Arr>>;
+}
+
+Max {
+  e.X = e.X;
+}
+
+SortByExp {
+  e.Arr e.Exp e.Max =
+    <If (<Greater e.Max <Divide e.Exp>>>
+      <SortByExp <CountingSortByExp e.Arr e.Exp> <Multiply e.Exp 10> e.Max>
+      e.Arr
+    >;
+}
+
+CountingSortByExp {
+  e.Arr e.Exp = e.Arr;
+}
