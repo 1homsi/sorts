@@ -1,0 +1,49 @@
+MODULE COCKTAILSORT(IDENT = 'V1.0') =
+BEGIN
+
+FORWARD ROUTINE
+    COCKTAIL_SORT;
+
+ROUTINE COCKTAIL_SORT(ARR : REF VECTOR[,LONG], N : LONG) =
+BEGIN
+    LOCAL
+        SWAPPED : LONG,
+        START   : LONG,
+        ENDING  : LONG,
+        I       : LONG,
+        TMP     : LONG;
+    SWAPPED = 1;
+    START = 0;
+    ENDING = .N - 1;
+    WHILE .SWAPPED NEQ 0 DO
+    BEGIN
+        SWAPPED = 0;
+        INCR I FROM .START TO .ENDING - 1 DO
+        BEGIN
+            IF .ARR[.I] GTR .ARR[.I + 1]
+            THEN BEGIN
+                TMP = .ARR[.I];
+                ARR[.I] = .ARR[.I + 1];
+                ARR[.I + 1] = .TMP;
+                SWAPPED = 1;
+            END;
+        END;
+        IF .SWAPPED EQL 0 THEN RETURN;
+        SWAPPED = 0;
+        ENDING = .ENDING - 1;
+        DECR I FROM .ENDING - 1 TO .START DO
+        BEGIN
+            IF .ARR[.I] GTR .ARR[.I + 1]
+            THEN BEGIN
+                TMP = .ARR[.I];
+                ARR[.I] = .ARR[.I + 1];
+                ARR[.I + 1] = .TMP;
+                SWAPPED = 1;
+            END;
+        END;
+        START = .START + 1;
+    END;
+    RETURN 0;
+END;
+
+END ELUDOM
