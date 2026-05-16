@@ -1,1 +1,6 @@
-print("Bogosort implementation for htmxattrs.htmx")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
