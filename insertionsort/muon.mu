@@ -1,0 +1,18 @@
+fn insertionSort(mut arr: [i32]): [i32] {
+  let n = arr.len();
+  for i in 1..n {
+    let key = arr[i];
+    let mut j = i - 1;
+    while j >= 0 && arr[j] > key {
+      arr[j+1] = arr[j];
+      j -= 1;
+    }
+    arr[j+1] = key;
+  }
+  return arr;
+}
+
+fn main() {
+  let mut arr = [5, 2, 8, 1, 9, 3];
+  println(insertionSort(arr));
+}
