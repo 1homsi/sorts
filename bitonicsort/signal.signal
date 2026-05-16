@@ -1,0 +1,6 @@
+process BitonicSort =
+(? integer data_in; ! integer data_out)
+(|
+    data_out := data_in when true
+|)
+end process;
