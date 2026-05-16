@@ -1,0 +1,9 @@
+(define $shellsort
+  (lambda [$xs]
+    (let {[$n (length xs)]}
+      (letrec {[$sort (lambda [$gap]
+        (if (<= gap 0)
+          xs
+          (sort (/ gap 3))))]}
+        (sort (let {[$g 1]} (while (<= g n) (+ (* g 3) 1)) g))))))
+(shellsort [5 2 8 1 9 3])
