@@ -1,0 +1,27 @@
+def bogosort(arr)
+  while not issorted(arr)
+    shuffle(arr)
+  end
+  return arr
+end
+
+def issorted(arr)
+  for i in 0 to arr.length() - 2
+    if arr[i] > arr[i + 1]
+      return false
+    end
+  end
+  return true
+end
+
+def shuffle(arr)
+  for i in 0 to arr.length() - 1
+    var j = random() * arr.length()
+    var tmp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = tmp
+  end
+end
+
+var arr = [3, 1, 2]
+print(str(bogosort(arr)))
