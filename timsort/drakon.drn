@@ -1,0 +1,10 @@
+
+    block_start
+    [Timsort]
+    [[array] [minSize]]
+    end
+    
+    block_start
+    [Mergesort]
+    [[array] [minSize]]
+    end
