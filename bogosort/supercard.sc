@@ -1,1 +1,1 @@
-print("Bogosort implementation for supercard.sc")
+bogosort = true
