@@ -1,0 +1,11 @@
+(defn insertion-sort [arr]
+  (let [n (Array.length arr)]
+    (for [i 1 n]
+      (let [key (Array.nth arr i)
+            j (ref (- i 1))]
+        (while (and (>= @j 0) (> @(Array.nth arr @j) @key))
+          (do
+            (Array.aset! arr (+ @j 1) @(Array.nth arr @j))
+            (set! j (- @j 1))))
+        (Array.aset! arr (+ @j 1) @key))))
+  arr)
