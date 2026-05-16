@@ -1,0 +1,35 @@
+
+.EB timsort [arr] [minsize]
+ M(mergesort) [arr] [minsize]
+.
+
+.EB mergesort [arr] [minsize]
+ :G @*arr"=" :L
+ 0"N @*arr"<=" :L
+ 1"="L J
+ @*arr"<=" minsize J
+ insertionsort [arr] J
+ /
+ @*arr"/" [mid]
+ 0,mid/[left]
+ mid,@*arr/[right]
+ mergesort [left] minsize [sl]
+ mergesort [right] minsize [sr]
+ merge [sl] [sr] J
+.
+
+.EB insertionsort [arr]
+ [arr] [result]
+ 2,@*result @:I
+ :L
+ @*result[i] [key]
+ i-1 [j]
+ :L
+ @*result[j] ">" key
+ @*result[j] [@*result[j+1]]
+ j-1 [j]
+ J
+ key [@*result[j+1]]
+ J
+ result J
+.
