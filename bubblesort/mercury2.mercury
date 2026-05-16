@@ -1,0 +1,49 @@
+:- module mercury2.
+:- interface.
+:- import_module io.
+:- pred main(io::di, io::uo) is det.
+
+:- implementation.
+:- import_module array, int, list.
+
+:- pred bubble_sort(array(int)::array_di, array(int)::array_uo) is det.
+bubble_sort(!Array) :-
+    array.size(!.Array, N),
+    bubble_loop(N, !Array).
+
+:- pred bubble_loop(int::in, array(int)::array_di, array(int)::array_uo) is det.
+bubble_loop(N, !Array) :-
+    ( N =< 1 ->
+        true
+    ;
+        bubble_pass(0, N - 1, no, Swapped, !Array),
+        ( Swapped = yes ->
+            bubble_loop(N - 1, !Array)
+        ;
+            true
+        )
+    ).
+
+:- pred bubble_pass(int::in, int::in, bool::in, bool::out,
+    array(int)::array_di, array(int)::array_uo) is det.
+bubble_pass(I, N, !Swapped, !Array) :-
+    ( I >= N ->
+        true
+    ;
+        array.lookup(!.Array, I, XI),
+        array.lookup(!.Array, I + 1, XI1),
+        ( XI > XI1 ->
+            array.set(I, XI1, !Array),
+            array.set(I + 1, XI, !Array),
+            !:Swapped = yes
+        ;
+            true
+        ),
+        bubble_pass(I + 1, N, !Swapped, !Array)
+    ).
+
+main(!IO) :-
+    array.from_list([64, 34, 25, 12, 22, 11, 90], A0),
+    bubble_sort(A0, Sorted),
+    io.write(array.to_list(Sorted), !IO),
+    io.nl(!IO).
