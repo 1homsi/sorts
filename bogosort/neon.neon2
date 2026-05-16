@@ -1,1 +1,1 @@
-print("Bogosort implementation for neon.neon2")
+bogosort = true
