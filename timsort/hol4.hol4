@@ -1,0 +1,38 @@
+open HolKernel boolLib bossLib;
+
+val _ = new_theory "TimSort";
+
+val timsort_def = Define `timsort arr minSize = mergesort arr minSize`;
+
+val mergesort_def = Define `
+  (mergesort [] minSize = []) /\
+  (mergesort [x] minSize = [x]) /\
+  (mergesort arr minSize =
+    if LENGTH arr <= minSize then insertionsort arr
+    else 
+      let mid = LENGTH arr DIV 2 in
+      merge (mergesort (TAKE mid arr) minSize)
+            (mergesort (DROP mid arr) minSize))
+`;
+
+val insertionsort_def = Define `
+  (insertionsort [] = []) /\
+  (insertionsort [x] = [x]) /\
+  (insertionsort (h::t) = insert h (insertionsort t))
+`;
+
+val insert_def = Define `
+  (insert x [] = [x]) /\
+  (insert x (h::t) = 
+    if x <= h then x::h::t else h::insert x t)
+`;
+
+val merge_def = Define `
+  (merge [] ys = ys) /\
+  (merge xs [] = xs) /\
+  (merge (x::xs) (y::ys) =
+    if x <= y then x::merge xs (y::ys)
+    else y::merge (x::xs) ys)
+`;
+
+val _ = export_theory();
