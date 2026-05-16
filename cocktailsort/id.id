@@ -1,0 +1,23 @@
+def cocktailSort arr =
+    let n = length arr
+        loop arr start end swapped =
+            if not swapped then arr
+            else
+                let (arr1, sw1) = forwardPass arr start end false
+                in if not sw1 then arr1
+                   else
+                       let (arr2, sw2) = backwardPass arr1 start (end-1) false
+                       in loop arr2 (start+1) (end-1) sw2
+        forwardPass arr i end sw =
+            if i >= end then (arr, sw)
+            else if arr!i > arr!(i+1)
+                 then forwardPass (swapAt arr i (i+1)) (i+1) end true
+                 else forwardPass arr (i+1) end sw
+        backwardPass arr i start sw =
+            if i < start then (arr, sw)
+            else if arr!i > arr!(i+1)
+                 then backwardPass (swapAt arr i (i+1)) (i-1) start true
+                 else backwardPass arr (i-1) start sw
+        swapAt arr i j =
+            array_update (array_update arr i arr!j) j arr!i
+    in loop arr 0 (n-1) true
