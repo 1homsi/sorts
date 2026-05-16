@@ -1,0 +1,27 @@
+let
+  fun selectionSort arr =
+    let
+      val n = Array.length arr
+      fun sort i =
+        if i < n - 1 then
+          let
+            val minIdx = ref i
+            fun findMin j =
+              if j < n then (
+                if Array.sub(arr, j) < Array.sub(arr, !minIdx) then
+                  minIdx := j
+              )
+            val _ = findMin (i + 1)
+            val tmp = Array.sub(arr, i)
+            val _ = Array.update(arr, i, Array.sub(arr, !minIdx))
+            val _ = Array.update(arr, !minIdx, tmp)
+          in
+            sort (i + 1)
+          end
+        else ()
+    in
+      sort 0
+    end
+in
+  selectionSort
+end
