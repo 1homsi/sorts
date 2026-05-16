@@ -1,0 +1,20 @@
+shellsort([], []).
+shellsort(L, S) :-
+  length(L, N),
+  compute_gap(N, G),
+  shellsort_gaps(L, G, S).
+
+compute_gap(N, G) :-
+  gap_loop(1, N, G).
+
+gap_loop(G, N, G) :- G > N, !.
+gap_loop(G, N, R) :-
+  G2 is G * 3 + 1,
+  gap_loop(G2, N, R).
+
+shellsort_gaps(L, 0, L) :- !.
+shellsort_gaps(L, G, R) :-
+  G2 is G // 3,
+  shellsort_gaps(L, G2, R).
+
+?- shellsort([5, 2, 8, 1, 9, 3], X), write(X).
