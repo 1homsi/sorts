@@ -1,0 +1,36 @@
+MODULE CYCLESORT;
+
+VAR arr: ARRAY[0..4] OF INTEGER;
+    n, cs, item, pos, i, tmp, writes: INTEGER;
+
+PROCEDURE CycleSort;
+BEGIN
+    writes := 0;
+    FOR cs := 0 TO n - 2 DO BEGIN
+        item := arr[cs];
+        pos := cs;
+        FOR i := cs + 1 TO n - 1 DO
+            IF arr[i] < item THEN pos := pos + 1;
+        IF pos <> cs THEN BEGIN
+            WHILE arr[pos] = item DO pos := pos + 1;
+            tmp := arr[pos]; arr[pos] := item; item := tmp;
+            writes := writes + 1;
+            WHILE pos <> cs DO BEGIN
+                pos := cs;
+                FOR i := cs + 1 TO n - 1 DO
+                    IF arr[i] < item THEN pos := pos + 1;
+                WHILE arr[pos] = item DO pos := pos + 1;
+                tmp := arr[pos]; arr[pos] := item; item := tmp;
+                writes := writes + 1;
+            END;
+        END;
+    END;
+END CycleSort;
+
+BEGIN
+    n := 5;
+    arr[0] := 5; arr[1] := 4; arr[2] := 3; arr[3] := 2; arr[4] := 1;
+    CycleSort;
+    FOR i := 0 TO n - 1 DO WRITE(arr[i]:4);
+    WRITELN;
+END CYCLESORT.
