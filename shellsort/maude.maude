@@ -1,0 +1,5 @@
+fmod SHELLSORT is
+  protecting INT-LIST .
+  op shellsort : IntList -> IntList .
+  ceq shellsort(L) = L if gap(L, 1) == 0 .
+endfm
