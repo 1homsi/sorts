@@ -1,0 +1,86 @@
+#include <LEDA/core/array.h>
+#include <iostream>
+using namespace leda;
+
+list<int> timsort(list<int> arr, int minSize) {
+  return mergesort(arr, minSize);
+}
+
+list<int> mergesort(list<int> arr, int minSize) {
+  if (arr.length() <= 1) {
+    return arr;
+  }
+  if (arr.length() <= minSize) {
+    return insertionsort(arr);
+  }
+  
+  int mid = arr.length() / 2;
+  list<int> left = arr;
+  list<int> right = arr;
+  
+  for (int i = mid; i < arr.length(); i++) {
+    left.pop_back();
+  }
+  for (int i = 0; i < mid; i++) {
+    right.pop_front();
+  }
+  
+  return merge(mergesort(left, minSize), mergesort(right, minSize));
+}
+
+list<int> insertionsort(list<int> arr) {
+  list<int> result = arr;
+  list_item it = result.first();
+  for (int i = 1; i < result.length(); i++) {
+    it = it->succ();
+    int key = *it;
+    list_item jt = it->pred();
+    while (jt != NULL && *jt > key) {
+      result.move_after(*jt, it);
+      jt = jt->pred();
+    }
+  }
+  return result;
+}
+
+list<int> merge(list<int> left, list<int> right) {
+  list<int> result;
+  list_item li = left.first();
+  list_item ri = right.first();
+  
+  while (li != NULL && ri != NULL) {
+    if (*li <= *ri) {
+      result.append(*li);
+      li = li->succ();
+    } else {
+      result.append(*ri);
+      ri = ri->succ();
+    }
+  }
+  
+  while (li != NULL) {
+    result.append(*li);
+    li = li->succ();
+  }
+  while (ri != NULL) {
+    result.append(*ri);
+    ri = ri->succ();
+  }
+  
+  return result;
+}
+
+int main() {
+  list<int> arr;
+  arr.append(5); arr.append(2); arr.append(8);
+  arr.append(1); arr.append(9); arr.append(3);
+  
+  list<int> sorted = timsort(arr, 32);
+  
+  for (int x : sorted) {
+    cout << x << " ";
+  }
+  cout << endl;
+  
+  return 0;
+}
