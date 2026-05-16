@@ -1,0 +1,13 @@
+DEFINE STOOGESORT
+PARAM ^ARR, ^I, ^J
+IF [ ^ARR[^J] < ^ARR[^I] ] THEN
+  LET ^TEMP = ^ARR[^J]
+  LET ^ARR[^J] = ^ARR[^I]
+  LET ^ARR[^I] = ^TEMP
+END
+IF [ ^J - ^I > 1 ] THEN
+  LET ^T = ( ^J - ^I + 1 ) / 3
+  STOOGESORT ^ARR ^I ^J - ^T
+  STOOGESORT ^ARR ^I + ^T ^J
+  STOOGESORT ^ARR ^I ^J - ^T
+END
