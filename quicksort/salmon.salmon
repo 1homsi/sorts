@@ -1,0 +1,12 @@
+function quicksort(arr) {
+  if (arr.size() <= 1)
+    return arr;
+
+  let pivot = arr[0];
+  let less = arr.select { |x| x <= pivot };
+  let greater = arr.select { |x| x > pivot };
+
+  return quicksort(less).concat([pivot]).concat(quicksort(greater));
+}
+
+print(quicksort([5, 2, 8, 1, 9, 3]));
