@@ -1,0 +1,17 @@
+GET "libhdr"
+
+LET insertion_sort2(arr, n) BE
+$(
+    LET i, j, key = 0, 0, 0
+    FOR i = 1 TO n-1 DO
+    $(
+        key := arr!i
+        j := i - 1
+        WHILE j >= 0 & arr!j > key DO
+        $(
+            arr!(j+1) := arr!j
+            j := j - 1
+        $)
+        arr!(j+1) := key
+    $)
+$)
