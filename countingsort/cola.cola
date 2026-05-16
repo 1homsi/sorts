@@ -1,0 +1,29 @@
+class CountingSort {
+  method countingsort(arr) {
+    if (arr.size == 0) { return arr; }
+
+    var max = 0;
+    arr.forEach { |x| if (x > max) { max = x; } }
+
+    var count = [];
+    for (var i = 0; i <= max; i++) {
+      count.push(0);
+    }
+
+    arr.forEach { |x| count[x] = count[x] + 1; }
+
+    var output = [];
+    for (var i = 0; i <= max; i++) {
+      for (var j = 0; j < count[i]; j++) {
+        output.push(i);
+      }
+    }
+
+    return output;
+  }
+
+  method main() {
+    var test = [5, 2, 8, 1, 9, 3];
+    System.println(countingsort(test));
+  }
+}
