@@ -1,0 +1,41 @@
+procedure merge(arr; left, mid, right)
+  var i := left
+  var j := mid + 1
+  var result := [0, 0, 0]
+  var k := 0
+  
+  do
+    until i > mid | j > right
+    if arr[i] <= arr[j] then
+      result[k] := arr[i]
+      i += 1
+    else
+      result[k] := arr[j]
+      j += 1
+    fi
+    k += 1
+  od
+  
+  do
+    until i > mid
+    result[k] := arr[i]
+    i += 1
+    k += 1
+  od
+  
+  do
+    until j > right
+    result[k] := arr[j]
+    j += 1
+    k += 1
+  od
+end merge
+
+procedure mergesort(arr; left, right)
+  if left < right then
+    var mid := (left + right) / 2
+    call mergesort(arr, left, mid)
+    call mergesort(arr, mid + 1, right)
+    call merge(arr, left, mid, right)
+  fi
+end mergesort
