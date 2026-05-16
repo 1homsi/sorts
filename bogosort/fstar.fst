@@ -1,1 +1,6 @@
-print("Bogosort implementation for fstar.fst")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
