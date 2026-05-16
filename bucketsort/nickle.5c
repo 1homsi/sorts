@@ -1,0 +1,14 @@
+bucket_sort = func(arr, maxVal) {
+    let buckets = @[0:maxVal-1] = [];
+    for (i in arr) {
+        if (i >= 0 && i < maxVal) {
+            buckets[i] = [i, ...buckets[i]];
+        }
+    }
+    let result = [];
+    for (i in buckets) {
+        result = [...result, ...i];
+    }
+    result;
+};
+bucket_sort([5, 2, 8, 1, 9, 3], 10);
