@@ -1,0 +1,12 @@
+def gnome_sort(arr as (int)) as (int):
+    i = 0
+    n = len(arr)
+    while i < n:
+        if i == 0 or arr[i] >= arr[i - 1]:
+            i += 1
+        else:
+            tmp = arr[i]
+            arr[i] = arr[i - 1]
+            arr[i - 1] = tmp
+            i -= 1
+    return arr
