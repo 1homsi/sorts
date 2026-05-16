@@ -1,0 +1,14 @@
+Pickup a passenger going to Quicksort
+Go to Quicksort
+Dropoff passenger
+Go to Display
+
+[Quicksort]
+Pickup a passenger
+Go to Partition
+Dropoff passenger
+
+[Partition]
+Pickup a passenger
+Go to Filter
+Dropoff passenger
