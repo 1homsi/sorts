@@ -1,0 +1,17 @@
+dec heapify : list(num) # num # num -> list(num);
+--- heapify(arr, n, i) <=
+    let left == 2 * i + 1
+    and right == 2 * i + 2
+    and vi == nth(arr, i)
+    and vl == nth(arr, left)
+    and vr == nth(arr, right)
+    and largest0 == if left < n andalso vl > vi then left else i
+    and largest == if right < n andalso vr > nth(arr, largest0) then right else largest0
+    in if largest = i then arr
+       else heapify(swap(arr, i, largest), n, largest);
+
+dec heapsort : list(num) -> list(num);
+--- heapsort(arr) <=
+    let n == length(arr)
+    and heap == foldl(fn(a,i) => heapify(a, n, i)) arr (from(n div 2 - 1) downto 0)
+    in foldl(fn(a,i) => heapify(swap(a, 0, i), i, 0)) heap (from(n-1) downto 1);
