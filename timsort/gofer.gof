@@ -1,0 +1,28 @@
+timsort arr minsize = mergesort arr minsize
+mergesort arr minsize
+  | length arr <= 1  = arr
+  | length arr <= minsize = insertionsort arr
+  | otherwise = merge (mergesort left minsize) (mergesort right minsize)
+  where mid = length arr `div` 2
+        left = take mid arr
+        right = drop mid arr
+
+insertionsort arr = doinsert arr 1
+  where doinsert result i
+          | i >= length result = result
+          | otherwise = doinsert (doup result i) (i+1)
+        doup result i = update result (i+1) key
+          where key = result!!i
+                j = i - 1
+                dowhile
+                  | j < 0 = result
+                  | result!!j <= key = result
+                  | otherwise = update result (j+1) (result!!j) `doseq` decr j
+
+merge [] ys = ys
+merge xs [] = xs
+merge (x:xs) (y:ys)
+  | x <= y = x : merge xs (y:ys)
+  | otherwise = y : merge (x:xs) ys
+
+timsort [5,2,8,1,9,3] 32
