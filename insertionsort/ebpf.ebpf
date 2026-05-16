@@ -1,0 +1,36 @@
+#include <linux/bpf.h>
+#include <bpf/bpf_helpers.h>
+
+struct {
+    __uint(type, BPF_MAP_TYPE_ARRAY);
+    __uint(max_entries, 16);
+    __type(key, __u32);
+    __type(value, __u32);
+} arr_map SEC(".maps");
+
+SEC("xdp")
+int insertion_sort_prog(struct xdp_md *ctx) {
+    int n = 5;
+    __u32 a[5];
+    for (int k = 0; k < n; k++) {
+        __u32 key_idx = k;
+        __u32 *v = bpf_map_lookup_elem(&arr_map, &key_idx);
+        if (v) a[k] = *v;
+    }
+    for (int i = 1; i < n; i++) {
+        __u32 key = a[i];
+        int j = i - 1;
+        while (j >= 0 && a[j] > key) {
+            a[j + 1] = a[j];
+            j--;
+        }
+        a[j + 1] = key;
+    }
+    for (int k = 0; k < n; k++) {
+        __u32 key_idx = k;
+        bpf_map_update_elem(&arr_map, &key_idx, &a[k], BPF_ANY);
+    }
+    return XDP_PASS;
+}
+
+char _license[] SEC("license") = "GPL";
