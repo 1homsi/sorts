@@ -1,0 +1,22 @@
+DCL arr FIXED DECIMAL(3) INIT (5, 2, 8, 1, 9, 3);
+DCL n FIXED BIN(7) VALUE (6);
+DCL i FIXED BIN(7) VALUE (0);
+DCL k FIXED BIN(7);
+DCL temp FIXED DECIMAL(3);
+DCL swapped FIXED BIN(1);
+
+PGM: DO WHILE (i < n);
+  swapped = '0'b;
+  DO k = 1 BY 1 UNTIL (k > n - i - 1);
+    IF arr(k) > arr(k + 1) THEN DO;
+      temp = arr(k);
+      arr(k) = arr(k + 1);
+      arr(k + 1) = temp;
+      swapped = '1'b;
+    END;
+  END;
+  IF ¬swapped THEN GO TO FIN;
+  i = i + 1;
+END;
+FIN: PUT LIST (arr);
+END PGM;
