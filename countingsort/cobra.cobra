@@ -1,0 +1,22 @@
+class CountingSort
+    def sort(arr as List<of int>) as List<of int>
+        if arr.count == 0, return arr
+        mn = arr[0]; mx = arr[0]
+        for v in arr
+            if v < mn, mn = v
+            if v > mx, mx = v
+        range = mx - mn + 1
+        count = List<of int>(range)
+        for i in range, count.add(0)
+        for v in arr, count[v - mn] += 1
+        for i in 1 : range, count[i] += count[i - 1]
+        output = List<of int>(arr.count)
+        for i in arr.count, output.add(0)
+        for i in arr.count - 1 : -1 : -1
+            count[arr[i] - mn] -= 1
+            output[count[arr[i] - mn]] = arr[i]
+        return output
+
+    def main
+        arr = [4, 2, 2, 8, 3, 3, 1]
+        print(sort(arr))
