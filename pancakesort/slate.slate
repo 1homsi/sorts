@@ -1,0 +1,16 @@
+(
+    arr := {5. 2. 8. 1. 9. 3} copy.
+    n := arr size.
+    0 below: (n - 1) do: [| i |
+        0 below: (n - i - 1) do: [| j |
+            (arr at: j) > (arr at: (j + 1))
+                ifTrue: [
+                    temp := arr at: j.
+                    arr at: j put: (arr at: (j + 1)).
+                    arr at: (j + 1) put: temp.
+                ]
+        ]
+    ].
+    'Pancake Sort: ' print.
+    arr printLine.
+)
