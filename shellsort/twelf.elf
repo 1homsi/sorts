@@ -1,0 +1,3 @@
+shellsort : list int -> list int -> type.
+shellsort/base : shellsort [] [].
+shellsort/rec : shellsort (X::XS) YS <- shellsort XS YS.
