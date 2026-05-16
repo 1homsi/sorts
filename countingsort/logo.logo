@@ -1,0 +1,28 @@
+to countingsort :arr
+  let "max 0
+  let "i 0
+  repeat count :arr [
+    if item :i + 1 :arr > :max [let "max item :i + 1 :arr]
+    let "i :i + 1
+  ]
+  let "count make "max + 1 0
+  let "i 0
+  repeat count :arr [
+    let "idx item :i + 1 :arr
+    let "count setitem :idx + 1 :count (item :idx + 1 :count) + 1
+    let "i :i + 1
+  ]
+  let "output []
+  let "i 0
+  repeat :max + 1 [
+    let "j 0
+    repeat item :i + 1 :count [
+      let "output lput :i - 1 :output
+      let "j :j + 1
+    ]
+    let "i :i + 1
+  ]
+  output :output
+end
+
+print countingsort [5 2 8 1 9 3]
