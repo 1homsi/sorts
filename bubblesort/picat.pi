@@ -1,0 +1,24 @@
+import util.
+
+bubble_sort(Arr) = Sorted =>
+    A = to_array(Arr),
+    N = len(A),
+    bubble_loop(A, N),
+    Sorted = to_list(A).
+
+bubble_loop(A, N) =>
+    Swapped = false,
+    foreach(I in 1..N-1)
+        if A[I] > A[I+1] then
+            Tmp = A[I],
+            A[I] := A[I+1],
+            A[I+1] := Tmp,
+            Swapped := true
+        end
+    end,
+    if Swapped then bubble_loop(A, N-1) end.
+
+main =>
+    Arr = [64, 34, 25, 12, 22, 11, 90],
+    Sorted = bubble_sort(Arr),
+    println(Sorted).
