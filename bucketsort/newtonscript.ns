@@ -1,0 +1,18 @@
+local bucketSort := func(arr, maxVal) {
+    local buckets := [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil];
+    foreach (num in arr) {
+        if (num >= 0 && num < maxVal) {
+            buckets[num] := [num, ...buckets[num]];
+        }
+    }
+    local result := [];
+    foreach (bucket in buckets) {
+        if (bucket <> nil) {
+            foreach (num in bucket) {
+                result := [...result, num];
+            }
+        }
+    }
+    result;
+};
+bucketSort([5, 2, 8, 1, 9, 3], 10);
