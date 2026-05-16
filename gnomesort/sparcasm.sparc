@@ -1,0 +1,36 @@
+        .data
+arr:    .word 5,3,8,1,9,2,7,4,6,0
+
+        .text
+        .global main
+main:
+        set  arr, %l0
+        mov  10, %l1
+        clr  %l2
+
+loop:
+        cmp  %l2, %l1
+        bge  done
+        nop
+        tst  %l2
+        be   advance
+        nop
+        sll  %l2, 2, %l3
+        add  %l0, %l3, %l4
+        ld   [%l4], %l5
+        ld   [%l4-4], %l6
+        cmp  %l5, %l6
+        bge  advance
+        nop
+        st   %l6, [%l4]
+        st   %l5, [%l4-4]
+        sub  %l2, 1, %l2
+        ba   loop
+        nop
+advance:
+        add  %l2, 1, %l2
+        ba   loop
+        nop
+done:
+        mov  1, %g1
+        ta   0
