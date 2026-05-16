@@ -1,0 +1,21 @@
+selectionSort = (arr) ->
+  n = arr length
+  i = 0
+  while (i < n - 1)
+    minIdx = i
+    j = i + 1
+    while (j < n)
+      if (arr(j) < arr(minIdx))
+        minIdx = j
+      end
+      j = j + 1
+    end
+    tmp = arr(i)
+    arr(i) = arr(minIdx)
+    arr(minIdx) = tmp
+    i = i + 1
+  end
+  return arr
+.
+
+say selectionSort([5, 2, 8, 1, 9, 3])
