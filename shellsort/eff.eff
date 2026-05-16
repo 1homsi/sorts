@@ -1,0 +1,21 @@
+let shellsort arr =
+  let n = Array.length arr in
+  let gap = ref 1 in
+  while !gap <= n do
+    gap := !gap * 3 + 1
+  done;
+  while !gap > 0 do
+    gap := !gap / 3;
+    for i = !gap to n - 1 do
+      let temp = arr.(i) in
+      let j = ref i in
+      while !j >= !gap && arr.(!j - !gap) > temp do
+        arr.(!j) <- arr.(!j - !gap);
+        j := !j - !gap;
+      done;
+      arr.(!j) <- temp;
+    done;
+  done;
+  arr
+;;
+let () = Array.iter (Printf.printf "%d ") (shellsort [|5; 2; 8; 1; 9; 3|]); print_newline ()
