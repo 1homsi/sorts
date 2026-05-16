@@ -1,0 +1,45 @@
+process main
+  define arr as 1D array of integers
+  define i, j, k, left, mid, right as integers
+  
+  let arr(1) = 5
+  let arr(2) = 2
+  let arr(3) = 8
+  let arr(4) = 1
+  let arr(5) = 9
+  let arr(6) = 3
+  
+  call mergesort(arr, 1, 6)
+  print arr
+end
+
+routine mergesort(arr, left, right)
+  define mid as integer
+  
+  if left < right
+    let mid = (left + right) / 2
+    call mergesort(arr, left, mid)
+    call mergesort(arr, mid + 1, right)
+    call merge(arr, left, mid, right)
+  endif
+end
+
+routine merge(arr, left, mid, right)
+  define i, j, k as integers
+  define result as 1D array of integers
+  
+  let i = left
+  let j = mid + 1
+  let k = 1
+  
+  do while (i .le. mid .and. j .le. right)
+    if arr(i) .le. arr(j)
+      let result(k) = arr(i)
+      let i = i + 1
+    else
+      let result(k) = arr(j)
+      let j = j + 1
+    endif
+    let k = k + 1
+  loop
+end
