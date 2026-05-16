@@ -1,0 +1,20 @@
+        ARR.1 = 64; ARR.2 = 34; ARR.3 = 25; ARR.4 = 12
+        ARR.5 = 22; ARR.6 = 11; ARR.7 = 90
+        N = 7
+OUTER   SWAPPED = 0
+        I = 1
+INNER   GT(I, N - 1) :S(DONE_INNER)
+        GT(ARR.$I, ARR.$(I + 1)) :F(NOSWAP)
+        TMP = ARR.$I
+        ARR.$I = ARR.$(I + 1)
+        ARR.$(I + 1) = TMP
+        SWAPPED = 1
+NOSWAP  I = I + 1 :(INNER)
+DONE_INNER
+        N = N - 1
+        EQ(SWAPPED, 1) :S(OUTER)
+        I = 1
+PRINT   GT(I, 7) :S(END)
+        OUTPUT = ARR.$I
+        I = I + 1 :(PRINT)
+END
