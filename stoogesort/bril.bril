@@ -1,0 +1,45 @@
+@stoogesort(a: ptr<int>, i: int, j: int) {
+  one: int = const 1;
+  three: int = const 3;
+  
+  aj_ptr: ptr<int> = ptradd a j;
+  ai_ptr: ptr<int> = ptradd a i;
+  
+  aj_val: int = load aj_ptr;
+  ai_val: int = load ai_ptr;
+  
+  cmp: bool = lt aj_val ai_val;
+  br cmp then else;
+  
+  then:
+    store aj_ptr ai_val;
+    store ai_ptr aj_val;
+  
+  else:
+  
+  j_minus_i: int = sub j i;
+  cmp2: bool = gt j_minus_i one;
+  br cmp2 rec base;
+  
+  rec:
+    sum: int = add j_minus_i one;
+    t: int = div sum three;
+    j_minus_t: int = sub j t;
+    i_plus_t: int = add i t;
+    
+    call @stoogesort a i j_minus_t;
+    call @stoogesort a i_plus_t j;
+    call @stoogesort a i j_minus_t;
+  
+  base:
+}
+
+@main {
+  a: int = const 5;
+  b: int = const 2;
+  c: int = const 8;
+  d: int = const 1;
+  e: int = const 9;
+  f: int = const 3;
+  print a b c d e f;
+}
