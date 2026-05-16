@@ -1,0 +1,32 @@
+def Heapsort(var Arr : Vector<Int>) is
+  Var N := |Arr|;
+  for I in N/2-1 .. 0 by -1 loop
+    Siftdown(Arr, I, N);
+  end loop;
+  for I in N-1 .. 1 by -1 loop
+    Var Temp := Arr[I];
+    Arr[I] := Arr[0];
+    Arr[0] := Temp;
+    Siftdown(Arr, 0, I);
+  end loop;
+  Println(Arr);
+end def Heapsort;
+
+def Siftdown(var Arr : Vector<Int>; Idx : Int; N : Int) is
+  Var Largest := Idx;
+  Var Left := 2 * Idx + 1;
+  Var Right := 2 * Idx + 2;
+  
+  if Left < N and Arr[Left] > Arr[Largest] then
+    Largest := Left;
+  end if;
+  if Right < N and Arr[Right] > Arr[Largest] then
+    Largest := Right;
+  end if;
+  if Largest != Idx then
+    Var Temp := Arr[Idx];
+    Arr[Idx] := Arr[Largest];
+    Arr[Largest] := Temp;
+    Siftdown(Arr, Largest, N);
+  end if;
+end def Siftdown;
