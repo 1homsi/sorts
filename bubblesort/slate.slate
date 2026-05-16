@@ -1,0 +1,15 @@
+define: #bubblesort -> [| :arr |
+  arr size `i `j `temp
+  0 `n -> n
+  i from: 0 to: n do: [
+    j from: 0 to: (n - 1 - i) do: [
+      (arr at: j) > (arr at: j + 1) ifTrue: [
+        arr at: j put: (arr at: j + 1).
+        arr at: j + 1 put: temp.
+      ].
+    ].
+  ].
+  arr
+].
+
+#(5 2 8 1 9 3) bubblesort print.
