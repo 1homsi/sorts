@@ -1,0 +1,37 @@
+CYCLE$SORT: DO;
+    DECLARE ARR(5) BYTE;
+    DECLARE (N, CS, ITEM, POS, I, TMP, WRITES) BYTE;
+
+    CYCLE$SORT$PROC: PROCEDURE;
+        N = 5;
+        ARR(0) = 5; ARR(1) = 4; ARR(2) = 3; ARR(3) = 2; ARR(4) = 1;
+        WRITES = 0;
+        DO CS = 0 TO N - 2;
+            ITEM = ARR(CS);
+            POS = CS;
+            DO I = CS + 1 TO N - 1;
+                IF ARR(I) < ITEM THEN POS = POS + 1;
+            END;
+            IF POS <> CS THEN DO;
+                DO WHILE ARR(POS) = ITEM;
+                    POS = POS + 1;
+                END;
+                TMP = ARR(POS); ARR(POS) = ITEM; ITEM = TMP;
+                WRITES = WRITES + 1;
+                DO WHILE POS <> CS;
+                    POS = CS;
+                    DO I = CS + 1 TO N - 1;
+                        IF ARR(I) < ITEM THEN POS = POS + 1;
+                    END;
+                    DO WHILE ARR(POS) = ITEM;
+                        POS = POS + 1;
+                    END;
+                    TMP = ARR(POS); ARR(POS) = ITEM; ITEM = TMP;
+                    WRITES = WRITES + 1;
+                END;
+            END;
+        END;
+    END CYCLE$SORT$PROC;
+
+    CALL CYCLE$SORT$PROC;
+END CYCLE$SORT;
