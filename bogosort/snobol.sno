@@ -1,30 +1,6 @@
-        ARRAY = ARRAY(8)
-        ARRAY<1> = 3
-        ARRAY<2> = 1
-        ARRAY<3> = 4
-        ARRAY<4> = 1
-        ARRAY<5> = 5
-        ARRAY<6> = 9
-        ARRAY<7> = 2
-        ARRAY<8> = 6
-        N = 8
-
-CHKSRT  SORTED = 1
-        I = 1
-CHKLP   GE(I, N)                          :S(DOSORT)
-        GT(ARRAY<I>, ARRAY<(I + 1)>)      :S(NOTSRT)
-        I = I + 1                          :(CHKLP)
-NOTSRT  SORTED = 0
-DOSORT  EQ(SORTED, 1)                     :S(PRINT)
-        I = N
-SHLP    LE(I, 1)                          :S(CHKSRT)
-        J = REMDR(RANDOM(I), I) + 1
-        TMP = ARRAY<I>
-        ARRAY<I> = ARRAY<J>
-        ARRAY<J> = TMP
-        I = I - 1                          :(SHLP)
-PRINT   I = 1
-PRTLP   GT(I, N)                          :S(END)
-        OUTPUT = ARRAY<I>
-        I = I + 1                          :(PRTLP)
-END
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
