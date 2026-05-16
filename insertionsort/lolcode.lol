@@ -1,0 +1,22 @@
+HAI 1.4
+CAN HAS STDIO?
+
+HOW IZ I INSERTSORT YR ARR AN YR N
+    I HAS A I ITZ 1
+    IM IN YR OUTER UPPIN YR I TIL BOTH SAEM I AN BIGGR OF I N
+        I HAS A KEY ITZ GIMMEH ARR!!I
+        I HAS A J ITZ DIFF OF I AN 1
+        IM IN YR INNER
+            BOTH SAEM BIGGR OF J AN -1 AN BIGGR OF GIMMEH ARR!!J AN KEY
+            O RLY?
+            YA RLY
+                GIMMEH ARR!!(SUM OF J AN 1) R GIMMEH ARR!!J
+                J R DIFF OF J AN 1
+            NO WAI
+                GTFO
+            OIC
+        IM OUTTA YR INNER
+        GIMMEH ARR!!(SUM OF J AN 1) R KEY
+    IM OUTTA YR OUTER
+IF U SAY SO
+KTHXBYE
