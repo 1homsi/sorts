@@ -1,0 +1,13 @@
+merge [] ys = ys
+merge xs [] = xs
+merge (x:xs) (y:ys) = if x <= y then x:merge xs (y:ys) else y:merge (x:xs) ys
+
+split [] = ([], [])
+split [x] = ([x], [])
+split (x:y:xs) = let (l, r) = split xs in (x:l, y:r)
+
+mergesort [] = []
+mergesort [x] = [x]
+mergesort xs = let (l, r) = split xs in merge (mergesort l) (mergesort r)
+
+main = print (mergesort [5, 2, 8, 1, 9, 3])
