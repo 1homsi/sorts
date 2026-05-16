@@ -1,0 +1,29 @@
+fn bogosort(arr mut [i32]) [i32] {
+  while !issorted(&arr) {
+    shuffle(&mut arr);
+  }
+  return arr;
+}
+
+fn issorted(arr &[i32]) bool {
+  for i in 0..arr.len-1 {
+    if arr[i] > arr[i+1] {
+      return false;
+    }
+  }
+  return true;
+}
+
+fn shuffle(arr mut &[i32]) {
+  for i in 0..arr.len {
+    j := i;
+    tmp := arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
+}
+
+fn main() {
+  arr := [3, 1, 2];
+  println(bogosort(arr));
+}
