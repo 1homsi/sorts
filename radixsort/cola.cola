@@ -1,0 +1,33 @@
+module radixsort {
+  def radixsort(arr: Array[Int]): Array[Int] {
+    var max = 0
+    for x in arr {
+      if x > max { max = x }
+    }
+    var exp = 1
+    while (max / exp > 0) {
+      arr = countingSortByExp(arr, exp)
+      exp = exp * 10
+    }
+    return arr
+  }
+
+  def countingSortByExp(arr: Array[Int], exp: Int): Array[Int] {
+    val n = arr.size()
+    var output = new Array[Int](n)
+    var count = new Array[Int](10)
+    for i in 0..n {
+      count[(arr[i] / exp) % 10] += 1
+    }
+    for i in 1..10 {
+      count[i] += count[i - 1]
+    }
+    for i in (n - 1)..0 {
+      output[count[(arr[i] / exp) % 10] - 1] = arr[i]
+      count[(arr[i] / exp) % 10] -= 1
+    }
+    return output
+  }
+}
+
+radixsort.radixsort([5, 2, 8, 1, 9, 3]).println()
