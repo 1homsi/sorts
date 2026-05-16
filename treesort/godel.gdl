@@ -1,0 +1,16 @@
+insert([], Val, [Val, [], []]).
+insert([Val, L, R], Val, [Val, L, R]).
+insert([V, L, R], Val, [V, NL, R]) :- Val < V, insert(L, Val, NL).
+insert([V, L, R], Val, [V, L, NR]) :- Val > V, insert(R, Val, NR).
+
+inorder([], []).
+inorder([V, L, R], Result) :-
+  inorder(L, LL),
+  inorder(R, RR),
+  append(LL, [V|RR], Result).
+
+tree_sort(Arr, Sorted) :-
+  foldl(insert, [], Arr, Root),
+  inorder(Root, Sorted).
+
+:- tree_sort([5, 2, 8, 1, 9, 3], X), write(X), nl.
