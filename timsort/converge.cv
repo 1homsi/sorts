@@ -1,0 +1,64 @@
+func timsort(arr: [Int], minSize: Int) -> [Int] {
+  return mergesort(arr: arr, minSize: minSize)
+}
+
+func mergesort(arr: [Int], minSize: Int) -> [Int] {
+  if arr.count <= 1 {
+    return arr
+  }
+  if arr.count <= minSize {
+    return insertionsort(arr: arr)
+  }
+  
+  let mid = arr.count / 2
+  let left = Array(arr.prefix(mid))
+  let right = Array(arr.suffix(from: mid))
+  
+  return merge(
+    left: mergesort(arr: left, minSize: minSize),
+    right: mergesort(arr: right, minSize: minSize)
+  )
+}
+
+func insertionsort(arr: [Int]) -> [Int] {
+  var result = arr
+  for i in 1..<result.count {
+    let key = result[i]
+    var j = i - 1
+    while j >= 0 && result[j] > key {
+      result[j + 1] = result[j]
+      j -= 1
+    }
+    result[j + 1] = key
+  }
+  return result
+}
+
+func merge(left: [Int], right: [Int]) -> [Int] {
+  var result = [Int]()
+  var i = 0
+  var j = 0
+  
+  while i < left.count && j < right.count {
+    if left[i] <= right[j] {
+      result.append(left[i])
+      i += 1
+    } else {
+      result.append(right[j])
+      j += 1
+    }
+  }
+  
+  while i < left.count {
+    result.append(left[i])
+    i += 1
+  }
+  while j < right.count {
+    result.append(right[j])
+    j += 1
+  }
+  
+  return result
+}
+
+print(timsort(arr: [5, 2, 8, 1, 9, 3], minSize: 32))
