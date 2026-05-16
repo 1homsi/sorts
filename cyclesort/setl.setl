@@ -1,0 +1,38 @@
+program cycle_sort_demo;
+
+procedure cycle_sort(rw arr, n);
+    writes := 0;
+    cycle_start := 1;
+    while cycle_start <= n - 1 loop
+        item := arr(cycle_start);
+        pos := cycle_start;
+        i := cycle_start + 1;
+        while i <= n loop
+            if arr(i) < item then pos := pos + 1; end if;
+            i := i + 1;
+        end loop;
+        if pos /= cycle_start then
+            while arr(pos) = item loop pos := pos + 1; end loop;
+            tmp := arr(pos); arr(pos) := item; item := tmp;
+            writes := writes + 1;
+            while pos /= cycle_start loop
+                pos := cycle_start;
+                i := cycle_start + 1;
+                while i <= n loop
+                    if arr(i) < item then pos := pos + 1; end if;
+                    i := i + 1;
+                end loop;
+                while arr(pos) = item loop pos := pos + 1; end loop;
+                tmp := arr(pos); arr(pos) := item; item := tmp;
+                writes := writes + 1;
+            end loop;
+        end if;
+        cycle_start := cycle_start + 1;
+    end loop;
+end procedure;
+
+arr := [5, 4, 3, 2, 1];
+cycle_sort(arr, 5);
+print(arr);
+
+end program;
