@@ -1,0 +1,10 @@
+node bubble_sort(x : int^6) returns (y : int^6);
+var swapped : bool;
+let
+  y = x;
+tel;
+
+node main() returns (z : int^6);
+let
+  z = bubble_sort([5, 2, 8, 1, 9, 3]);
+tel;
