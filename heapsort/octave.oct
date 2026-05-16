@@ -1,0 +1,29 @@
+function arr = heapify(arr, n, i)
+    largest = i;
+    left = 2*i;
+    right = 2*i+1;
+    if left <= n && arr(left) > arr(largest)
+        largest = left;
+    endif
+    if right <= n && arr(right) > arr(largest)
+        largest = right;
+    endif
+    if largest != i
+        tmp = arr(i); arr(i) = arr(largest); arr(largest) = tmp;
+        arr = heapify(arr, n, largest);
+    endif
+endfunction
+
+function arr = heapsort(arr)
+    n = length(arr);
+    for i = floor(n/2):-1:1
+        arr = heapify(arr, n, i);
+    endfor
+    for i = n:-1:2
+        tmp = arr(1); arr(1) = arr(i); arr(i) = tmp;
+        arr = heapify(arr, i-1, 1);
+    endfor
+endfunction
+
+arr = [12, 11, 13, 5, 6, 7];
+disp(heapsort(arr))
