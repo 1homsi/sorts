@@ -1,0 +1,40 @@
+PROGRAM CYCLESORT;
+DECLARE ARR(6) CHARACTER INITIAL('5', '2', '8', '1', '9', '3');
+DECLARE N, POS, ITEM, CYCLES, I, TEMP FIXED;
+
+N = 6;
+POS = 0;
+DO WHILE (POS < N);
+  ITEM = ARR(POS);
+  CYCLES = 0;
+  DO I = 0 TO N-1;
+    IF I ^= POS AND ARR(I) < ITEM THEN
+      CYCLES = CYCLES + 1;
+    END;
+  END;
+  IF CYCLES ^= 0 THEN
+    DO WHILE (ARR(POS) = ITEM);
+      POS = POS + 1;
+    END;
+    TEMP = ARR(POS);
+    ARR(POS) = ITEM;
+    ITEM = TEMP;
+    DO WHILE (CYCLES > 0);
+      CYCLES = 0;
+      DO I = 0 TO N-1;
+        IF I ^= POS AND ARR(I) < ITEM THEN
+          CYCLES = CYCLES + 1;
+        END;
+      END;
+      DO WHILE (ARR(POS) = ITEM);
+        POS = POS + 1;
+      END;
+      TEMP = ARR(POS);
+      ARR(POS) = ITEM;
+      ITEM = TEMP;
+      CYCLES = CYCLES - 1;
+    END;
+  END;
+  POS = POS + 1;
+END;
+DISPLAY ARR;
