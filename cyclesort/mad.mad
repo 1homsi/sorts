@@ -1,0 +1,28 @@
+           DIMENSION ARR(5)
+           ARR(1)=5
+           ARR(2)=4
+           ARR(3)=3
+           ARR(4)=2
+           ARR(5)=1
+           N=5
+           WRITES=0
+           THROUGH OUTR, FOR CS=1, 1, CS.GE.N
+           ITEM=ARR(CS)
+           POS=CS
+           THROUGH INNR, FOR I=CS+1, 1, I.GE.N
+           WHENEVER ARR(I).L.ITEM, POS=POS+1
+           INNR   CONTINUE
+           WHENEVER POS.E.CS, TRANSFER TO OUTR
+SKIP       WHENEVER ARR(POS).NE.ITEM, TRANSFER TO DOSWP
+           POS=POS+1
+           TRANSFER TO SKIP
+DOSWP      TMP=ARR(POS)
+           ARR(POS)=ITEM
+           ITEM=TMP
+           WRITES=WRITES+1
+OUTR       CONTINUE
+           THROUGH PRNT, FOR I=1, 1, I.G.N
+           PRINT FORMAT FMT, ARR(I)
+PRNT       CONTINUE
+           VECTOR VALUES FMT=$I4*$
+           END OF PROGRAM
