@@ -1,0 +1,14 @@
+define bubble-sort (... -> ...):
+  var arr var n
+  n arr length -> n
+  0 n range over var i (
+    0 (n 1 - i -) range over var j (
+      arr at j arr at (j 1 +) over 1 < when (
+        arr j swap
+      )
+    )
+  )
+  arr
+;
+
+[5 2 8 1 9 3] bubble-sort
