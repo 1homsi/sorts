@@ -1,0 +1,15 @@
+def stoogesort {
+  (a, i, j) =>
+    (a[j] < a[i] ? a.swap(i, j) : null) &
+    (j - i > 1 ? 
+      stoogesort(a, i, j - (j-i+1) div 3) &
+      stoogesort(a, i + (j-i+1) div 3, j) &
+      stoogesort(a, i, j - (j-i+1) div 3)
+    : null)
+}
+
+def main {
+  arr = [5, 2, 8, 1, 9, 3]
+  stoogesort(arr, 0, 5)
+  println(arr)
+}
