@@ -1,0 +1,32 @@
+bitonicsort arr lo cnt dir =
+  if cnt > 1 then
+    let k = cnt div 2 in
+    let arr1 = bitonicsort arr lo k 1 in
+    let arr2 = bitonicsort arr1 (lo + k) k 0 in
+    bitonicmerge arr2 lo cnt dir
+  else
+    arr;
+
+bitonicmerge arr lo cnt dir =
+  if cnt > 1 then
+    let k = cnt div 2 in
+    let arr1 = bitonicmerge arr lo k dir in
+    let arr2 = bitonicmerge arr1 (lo + k) k dir in
+    if (arr1!(lo) > arr1!(lo + k)) == (dir == 1) then
+      swap arr1 lo (lo + k)
+    else
+      arr2
+  else
+    arr;
+
+swap arr i j =
+  let tmp = arr!i in
+  arr!i := arr!j; arr!j := tmp; arr;
+
+main = do
+  let arr = [5, 2, 8, 1, 9, 3, 7, 4];
+  bitonicsort arr 0 8 1;
+  println arr;
+end;
+
+main;
