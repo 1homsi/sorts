@@ -1,0 +1,23 @@
+module aptos_sort::insertion_sort {
+    use std::vector;
+
+    public fun insertion_sort(arr: vector<u64>): vector<u64> {
+        let n = vector::length(&arr);
+        let i = 1u64;
+        while (i < n) {
+            let key = *vector::borrow(&arr, i);
+            let j = i - 1;
+            loop {
+                let aj = *vector::borrow(&arr, j);
+                if (aj > key) {
+                    *vector::borrow_mut(&mut arr, j + 1) = aj;
+                    if (j == 0) break;
+                    j = j - 1;
+                } else break;
+            };
+            *vector::borrow_mut(&mut arr, j + 1) = key;
+            i = i + 1;
+        };
+        arr
+    }
+}
