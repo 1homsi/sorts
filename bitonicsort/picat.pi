@@ -1,0 +1,32 @@
+import util.
+
+main =>
+    Data = {3, 7, 4, 8, 6, 2, 1, 5},
+    bitonic_sort(Data, 1, length(Data), true),
+    println(Data).
+
+compare_and_swap(Arr, I, J, Dir) =>
+    AI = Arr[I],
+    AJ = Arr[J],
+    (Dir == (AI > AJ) ->
+        Arr[I] := AJ,
+        Arr[J] := AI
+    ; true).
+
+bitonic_merge(Arr, Lo, Cnt, Dir) =>
+    (Cnt > 1 ->
+        K = Cnt div 2,
+        foreach(I in Lo..Lo+K-1)
+            compare_and_swap(Arr, I, I+K, Dir)
+        end,
+        bitonic_merge(Arr, Lo, K, Dir),
+        bitonic_merge(Arr, Lo+K, K, Dir)
+    ; true).
+
+bitonic_sort(Arr, Lo, Cnt, Dir) =>
+    (Cnt > 1 ->
+        K = Cnt div 2,
+        bitonic_sort(Arr, Lo, K, true),
+        bitonic_sort(Arr, Lo+K, K, false),
+        bitonic_merge(Arr, Lo, Cnt, Dir)
+    ; true).
