@@ -1,0 +1,45 @@
+define heapsort(arr) {
+  local(n, i, temp);
+  set n to arr->length();
+  
+  set i to n / 2 - 1;
+  while (i >= 0) {
+    siftdown(arr, i, n);
+    set i to i - 1;
+  }
+  
+  set i to n - 1;
+  while (i > 0) {
+    set temp to arr[0];
+    set arr[0] to arr[i];
+    set arr[i] to temp;
+    siftdown(arr, 0, i);
+    set i to i - 1;
+  }
+  
+  return arr;
+}
+
+define siftdown(arr, idx, n) {
+  local(largest, left, right, temp);
+  set largest to idx;
+  set left to 2 * idx + 1;
+  set right to 2 * idx + 2;
+  
+  if (left < n && arr[left] > arr[largest]) {
+    set largest to left;
+  }
+  if (right < n && arr[right] > arr[largest]) {
+    set largest to right;
+  }
+  if (largest != idx) {
+    set temp to arr[idx];
+    set arr[idx] to arr[largest];
+    set arr[largest] to temp;
+    siftdown(arr, largest, n);
+  }
+}
+
+local(arr);
+set arr to [5, 2, 8, 1, 9, 3];
+print(heapsort(arr));
