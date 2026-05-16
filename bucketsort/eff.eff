@@ -1,0 +1,17 @@
+let rec bucket_sort arr max_val =
+  if max_val = 0 then arr
+  else
+    let buckets = Array.make max_val [] in
+    List.iter (fun num ->
+      if num >= 0 && num < max_val then
+        buckets.(num) <- num :: buckets.(num)
+    ) arr;
+    let result = ref [] in
+    for i = max_val - 1 downto 0 do
+      List.iter (fun num -> 
+        result := num :: !result
+      ) buckets.(i)
+    done;
+    !result
+
+bucket_sort [5; 2; 8; 1; 9; 3] 10
