@@ -1,0 +1,13 @@
+(define $bucket-sort
+  (lambda [$arr $maxVal]
+    (if (eq? $maxVal 0)
+      $arr
+      (letrec ([bs (map (lambda [$_] '()) (iota $maxVal))])
+        (letrec ([filled (foldl (lambda [$bs $num]
+          (let* ([$idx num])
+            (if (and (>= $idx 0) (< $idx $maxVal))
+              (update-at bs $idx (cons $num (nth bs $idx)))
+              $bs)))
+          $bs $arr)])
+          (foldl append '() (reverse $filled)))))))
+(bucket-sort '(5 2 8 1 9 3) 10)
