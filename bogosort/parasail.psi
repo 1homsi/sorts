@@ -1,0 +1,22 @@
+abstract interface Bogosort<> is
+  function Bogosort(Arr : Vector<Integer>) returns Vector<Integer>;
+end interface Bogosort;
+
+class Bogosort is
+  function Bogosort(Arr : Vector<Integer>) returns Vector<Integer> is
+    var Sorted := Arr;
+    while not IsSorted(Sorted) loop
+      Shuffle(Sorted);
+    end loop;
+    return Sorted;
+  end function Bogosort;
+
+  function IsSorted(Arr : Vector<Integer>) returns Boolean is
+    for I in 1..Length(Arr)-1 loop
+      if Arr[I] > Arr[I+1] then
+        return false;
+      end if;
+    end loop;
+    return true;
+  end function IsSorted;
+end class Bogosort;
