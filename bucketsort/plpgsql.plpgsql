@@ -1,0 +1,43 @@
+CREATE OR REPLACE FUNCTION bucket_sort(arr FLOAT[]) RETURNS FLOAT[] AS $$
+DECLARE
+    n INT := array_length(arr, 1);
+    min_v FLOAT;
+    max_v FLOAT;
+    idx INT;
+    pos INT := 1;
+    key FLOAT;
+    j INT;
+    result FLOAT[];
+    buckets FLOAT[][];
+    counts INT[];
+BEGIN
+    IF n = 0 THEN RETURN arr; END IF;
+    SELECT MIN(v), MAX(v) INTO min_v, max_v FROM unnest(arr) v;
+    buckets := array_fill(0.0::FLOAT, ARRAY[n, n]);
+    counts := array_fill(0, ARRAY[n]);
+    FOR i IN 1..n LOOP
+        idx := LEAST(n, floor((arr[i] - min_v) / (max_v - min_v + 1) * n)::INT + 1);
+        counts[idx] := counts[idx] + 1;
+        buckets[idx][counts[idx]] := arr[i];
+    END LOOP;
+    result := array_fill(0.0::FLOAT, ARRAY[n]);
+    FOR b IN 1..n LOOP
+        FOR i IN 2..counts[b] LOOP
+            key := buckets[b][i];
+            j := i - 1;
+            WHILE j >= 1 AND buckets[b][j] > key LOOP
+                buckets[b][j+1] := buckets[b][j];
+                j := j - 1;
+            END LOOP;
+            buckets[b][j+1] := key;
+        END LOOP;
+        FOR i IN 1..counts[b] LOOP
+            result[pos] := buckets[b][i];
+            pos := pos + 1;
+        END LOOP;
+    END LOOP;
+    RETURN result;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT bucket_sort(ARRAY[0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68]);
