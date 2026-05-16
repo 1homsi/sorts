@@ -1,0 +1,20 @@
+        DEFINE('COMBSORT(N)')
+        GAP = N
+        SORTED = 0
+LOOP    EQ(SORTED, 1)                               :S(END)
+        GAP = INTEGER(GAP / 1.3)
+        LT(GAP, 1)                                  :S(SETONE)
+        EQ(GAP, 1)                                  :S(SETSORT)
+        GOTO PASS
+SETONE  GAP = 1
+SETSORT SORTED = 1
+PASS    I = 1
+INNER   GT(I + GAP, N)                              :S(LOOP)
+        GT(ARR<I>, ARR<I + GAP>)                    :F(NEXT)
+        TMP = ARR<I>
+        ARR<I> = ARR<I + GAP>
+        ARR<I + GAP> = TMP
+        SORTED = 0
+NEXT    I = I + 1
+        GOTO INNER
+END
