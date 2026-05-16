@@ -1,16 +1,17 @@
-10 DIM A(7)
-20 A(1)=64: A(2)=34: A(3)=25: A(4)=12: A(5)=22: A(6)=11: A(7)=90
-30 N=7
-40 GAP=INT(N/2)
-50 IF GAP=0 THEN GOTO 130
-60 FOR I=GAP+1 TO N
-70 TEMP=A(I)
-80 J=I
-90 IF J<GAP+1 OR A(J-GAP)<=TEMP THEN GOTO 110
-100 A(J)=A(J-GAP): J=J-GAP: GOTO 90
-110 A(J)=TEMP
-120 NEXT I
-125 GAP=INT(GAP/2): GOTO 50
-130 FOR I=1 TO N: PRINT A(I); : NEXT I
-140 PRINT
-150 END
+SUB Shellsort(arr() AS INTEGER)
+    DIM n AS INTEGER, gap AS INTEGER, i AS INTEGER, j AS INTEGER, temp AS INTEGER
+    n = UBOUND(arr)
+    gap = n / 2
+    WHILE gap > 0
+        FOR i = gap TO n
+            temp = arr(i)
+            j = i
+            WHILE j >= gap AND arr(j - gap) > temp
+                arr(j) = arr(j - gap)
+                j = j - gap
+            WEND
+            arr(j) = temp
+        NEXT i
+        gap = gap / 2
+    WEND
+END SUB
