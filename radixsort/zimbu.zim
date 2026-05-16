@@ -1,0 +1,11 @@
+func Radixsort(arr: list<number>): list<number>
+  var max = 0
+  for x in arr
+    if x > max
+      max = x
+  var exp = 1
+  while max / exp > 0
+    exp = exp * 10
+  return arr
+
+print(Radixsort([5, 2, 8, 1, 9, 3]))
