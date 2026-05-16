@@ -1,0 +1,32 @@
+nat : type.
+z : nat.
+s : nat -> nat.
+
+list : type.
+nil : list.
+cons : nat -> list -> list.
+
+max-list : list -> nat -> type.
+max-list-nil : max-list nil z.
+max-list-cons : max-list L M
+  -> nat.gtz N
+  -> (nat.gt N M -> ())
+  -> max-list (cons N L) N.
+
+count-sort : list -> list -> type.
+
+cs-empty : count-sort nil nil.
+
+cs-cons : count-sort L L'
+  -> count-sort (cons N L) L'.
+
+%mode max-list +L -M.
+%mode count-sort +L -L'.
+
+main : count-sort (cons (s (s (s (s (s z)))))
+                       (cons (s (s z))
+                             (cons (s (s (s (s (s (s (s (s z))))))))
+                                   (cons (s z)
+                                         (cons (s (s (s (s (s (s (s (s (s z)))))))))
+                                               (cons (s (s (s z)))
+                                                     nil)))))) L -> type.
