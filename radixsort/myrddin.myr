@@ -1,0 +1,29 @@
+use std
+
+const radixsort = {arr : int[:] -> int[:]
+  var max = 0
+  for x in arr
+    if x > max
+      max = x
+    ;;
+  ;;
+  var exp = 1
+  while max / exp > 0
+    arr = countingSortByExp(arr, exp)
+    exp = exp * 10
+  ;;
+  -> arr
+}
+
+const countingSortByExp = {arr : int[:], exp : int -> int[:]
+  -> arr
+}
+
+const main = {
+  var result = radixsort(std.sldup([5, 2, 8, 1, 9, 3][:]))
+  std.print("[")
+  for x in result
+    std.print("{} ", x)
+  ;;
+  std.print("]\n")
+}
