@@ -1,0 +1,37 @@
+cocktail_sort(Arr, Sorted) =>
+    A = copy_term(Arr),
+    N = len(A),
+    cocktail_loop(A, N, 1, N, true),
+    Sorted = A.
+
+cocktail_loop(_, _, _, _, false) => true.
+cocktail_loop(A, N, Start, End, true) =>
+    forward_pass(A, Start, End, false, Sw1),
+    (Sw1 = false ->
+        true
+    ;
+        End1 = End - 1,
+        backward_pass(A, Start, End1, false, Sw2),
+        Start1 = Start + 1,
+        cocktail_loop(A, N, Start1, End1, Sw2)
+    ).
+
+forward_pass(_, I, End, Sw, Sw) => I >= End.
+forward_pass(A, I, End, _, Sw) =>
+    I < End,
+    (A[I] > A[I+1] ->
+        Tmp = A[I], A[I] := A[I+1], A[I+1] := Tmp,
+        forward_pass(A, I+1, End, true, Sw)
+    ;
+        forward_pass(A, I+1, End, false, Sw)
+    ).
+
+backward_pass(_, I, Start, Sw, Sw) => I < Start.
+backward_pass(A, I, Start, _, Sw) =>
+    I >= Start,
+    (A[I] > A[I+1] ->
+        Tmp = A[I], A[I] := A[I+1], A[I+1] := Tmp,
+        backward_pass(A, I-1, Start, true, Sw)
+    ;
+        backward_pass(A, I-1, Start, false, Sw)
+    ).
