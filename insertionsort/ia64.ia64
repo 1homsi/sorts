@@ -1,0 +1,41 @@
+        .data
+arr:    data4 5, 3, 1, 4, 2
+n:      data4 5
+
+        .text
+        .global _start#
+_start:
+        addl    r14 = @gprel(arr), gp
+        addl    r15 = @gprel(n), gp
+        ld4     r15 = [r15]
+        mov     r16 = 1
+        ;;
+outer:
+        cmp.ge  p6, p7 = r16, r15
+(p6)    br.cond.sptk done
+        shladd  r17 = r16, 2, r14
+        ld4     r18 = [r17]
+        adds    r19 = -1, r16
+        ;;
+inner:
+        cmp.lt  p8, p9 = r19, r0
+(p8)    br.cond.sptk place
+        shladd  r20 = r19, 2, r14
+        ld4     r21 = [r20]
+        ;;
+        cmp.le  p10, p11 = r21, r18
+(p10)   br.cond.sptk place
+        adds    r22 = 4, r20
+        st4     [r22] = r21
+        adds    r19 = -1, r19
+        br.cond.sptk inner
+        ;;
+place:
+        adds    r19 = 1, r19
+        shladd  r20 = r19, 2, r14
+        st4     [r20] = r18
+        adds    r16 = 1, r16
+        br.cond.sptk outer
+        ;;
+done:
+        break.i 0
