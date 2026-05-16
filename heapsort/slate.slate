@@ -1,0 +1,35 @@
+define: #heapsort := [|arr|
+  let: #n := arr size.
+  let: #i := (n / 2) - 1.
+  [i >= 0] whileTrue: [
+    arr siftdown: i n: n.
+    i := i - 1.
+  ].
+  i := n - 1.
+  [i > 0] whileTrue: [
+    let: #temp := arr at: 0.
+    arr at: 0 put: (arr at: i).
+    arr at: i put: temp.
+    arr siftdown: 0 n: i.
+    i := i - 1.
+  ].
+  arr printLine.
+].
+
+Array addSlot: #siftdown with: [|idx n|
+  let: #largest := idx.
+  let: #left := 2 * idx + 1.
+  let: #right := 2 * idx + 2.
+  (left < n && (arr at: left) > (arr at: largest))
+    ifTrue: [largest := left].
+  (right < n && (arr at: right) > (arr at: largest))
+    ifTrue: [largest := right].
+  (largest != idx) ifTrue: [
+    let: #temp := arr at: idx.
+    arr at: idx put: (arr at: largest).
+    arr at: largest put: temp.
+    arr siftdown: largest n: n.
+  ].
+].
+
+#heapsort value: (Array with: 5 with: 2 with: 8 with: 1 with: 9 with: 3).
