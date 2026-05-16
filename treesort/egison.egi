@@ -1,0 +1,22 @@
+(define $insert
+  (lambda [$node $val]
+    (match node
+      {[#null (Node val #null #null)]
+       [(Node $v $l $r)
+        (cond
+          {[(< val v) (Node v (insert l val) r)]
+           [(> val v) (Node v l (insert r val))]
+           [else (Node v l r)])]}]})))
+
+(define $inorder
+  (lambda [$node]
+    (match node
+      {[#null []]
+       [(Node $v $l $r)
+        (append (inorder l) (cons v (inorder r)))]}]})))
+
+(define $tree-sort
+  (lambda [$arr]
+    (inorder (foldl insert #null arr))))
+
+(print (tree-sort [5 2 8 1 9 3]))
