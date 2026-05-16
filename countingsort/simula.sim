@@ -1,0 +1,30 @@
+Begin
+   Integer Array arr(1:7);
+   Integer Array cnt(0:99);
+   Integer Array output(1:7);
+   Integer n, i, mn, mx, rng, idx;
+
+   arr(1) := 4; arr(2) := 2; arr(3) := 2; arr(4) := 8;
+   arr(5) := 3; arr(6) := 3; arr(7) := 1;
+   n := 7;
+
+   mn := arr(1); mx := arr(1);
+   For i := 2 Step 1 Until n Do Begin
+      If arr(i) < mn Then mn := arr(i);
+      If arr(i) > mx Then mx := arr(i)
+   End;
+
+   rng := mx - mn + 1;
+   For i := 0 Step 1 Until rng - 1 Do cnt(i) := 0;
+   For i := 1 Step 1 Until n Do cnt(arr(i) - mn) := cnt(arr(i) - mn) + 1;
+   For i := 1 Step 1 Until rng - 1 Do cnt(i) := cnt(i) + cnt(i - 1);
+
+   For i := n Step -1 Until 1 Do Begin
+      idx := arr(i) - mn;
+      cnt(idx) := cnt(idx) - 1;
+      output(cnt(idx) + 1) := arr(i)
+   End;
+
+   For i := 1 Step 1 Until n Do OutInt(output(i), 4);
+   OutImage
+End
