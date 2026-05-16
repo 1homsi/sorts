@@ -1,0 +1,16 @@
+[counting-sort] [
+    dup null [pop []] [
+        dup [minimum] [maximum] bi
+        swap over - succ
+        [0] replicate
+        [over over nth succ put] each drop
+        [1 [dup pred nth + put] each] reduce
+        []
+        [dup size pred -1 do
+            dup i nth
+            dup dup pred nth
+            put drop drop] reduce
+    ] if
+] define
+
+[4 2 2 8 3 3 1] counting-sort.
