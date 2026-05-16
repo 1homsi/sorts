@@ -1,0 +1,36 @@
+to bitonicsort :array :lo :cnt :dir
+  ifelse :cnt > 1 [
+    make "k quotient :cnt 2
+    bitonicsort :array :lo :k ifelse :dir = 1 [1] [0]
+    bitonicsort :array sum :lo :k :k ifelse :dir = 1 [1] [0]
+    bitonicmerge :array :lo :cnt :dir
+  ] []
+end
+
+to bitonicmerge :array :lo :cnt :dir
+  if :cnt > 1 [
+    make "k quotient :cnt 2
+    make "i 0
+    repeat :cnt [
+      if :i < :k [
+        make "aval item sum :lo :i + 1 :array
+        make "bval item sum :lo :i :k + 1 :array
+        if greaterp (lessp :aval :bval) (equal :dir 1) [
+          setitem sum :lo :i + 1 :array :bval
+          setitem sum :lo :i :k + 1 :array :aval
+        ]
+      ]
+      make "i sum :i 1
+    ]
+    bitonicmerge :array :lo :k :dir
+    bitonicmerge :array sum :lo :k :k :dir
+  ]
+end
+
+to test
+  make "arr [5 2 8 1 9 3 7 4]
+  bitonicsort :arr 1 count :arr 1
+  print :arr
+end
+
+test
