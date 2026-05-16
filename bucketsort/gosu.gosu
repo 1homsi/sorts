@@ -1,0 +1,44 @@
+package bucketsort
+
+uses java.util.ArrayList
+uses java.util.List
+
+class BucketSort {
+    static function insertionSort(bucket: List<Double>): List<Double> {
+        var n = bucket.size()
+        for (i in 1..|n) {
+            var key = bucket.get(i)
+            var j = i - 1
+            while (j >= 0 && bucket.get(j) > key) {
+                bucket.set(j + 1, bucket.get(j))
+                j--
+            }
+            bucket.set(j + 1, key)
+        }
+        return bucket
+    }
+
+    static function bucketSort(arr: List<Double>): List<Double> {
+        var n = arr.size()
+        if (n == 0) return arr
+        var minV = arr.stream().mapToDouble({d -> d}).min().getAsDouble()
+        var maxV = arr.stream().mapToDouble({d -> d}).max().getAsDouble()
+        var buckets = new ArrayList<List<Double>>(n)
+        for (i in 0..|n) buckets.add(new ArrayList<Double>())
+        for (num in arr) {
+            var idx = ((num - minV) / (maxV - minV + 1) * n) as int
+            if (idx >= n) idx = n - 1
+            buckets.get(idx).add(num)
+        }
+        var result = new ArrayList<Double>()
+        for (bucket in buckets) {
+            result.addAll(insertionSort(bucket))
+        }
+        return result
+    }
+
+    static function main(args: String[]) {
+        var data: List<Double> = {0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68}
+        print(bucketSort(data))
+    }
+}
