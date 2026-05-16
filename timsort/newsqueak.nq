@@ -1,0 +1,59 @@
+TimSort := {
+  timsort := fn(arr, minSize) {
+    mergesort(arr, minSize)
+  };
+  
+  mergesort := fn(arr, minSize) {
+    if (arr.len() <= 1) {
+      arr
+    } else if (arr.len() <= minSize) {
+      insertionsort(arr)
+    } else {
+      mid := arr.len() / 2;
+      left := arr[0:mid];
+      right := arr[mid:];
+      merge(mergesort(left, minSize), mergesort(right, minSize))
+    }
+  };
+  
+  insertionsort := fn(arr) {
+    result := arr.copy();
+    for (i := 1; i < result.len(); i++) {
+      key := result[i];
+      j := i - 1;
+      while (j >= 0 && result[j] > key) {
+        result[j + 1] = result[j];
+        j = j - 1;
+      }
+      result[j + 1] = key;
+    }
+    result
+  };
+  
+  merge := fn(left, right) {
+    result := [];
+    i := 0;
+    j := 0;
+    
+    while (i < left.len() && j < right.len()) {
+      if (left[i] <= right[j]) {
+        result.push(left[i]);
+        i = i + 1;
+      } else {
+        result.push(right[j]);
+        j = j + 1;
+      }
+    }
+    
+    while (i < left.len()) {
+      result.push(left[i]);
+      i = i + 1;
+    }
+    while (j < right.len()) {
+      result.push(right[j]);
+      j = j + 1;
+    }
+    
+    result
+  };
+}.timsort([5, 2, 8, 1, 9, 3], 32)
