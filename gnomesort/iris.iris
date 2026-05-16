@@ -1,0 +1,20 @@
+From iris.program_logic Require Import weakestpre.
+From iris.heap_lang Require Import lang proofmode notation.
+
+Definition gnome_sort : val :=
+  rec: "gnome_sort" "arr" "n" :=
+    let: "i" := ref #0 in
+    (rec: "loop" <> :=
+       if: !"i" < "n" then
+         if: !"i" = #0 then
+           "i" <- !"i" + #1 ;; "loop" #()
+         else
+           let: "ai" := !("arr" +ₗ !"i") in
+           let: "ai1" := !("arr" +ₗ (!"i" - #1)) in
+           if: "ai" ≥ "ai1" then
+             "i" <- !"i" + #1 ;; "loop" #()
+           else
+             ("arr" +ₗ !"i") <- "ai1" ;;
+             ("arr" +ₗ (!"i" - #1)) <- "ai" ;;
+             "i" <- !"i" - #1 ;; "loop" #()
+       else #()) #().
