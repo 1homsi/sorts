@@ -1,0 +1,29 @@
+comb_sort(Arr) = Sorted =>
+    N = len(Arr),
+    A = new_array(N),
+    foreach(I in 1..N)
+        A[I] := Arr[I]
+    end,
+    comb_loop(A, N, N),
+    Sorted = to_list(A).
+
+comb_loop(A, N, Gap) =>
+    NewGap = max(1, Gap * 10 // 13),
+    comb_pass(A, N, NewGap, 1, false, Changed),
+    if NewGap == 1, Changed == false then
+        true
+    else
+        comb_loop(A, N, NewGap)
+    end.
+
+comb_pass(_, N, Gap, I, Changed, Changed) => I + Gap > N.
+comb_pass(A, N, Gap, I, ChangedIn, ChangedOut) =>
+    J = I + Gap,
+    if A[I] > A[J] then
+        Tmp = A[I],
+        A[I] := A[J],
+        A[J] := Tmp,
+        comb_pass(A, N, Gap, I+1, true, ChangedOut)
+    else
+        comb_pass(A, N, Gap, I+1, ChangedIn, ChangedOut)
+    end.
