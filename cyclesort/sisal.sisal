@@ -1,0 +1,19 @@
+define main
+
+function cycle_sort(arr: array[integer]) returns array[integer]
+let
+    n := array_size(arr);
+    result := for i in 1, n cross j in 1, n
+              when j <= i
+              count
+              end for
+in
+    for i in 1, n
+    returns array of arr[i]
+    end for
+end let
+end function
+
+function main() returns array[integer]
+    cycle_sort(array_fill(1, [5, 4, 3, 2, 1]))
+end function
