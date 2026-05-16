@@ -1,0 +1,24 @@
+define combsort -> result;
+  vars arr gap i len temp swapped;
+  arr -> arr;
+  arr.length -> len;
+  len -> gap;
+  true -> swapped;
+  (gap > 1 or swapped) [
+    (gap * 10) / 13 -> gap;
+    gap < 1 [1 -> gap];
+    false -> swapped;
+    0 [i < len - gap] [
+      arr[i] > arr[i + gap] [
+        arr[i] -> temp;
+        arr[i + gap] -> arr[i];
+        temp -> arr[i + gap];
+        true -> swapped;
+      ];
+      i + 1 -> i;
+    ];
+  ];
+  arr -> result;
+enddefine;
+
+[5 2 8 1 9 3] combsort =>
