@@ -1,0 +1,50 @@
+import gleam/list
+import gleam/int
+
+pub fn gnome_sort(arr: List(Int)) -> List(Int) {
+  let indexed = list.index_map(arr, fn(x, i) { #(i, x) })
+  let n = list.length(arr)
+  gnome_loop(arr, 0, n)
+}
+
+fn gnome_loop(arr: List(Int), i: Int, n: Int) -> List(Int) {
+  case i >= n {
+    True -> arr
+    False ->
+      case i == 0 {
+        True -> gnome_loop(arr, 1, n)
+        False ->
+          let ai = get_at(arr, i)
+          let ai1 = get_at(arr, i - 1)
+          case ai >= ai1 {
+            True -> gnome_loop(arr, i + 1, n)
+            False ->
+              let arr2 = swap_at(arr, i, i - 1)
+              gnome_loop(arr2, i - 1, n)
+          }
+      }
+  }
+}
+
+fn get_at(lst: List(Int), idx: Int) -> Int {
+  case idx, lst {
+    0, [x, ..] -> x
+    n, [_, ..rest] -> get_at(rest, n - 1)
+    _, [] -> 0
+  }
+}
+
+fn swap_at(lst: List(Int), a: Int, b: Int) -> List(Int) {
+  let va = get_at(lst, a)
+  let vb = get_at(lst, b)
+  list.index_map(lst, fn(x, i) {
+    case i == a {
+      True -> vb
+      False ->
+        case i == b {
+          True -> va
+          False -> x
+        }
+    }
+  })
+}
