@@ -1,0 +1,11 @@
+channel compare, swap, advance, done
+
+GNOME_SORT =
+    compare ->
+    (advance -> GNOME_SORT
+    |~|
+    swap -> GNOME_SORT)
+
+SORTED = done -> STOP
+
+SYSTEM = GNOME_SORT [| {compare, swap, advance} |] SORTED
