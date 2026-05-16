@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main(int argc, char *argv[]) {
+  int arr[] = {5, 2, 8, 1, 9, 3};
+  int buckets[10] = {0};
+  for (int i = 0; i < 6; i++) {
+    buckets[arr[i]]++;
+  }
+  int result[6];
+  int idx = 0;
+  for (int i = 0; i < 10; i++) {
+    for (int j = 0; j < buckets[i]; j++) {
+      result[idx++] = i;
+    }
+  }
+  for (int i = 0; i < 6; i++) {
+    printf("%d ", result[i]);
+  }
+  printf("\n");
+  return 0;
+}
