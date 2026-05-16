@@ -1,0 +1,19 @@
+let BucketSort(arr, maxVal) be
+  let buckets = Obliq.array(maxVal);
+  for i = 0 to maxVal - 1 do
+    buckets[i] := Obliq.list();
+  end;
+  for num in arr do
+    if num >= 0 and num < maxVal then
+      buckets[num] := Obliq.cons(num, buckets[num]);
+    end;
+  end;
+  let result = Obliq.list();
+  for i = 0 to maxVal - 1 do
+    for num in buckets[i] do
+      result := Obliq.cons(num, result);
+    end;
+  end;
+  return result;
+end;
+BucketSort([5, 2, 8, 1, 9, 3], 10);
