@@ -1,0 +1,12 @@
+isort arr =
+    let n = length arr
+        go i arr =
+            if i >= n then arr
+            else
+                let key = arr !! i
+                    shift j arr =
+                        if j < 0 || arr !! j <= key
+                        then arr // [(j+1, key)]
+                        else shift (j-1) (arr // [(j+1, arr !! j)])
+                in go (i+1) (shift (i-1) arr)
+    in go 1 arr
