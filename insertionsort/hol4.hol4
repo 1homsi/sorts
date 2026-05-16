@@ -1,0 +1,10 @@
+val insertionSort_def = Define `
+  insertionSort [] = []
+  /\ insertionSort [x] = [x]
+  /\ insertionSort (x::xs) = insert x (insertionSort xs)`;
+
+val insert_def = Define `
+  insert x [] = [x]
+  /\ insert x (y::ys) = if x <= y then x::y::ys else y::insert x ys`;
+
+val _ = EVAL (Term `insertionSort [5;2;8;1;9;3]`);
