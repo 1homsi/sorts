@@ -1,0 +1,21 @@
+insertion_sort(bits32 arr, bits32 n) {
+    bits32 i, j, key, aj, aptr, bptr;
+    i = 1::bits32;
+outer:
+    if i >= n goto done;
+    key = W32[arr + i * 4];
+    j = i - 1::bits32;
+inner:
+    if j < 0::bits32 goto place;
+    aj = W32[arr + j * 4];
+    if aj <= key goto place;
+    W32[arr + (j + 1::bits32) * 4] = aj;
+    j = j - 1::bits32;
+    goto inner;
+place:
+    W32[arr + (j + 1::bits32) * 4] = key;
+    i = i + 1::bits32;
+    goto outer;
+done:
+    return;
+}
