@@ -1,0 +1,13 @@
+module SelectionSort where
+
+import Prelude
+
+selectionSort :: [Int] -> [Int]
+selectionSort [] = []
+selectionSort (x:xs) = insert x (selectionSort xs)
+  where insert n [] = [n]
+        insert n (y:ys)
+          | n <= y = n : y : ys
+          | otherwise = y : insert n ys
+
+main = print (selectionSort [5, 2, 8, 1, 9, 3])
