@@ -1,24 +1,6 @@
-PROC main:
-  LOCAL arr%(8), n%, i%, j%, tmp%, sorted%
-  arr%(1)=3: arr%(2)=1: arr%(3)=4: arr%(4)=1
-  arr%(5)=5: arr%(6)=9: arr%(7)=2: arr%(8)=6
-  n%=8
-
-loop::
-  sorted%=1
-  FOR i%=1 TO n%-1
-    IF arr%(i%)>arr%(i%+1): sorted%=0: ENDIF
-  NEXT
-  IF sorted%=0
-    FOR i%=n% TO 2 STEP -1
-      j%=INT(RAND*i%)+1
-      tmp%=arr%(i%): arr%(i%)=arr%(j%): arr%(j%)=tmp%
-    NEXT
-    GOTO loop
-  ENDIF
-
-  FOR i%=1 TO n%
-    PRINT arr%(i%);
-  NEXT
-  PRINT
-ENDP
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
