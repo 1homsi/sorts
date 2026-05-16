@@ -1,0 +1,26 @@
+Section Header
+  + name := STOOGESORT;
+
+Section Public
+  - stoogesort (a : ARRAY[INT]; i : INT; j : INT) : OBJECT <-
+  (
+    (a.item(j) < a.item(i)) ifTrue: [
+      a.put(a.item(j), i);
+      a.put(a.item(i), j);
+    ];
+    ((j - i) > 1) ifTrue: [
+      (((j - i + 1) / 3).to_integer -> t;
+        stoogesort(a, i, j - t);
+        stoogesort(a, i + t, j);
+        stoogesort(a, i, j - t);
+      );
+    ];
+  );
+
+  - main : OBJECT <-
+  (
+    (ARRAY[INT].create(5, 2, 8, 1, 9, 3) -> arr;
+      stoogesort(arr, 0, 5);
+      arr.print;
+    )
+  );
