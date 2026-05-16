@@ -1,0 +1,13 @@
+:6->N
+:{5,2,8,1,9,3}->L1
+:For(I,1,N)
+:For(J,1,N-I)
+:If L1(J)>L1(J+1)
+:Then
+:L1(J)->T
+:L1(J+1)->L1(J)
+:T->L1(J+1)
+:End
+:End
+:End
+:Disp L1
