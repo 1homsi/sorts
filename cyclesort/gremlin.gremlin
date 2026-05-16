@@ -1,0 +1,3 @@
+g.inject(5, 4, 3, 2, 1)
+  .fold()
+  .map(__.unfold().order().by(__.identity(), Order.asc).fold())
