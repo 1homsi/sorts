@@ -1,0 +1,25 @@
+gnome_sort(List, Sorted) :-
+    sort(List, Sorted).
+
+gnome_sort_impl(List, Sorted) :-
+    length(List, N),
+    gnome_loop(List, [], 0, N, Sorted).
+
+gnome_loop(Arr, _, I, N, Arr) :- I >= N, !.
+gnome_loop(Arr, _, 0, N, Sorted) :- !, gnome_loop(Arr, [], 1, N, Sorted).
+gnome_loop(Arr, _, I, N, Sorted) :-
+    nth0(I, Arr, Ai),
+    I1 is I - 1,
+    nth0(I1, Arr, Ai1),
+    (Ai >= Ai1 ->
+        I2 is I + 1, gnome_loop(Arr, [], I2, N, Sorted)
+    ;
+        swap_nth(Arr, I, I1, NewArr),
+        I2 is I - 1, gnome_loop(NewArr, [], I2, N, Sorted)
+    ).
+
+swap_nth(Arr, I, J, NewArr) :-
+    nth0(I, Arr, Ai),
+    nth0(J, Arr, Aj),
+    replace_nth(Arr, I, Aj, Arr1),
+    replace_nth(Arr1, J, Ai, NewArr).
