@@ -1,0 +1,12 @@
+let a = array[5, 2, 8, 1, 9, 3]
+let n = dim(a)
+for i = 1 to n
+  for j = 1 to (n - i)
+    if a[j] > a[j+1]
+      t = a[j]
+      a[j] = a[j+1]
+      a[j+1] = t
+    end
+  end
+end
+print a
