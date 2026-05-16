@@ -1,1 +1,6 @@
-print("Bogosort implementation for red.red")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
