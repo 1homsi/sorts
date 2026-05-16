@@ -1,0 +1,14 @@
+cabal-version: 3.0
+name: gnome-sort
+version: 1.0.0
+synopsis: Gnome sort implementation in Haskell
+
+library
+  exposed-modules: GnomeSort
+  build-depends: base >= 4.14, array >= 0.5
+  default-language: Haskell2010
+
+executable gnome-sort
+  main-is: Main.hs
+  build-depends: base >= 4.14, gnome-sort
+  default-language: Haskell2010
