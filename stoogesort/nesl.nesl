@@ -1,0 +1,10 @@
+stoogesort = {a, i, j : 
+  if (a[j] < a[i]) then
+    swap(a, i, j)
+  else
+    a
+  endif
+};
+
+arr = [5, 2, 8, 1, 9, 3];
+result = stoogesort(arr, 0, 5);
