@@ -1,0 +1,30 @@
+-module(gnome_sort_otp).
+-behaviour(gen_server).
+-export([start_link/0, sort/1]).
+-export([init/1, handle_call/3, handle_cast/2]).
+
+start_link() ->
+    gen_server:start_link({local, ?MODULE}, ?MODULE, [], []).
+
+sort(Arr) ->
+    gen_server:call(?MODULE, {sort, Arr}).
+
+init([]) -> {ok, #{}}.
+
+handle_call({sort, Arr}, _From, State) ->
+    Sorted = gnome_loop(array:from_list(Arr), 0, length(Arr)),
+    {reply, array:to_list(Sorted), State}.
+
+handle_cast(_Msg, State) -> {noreply, State}.
+
+gnome_loop(Arr, I, N) when I >= N -> Arr;
+gnome_loop(Arr, 0, N) -> gnome_loop(Arr, 1, N);
+gnome_loop(Arr, I, N) ->
+    AI = array:get(I, Arr),
+    AI1 = array:get(I-1, Arr),
+    if AI >= AI1 ->
+        gnome_loop(Arr, I+1, N);
+    true ->
+        Arr2 = array:set(I, AI1, array:set(I-1, AI, Arr)),
+        gnome_loop(Arr2, I-1, N)
+    end.
