@@ -1,23 +1,6 @@
-(function isSorted (arr)
-    (set n (arr count))
-    (set sorted YES)
-    (for (set i 0) (< i (- n 1)) (set i (+ i 1))
-        (if (> (arr i) (arr (+ i 1)))
-            (set sorted NO)
-            (break)))
-    sorted)
-
-(function shuffle (arr)
-    (set n (arr count))
-    (set i (- n 1))
-    (while (> i 0)
-        (set j (int (* (rand) (+ i 1))))
-        (set tmp (arr i))
-        (arr replaceObjectAtIndex:i withObject:(arr j))
-        (arr replaceObjectAtIndex:j withObject:tmp)
-        (set i (- i 1)))
-    arr)
-
-(set arr (NSMutableArray arrayWithArray:'(3 1 4 1 5 9 2 6)))
-(while (not (isSorted arr)) (shuffle arr))
-(puts arr)
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
