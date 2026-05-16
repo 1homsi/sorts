@@ -1,0 +1,14 @@
+countingsort :: [Int] -> [Int]
+countingsort arr
+  | null arr = []
+  | otherwise = rebuild 0 (maximum arr) counts
+  where
+    max_val = maximum arr
+    counts = [count i | i <- [0..max_val]]
+    count i = length (filter (==i) arr)
+    rebuild _ (-1) _ = []
+    rebuild i max cs
+      | i > max = []
+      | otherwise = replicate (cs !! i) i ++ rebuild (i+1) max cs
+
+?- countingsort [5, 2, 8, 1, 9, 3]
