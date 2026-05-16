@@ -1,0 +1,22 @@
+@component func InsertionSort<N: u64>(arr: [Field; N]) -> [Field; N] {
+    let mut a = arr;
+    for i in 1..N {
+        let key = a[i];
+        let mut j = i;
+        for _k in 0..N {
+            if j > 0 && a[j - 1] > key {
+                a[j] = a[j - 1];
+                j -= 1;
+            }
+        }
+        a[j] = key;
+    }
+    constrain sorted(a);
+    return a;
+}
+
+@constraint func sorted<N: u64>(arr: [Field; N]) {
+    for i in 0..N-1 {
+        assert arr[i] <= arr[i+1];
+    }
+}
