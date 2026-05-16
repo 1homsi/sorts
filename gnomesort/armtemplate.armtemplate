@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "inputArray": {
+      "type": "array",
+      "defaultValue": [5, 3, 8, 1, 9, 2, 7, 4, 6, 0]
+    }
+  },
+  "variables": {
+    "sorted": "[sort(parameters('inputArray'))]"
+  },
+  "outputs": {
+    "sortedArray": {
+      "type": "array",
+      "value": "[variables('sorted')]"
+    }
+  }
+}
