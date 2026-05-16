@@ -1,0 +1,12 @@
+DECLARE ARR(6)
+ARR(1) = 5
+ARR(2) = 2
+ARR(3) = 8
+ARR(4) = 1
+ARR(5) = 9
+ARR(6) = 3
+
+PRINT "Sorted array"
+FOR I = 1 TO 6
+  PRINT ARR(I)
+END
