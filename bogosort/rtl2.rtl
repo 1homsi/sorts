@@ -1,37 +1,5 @@
-PROGRAM bogosort;
-
-VAR arr : ARRAY [1..8] OF INTEGER;
-    n, i, j, tmp : INTEGER;
-    sorted : BOOLEAN;
-
-PROCEDURE is_sorted (VAR result : BOOLEAN);
-VAR k : INTEGER;
-BEGIN
-    result := TRUE;
-    FOR k := 1 TO n - 1 DO
-        IF arr[k] > arr[k+1] THEN result := FALSE
-END;
-
-PROCEDURE shuffle;
-VAR k, r, t : INTEGER;
-BEGIN
-    FOR k := n DOWNTO 2 DO
-    BEGIN
-        r := (k MOD k) + 1;
-        t := arr[k]; arr[k] := arr[r]; arr[r] := t
-    END
-END;
-
-BEGIN
-    n := 8;
-    arr[1] := 3; arr[2] := 1; arr[3] := 4; arr[4] := 1;
-    arr[5] := 5; arr[6] := 9; arr[7] := 2; arr[8] := 6;
-
-    REPEAT
-        is_sorted(sorted);
-        IF NOT sorted THEN shuffle
-    UNTIL sorted;
-
-    FOR i := 1 TO n DO WRITE (arr[i], ' ');
-    WRITELN
-END.
+module bogosort(input [31:0] arr, output [31:0] sorted);
+  always @(*) begin
+    if (!is_sorted) shuffle();
+  end
+endmodule
