@@ -1,0 +1,23 @@
+procedure combsort(arr; n);
+begin
+    integer gap, i, tmp;
+    boolean sorted;
+    gap := n;
+    sorted := false;
+    while not sorted do
+    begin
+        gap := entier(gap / 1.3);
+        if gap < 1 then gap := 1;
+        if gap = 1 then sorted := true;
+        for i := 1 step 1 until n - gap do
+        begin
+            if arr[i] > arr[i + gap] then
+            begin
+                tmp := arr[i];
+                arr[i] := arr[i + gap];
+                arr[i + gap] := tmp;
+                sorted := false
+            end
+        end
+    end
+end
