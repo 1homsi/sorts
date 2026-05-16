@@ -1,0 +1,25 @@
+bucket_sort = (arr, maxVal) :
+  if maxVal == 0 : arr
+  else :
+    buckets = (Array of (Array of Integer)) new(maxVal)
+    i = 0
+    while (i < maxVal) :
+      buckets[i] = Array of (Integer) new
+      i++
+    end
+    arr each(num) :
+      if num >= 0 and num < maxVal :
+        buckets[num] append(num)
+      end
+    end
+    result = Array of (Integer) new
+    i = 0
+    while (i < maxVal) :
+      buckets[i] each(num) :
+        result append(num)
+      end
+      i++
+    end
+    result
+
+print(bucket_sort([5, 2, 8, 1, 9, 3], 10))
