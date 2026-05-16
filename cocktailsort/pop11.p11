@@ -1,0 +1,29 @@
+define cocktailsort(arr);
+    lvars n = length(arr), i = 0, k, temp, swapped;
+    while i < n do
+        false -> swapped;
+        for k from 0 to n - i - 2 do
+            if arr(k) > arr(k + 1) then
+                arr(k) -> temp;
+                arr(k + 1) -> arr(k);
+                temp -> arr(k + 1);
+                true -> swapped;
+            endif;
+        endfor;
+        if not(swapped) then break endif;
+        i + 1 -> i;
+        false -> swapped;
+        for k from n - i - 2 downto 0 do
+            if arr(k) > arr(k + 1) then
+                arr(k) -> temp;
+                arr(k + 1) -> arr(k);
+                temp -> arr(k + 1);
+                true -> swapped;
+            endif;
+        endfor;
+        if not(swapped) then break endif;
+        i + 1 -> i;
+    endwhile;
+enddefine;
+
+[5 2 8 1 9 3] -> cocktailsort();
