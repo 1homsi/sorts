@@ -1,0 +1,14 @@
+bubble_pass [] = ([], False)
+bubble_pass [x] = ([x], False)
+bubble_pass (x:y:rest)
+    = (y:sorted, True),  if x > y
+    where (sorted, sw) = bubble_pass (x:rest)
+    = (x:sorted, sw),   otherwise
+    where (sorted, sw) = bubble_pass (y:rest)
+
+bubble_sort xs
+    = bubble_sort sorted, if swapped
+    = sorted,             otherwise
+    where (sorted, swapped) = bubble_pass xs
+
+main = print (bubble_sort [64, 34, 25, 12, 22, 11, 90])
