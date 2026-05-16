@@ -1,0 +1,46 @@
+SET TALK OFF
+PRIVATE arr[5], n, writes, cs, item, pos, i, tmp
+
+n = 5
+arr[1] = 5 && arr[2] = 4 && arr[3] = 3 && arr[4] = 2 && arr[5] = 1
+writes = 0
+
+FOR cs = 1 TO n - 1
+    item = arr[cs]
+    pos = cs
+    FOR i = cs + 1 TO n
+        IF arr[i] < item
+            pos = pos + 1
+        ENDIF
+    NEXT i
+    IF pos = cs
+        LOOP
+    ENDIF
+    DO WHILE arr[pos] = item
+        pos = pos + 1
+    ENDDO
+    tmp = arr[pos]
+    arr[pos] = item
+    item = tmp
+    writes = writes + 1
+    DO WHILE pos <> cs
+        pos = cs
+        FOR i = cs + 1 TO n
+            IF arr[i] < item
+                pos = pos + 1
+            ENDIF
+        NEXT i
+        DO WHILE arr[pos] = item
+            pos = pos + 1
+        ENDDO
+        tmp = arr[pos]
+        arr[pos] = item
+        item = tmp
+        writes = writes + 1
+    ENDDO
+NEXT cs
+
+FOR i = 1 TO n
+    ? arr[i]
+NEXT i
+RETURN
