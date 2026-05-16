@@ -1,0 +1,47 @@
+type intarray = mutable array of int;
+
+let timsort(arr: intarray, minSize: int): intarray =
+  mergesort(arr, minSize);
+
+let mergesort(arr: intarray, minSize: int): intarray =
+  if abs(arr) <= 1 then
+    arr
+  else if abs(arr) <= minSize then
+    insertionsort(arr)
+  else
+    let mid = abs(arr) div 2 in
+    let left = arr[0..mid-1] in
+    let right = arr[mid..abs(arr)-1] in
+    merge(mergesort(left, minSize), mergesort(right, minSize))
+  endif;
+
+let insertionsort(arr: intarray): intarray =
+  let result = arr in
+  (for i = 1 to abs(result) - 1 do
+    let key = result[i] in
+    let j = ref (i - 1) in
+    (while !j >= 0 and result[!j] > key do
+      result[!j + 1] := result[!j];
+      j := !j - 1
+    od;
+    result[!j + 1] := key)
+  od;
+  result);
+
+let merge(left: intarray, right: intarray): intarray =
+  let result = empty intarray in
+  let i = ref 0 in
+  let j = ref 0 in
+  (while !i < abs(left) and !j < abs(right) do
+    if left[!i] <= right[!j] then
+      result[abs(result)] := left[!i];
+      i := !i + 1
+    else
+      result[abs(result)] := right[!j];
+      j := !j + 1
+    endif
+  od;
+  result);
+
+let arr = mutable [5, 2, 8, 1, 9, 3] in
+timsort(arr, 32)
