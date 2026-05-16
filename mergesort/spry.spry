@@ -1,0 +1,44 @@
+merge: function [arr left mid right] [
+  | i j k result |
+  set i: left
+  set j: mid + 1
+  set result: []
+  
+  while [and <= i mid, <= j right] [
+    if [<= at arr i, at arr j] [
+      append result, at arr i
+      inc i
+    ] [
+      append result, at arr j
+      inc j
+    ]
+  ]
+  
+  while [<= i mid] [
+    append result, at arr i
+    inc i
+  ]
+  
+  while [<= j right] [
+    append result, at arr j
+    inc j
+  ]
+  
+  foreach [k 0] [< k, count result] [
+    put arr (+ left k), at result k
+  ]
+]
+
+mergesort: function [arr left right] [
+  if [< left right] [
+    | mid |
+    set mid: / + left right, 2
+    mergesort arr, left, mid
+    mergesort arr, (+ mid 1), right
+    merge arr, left, mid, right
+  ]
+]
+
+set arr: [5 2 8 1 9 3]
+mergesort arr, 0, 5
+print arr
