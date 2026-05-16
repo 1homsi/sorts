@@ -1,0 +1,16 @@
+Require Import List.
+Require Import Arith.
+
+Fixpoint insert_sorted (x : nat) (l : list nat) : list nat :=
+  match l with
+  | nil => x :: nil
+  | h :: t =>
+    if Nat.leb x h then x :: h :: t
+    else h :: insert_sorted x t
+  end.
+
+Fixpoint gnome_sort (l : list nat) : list nat :=
+  match l with
+  | nil => nil
+  | h :: t => insert_sorted h (gnome_sort t)
+  end.
