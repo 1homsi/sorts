@@ -1,0 +1,21 @@
+(letrec ((gnome-sort
+          (lambda (lst)
+            (letrec ((loop
+                      (lambda (arr i n)
+                        (if (>= i n) arr
+                            (if (= i 0)
+                                (loop arr (+ i 1) n)
+                                (let ((cur (list-ref arr i))
+                                      (prv (list-ref arr (- i 1))))
+                                  (if (>= cur prv)
+                                      (loop arr (+ i 1) n)
+                                      (loop (swap-at arr i) (- i 1) n))))))))
+              (loop lst 0 (length lst)))))
+         (swap-at
+          (lambda (lst i)
+            (map-indexed (lambda (x j)
+                           (cond ((= j i) (list-ref lst (- i 1)))
+                                 ((= j (- i 1)) (list-ref lst i))
+                                 (else x)))
+                         lst))))
+  (gnome-sort '(5 3 8 1 9 2 7 4 6 0)))
