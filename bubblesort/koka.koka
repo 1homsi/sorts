@@ -1,0 +1,20 @@
+fun bubble-pass(arr: vector<int>) : (vector<int>, bool)
+  val n = arr.length
+  var swapped := False
+  var a := arr
+  for(0, n - 2) fn(i)
+    if a[i] > a[i+1] then
+      val tmp = a[i]
+      a := a.set(i, a[i+1])
+      a := a.set(i+1, tmp)
+      swapped := True
+  (a, swapped)
+
+fun bubble-sort(arr: vector<int>) : vector<int>
+  val (sorted, swapped) = bubble-pass(arr)
+  if swapped then bubble-sort(sorted)
+  else sorted
+
+fun main()
+  val arr = vector([64, 34, 25, 12, 22, 11, 90])
+  println(bubble-sort(arr).show)
