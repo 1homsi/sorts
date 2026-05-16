@@ -1,0 +1,33 @@
+routines (
+    comb_sort
+    new_gap
+)
+
+integers ( n gap i tmp sorted )
+booleans ( changed )
+
+define new_gap as (
+    $gap = $gap * 10 / 13
+    $gap < 1
+    $gap = 1
+)
+
+define comb_sort as (
+    $sorted = 0
+    do {
+        new_gap
+        $gap == 1 ($sorted = 1)
+        $i = 0
+        do {
+            $i + $gap >= $n (leave)
+            arr[$i] > arr[$i + $gap] (
+                $tmp = arr[$i]
+                arr[$i] = arr[$i + $gap]
+                arr[$i + $gap] = $tmp
+                $sorted = 0
+            )
+            $i = $i + 1
+        }
+        $sorted == 1 (leave)
+    }
+)
