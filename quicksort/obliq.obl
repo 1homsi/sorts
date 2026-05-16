@@ -1,0 +1,22 @@
+quicksort = proc(arr: array) : array is
+  local less, greater, pivot, i
+  if array_size(arr) <= 1 then
+    return arr
+  end
+  pivot := array_get(arr, 0)
+  less := array_new()
+  greater := array_new()
+  for i := 1 to (array_size(arr) - 1) do
+    if array_get(arr, i) <= pivot then
+      array_put(less, array_size(less), array_get(arr, i))
+    else
+      array_put(greater, array_size(greater), array_get(arr, i))
+    end
+  end
+  return array_concat(
+    array_concat(quicksort(less), array_create(pivot)),
+    quicksort(greater)
+  )
+end
+
+array_print(quicksort(array_create(5, 2, 8, 1, 9, 3)))
