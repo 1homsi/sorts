@@ -1,0 +1,45 @@
+module BucketSort
+
+from "list" include List
+from "array" include Array
+from "float64" include Float64
+from "int32" include Int32
+
+let insertionSort = (bucket) => {
+  let arr = Array.fromList(bucket)
+  let n = Array.length(arr)
+  for (let mut i = 1; i < n; i += 1) {
+    let key = arr[i]
+    let mut j = i - 1
+    while (j >= 0 && arr[j] > key) {
+      arr[j + 1] = arr[j]
+      j -= 1
+    }
+    arr[j + 1] = key
+  }
+  Array.toList(arr)
+}
+
+let bucketSort = (arr) => {
+  let n = List.length(arr)
+  if (n == 0) {
+    arr
+  } else {
+    let mn = List.reduce(Float64.min, List.head(arr), arr)
+    let mx = List.reduce(Float64.max, List.head(arr), arr)
+    let buckets = Array.make(n, [])
+    List.forEach((num) => {
+      let idx = Float64.toInt((num - mn) / (mx - mn + 1.0) * Int32.toFloat(n))
+      let idx = if (idx >= n) n - 1 else idx
+      buckets[idx] = List.append(buckets[idx], [num])
+    }, arr)
+    let result = ref []
+    for (let mut i = 0; i < n; i += 1) {
+      result := List.append(*result, insertionSort(buckets[i]))
+    }
+    *result
+  }
+}
+
+let data = [0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68]
+print(bucketSort(data))
