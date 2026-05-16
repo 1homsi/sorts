@@ -1,0 +1,19 @@
+object {
+  let a = [5, 2, 8, 1, 9, 3];
+  let n = 6;
+  let gap = 1;
+  while (gap <= n) { gap := gap * 3 + 1 };
+  while (gap > 0) {
+    gap := gap / 3;
+    for i := gap to (n - 1) do {
+      let temp = a[i];
+      let j = i;
+      while (j >= gap && a[j - gap] > temp) {
+        a[j] := a[j - gap];
+        j := j - gap;
+      };
+      a[j] := temp;
+    }
+  };
+  output a;
+}
