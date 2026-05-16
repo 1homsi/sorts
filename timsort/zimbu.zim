@@ -1,0 +1,65 @@
+class TimSort
+  def Sort(arr: list<int>, minSize: int): list<int>
+    return MergeSort(arr, minSize)
+  end
+  
+  def MergeSort(arr: list<int>, minSize: int): list<int>
+    if len(arr) <= 1
+      return arr
+    end
+    if len(arr) <= minSize
+      return InsertionSort(arr)
+    end
+    
+    var mid = len(arr) / 2
+    var left = arr[0 : mid]
+    var right = arr[mid :]
+    
+    return Merge(MergeSort(left, minSize), MergeSort(right, minSize))
+  end
+  
+  def InsertionSort(arr: list<int>): list<int>
+    var result = copy(arr)
+    for i in 1 .. len(result) - 1
+      var key = result[i]
+      var j = i - 1
+      while j >= 0 && result[j] > key
+        result[j + 1] = result[j]
+        j = j - 1
+      end
+      result[j + 1] = key
+    end
+    return result
+  end
+  
+  def Merge(left: list<int>, right: list<int>): list<int>
+    var result: list<int>
+    var i = 0
+    var j = 0
+    
+    while i < len(left) && j < len(right)
+      if left[i] <= right[j]
+        result.add(left[i])
+        i = i + 1
+      else
+        result.add(right[j])
+        j = j + 1
+      end
+    end
+    
+    while i < len(left)
+      result.add(left[i])
+      i = i + 1
+    end
+    while j < len(right)
+      result.add(right[j])
+      j = j + 1
+    end
+    
+    return result
+  end
+end
+
+var ts = TimSort()
+var arr = [5, 2, 8, 1, 9, 3]
+print(ts.Sort(arr, 32))
