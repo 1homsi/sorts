@@ -1,0 +1,22 @@
+CREATE OR REPLACE FUNCTION comb_sort(arr integer[]) RETURNS integer[] AS $$
+DECLARE
+    n INTEGER := array_length(arr, 1);
+    gap INTEGER := n;
+    sorted BOOLEAN := FALSE;
+    tmp INTEGER;
+BEGIN
+    WHILE NOT sorted LOOP
+        gap := GREATEST(1, FLOOR(gap / 1.3)::INTEGER);
+        IF gap = 1 THEN sorted := TRUE; END IF;
+        FOR i IN 1 .. n - gap LOOP
+            IF arr[i] > arr[i + gap] THEN
+                tmp := arr[i];
+                arr[i] := arr[i + gap];
+                arr[i + gap] := tmp;
+                sorted := FALSE;
+            END IF;
+        END LOOP;
+    END LOOP;
+    RETURN arr;
+END;
+$$ LANGUAGE plpgsql;
