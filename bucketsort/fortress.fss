@@ -1,0 +1,18 @@
+object BucketSort
+  run() = do
+    arr = [5, 2, 8, 1, 9, 3]
+    maxVal = 10
+    buckets: Array[List[ZZ32], ZZ32] = array(i: ZZ32) -> <| [] |> for i in 0:maxVal)
+    for num in arr do
+      idx: ZZ32 = num
+      if 0 <= idx < maxVal then
+        buckets(idx) := buckets(idx) ++ [num]
+      end
+    end
+    result: List[ZZ32] = []
+    for bucket in buckets do
+      result := result ++ bucket
+    end
+    println result
+  end
+end
