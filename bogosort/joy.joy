@@ -1,16 +1,1 @@
-DEFINE
-  is-sorted ==
-    true swap
-    [size 1 -] dip
-    [0 [dup2 at swap 1 + at <=] [] while drop] dip
-    and;
-
-  shuffle ==
-    [size] dup i swap
-    [rand rem swap [swap] dip] step
-    drop;
-
-  bogosort ==
-    [is-sorted] [shuffle] until.
-
-[3 1 4 1 5 9 2 6] bogosort putln.
+: bogosort ( -- ) begin dup sorted? not while shuffle repeat ;
