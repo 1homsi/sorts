@@ -1,0 +1,22 @@
+to selection_sort :arr
+  local "n
+  make "n count :arr
+  local "i
+  for "i 1 [1] :n - 1 [
+    local "min_idx
+    make "min_idx :i
+    local "j
+    for "j :i + 1 [1] :n [
+      if (item :j :arr) < (item :min_idx :arr) [
+        make "min_idx :j
+      ]
+    ]
+    local "tmp
+    make "tmp item :i :arr
+    setitem :i :arr item :min_idx :arr
+    setitem :min_idx :arr :tmp
+  ]
+  output :arr
+end
+
+print selection_sort [5 2 8 1 9 3]
