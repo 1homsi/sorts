@@ -1,0 +1,41 @@
+var arr, i, j, temp, n;
+
+procedure gnomesort;
+  var i, temp;
+begin
+  i := 0;
+  while i < n do
+  begin
+    if i = 0 then
+      i := i + 1
+    else
+    begin
+      if arr[i] < arr[i-1] then
+      begin
+        temp := arr[i];
+        arr[i] := arr[i-1];
+        arr[i-1] := temp;
+        i := i - 1;
+      end
+      else
+        i := i + 1;
+    end;
+  end;
+end;
+
+begin
+  n := 6;
+  arr[0] := 5;
+  arr[1] := 2;
+  arr[2] := 8;
+  arr[3] := 1;
+  arr[4] := 9;
+  arr[5] := 3;
+  call gnomesort;
+  i := 0;
+  while i < n do
+  begin
+    ! arr[i];
+    i := i + 1;
+  end;
+end.
