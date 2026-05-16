@@ -1,0 +1,30 @@
+
+INITIALIZE
+    ARR = [5, 2, 8, 1, 9, 3, 7, 4]
+
+DEFINE BITONICSORT(ARR, LO, CNT, DIR)
+    IF CNT > 1
+        K = INT(CNT / 2)
+        CALL BITONICSORT(ARR, LO, K, 1)
+        CALL BITONICSORT(ARR, LO + K, K, 0)
+        CALL BITONICMERGE(ARR, LO, CNT, DIR)
+    END IF
+END DEFINE
+
+DEFINE BITONICMERGE(ARR, LO, CNT, DIR)
+    IF CNT > 1
+        K = INT(CNT / 2)
+        FOR I = LO TO LO + CNT - K - 1
+            IF (ARR[I] > ARR[I + K]) = (DIR = 1)
+                TMP = ARR[I]
+                ARR[I] = ARR[I + K]
+                ARR[I + K] = TMP
+            END IF
+        END FOR
+        CALL BITONICMERGE(ARR, LO, K, DIR)
+        CALL BITONICMERGE(ARR, LO + K, K, DIR)
+    END IF
+END DEFINE
+
+CALL BITONICSORT(ARR, 1, 8, 1)
+PRINT ARR
