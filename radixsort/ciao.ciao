@@ -1,0 +1,18 @@
+radixsort(Arr, Sorted) :-
+    max_list(Arr, Max),
+    radixsort_exp(Arr, Max, 1, Sorted).
+
+radixsort_exp(Arr, Max, Exp, Arr) :- Max / Exp =< 0, !.
+radixsort_exp(Arr, Max, Exp, Sorted) :-
+    counting_sort_by_exp(Arr, Exp, SortedByExp),
+    NewExp is Exp * 10,
+    radixsort_exp(SortedByExp, Max, NewExp, Sorted).
+
+counting_sort_by_exp(Arr, Exp, Output) :-
+    length(Arr, N),
+    counting_sort_impl(Arr, N, Exp, Output).
+
+counting_sort_impl(Arr, N, Exp, Output) :-
+    Output = Arr.
+
+:- radixsort([5, 2, 8, 1, 9, 3], R), write(R), nl.
