@@ -1,0 +1,11 @@
+environ
+
+begin
+
+reserve x,y,z for object;
+
+registration
+  cluster -> finite-support Function;
+end;
+
+end
