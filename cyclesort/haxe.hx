@@ -1,0 +1,33 @@
+class haxe {
+    static function cycleSort(arr:Array<Int>):Int {
+        var writes = 0;
+        var n = arr.length;
+        for (cycleStart in 0...n - 1) {
+            var item = arr[cycleStart];
+            var pos = cycleStart;
+            for (i in cycleStart + 1...n) {
+                if (arr[i] < item) pos++;
+            }
+            if (pos == cycleStart) continue;
+            while (item == arr[pos]) pos++;
+            var tmp = arr[pos]; arr[pos] = item; item = tmp;
+            writes++;
+            while (pos != cycleStart) {
+                pos = cycleStart;
+                for (i in cycleStart + 1...n) {
+                    if (arr[i] < item) pos++;
+                }
+                while (item == arr[pos]) pos++;
+                tmp = arr[pos]; arr[pos] = item; item = tmp;
+                writes++;
+            }
+        }
+        return writes;
+    }
+
+    static function main() {
+        var arr = [5, 4, 3, 2, 1];
+        cycleSort(arr);
+        trace(arr);
+    }
+}
