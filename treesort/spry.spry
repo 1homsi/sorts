@@ -1,0 +1,33 @@
+insert: func [node val] [
+  either (node = null) [
+    make object [value: val left: null right: null]
+  ] [
+    either (val < node/value) [
+      node/left: insert (node/left) val
+    ] [
+      either (val > node/value) [
+        node/right: insert (node/right) val
+      ] []
+    ]
+    node
+  ]
+]
+
+inorder: func [node] [
+  either (node = null) [
+    []
+  ] [
+    append (inorder (node/left))
+    append [node/value]
+    inorder (node/right)
+  ]
+]
+
+tree-sort: func [arr] [
+  root: null
+  foreach arr [val]
+    root: insert root val
+  inorder root
+]
+
+print (tree-sort [5 2 8 1 9 3])
