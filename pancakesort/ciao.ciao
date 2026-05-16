@@ -1,0 +1,12 @@
+pancake_sort([], []).
+pancake_sort(L, S) :-
+    select(M, L, R),
+    min_member(M, L),
+    pancake_sort(R, SR),
+    append(SR, [M], S).
+
+main :- 
+    pancake_sort([5, 2, 8, 1, 9, 3], Sorted),
+    format('Pancake Sort: ~w~n', [Sorted]).
+
+:- main.
