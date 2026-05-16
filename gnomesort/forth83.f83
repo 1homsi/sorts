@@ -1,0 +1,23 @@
+CREATE ARR 10 CELLS ALLOT
+: @I ( i -- n ) CELLS ARR + @ ;
+: !I ( n i -- ) CELLS ARR + ! ;
+
+: GNOME-SORT ( n -- )
+    0 ( n i )
+    BEGIN
+        2DUP >
+    WHILE
+        DUP 0= IF
+            1+
+        ELSE
+            DUP @I OVER 1- @I >
+            IF
+                DUP 1- OVER 1- @I OVER !I
+                DUP @I OVER 1- !I
+                1-
+            ELSE
+                1+
+            THEN
+        THEN
+    REPEAT
+    DROP DROP ;
