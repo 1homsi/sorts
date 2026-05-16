@@ -1,0 +1,24 @@
+procedure stoogesort(a : array; i, j : integer)
+  var temp, t : integer
+  begin
+    if a[j] < a[i] then
+      temp := a[j]
+      a[j] := a[i]
+      a[i] := temp
+    end
+    if j - i > 1 then
+      t := (j - i + 1) div 3
+      stoogesort(a, i, j - t)
+      stoogesort(a, i + t, j)
+      stoogesort(a, i, j - t)
+    end
+  end
+
+program test
+  var arr : array[6] of integer
+  begin
+    arr[0] := 5; arr[1] := 2; arr[2] := 8;
+    arr[3] := 1; arr[4] := 9; arr[5] := 3;
+    stoogesort(arr, 0, 5)
+    output arr
+  end
