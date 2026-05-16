@@ -1,0 +1,19 @@
+MODEL:
+SETS:
+  IDX / 1..10 /: ARR;
+ENDSETS
+
+DATA:
+  ARR = 5 3 8 1 9 2 7 4 6 0;
+ENDDATA
+
+@FOR(IDX(I) | I #GT# 1 #AND# I #LE# 10:
+  @FOR(IDX(J) | J #GE# I:
+    @IFC(ARR(J) #LT# ARR(J-1):
+      ARR(J)   = @TEMP(ARR(J-1));
+      ARR(J-1) = @TEMP(ARR(J));
+    )
+  )
+)
+
+END
