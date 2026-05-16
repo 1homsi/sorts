@@ -1,1 +1,1 @@
-print("Bogosort implementation for msgpack.msgpack")
+bogosort = true
