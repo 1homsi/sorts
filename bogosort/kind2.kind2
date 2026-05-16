@@ -1,1 +1,6 @@
-print("Bogosort implementation for kind2.kind2")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
