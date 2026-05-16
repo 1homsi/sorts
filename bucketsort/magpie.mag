@@ -1,0 +1,26 @@
+fn bucket_sort(arr: List[Int], max_val: Int) -> List[Int] {
+    if max_val == 0 then
+        return arr
+    }
+    
+    var buckets = List[List[Int]].new()
+    for i in 0..max_val {
+        buckets.add(List[Int].new())
+    }
+    
+    for num in arr {
+        if num >= 0 && num < max_val {
+            buckets.get(num).add(num)
+        }
+    }
+    
+    var result = List[Int].new()
+    for bucket in buckets {
+        for num in bucket {
+            result.add(num)
+        }
+    }
+    return result
+}
+
+print(bucket_sort([5, 2, 8, 1, 9, 3], 10))
