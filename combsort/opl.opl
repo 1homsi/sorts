@@ -1,0 +1,22 @@
+PROC CombSort:(arr%, n%)
+    LOCAL gap%,sorted%,i%,tmp%
+    gap%=n%
+    sorted%=0
+    WHILE sorted%=0
+        gap%=gap%*10/13
+        IF gap%<=1
+            gap%=1
+            sorted%=1
+        ENDIF
+        i%=0
+        WHILE i%+gap%<n%
+            IF arr%(i%)>arr%(i%+gap%)
+                tmp%=arr%(i%)
+                arr%(i%)=arr%(i%+gap%)
+                arr%(i%+gap%)=tmp%
+                sorted%=0
+            ENDIF
+            i%=i%+1
+        ENDWH
+    ENDWH
+ENDP
