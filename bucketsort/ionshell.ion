@@ -1,0 +1,47 @@
+fn insertion_sort(bucket: [float]) -> [float]
+    let n = len($bucket)
+    let mut arr = $bucket
+    for i in 1..$n
+        let key = $arr[$i]
+        let mut j = math($i - 1)
+        while test $j -ge 0 && test $arr[$j] -gt $key
+            let arr[$j + 1] = $arr[$j]
+            let j = math($j - 1)
+        end
+        let arr[$j + 1] = $key
+    end
+    return $arr
+end
+
+fn bucket_sort(arr: [float]) -> [float]
+    let n = len($arr)
+    if test $n -eq 0
+        return $arr
+    end
+    let min_v = $arr[0]
+    let max_v = $arr[0]
+    for v in $arr
+        if test $v -lt $min_v; let min_v = $v; end
+        if test $v -gt $max_v; let max_v = $v; end
+    end
+    let mut buckets = []
+    for i in 0..$n
+        let buckets += [[]]
+    end
+    for num in $arr
+        let idx = math(floor(($num - $min_v) / ($max_v - $min_v + 1) * $n))
+        if test $idx -ge $n; let idx = math($n - 1); end
+        let buckets[$idx] += $num
+    end
+    let mut result = []
+    for b in $buckets
+        let sorted = insertion_sort $b
+        for v in $sorted
+            let result += $v
+        end
+    end
+    return $result
+end
+
+let data = [0.78 0.17 0.39 0.26 0.72 0.94 0.21 0.12 0.23 0.68]
+echo $(bucket_sort $data)
