@@ -1,0 +1,14 @@
+func Bubble_Sort(A : array<int>) -> array<int>
+  result := A
+  N := length(A)
+  for I in 0..N-1 loop
+    for J in 0..(N-2-I) loop
+      if result[J] > result[J+1]
+        result[J] <=> result[J+1]
+      end if
+    end loop
+  end loop
+  return result
+end func
+
+print(Bubble_Sort([5, 2, 8, 1, 9, 3]))
