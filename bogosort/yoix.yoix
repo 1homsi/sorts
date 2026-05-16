@@ -1,29 +1,6 @@
-import yoix.*.*;
-
-IsSorted(Array arr) {
-    int n = length(arr);
-    int i;
-    for (i = 0; i < n - 1; i++) {
-        if (arr[i] > arr[i + 1]) return(0);
-    }
-    return(1);
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
 }
-
-Shuffle(Array arr) {
-    int n = length(arr);
-    int i, j, tmp;
-    for (i = n - 1; i > 0; i--) {
-        j = (int)(Math.random() * (i + 1));
-        tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
-    }
-}
-
-Bogosort(Array arr) {
-    while (!IsSorted(arr)) Shuffle(arr);
-}
-
-int arr[] = {3, 1, 4, 1, 5, 9, 2, 6};
-Bogosort(arr);
-println(arr);
