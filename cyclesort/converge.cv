@@ -1,0 +1,30 @@
+def cyclesort(arr):
+  n = len(arr)
+  pos = 0
+  while pos < n:
+    item = arr[pos]
+    cycles = 0
+    for i in range(n):
+      if i != pos and arr[i] < item:
+        cycles += 1
+    if cycles != 0:
+      while arr[pos] == item:
+        pos += 1
+      temp = arr[pos]
+      arr[pos] = item
+      item = temp
+      while cycles > 0:
+        cycles = 0
+        for i in range(n):
+          if i != pos and arr[i] < item:
+            cycles += 1
+        while arr[pos] == item:
+          pos += 1
+        temp = arr[pos]
+        arr[pos] = item
+        item = temp
+        cycles -= 1
+    pos += 1
+  return arr
+
+print(cyclesort([5, 2, 8, 1, 9, 3]))
