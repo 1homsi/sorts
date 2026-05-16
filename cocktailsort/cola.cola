@@ -1,0 +1,33 @@
+cocktailsort: method(arr) {
+  n := arr size
+  i := 0
+  {
+    i < n
+  } whileTrue: {
+    swapped := false
+    0 to: (n - i - 2) do: { k |
+      (arr at: k) > (arr at: (k + 1)) ifTrue: {
+        temp := arr at: k
+        arr at: k put: (arr at: (k + 1))
+        arr at: (k + 1) put: temp
+        swapped := true
+      }
+    }
+    swapped ifFalse: { ^arr }
+    i := i + 1
+    swapped := false
+    (n - i - 2) downto: 0 do: { k |
+      (arr at: k) > (arr at: (k + 1)) ifTrue: {
+        temp := arr at: k
+        arr at: k put: (arr at: (k + 1))
+        arr at: (k + 1) put: temp
+        swapped := true
+      }
+    }
+    swapped ifFalse: { ^arr }
+    i := i + 1
+  }
+}
+
+arr := [5, 2, 8, 1, 9, 3]
+Transcript show: (arr cocktailsort)
