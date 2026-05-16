@@ -1,0 +1,3 @@
+<%= for val <- @sorted do %>
+  <li><%= val %></li>
+<% end %>
