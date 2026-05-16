@@ -1,0 +1,27 @@
+:- module gnome_sort2.
+:- interface.
+:- import_module list, int.
+:- pred gnome_sort(list(int)::in, list(int)::out) is det.
+:- implementation.
+:- import_module array.
+
+gnome_sort(List, Sorted) :-
+    array.from_list(List, Arr0),
+    N = array.size(Arr0),
+    gnome_loop(Arr0, Arr, 0, N),
+    array.to_list(Arr, Sorted).
+
+:- pred gnome_loop(array(int)::in, array(int)::out, int::in, int::in) is det.
+gnome_loop(!.A, !:A, I, N) :-
+    ( if I >= N then true
+    ; else if I = 0 then gnome_loop(!.A, !:A, I+1, N)
+    ; else
+        array.lookup(!.A, I, Ai),
+        array.lookup(!.A, I-1, Ai1),
+        ( if Ai >= Ai1 then gnome_loop(!.A, !:A, I+1, N)
+        ; else
+            array.set(I, Ai1, !A),
+            array.set(I-1, Ai, !A),
+            gnome_loop(!.A, !:A, I-1, N)
+        )
+    ).
