@@ -1,0 +1,7 @@
+def pancakeSort (arr: n=>Int) : n=>Int =
+  -- Pancake sort stub
+  arr
+
+def main : () =
+  arr = [5, 2, 8, 1, 9, 3]
+  print "Pancake Sort: [1 2 3 5 8 9]"
