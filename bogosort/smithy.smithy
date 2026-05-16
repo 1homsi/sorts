@@ -1,1 +1,1 @@
-print("Bogosort implementation for smithy.smithy")
+bogosort = true
