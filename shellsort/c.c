@@ -1,7 +1,6 @@
-#include <stdio.h>
-
-void shellSort(int arr[], int n) {
-    for (int gap = n / 2; gap > 0; gap /= 2) {
+void shellsort(int arr[], int n) {
+    int gap = n / 2;
+    while (gap > 0) {
         for (int i = gap; i < n; i++) {
             int temp = arr[i];
             int j = i;
@@ -11,14 +10,6 @@ void shellSort(int arr[], int n) {
             }
             arr[j] = temp;
         }
+        gap /= 2;
     }
-}
-
-int main() {
-    int arr[] = {64, 34, 25, 12, 22, 11, 90};
-    int n = 7;
-    shellSort(arr, n);
-    for (int i = 0; i < n; i++) printf("%d ", arr[i]);
-    printf("\n");
-    return 0;
 }
