@@ -1,0 +1,19 @@
+def shellsort(uint[] arr) {
+  uint gap = 1;
+  while (gap <= arr.length) {
+    gap = gap * 3 + 1;
+  }
+  while (gap > 0) {
+    gap = gap / 3;
+    for (uint i = gap; i < arr.length; i++) {
+      uint temp = arr[i];
+      uint j = i;
+      while (j >= gap && arr[j - gap] > temp) {
+        arr[j] = arr[j - gap];
+        j -= gap;
+      }
+      arr[j] = temp;
+    }
+  }
+  return arr;
+}
