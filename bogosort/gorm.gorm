@@ -1,1 +1,1 @@
-print("Bogosort implementation for gorm.gorm")
+bogosort = true
