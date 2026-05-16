@@ -1,0 +1,12 @@
+node insert_sort(input: int) returns (output: int);
+var
+  state: int;
+let
+  output = state;
+  state = insert_pos(input, state);
+tel;
+
+node insert_pos(x: int; sorted: int) returns (result: int);
+let
+  result = if x <= sorted then x -> sorted else sorted -> x;
+tel;
