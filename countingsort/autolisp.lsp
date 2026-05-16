@@ -1,0 +1,30 @@
+(defun counting-sort (arr / n mn mx range count output i v idx pos)
+  (setq n (length arr))
+  (if (= n 0) arr
+    (progn
+      (setq mn (car arr) mx (car arr))
+      (foreach v arr
+        (if (< v mn) (setq mn v))
+        (if (> v mx) (setq mx v)))
+      (setq range (1+ (- mx mn)))
+      (setq count (make-list range 0))
+      (foreach v arr
+        (setq idx (- v mn))
+        (setf (nth idx count) (1+ (nth idx count))))
+      (setq i 1)
+      (while (< i range)
+        (setf (nth i count) (+ (nth i count) (nth (1- i) count)))
+        (setq i (1+ i)))
+      (setq output (make-list n 0))
+      (setq i (1- n))
+      (while (>= i 0)
+        (setq v (nth i arr)
+              idx (- v mn)
+              pos (1- (nth idx count)))
+        (setf (nth idx count) pos)
+        (setf (nth pos output) v)
+        (setq i (1- i)))
+      output)))
+
+(princ (counting-sort '(4 2 2 8 3 3 1)))
+(terpri)
