@@ -1,0 +1,15 @@
+gnome_sort = proc (arr: array[int])
+    i: int := array[int]$low(arr)
+    n: int := array[int]$high(arr)
+    tmp: int
+    while i <= n do
+        if i = array[int]$low(arr) cor arr[i] >= arr[i - 1] then
+            i := i + 1
+        else
+            tmp := arr[i]
+            arr[i] := arr[i - 1]
+            arr[i - 1] := tmp
+            i := i - 1
+        end
+    end
+end gnome_sort
