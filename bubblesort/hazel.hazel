@@ -1,0 +1,22 @@
+let bubble_pass = fun arr ->
+  let n = List.length arr in
+  let rec go i lst swapped =
+    if i >= n - 1 then (lst, swapped)
+    else
+      match lst with
+      | [] -> ([], swapped)
+      | [x] -> ([x], swapped)
+      | x :: y :: rest ->
+        if x > y then
+          let (sorted, _) = go (i + 1) (x :: rest) true in
+          (y :: sorted, true)
+        else
+          let (sorted, sw) = go (i + 1) (y :: rest) swapped in
+          (x :: sorted, sw)
+  in go 0 arr false
+
+let rec bubble_sort = fun lst ->
+  let (sorted, swapped) = bubble_pass lst in
+  if swapped then bubble_sort sorted else sorted
+
+let result = bubble_sort [64, 34, 25, 12, 22, 11, 90]
