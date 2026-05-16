@@ -1,0 +1,47 @@
+PROC cycle.sort ([]INT arr, VAL INT n, INT writes)
+  INT item, pos, i, tmp :
+  SEQ
+    writes := 0
+    SEQ cycle.start = 0 FOR n - 1
+      SEQ
+        item := arr[cycle.start]
+        pos := cycle.start
+        SEQ i = cycle.start + 1 FOR n - cycle.start - 1
+          IF
+            arr[i] < item
+              pos := pos + 1
+            TRUE
+              SKIP
+        IF
+          pos <> cycle.start
+            SEQ
+              WHILE arr[pos] = item
+                pos := pos + 1
+              tmp := arr[pos]
+              arr[pos] := item
+              item := tmp
+              writes := writes + 1
+              WHILE pos <> cycle.start
+                SEQ
+                  pos := cycle.start
+                  SEQ i = cycle.start + 1 FOR n - cycle.start - 1
+                    IF
+                      arr[i] < item
+                        pos := pos + 1
+                      TRUE
+                        SKIP
+                  WHILE arr[pos] = item
+                    pos := pos + 1
+                  tmp := arr[pos]
+                  arr[pos] := item
+                  item := tmp
+                  writes := writes + 1
+          TRUE
+            SKIP
+:
+
+INT writes :
+[5]INT arr :
+SEQ
+  arr[0] := 5; arr[1] := 4; arr[2] := 3; arr[3] := 2; arr[4] := 1
+  cycle.sort(arr, 5, writes)
