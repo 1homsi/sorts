@@ -1,0 +1,7 @@
+type storage = list<int>;
+
+const gnome_sort = (lst: list<int>): list<int> =>
+    List.sort((a: int, b: int): bool => a < b, lst);
+
+const main = (action: list<int>, store: storage): [list<operation>, storage] =>
+    [list([]), gnome_sort(action)];
