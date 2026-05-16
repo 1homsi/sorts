@@ -1,0 +1,9 @@
+INSERTION_SORT =
+    let
+        INSERT(x, <>) = <x>
+        INSERT(x, <h>^t) = if x <= h then <x,h>^t else <h>^INSERT(x,t)
+
+        SORT(<>) = <>
+        SORT(<h>^t) = INSERT(h, SORT(t))
+    within
+        SORT
