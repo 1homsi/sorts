@@ -1,0 +1,6 @@
+radixsort = lambda arr .
+  let max = max(arr)
+      exp = 1
+  in if max / exp <= 0 then arr else radixsort(arr);
+
+print(radixsort([5, 2, 8, 1, 9, 3]));
