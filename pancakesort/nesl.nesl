@@ -1,0 +1,7 @@
+function pancakeSort(a) =
+  if (#a <= 1) then a
+  else let m = min_val(a)
+       in {m} ++ pancakeSort(filter(lambda(x) x != m, a))
+  endif;
+
+pancakeSort([5, 2, 8, 1, 9, 3]);
