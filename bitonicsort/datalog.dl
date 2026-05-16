@@ -1,0 +1,8 @@
+.decl element(idx: number, val: number)
+element(0,3). element(1,7). element(2,4). element(3,8).
+element(4,6). element(5,2). element(6,1). element(7,5).
+
+.decl sorted(idx: number, val: number)
+sorted(idx, val) :- element(idx, val).
+
+.output sorted
