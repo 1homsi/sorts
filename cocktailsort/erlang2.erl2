@@ -1,0 +1,36 @@
+-module(cocktailsort2).
+-export([sort/1]).
+
+sort(List) ->
+    N = length(List),
+    Arr = list_to_tuple(List),
+    Result = do_sort(Arr, 0, N-1, true),
+    tuple_to_list(Result).
+
+do_sort(Arr, _, _, false) -> Arr;
+do_sort(Arr, S, E, true) ->
+    {Arr1, Sw1} = fwd(Arr, S, E, false),
+    case Sw1 of
+        false -> Arr1;
+        true ->
+            {Arr2, Sw2} = bwd(Arr1, S, E-1, false),
+            do_sort(Arr2, S+1, E-1, Sw2)
+    end.
+
+fwd(Arr, I, E, Sw) when I >= E -> {Arr, Sw};
+fwd(Arr, I, E, Sw) ->
+    A = element(I+1, Arr), B = element(I+2, Arr),
+    if A > B ->
+        A2 = setelement(I+2, setelement(I+1, Arr, B), A),
+        fwd(A2, I+1, E, true);
+    true -> fwd(Arr, I+1, E, Sw)
+    end.
+
+bwd(Arr, S, I, Sw) when I < S -> {Arr, Sw};
+bwd(Arr, S, I, Sw) ->
+    A = element(I+1, Arr), B = element(I+2, Arr),
+    if A > B ->
+        A2 = setelement(I+2, setelement(I+1, Arr, B), A),
+        bwd(A2, S, I-1, true);
+    true -> bwd(Arr, S, I-1, Sw)
+    end.
