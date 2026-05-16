@@ -1,0 +1,17 @@
+namespace NSMain;
+
+function insertSorted(x: Int, lst: List<Int>): List<Int> {
+    if(lst->empty()) {
+        return List<Int>{x};
+    }
+    elif(x <= lst->front()) {
+        return List<Int>{x} @ lst;
+    }
+    else {
+        return List<Int>{lst->front()} @ insertSorted(x, lst->tail());
+    }
+}
+
+function insertionSort(lst: List<Int>): List<Int> {
+    return lst->reduce(List<Int>{}, fn(acc: List<Int>, x: Int): List<Int> => insertSorted(x, acc));
+}
