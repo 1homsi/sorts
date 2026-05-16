@@ -1,32 +1,6 @@
-$ include "seed7_05.s7i";
-
-const proc: main is func
-  local
-    var array integer: arr is [] (3, 1, 4, 1, 5, 9, 2, 6);
-    var integer: n is 8;
-    var integer: i is 0;
-    var integer: j is 0;
-    var integer: tmp is 0;
-    var boolean: sorted is FALSE;
-  begin
-    repeat
-      sorted := TRUE;
-      for i range 1 to n - 1 do
-        if arr[i] > arr[i + 1] then
-          sorted := FALSE;
-        end if;
-      end for;
-      if not sorted then
-        for i range n downto 2 do
-          j := rand(1, i);
-          tmp := arr[i];
-          arr[i] := arr[j];
-          arr[j] := tmp;
-        end for;
-      end if;
-    until sorted;
-    for i range 1 to n do
-      write(arr[i] <& " ");
-    end for;
-    writeln;
-  end func;
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
