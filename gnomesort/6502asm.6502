@@ -1,0 +1,22 @@
+        ORG $0600
+
+GNOME:  LDX #0
+LOOP:   CPX #10
+        BCS DONE
+        CPX #0
+        BEQ ADV
+        LDA ARR,X
+        CMP ARR-1,X
+        BCS ADV
+        PHA
+        LDA ARR-1,X
+        STA ARR,X
+        PLA
+        STA ARR-1,X
+        DEX
+        JMP LOOP
+ADV:    INX
+        JMP LOOP
+DONE:   RTS
+
+ARR:    DB 5,3,8,1,9,2,7,4,6,0
