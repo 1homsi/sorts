@@ -1,0 +1,28 @@
+MODULE bubble_sort;
+
+DCL arr(7) INT := [64,34,25,12,22,11,90];
+DCL n INT := 7;
+DCL i, tmp INT;
+DCL swapped BOOL;
+
+bubble_sort: PROC();
+    swapped := TRUE;
+    DO WHILE swapped;
+        swapped := FALSE;
+        i := 0;
+        DO WHILE i < n - 1;
+            IF arr(i) > arr(i+1) THEN
+                tmp := arr(i);
+                arr(i) := arr(i+1);
+                arr(i+1) := tmp;
+                swapped := TRUE;
+            FI;
+            i := i + 1;
+        OD;
+        n := n - 1;
+    OD;
+END bubble_sort;
+
+CALL bubble_sort();
+
+END MODULE;
