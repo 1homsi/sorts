@@ -1,1 +1,1 @@
-print("Bogosort implementation for mongoose.mongoose")
+bogosort = true
