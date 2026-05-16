@@ -1,1 +1,1 @@
-print("Bogosort implementation for cockroachdb.cockroachdb")
+SELECT * FROM array ORDER BY value ASC;
