@@ -1,0 +1,33 @@
+IF OBJECT_ID('tempdb..#arr') IS NOT NULL DROP TABLE #arr;
+IF OBJECT_ID('tempdb..#buckets') IS NOT NULL DROP TABLE #buckets;
+
+CREATE TABLE #arr (id INT, val FLOAT);
+INSERT INTO #arr VALUES (1,0.78),(2,0.17),(3,0.39),(4,0.26),(5,0.72),
+                        (6,0.94),(7,0.21),(8,0.12),(9,0.23),(10,0.68);
+
+DECLARE @n INT = 10;
+DECLARE @min_v FLOAT, @max_v FLOAT;
+SELECT @min_v = MIN(val), @max_v = MAX(val) FROM #arr;
+
+CREATE TABLE #buckets (bucket_id INT, val FLOAT, seq INT IDENTITY);
+
+INSERT INTO #buckets (bucket_id, val)
+SELECT
+    LEAST(@n - 1, FLOOR((val - @min_v) / (@max_v - @min_v + 1) * @n)),
+    val
+FROM #arr;
+
+WITH bucket_ranked AS (
+    SELECT
+        bucket_id,
+        val,
+        ROW_NUMBER() OVER (PARTITION BY bucket_id ORDER BY val) AS rank_in_bucket,
+        ROW_NUMBER() OVER (ORDER BY bucket_id, val) AS final_rank
+    FROM #buckets
+)
+SELECT val
+FROM bucket_ranked
+ORDER BY final_rank;
+
+DROP TABLE #arr;
+DROP TABLE #buckets;
