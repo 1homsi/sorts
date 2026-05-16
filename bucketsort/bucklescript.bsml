@@ -1,0 +1,34 @@
+let insert_sorted x lst =
+  let rec go = function
+    | [] -> [x]
+    | h :: t -> if x <= h then x :: h :: t else h :: go t
+  in go lst
+
+let insertion_sort lst =
+  let rec go = function
+    | [] -> []
+    | h :: t -> insert_sorted h (go t)
+  in go lst
+
+let get_idx num mn mx n =
+  let raw = int_of_float ((num -. mn) /. (mx -. mn +. 1.0) *. float_of_int n) in
+  min (n - 1) raw
+
+let bucket_sort arr =
+  let n = List.length arr in
+  if n = 0 then arr
+  else
+    let mn = List.fold_left min (List.hd arr) arr in
+    let mx = List.fold_left max (List.hd arr) arr in
+    let buckets = Array.make n [] in
+    List.iter (fun num ->
+      let idx = get_idx num mn mx n in
+      buckets.(idx) <- buckets.(idx) @ [num]
+    ) arr;
+    Array.fold_left (fun acc b -> acc @ insertion_sort b) [] buckets
+
+let () =
+  let data = [0.78; 0.17; 0.39; 0.26; 0.72; 0.94; 0.21; 0.12; 0.23; 0.68] in
+  let sorted = bucket_sort data in
+  List.iter (fun x -> Printf.printf "%.2f " x) sorted;
+  print_newline ()
