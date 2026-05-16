@@ -1,0 +1,19 @@
+routine quicksort( arr: list<int> ) => list<int>
+{
+  if( arr.size() <= 1 ) return arr
+
+  var pivot = arr[0]
+  var less = {}
+  var greater = {}
+
+  for( i = 1; i < arr.size(); i += 1 )
+  {
+    if( arr[i] <= pivot ) less.append( arr[i] )
+    else greater.append( arr[i] )
+  }
+
+  return quicksort(less) + [ pivot ] + quicksort(greater)
+}
+
+var result = quicksort( [5, 2, 8, 1, 9, 3] )
+io.writeln( result )
