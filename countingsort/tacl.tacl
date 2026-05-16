@@ -1,0 +1,33 @@
+?COUNTINGSORT
+  ?INPUT ¢
+    ?ARRAY [5, 2, 8, 1, 9, 3]
+  ?END
+
+  ?SET MAX = 0
+  ?FOR I = 0 TO LEN(ARRAY) - 1
+    ?IF ARRAY[I] > MAX
+      ?SET MAX = ARRAY[I]
+    ?END IF
+  ?END FOR
+
+  ?DECLARE COUNT ARRAY[10]
+  ?FOR I = 0 TO MAX
+    ?SET COUNT[I] = 0
+  ?END FOR
+
+  ?FOR I = 0 TO LEN(ARRAY) - 1
+    ?SET COUNT[ARRAY[I]] = COUNT[ARRAY[I]] + 1
+  ?END FOR
+
+  ?DECLARE OUTPUT ARRAY[10]
+  ?SET OUT_IDX = 0
+  ?FOR I = 0 TO MAX
+    ?FOR J = 0 TO COUNT[I] - 1
+      ?SET OUTPUT[OUT_IDX] = I
+      ?SET OUT_IDX = OUT_IDX + 1
+    ?END FOR
+  ?END FOR
+
+  ?PRINT OUTPUT
+
+?END
