@@ -1,0 +1,17 @@
+fmod QUICKSORT is
+  protecting LIST{Nat} .
+
+  var H T : Nat .
+  var L : List{Nat} .
+
+  op quicksort : List{Nat} -> List{Nat} .
+
+  eq quicksort(nil) = nil .
+  eq quicksort(H) = H .
+  eq quicksort(H L) = quicksort(filter(<= H, L)) H quicksort(filter(> H, L)) .
+
+  op filter : [Nat -> Bool] List{Nat} -> List{Nat} .
+  eq filter(F, nil) = nil .
+endfm
+
+reduce quicksort(5 2 8 1 9 3) .
