@@ -1,1 +1,1 @@
-print("Bogosort implementation for zeromq.zeromq")
+bogosort = true
