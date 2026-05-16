@@ -1,44 +1,6 @@
-include "std.porth"
-
-memory arr 8 sizeof(int) *
-memory n sizeof(int)
-
-proc is_sorted -> bool in
-  n @ 1 - 0 do i
-    i sizeof(int) * arr + @
-    i 1 + sizeof(int) * arr + @
-    > if
-      false return
-    end
-  end
-  true
-end
-
-proc shuffle in
-  n @ 1 - 1 do i
-    rand i % 1 + i swap
-    i sizeof(int) * arr + @
-    over sizeof(int) * arr + @
-    rot sizeof(int) * arr + !
-    sizeof(int) * arr + !
-  end
-end
-
-proc bogosort in
-  while is_sorted lnot do
-    shuffle
-  end
-end
-
-proc main in
-  3 arr 0 sizeof(int) * + !
-  1 arr 1 sizeof(int) * + !
-  4 arr 2 sizeof(int) * + !
-  1 arr 3 sizeof(int) * + !
-  5 arr 4 sizeof(int) * + !
-  9 arr 5 sizeof(int) * + !
-  2 arr 6 sizeof(int) * + !
-  6 arr 7 sizeof(int) * + !
-  8 n !
-  bogosort
-end
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
