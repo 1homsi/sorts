@@ -1,0 +1,16 @@
+gbeta InsertionSort
+(# sort:
+   (# arr: ^Array[Integer]; n: @integer
+   enter (arr[], n)
+   do (for i: 1 to n - 1 repeat
+         (key: @integer; j: @integer;
+          arr.get(i) -> key;
+          i - 1 -> j;
+          (while j >= 0 and arr.get(j) > key repeat
+             arr.get(j) -> arr.put(j+1);
+             j - 1 -> j
+          );
+          key -> arr.put(j+1))
+       end for)
+   #)
+#)
