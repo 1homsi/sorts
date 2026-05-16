@@ -1,0 +1,41 @@
+fun cycleSort(arr: array[int]): array[int] = {
+  var a = arr;
+  val n = len a;
+  var pos = 0;
+  while pos < n do
+    val item = a.pos;
+    var cycles = 0;
+    for i in 0 upto n do
+      if i != pos and a.i < item then
+        cycles = cycles + 1;
+      endif
+    done
+    if cycles != 0 then
+      while a.pos == item do
+        pos = pos + 1;
+      done
+      var temp = a.pos;
+      a = a with pos = item;
+      item = temp;
+      while cycles > 0 do
+        cycles = 0;
+        for i in 0 upto n do
+          if i != pos and a.i < item then
+            cycles = cycles + 1;
+          endif
+        done
+        while a.pos == item do
+          pos = pos + 1;
+        done
+        temp = a.pos;
+        a = a with pos = item;
+        item = temp;
+        cycles = cycles - 1;
+      done
+    endif
+    pos = pos + 1;
+  done
+  return a;
+};
+
+println$ cycleSort(array[1, 5, 2, 8, 1, 9, 3]);
