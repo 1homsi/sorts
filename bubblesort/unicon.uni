@@ -1,0 +1,24 @@
+procedure bubbleSort(arr)
+    n := *arr
+    repeat {
+        swapped := &null
+        every i := 1 to n-1 do {
+            if arr[i] > arr[i+1] then {
+                tmp := arr[i]
+                arr[i] := arr[i+1]
+                arr[i+1] := tmp
+                swapped := 1
+            }
+        }
+        n -:= 1
+        if /swapped then break
+    }
+    return arr
+end
+
+procedure main()
+    arr := [64, 34, 25, 12, 22, 11, 90]
+    bubbleSort(arr)
+    every writes(!arr, " ")
+    write()
+end
