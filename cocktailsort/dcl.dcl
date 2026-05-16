@@ -1,0 +1,40 @@
+$ COCKTAIL_SORT: SUBROUTINE
+$   ARR_0 = 5
+$   ARR_1 = 3
+$   ARR_2 = 8
+$   ARR_3 = 1
+$   ARR_4 = 9
+$   N = 5
+$   SWAPPED = 1
+$   START = 0
+$   END = N - 1
+$OUTER_LOOP:
+$   IF SWAPPED .EQ. 0 THEN GOTO DONE
+$   SWAPPED = 0
+$   I = START
+$FORWARD:
+$   IF I .GE. END THEN GOTO AFTER_FWD
+$   I1 = I + 1
+$   A = ARR_'I'
+$   B = ARR_'I1'
+$   IF A .GT. B THEN ARR_'I' = B, ARR_'I1' = A, SWAPPED = 1
+$   I = I + 1
+$   GOTO FORWARD
+$AFTER_FWD:
+$   IF SWAPPED .EQ. 0 THEN GOTO DONE
+$   SWAPPED = 0
+$   END = END - 1
+$   I = END - 1
+$BACKWARD:
+$   IF I .LT. START THEN GOTO AFTER_BWD
+$   I1 = I + 1
+$   A = ARR_'I'
+$   B = ARR_'I1'
+$   IF A .GT. B THEN ARR_'I' = B, ARR_'I1' = A, SWAPPED = 1
+$   I = I - 1
+$   GOTO BACKWARD
+$AFTER_BWD:
+$   START = START + 1
+$   GOTO OUTER_LOOP
+$DONE:
+$ ENDSUBROUTINE
