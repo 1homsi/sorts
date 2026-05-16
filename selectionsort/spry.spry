@@ -1,0 +1,21 @@
+selectionSort: func(arr) {
+    n: (arr length)
+    i: 0
+    while(< i (- n 1)) {
+        minIdx: i
+        j: (+ i 1)
+        while(< j n) {
+            if(< (arr at: j) (arr at: minIdx)) {
+                minIdx: j
+            }
+            j: (+ j 1)
+        }
+        tmp: (arr at: i)
+        arr set: i (arr at: minIdx)
+        arr set: minIdx tmp
+        i: (+ i 1)
+    }
+    return: arr
+}
+
+print(selectionSort([5 2 8 1 9 3]))
