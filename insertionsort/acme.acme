@@ -1,0 +1,35 @@
+!cpu 6502
+
+* = $0800
+
+ARR     !byte 5, 3, 1, 4, 2
+N       !byte 5
+
+START:
+    ldx #1
+OUTER:
+    cpx N
+    bcs DONE
+    lda ARR,x
+    sta KEY
+    txa
+    tay
+    dey
+INNER:
+    cpy #$ff
+    beq PLACE
+    lda ARR,y
+    cmp KEY
+    bcc PLACE
+    sta ARR+1,y
+    dey
+    jmp INNER
+PLACE:
+    lda KEY
+    sta ARR+1,y
+    inx
+    jmp OUTER
+DONE:
+    brk
+
+KEY !byte 0
