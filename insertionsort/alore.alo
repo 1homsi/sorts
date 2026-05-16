@@ -1,0 +1,15 @@
+def insertionSort(arr)
+  n = arr.length()
+  for i in 1 to n - 1
+    key = arr[i]
+    j = i - 1
+    while j >= 0 and arr[j] > key
+      arr[j + 1] = arr[j]
+      j = j - 1
+    end
+    arr[j + 1] = key
+  end
+  return arr
+end
+
+print(insertionSort([5, 2, 8, 1, 9, 3]))
