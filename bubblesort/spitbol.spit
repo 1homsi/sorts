@@ -1,0 +1,20 @@
+        ARR = ARRAY(7)
+        ARR<1> = 64; ARR<2> = 34; ARR<3> = 25; ARR<4> = 12
+        ARR<5> = 22; ARR<6> = 11; ARR<7> = 90
+        N = 7
+OUTER   SWAPPED = 0
+        I = 1
+INNER   GT(I, N-1) :S(DONE)
+        GT(ARR<I>, ARR<I+1>) :F(SKIP)
+        TMP = ARR<I>
+        ARR<I> = ARR<I+1>
+        ARR<I+1> = TMP
+        SWAPPED = 1
+SKIP    I = I + 1 :(INNER)
+DONE    N = N - 1
+        EQ(SWAPPED, 1) :S(OUTER)
+        I = 1
+PRT     GT(I, 7) :S(END)
+        OUTPUT = ARR<I>
+        I = I + 1 :(PRT)
+END
