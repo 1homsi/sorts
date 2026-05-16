@@ -1,0 +1,33 @@
+func countingsort(arr: List<number>) : List<number>
+  if arr.length == 0
+    return arr
+  endif
+
+  var max = 0
+  for val in arr
+    if val > max
+      max = val
+    endif
+  endfor
+
+  var count: List<number>
+  for i in 0..max
+    count.add(0)
+  endfor
+
+  for val in arr
+    count[val] = count[val] + 1
+  endfor
+
+  var output: List<number>
+  for i in 0..max
+    for j in 0..<count[i]
+      output.add(i)
+    endfor
+  endfor
+
+  return output
+endfunc
+
+var test = [5, 2, 8, 1, 9, 3]
+echo countingsort(test)
