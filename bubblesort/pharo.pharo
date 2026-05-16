@@ -1,0 +1,21 @@
+bubbleSort: anArray
+    | n swapped tmp |
+    n := anArray size.
+    swapped := true.
+    [ swapped ] whileTrue: [
+        swapped := false.
+        1 to: n - 1 do: [ :i |
+            (anArray at: i) > (anArray at: i + 1) ifTrue: [
+                tmp := anArray at: i.
+                anArray at: i put: (anArray at: i + 1).
+                anArray at: i + 1 put: tmp.
+                swapped := true.
+            ].
+        ].
+        n := n - 1.
+    ].
+    ^ anArray.
+
+| arr |
+arr := #(64 34 25 12 22 11 90) asOrderedCollection asArray.
+Transcript showCr: (self bubbleSort: arr) printString.
