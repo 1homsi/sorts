@@ -1,0 +1,29 @@
+#lang racket
+
+(define (cocktail-sort-v2! vec)
+  (define n (vector-length vec))
+  (define (fwd! i end sw)
+    (cond
+      [(>= i end) sw]
+      [(> (vector-ref vec i) (vector-ref vec (+ i 1)))
+       (define tmp (vector-ref vec i))
+       (vector-set! vec i (vector-ref vec (+ i 1)))
+       (vector-set! vec (+ i 1) tmp)
+       (fwd! (+ i 1) end #t)]
+      [else (fwd! (+ i 1) end sw)]))
+  (define (bwd! i start sw)
+    (cond
+      [(< i start) sw]
+      [(> (vector-ref vec i) (vector-ref vec (+ i 1)))
+       (define tmp (vector-ref vec i))
+       (vector-set! vec i (vector-ref vec (+ i 1)))
+       (vector-set! vec (+ i 1) tmp)
+       (bwd! (- i 1) start #t)]
+      [else (bwd! (- i 1) start sw)]))
+  (let loop ([start 0] [end (- n 1)])
+    (define sw1 (fwd! start end #f))
+    (when sw1
+      (define sw2 (bwd! (- end 1) start #f))
+      (when sw2
+        (loop (+ start 1) (- end 1)))))
+  vec)
