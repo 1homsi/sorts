@@ -1,0 +1,16 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: gnome-sort-policy
+spec:
+  endpointSelector:
+    matchLabels:
+      app: gnome-sort
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        role: sorted
+    toPorts:
+    - ports:
+      - port: "80"
+        protocol: TCP
