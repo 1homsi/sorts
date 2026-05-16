@@ -1,28 +1,6 @@
-let is_sorted = fun arr ->
-  let n = List.length arr in
-  let rec check i =
-    if i >= n - 1 then true
-    else
-      let a = List.nth arr i in
-      let b = List.nth arr (i + 1) in
-      if a > b then false
-      else check (i + 1)
-  in check 0
-
-let shuffle arr =
-  let a = Array.of_list arr in
-  let n = Array.length a in
-  for i = n - 1 downto 1 do
-    let j = Random.int (i + 1) in
-    let tmp = a.(i) in
-    a.(i) <- a.(j);
-    a.(j) <- tmp
-  done;
-  Array.to_list a
-
-let rec bogosort arr =
-  if is_sorted arr then arr
-  else bogosort (shuffle arr)
-
-let arr = [3; 1; 4; 1; 5; 9; 2; 6]
-let _ = bogosort arr
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
