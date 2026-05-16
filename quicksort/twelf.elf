@@ -1,0 +1,19 @@
+quicksort : list int -> list int -> type.
+
+qs-nil : quicksort nil nil.
+qs-one : quicksort (X::nil) (X::nil).
+qs-cons : quicksort ((H::T)) (Result)
+  <- partition H T nil nil L G
+  <- quicksort L SL
+  <- quicksort G SG
+  <- append SL (H::SG) Result.
+
+partition : int -> list int -> list int -> list int -> list int -> list int -> type.
+partition-nil : partition _ nil L G L G.
+partition-cons : partition H (X::T) L G SL SG
+  <- (lt H X -> partition H T L (X::G) SL SG;
+      partition H T (X::L) G SL SG).
+
+append : list int -> list int -> list int -> type.
+append-nil : append nil L L.
+append-cons : append (X::L1) L2 (X::L3) <- append L1 L2 L3.
