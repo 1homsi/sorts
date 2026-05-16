@@ -1,0 +1,17 @@
+:0→I
+:{5,2,8,1,9,3}→L1
+:While I<6
+:If I=0
+:I+1→I
+:Else
+:If L1(I)<L1(I-1)
+:L1(I)→T
+:L1(I-1)→L1(I)
+:T→L1(I-1)
+:I-1→I
+:Else
+:I+1→I
+:End
+:End
+:End
+:Disp L1
