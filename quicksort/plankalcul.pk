@@ -1,0 +1,5 @@
+P1 ( (3, 5) (1, 2) (2, 8) (3, 1) (4, 9) (5, 3) ) => QUICKSORT
+QUICKSORT ( S ) => QUICKSORT_IMPL
+QUICKSORT_IMPL ( S ) => PRINT S
+PRINT ( (N, V) ) => WRITE V, PRINT_REST
+PRINT_REST ( ) => STOP
