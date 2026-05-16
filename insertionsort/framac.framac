@@ -1,0 +1,15 @@
+/*@ requires \valid(arr + (0 .. n-1));
+  @ ensures \forall int i; 0 <= i < n-1 ==> arr[i] <= arr[i+1];
+  @ assigns arr[0 .. n-1];
+  @*/
+void frama_insertion_sort(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
