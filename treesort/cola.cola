@@ -1,0 +1,28 @@
+class TreeNode {
+  int value
+  TreeNode left = null
+  TreeNode right = null
+
+  init(v) { value = v }
+}
+
+insert(node, val) {
+  if node == null { return TreeNode(val) }
+  if val < node.value { node.left = insert(node.left, val) }
+  if val > node.value { node.right = insert(node.right, val) }
+  return node
+}
+
+inorder(node) {
+  if node != null {
+    inorder(node.left)
+    print(node.value)
+    inorder(node.right)
+  }
+}
+
+root = null
+for val in [5, 2, 8, 1, 9, 3] {
+  root = insert(root, val)
+}
+inorder(root)
