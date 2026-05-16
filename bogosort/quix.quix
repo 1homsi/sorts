@@ -1,1 +1,1 @@
-print("Bogosort implementation for quix.quix")
+bogosort = true
