@@ -1,0 +1,13 @@
+bucket_sort arr max_val | max_val == 0 = arr
+                              | otherwise = collect buckets
+    with buckets = init_buckets max_val;
+             collect [] = [];
+             collect (b:bs) = collect_bucket b ++ collect bs;
+             collect_bucket [] = [];
+             collect_bucket (x:xs) = x : collect_bucket xs;
+    end;
+
+init_buckets 0 = [];
+init_buckets n = [] : init_buckets (n - 1);
+
+bucket_sort [5, 2, 8, 1, 9, 3] 10;
