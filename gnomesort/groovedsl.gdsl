@@ -1,0 +1,17 @@
+def gnomeSort(arr) {
+    def i = 0
+    def n = arr.size()
+    while (i < n) {
+        if (i == 0 || arr[i] >= arr[i - 1]) {
+            i++
+        } else {
+            def tmp = arr[i]
+            arr[i] = arr[i - 1]
+            arr[i - 1] = tmp
+            i--
+        }
+    }
+    return arr
+}
+
+gnomeSort([5, 3, 8, 1, 9, 2, 7, 4, 6, 0])
