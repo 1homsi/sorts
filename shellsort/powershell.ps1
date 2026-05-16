@@ -1,5 +1,5 @@
-function Shell-Sort {
-    param([int[]]$arr)
+function Shellsort {
+    param([array]$arr)
     $n = $arr.Length
     $gap = [math]::Floor($n / 2)
     while ($gap -gt 0) {
@@ -16,6 +16,3 @@ function Shell-Sort {
     }
     return $arr
 }
-
-$arr = @(64, 34, 25, 12, 22, 11, 90)
-Write-Output (Shell-Sort $arr)
