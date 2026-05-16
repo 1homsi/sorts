@@ -1,0 +1,27 @@
+        .data
+arr:    .long 5,3,8,1,9,2,7,4,6,0
+
+        .text
+        .global gnome_sort
+gnome_sort:
+        lda  $16, arr
+        lda  $17, 10
+        clr  $18
+loop:
+        cmplt $18, $17, $19
+        beq  $19, done
+        beq  $18, advance
+        s4addq $18, $16, $20
+        ldl  $21, 0($20)
+        ldl  $22, -4($20)
+        cmplt $21, $22, $23
+        beq  $23, advance
+        stl  $22, 0($20)
+        stl  $21, -4($20)
+        subq $18, 1, $18
+        br   loop
+advance:
+        addq $18, 1, $18
+        br   loop
+done:
+        ret
