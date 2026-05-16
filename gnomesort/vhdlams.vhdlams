@@ -1,0 +1,30 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity gnome_sort_ams is
+end entity;
+
+architecture behavioral of gnome_sort_ams is
+    type int_array is array (0 to 9) of integer;
+    signal arr : int_array := (5, 3, 8, 1, 9, 2, 7, 4, 6, 0);
+begin
+    process
+        variable v_arr : int_array := (5, 3, 8, 1, 9, 2, 7, 4, 6, 0);
+        variable i : integer := 0;
+        variable tmp : integer;
+    begin
+        while i < 10 loop
+            if i = 0 or v_arr(i) >= v_arr(i-1) then
+                i := i + 1;
+            else
+                tmp := v_arr(i);
+                v_arr(i) := v_arr(i-1);
+                v_arr(i-1) := tmp;
+                i := i - 1;
+            end if;
+        end loop;
+        arr <= v_arr;
+        wait;
+    end process;
+end architecture;
