@@ -1,0 +1,12 @@
+var arr = [5, 2, 8, 1, 9, 3];
+var n = arr.length;
+for i in 0usize..n-2usize do
+    for j in 0usize..n-i-2usize do
+        if arr.(j) > arr.(j+1usize) do
+            var temp = arr.(j);
+            arr.(j) = arr.(j+1usize);
+            arr.(j+1usize) = temp;
+        done
+    done
+done
+println ("Pancake Sort: " + str arr);
