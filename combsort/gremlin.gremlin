@@ -1,0 +1,21 @@
+g.withSideEffect('arr', [5, 3, 8, 1, 9, 2, 7, 4, 6]).
+  withSideEffect('gap', 9).
+  withSideEffect('sorted', false).
+  inject(1).
+  repeat(
+    sideEffect { t ->
+      def arr = t.sideEffects('arr')
+      def n = arr.size()
+      def gap = Math.max(1, (int)(t.sideEffects('gap') / 1.3))
+      t.sideEffects('gap', gap)
+      def s = (gap == 1)
+      (0..<(n-gap)).each { i ->
+        if (arr[i] > arr[i+gap]) {
+          def tmp = arr[i]; arr[i] = arr[i+gap]; arr[i+gap] = tmp
+          s = false
+        }
+      }
+      t.sideEffects('sorted', s)
+    }
+  ).until { t -> t.sideEffects('sorted') }.
+  select('arr')
