@@ -1,0 +1,36 @@
+PROC bubble.sort ([]INT arr, VAL INT size)
+  INT n, tmp:
+  BOOL swapped:
+  SEQ
+    n := size
+    swapped := TRUE
+    WHILE swapped
+      SEQ
+        swapped := FALSE
+        SEQ i = 0 FOR n-1
+          IF
+            arr[i] > arr[i+1]
+              SEQ
+                tmp := arr[i]
+                arr[i] := arr[i+1]
+                arr[i+1] := tmp
+                swapped := TRUE
+            TRUE
+              SKIP
+        n := n - 1
+:
+
+PROC main ()
+  [7]INT arr:
+  SEQ
+    arr[0] := 64
+    arr[1] := 34
+    arr[2] := 25
+    arr[3] := 12
+    arr[4] := 22
+    arr[5] := 11
+    arr[6] := 90
+    bubble.sort(arr, 7)
+    SEQ i = 0 FOR 7
+      out.int(arr[i], 0, STDOUT)
+:
