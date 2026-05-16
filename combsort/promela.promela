@@ -1,0 +1,35 @@
+#define N 9
+
+int arr[N];
+int gap;
+bool sorted;
+int tmp;
+
+init {
+    arr[0] = 5; arr[1] = 3; arr[2] = 8;
+    arr[3] = 1; arr[4] = 9; arr[5] = 2;
+    arr[6] = 7; arr[7] = 4; arr[8] = 6;
+
+    gap = N;
+    sorted = false;
+
+    do
+    :: !sorted ->
+        gap = gap * 10 / 13;
+        if :: gap <= 1 -> gap = 1; sorted = true :: else -> skip fi;
+        int i = 0;
+        do
+        :: i + gap < N ->
+            if :: arr[i] > arr[i+gap] ->
+                tmp = arr[i];
+                arr[i] = arr[i+gap];
+                arr[i+gap] = tmp;
+                sorted = false
+            :: else -> skip
+            fi;
+            i++
+        :: else -> break
+        od
+    :: sorted -> break
+    od
+}
