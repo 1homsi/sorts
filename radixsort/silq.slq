@@ -1,0 +1,32 @@
+fun radixsort(int[6] arr) returns (int[6]) {
+  int max = 0;
+  for int i in 0..5 {
+    if arr[i] > max { max = arr[i]; }
+  }
+  int exp = 1;
+  while (max / exp > 0) {
+    arr = countingSortByExp(arr, exp);
+    exp = exp * 10;
+  }
+  return arr;
+}
+
+fun countingSortByExp(int[6] arr, int exp) returns (int[6]) {
+  int[6] output;
+  int[10] count;
+
+  for int i in 0..9 { count[i] = 0; }
+  for int i in 0..5 {
+    count[(arr[i] / exp) % 10] = count[(arr[i] / exp) % 10] + 1;
+  }
+  for int i in 1..9 {
+    count[i] = count[i] + count[i - 1];
+  }
+  for int i in 5..-1..0 {
+    output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+    count[(arr[i] / exp) % 10] = count[(arr[i] / exp) % 10] - 1;
+  }
+  return output;
+}
+
+radixsort([5, 2, 8, 1, 9, 3]);
