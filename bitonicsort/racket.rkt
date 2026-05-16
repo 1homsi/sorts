@@ -1,0 +1,26 @@
+#lang racket
+
+(define (compare-and-swap! arr i j direction)
+  (when (eq? direction (> (vector-ref arr i) (vector-ref arr j)))
+    (let ((tmp (vector-ref arr i)))
+      (vector-set! arr i (vector-ref arr j))
+      (vector-set! arr j tmp))))
+
+(define (bitonic-merge! arr lo cnt direction)
+  (when (> cnt 1)
+    (define k (quotient cnt 2))
+    (for ([i (in-range lo (+ lo k))])
+      (compare-and-swap! arr i (+ i k) direction))
+    (bitonic-merge! arr lo k direction)
+    (bitonic-merge! arr (+ lo k) k direction)))
+
+(define (bitonic-sort! arr lo cnt direction)
+  (when (> cnt 1)
+    (define k (quotient cnt 2))
+    (bitonic-sort! arr lo k #t)
+    (bitonic-sort! arr (+ lo k) k #f)
+    (bitonic-merge! arr lo cnt direction)))
+
+(define data (vector 3 7 4 8 6 2 1 5))
+(bitonic-sort! data 0 (vector-length data) #t)
+(displayln (vector->list data))
