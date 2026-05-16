@@ -1,0 +1,37 @@
+SPEED CODING COMB SORT
+REG 1 = N (ARRAY SIZE)
+REG 2 = GAP
+REG 3 = I (LOOP INDEX)
+REG 4 = TMP
+REG 5 = SORTED FLAG (0=FALSE 1=TRUE)
+REG 6 = ARRAY BASE ADDRESS
+
+INIT:    LOAD R2, R1      GAP = N
+         CLR  R5           SORTED = FALSE
+
+OUTER:   CMP  R5, #1
+         JEQ  DONE
+
+         MUL  R2, #10
+         DIV  R2, #13
+         CMP  R2, #1
+         JGT  NOONE
+         MOV  R2, #1
+         MOV  R5, #1
+NOONE:   CLR  R3           I = 0
+
+INNER:   MOV  R7, R3
+         ADD  R7, R2
+         CMP  R7, R1
+         JGE  OUTER
+
+         LOAD R8, [R6+R3]
+         LOAD R9, [R6+R7]
+         CMP  R8, R9
+         JLE  SKIP
+         STOR [R6+R3], R9
+         STOR [R6+R7], R8
+         CLR  R5
+SKIP:    INC  R3
+         JMP  INNER
+DONE:    RET
