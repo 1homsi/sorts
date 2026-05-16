@@ -1,0 +1,14 @@
+dec comb_sort : list(num) -> list(num);
+--- comb_sort xs <=
+    let n == length xs;
+        arr == list_to_array xs;
+        gap == n;
+        sorted == false
+    in comb_loop arr n gap sorted;
+
+dec comb_loop : array(num) # num # num # bool -> list(num);
+--- comb_loop arr n gap sorted <=
+    let new_gap == max 1 (n * 10 / 13)
+    in if new_gap = 1 andalso not (has_swap arr n new_gap)
+       then array_to_list arr
+       else comb_loop (do_pass arr n new_gap) n new_gap false;
