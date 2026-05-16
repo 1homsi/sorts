@@ -1,0 +1,52 @@
+component Test
+  export Executable
+
+  merge(arr: Array[\ZZ32\], left: \ZZ32\, mid: \ZZ32\, right: \ZZ32\): () = do
+    i: \ZZ32\ := left
+    j: \ZZ32\ := mid + 1
+    result: Array[\ZZ32\] = array(1, right - left + 1, 0)
+    k: \ZZ32\ := 1
+    
+    while i <= mid /\ j <= right do
+      if arr(i) <= arr(j) then
+        result(k) := arr(i)
+        i := i + 1
+      else
+        result(k) := arr(j)
+        j := j + 1
+      end
+      k := k + 1
+    end
+    
+    while i <= mid do
+      result(k) := arr(i)
+      i := i + 1
+      k := k + 1
+    end
+    
+    while j <= right do
+      result(k) := arr(j)
+      j := j + 1
+      k := k + 1
+    end
+    
+    for k <- 1:right - left + 1 do
+      arr(left + k - 1) := result(k)
+    end
+  end
+
+  mergesort(arr: Array[\ZZ32\], left: \ZZ32\, right: \ZZ32\): () = do
+    if left < right then
+      mid: \ZZ32\ := (left + right) / 2
+      mergesort(arr, left, mid)
+      mergesort(arr, mid + 1, right)
+      merge(arr, left, mid, right)
+    end
+  end
+
+  run(): () = do
+    arr: Array[\ZZ32\] = array(5, 2, 8, 1, 9, 3)
+    mergesort(arr, 1, 6)
+    println(arr)
+  end
+end
