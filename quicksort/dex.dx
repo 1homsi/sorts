@@ -1,0 +1,8 @@
+def quicksort (arr: (Fin n) -> Int) : (Fin n) -> Int =
+  if n <= 1
+    then arr
+    else
+      let pivot = arr 0
+      let less = filter (lambda x => x <= pivot) arr
+      let greater = filter (lambda x => x > pivot) arr
+      in quicksort less ++ [pivot] ++ quicksort greater
