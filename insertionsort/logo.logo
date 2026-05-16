@@ -1,0 +1,17 @@
+to insertionSort :arr
+  localmake "n count :arr
+  localmake "i 2
+  repeat :n - 1 [
+    localmake "key item :i :arr
+    localmake "j :i - 1
+    while [and [:j > 0] [item :j :arr > :key]] [
+      setitem :j + 1 :arr item :j :arr
+      localmake "j :j - 1
+    ]
+    setitem :j + 1 :arr :key
+    localmake "i :i + 1
+  ]
+  output :arr
+end
+
+show insertionSort [5 2 8 1 9 3]
