@@ -1,0 +1,44 @@
+def cyclesort(arr as Array) as Array
+  var n = arr.length()
+  var pos = 0
+  while pos < n
+    var item = arr[pos]
+    var cycles = 0
+    var i = 0
+    while i < n
+      if i != pos and arr[i] < item
+        cycles = cycles + 1
+      end
+      i = i + 1
+    end
+    if cycles != 0
+      while arr[pos] == item
+        pos = pos + 1
+      end
+      var temp = arr[pos]
+      arr[pos] = item
+      item = temp
+      while cycles > 0
+        cycles = 0
+        i = 0
+        while i < n
+          if i != pos and arr[i] < item
+            cycles = cycles + 1
+          end
+          i = i + 1
+        end
+        while arr[pos] == item
+          pos = pos + 1
+        end
+        temp = arr[pos]
+        arr[pos] = item
+        item = temp
+        cycles = cycles - 1
+      end
+    end
+    pos = pos + 1
+  end
+  return arr
+end
+
+print(cyclesort([5, 2, 8, 1, 9, 3]))
