@@ -1,34 +1,6 @@
-include std/sequence.e
-include std/rand.e
-
-function is_sorted(sequence arr)
-    integer n = length(arr)
-    for i = 1 to n - 1 do
-        if arr[i] > arr[i + 1] then
-            return 0
-        end if
-    end for
-    return 1
-end function
-
-function do_shuffle(sequence arr)
-    integer n = length(arr)
-    integer j, tmp
-    for i = n to 2 by -1 do
-        j = rand(i)
-        tmp = arr[i]
-        arr[i] = arr[j]
-        arr[j] = tmp
-    end for
-    return arr
-end function
-
-function bogosort(sequence arr)
-    while not is_sorted(arr) do
-        arr = do_shuffle(arr)
-    end while
-    return arr
-end function
-
-sequence arr = {3, 1, 4, 1, 5, 9, 2, 6}
-? bogosort(arr)
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
