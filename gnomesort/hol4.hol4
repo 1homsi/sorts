@@ -1,0 +1,14 @@
+val gnomesort_def = Define `
+  gnomesort [] = [] ∧
+  gnomesort [x] = [x] ∧
+  gnomesort (x::y::xs) =
+    if x <= y then
+      x :: gnomesort(y::xs)
+    else
+      y :: gnomesort(x::xs)`;
+
+val test = [5, 2, 8, 1, 9, 3];
+
+val result = EVAL (Term `gnomesort ^(listSyntax.mk_list(test, intSyntax.int_ty))`);
+
+val _ = print(result);
