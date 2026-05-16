@@ -1,24 +1,6 @@
-         DIMENSION ARR(8)
-         DATA ARR/3,1,4,1,5,9,2,6/
-         INTEGER N,I,J,TMP,SORTED
-         N=8
-
-LOOP     SORTED=1
-         FOR I=1,1,I.GE.N
-           IF(ARR(I).GT.ARR(I+1)) SORTED=0
-         CONTINUE
-         IF(SORTED.EQ.1) GOTO PRINT
-         FOR I=N,-1,I.LE.1
-           J=MOD(IABS(NRAND(1)),I)+1
-           TMP=ARR(I)
-           ARR(I)=ARR(J)
-           ARR(J)=TMP
-         CONTINUE
-         GOTO LOOP
-
-PRINT    FOR I=1,1,I.GT.N
-           PRINT FORMAT F,ARR(I)
-         CONTINUE
-         STOP
-F        FORMAT(I5)
-         END
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
