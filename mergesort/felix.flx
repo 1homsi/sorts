@@ -1,0 +1,46 @@
+fun merge(arr: array[int], left: int, mid: int, right: int) {
+  var i = left;
+  var j = mid + 1;
+  var result = array[int](right - left + 1);
+  var k = 0;
+  
+  while (i <= mid && j <= right) {
+    if (arr.i <= arr.j) {
+      result.k = arr.i;
+      i = i + 1;
+    } else {
+      result.k = arr.j;
+      j = j + 1;
+    }
+    k = k + 1;
+  }
+  
+  while (i <= mid) {
+    result.k = arr.i;
+    i = i + 1;
+    k = k + 1;
+  }
+  
+  while (j <= right) {
+    result.k = arr.j;
+    j = j + 1;
+    k = k + 1;
+  }
+  
+  for (k = 0; k < right - left + 1; k++) {
+    arr.(left + k) = result.k;
+  }
+}
+
+fun mergesort(arr: array[int], left: int, right: int) {
+  if (left < right) {
+    var mid = (left + right) / 2;
+    mergesort(arr, left, mid);
+    mergesort(arr, mid + 1, right);
+    merge(arr, left, mid, right);
+  }
+}
+
+var arr = array(5, 2, 8, 1, 9, 3);
+mergesort(arr, 0, 5);
+println(arr);
