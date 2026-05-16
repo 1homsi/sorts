@@ -1,0 +1,36 @@
+section PUBLIC
+
+import Standard
+
+Object : {
+  COCKTAILSORT(arr:ARRAY[INTEGER]) : ARRAY[INTEGER] <-
+  {
+    var n:INTEGER;
+    var i:INTEGER;
+    var k:INTEGER;
+    var temp:INTEGER;
+    var swapped:BOOLEAN;
+    
+    n := arr.count;
+    i := 0;
+    
+    {i < n}.while_do {
+      swapped := FALSE;
+      k := 0;
+      {k < n - i - 1}.while_do {
+        (arr.item(k) > arr.item(k + 1)).if {
+          temp := arr.item(k);
+          arr.put(arr.item(k + 1), k);
+          arr.put(temp, k + 1);
+          swapped := TRUE;
+        };
+        k := k + 1;
+      };
+      (swapped.not).if {
+        ^arr;
+      };
+      i := i + 1;
+    };
+    arr
+  }
+}
