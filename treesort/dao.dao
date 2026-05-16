@@ -1,0 +1,30 @@
+class Node
+  var value: int
+  var left: Node
+  var right: Node
+
+  routine init(v: int)
+    value = v
+  end
+end
+
+routine insert(node: Node, val: int) => Node
+  if (node == none) then return Node(val)
+  if (val < node.value) then node.left = insert(node.left, val)
+  if (val > node.value) then node.right = insert(node.right, val)
+  return node
+end
+
+routine inorder(node: Node)
+  if (node != none) then
+    inorder(node.left)
+    io.write(node.value, ' ')
+    inorder(node.right)
+  end
+end
+
+var root: Node = none
+for val in [5, 2, 8, 1, 9, 3]
+  root = insert(root, val)
+end
+inorder(root)
