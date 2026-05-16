@@ -1,0 +1,40 @@
+define cocktailsort(arr):
+    var n = len(arr)
+    var i = 0
+    while i < n:
+        var swapped = 0
+        var k = 0
+        while k < n - i - 1:
+            if arr[k] > arr[k + 1]:
+                var temp = arr[k]
+                arr[k] = arr[k + 1]
+                arr[k + 1] = temp
+                swapped = 1
+            endif
+            k += 1
+        endwhile
+        if !swapped:
+            return arr
+        endif
+        i += 1
+        swapped = 0
+        k = n - i - 2
+        while k >= 0:
+            if arr[k] > arr[k + 1]:
+                var temp = arr[k]
+                arr[k] = arr[k + 1]
+                arr[k + 1] = temp
+                swapped = 1
+            endif
+            k -= 1
+        endwhile
+        if !swapped:
+            return arr
+        endif
+        i += 1
+    endwhile
+    return arr
+enddefine
+
+var arr = [5, 2, 8, 1, 9, 3]
+print cocktailsort(arr)
