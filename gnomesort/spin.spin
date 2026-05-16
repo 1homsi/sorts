@@ -1,0 +1,23 @@
+int arr[10];
+int n = 10;
+
+proctype GnomeSorter() {
+    int i = 0;
+    int tmp;
+    do
+    :: (i >= n) -> break
+    :: (i == 0) -> i++
+    :: (i > 0 && arr[i] >= arr[i-1]) -> i++
+    :: (i > 0 && arr[i] < arr[i-1]) ->
+        tmp = arr[i];
+        arr[i] = arr[i-1];
+        arr[i-1] = tmp;
+        i--
+    od
+}
+
+init {
+    arr[0] = 5; arr[1] = 3; arr[2] = 8; arr[3] = 1; arr[4] = 9;
+    arr[5] = 2; arr[6] = 7; arr[7] = 4; arr[8] = 6; arr[9] = 0;
+    run GnomeSorter()
+}
