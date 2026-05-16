@@ -1,0 +1,30 @@
+countingsort := func(arr) {
+  local(max = 0, count, output, i, j);
+
+  SetLength(arr, length(arr));
+  for (i = 0; i < length(arr); i++) {
+    if (arr[i] > max) {
+      max := arr[i];
+    }
+  }
+
+  SetLength(count, max + 1);
+  for (i = 0; i <= max; i++) {
+    count[i] := 0;
+  }
+
+  for (i = 0; i < length(arr); i++) {
+    count[arr[i]]++;
+  }
+
+  SetLength(output, 0);
+  for (i = 0; i <= max; i++) {
+    for (j = 0; j < count[i]; j++) {
+      output[length(output)] := i;
+    }
+  }
+
+  return output;
+};
+
+print(countingsort([5, 2, 8, 1, 9, 3]));
