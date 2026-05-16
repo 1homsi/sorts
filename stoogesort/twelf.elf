@@ -1,0 +1,8 @@
+stoogesort : list -> list -> type.
+
+ss-base : stoogesort nil nil.
+ss-sing : stoogesort (X :: nil) (X :: nil).
+
+ss-step : stoogesort L2 L3 -> stoogesort L1 L2 -> stoogesort L L3.
+
+test : stoogesort (5 :: 2 :: 8 :: 1 :: 9 :: 3 :: nil) L = ...
