@@ -1,0 +1,30 @@
+parameter (list int);
+storage (list int);
+code {
+  CAR;
+  NIL int;
+  SWAP;
+  ITER {
+    CONS;
+  };
+  NIL int;
+  SWAP;
+  ITER {
+    DUP;
+    DIP {
+      DUP;
+      NIL int;
+      SWAP;
+      ITER {
+        DUP 3;
+        COMPARE;
+        GE;
+        IF { CONS } { SWAP; DIP { CONS } };
+      };
+      DROP;
+    };
+    CONS;
+  };
+  NIL OPERATION;
+  PAIR;
+};
