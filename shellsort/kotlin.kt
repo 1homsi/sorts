@@ -1,4 +1,4 @@
-fun shellSort(arr: IntArray) {
+fun shellsort(arr: IntArray) {
     val n = arr.size
     var gap = n / 2
     while (gap > 0) {
@@ -13,10 +13,4 @@ fun shellSort(arr: IntArray) {
         }
         gap /= 2
     }
-}
-
-fun main() {
-    val arr = intArrayOf(64, 34, 25, 12, 22, 11, 90)
-    shellSort(arr)
-    println(arr.toList())
 }
