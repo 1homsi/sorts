@@ -1,0 +1,39 @@
+FUNCTION Heapify(aArr, nN, nI)
+  LOCAL nLargest, nLeft, nRight, nTmp
+  nLargest = nI
+  nLeft = 2*nI+1
+  nRight = 2*nI+2
+  IF nLeft < nN AND aArr[nLeft+1] > aArr[nLargest+1]
+    nLargest = nLeft
+  ENDIF
+  IF nRight < nN AND aArr[nRight+1] > aArr[nLargest+1]
+    nLargest = nRight
+  ENDIF
+  IF nLargest != nI
+    nTmp = aArr[nI+1]
+    aArr[nI+1] = aArr[nLargest+1]
+    aArr[nLargest+1] = nTmp
+    Heapify(aArr, nN, nLargest)
+  ENDIF
+ENDFUNC
+
+FUNCTION Heapsort(aArr)
+  LOCAL nN, nI, nTmp
+  nN = ALEN(aArr)
+  FOR nI = INT(nN/2)-1 TO 0 STEP -1
+    Heapify(aArr, nN, nI)
+  ENDFOR
+  FOR nI = nN-1 TO 1 STEP -1
+    nTmp = aArr[1]
+    aArr[1] = aArr[nI+1]
+    aArr[nI+1] = nTmp
+    Heapify(aArr, nI, 0)
+  ENDFOR
+  RETURN aArr
+ENDFUNC
+
+LOCAL aData(6)
+aData[1]=12; aData[2]=11; aData[3]=13; aData[4]=5; aData[5]=6; aData[6]=7
+Heapsort(aData)
+LOCAL i
+FOR i=1 TO 6: ? aData[i]: ENDFOR
