@@ -1,0 +1,30 @@
+rec cyclesort : int list -> int list =
+  fun arr =>
+    let n = List.length arr
+        rec loop : int -> int list -> int list =
+          fun pos arr' =>
+            if pos >= n then arr'
+            else
+              let item = List.nth arr' pos
+                  cycles = List.length (List.filter (fun i -> i != pos && List.nth arr' i < item) (List.range 0 n))
+              in
+              if cycles = 0 then loop (pos + 1) arr'
+              else loop (pos + 1) (update_cycle arr' pos item cycles)
+            end
+        and update_cycle : int list -> int -> int -> int -> int list =
+          fun arr' pos item cycles =>
+            if cycles = 0 then arr'
+            else
+              let pos' = skip_dup arr' pos item
+                  temp = List.nth arr' pos'
+                  arr'' = List.update arr' pos' item
+              in
+              update_cycle arr'' pos' temp (cycles - 1)
+            end
+        and skip_dup : int list -> int -> int -> int =
+          fun arr' pos item =>
+            if List.nth arr' pos != item then pos
+            else skip_dup arr' (pos + 1) item
+            end
+    in
+    loop 0 arr
