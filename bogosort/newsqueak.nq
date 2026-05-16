@@ -1,0 +1,29 @@
+BogSort := func() {
+  arr := [3, 1, 2];
+
+  while (!issorted(arr)) {
+    shuffle(arr);
+  }
+
+  print(arr);
+};
+
+issorted := func(arr) {
+  for (i := 0; i < len(arr) - 1; i++) {
+    if (arr[i] > arr[i+1]) {
+      return false;
+    }
+  }
+  return true;
+};
+
+shuffle := func(arr) {
+  for (i := 0; i < len(arr); i++) {
+    j := rand() % len(arr);
+    tmp := arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
+};
+
+BogSort();
