@@ -1,0 +1,10 @@
+:Lbl SORT
+:5→L₁(1)
+:2→L₁(2)
+:8→L₁(3)
+:1→L₁(4)
+:9→L₁(5)
+:3→L₁(6)
+:Disp "Pancake Sort:"
+:Disp L₁
+:End
