@@ -1,0 +1,3 @@
+sort : list int -> list int -> type.
+nil : sort [] [].
+cons : sort L1 L2 -> sort (X :: L1) (X :: L2) -> type.
