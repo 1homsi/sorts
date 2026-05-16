@@ -1,0 +1,47 @@
+$ENTRY TimSort {
+  e.Arr e.MinSize = <MergeSort e.Arr e.MinSize>;
+}
+
+MergeSort {
+  e.Arr e.MinSize, <Length e.Arr> : s.Len, 
+  <Compare s.Len 1> : '-'  = e.Arr;
+  
+  e.Arr e.MinSize, <Length e.Arr> : s.Len,
+  <Compare s.Len e.MinSize> : '+' = <InsertionSort e.Arr>;
+  
+  e.Arr e.MinSize, <Length e.Arr> : s.Len,
+  <Div s.Len 2> : s.Mid,
+  <Left e.Arr 1 s.Mid> : e.Left,
+  <Right e.Arr s.Mid> : e.Right =
+    <Merge 
+      <MergeSort e.Left e.MinSize>
+      <MergeSort e.Right e.MinSize>
+    >;
+}
+
+InsertionSort {
+  e.Arr = <DoInsertionSort e.Arr 1>;
+}
+
+DoInsertionSort {
+  e.Arr e.I, <Length e.Arr> : s.Len,
+  <Compare e.I s.Len> : '+' = e.Arr;
+  
+  e.Arr e.I = <InsertElement e.Arr e.I>;
+}
+
+Merge {
+  e.Left e.Right = <DoMerge () e.Left e.Right>;
+}
+
+DoMerge {
+  e.Result = e.Result;
+}
+
+Length {
+  = 0;
+  e.X e.Rest = <+ 1 <Length e.Rest>>;
+}
+
+Left { } { } = ();
+Right { } { } = ();
