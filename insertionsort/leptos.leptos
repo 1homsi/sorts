@@ -1,0 +1,27 @@
+use leptos::*;
+
+fn insertion_sort(arr: Vec<i32>) -> Vec<i32> {
+    let mut a = arr;
+    let n = a.len();
+    for i in 1..n {
+        let key = a[i];
+        let mut j = i as isize - 1;
+        while j >= 0 && a[j as usize] > key {
+            a[(j + 1) as usize] = a[j as usize];
+            j -= 1;
+        }
+        a[(j + 1) as usize] = key;
+    }
+    a
+}
+
+#[component]
+pub fn App() -> impl IntoView {
+    let (sorted, set_sorted) = create_signal(vec![]);
+    view! {
+        <div>
+            <button on:click=move |_| set_sorted(insertion_sort(vec![5, 3, 1, 4, 2]))>"Sort"</button>
+            <p>{move || sorted().iter().map(|x: &i32| x.to_string()).collect::<Vec<_>>().join(", ")}</p>
+        </div>
+    }
+}
