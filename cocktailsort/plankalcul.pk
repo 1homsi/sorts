@@ -1,0 +1,22 @@
+DEFINITION COCKTAIL_SORT START:
+P0 = (arr: array, n: int) -> array
+
+BEGIN
+  A0 (n) i = 0
+  REPEAT WHILE (i < n)
+    A0 (swapped) = false
+    A0 (k) = 0
+    REPEAT WHILE (k < n - i - 1)
+      IF arr[k] > arr[k + 1]
+        THEN
+          A0 (temp) = arr[k]
+          A0 arr[k] = arr[k + 1]
+          A0 arr[k + 1] = A0 (temp)
+          A0 (swapped) = true
+      END
+      A0 (k) = A0 (k) + 1
+    END REPEAT
+    IF NOT A0 (swapped) THEN STOP END
+    A0 (i) = A0 (i) + 1
+  END REPEAT
+END
