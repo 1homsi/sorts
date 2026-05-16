@@ -1,0 +1,26 @@
+data Nat = Zero | Suc Nat
+data Vec (A : Set) : Nat -> Set where
+  Nil : Vec A Zero
+  Cons : A -> {n : Nat} -> Vec A n -> Vec A (Suc n)
+
+maximum : {n : Nat} -> Vec Nat n -> Nat
+maximum Nil = Zero
+maximum (Cons x xs) = max x (maximum xs)
+  where
+    max : Nat -> Nat -> Nat
+    max Zero n = n
+    max (Suc m) Zero = Suc m
+    max (Suc m) (Suc n) = Suc (max m n)
+
+countingsort : {n : Nat} -> Vec Nat n -> Vec Nat n
+countingsort xs = rebuild Zero (maximum xs) (count xs)
+  where
+    count : {n : Nat} -> Vec Nat n -> Vec Nat (Suc (maximum xs))
+    count Nil = ?
+    count (Cons x xs) = ?
+
+    rebuild : Nat -> Nat -> Vec Nat (Suc (maximum xs)) -> Vec Nat n
+    rebuild _ Zero counts = Nil
+    rebuild i (Suc n) counts = ?
+
+?Main : countingsort (Cons 5 (Cons 2 (Cons 8 (Cons 1 (Cons 9 (Cons 3 Nil))))))
