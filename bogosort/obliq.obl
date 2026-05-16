@@ -1,0 +1,27 @@
+let bogosort = proc(arr)
+  var sorted := false
+  do
+    sorted := true
+    for i := 1 to number.minus(arr.size(), 1) do
+      if number.gt(arr.elt(i), arr.elt(number.plus(i, 1))) then
+        sorted := false
+      end
+    end
+    if not(sorted) then
+      bogosort_shuffle(arr)
+    end
+  until sorted
+  arr
+end
+
+let bogosort_shuffle = proc(arr)
+  var i, j, tmp
+  for i := 1 to arr.size() do
+    j := number.random(arr.size())
+    tmp := arr.elt(i)
+    arr.set(i, arr.elt(j))
+    arr.set(j, tmp)
+  end
+end
+
+bogosort(array(3, 1, 2))
