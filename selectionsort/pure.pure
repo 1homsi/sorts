@@ -1,0 +1,11 @@
+selection_sort [] = [];
+selection_sort xs = ys where
+  min_val = foldl1 min xs;
+  ys = [min_val] + selection_sort (delete_first min_val xs)
+  with
+    delete_first _ [] = [];
+    delete_first x (y:ys) = if x == y then ys else y : delete_first x ys;
+  end;
+end;
+
+println (selection_sort [5, 2, 8, 1, 9, 3]);
