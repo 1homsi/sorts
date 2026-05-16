@@ -1,0 +1,8 @@
+import math
+
+schema InsertionSort:
+    input: [int]
+    sorted: [int] = []
+
+rule InsertionSortRule for s: InsertionSort:
+    s.sorted == sorted(s.input)
