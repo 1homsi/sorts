@@ -1,0 +1,13 @@
+(define (gnome-sort lst)
+  (let ((arr (list->vector lst)))
+    (let loop ((i 0))
+      (let ((n (vector-length arr)))
+        (when (< i n)
+          (if (or (= i 0) (>= (vector-ref arr i) (vector-ref arr (- i 1))))
+              (loop (+ i 1))
+              (begin
+                (let ((tmp (vector-ref arr i)))
+                  (vector-set! arr i (vector-ref arr (- i 1)))
+                  (vector-set! arr (- i 1) tmp))
+                (loop (- i 1)))))))
+    (vector->list arr)))
