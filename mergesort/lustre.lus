@@ -1,0 +1,20 @@
+node merge(l1: int^n; l2: int^m) returns (o: int^(n+m))
+var result: int^(n+m);
+let
+  result = l1 fby l2;
+tel;
+
+node mergesort(arr: int^n) returns (o: int^n)
+var left, right: int^(n/2); merged: int^n;
+let
+  left = arr^(0..n/2-1);
+  right = arr^(n/2..n-1);
+  o = merge(mergesort(left), mergesort(right));
+tel;
+
+node main() returns ()
+var arr: int^6; sorted: int^6;
+let
+  arr = (5, 2, 8, 1, 9, 3);
+  sorted = mergesort(arr);
+tel;
