@@ -1,0 +1,45 @@
+section TREE_SORT;
+
+class NODE is
+  value : INTEGER
+  left : NODE
+  right : NODE
+
+  create(v : INTEGER) is
+    value := v
+    left := null
+    right := null
+  end
+end
+
+section PUBLIC;
+
+insert(node : NODE, val : INTEGER) : NODE is
+  if node = null then
+    return NODE.create(val)
+  else
+    if val < node.value then
+      node.left := insert(node.left, val)
+    else if val > node.value then
+      node.right := insert(node.right, val)
+    end
+    return node
+  end
+end
+
+inorder(node : NODE) is
+  if node /= null then
+    inorder(node.left)
+    node.value.print
+    inorder(node.right)
+  end
+end
+
+main is
+  local root : NODE
+  root := null
+  [5, 2, 8, 1, 9, 3].do { |v|
+    root := insert(root, v)
+  }
+  inorder(root)
+end
