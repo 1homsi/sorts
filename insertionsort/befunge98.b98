@@ -1,0 +1,3 @@
+v insertion sort befunge-98 approximation
+>5 3 1 4 2 ' ' k@
+ ;insertion sort using funge-98 stack;
