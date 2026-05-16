@@ -1,0 +1,21 @@
+pancake_sort = proc(arr: sequence[int]) returns sequence[int]
+    var n: int := arr.size()
+    var i, j, temp: int
+    
+    for i := 0 to n-2 do
+        for j := 0 to n-i-2 do
+            if arr[j] > arr[j+1] then
+                temp := arr[j]
+                arr[j] := arr[j+1]
+                arr[j+1] := temp
+            end
+        end
+    end
+    
+    return arr
+end
+
+Start()
+    var result := pancake_sort([5, 2, 8, 1, 9, 3])
+    write("Pancake Sort: ", result)
+end
