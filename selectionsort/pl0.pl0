@@ -1,0 +1,26 @@
+VAR N, I, J, MIN_IDX, TMP;
+VAR ARR;
+
+BEGIN
+  ARR := [5, 2, 8, 1, 9, 3];
+  N := 6;
+  
+  I := 0;
+  WHILE I < N - 1 DO
+  BEGIN
+    MIN_IDX := I;
+    J := I + 1;
+    WHILE J < N DO
+    BEGIN
+      IF ARR[J] < ARR[MIN_IDX] THEN
+        MIN_IDX := J;
+      J := J + 1;
+    END;
+    TMP := ARR[I];
+    ARR[I] := ARR[MIN_IDX];
+    ARR[MIN_IDX] := TMP;
+    I := I + 1;
+  END;
+  
+  CALL WRITE(ARR);
+END.
