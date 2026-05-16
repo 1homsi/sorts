@@ -1,0 +1,24 @@
+CREATE PROCEDURE GnomeSort AS
+BEGIN
+    DECLARE @arr TABLE (pos INT, val INT)
+    INSERT INTO @arr VALUES (1,5),(2,3),(3,8),(4,1),(5,9),(6,2),(7,7),(8,4),(9,6),(10,0)
+
+    DECLARE @i INT = 1
+    DECLARE @n INT = 10
+    DECLARE @tmp INT
+
+    WHILE @i <= @n
+    BEGIN
+        IF @i = 1 OR (SELECT val FROM @arr WHERE pos = @i) >= (SELECT val FROM @arr WHERE pos = @i - 1)
+            SET @i = @i + 1
+        ELSE
+        BEGIN
+            SET @tmp = (SELECT val FROM @arr WHERE pos = @i)
+            UPDATE @arr SET val = (SELECT val FROM @arr WHERE pos = @i - 1) WHERE pos = @i
+            UPDATE @arr SET val = @tmp WHERE pos = @i - 1
+            SET @i = @i - 1
+        END
+    END
+
+    SELECT * FROM @arr ORDER BY pos
+END
