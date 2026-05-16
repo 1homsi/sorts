@@ -1,0 +1,40 @@
+let merge arr left mid right =
+  let i = ref left in
+  let j = ref (mid + 1) in
+  let result = Array.make (right - left + 1) 0 in
+  let k = ref 0 in
+  while !i <= mid && !j <= right do
+    if arr.(!i) <= arr.(!j) then (
+      result.(!k) <- arr.(!i);
+      incr i
+    ) else (
+      result.(!k) <- arr.(!j);
+      incr j
+    );
+    incr k
+  done;
+  while !i <= mid do
+    result.(!k) <- arr.(!i);
+    incr i;
+    incr k
+  done;
+  while !j <= right do
+    result.(!k) <- arr.(!j);
+    incr j;
+    incr k
+  done;
+  Array.iteri (fun k v -> arr.(left + k) <- v) result
+
+let rec mergesort arr left right =
+  if left < right then begin
+    let mid = (left + right) / 2 in
+    mergesort arr left mid;
+    mergesort arr (mid + 1) right;
+    merge arr left mid right
+  end
+
+let () =
+  let arr = [|5; 2; 8; 1; 9; 3|] in
+  mergesort arr 0 5;
+  Array.iter (Printf.printf "%d ") arr;
+  print_newline ()
