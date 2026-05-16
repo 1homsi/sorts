@@ -1,0 +1,11 @@
+procedure stoogesort(a)
+  i := 0; j := 5;
+  if a[j] < a[i] then
+    swap(a, i, j)
+  end
+  from i := 0 until i >= 2
+  do
+    stoogesort(a)
+    i := i + 1
+  end
+end
