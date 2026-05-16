@@ -1,0 +1,26 @@
+PROCEDURE SHELLSORT
+  DEFINE A[6]
+  A[1] = 5, A[2] = 2, A[3] = 8
+  A[4] = 1, A[5] = 9, A[6] = 3
+  DEFINE N, GAP, I, J, TEMP
+  N = 6
+  GAP = 1
+  WHILE GAP <= N
+    GAP = GAP * 3 + 1
+  END WHILE
+  WHILE GAP > 0
+    GAP = GAP / 3
+    I = GAP
+    WHILE I < N
+      TEMP = A[I]
+      J = I
+      WHILE J >= GAP AND A[J - GAP] > TEMP
+        A[J] = A[J - GAP]
+        J = J - GAP
+      END WHILE
+      A[J] = TEMP
+      I = I + 1
+    END WHILE
+  END WHILE
+  PRINT A
+END PROCEDURE
