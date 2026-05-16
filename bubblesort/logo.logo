@@ -1,0 +1,17 @@
+to bubblesort :arr
+  local "n localmake "n count :arr
+  local "i local "j
+  localmake "i 0
+  repeat :n
+  [ localmake "j 0
+    repeat ((:n - 1) - :i)
+    [ if (item (:j + 1) :arr) > (item (:j + 2) :arr)
+      [ local "temp localmake "temp item (:j + 1) :arr
+        setitem (:j + 1) :arr item (:j + 2) :arr
+        setitem (:j + 2) :arr :temp ]
+      localmake "j :j + 1 ]
+    localmake "i :i + 1 ]
+  output :arr
+
+make "result bubblesort [5 2 8 1 9 3]
+print :result
