@@ -1,0 +1,42 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+struct Node {
+  int value;
+  struct Node *left;
+  struct Node *right;
+};
+
+struct Node* insert(struct Node *node, int val) {
+  if (node == NULL) {
+    struct Node *n = malloc(sizeof(struct Node));
+    n->value = val;
+    n->left = NULL;
+    n->right = NULL;
+    return n;
+  }
+  if (val < node->value) {
+    node->left = insert(node->left, val);
+  } else if (val > node->value) {
+    node->right = insert(node->right, val);
+  }
+  return node;
+}
+
+void inorder(struct Node *node) {
+  if (node != NULL) {
+    inorder(node->left);
+    printf("%d\n", node->value);
+    inorder(node->right);
+  }
+}
+
+int main() {
+  int arr[] = {5, 2, 8, 1, 9, 3};
+  struct Node *root = NULL;
+  for (int i = 0; i < 6; i++) {
+    root = insert(root, arr[i]);
+  }
+  inorder(root);
+  return 0;
+}
