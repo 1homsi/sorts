@@ -1,0 +1,27 @@
+function tree_sort(a) =
+  let
+    function insert(t, x) =
+      if (t == [])
+        then [x, [], []]
+        else let v = t[0];
+             l = t[1];
+             r = t[2]
+          in if (x < v)
+             then [v, insert(l, x), r]
+             else if (x > v)
+                  then [v, l, insert(r, x)]
+                  else t
+          endif
+        endif;
+
+    function inorder(t) =
+      if (t == [])
+      then []
+      else inorder(t[1]) ++ [t[0]] ++ inorder(t[2])
+      endif;
+
+    root = reduce(insert, [], a)
+  in inorder(root)
+  endlet;
+
+print(tree_sort([5, 2, 8, 1, 9, 3]));
