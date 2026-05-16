@@ -1,0 +1,33 @@
+heapsort: method [arr] {
+    n := arr size
+    (n / 2 - 1) downTo: 0 do: [|i| siftdown arr i n]
+    (n - 1) downTo: 1 do: [|i|
+        temp := arr at: 0
+        arr at: 0 put: (arr at: i)
+        arr at: i put: temp
+        siftdown arr 0 i
+    ]
+    arr
+}
+
+siftdown: method [arr idx n] {
+    largest := idx
+    left := 2 * idx + 1
+    right := 2 * idx + 2
+    
+    (left < n and: [(arr at: left) > (arr at: largest)]) ifTrue: [
+        largest := left
+    ]
+    (right < n and: [(arr at: right) > (arr at: largest)]) ifTrue: [
+        largest := right
+    ]
+    largest != idx ifTrue: [
+        temp := arr at: idx
+        arr at: idx put: (arr at: largest)
+        arr at: largest put: temp
+        siftdown arr largest n
+    ]
+    arr
+}
+
+(heapsort [5 2 8 1 9 3]) print
