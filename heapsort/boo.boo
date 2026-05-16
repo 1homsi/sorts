@@ -1,0 +1,25 @@
+import System
+
+def heapify(arr as (int), n as int, i as int):
+    largest = i
+    left = 2 * i + 1
+    right = 2 * i + 2
+    if left < n and arr[left] > arr[largest]:
+        largest = left
+    if right < n and arr[right] > arr[largest]:
+        largest = right
+    if largest != i:
+        tmp = arr[i]; arr[i] = arr[largest]; arr[largest] = tmp
+        heapify(arr, n, largest)
+
+def heapsort(arr as (int)):
+    n = len(arr)
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(arr, n, i)
+    for i in range(n - 1, 0, -1):
+        tmp = arr[0]; arr[0] = arr[i]; arr[i] = tmp
+        heapify(arr, i, 0)
+
+arr = array(int, (12, 11, 13, 5, 6, 7))
+heapsort(arr)
+print(join(arr, " "))
