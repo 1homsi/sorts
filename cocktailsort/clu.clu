@@ -1,0 +1,31 @@
+cocktail_sort = proc(arr: array[int])
+    swapped: bool := true
+    start: int := array[int]$low(arr)
+    ending: int := array[int]$high(arr)
+    tmp: int
+    while swapped do
+        swapped := false
+        for i: int in int$from_to(start, ending - 1) do
+            if arr[i] > arr[i + 1] then
+                tmp := arr[i]
+                arr[i] := arr[i + 1]
+                arr[i + 1] := tmp
+                swapped := true
+            end
+        end
+        if ~swapped then return end
+        swapped := false
+        ending := ending - 1
+        i: int := ending - 1
+        while i >= start do
+            if arr[i] > arr[i + 1] then
+                tmp := arr[i]
+                arr[i] := arr[i + 1]
+                arr[i + 1] := tmp
+                swapped := true
+            end
+            i := i - 1
+        end
+        start := start + 1
+    end
+end cocktail_sort
