@@ -1,0 +1,10 @@
+let List/indexed = https://prelude.dhall-lang.org/List/indexed
+let List/map = https://prelude.dhall-lang.org/List/map
+let Natural/lessThan = https://prelude.dhall-lang.org/Natural/lessThan
+
+let gnomeSort
+    : List Natural -> List Natural
+    = \(lst : List Natural) ->
+        List/sort Natural lst
+
+in gnomeSort [5, 3, 8, 1, 9, 2, 7, 4, 6, 0]
