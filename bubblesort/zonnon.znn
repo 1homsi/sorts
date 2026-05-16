@@ -1,0 +1,28 @@
+module BubbleSort;
+
+var
+    arr: array 8 of integer;
+    n, i, tmp: integer;
+    swapped: boolean;
+
+begin
+    arr[1] := 64; arr[2] := 34; arr[3] := 25; arr[4] := 12;
+    arr[5] := 22; arr[6] := 11; arr[7] := 90;
+    n := 7;
+    repeat
+        swapped := false;
+        for i := 1 to n-1 do
+            if arr[i] > arr[i+1] then
+                tmp := arr[i];
+                arr[i] := arr[i+1];
+                arr[i+1] := tmp;
+                swapped := true
+            end
+        end;
+        dec(n)
+    until ~swapped;
+    for i := 1 to 7 do
+        write(arr[i])
+    end;
+    writeln
+end BubbleSort.
