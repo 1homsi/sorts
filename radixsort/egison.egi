@@ -1,0 +1,12 @@
+(define $radixsort
+  (lambda [$arr]
+    (let {[$max (maximum arr)] [$exp 1]}
+      (if (> (/ max exp) 0)
+        (radixsort (counting-sort-by-exp arr exp))
+        arr))))
+
+(define $counting-sort-by-exp
+  (lambda [$arr $exp]
+    arr))
+
+(print (radixsort [5 2 8 1 9 3]))
