@@ -1,0 +1,8 @@
+node cocktail_sort(arr : int^6) returns (result : int^6)
+var swapped : bool;
+    i : int;
+    k : int;
+    temp : int;
+let
+  result = arr;
+tel
