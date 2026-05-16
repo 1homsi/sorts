@@ -1,1 +1,4 @@
-print("Bogosort implementation for move.move")
+function bogosort(arr) public pure returns (uint[] memory) {
+  while (!isSorted(arr)) { shuffle(arr); }
+  return arr;
+}
