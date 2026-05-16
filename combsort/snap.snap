@@ -1,0 +1,21 @@
+when I receive [sort v]
+set [n v] to (length of [arr v])
+set [gap v] to (n)
+set [sorted v] to (false)
+repeat until <(sorted) = (true)>
+    set [gap v] to (floor ((gap) / (1.3)))
+    if <(gap) ≤ (1)>
+        set [gap v] to (1)
+        set [sorted v] to (true)
+    end
+    set [i v] to (0)
+    repeat until <((i) + (gap)) ≥ (n)>
+        if <(item (i) of (arr)) > (item ((i) + (gap)) of (arr))>
+            set [tmp v] to (item (i) of (arr))
+            replace item (i) of (arr) with (item ((i) + (gap)) of (arr))
+            replace item ((i) + (gap)) of (arr) with (tmp)
+            set [sorted v] to (false)
+        end
+        change [i v] by (1)
+    end
+end
