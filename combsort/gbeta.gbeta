@@ -1,0 +1,27 @@
+-- CombSort in gbeta
+origin 'betaenv';
+body combsort
+(# combSort:
+   (# arr: ^list; n: @integer; gap, i, tmp: @integer; sorted: @boolean
+   enter (arr[], n)
+   do
+      n -> gap;
+      false -> sorted;
+      loop: (sorted not) ->
+          (gap * 10 / 13 -> gap);
+          (gap <= 1) -> (if true // 1 -> gap; true -> sorted if);
+          1 -> i;
+          inner: (i + gap <= n) ->
+              arr.get(i) -> @tmp;
+              arr.get(i + gap) -> @tmp2;
+              (tmp > tmp2) -> (if true //
+                  tmp2 -> arr.put(i);
+                  tmp -> arr.put(i + gap);
+                  false -> sorted
+              if);
+              i + 1 -> i;
+          restart inner
+      restart loop
+   exit arr[]
+   #);
+#)
