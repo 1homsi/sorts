@@ -1,0 +1,44 @@
+Begin
+    Integer Array arr(1:10);
+    Integer n, i, tmp, start, ending;
+    Boolean swapped;
+
+    Procedure CocktailSort;
+    Begin
+        swapped := True;
+        start := 1;
+        ending := n;
+        While swapped Do
+        Begin
+            swapped := False;
+            For i := start Step 1 Until ending - 1 Do
+            Begin
+                If arr(i) > arr(i+1) Then
+                Begin
+                    tmp := arr(i);
+                    arr(i) := arr(i+1);
+                    arr(i+1) := tmp;
+                    swapped := True
+                End
+            End;
+            If Not swapped Then GoTo Done;
+            swapped := False;
+            ending := ending - 1;
+            For i := ending - 1 Step -1 Until start Do
+            Begin
+                If arr(i) > arr(i+1) Then
+                Begin
+                    tmp := arr(i);
+                    arr(i) := arr(i+1);
+                    arr(i+1) := tmp;
+                    swapped := True
+                End
+            End;
+            start := start + 1
+        End;
+        Done:
+    End;
+
+    n := 10;
+    CocktailSort;
+End
