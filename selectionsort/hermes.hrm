@@ -1,0 +1,24 @@
+BEGIN
+  PROCEDURE SelectionSort(VAR arr: ARRAY OF INTEGER);
+  VAR
+    n, i, j, minIdx, tmp: INTEGER;
+  BEGIN
+    n := HIGH(arr) + 1;
+    FOR i := 0 TO n - 2 DO
+      minIdx := i;
+      FOR j := i + 1 TO n - 1 DO
+        IF arr[j] < arr[minIdx] THEN
+          minIdx := j;
+        END;
+      END;
+      tmp := arr[i];
+      arr[i] := arr[minIdx];
+      arr[minIdx] := tmp;
+    END;
+  END SelectionSort;
+  
+  VAR arr: ARRAY [0..5] OF INTEGER;
+  arr := [5, 2, 8, 1, 9, 3];
+  SelectionSort(arr);
+  WriteArray(arr);
+END.
