@@ -1,0 +1,25 @@
+function BOGOSORT = (ARR)
+  {
+    WHILE (.NOT. ISSORTED(ARR))
+      SHUFFLE(ARR)
+    LOOP
+    RETURN ARR
+  }
+
+function ISSORTED = (ARR)
+  {
+    DO I = 1, DIM(ARR) - 1
+      IF (ARR(I) .GT. ARR(I+1)) RETURN 0
+    ENDDO
+    RETURN 1
+  }
+
+subroutine SHUFFLE(ARR)
+  {
+    DO I = 1, DIM(ARR)
+      J = INT(RANDOM() * DIM(ARR)) + 1
+      TEMP = ARR(I)
+      ARR(I) = ARR(J)
+      ARR(J) = TEMP
+    ENDDO
+  }
