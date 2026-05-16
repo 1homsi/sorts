@@ -1,0 +1,32 @@
+counting_sort = proc (arr: array[int]) returns (array[int])
+    n: int := array[int]$size(arr)
+    if n = 0 then return arr end
+    mn: int := arr[array[int]$low(arr)]
+    mx: int := arr[array[int]$low(arr)]
+    for v: int in array[int]$elements(arr) do
+        if v < mn then mn := v end
+        if v > mx then mx := v end
+    end
+    range: int := mx - mn + 1
+    count: array[int] := array[int]$fill(0, range, 0)
+    for v: int in array[int]$elements(arr) do
+        count[v - mn] := count[v - mn] + 1
+    end
+    for i: int in int$from_to(1, range - 1) do
+        count[i] := count[i] + count[i - 1]
+    end
+    output: array[int] := array[int]$fill(0, n, 0)
+    for i: int in int$from_to_by(n - 1, 0, -1) do
+        count[arr[i] - mn] := count[arr[i] - mn] - 1
+        output[count[arr[i] - mn]] := arr[i]
+    end
+    return output
+end counting_sort
+
+start_up = proc ()
+    arr: array[int] := array[int]$[4, 2, 2, 8, 3, 3, 1]
+    result: array[int] := counting_sort(arr)
+    for v: int in array[int]$elements(result) do
+        stream$putl(stream$primary_output(), int$unparse(v))
+    end
+end start_up
