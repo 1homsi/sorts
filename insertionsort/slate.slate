@@ -1,0 +1,14 @@
+define: #insertionSort -> [| :arr |
+  arr size 1 to: [ | :i |
+    let key = arr at: i.
+    let j = i - 1.
+    [ j >= 0 /\ (arr at: j) > key ] whileTrue: [
+      arr at: j + 1 put: (arr at: j).
+      j := j - 1.
+    ].
+    arr at: j + 1 put: key.
+  ].
+  arr
+].
+
+({5. 2. 8. 1. 9. 3} as: Array) do: insertionSort then: inform.
