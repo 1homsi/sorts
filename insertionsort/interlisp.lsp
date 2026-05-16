@@ -1,0 +1,16 @@
+(DEFINEQ INSERTIONSORT
+  (LAMBDA (ARR)
+    (PROG (N I J KEY)
+      (SETQ N (LLENGTH ARR))
+      (SETQ I 2)
+      (LOOPUNTIL (> I N)
+        (SETQ KEY (ELT ARR I))
+        (SETQ J (SUB1 I))
+        (LOOPUNTIL (OR (< J 1) (<= KEY (ELT ARR J)))
+          (SETELEMENT ARR (ADD1 J) (ELT ARR J))
+          (SETQ J (SUB1 J)))
+        (SETELEMENT ARR (ADD1 J) KEY)
+        (SETQ I (ADD1 I)))
+      (RETURN ARR))))
+
+(PRINT (INSERTIONSORT [5 2 8 1 9 3]))
