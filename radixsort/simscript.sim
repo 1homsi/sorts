@@ -1,0 +1,13 @@
+routine radixsort(arr)
+  let max = 0
+  let exp = 1
+
+  for i = 1 to size(arr)
+    if arr(i) > max
+      let max = arr(i)
+
+  while max / exp > 0
+    call countingSortByExp(arr, exp)
+    let exp = exp * 10
+  return arr
+end
