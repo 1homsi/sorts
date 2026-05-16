@@ -1,0 +1,18 @@
+let
+  val bubblesort = fn arr =>
+    let
+      val n = Vector.length arr
+      fun loop i = if i >= n then ()
+                   else (let fun inner j = if j >= n - 1 - i then ()
+                                           else if Vector.sub(arr, j) > Vector.sub(arr, j + 1) then
+                                             (Vector.update(arr, j, Vector.sub(arr, j + 1));
+                                              Vector.update(arr, j + 1, Vector.sub(arr, j));
+                                              inner(j + 1))
+                                           else inner(j + 1)
+                         in inner 0
+                         end; loop(i + 1))
+    in loop 0; arr
+    end
+in
+  bubblesort #[5, 2, 8, 1, 9, 3]
+end;
