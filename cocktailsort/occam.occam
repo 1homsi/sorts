@@ -1,0 +1,40 @@
+PROC cocktail.sort ([]INT arr, VAL INT n)
+  BOOL swapped:
+  INT start, ending, i, tmp:
+  SEQ
+    swapped := TRUE
+    start := 0
+    ending := n - 1
+    WHILE swapped
+      SEQ
+        swapped := FALSE
+        SEQ i = start FOR ending - start
+          IF
+            arr[i] > arr[i + 1]
+              SEQ
+                tmp := arr[i]
+                arr[i] := arr[i + 1]
+                arr[i + 1] := tmp
+                swapped := TRUE
+            TRUE
+              SKIP
+        IF
+          NOT swapped
+            SKIP
+          TRUE
+            SEQ
+              swapped := FALSE
+              ending := ending - 1
+              SEQ i = start FOR ending - start
+                VAL INT j IS (ending - 1) - i:
+                IF
+                  arr[j] > arr[j + 1]
+                    SEQ
+                      tmp := arr[j]
+                      arr[j] := arr[j + 1]
+                      arr[j + 1] := tmp
+                      swapped := TRUE
+                  TRUE
+                    SKIP
+              start := start + 1
+:
