@@ -1,0 +1,9 @@
+node stoogesort(a: int; i: int; j: int) returns (result: int);
+let
+  result = a;
+tel;
+
+node main(a0: int; a1: int; a2: int; a3: int; a4: int; a5: int) returns (o: int);
+let
+  o = a0;
+tel;
