@@ -1,0 +1,13 @@
+process CYCLE_SORT =
+{ integer } -> { integer };
+
+(|
+  cycle_sort_impl
+|)
+
+where
+
+  process cycle_sort_impl =
+    (| ... |)
+
+end
