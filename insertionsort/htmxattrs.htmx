@@ -1,0 +1,27 @@
+<div id="sort-app">
+  <button
+    hx-post="/sort"
+    hx-vals='{"arr": [5,3,1,4,2]}'
+    hx-target="#result"
+    hx-swap="innerHTML">
+    Sort
+  </button>
+  <div id="result"></div>
+</div>
+
+<script>
+function insertionSort(arr) {
+  const a = [...arr];
+  const n = a.length;
+  for (let i = 1; i < n; i++) {
+    const key = a[i];
+    let j = i - 1;
+    while (j >= 0 && a[j] > key) {
+      a[j + 1] = a[j];
+      j--;
+    }
+    a[j + 1] = key;
+  }
+  return a;
+}
+</script>
