@@ -1,0 +1,40 @@
+DECLARE ARR(6) BIT 32;
+DECLARE N, I, K, TEMP BIT 32;
+DECLARE SWAPPED BIT 1;
+
+ARR(1) = 5;
+ARR(2) = 2;
+ARR(3) = 8;
+ARR(4) = 1;
+ARR(5) = 9;
+ARR(6) = 3;
+N = 6;
+I = 0;
+
+DO WHILE I < N;
+  SWAPPED = 0;
+  DO K = 1 TO N - I - 1;
+    IF ARR(K) > ARR(K + 1) THEN DO;
+      TEMP = ARR(K);
+      ARR(K) = ARR(K + 1);
+      ARR(K + 1) = TEMP;
+      SWAPPED = 1;
+    END;
+  END;
+  IF NOT SWAPPED THEN GO TO DONE;
+  I = I + 1;
+  DO K = N - I - 1 BY -1 TO 1;
+    IF ARR(K) > ARR(K + 1) THEN DO;
+      TEMP = ARR(K);
+      ARR(K) = ARR(K + 1);
+      ARR(K + 1) = TEMP;
+      SWAPPED = 1;
+    END;
+  END;
+  IF NOT SWAPPED THEN GO TO DONE;
+  I = I + 1;
+END;
+
+DONE:
+OUTPUT ARR;
+STOP;
