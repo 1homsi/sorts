@@ -1,30 +1,6 @@
-bogosort = proc ()
-    arr: array[int] := array[int]$[3, 1, 4, 1, 5, 9, 2, 6]
-    n: int := array[int]$size(arr)
-
-    while ~is_sorted(arr, n) do
-        shuffle(arr, n)
-    end
-
-    for i: int in array[int]$indexes(arr) do
-        stream$putint(primary_output(), arr[i])
-        stream$puts(primary_output(), " ")
-    end
-    stream$putnl(primary_output())
-end bogosort
-
-is_sorted = proc (arr: array[int], n: int) returns (bool)
-    for i: int in int$from_to(1, n - 1) do
-        if arr[i] > arr[i + 1] then return(false) end
-    end
-    return(true)
-end is_sorted
-
-shuffle = proc (arr: array[int], n: int)
-    for i: int in int$from_to_by(n, 2, -1) do
-        j: int := random(i)
-        tmp: int := arr[i]
-        arr[i] := arr[j]
-        arr[j] := tmp
-    end
-end shuffle
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
