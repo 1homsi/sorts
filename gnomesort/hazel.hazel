@@ -1,0 +1,13 @@
+let gnome_sort = fun arr ->
+  let n = List.length arr in
+  let rec loop lst i =
+    if i >= n then lst
+    else if i = 0 then loop lst (i + 1)
+    else
+      match List.nth_opt lst i, List.nth_opt lst (i - 1) with
+      | Some x, Some y ->
+        if x >= y then loop lst (i + 1)
+        else loop lst (i - 1)
+      | _ -> lst
+  in
+  loop arr 0
