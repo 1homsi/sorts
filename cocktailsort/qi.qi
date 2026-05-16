@@ -1,0 +1,27 @@
+(define cocktail-sort
+  Lst -> (let Arr (list->array Lst)
+              N (length Lst)
+              Result (cocktail-loop Arr true 0 (- N 1))
+          (array->list Result)))
+
+(define cocktail-loop
+  Arr false _ _ -> Arr
+  Arr true S E ->
+    (let Arr1 (forward Arr S E false)
+         Sw1  (was-swapped Arr1 S E)
+      (if (not Sw1) Arr1
+          (let Arr2 (backward Arr1 S (- E 1) false)
+               Sw2  (was-swapped Arr2 S (- E 1))
+            (cocktail-loop Arr2 Sw2 (+ S 1) (- E 1))))))
+
+(define forward
+  Arr I End Sw -> (if (>= I End) Arr
+    (if (> (array-ref Arr I) (array-ref Arr (+ I 1)))
+        (forward (array-swap Arr I (+ I 1)) (+ I 1) End true)
+        (forward Arr (+ I 1) End Sw))))
+
+(define backward
+  Arr I Start Sw -> (if (< I Start) Arr
+    (if (> (array-ref Arr I) (array-ref Arr (+ I 1)))
+        (backward (array-swap Arr I (+ I 1)) (- I 1) Start true)
+        (backward Arr (- I 1) Start Sw))))
