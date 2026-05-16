@@ -1,0 +1,13 @@
+let
+  insert = fn node val =>
+    if null node then [val, nil, nil]
+    else if val < hd node then [hd node, insert (hd (tl node)) val, hd (tl (tl node))]
+    else if val > hd node then [hd node, hd (tl node), insert (hd (tl (tl node))) val]
+    else node
+
+  inorder = fn node =>
+    if null node then nil
+    else append (inorder (hd (tl node))) (cons (hd node) (inorder (hd (tl (tl node)))))
+in
+  inorder (foldl insert nil [5, 2, 8, 1, 9, 3])
+end
