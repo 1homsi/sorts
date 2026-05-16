@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="CycleSort" default="sort" basedir=".">
+    <target name="sort">
+        <script language="groovy">
+            def arr = [5, 4, 3, 2, 1]
+            def n = arr.size()
+            def writes = 0
+            for (int cycleStart = 0; cycleStart &lt; n - 1; cycleStart++) {
+                def item = arr[cycleStart]
+                def pos = cycleStart
+                for (int i = cycleStart + 1; i &lt; n; i++) {
+                    if (arr[i] &lt; item) pos++
+                }
+                if (pos == cycleStart) continue
+                while (item == arr[pos]) pos++
+                def tmp = arr[pos]; arr[pos] = item; item = tmp
+                writes++
+                while (pos != cycleStart) {
+                    pos = cycleStart
+                    for (int i = cycleStart + 1; i &lt; n; i++) {
+                        if (arr[i] &lt; item) pos++
+                    }
+                    while (item == arr[pos]) pos++
+                    tmp = arr[pos]; arr[pos] = item; item = tmp
+                    writes++
+                }
+            }
+            println arr
+        </script>
+    </target>
+</project>
