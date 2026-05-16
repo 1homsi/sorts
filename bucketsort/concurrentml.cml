@@ -1,0 +1,33 @@
+structure BucketSort =
+struct
+    fun insertSorted (x, []) = [x]
+      | insertSorted (x, h::t) =
+        if x <= h then x::h::t
+        else h::(insertSorted (x, t))
+
+    fun insertionSort [] = []
+      | insertionSort (h::t) = insertSorted (h, insertionSort t)
+
+    fun getIdx (num, mn, mx, n) =
+        let val raw = Real.floor ((num - mn) / (mx - mn + 1.0) * Real.fromInt n)
+        in Int.min (n - 1, raw) end
+
+    fun bucketSort [] = []
+      | bucketSort arr =
+        let
+            val n = List.length arr
+            val mn = List.foldl Real.min (List.hd arr) arr
+            val mx = List.foldl Real.max (List.hd arr) arr
+            val buckets = Array.array (n, [])
+            val () = List.app (fn x =>
+                let val idx = getIdx (x, mn, mx, n)
+                    val old = Array.sub (buckets, idx)
+                in Array.update (buckets, idx, x :: old) end) arr
+        in
+            Array.foldl (fn (b, acc) => acc @ insertionSort b) [] buckets
+        end
+
+    val data = [0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68]
+    val sorted = bucketSort data
+    val () = print (String.concatWith " " (map Real.toString sorted) ^ "\n")
+end
