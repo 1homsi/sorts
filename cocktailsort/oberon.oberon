@@ -1,0 +1,42 @@
+MODULE CocktailSort;
+
+TYPE IntArray = ARRAY 100 OF INTEGER;
+
+PROCEDURE Sort(VAR arr: IntArray; n: INTEGER);
+VAR
+    swapped: BOOLEAN;
+    start, end, i, tmp: INTEGER;
+BEGIN
+    swapped := TRUE;
+    start := 0;
+    end := n - 1;
+    WHILE swapped DO
+        swapped := FALSE;
+        i := start;
+        WHILE i < end DO
+            IF arr[i] > arr[i + 1] THEN
+                tmp := arr[i];
+                arr[i] := arr[i + 1];
+                arr[i + 1] := tmp;
+                swapped := TRUE
+            END;
+            INC(i)
+        END;
+        IF ~swapped THEN RETURN END;
+        swapped := FALSE;
+        DEC(end);
+        i := end - 1;
+        WHILE i >= start DO
+            IF arr[i] > arr[i + 1] THEN
+                tmp := arr[i];
+                arr[i] := arr[i + 1];
+                arr[i + 1] := tmp;
+                swapped := TRUE
+            END;
+            DEC(i)
+        END;
+        INC(start)
+    END
+END Sort;
+
+END CocktailSort.
