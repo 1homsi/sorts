@@ -1,0 +1,17 @@
+define bucketSort :arr :maxVal [
+  arr isEmpty ifTrue: [^ arr].
+  (Array new: maxVal) mapWith: [|:i| Array new].
+  let result = Array new.
+  arr do: [|:num|
+    (num >= 0 /\ (num < maxVal)) ifTrue: [
+      (buckets at: num) push: num.
+    ]
+  ].
+  buckets do: [|:bucket|
+    bucket do: [|:num|
+      result push: num.
+    ]
+  ].
+  result.
+].
+({5, 2, 8, 1, 9, 3}, 10) bucketSort print.
