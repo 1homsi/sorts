@@ -1,28 +1,6 @@
-ORIGIN '~beta/basiclib/betaenv';
-
-Bogosort:
-(# arr: @[8]integer;
-   n: @integer;
-   sorted: @boolean;
-
-   isSorted:
-   (# do true -> sorted;
-         (for i: n-1 repeat
-           (if arr[i] > arr[i+1] then false -> sorted if)
-         for) #);
-
-   shuffle:
-   (# i, j, tmp: @integer
-      do (for i: n downto 2 repeat
-            (# do (random * i).round -> j;
-               arr[i] -> tmp;
-               arr[j] -> arr[i];
-               tmp -> arr[j] #)
-          for) #);
-
-do 3->arr[1]; 1->arr[2]; 4->arr[3]; 1->arr[4];
-   5->arr[5]; 9->arr[6]; 2->arr[7]; 6->arr[8];
-   8->n;
-   loop: (isSorted; not sorted -> (if then shuffle; restart loop if));
-   (for i: n repeat arr[i]->screen.putint for)
-#)
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
