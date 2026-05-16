@@ -1,0 +1,15 @@
+        START   /5,3,1,4,2/     $
+SORT    $=*/ARR//N = 5
+        I = 1
+OUTER   I .GE. N :DONE
+        KEY = ARR(I+1)
+        J = I
+INNER   J .LE. 0 :PLACE
+        ARR(J) .GT. KEY :PLACE
+        ARR(J+1) = ARR(J)
+        J = J - 1
+        :INNER
+PLACE   ARR(J+1) = KEY
+        I = I + 1
+        :OUTER
+DONE    END
