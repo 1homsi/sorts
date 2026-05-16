@@ -1,0 +1,19 @@
+
+graph: HEAPSORT
+  input: arr, n
+  
+  action: 
+    i = n / 2 - 1
+  
+  loop:
+    while i >= 0
+      action: siftdown(arr, i, n)
+      action: i = i - 1
+  
+  loop2:
+    while i > 0
+      action: swap(arr[0], arr[i])
+      action: siftdown(arr, 0, i)
+      action: i = i - 1
+  
+  output: arr
