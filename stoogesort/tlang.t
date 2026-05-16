@@ -1,0 +1,17 @@
+(define stoogesort
+  (lambda (a i j)
+    (begin
+      (if (< (vector-ref a j) (vector-ref a i))
+        (begin
+          (vector-set! a i (vector-ref a j))
+          (vector-set! a j (vector-ref a i))))
+      (if (> (- j i) 1)
+        (begin
+          (define t (quotient (+ (- j i) 1) 3))
+          (stoogesort a i (- j t))
+          (stoogesort a (+ i t) j)
+          (stoogesort a i (- j t)))))))
+
+(define arr (vector 5 2 8 1 9 3))
+(stoogesort arr 0 5)
+(display arr)
