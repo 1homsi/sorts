@@ -1,0 +1,21 @@
+function bitonicsort(arr, lo, cnt, dir) =
+  if (cnt > 1) then
+    let k = cnt / 2 in
+    let arr = bitonicsort(arr, lo, k, 1) in
+    let arr = bitonicsort(arr, lo + k, k, 0) in
+    bitonicmerge(arr, lo, cnt, dir)
+  else
+    arr;
+
+function bitonicmerge(arr, lo, cnt, dir) =
+  if (cnt > 1) then
+    let k = cnt / 2 in
+    let arr = {[i] = if (arr[i] > arr[i + k]) = (dir = 1)
+                      then arr[i + k]
+                      else arr[i] : i in [lo .. lo + cnt - k)} in
+    let arr = bitonicmerge(arr, lo, k, dir) in
+    bitonicmerge(arr, lo + k, k, dir)
+  else
+    arr;
+
+bitonicsort([5, 2, 8, 1, 9, 3, 7, 4], 0, 8, 1);
