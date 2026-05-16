@@ -1,0 +1,20 @@
+def comb_sort(arr: n=>Int) -> n=>Int =
+  def gap = size arr
+  def swapped = True
+  loop
+    gap = (gap * 10) / 13
+    if gap < 1
+      gap = 1
+    swapped = False
+    for i in ..size arr - gap
+      if arr[i] > arr[i + gap]
+        temp = arr[i]
+        arr[i] = arr[i + gap]
+        arr[i + gap] = temp
+        swapped = True
+    if gap <= 1 && not swapped
+      break
+  arr
+
+sample : 6=>Int = [5, 2, 8, 1, 9, 3]
+comb_sort sample
