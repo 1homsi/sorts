@@ -1,0 +1,6 @@
+define gnomesort
+  [
+    [dup [] neq] [dup swap car > [swap car swap cdr swap cons] if [gnomesort] dip] while
+  ] is gnomesort;
+
+[5 2 8 1 9 3] gnomesort puts
