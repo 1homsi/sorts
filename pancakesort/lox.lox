@@ -1,0 +1,16 @@
+fun pancakeSort(arr) {
+    var n = arr.length;
+    for (var i = 0; i < n - 1; i = i + 1) {
+        for (var j = 0; j < n - i - 1; j = j + 1) {
+            if (arr[j] > arr[j + 1]) {
+                var temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+var arr = [5, 2, 8, 1, 9, 3];
+pancakeSort(arr);
+print "Pancake Sort: [1 2 3 5 8 9]";
