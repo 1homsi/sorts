@@ -1,0 +1,32 @@
+use bellman::{Circuit, ConstraintSystem, SynthesisError};
+use bls12_381::Scalar;
+
+struct GnomeSortCircuit {
+    input: Vec<Option<Scalar>>,
+    sorted: Vec<Option<Scalar>>,
+}
+
+impl Circuit<Scalar> for GnomeSortCircuit {
+    fn synthesize<CS: ConstraintSystem<Scalar>>(
+        self,
+        cs: &mut CS,
+    ) -> Result<(), SynthesisError> {
+        let n = self.input.len();
+        let mut sorted_vars = Vec::new();
+        for (i, val) in self.sorted.iter().enumerate() {
+            let var = cs.alloc(|| format!("sorted_{}", i), || {
+                val.ok_or(SynthesisError::AssignmentMissing)
+            })?;
+            sorted_vars.push(var);
+        }
+        for i in 0..n-1 {
+            cs.enforce(
+                || format!("sorted_order_{}", i),
+                |lc| lc + sorted_vars[i+1] - sorted_vars[i],
+                |lc| lc + CS::one(),
+                |lc| lc,
+            );
+        }
+        Ok(())
+    }
+}
