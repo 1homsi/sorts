@@ -1,0 +1,25 @@
+(fn cocktail-sort [arr]
+  (var swapped true)
+  (var start 0)
+  (var ending (- (length arr) 1))
+  (while swapped
+    (set swapped false)
+    (for i start (- ending 1)
+      (when (> (. arr (+ i 1)) (. arr (+ i 2)))
+        (let [tmp (. arr (+ i 1))]
+          (tset arr (+ i 1) (. arr (+ i 2)))
+          (tset arr (+ i 2) tmp)
+          (set swapped true))))
+    (when (not swapped) (lua "break"))
+    (set swapped false)
+    (set ending (- ending 1))
+    (var i (- ending 1))
+    (while (>= i start)
+      (when (> (. arr (+ i 1)) (. arr (+ i 2)))
+        (let [tmp (. arr (+ i 1))]
+          (tset arr (+ i 1) (. arr (+ i 2)))
+          (tset arr (+ i 2) tmp)
+          (set swapped true)))
+      (set i (- i 1)))
+    (set start (+ start 1)))
+  arr)
