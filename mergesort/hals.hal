@@ -1,0 +1,45 @@
+PROGRAM MERGESORT
+  DECLARE ARRAY ARR(6)
+  DECLARE I, J, K, LEFT, MID, RIGHT
+  
+  ARR(1) = 5; ARR(2) = 2; ARR(3) = 8; ARR(4) = 1; ARR(5) = 9; ARR(6) = 3
+  
+  PROCEDURE MERGE(L, M, R)
+    DECLARE ARRAY RESULT(R - L + 1)
+    I = L; J = M + 1; K = 1
+    
+    WHILE (I .LE. M .AND. J .LE. R)
+      IF (ARR(I) .LE. ARR(J))
+        RESULT(K) = ARR(I); I = I + 1
+      ELSE
+        RESULT(K) = ARR(J); J = J + 1
+      END_IF
+      K = K + 1
+    END_WHILE
+    
+    WHILE (I .LE. M)
+      RESULT(K) = ARR(I); I = I + 1; K = K + 1
+    END_WHILE
+    
+    WHILE (J .LE. R)
+      RESULT(K) = ARR(J); J = J + 1; K = K + 1
+    END_WHILE
+    
+    FOR K = 1 TO R - L + 1
+      ARR(L + K - 1) = RESULT(K)
+    END_FOR
+  END_PROCEDURE
+  
+  PROCEDURE MERGESORT(L, R)
+    DECLARE MID
+    IF (L .LT. R)
+      MID = (L + R) / 2
+      CALL MERGESORT(L, MID)
+      CALL MERGESORT(MID + 1, R)
+      CALL MERGE(L, MID, R)
+    END_IF
+  END_PROCEDURE
+  
+  CALL MERGESORT(1, 6)
+  PRINT ARR
+END PROGRAM
