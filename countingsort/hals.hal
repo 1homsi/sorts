@@ -1,0 +1,38 @@
+PROGRAM COUNTINGSORT;
+
+DECLARE ARR(6) INTEGER;
+DECLARE COUNT(9) INTEGER;
+DECLARE MAX INTEGER;
+DECLARE I INTEGER;
+DECLARE J INTEGER;
+
+MAIN:
+  ARR(1) = 5;
+  ARR(2) = 2;
+  ARR(3) = 8;
+  ARR(4) = 1;
+  ARR(5) = 9;
+  ARR(6) = 3;
+
+  MAX = 0;
+  DO I = 1 TO 6;
+    IF ARR(I) > MAX THEN
+      MAX = ARR(I);
+    END;
+  END;
+
+  DO I = 0 TO 9;
+    COUNT(I) = 0;
+  END;
+
+  DO I = 1 TO 6;
+    COUNT(ARR(I)) = COUNT(ARR(I)) + 1;
+  END;
+
+  DO I = 0 TO MAX;
+    DO J = 1 TO COUNT(I);
+      PRINT I;
+    END;
+  END;
+
+END PROGRAM COUNTINGSORT;
