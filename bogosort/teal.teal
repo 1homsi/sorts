@@ -1,27 +1,6 @@
-local function is_sorted(arr: {integer}): boolean
-    for i = 1, #arr - 1 do
-        if arr[i] > arr[i + 1] then return false end
-    end
-    return true
-end
-
-local function shuffle(arr: {integer})
-    local n = #arr
-    for i = n, 2, -1 do
-        local j = math.random(i)
-        arr[i], arr[j] = arr[j], arr[i]
-    end
-end
-
-local function bogosort(arr: {integer}): {integer}
-    local a: {integer} = {}
-    for _, v in ipairs(arr) do a[#a+1] = v end
-    while not is_sorted(a) do
-        shuffle(a)
-    end
-    return a
-end
-
-math.randomseed(os.time())
-local arr: {integer} = {3, 1, 4, 1, 5, 9, 2, 6}
-print(table.concat(bogosort(arr), " "))
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
