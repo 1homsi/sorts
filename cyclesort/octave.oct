@@ -1,0 +1,39 @@
+function arr = cycle_sort(arr)
+  n = length(arr);
+  for cycle_start = 1:n-1
+    item = arr(cycle_start);
+    pos = cycle_start;
+    for i = cycle_start+1:n
+      if arr(i) < item
+        pos = pos + 1;
+      end
+    end
+    if pos == cycle_start
+      continue;
+    end
+    while item == arr(pos)
+      pos = pos + 1;
+    end
+    tmp = arr(pos);
+    arr(pos) = item;
+    item = tmp;
+    while pos != cycle_start
+      pos = cycle_start;
+      for i = cycle_start+1:n
+        if arr(i) < item
+          pos = pos + 1;
+        end
+      end
+      while item == arr(pos)
+        pos = pos + 1;
+      end
+      tmp = arr(pos);
+      arr(pos) = item;
+      item = tmp;
+    end
+  end
+end
+
+arr = [5 4 3 2 1];
+arr = cycle_sort(arr);
+disp(arr)
