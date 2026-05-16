@@ -1,0 +1,12 @@
+module BitonicSort:
+
+input DATA_IN : integer;
+output DATA_OUT : integer;
+
+signal SORTED : combine integer with +;
+
+every DATA_IN do
+    emit DATA_OUT(pre(DATA_IN))
+end every
+
+end module
