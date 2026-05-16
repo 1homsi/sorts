@@ -1,0 +1,29 @@
+process main() {
+    void bitonicsort(int arr[], int lo, int cnt, int dir) {
+        if (cnt > 1) {
+            int k = cnt / 2;
+            [bitonicsort(arr, lo, k, 1),
+             bitonicsort(arr, lo + k, k, 0),
+             bitonicmerge(arr, lo, cnt, dir)];
+        }
+    }
+
+    void bitonicmerge(int arr[], int lo, int cnt, int dir) {
+        if (cnt > 1) {
+            int k = cnt / 2;
+            for (int i = lo; i < lo + cnt - k; i++) {
+                if ((arr[i] > arr[i + k]) == (dir == 1)) {
+                    int tmp = arr[i];
+                    arr[i] = arr[i + k];
+                    arr[i + k] = tmp;
+                }
+            }
+            [bitonicmerge(arr, lo, k, dir),
+             bitonicmerge(arr, lo + k, k, dir)];
+        }
+    }
+
+    int arr[8] = {5, 2, 8, 1, 9, 3, 7, 4};
+    bitonicsort(arr, 0, 8, 1);
+    printf("%d\n", arr[0]);
+}
