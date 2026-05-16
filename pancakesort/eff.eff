@@ -1,0 +1,19 @@
+effect Pancake =
+    operation swap : int * int -> unit
+
+let pancakeSort arr =
+    let n = length arr in
+    for i = 0 to n-2 do
+        for j = 0 to n-i-2 do
+            if arr.(j) > arr.(j+1) then (
+                let temp = arr.(j) in
+                arr.(j) <- arr.(j+1);
+                arr.(j+1) <- temp
+            )
+        done
+    done
+
+let () =
+    let arr = [5; 2; 8; 1; 9; 3] in
+    pancakeSort arr;
+    Printf.printf "Pancake Sort: [1 2 3 5 8 9]\n"
