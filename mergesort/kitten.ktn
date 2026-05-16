@@ -1,0 +1,29 @@
+def merge(+left +mid +right -> -arr):
+  var i (left) var j (mid 1+) var k (0) var result (vector)
+  {
+    i @ mid <= & j @ right <= &
+  } {
+    i @ j @ <= {
+      result (i @) push
+      i (i @ 1+) set
+    } {
+      result (j @) push
+      j (j @ 1+) set
+    } if
+    k (k @ 1+) set
+  } while
+  ...
+;
+
+def mergesort(+left +right -> -arr):
+  left right < {
+    var mid ((left @ right @ +) 2 /)
+    left mid @ mergesort
+    mid @ 1+ right @ mergesort
+    left mid @ right @ merge
+  } if
+;
+
+5 2 8 1 9 3 vector
+0 5 mergesort
+write
