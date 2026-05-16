@@ -1,0 +1,17 @@
+package gnomesort.policy
+
+import future.keywords.if
+
+default allow = false
+
+allow if {
+    input.action == "sort"
+    input.user.roles[_] == "admin"
+}
+
+sorted_correctly(arr) if {
+    count(arr) > 0
+    every i in numbers.range(0, count(arr) - 2) {
+        arr[i] <= arr[i+1]
+    }
+}
