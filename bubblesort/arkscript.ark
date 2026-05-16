@@ -1,0 +1,19 @@
+let bubblesort = fun(arr) {
+  let n = arr:len()
+  let i = 0
+  while i < n {
+    let j = 0
+    while j < (n - 1 - i) {
+      if arr:at(j) > arr:at(j + 1) {
+        let temp = arr:at(j)
+        arr:set-at(j, arr:at(j + 1))
+        arr:set-at(j + 1, temp)
+      }
+      set j (j + 1)
+    }
+    set i (i + 1)
+  }
+  arr
+}
+
+print(bubblesort([5 2 8 1 9 3]))
