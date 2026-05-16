@@ -1,0 +1,37 @@
+def cycle_sort arr n =
+    if n <= 1 then arr
+    else
+        let result = array_create n 0 in
+        let _ = array_copy arr result in
+        let writes = ref 0 in
+        let _ = for cycle_start = 0 to n-2 do
+            let item = ref result.(cycle_start) in
+            let pos = ref cycle_start in
+            let _ = for i = cycle_start+1 to n-1 do
+                if result.(i) < !item then pos := !pos + 1
+            done in
+            if !pos <> cycle_start then begin
+                while result.(!pos) = !item do pos := !pos + 1 done;
+                let tmp = result.(!pos) in
+                result.(!pos) <- !item;
+                item := tmp;
+                writes := !writes + 1;
+                while !pos <> cycle_start do
+                    pos := cycle_start;
+                    for i = cycle_start+1 to n-1 do
+                        if result.(i) < !item then pos := !pos + 1
+                    done;
+                    while result.(!pos) = !item do pos := !pos + 1 done;
+                    let t = result.(!pos) in
+                    result.(!pos) <- !item;
+                    item := t;
+                    writes := !writes + 1
+                done
+            end
+        done in
+        result
+
+let arr = [|5; 4; 3; 2; 1|]
+let sorted = cycle_sort arr 5
+let () = Array.iter (fun x -> print_int x; print_char ' ') sorted
+let () = print_newline ()
