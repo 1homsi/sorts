@@ -1,0 +1,40 @@
+sequence arr
+arr = {3, 7, 4, 8, 6, 2, 1, 5}
+
+procedure comp_swap(integer i, integer j, integer dir)
+    integer ai, aj, tmp
+    ai = arr[i]
+    aj = arr[j]
+    if (dir = 1 and ai > aj) or (dir = 0 and ai < aj) then
+        arr[i] = aj
+        arr[j] = ai
+    end if
+end procedure
+
+procedure bitonic_merge(integer lo, integer cnt, integer dir)
+    integer k, i
+    if cnt > 1 then
+        k = cnt / 2
+        for i = lo to lo + k - 1 do
+            comp_swap(i, i + k, dir)
+        end for
+        bitonic_merge(lo, k, dir)
+        bitonic_merge(lo + k, k, dir)
+    end if
+end procedure
+
+procedure bitonic_sort(integer lo, integer cnt, integer dir)
+    integer k
+    if cnt > 1 then
+        k = cnt / 2
+        bitonic_sort(lo, k, 1)
+        bitonic_sort(lo + k, k, 0)
+        bitonic_merge(lo, cnt, dir)
+    end if
+end procedure
+
+bitonic_sort(1, length(arr), 1)
+for i = 1 to length(arr) do
+    printf(1, "%d ", {arr[i]})
+end for
+puts(1, "\n")
