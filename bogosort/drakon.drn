@@ -1,0 +1,29 @@
+state BogSort(arr)
+  loop
+    if (issorted(arr))
+      return arr
+    else
+      shuffle(arr)
+    endif
+  endloop
+endstate
+
+state issorted(arr)
+  for i in 0 : arr.size - 1
+    if (arr[i] > arr[i+1])
+      return false
+    endif
+  endfor
+  return true
+endstate
+
+state shuffle(arr)
+  for i in 0 : arr.size
+    j = random(arr.size)
+    tmp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = tmp
+  endfor
+endstate
+
+print(BogSort([3, 1, 2]))
