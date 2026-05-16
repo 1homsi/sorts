@@ -1,0 +1,9 @@
+MODULE COCKTAIL_SORT.
+
+PREDICATE Cocktail_Sort(INTEGER, INTEGER, BOOLEAN).
+
+Cocktail_Sort(Arr, N, True) :-
+    TRUE.
+
+Cocktail_Sort(Arr, N, False) :-
+    FAIL.
