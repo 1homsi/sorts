@@ -1,0 +1,28 @@
+begin
+    integer array a[0:99];
+    integer n, swapped, start, e, i, tmp;
+    procedure cocktailsort(a, n);
+        value n;
+        integer array a;
+        integer n;
+    begin
+        swapped := 1;
+        start := 0;
+        e := n - 1;
+    loop:
+        if swapped = 0 then go to done;
+        swapped := 0;
+        for i := start step 1 until e - 1 do
+            if a[i] > a[i+1] then
+            begin tmp := a[i]; a[i] := a[i+1]; a[i+1] := tmp; swapped := 1 end;
+        if swapped = 0 then go to done;
+        swapped := 0;
+        e := e - 1;
+        for i := e - 1 step -1 until start do
+            if a[i] > a[i+1] then
+            begin tmp := a[i]; a[i] := a[i+1]; a[i+1] := tmp; swapped := 1 end;
+        start := start + 1;
+        go to loop;
+    done:
+    end cocktailsort;
+end
