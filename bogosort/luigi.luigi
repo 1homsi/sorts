@@ -1,1 +1,1 @@
-print("Bogosort implementation for luigi.luigi")
+bogosort = true
