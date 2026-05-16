@@ -1,0 +1,33 @@
+process main
+  declare array as 3-item list of integers initially [3,1,2]
+
+  do while not check if array is sorted
+    shuffle array
+  loop
+
+  print array
+end main
+
+routine check if array is sorted
+  declare i as integer
+  declare result as integer
+  let result = 1
+
+  for i = 1 to 2
+    if array(i) > array(i+1) then
+      let result = 0
+    end if
+  end for
+
+  return result
+end routine
+
+routine shuffle array
+  declare i, j, temp as integer
+  for i = 1 to 3
+    let j = truncate(3 * uniform(0,1)) + 1
+    let temp = array(i)
+    let array(i) = array(j)
+    let array(j) = temp
+  end for
+end routine
