@@ -1,0 +1,25 @@
+begin
+  integer array a(1..3);
+  integer i, j, t, sorted;
+
+  a(1) := 3; a(2) := 1; a(3) := 2;
+
+  sorted := 0;
+  while sorted = 0 do begin
+    sorted := 1;
+    for i := 1 step 1 until 2 do
+      if a(i) > a(i+1) then sorted := 0;
+
+    if sorted = 0 then begin
+      for i := 1 step 1 until 3 do begin
+        j := entier(random * 3) + 1;
+        t := a(i);
+        a(i) := a(j);
+        a(j) := t;
+      end;
+    end;
+  end;
+
+  for i := 1 step 1 until 3 do
+    print(a(i));
+end
