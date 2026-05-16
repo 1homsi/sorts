@@ -1,0 +1,15 @@
+insertionSort: func(arr: Int[]) {
+  n := arr length
+  for (i in 1..n) {
+    key := arr[i]
+    j := i - 1
+    while (j >= 0 && arr[j] > key) {
+      arr[j+1] = arr[j]
+      j -= 1
+    }
+    arr[j+1] = key
+  }
+  arr
+}
+
+println(insertionSort([5, 2, 8, 1, 9, 3]))
