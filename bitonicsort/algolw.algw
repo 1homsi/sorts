@@ -1,0 +1,43 @@
+BEGIN
+  PROCEDURE BITONICSORT(ARR, LO, CNT, DIR);
+    VALUE LO, CNT, DIR;
+    INTEGER ARRAY ARR;
+    INTEGER LO, CNT, DIR;
+    BEGIN
+      INTEGER K;
+      IF CNT > 1 THEN BEGIN
+        K := CNT DIV 2;
+        BITONICSORT(ARR, LO, K, 1);
+        BITONICSORT(ARR, LO + K, K, 0);
+        BITONICMERGE(ARR, LO, CNT, DIR);
+      END;
+    END;
+
+  PROCEDURE BITONICMERGE(ARR, LO, CNT, DIR);
+    VALUE LO, CNT, DIR;
+    INTEGER ARRAY ARR;
+    INTEGER LO, CNT, DIR;
+    BEGIN
+      INTEGER K, I, TMP;
+      IF CNT > 1 THEN BEGIN
+        K := CNT DIV 2;
+        FOR I := LO STEP 1 UNTIL LO + CNT - K - 1 DO BEGIN
+          IF (ARR(I) > ARR(I + K)) = (DIR = 1) THEN BEGIN
+            TMP := ARR(I);
+            ARR(I) := ARR(I + K);
+            ARR(I + K) := TMP;
+          END;
+        END;
+        BITONICMERGE(ARR, LO, K, DIR);
+        BITONICMERGE(ARR, LO + K, K, DIR);
+      END;
+    END;
+
+  INTEGER ARRAY ARR(1:8);
+  ARR(1) := 5; ARR(2) := 2; ARR(3) := 8; ARR(4) := 1;
+  ARR(5) := 9; ARR(6) := 3; ARR(7) := 7; ARR(8) := 4;
+
+  BITONICSORT(ARR, 1, 8, 1);
+
+  WRITE(ARR);
+END
