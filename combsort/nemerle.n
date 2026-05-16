@@ -1,0 +1,26 @@
+using System;
+using System.Collections.Generic;
+
+module CombSort {
+    public Sort(arr : array[int]) : array[int] {
+        def n = arr.Length;
+        mutable gap = n;
+        mutable sorted = false;
+        while (!sorted) {
+            gap = (gap :> double / 1.3) :> int;
+            when (gap <= 1) {
+                gap = 1;
+                sorted = true;
+            }
+            for (mutable i = 0; i + gap < n; i++) {
+                when (arr[i] > arr[i + gap]) {
+                    def tmp = arr[i];
+                    arr[i] = arr[i + gap];
+                    arr[i + gap] = tmp;
+                    sorted = false;
+                }
+            }
+        }
+        arr
+    }
+}
