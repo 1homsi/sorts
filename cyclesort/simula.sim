@@ -1,0 +1,32 @@
+Begin
+   Integer Array arr(1:5);
+   Integer n, cycleStart, item, pos, i, tmp, writes;
+
+   arr(1) := 5; arr(2) := 4; arr(3) := 3; arr(4) := 2; arr(5) := 1;
+   n := 5;
+   writes := 0;
+
+   For cycleStart := 1 Step 1 Until n-1 Do Begin
+      item := arr(cycleStart);
+      pos := cycleStart;
+      For i := cycleStart+1 Step 1 Until n Do
+         If arr(i) < item Then pos := pos + 1;
+      If pos <> cycleStart Then Begin
+         While arr(pos) = item Do pos := pos + 1;
+         tmp := arr(pos); arr(pos) := item; item := tmp;
+         writes := writes + 1;
+         While pos <> cycleStart Do Begin
+            pos := cycleStart;
+            For i := cycleStart+1 Step 1 Until n Do
+               If arr(i) < item Then pos := pos + 1;
+            While arr(pos) = item Do pos := pos + 1;
+            tmp := arr(pos); arr(pos) := item; item := tmp;
+            writes := writes + 1
+         End
+      End
+   End;
+
+   For i := 1 Step 1 Until n Do
+      OutInt(arr(i), 4);
+   OutImage
+End
