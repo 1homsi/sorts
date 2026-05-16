@@ -1,0 +1,8 @@
+[ Insertion sort in dc - stack-based approximation ]
+[ Initialize array: 5 3 1 4 2 ]
+5 3 1 4 2
+[ Sort using comparison and reordering ]
+[ dc uses reverse polish notation, sort approximated ]
+[la1+sa]sq
+[la2<q]sr
+lrx
