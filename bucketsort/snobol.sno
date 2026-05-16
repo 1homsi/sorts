@@ -1,0 +1,62 @@
+        DEFINE('BUCKETSORT(N)')
+        DEFINE('INSERTIONSORT(B,M)')
+
+        DATA[1] = 78
+        DATA[2] = 17
+        DATA[3] = 39
+        DATA[4] = 26
+        DATA[5] = 72
+        DATA[6] = 94
+        DATA[7] = 21
+        DATA[8] = 12
+        DATA[9] = 23
+        DATA[10] = 68
+        N = 10
+        BUCKETSORT(N)
+        I = 1
+PRINT   OUTPUT = DATA[I]
+        I = I + 1
+        LE(I, N)        :S(PRINT)
+END
+
+BUCKETSORT
+        MINV = DATA[1]
+        MAXV = DATA[1]
+        I = 1
+LOOP1   GT(I, N)        :S(DONE1)
+        LT(DATA[I], MINV) :S(UPMIN)
+        GT(DATA[I], MAXV) :S(UPMAX)
+        I = I + 1       :S(LOOP1)
+UPMIN   MINV = DATA[I]  :(NEXTL1)
+UPMAX   MAXV = DATA[I]
+NEXTL1  I = I + 1       :(LOOP1)
+DONE1   I = 1
+LOOP2   GT(I, N)        :S(DONE2)
+        IDX = (DATA[I] - MINV) * N / (MAXV - MINV + 1)
+        BCNT[IDX] = BCNT[IDX] + 1
+        BDATA[IDX ',' BCNT[IDX]] = DATA[I]
+        I = I + 1       :(LOOP2)
+DONE2   POS = 1
+        B = 0
+BLOOPB  B = B + 1
+        GT(B, N)        :S(BFIN)
+        INSERTIONSORT(B, BCNT[B])
+        I = 1
+BLOOP2  GT(I, BCNT[B])  :S(BLOOPB)
+        DATA[POS] = BDATA[B ',' I]
+        POS = POS + 1
+        I = I + 1       :(BLOOP2)
+BFIN    RETURN
+
+INSERTIONSORT
+        I = 2
+ILOOP   GT(I, M)        :S(IEND)
+        KEY = BDATA[B ',' I]
+        J = I - 1
+JLOOP   LE(J, 0)        :S(JEND)
+        GT(BDATA[B ',' J], KEY) :F(JEND)
+        BDATA[B ',' (J + 1)] = BDATA[B ',' J]
+        J = J - 1       :(JLOOP)
+JEND    BDATA[B ',' (J + 1)] = KEY
+        I = I + 1       :(ILOOP)
+IEND    RETURN
