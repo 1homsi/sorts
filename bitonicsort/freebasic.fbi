@@ -1,0 +1,35 @@
+Dim arr(0 To 7) As Integer => {3, 7, 4, 8, 6, 2, 1, 5}
+
+Sub CompSwap(i As Integer, j As Integer, dir As Boolean)
+    If dir = (arr(i) > arr(j)) Then
+        Dim tmp As Integer = arr(i)
+        arr(i) = arr(j)
+        arr(j) = tmp
+    End If
+End Sub
+
+Sub BitonicMerge(lo As Integer, cnt As Integer, dir As Boolean)
+    If cnt > 1 Then
+        Dim k As Integer = cnt \ 2
+        For i As Integer = lo To lo + k - 1
+            CompSwap(i, i + k, dir)
+        Next
+        BitonicMerge(lo, k, dir)
+        BitonicMerge(lo + k, k, dir)
+    End If
+End Sub
+
+Sub BitonicSort(lo As Integer, cnt As Integer, dir As Boolean)
+    If cnt > 1 Then
+        Dim k As Integer = cnt \ 2
+        BitonicSort(lo, k, True)
+        BitonicSort(lo + k, k, False)
+        BitonicMerge(lo, cnt, dir)
+    End If
+End Sub
+
+BitonicSort(0, 8, True)
+For i As Integer = 0 To 7
+    Print arr(i); " ";
+Next
+Print
