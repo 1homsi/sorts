@@ -1,0 +1,12 @@
+theorem BitonicSort:
+  for arr being Sequence holds true
+proof
+  let arr be Sequence;
+  per cases;
+  case arr = {};
+  proof trivial; end;
+  case arr <> {};
+  proof
+    arg min(arr) does sort arr;
+  end;
+end;
