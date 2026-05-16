@@ -1,0 +1,15 @@
+bitonicsort arr lo cnt dir =
+  if cnt > 1 then
+    let k = cnt `div` 2 in
+    bitonicmerge (bitonicsort (bitonicsort arr lo k 1) (lo + k) k 0) lo cnt dir
+  else
+    arr
+
+bitonicmerge arr lo cnt dir =
+  if cnt > 1 then
+    let k = cnt `div` 2 in
+    bitonicmerge (bitonicmerge arr lo k dir) (lo + k) k dir
+  else
+    arr
+
+main = print (bitonicsort [5, 2, 8, 1, 9, 3, 7, 4] 0 8 1)
