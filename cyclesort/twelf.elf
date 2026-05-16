@@ -1,0 +1,6 @@
+cyclesort : list -> list -> type.
+cyclesort-start : cyclesort L L.
+
+print_list : list -> type.
+print_list-nil : print_list nil.
+print_list-cons : print_list (H :: T) <- print_list T.
