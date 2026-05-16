@@ -1,0 +1,26 @@
+BEGIN
+    INTEGER ARRAY A(1:100);
+    INTEGER N, GAP, I, TEMP;
+    BOOLEAN DONE;
+    PROCEDURE COMBSORT;
+    BEGIN
+        GAP := N;
+        DONE := FALSE;
+        FOR DONE = FALSE DO
+        BEGIN
+            GAP := ENTIER(GAP / 1.3);
+            IF GAP < 1 THEN GAP := 1;
+            DONE := GAP = 1;
+            FOR I := 1 STEP 1 UNTIL N - GAP DO
+            BEGIN
+                IF A[I] > A[I + GAP] THEN
+                BEGIN
+                    TEMP := A[I];
+                    A[I] := A[I + GAP];
+                    A[I + GAP] := TEMP;
+                    DONE := FALSE
+                END
+            END
+        END
+    END;
+END
