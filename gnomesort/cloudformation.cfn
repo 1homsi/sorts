@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Gnome Sort CloudFormation Template
+
+Parameters:
+  InputData:
+    Type: CommaDelimitedList
+    Default: "5,3,8,1,9,2,7,4,6,0"
+
+Resources:
+  GnomeSortFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: gnome-sort
+      Runtime: python3.11
+      Handler: index.handler
+      Code:
+        ZipFile: |
+          def handler(event, context):
+              arr = list(event.get('arr', []))
+              n = len(arr)
+              i = 0
+              while i < n:
+                  if i == 0 or arr[i] >= arr[i-1]:
+                      i += 1
+                  else:
+                      arr[i], arr[i-1] = arr[i-1], arr[i]
+                      i -= 1
+              return {'sorted': arr}
+      Role: !Sub 'arn:aws:iam::${AWS::AccountId}:role/lambda-role'
