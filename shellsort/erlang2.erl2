@@ -1,35 +1,30 @@
--module(erlang2).
--export([shell_sort/1, main/0]).
+shellsort(List) ->
+    N = length(List),
+    Gap = N div 2,
+    shell_sort(Gap, List, N).
 
-shell_sort(List) ->
-    Arr = list_to_tuple(List),
-    N = tuple_size(Arr),
-    Sorted = do_sort(Arr, N, N div 2),
-    tuple_to_list(Sorted).
+shell_sort(Gap, List, _) when Gap =< 0 ->
+    List;
+shell_sort(Gap, List, N) ->
+    NewList = insert_gap(List, Gap, Gap, N),
+    shell_sort(Gap div 2, NewList, N).
 
-do_sort(Arr, _, 0) -> Arr;
-do_sort(Arr, N, Gap) ->
-    Arr2 = lists:foldl(
-        fun(I, A) ->
-            Temp = element(I + 1, A),
-            shift_back(A, Gap, I, Temp)
-        end,
-        Arr,
-        lists:seq(Gap, N - 1)
-    ),
-    do_sort(Arr2, N, Gap div 2).
-
-shift_back(Arr, Gap, J, Temp) when J < Gap ->
-    setelement(J + 1, Arr, Temp);
-shift_back(Arr, Gap, J, Temp) ->
-    Prev = element(J - Gap + 1, Arr),
-    if Prev > Temp ->
-        Arr2 = setelement(J + 1, Arr, Prev),
-        shift_back(Arr2, Gap, J - Gap, Temp);
+insert_gap(List, _, Idx, N) when Idx >= N ->
+    List;
+insert_gap(List, Gap, Idx, N) ->
+    Element = lists:nth(Idx + 1, List),
+    if Idx < Gap ->
+        insert_gap(List, Gap, Idx + 1, N);
     true ->
-        setelement(J + 1, Arr, Temp)
+        CompIdx = Idx - Gap + 1,
+        CompElement = lists:nth(CompIdx, List),
+        if CompElement > Element ->
+            Swapped = swap_elements(List, CompIdx - 1, Idx),
+            insert_gap(Swapped, Gap, Idx + 1, N);
+        true ->
+            insert_gap(List, Gap, Idx + 1, N)
+        end
     end.
 
-main() ->
-    Arr = [64, 34, 25, 12, 22, 11, 90],
-    io:format("~w~n", [shell_sort(Arr)]).
+swap_elements(List, I, J) ->
+    lists:sublist(List, I - 1) ++ [lists:nth(J + 1, List)] ++ lists:sublist(List, I, J - I) ++ [lists:nth(I + 1, List)] ++ lists:sublist(List, J + 2).
