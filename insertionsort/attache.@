@@ -1,0 +1,10 @@
+InsertionSort[arr] := Fold[{acc, x} -> Insert[acc, x], [], arr]
+
+Insert[lst, x] := If[
+    Empty[lst],
+    {x},
+    If[x <= First[lst],
+        {x} ++ lst,
+        {First[lst]} ++ Insert[Rest[lst], x]
+    ]
+]
