@@ -1,0 +1,28 @@
+insertion_sort([],    []).
+insertion_sort([H|T], Sorted) :-
+    insertion_sort(T, SortedT),
+    insert_sorted(H, SortedT, Sorted).
+
+insert_sorted(X, [], [X]).
+insert_sorted(X, [H|T], [X,H|T]) :- X =< H, !.
+insert_sorted(X, [H|T], [H|R]) :- insert_sorted(X, T, R).
+
+get_idx(Num, Min, Max, N, Idx) :-
+    Raw is truncate((Num - Min) / (Max - Min + 1) * N),
+    Idx is min(N - 1, Raw).
+
+bucket_sort([], []).
+bucket_sort(Arr, Sorted) :-
+    length(Arr, N),
+    min_list(Arr, MinV),
+    max_list(Arr, MaxV),
+    findall(B,
+        (between(0, N-1, I),
+         findall(X, (member(X, Arr), get_idx(X, MinV, MaxV, N, I)), B)),
+        Buckets),
+    maplist(insertion_sort, Buckets, SortedBuckets),
+    flatten(SortedBuckets, Sorted).
+
+:- initialization(
+    bucket_sort([0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68], S),
+    write(S), nl, halt).
