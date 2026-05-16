@@ -1,0 +1,16 @@
+fun countingsort(arr : Array of Integer) : Array of Integer =
+  if arr.isEmpty()
+  then arr
+  else
+    let max = (arr -> max)
+    let count = (new Array of Integer of size (max + 1))
+    let _ = for each x in arr do
+      count[x] := (count[x] + 1)
+    let output = (new Array of Integer of size 0)
+    let _ = for i = 0 to max do
+      for j = 0 to count[i] - 1 do
+        output := (output concatenate [i])
+    output
+
+val test = [5, 2, 8, 1, 9, 3]
+print (countingsort(test))
