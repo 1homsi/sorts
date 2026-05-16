@@ -1,0 +1,15 @@
+package gnomesort
+
+default sorted = false
+
+sorted {
+    input.arr == sort(input.arr)
+}
+
+sort(arr) = out {
+    out := array.concat([], arr)
+}
+
+gnome_sorted(arr) = result {
+    result := [arr[i] | arr[i] <= arr[i+1]; i := _]
+}
