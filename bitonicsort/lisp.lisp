@@ -1,0 +1,24 @@
+(defun compare-and-swap (arr i j direction)
+  (when (eq direction (> (aref arr i) (aref arr j)))
+    (let ((tmp (aref arr i)))
+      (setf (aref arr i) (aref arr j))
+      (setf (aref arr j) tmp))))
+
+(defun bitonic-merge (arr lo cnt direction)
+  (when (> cnt 1)
+    (let ((k (floor cnt 2)))
+      (loop for i from lo below (+ lo k) do
+        (compare-and-swap arr i (+ i k) direction))
+      (bitonic-merge arr lo k direction)
+      (bitonic-merge arr (+ lo k) k direction))))
+
+(defun bitonic-sort (arr lo cnt direction)
+  (when (> cnt 1)
+    (let ((k (floor cnt 2)))
+      (bitonic-sort arr lo k t)
+      (bitonic-sort arr (+ lo k) k nil)
+      (bitonic-merge arr lo cnt direction))))
+
+(let ((data (vector 3 7 4 8 6 2 1 5)))
+  (bitonic-sort data 0 (length data) t)
+  (print data))
