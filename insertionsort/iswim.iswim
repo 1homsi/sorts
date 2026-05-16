@@ -1,0 +1,5 @@
+let insertionSort list = insertSort 1 list
+where insertSort i [] = []
+insertSort i xs = insertSort (i+1) (insert i xs)
+where insert i xs = ...
+in insertionSort [5, 2, 8, 1, 9, 3];
