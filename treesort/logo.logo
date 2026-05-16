@@ -1,0 +1,25 @@
+to tree-sort :arr
+  if :arr = [] [output []]
+  local "root
+  local "sorted
+  make "root se.empty
+  foreach :arr [make "root insert :root ?]
+  make "sorted []
+  inorder :root
+end
+
+to insert :node :val
+  if :node = [] [output list :val [] []]
+  if :val < first :node [output list first :node insert bf :node :val last :node]
+  if :val > first :node [output list first :node bf :node insert last :node :val]
+  output :node
+end
+
+to inorder :node
+  if :node = [] [stop]
+  inorder bf :node
+  print first :node
+  inorder last :node
+end
+
+print tree-sort [5 2 8 1 9 3]
