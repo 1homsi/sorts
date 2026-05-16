@@ -1,0 +1,29 @@
+(DEFINEQ BOGOSORT
+  ((LAMBDA (ARR)
+    (PROG (SORTED)
+      (SETQ SORTED NIL)
+      L1 (COND ((ISSORTED ARR) (RETURN ARR)))
+      (SHUFFLE ARR)
+      (GO L1)))))
+
+(DEFINEQ ISSORTED
+  ((LAMBDA (ARR)
+    (PROG (I)
+      (SETQ I 0)
+      L1 (COND ((GREATERP I (SUB1 (LENGTH ARR))) (RETURN T)))
+      (COND ((GREATERP (NTH ARR I) (NTH ARR (ADD1 I)))
+        (RETURN NIL)))
+      (SETQ I (ADD1 I))
+      (GO L1)))))
+
+(DEFINEQ SHUFFLE
+  ((LAMBDA (ARR)
+    (PROG (I J TMP)
+      (SETQ I 0)
+      L1 (COND ((GREATERP I (LENGTH ARR)) (RETURN T)))
+      (SETQ J (RANDOM (LENGTH ARR)))
+      (SETQ TMP (NTH ARR I))
+      (RPLACA (NTHCDR I ARR) (NTH ARR J))
+      (RPLACA (NTHCDR J ARR) TMP)
+      (SETQ I (ADD1 I))
+      (GO L1)))))
