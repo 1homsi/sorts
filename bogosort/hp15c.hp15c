@@ -1,1 +1,6 @@
-print("Bogosort implementation for hp15c.hp15c")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
