@@ -1,0 +1,19 @@
+def stoogesort(a: Array[Int], i: Int, j: Int) -> Unit = {
+  if (a[j] < a[i]) {
+    let temp = a[j]
+    a[j] = a[i]
+    a[i] = temp
+  }
+  if (j - i > 1) {
+    let t = (j - i + 1) / 3
+    stoogesort(a, i, j - t)
+    stoogesort(a, i + t, j)
+    stoogesort(a, i, j - t)
+  }
+}
+
+def main() -> Unit = {
+  let arr = Array(5, 2, 8, 1, 9, 3)
+  stoogesort(arr, 0, 5)
+  println(arr)
+}
