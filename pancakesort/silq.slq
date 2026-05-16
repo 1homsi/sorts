@@ -1,0 +1,16 @@
+def main() {
+    uint[6] arr = [5, 2, 8, 1, 9, 3];
+    uint n = 6;
+    
+    for uint i in 0..n-1 {
+        for uint j in 0..n-i-1 {
+            if arr[j] > arr[j+1] {
+                uint temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+    
+    print("Pancake Sort: " + arr);
+}
