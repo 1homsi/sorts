@@ -1,0 +1,62 @@
+let timsort = proc(arr, minSize)
+  mergesort(arr, minSize)
+end
+
+let mergesort = proc(arr, minSize)
+  if array_size(arr) <= 1 then
+    arr
+  elif array_size(arr) <= minSize then
+    insertionsort(arr)
+  else
+    let mid = array_size(arr) div 2 in
+    let left = array_sub(arr, 0, mid) in
+    let right = array_sub(arr, mid, array_size(arr) - mid) in
+    merge(mergesort(left, minSize), mergesort(right, minSize))
+  end
+end
+
+let insertionsort = proc(arr)
+  let result = array_copy(arr) in
+  let i = 1 in
+  {
+    do
+      let key = array_get(result, i) in
+      let j = i - 1 in
+      {
+        do
+          if j >= 0 && array_get(result, j) > key then
+            array_put(result, j + 1, array_get(result, j));
+            j := j - 1
+          else
+            skip
+          end
+        until j < 0 || array_get(result, j) <= key
+      };
+      array_put(result, j + 1, key);
+      i := i + 1
+    until i >= array_size(result)
+  };
+  result
+end
+
+let merge = proc(left, right)
+  let result = array_alloc() in
+  let i = 0 in
+  let j = 0 in
+  {
+    do
+      if i < array_size(left) && j < array_size(right) then
+        if array_get(left, i) <= array_get(right, j) then
+          array_put(result, array_size(result), array_get(left, i));
+          i := i + 1
+        else
+          array_put(result, array_size(result), array_get(right, j));
+          j := j + 1
+        end
+      else
+        skip
+      end
+    until i >= array_size(left) || j >= array_size(right)
+  };
+  result
+end
