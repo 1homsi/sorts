@@ -1,0 +1,24 @@
+
+bitonicsort(arr, lo, cnt, dir) =
+  if cnt > 1 then
+    k = cnt / 2 ;
+    bitonicsort(arr, lo, k, 1) ,
+    bitonicsort(arr, lo + k, k, 0) ,
+    bitonicmerge(arr, lo, cnt, dir)
+  else
+    arr
+  end ;
+
+bitonicmerge(arr, lo, cnt, dir) =
+  if cnt > 1 then
+    k = cnt / 2 ;
+    swap_elements(arr, lo, k, dir) ,
+    bitonicmerge(arr, lo, k, dir) ,
+    bitonicmerge(arr, lo + k, k, dir)
+  else
+    arr
+  end ;
+
+swap_elements(arr, lo, k, dir) = arr ;
+
+[5, 2, 8, 1, 9, 3, 7, 4] -> bitonicsort(%, 0, 8, 1) -> write ;
