@@ -1,0 +1,9 @@
+[package]
+name = "insertion-sort"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "insertion_sort"
+
+[dependencies]
