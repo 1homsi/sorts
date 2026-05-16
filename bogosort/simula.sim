@@ -1,36 +1,6 @@
-BEGIN
-    INTEGER ARRAY arr(1:8);
-    INTEGER n, i, j, tmp;
-    REAL r;
-    BOOLEAN sorted;
-
-    n := 8;
-    arr(1) := 3; arr(2) := 1; arr(3) := 4; arr(4) := 1;
-    arr(5) := 5; arr(6) := 9; arr(7) := 2; arr(8) := 6;
-
-    PROCEDURE IsSorted(BOOLEAN RESULT sorted);
-    BEGIN
-        sorted := TRUE;
-        FOR i := 1 STEP 1 UNTIL n - 1 DO
-            IF arr(i) > arr(i + 1) THEN sorted := FALSE;
-    END;
-
-    PROCEDURE Shuffle;
-    BEGIN
-        FOR i := n STEP -1 UNTIL 2 DO
-        BEGIN
-            j := ENTIER(RANDINT(1, i, 1));
-            tmp := arr(i);
-            arr(i) := arr(j);
-            arr(j) := tmp;
-        END;
-    END;
-
-    LOOP:
-    IsSorted(sorted);
-    IF NOT sorted THEN BEGIN Shuffle; GO TO LOOP; END;
-
-    FOR i := 1 STEP 1 UNTIL n DO
-        OUTINT(arr(i), 4);
-    OUTIMAGE;
-END
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
