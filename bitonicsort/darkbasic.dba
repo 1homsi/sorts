@@ -1,0 +1,36 @@
+DIM arr(7)
+arr(0)=3 : arr(1)=7 : arr(2)=4 : arr(3)=8
+arr(4)=6 : arr(5)=2 : arr(6)=1 : arr(7)=5
+
+CALL BITONICSORT 0,8,1
+
+FOR i=0 TO 7
+    PRINT STR$(arr(i))+" ";
+NEXT i
+PRINT
+
+FUNCTION BITONICSORT(lo,cnt,dir)
+    IF cnt>1
+        k=cnt/2
+        BITONICSORT(lo,k,1)
+        BITONICSORT(lo+k,k,0)
+        BITONICMERGE(lo,cnt,dir)
+    ENDIF
+ENDFUNCTION
+
+FUNCTION BITONICMERGE(lo,cnt,dir)
+    IF cnt>1
+        k=cnt/2
+        FOR i=lo TO lo+k-1
+            COMPSWAP(i,i+k,dir)
+        NEXT i
+        BITONICMERGE(lo,k,dir)
+        BITONICMERGE(lo+k,k,dir)
+    ENDIF
+ENDFUNCTION
+
+FUNCTION COMPSWAP(i,j,dir)
+    IF (dir=1 AND arr(i)>arr(j)) OR (dir=0 AND arr(i)<arr(j))
+        t=arr(i) : arr(i)=arr(j) : arr(j)=t
+    ENDIF
+ENDFUNCTION
