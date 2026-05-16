@@ -1,0 +1,9 @@
+environ vocabularies NUMBERS, FINSEQ_1;
+
+begin
+
+theorem sort_by_shuffle:
+  for X being FinSequence of INT holds
+  ex Y being FinSequence of INT st Y = X;
+
+end;
