@@ -1,0 +1,36 @@
+import std/core
+import std/data/array
+
+fun cycle-sort(arr: array<int>): int
+  val n = arr.length
+  var writes := 0
+  var cycle-start := 0
+  while { cycle-start < n - 1 }
+    val item-ref = ref(arr[cycle-start])
+    var pos := cycle-start
+    for-range(cycle-start + 1, n - 1) fn(i)
+      if arr[i] < !item-ref then pos := pos + 1
+    if pos != cycle-start then
+      while { !item-ref == arr[pos] } { pos := pos + 1 }
+      val tmp = arr[pos]
+      arr[pos] := !item-ref
+      item-ref := tmp
+      writes := writes + 1
+      while { pos != cycle-start }
+        pos := cycle-start
+        for-range(cycle-start + 1, n - 1) fn(i)
+          if arr[i] < !item-ref then pos := pos + 1
+        while { !item-ref == arr[pos] } { pos := pos + 1 }
+        val t = arr[pos]
+        arr[pos] := !item-ref
+        item-ref := t
+        writes := writes + 1
+    cycle-start := cycle-start + 1
+  writes
+
+fun main()
+  val arr = array(5, 0)
+  arr[0] := 5; arr[1] := 4; arr[2] := 3; arr[3] := 2; arr[4] := 1
+  val _ = cycle-sort(arr)
+  arr.foreach fn(v) print(v.show ++ " ")
+  println("")
