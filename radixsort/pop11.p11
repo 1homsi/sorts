@@ -1,0 +1,33 @@
+define radixsort(arr);
+  lvars max exp result output count;
+  max_list(arr) -> max;
+  1 -> exp;
+  arr -> result;
+  while max / exp > 0 do
+    countingSortByExp(result, exp) -> result;
+    exp * 10 -> exp;
+  endwhile;
+  result;
+enddefine;
+
+define countingSortByExp(arr, exp);
+  lvars n i output count idx;
+  length(arr) -> n;
+  newarray([1 ^n], 0) -> output;
+  newarray([1 10], 0) -> count;
+  for i from 1 to n do
+    (arr(i) div exp) mod 10 -> idx;
+    count(idx) + 1 -> count(idx);
+  endfor;
+  for i from 2 to 10 do
+    count(i) + count(i - 1) -> count(i);
+  endfor;
+  for i from n downto 1 do
+    (arr(i) div exp) mod 10 -> idx;
+    arr(i) -> output(count(idx));
+    count(idx) - 1 -> count(idx);
+  endfor;
+  output;
+enddefine;
+
+radixsort([5 2 8 1 9 3]) =>
