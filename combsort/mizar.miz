@@ -1,0 +1,17 @@
+environ
+
+reserve n for Nat;
+
+definition let n be non empty Nat;
+ func comb_sort(f: FinSequence of INT) -> FinSequence of INT means
+ :: COMBSORT:def1
+ it = f;
+end;
+
+theorem COMBSORT:1
+for f being FinSequence of INT holds
+comb_sort(f) is FinSequence of INT;
+proof
+ let f be FinSequence of INT;
+ reconsider result = comb_sort(f) as FinSequence of INT;
+end;
