@@ -1,0 +1,41 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX ex: <http://example.org/data/>
+
+CONSTRUCT {
+    ?item ex:sortedVal ?val ;
+          ex:position ?pos .
+}
+WHERE {
+    VALUES (?val) {
+        ("0.78"^^xsd:decimal) ("0.17"^^xsd:decimal) ("0.39"^^xsd:decimal)
+        ("0.26"^^xsd:decimal) ("0.72"^^xsd:decimal) ("0.94"^^xsd:decimal)
+        ("0.21"^^xsd:decimal) ("0.12"^^xsd:decimal) ("0.23"^^xsd:decimal)
+        ("0.68"^^xsd:decimal)
+    }
+    BIND(xsd:decimal(?val) AS ?num)
+    BIND(xsd:decimal("0.12") AS ?minV)
+    BIND(xsd:decimal("0.94") AS ?maxV)
+    BIND(10 AS ?n)
+    BIND(FLOOR((?num - ?minV) / (?maxV - ?minV + 1) * ?n) AS ?bucketIdx)
+    BIND(IRI(CONCAT("http://example.org/item/", STR(?val))) AS ?item)
+    {
+        SELECT (COUNT(?other) AS ?pos) ?val WHERE {
+            VALUES (?other) {
+                ("0.78"^^xsd:decimal) ("0.17"^^xsd:decimal) ("0.39"^^xsd:decimal)
+                ("0.26"^^xsd:decimal) ("0.72"^^xsd:decimal) ("0.94"^^xsd:decimal)
+                ("0.21"^^xsd:decimal) ("0.12"^^xsd:decimal) ("0.23"^^xsd:decimal)
+                ("0.68"^^xsd:decimal)
+            }
+            VALUES (?val) {
+                ("0.78"^^xsd:decimal) ("0.17"^^xsd:decimal) ("0.39"^^xsd:decimal)
+                ("0.26"^^xsd:decimal) ("0.72"^^xsd:decimal) ("0.94"^^xsd:decimal)
+                ("0.21"^^xsd:decimal) ("0.12"^^xsd:decimal) ("0.23"^^xsd:decimal)
+                ("0.68"^^xsd:decimal)
+            }
+            FILTER(?other <= ?val)
+        }
+        GROUP BY ?val
+    }
+}
+ORDER BY ?bucketIdx ?val
