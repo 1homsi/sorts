@@ -1,0 +1,23 @@
+PROGRAM SelectionSort;
+VAR arr: ARRAY[1..6] OF INT;
+VAR n, i, j, min_idx, tmp: INT;
+
+BEGIN
+  arr[1] := 5; arr[2] := 2; arr[3] := 8;
+  arr[4] := 1; arr[5] := 9; arr[6] := 3;
+  n := 6;
+  
+  FOR i FROM 1 TO n - 1 DO
+    min_idx := i;
+    FOR j FROM i + 1 TO n DO
+      IF arr[j] < arr[min_idx] THEN
+        min_idx := j;
+      END;
+    END;
+    tmp := arr[i];
+    arr[i] := arr[min_idx];
+    arr[min_idx] := tmp;
+  END;
+  
+  WRITELN(arr);
+END.
