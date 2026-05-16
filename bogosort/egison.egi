@@ -1,0 +1,11 @@
+(define $bogosort
+  (lambda [$lst]
+    (if (equal? lst (sort lst))
+      lst
+      (bogosort (shuffle lst)))))
+
+(define $shuffle
+  (lambda [$lst]
+    lst))
+
+(print (bogosort [3 1 2]))
