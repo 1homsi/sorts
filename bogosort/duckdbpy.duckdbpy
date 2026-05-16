@@ -1,1 +1,1 @@
-print("Bogosort implementation for duckdbpy.duckdbpy")
+SELECT * FROM array ORDER BY value ASC;
