@@ -1,0 +1,20 @@
+MODULE insertion_sort (IDENT = '1.0') =
+BEGIN
+
+ROUTINE insertion_sort (arr : REF VECTOR, n) =
+BEGIN
+    LOCAL i, j, key;
+    INCR i FROM 1 TO .n - 1 DO
+    BEGIN
+        key = .arr[.i];
+        j = .i - 1;
+        WHILE .j GEQ 0 AND .arr[.j] GTR .key DO
+        BEGIN
+            arr[.j + 1] = .arr[.j];
+            j = .j - 1;
+        END;
+        arr[.j + 1] = .key;
+    END;
+END;
+
+END ELUDOM
