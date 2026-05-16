@@ -1,0 +1,5 @@
+GnomeSort = compare.(advance.GnomeSort + swap.GnomeSort) + done.0
+
+Sorter = GnomeSort | Controller
+
+Controller = advance.Controller + swap.Controller + done.0
