@@ -1,0 +1,31 @@
+let rec bitonic_merge dir = function
+    | [] -> []
+    | [x] -> [x]
+    | xs ->
+        let n = List.length xs in
+        let k = n / 2 in
+        let left = List.filteri (fun i _ -> i < k) xs in
+        let right = List.filteri (fun i _ -> i >= k) xs in
+        let pairs = List.combine left right in
+        let swapped = List.map (fun (a,b) ->
+            if dir = (a > b) then (b,a) else (a,b)) pairs in
+        bitonic_merge dir (List.map fst swapped) @
+        bitonic_merge dir (List.map snd swapped)
+
+let rec bitonic_sort dir = function
+    | [] -> []
+    | [x] -> [x]
+    | xs ->
+        let n = List.length xs in
+        let k = n / 2 in
+        let left = List.filteri (fun i _ -> i < k) xs in
+        let right = List.filteri (fun i _ -> i >= k) xs in
+        let sl = bitonic_sort true left in
+        let sr = bitonic_sort false right in
+        bitonic_merge dir (sl @ sr)
+
+let () =
+    let data = [3; 7; 4; 8; 6; 2; 1; 5] in
+    let sorted = bitonic_sort true data in
+    List.iter (fun x -> print_int x; print_char ' ') sorted;
+    print_newline ()
