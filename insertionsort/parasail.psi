@@ -1,0 +1,17 @@
+func InsertionSort(A : Array<Int>) -> Array<Int> is
+  var Result := A;
+  for I in 1..Length(A)-1 loop
+    var Key := Result[I];
+    var J := I - 1;
+    while J >= 0 && Result[J] > Key loop
+      Result[J+1] := Result[J];
+      J -= 1;
+    end loop;
+    Result[J+1] := Key;
+  end loop;
+  return Result;
+end func;
+
+func Main() is
+  Println(InsertionSort([5, 2, 8, 1, 9, 3]));
+end func;
