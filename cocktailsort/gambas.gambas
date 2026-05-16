@@ -1,0 +1,29 @@
+Public Sub CocktailSort(arr As Integer[], n As Integer)
+    Dim swapped As Boolean = True
+    Dim start As Integer = 0
+    Dim ending As Integer = n - 1
+    Dim i As Integer, tmp As Integer
+    While swapped
+        swapped = False
+        For i = start To ending - 1
+            If arr[i] > arr[i + 1] Then
+                tmp = arr[i]
+                arr[i] = arr[i + 1]
+                arr[i + 1] = tmp
+                swapped = True
+            EndIf
+        Next
+        If Not swapped Then Return
+        swapped = False
+        ending -= 1
+        For i = ending - 1 DownTo start
+            If arr[i] > arr[i + 1] Then
+                tmp = arr[i]
+                arr[i] = arr[i + 1]
+                arr[i + 1] = tmp
+                swapped = True
+            EndIf
+        Next
+        start += 1
+    Wend
+End Sub
