@@ -1,0 +1,19 @@
+From iris.heap_lang Require Import lang proofmode notation.
+
+Definition insert_sort : val :=
+  rec: "insert_sort" "arr" "n" :=
+    let: "i" := ref #1 in
+    (rec: "outer" <> :=
+      if: !"i" < "n" then
+        let: "key" := !("arr" +ₗ !"i") in
+        let: "j" := ref (!"i" - #1) in
+        (rec: "inner" <> :=
+          if: !"j" ≥ #0 ∧ !("arr" +ₗ !"j") > "key" then
+            ("arr" +ₗ (!"j" + #1)) <- !("arr" +ₗ !"j");;
+            "j" <- !"j" - #1;;
+            "inner" #()
+          else #()) #();;
+        ("arr" +ₗ (!"j" + #1)) <- "key";;
+        "i" <- !"i" + #1;;
+        "outer" #()
+      else #()) #().
