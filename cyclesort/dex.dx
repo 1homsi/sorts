@@ -1,0 +1,37 @@
+def cyclesort (arr : n=>Int) : n=>Int =
+  n_val = n
+  pos_ref = Ref 0
+  while (!pos_ref < n_val)
+    pos = !pos_ref
+    item = arr.pos
+    cycles_ref = Ref 0
+    for i:(Fin n_val)
+      if i != pos && arr.i < item
+        cycles_ref := !cycles_ref + 1
+    cycles = !cycles_ref
+    if cycles != 0
+      while (arr.(!pos_ref)) == item
+        pos_ref := !pos_ref + 1
+      pos = !pos_ref
+      temp = arr.pos
+      arr_mut = for i:(Fin n_val)
+        if i == pos then item else arr.i
+      arr_ref = Ref arr_mut
+      item_ref = Ref temp
+      while (!cycles_ref > 0)
+        cycles_ref := 0
+        for i:(Fin n_val)
+          if i != pos && arr_ref!(i) < !item_ref
+            cycles_ref := !cycles_ref + 1
+        cycles = !cycles_ref
+        while (arr_ref!(!pos_ref)) == !item_ref
+          pos_ref := !pos_ref + 1
+        pos = !pos_ref
+        temp = arr_ref!.pos
+        arr_mut = for i:(Fin n_val)
+          if i == pos then !item_ref else arr_ref!.i
+        arr_ref := arr_mut
+        item_ref := temp
+        cycles_ref := !cycles_ref - 1
+    pos_ref := !pos_ref + 1
+  arr
