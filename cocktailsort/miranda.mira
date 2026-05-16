@@ -1,0 +1,25 @@
+cocktailSort :: [num] -> [num]
+cocktailSort [] = []
+cocktailSort [x] = [x]
+cocktailSort xs
+    = go xs 0 (# xs - 1) True
+      where
+      go arr s e False = arr
+      go arr s e True
+          = go arr2 (s+1) (e-1) sw2
+            where
+            (arr1, sw1) = forward arr s e False
+            (arr2, sw2) = backward arr1 s (e-1) False
+      forward arr i e sw
+          = (arr, sw),                 if i >= e
+          = forward arr' (i+1) e True, if arr!i > arr!(i+1)
+          = forward arr  (i+1) e sw,   otherwise
+            where arr' = swapAt arr i (i+1)
+      backward arr i s sw
+          = (arr, sw),                  if i < s
+          = backward arr' (i-1) s True, if arr!i > arr!(i+1)
+          = backward arr  (i-1) s sw,   otherwise
+            where arr' = swapAt arr i (i+1)
+      swapAt arr i j
+          = [arr!k | k <- [0..#arr-1], k ~= i, k ~= j] ++
+            [(arr!j, i), (arr!i, j)]
