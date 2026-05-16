@@ -1,0 +1,26 @@
+import structure Array = Array
+import structure Real = Real
+import structure Int = Int
+
+fun combSort arr =
+    let
+        val n = Array.length arr
+        val gap = ref n
+        val sorted = ref false
+    in
+        while not (!sorted) do (
+            gap := Int.max (1, Real.trunc (Real.fromInt (!gap) / 1.3));
+            if !gap <= 1 then (gap := 1; sorted := true) else ();
+            Array.appi (fn (i, v) =>
+                if i + !gap < n then
+                    let val w = Array.sub (arr, i + !gap)
+                    in if v > w then (
+                        Array.update (arr, i, w);
+                        Array.update (arr, i + !gap, v);
+                        sorted := false
+                    ) else ()
+                    end
+                else ()) arr
+        );
+        arr
+    end
