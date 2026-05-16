@@ -1,0 +1,46 @@
+Plankalcul Counting Sort Implementation
+
+PROGRAM Countingsort
+
+DEFINITIONS:
+  DEF VAR arr INT [1..6]
+  DEF VAR max INT
+  DEF VAR count INT [0..9]
+  DEF VAR output INT [0..9]
+  DEF VAR i INT
+  DEF VAR j INT
+
+MAIN EXECUTION:
+  arr[1] := 5
+  arr[2] := 2
+  arr[3] := 8
+  arr[4] := 1
+  arr[5] := 9
+  arr[6] := 3
+
+  max := 0
+  DO i = 1 TO 6
+    IF arr[i] > max THEN
+      max := arr[i]
+    ENDIF
+  ENDDO
+
+  DO i = 0 TO 9
+    count[i] := 0
+  ENDDO
+
+  DO i = 1 TO 6
+    count[arr[i]] := count[arr[i]] + 1
+  ENDDO
+
+  j := 1
+  DO i = 0 TO max
+    DO WHILE count[i] > 0
+      output[j] := i
+      j := j + 1
+      count[i] := count[i] - 1
+    ENDDO
+  ENDDO
+
+  PRINT output
+END PROGRAM
