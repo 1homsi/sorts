@@ -1,0 +1,32 @@
+package heapsort
+
+uses java.util.ArrayList
+
+function heapify(arr: ArrayList<Integer>, n: int, i: int) {
+    var largest = i
+    var left = 2 * i + 1
+    var right = 2 * i + 2
+    if (left < n && arr.get(left) > arr.get(largest)) { largest = left }
+    if (right < n && arr.get(right) > arr.get(largest)) { largest = right }
+    if (largest != i) {
+        var tmp = arr.get(i)
+        arr.set(i, arr.get(largest))
+        arr.set(largest, tmp)
+        heapify(arr, n, largest)
+    }
+}
+
+function heapsort(arr: ArrayList<Integer>) {
+    var n = arr.size()
+    for (i in n / 2 - 1..0 step -1) { heapify(arr, n, i) }
+    for (i in n - 1..1 step -1) {
+        var tmp = arr.get(0)
+        arr.set(0, arr.get(i))
+        arr.set(i, tmp)
+        heapify(arr, i, 0)
+    }
+}
+
+var arr = new ArrayList<Integer>() { 12, 11, 13, 5, 6, 7 }
+heapsort(arr)
+print(arr)
