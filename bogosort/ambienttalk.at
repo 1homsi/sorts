@@ -1,29 +1,6 @@
-def arr := [3, 1, 4, 1, 5, 9, 2, 6];
-def n := arr.length;
-
-def isSorted(a) {
-    def sorted := true;
-    1.to(n-1, {|i|
-        if: a[i] > a[i+1] then: { sorted := false }
-    });
-    sorted
-};
-
-def shuffle(a) {
-    def b := a.copy;
-    n.downTo(2, {|i|
-        def j := (n.random) + 1;
-        def tmp := b[i];
-        b[i] := b[j];
-        b[j] := tmp
-    });
-    b
-};
-
-def bogosort(a) {
-    def curr := a;
-    {!isSorted(curr)}.whileTrue: { curr := shuffle(curr) };
-    curr
-};
-
-system.println(bogosort(arr));
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
