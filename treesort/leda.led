@@ -1,0 +1,43 @@
+class Node
+  value : integer
+  left : Node
+  right : Node
+
+  procedure init(v : integer)
+    value := v
+    left := nil
+    right := nil
+  end
+end
+
+procedure insert(node : Node, val : integer) : Node
+  if node = nil then
+    var n : Node
+    new(n)
+    n.init(val)
+    return n
+  end
+
+  if val < node.value then
+    node.left := insert(node.left, val)
+  else if val > node.value then
+    node.right := insert(node.right, val)
+  end
+
+  return node
+end
+
+procedure inorder(node : Node)
+  if node <> nil then
+    inorder(node.left)
+    output node.value
+    inorder(node.right)
+  end
+end
+
+var arr : array 1..6 of integer = [5, 2, 8, 1, 9, 3]
+var root : Node := nil
+for i := 1 to 6 do
+  root := insert(root, arr[i])
+end
+inorder(root)
