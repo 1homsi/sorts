@@ -1,1 +1,1 @@
-print("Bogosort implementation for wgpu.wgpu")
+bogosort = true
