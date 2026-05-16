@@ -1,0 +1,22 @@
+begin
+    integer array arr[1:7];
+    integer n, i, tmp;
+    boolean swapped;
+    arr[1] := 64; arr[2] := 34; arr[3] := 25; arr[4] := 12;
+    arr[5] := 22; arr[6] := 11; arr[7] := 90;
+    n := 7;
+    swapped := true;
+    for swapped do begin
+        swapped := false;
+        for i := 1 step 1 until n-1 do
+            if arr[i] > arr[i+1] then begin
+                tmp := arr[i];
+                arr[i] := arr[i+1];
+                arr[i+1] := tmp;
+                swapped := true
+            end;
+        n := n - 1
+    end;
+    for i := 1 step 1 until 7 do
+        outinteger(arr[i])
+end
