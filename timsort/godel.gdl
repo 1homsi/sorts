@@ -1,0 +1,42 @@
+:-
+
+ PREDICATE(timsort(array, int, array)).
+ PREDICATE(mergesort(array, int, array)).
+ PREDICATE(insertionsort(array, array)).
+ PREDICATE(merge(array, array, array)).
+
+ timsort(Arr, MinSize, Result) :-
+   mergesort(Arr, MinSize, Result).
+
+ mergesort(Arr, MinSize, Arr) :-
+   length(Arr, Len), Len =< 1.
+ 
+ mergesort(Arr, MinSize, Result) :-
+   length(Arr, Len), Len =< MinSize,
+   insertionsort(Arr, Result).
+ 
+ mergesort(Arr, MinSize, Result) :-
+   length(Arr, Len), Len > MinSize,
+   Mid is Len // 2,
+   split(Arr, Mid, Left, Right),
+   mergesort(Left, MinSize, SortedLeft),
+   mergesort(Right, MinSize, SortedRight),
+   merge(SortedLeft, SortedRight, Result).
+
+ insertionsort([], []).
+ insertionsort([H|T], Result) :-
+   insertionsort(T, SortedT),
+   insert(H, SortedT, Result).
+
+ insert(X, [], [X]).
+ insert(X, [H|T], [X, H|T]) :- X =< H.
+ insert(X, [H|T], [H|R]) :- X > H, insert(X, T, R).
+
+ merge([], R, R).
+ merge(L, [], L).
+ merge([H1|T1], [H2|T2], [H1|R]) :- H1 =< H2, merge(T1, [H2|T2], R).
+ merge([H1|T1], [H2|T2], [H2|R]) :- H1 > H2, merge([H1|T1], T2, R).
+
+ split([], _, [], []).
+ split(List, 0, [], List).
+ split([H|T], N, [H|L], R) :- N > 0, N1 is N - 1, split(T, N1, L, R).
