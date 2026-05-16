@@ -1,0 +1,39 @@
+define cyclesort(arr) -> sorted;
+  lvars n = length(arr), pos = 0, item, cycles, i, temp;
+  while pos < n do
+    arr(pos) -> item;
+    0 -> cycles;
+    for i from 1 to n do
+      if i /== pos and arr(i) < item then
+        cycles + 1 -> cycles;
+      endif;
+    endfor;
+    if cycles /== 0 then
+      while arr(pos) == item do
+        pos + 1 -> pos;
+      endwhile;
+      arr(pos) -> temp;
+      item -> arr(pos);
+      temp -> item;
+      while cycles > 0 do
+        0 -> cycles;
+        for i from 1 to n do
+          if i /== pos and arr(i) < item then
+            cycles + 1 -> cycles;
+          endif;
+        endfor;
+        while arr(pos) == item do
+          pos + 1 -> pos;
+        endwhile;
+        arr(pos) -> temp;
+        item -> arr(pos);
+        temp -> item;
+        cycles - 1 -> cycles;
+      endwhile;
+    endif;
+    pos + 1 -> pos;
+  endwhile;
+  arr -> sorted;
+enddefine;
+
+cyclesort({5, 2, 8, 1, 9, 3}) =>
