@@ -1,0 +1,33 @@
+cocktail_sort := func(arr);
+    n := #arr;
+    swapped := true;
+    start := 1;
+    ending := n;
+    while swapped do
+        swapped := false;
+        for i in [start..ending-1] do
+            if arr(i) > arr(i+1) then
+                tmp := arr(i);
+                arr(i) := arr(i+1);
+                arr(i+1) := tmp;
+                swapped := true;
+            end;
+        end;
+        if not swapped then return arr; end;
+        swapped := false;
+        ending := ending - 1;
+        for i in [ending-1, ending-2..start] do
+            if arr(i) > arr(i+1) then
+                tmp := arr(i);
+                arr(i) := arr(i+1);
+                arr(i+1) := tmp;
+                swapped := true;
+            end;
+        end;
+        start := start + 1;
+    end;
+    return arr;
+end;
+
+arr := [5, 3, 8, 1, 9, 2, 7, 4, 6, 0];
+print(cocktail_sort(arr));
