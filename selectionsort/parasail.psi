@@ -1,0 +1,16 @@
+procedure SelectionSort(var Arr : Array<Univ_Integer>) {
+  const N = Arr.Length();
+  for I in 1..N-1 forward loop
+    var Min_Idx := I;
+    for J in I+1..N forward loop
+      if Arr[J] < Arr[Min_Idx] then
+        Min_Idx := J;
+      end if;
+    end loop;
+    const Tmp := Arr[I];
+    Arr[I] := Arr[Min_Idx];
+    Arr[Min_Idx] := Tmp;
+  end loop;
+}
+
+SelectionSort(Arr => [5, 2, 8, 1, 9, 3]);
