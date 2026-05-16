@@ -1,0 +1,13 @@
+DEFINE
+  bubble-pass ==
+    [] false
+    [ [null] [pop] [] [uncons] ifte ]
+    [ dup rest null
+      [ swap second > [swap] [] if cons second ]
+      []
+      ifte
+    ]
+    linrec ;
+
+  bubble-sort ==
+    [bubble-pass] [second] until first .
