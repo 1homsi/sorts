@@ -1,0 +1,7 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sort: <http://example.org/sort#>
+
+SELECT ?sorted WHERE {
+  VALUES ?input { "3 7 4 8 6 2 1 5" }
+  BIND(STRSPLIT(?input, " ") AS ?arr)
+}
