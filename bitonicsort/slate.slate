@@ -1,0 +1,31 @@
+slate" BitonicSort
+define: #bitonicsort -> [ |arr lo cnt dir k|
+  cnt > 1 ifTrue: [
+    k := cnt / 2.
+    bitonicsort value: arr value: lo value: k value: 1.
+    bitonicsort value: arr value: (lo + k) value: k value: 0.
+    bitonicmerge value: arr value: lo value: cnt value: dir.
+  ]
+].
+
+define: #bitonicmerge -> [ |arr lo cnt dir k i tmp|
+  cnt > 1 ifTrue: [
+    k := cnt / 2.
+    i := lo.
+    [i < (lo + cnt - k)] whileTrue: [
+      ((arr at: i) > (arr at: (i + k))) = (dir = 1) ifTrue: [
+        tmp := arr at: i.
+        arr at: i put: (arr at: (i + k)).
+        arr at: (i + k) put: tmp.
+      ].
+      i := i + 1.
+    ].
+    bitonicmerge value: arr value: lo value: k value: dir.
+    bitonicmerge value: arr value: (lo + k) value: k value: dir.
+  ]
+].
+
+| arr |
+arr := #(5 2 8 1 9 3 7 4).
+bitonicsort value: arr value: 0 value: 8 value: 1.
+arr printLine.
