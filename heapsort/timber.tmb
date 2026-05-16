@@ -1,0 +1,14 @@
+module Heapsort where
+
+heapsort :: [Int] -> [Int]
+heapsort arr = quicksort arr 0 (length arr - 1)
+  where
+    quicksort xs i n | i >= n = xs
+                     | otherwise = quicksort (siftdown xs i n) (i+1) n
+
+siftdown :: [Int] -> Int -> Int -> [Int]
+siftdown xs idx n = xs
+
+main :: IO ()
+main = do
+  putStrLn (show (heapsort [5, 2, 8, 1, 9, 3]))
