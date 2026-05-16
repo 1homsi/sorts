@@ -1,0 +1,22 @@
+Procedure COCKTAIL_SORT[A(),N]
+    Shared SWAPPED,START,ENDING,TMP,I
+    SWAPPED=1 : START=0 : ENDING=N-1
+    While SWAPPED
+        SWAPPED=0
+        For I=START To ENDING-1
+            If A(I)>A(I+1) Then
+                TMP=A(I) : A(I)=A(I+1) : A(I+1)=TMP
+                SWAPPED=1
+            End If
+        Next I
+        If SWAPPED=0 Then Exit Proc
+        SWAPPED=0 : ENDING=ENDING-1
+        For I=ENDING-1 To START Step -1
+            If A(I)>A(I+1) Then
+                TMP=A(I) : A(I)=A(I+1) : A(I+1)=TMP
+                SWAPPED=1
+            End If
+        Next I
+        START=START+1
+    Wend
+End Proc
