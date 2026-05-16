@@ -1,0 +1,18 @@
+def quicksort(arr)
+  if arr.length() <= 1
+    return arr
+  end
+  var pivot = arr[0]
+  var less = []
+  var greater = []
+  for i in 1..arr.length() - 1
+    if arr[i] <= pivot
+      less.append(arr[i])
+    else
+      greater.append(arr[i])
+    end
+  end
+  return quicksort(less) + [pivot] + quicksort(greater)
+end
+
+print(quicksort([5, 2, 8, 1, 9, 3]))
