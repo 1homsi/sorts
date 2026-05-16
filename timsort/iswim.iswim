@@ -1,0 +1,43 @@
+(define timsort
+  (lambda (arr minSize)
+    (mergesort arr minSize)))
+
+(define mergesort
+  (lambda (arr minSize)
+    (cond
+      ((<= (length arr) 1) arr)
+      ((<= (length arr) minSize) (insertionsort arr))
+      (else
+        (let ((mid (quotient (length arr) 2)))
+          (merge
+            (mergesort (take arr mid) minSize)
+            (mergesort (drop arr mid) minSize)))))))
+
+(define take
+  (lambda (lst n)
+    (if (or (zero? n) (null? lst))
+      (quote ())
+      (cons (car lst) (take (cdr lst) (- n 1))))))
+
+(define drop
+  (lambda (lst n)
+    (if (or (zero? n) (null? lst))
+      lst
+      (drop (cdr lst) (- n 1)))))
+
+(define insertionsort
+  (lambda (arr)
+    (merge-all (map (lambda (x) (list x)) arr))))
+
+(define merge
+  (lambda (left right)
+    (cond
+      ((null? left) right)
+      ((null? right) left)
+      ((<= (car left) (car right))
+       (cons (car left) (merge (cdr left) right)))
+      (else
+       (cons (car right) (merge left (cdr right)))))))
+
+(display (timsort (quote (5 2 8 1 9 3)) 32))
+(newline)
