@@ -1,0 +1,32 @@
+function Node(value) {
+  this.value = value;
+  this.left = null;
+  this.right = null;
+}
+
+function insert(node, val) {
+  if (node == null) {
+    return new Node(val);
+  }
+  if (val < node.value) {
+    node.left = insert(node.left, val);
+  } else if (val > node.value) {
+    node.right = insert(node.right, val);
+  }
+  return node;
+}
+
+function inorder(node) {
+  if (node != null) {
+    inorder(node.left);
+    WScript.Echo(node.value);
+    inorder(node.right);
+  }
+}
+
+var root = null;
+var arr = [5, 2, 8, 1, 9, 3];
+for (var i = 0; i < arr.length; i++) {
+  root = insert(root, arr[i]);
+}
+inorder(root);
