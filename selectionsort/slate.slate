@@ -1,0 +1,19 @@
+[ :arr |
+  arr size => [n |
+    0 to: n - 2 do: [i |
+      i => [minIdx |
+        i + 1 to: n - 1 do: [j |
+          (arr at: j) < (arr at: minIdx) 
+            ifTrue: [j => minIdx]
+        ].
+        (arr at: i) => [tmp |
+          arr at: i put: (arr at: minIdx).
+          arr at: minIdx put: tmp
+        ]
+      ]
+    ]
+  ].
+  arr
+] => selectionSort.
+
+{5. 2. 8. 1. 9. 3} selectionSort printLine.
