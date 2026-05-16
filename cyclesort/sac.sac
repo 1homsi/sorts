@@ -1,0 +1,55 @@
+use Array: all;
+use StdIO: all;
+
+int[.] cycleSort(int[.] arr)
+{
+    int n = shape(arr)[0];
+    int writes = 0;
+    int[.] a = arr;
+
+    for (int cycleStart = 0; cycleStart < n - 1; cycleStart++) {
+        int item = a[cycleStart];
+        int pos = cycleStart;
+        for (int i = cycleStart + 1; i < n; i++) {
+            if (a[i] < item) {
+                pos = pos + 1;
+            }
+        }
+        if (pos != cycleStart) {
+            while (item == a[pos]) {
+                pos = pos + 1;
+            }
+            int tmp = a[pos];
+            a = modarray(a, [pos], item);
+            item = tmp;
+            writes = writes + 1;
+            while (pos != cycleStart) {
+                pos = cycleStart;
+                for (int i = cycleStart + 1; i < n; i++) {
+                    if (a[i] < item) {
+                        pos = pos + 1;
+                    }
+                }
+                while (item == a[pos]) {
+                    pos = pos + 1;
+                }
+                tmp = a[pos];
+                a = modarray(a, [pos], item);
+                item = tmp;
+                writes = writes + 1;
+            }
+        }
+    }
+    return a;
+}
+
+int main()
+{
+    int[5] arr = [5, 4, 3, 2, 1];
+    int[.] sorted = cycleSort(arr);
+    for (int i = 0; i < 5; i++) {
+        printf("%d ", sorted[i]);
+    }
+    printf("\n");
+    return 0;
+}
