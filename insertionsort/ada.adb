@@ -1,0 +1,14 @@
+procedure Insertion_Sort (Arr : in out Integer_Array) is
+   Key : Integer;
+   J   : Integer;
+begin
+   for I in Arr'First + 1 .. Arr'Last loop
+      Key := Arr (I);
+      J   := I - 1;
+      while J >= Arr'First and then Arr (J) > Key loop
+         Arr (J + 1) := Arr (J);
+         J := J - 1;
+      end loop;
+      Arr (J + 1) := Key;
+   end loop;
+end Insertion_Sort;
