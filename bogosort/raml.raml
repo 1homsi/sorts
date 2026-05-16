@@ -1,1 +1,1 @@
-print("Bogosort implementation for raml.raml")
+bogosort xs = if sorted xs then xs else bogosort (shuffle xs)
