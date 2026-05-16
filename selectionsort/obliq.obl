@@ -1,0 +1,24 @@
+let SelectionSort = proc (a: array_of any) is
+  {
+    var arr = a;
+    var n = number_of(arr);
+    var i = 0;
+    { i < n - 1 } do_while
+      {
+        var min_idx = i;
+        var j = i + 1;
+        { j < n } do_while
+          {
+            if arr[j] < arr[min_idx] then min_idx := j else skip;
+            j := j + 1
+          };
+        var tmp = arr[i];
+        arr[i] := arr[min_idx];
+        arr[min_idx] := tmp;
+        i := i + 1
+      };
+    arr
+  }
+end
+
+print(SelectionSort([5, 2, 8, 1, 9, 3]))
