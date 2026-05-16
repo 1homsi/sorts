@@ -1,0 +1,9 @@
+gnome_sort :: [num] -> [num]
+gnome_sort xs = gnome_loop xs 0 (#xs)
+
+gnome_loop :: [num] -> num -> num -> [num]
+gnome_loop arr i n
+    = arr, if i >= n
+    = gnome_loop arr (i+1) n, if i = 0
+    = gnome_loop arr (i+1) n, if arr!i >= arr!(i-1)
+    = gnome_loop (swap arr i (i-1)) (i-1) n, otherwise
