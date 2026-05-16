@@ -1,0 +1,23 @@
+define bucketSort(arr, maxVal);
+  lvars buckets, result, i, num, bucket;
+  if maxVal == 0 then arr
+  else
+    newarray(maxVal) -> buckets;
+    for i from 0 to maxVal - 1 do
+      [] -> buckets(i + 1);
+    endfor;
+    for num in arr do
+      if num >= 0 and num < maxVal then
+        [num | buckets(num + 1)] -> buckets(num + 1);
+      endif;
+    endfor;
+    [] -> result;
+    for i from 0 to maxVal - 1 do
+      for num in buckets(i + 1) do
+        [num | result] -> result;
+      endfor;
+    endfor;
+    reverse(result);
+  endif;
+enddefine;
+bucketSort([5, 2, 8, 1, 9, 3], 10) =>
