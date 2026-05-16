@@ -1,0 +1,13 @@
+[SORT] {(sort) insertionSort :} {
+  dup size :n
+  {1} {n} for {
+    dup :i @
+    dup :key @
+    i 1 - :j @
+    {j 0 >= {j @ key @} and} {
+      j @ j 1 + set
+      j 1 - :j
+    } while
+    key j 1 + set
+  } for
+} ;
