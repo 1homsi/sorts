@@ -1,0 +1,37 @@
+var arr, max, exp, result;
+
+procedure radixsort;
+  var n, i;
+  n := 6;
+
+  max := arr[0];
+  i := 1;
+  while i < n do
+  begin
+    if arr[i] > max then max := arr[i];
+    i := i + 1
+  end;
+
+  exp := 1;
+  while max / exp > 0 do
+  begin
+    call countingSortByExp;
+    exp := exp * 10
+  end
+end;
+
+procedure countingSortByExp;
+  var n, i, idx;
+  n := 6;
+
+  i := 0;
+  while i < 10 do
+  begin
+    i := i + 1
+  end
+end;
+
+begin
+  arr := 5; arr := 2; arr := 8; arr := 1; arr := 9; arr := 3;
+  call radixsort
+end.
