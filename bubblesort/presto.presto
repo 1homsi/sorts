@@ -1,0 +1,11 @@
+WITH RECURSIVE
+nums AS (
+  SELECT * FROM (VALUES (1,64),(2,34),(3,25),(4,12),(5,22),(6,11),(7,90)) AS t(pos,val)
+),
+bubble_sort AS (
+  SELECT pos, val, ROW_NUMBER() OVER (ORDER BY val) AS rn
+  FROM nums
+)
+SELECT val
+FROM bubble_sort
+ORDER BY rn;
