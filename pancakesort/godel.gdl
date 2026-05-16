@@ -1,0 +1,10 @@
+EXPORT pancakesort.
+
+pancakesort([],[]).
+pancakesort(Ls,Sorted) :-
+    min(Ls,Min),
+    delete(Min,Ls,Rest),
+    pancakesort(Rest,SortedRest),
+    append(SortedRest,[Min],Sorted).
+
+MIN QUERY :: pancakesort([5,2,8,1,9,3], X). DISPLAY X.
