@@ -1,0 +1,35 @@
+def timsort (arr : Array Int) (minSize : Int) : Array Int =
+  mergesort arr minSize
+
+def mergesort (arr : Array Int) (minSize : Int) : Array Int =
+  if (length arr) <= 1
+  then arr
+  else if (length arr) <= minSize
+  then insertionsort arr
+  else
+    let mid = (length arr) / 2
+        left = take mid arr
+        right = drop mid arr
+    in merge (mergesort left minSize) (mergesort right minSize)
+
+def insertionsort (arr : Array Int) : Array Int =
+  fold arr [] (est x =>
+    insert x rest)
+
+def insert (x : Int) (arr : Array Int) : Array Int =
+  case arr of
+    [] => [x]
+    h::t => if x <= h then (x::h::t) else (h::(insert x t))
+
+def merge (left : Array Int) (right : Array Int) : Array Int =
+  case left of
+    [] => right
+    l_h::l_t =>
+      case right of
+        [] => left
+        r_h::r_t =>
+          if l_h <= r_h
+          then (l_h::(merge l_t right))
+          else (r_h::(merge left r_t))
+
+print (timsort [5, 2, 8, 1, 9, 3] 32)
