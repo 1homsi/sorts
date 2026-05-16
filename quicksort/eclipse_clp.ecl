@@ -1,0 +1,16 @@
+quicksort([], []).
+quicksort([X], [X]) :- !.
+quicksort([H|T], Sorted) :-
+  partition(T, H, Less, Greater),
+  quicksort(Less, SortedLess),
+  quicksort(Greater, SortedGreater),
+  append(SortedLess, [H|SortedGreater], Sorted).
+
+partition([], _, [], []).
+partition([H|T], Pivot, [H|Less], Greater) :-
+  H =< Pivot, !,
+  partition(T, Pivot, Less, Greater).
+partition([H|T], Pivot, Less, [H|Greater]) :-
+  partition(T, Pivot, Less, Greater).
+
+?- quicksort([5, 2, 8, 1, 9, 3], X), write(X), nl.
