@@ -1,0 +1,33 @@
+import Data.List (foldl')
+import Data.Array (Array, listArray, (!), (//), elems, bounds)
+
+heapify :: Array Int Int -> Int -> Int -> Array Int Int
+heapify arr n i =
+  let left = 2 * i + 1
+      right = 2 * i + 2
+      largest0 = if left < n && arr ! left > arr ! i then left else i
+      largest1 = if right < n && arr ! right > arr ! largest0 then right else largest0
+  in if largest1 /= i
+     then let arr' = arr // [(i, arr ! largest1), (largest1, arr ! i)]
+          in heapify arr' n largest1
+     else arr
+
+buildHeap :: Array Int Int -> Int -> Array Int Int
+buildHeap arr n = foldl' (\a i -> heapify a n i) arr [n `div` 2 - 1, n `div` 2 - 2 .. 0]
+
+heapsortStep :: Array Int Int -> Int -> Array Int Int
+heapsortStep arr i =
+  let arr' = arr // [(0, arr ! i), (i, arr ! 0)]
+  in heapify arr' i 0
+
+heapsort :: [Int] -> [Int]
+heapsort [] = []
+heapsort xs =
+  let n = length xs
+      arr = listArray (0, n-1) xs
+      heap = buildHeap arr n
+      sorted = foldl' heapsortStep heap [n-1, n-2 .. 1]
+  in elems sorted
+
+main :: IO ()
+main = print $ heapsort [12, 11, 13, 5, 6, 7]
