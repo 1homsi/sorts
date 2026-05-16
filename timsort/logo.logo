@@ -1,0 +1,49 @@
+to timsort :arr :min_size
+  output mergesort :arr :min_size
+end
+
+to mergesort :arr :min_size
+  if lessequal (count :arr) 1
+    [output :arr]
+  if lessequal (count :arr) :min_size
+    [output insertionsort :arr]
+  
+  localmake "mid (quotient (count :arr) 2)
+  localmake "left sublist :arr 1 :mid
+  localmake "right sublist :arr (sum :mid 1) (count :arr)
+  
+  output merge (mergesort :left :min_size) (mergesort :right :min_size)
+end
+
+to insertionsort :arr
+  localmake "result :arr
+  localmake "i 2
+  repeat (sum -1 (count :arr))
+    [localmake "key item :i :result
+     localmake "j (sum -1 :i)
+     while and (greaterthan :j 0) (greaterthan (item :j :result) :key)
+       [setitem :j :result (item (sum -1 :j) :result)
+        localmake "j (sum -1 :j)]
+     setitem (sum 1 :j) :result :key
+     localmake "i (sum 1 :i)]
+  output :result
+end
+
+to merge :left :right
+  localmake "result []
+  localmake "i 1
+  localmake "j 1
+  
+  while and (lessequal :i (count :left)) (lessequal :j (count :right))
+    [if lessequal (item :i :left) (item :j :right)
+      [lput (item :i :left) :result
+       localmake "i (sum 1 :i)]
+      [lput (item :j :right) :result
+       localmake "j (sum 1 :j)]]
+  
+  if lessequal :i (count :left)
+    [output sentence :result sublist :left :i (count :left)]
+  output sentence :result sublist :right :j (count :right)
+end
+
+print timsort [5 2 8 1 9 3] 32
