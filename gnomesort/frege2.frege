@@ -1,0 +1,17 @@
+module GnomeSort where
+
+import Data.Array
+
+gnomeSort :: Array Int Int -> Array Int Int
+gnomeSort arr = gnomeLoop arr 0 (snd (Array.bounds arr))
+
+gnomeLoop :: Array Int Int -> Int -> Int -> Array Int Int
+gnomeLoop arr i n
+  | i > n    = arr
+  | i == 0   = gnomeLoop arr 1 n
+  | otherwise =
+      let ai  = arr Array.! i
+          ai1 = arr Array.! (i - 1)
+      in if ai >= ai1
+           then gnomeLoop arr (i + 1) n
+           else gnomeLoop (arr Array.// [(i, ai1), (i-1, ai)]) (i - 1) n
