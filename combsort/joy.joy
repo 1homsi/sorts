@@ -1,0 +1,19 @@
+DEFINE
+    new-gap == 10 * 13 / 1 max ;
+
+    comb-pass ==
+        [i gap n arr -- arr changed]
+        0 swap
+        [dup rolldown + <]
+        [ i gap + arr nth
+          i arr nth
+          > [ arr i i gap + exchange true ] [ ] ifte
+          i 1 + ]
+        while ;
+
+    comb-sort ==
+        dup size
+        [ dup 1 >]
+        [ new-gap swap comb-pass pop ]
+        while
+        pop ;
