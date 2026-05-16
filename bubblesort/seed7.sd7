@@ -1,0 +1,35 @@
+$ include "seed7_05.s7i";
+
+const proc: bubbleSort (inout array integer: arr) is func
+  local
+    var integer: n is 0;
+    var boolean: swapped is TRUE;
+    var integer: i is 0;
+    var integer: tmp is 0;
+  begin
+    n := length(arr);
+    while swapped do
+      swapped := FALSE;
+      for i range 1 to pred(n) do
+        if arr[i] > arr[succ(i)] then
+          tmp := arr[i];
+          arr[i] := arr[succ(i)];
+          arr[succ(i)] := tmp;
+          swapped := TRUE;
+        end if;
+      end for;
+      decr(n);
+    end while;
+  end func;
+
+const proc: main is func
+  local
+    var array integer: arr is [] (64, 34, 25, 12, 22, 11, 90);
+    var integer: x is 0;
+  begin
+    bubbleSort(arr);
+    for x range arr do
+      write(x <& " ");
+    end for;
+    writeln;
+  end func;
