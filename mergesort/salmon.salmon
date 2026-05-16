@@ -1,0 +1,45 @@
+fn merge(mut arr: [int], left: int, mid: int, right: int) -> [int] {
+  var i = left;
+  var j = mid + 1;
+  var result = [];
+  
+  while (i <= mid && j <= right) {
+    if (arr[i] <= arr[j]) {
+      result.push(arr[i]);
+      i = i + 1;
+    } else {
+      result.push(arr[j]);
+      j = j + 1;
+    }
+  }
+  
+  while (i <= mid) {
+    result.push(arr[i]);
+    i = i + 1;
+  }
+  
+  while (j <= right) {
+    result.push(arr[j]);
+    j = j + 1;
+  }
+  
+  for (k = 0; k < result.len(); k = k + 1) {
+    arr[left + k] = result[k];
+  }
+  
+  return arr;
+}
+
+fn mergesort(mut arr: [int], left: int, right: int) -> [int] {
+  if (left < right) {
+    var mid = (left + right) / 2;
+    arr = mergesort(arr, left, mid);
+    arr = mergesort(arr, mid + 1, right);
+    arr = merge(arr, left, mid, right);
+  }
+  return arr;
+}
+
+var arr = [5, 2, 8, 1, 9, 3];
+arr = mergesort(arr, 0, 5);
+print(arr);
