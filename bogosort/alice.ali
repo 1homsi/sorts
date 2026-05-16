@@ -1,27 +1,6 @@
-import structure Random from "x-alice:/lib/utility/Random"
-import structure List from "x-alice:/lib/standard/List"
-
-fun isSorted [] = true
-  | isSorted [_] = true
-  | isSorted (x::y::rest) = x <= y andalso isSorted (y::rest)
-
-fun shuffle lst =
-  let
-    val n = List.length lst
-    val arr = Array.fromList lst
-    fun swap i j =
-      let val tmp = Array.sub(arr, i)
-      in Array.update(arr, i, Array.sub(arr, j));
-         Array.update(arr, j, tmp)
-      end
-  in
-    Array.appi (fn (i, _) =>
-      if i > 0 then swap i (Random.int (i+1)) else ()) arr;
-    Array.toList arr
-  end
-
-fun bogosort lst =
-  if isSorted lst then lst
-  else bogosort (shuffle lst)
-
-val _ = print (List.toString Int.toString (bogosort [3,1,4,1,5,9,2,6]) ^ "\n")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
