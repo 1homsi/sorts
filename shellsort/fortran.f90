@@ -1,8 +1,8 @@
-program shell_sort_prog
+subroutine shellsort(arr, n)
     implicit none
-    integer :: arr(7), n, gap, i, j, temp
-    arr = [64, 34, 25, 12, 22, 11, 90]
-    n = 7
+    integer :: n, i, j, gap, temp
+    integer :: arr(n)
+
     gap = n / 2
     do while (gap > 0)
         do i = gap + 1, n
@@ -16,5 +16,4 @@ program shell_sort_prog
         end do
         gap = gap / 2
     end do
-    print *, arr
-end program shell_sort_prog
+end subroutine shellsort
