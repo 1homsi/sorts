@@ -1,14 +1,1 @@
-is_sorted [] = true
-is_sorted [_] = true
-is_sorted (x::y::rest) = x <= y && is_sorted (y::rest)
-
-shuffle lst =
-    let n = length lst
-        arr = array (0, n-1) (zip [0..] lst)
-    in map (arr!) (random_perm n)
-
-bogosort lst =
-    if is_sorted lst then lst
-    else bogosort (shuffle lst)
-
-main = print (bogosort [3, 1, 4, 1, 5, 9, 2, 6])
+bogosort xs = if sorted xs then xs else bogosort (shuffle xs)
