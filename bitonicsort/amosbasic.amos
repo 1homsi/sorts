@@ -1,0 +1,35 @@
+Dim Arr(7)
+Arr(0)=3 : Arr(1)=7 : Arr(2)=4 : Arr(3)=8
+Arr(4)=6 : Arr(5)=2 : Arr(6)=1 : Arr(7)=5
+
+Proc BitonicSort[0,8,1]
+For I=0 To 7
+  Print Arr(I);" ";
+Next I
+Print
+
+Procedure BitonicSort[Lo,Cnt,Dir]
+  If Cnt>1
+    K=Cnt/2
+    BitonicSort[Lo,K,1]
+    BitonicSort[Lo+K,K,0]
+    BitonicMerge[Lo,Cnt,Dir]
+  End If
+End Proc
+
+Procedure BitonicMerge[Lo,Cnt,Dir]
+  If Cnt>1
+    K=Cnt/2
+    For I=Lo To Lo+K-1
+      CompSwap[I,I+K,Dir]
+    Next I
+    BitonicMerge[Lo,K,Dir]
+    BitonicMerge[Lo+K,K,Dir]
+  End If
+End Proc
+
+Procedure CompSwap[I,J,Dir]
+  If (Dir=1 And Arr(I)>Arr(J)) Or (Dir=0 And Arr(I)<Arr(J))
+    T=Arr(I) : Arr(I)=Arr(J) : Arr(J)=T
+  End If
+End Proc
