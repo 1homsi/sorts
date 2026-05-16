@@ -1,0 +1,19 @@
+shellsort: func [arr] {
+  gap: 1
+  n: arr length
+  loop {gap <= n} {gap: gap * 3 + 1}
+  loop {gap > 0} {
+    gap: gap / 3
+    loop {i: gap, i < n, i: i + 1} {
+      temp: arr at: i
+      j: i
+      loop {j >= gap && (arr at: j - gap) > temp} {
+        arr at: j put: arr at: (j - gap)
+        j: j - gap
+      }
+      arr at: j put: temp
+    }
+  }
+  arr
+}
+print (shellsort [5 2 8 1 9 3])
