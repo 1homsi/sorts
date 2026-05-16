@@ -1,0 +1,31 @@
+let cocktailsort = fn arr =>
+  let n = length(arr)
+  let i = ref 0
+  let swapped = ref true
+  in (
+    while !i < n and !swapped do (
+      swapped := false;
+      for k = 0 to n - !i - 2 do
+        if arr(k) > arr(k + 1) then
+          let temp = arr(k)
+          arr(k) := arr(k + 1);
+          arr(k + 1) := temp;
+          swapped := true
+        end
+      end;
+      if !swapped then ()
+      else (
+        swapped := false;
+        for k = n - !i - 2 downto 0 do
+          if arr(k) > arr(k + 1) then
+            let temp = arr(k)
+            arr(k) := arr(k + 1);
+            arr(k + 1) := temp;
+            swapped := true
+          end
+        end
+      );
+      i := !i + 1
+    );
+    arr
+  )
