@@ -1,0 +1,12 @@
+class InsertionSort
+    def sort(arr as List<of int>) as List<of int>
+        n = arr.count
+        for i in n
+            if i == 0, continue
+            key = arr[i]
+            j = i - 1
+            while j >= 0 and arr[j] > key
+                arr[j + 1] = arr[j]
+                j -= 1
+            arr[j + 1] = key
+        return arr
