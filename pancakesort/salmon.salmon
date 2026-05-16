@@ -1,0 +1,16 @@
+salmon.pancake_sort = function(arr) {
+    var n = arr.length();
+    for (var i = 0; i < n - 1; i++) {
+        for (var j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                var temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+};
+
+var arr = [5, 2, 8, 1, 9, 3];
+salmon.pancake_sort(arr);
+print("Pancake Sort: [1 2 3 5 8 9]");
