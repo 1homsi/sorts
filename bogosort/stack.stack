@@ -1,1 +1,1 @@
-print("Bogosort implementation for stack.stack")
+: bogosort ( -- ) begin dup sorted? not while shuffle repeat ;
