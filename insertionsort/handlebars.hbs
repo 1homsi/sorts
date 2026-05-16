@@ -1,0 +1,7 @@
+{{#*inline "insertionSort"}}
+  {{! Handlebars cannot perform insertion sort natively }}
+  {{! The sorted result is pre-computed and passed as context }}
+  {{#each sorted}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}
+{{/inline}}
+
+{{> insertionSort sorted=(sort input)}}
