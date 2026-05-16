@@ -1,0 +1,12 @@
+insertion_sort: PROC (arr: LOC ARRAY (0:) OF INT, n: INT);
+DCL (i, j, key): INT;
+FOR i := 1 TO n-1 DO
+    key := arr(i);
+    j := i - 1;
+    DO WHILE j >= 0 AND arr(j) > key;
+        arr(j+1) := arr(j);
+        j := j - 1;
+    OD;
+    arr(j+1) := key;
+OD;
+END insertion_sort;
