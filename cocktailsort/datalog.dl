@@ -1,0 +1,9 @@
+.decl elem(idx: number, val: number)
+.decl sorted(idx: number, val: number)
+.decl swap_needed(i: number)
+.decl pass_forward(i: number, end: number)
+
+swap_needed(i) :- elem(i, a), elem(i+1, b), a > b.
+
+.decl cocktail_sorted(idx: number, val: number)
+cocktail_sorted(idx, val) :- sorted(idx, val).
