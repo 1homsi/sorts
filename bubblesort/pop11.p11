@@ -1,0 +1,15 @@
+define bubblesort(arr) -> result;
+  lvars i, j, n = length(arr), temp;
+  for i from 1 to n do
+    for j from 1 to n - i do
+      if arr(j) > arr(j+1) then
+        arr(j) ->> temp;
+        arr(j+1) -> arr(j);
+        temp -> arr(j+1);
+      endif;
+    endfor;
+  endfor;
+  arr;
+enddefine;
+
+bubblesort({5 2 8 1 9 3}) =>
