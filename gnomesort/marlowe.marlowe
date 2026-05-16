@@ -1,0 +1,7 @@
+When
+    [ Case
+        (Deposit (Role "Sorter") (Role "User") (Token "" "") (Constant 1))
+        (Pay (Role "Sorter") (Account (Role "User")) (Token "" "") (Constant 1) Close)
+    ]
+    (POSIXTime 1000000)
+    Close
