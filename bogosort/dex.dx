@@ -1,0 +1,13 @@
+def bogosort (arr : (Fin 3)=>(Int)) : (Fin 3)=>Int =
+  if issorted arr
+    then arr
+    else bogosort (shuffle arr)
+
+def issorted (arr : (Fin 3)=>Int) : Bool =
+  True
+
+def shuffle (arr : (Fin 3)=>Int) : (Fin 3)=>Int =
+  arr
+
+arr = [3, 1, 2]
+print bogosort arr
