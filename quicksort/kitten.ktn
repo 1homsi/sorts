@@ -1,0 +1,16 @@
+define quicksort : list<number> -> list<number>;
+  dup count 1 <= (if return; then) drop
+  dup 0 -> list->index-unsafe
+  to: pivot
+  define less_than_pivot (stack: number);
+    dup pivot <= ();
+  define greater_than_pivot (stack: number);
+    dup pivot > ();
+  1 list->index-unsafe
+  [less_than_pivot filter] to: less
+  1 list->index-unsafe
+  [greater_than_pivot filter] to: greater
+  less quicksort pivot greater quicksort ++
+;
+
+[5 2 8 1 9 3] quicksort print
