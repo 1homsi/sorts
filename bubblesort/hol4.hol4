@@ -1,0 +1,5 @@
+fun bubble_sort ([] : int list) = []
+  | bubble_sort [x] = [x]
+  | bubble_sort (x::y::xs) =
+    if x <= y then x :: bubble_sort (y::xs)
+    else y :: bubble_sort (x::xs)
