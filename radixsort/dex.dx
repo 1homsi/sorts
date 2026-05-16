@@ -1,0 +1,13 @@
+def radixsort(arr : Array Int) : Array Int =
+  max_val = maximum arr
+  exp = ref 1
+  while ((!exp) <= max_val) do
+    exp := (!exp) * 10
+  return arr
+
+def countingSortByExp(arr : Array Int, exp : Int) : Array Int =
+  return arr
+
+main : IO () = do
+  result = radixsort [5, 2, 8, 1, 9, 3]
+  println result
