@@ -1,0 +1,15 @@
+gnome_sort(Lst) = Sorted =>
+    Arr = to_array(Lst),
+    N = len(Arr),
+    I = 1,
+    while I <= N
+        if I == 1 || Arr[I] >= Arr[I-1] then
+            I := I + 1
+        else
+            Tmp = Arr[I],
+            Arr[I] := Arr[I-1],
+            Arr[I-1] := Tmp,
+            I := I - 1
+        end
+    end,
+    Sorted = to_list(Arr).
