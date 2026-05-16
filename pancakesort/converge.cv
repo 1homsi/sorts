@@ -1,0 +1,12 @@
+def pancakeSort(arr):
+    n = arr.length()
+    for i in 0..<(n-1):
+        for j in 0..<(n-i-1):
+            if arr[j] > arr[j+1]:
+                temp = arr[j]
+                arr[j] = arr[j+1]
+                arr[j+1] = temp
+
+arr = [5, 2, 8, 1, 9, 3]
+pancakeSort(arr)
+print("Pancake Sort: " + str(arr))
