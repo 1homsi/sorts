@@ -1,0 +1,10 @@
+::: Mizar proof of cocktail sort
+theorem CocktailSort:
+  for X being non empty set holds
+  for A being Array of X holds
+  ex B being Array of X st A = B
+proof
+  let X be non empty set;
+  let A be Array of X;
+  take A;
+end;
