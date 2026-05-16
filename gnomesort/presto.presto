@@ -1,0 +1,19 @@
+WITH RECURSIVE gnome_sort AS (
+    SELECT ARRAY[5, 3, 8, 1, 9, 2, 7, 4, 6, 0] AS arr, 0 AS i, 10 AS n
+    UNION ALL
+    SELECT
+        CASE WHEN i = 0 OR arr[i + 1] >= arr[i] THEN arr
+             ELSE array_except(
+                 slice(arr, 1, i - 1) ||
+                 ARRAY[arr[i + 1], arr[i]] ||
+                 slice(arr, i + 2, cardinality(arr))
+             , ARRAY[]::integer[])
+        END AS arr,
+        CASE WHEN i = 0 OR arr[i + 1] >= arr[i] THEN i + 1
+             ELSE i - 1
+        END AS i,
+        n
+    FROM gnome_sort
+    WHERE i < n
+)
+SELECT arr FROM gnome_sort WHERE i >= n LIMIT 1;
