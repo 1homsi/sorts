@@ -1,0 +1,14 @@
+PROC GnomeSort:(arr%, n%)
+    LOCAL i%, tmp%
+    i% = 0
+    DO
+        IF i% = 0 OR arr%(i%) >= arr%(i%-1) THEN
+            i% = i% + 1
+        ELSE
+            tmp% = arr%(i%)
+            arr%(i%) = arr%(i%-1)
+            arr%(i%-1) = tmp%
+            i% = i% - 1
+        ENDIF
+    UNTIL i% >= n%
+ENDP
