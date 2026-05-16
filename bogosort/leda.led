@@ -1,0 +1,37 @@
+%{
+  BOGOSORT
+  Shuffle until sorted
+}%
+
+macro <> = list_to_array(make_list(3, 1, 2));
+
+card bogosort(arr)
+{
+  while (!issorted(arr))
+  {
+    shuffle(arr);
+  }
+  return arr;
+}
+
+card issorted(arr)
+{
+  for i in 0 .. length(arr)-2
+  {
+    if (arr[i] > arr[i+1]) return false;
+  }
+  return true;
+}
+
+card shuffle(arr)
+{
+  for i in 0 .. length(arr)-1
+  {
+    j = random(length(arr));
+    tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
+}
+
+main: bogosort(<>);
