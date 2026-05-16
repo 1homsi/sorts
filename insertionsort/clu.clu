@@ -1,0 +1,12 @@
+insertion_sort = proc (arr: array[int])
+    n: int := array[int]$size(arr)
+    for i: int in int$from_to(1, n-1) do
+        key: int := arr[i]
+        j: int := i - 1
+        while j >= 0 cand arr[j] > key do
+            arr[j+1] := arr[j]
+            j := j - 1
+        end
+        arr[j+1] := key
+    end
+end insertion_sort
