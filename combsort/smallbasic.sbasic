@@ -1,0 +1,20 @@
+n = 9
+Dim arr[n]
+arr[0]=5 : arr[1]=3 : arr[2]=8 : arr[3]=1 : arr[4]=9
+arr[5]=2 : arr[6]=7 : arr[7]=4 : arr[8]=6
+
+gap = n
+sorted = 0
+While sorted = 0
+  gap = Int(gap / 1.3)
+  If gap < 1 Then gap = 1
+  If gap = 1 Then sorted = 1
+  For i = 0 To n - gap - 1
+    If arr[i] > arr[i + gap] Then
+      tmp = arr[i]
+      arr[i] = arr[i + gap]
+      arr[i + gap] = tmp
+      sorted = 0
+    End If
+  Next i
+Wend
