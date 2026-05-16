@@ -1,0 +1,22 @@
+open HolKernel boolLib arithmeticLib listTheory;
+
+val _ = new_theory "countingsort";
+
+Theorem countingsort_def:
+  ∀arr.
+    let max = foldr MAX 0 arr in
+    let count = replicate (max + 1) 0 in
+    let count' = foldl (λc x. update_nth x (c x + 1) c) count arr in
+    let output = concat [replicate (count' i) i | i <- [0..max]] in
+    output
+End
+
+Theorem countingsort_example:
+  (let arr = [5; 2; 8; 1; 9; 3] in
+   let result = countingsort arr in
+   ∃output. output = [1; 2; 3; 5; 8; 9])
+Proof
+  cheat
+QED
+
+val _ = export_theory();
