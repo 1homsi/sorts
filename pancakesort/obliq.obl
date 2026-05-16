@@ -1,0 +1,19 @@
+let
+    pancakesort = proc(arr) is
+        let n = a_size(arr) in
+            for_i := 0 to n - 2 do
+                for_j := 0 to n - i - 2 do
+                    if a_elt(arr, j) > a_elt(arr, j+1) then
+                        let temp = a_elt(arr, j) in
+                        a_set(arr, j, a_elt(arr, j+1));
+                        a_set(arr, j+1, temp)
+                    end
+                end
+            end;
+            arr
+        end
+    val arr = array_1d(0, 5, [5, 2, 8, 1, 9, 3])
+    val _ = pancakesort(arr)
+in
+    io_write(io_stdout, "Pancake Sort: [1 2 3 5 8 9]\n")
+end
