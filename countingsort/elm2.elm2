@@ -1,0 +1,19 @@
+module CountingSort2 exposing (..)
+
+import List
+
+countingSort : List Int -> List Int
+countingSort arr =
+    case arr of
+        [] -> []
+        _ ->
+            let
+                minVal = List.minimum arr |> Maybe.withDefault 0
+                maxVal = List.maximum arr |> Maybe.withDefault 0
+            in
+            List.concat
+                (List.map
+                    ( -> List.repeat (List.length (List.filter ((==) v) arr)) v)
+                    (List.range minVal maxVal))
+
+main = Debug.log "sorted" (countingSort [4, 2, 2, 8, 3, 3, 1])
