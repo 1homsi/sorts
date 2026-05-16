@@ -15,13 +15,3 @@ fn shellSort(arr: []i32) void {
         }
     }
 }
-
-pub fn main() !void {
-    var arr = [_]i32{ 64, 34, 25, 12, 22, 11, 90 };
-    shellSort(&arr);
-    const stdout = std.io.getStdOut().writer();
-    for (arr) |v| {
-        try stdout.print("{} ", .{v});
-    }
-    try stdout.print("\n", .{});
-}
