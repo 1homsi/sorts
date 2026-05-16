@@ -1,0 +1,22 @@
+cyclesort arr = cyclesort_loop arr 0 (length arr) where
+  cyclesort_loop arr pos n
+    | pos >= n = arr
+    | otherwise = cyclesort_loop arr'' (pos+1) n
+      where
+        item = arr!pos
+        cycles = length [() | i in 0..(n-1), i != pos, arr!i < item]
+        arr' = if cycles == 0 then arr
+               else update_array arr pos item cycles
+        arr'' = arr'
+
+  update_array arr pos item cycles
+    | cycles == 0 = arr
+    | otherwise = update_array arr' pos item' (cycles-1)
+      where
+        pos' = until (\i -> arr!i != item) (+1) pos
+        temp = arr!pos'
+        arr' = {arr | pos' = item}
+        item' = temp
+  ;
+
+cyclesort [5, 2, 8, 1, 9, 3]
