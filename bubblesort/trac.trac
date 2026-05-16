@@ -1,0 +1,12 @@
+#(DS,BSORT,#(PN,Bubble sort result: )
+  #(DS,ARR,64 34 25 12 22 11 90)
+  #(DS,N,7)
+  #(DS,SWAPPED,1)
+  #(DS,LOOP,#(EQ,#(SWAPPED),,#(PN,Done),
+    #(DS,SWAPPED,0)
+    #(INNER)
+    #(DS,N,#(SB,#(N),1))
+    #(LOOP)))
+  #(DS,INNER,...)
+  #(LOOP))
+#(BSORT)
