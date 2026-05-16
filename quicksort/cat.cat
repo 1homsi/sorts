@@ -1,0 +1,19 @@
+def quicksort [
+  dup size 1 <= [ ] [
+    dup 0 get :pivot
+    1 [
+      dup :x
+      x pivot <= [ [ x ] ] [ [ ] ]
+    ] map :parts_less
+    1 [
+      dup :x
+      x pivot > [ [ x ] ] [ [ ] ]
+    ] map :parts_greater
+    parts_less flatten quicksort
+    pivot
+    parts_greater flatten quicksort
+    3 cat
+  ] if
+]
+
+[5 2 8 1 9 3] quicksort .
