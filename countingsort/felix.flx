@@ -1,0 +1,23 @@
+fun countingsort (arr: array[int]): array[int] = {
+  if arr.len == 0uz then return arr;
+  var max = 0;
+  for i in 0uz..< arr.len do
+    if arr.[i] > max then max = arr.[i];
+  done
+
+  var count = (0..(max + 1)).map(fun (x: int) => 0).to_array;
+  for i in 0uz..< arr.len do
+    count.(arr.[i]) = count.(arr.[i]) + 1;
+  done
+
+  var output = empty[int];
+  for i in 0..max do
+    for j in 0..<count.(i) do
+      output += [i];
+    done
+  done
+
+  return output;
+};
+
+println$ countingsort [5, 2, 8, 1, 9, 3];
