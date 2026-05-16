@@ -1,1 +1,1 @@
-print("Bogosort implementation for ggml.ggml")
+bogosort = true
