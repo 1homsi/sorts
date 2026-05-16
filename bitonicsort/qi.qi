@@ -1,0 +1,22 @@
+(define compare-and-swap
+    Arr I J Dir -> (let Ai (vector-> Arr I)
+                        Aj (vector-> Arr J)
+                   (if (= Dir (> Ai Aj))
+                       (do (address-> Arr I Aj) (address-> Arr J Ai) Arr)
+                       Arr)))
+
+(define bitonic-merge
+    Arr Lo Cnt Dir -> Arr where (<= Cnt 1)
+    Arr Lo Cnt Dir -> (let K (floor (/ Cnt 2))
+                       _ (iterate (fn I (compare-and-swap Arr I (+ I K) Dir)) Lo (+ Lo K))
+                       _ (bitonic-merge Arr Lo K Dir)
+                       (bitonic-merge Arr (+ Lo K) K Dir)))
+
+(define bitonic-sort
+    Arr Lo Cnt Dir -> Arr where (<= Cnt 1)
+    Arr Lo Cnt Dir -> (let K (floor (/ Cnt 2))
+                       _ (bitonic-sort Arr Lo K true)
+                       _ (bitonic-sort Arr (+ Lo K) K false)
+                       (bitonic-merge Arr Lo Cnt Dir)))
+
+(print (bitonic-sort (absvector 3 7 4 8 6 2 1 5) 0 8 true))
