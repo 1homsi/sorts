@@ -1,0 +1,16 @@
+package gnomesort
+
+#GnomeSortInput: {
+    arr: [...int]
+    n:   int & >=0
+}
+
+#GnomeSortOutput: {
+    result: [...int]
+    sorted: bool
+}
+
+gnomeSort: #GnomeSortInput & {
+    arr: [5, 3, 8, 1, 9, 2, 7, 4, 6, 0]
+    n:   10
+}
