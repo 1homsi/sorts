@@ -1,0 +1,11 @@
+5 2 8 1 9 3 6 => [arr] {{
+  {arr 0 arr length 1 - cat::merge_sort} => [sorted]
+  sorted .
+}} cat::merge_sort => {
+  {_ () +} call => [left right]
+  {left right <} {
+    {left right 1 + 2 /} => [mid]
+    {left mid} cat::merge_sort
+    {mid 1 + right} cat::merge_sort
+  } call
+}
