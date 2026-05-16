@@ -1,0 +1,70 @@
+GET "libhdr"
+
+GLOBAL
+    arr: 200
+    buckets: 201
+    counts: 202
+    n: 203
+
+LET insertionsort(bucket, sz) BE
+{   LET i, j, key = 1, 0, 0
+    WHILE i < sz DO
+    {   key := bucket!i
+        j := i - 1
+        WHILE j >= 0 & bucket!j > key DO
+        {   bucket!(j+1) := bucket!j
+            j := j - 1
+        }
+        bucket!(j+1) := key
+        i := i + 1
+    }
+}
+
+LET bucketsort(arr, n) BE
+{   LET minv, maxv, num, idx, b, pos = arr!0, arr!0, 0, 0, 0, 0
+    LET i = 0
+    WHILE i < n DO
+    {   IF arr!i < minv THEN minv := arr!i
+        IF arr!i > maxv THEN maxv := arr!i
+        i := i + 1
+    }
+    i := 0
+    WHILE i < n DO { counts!i := 0; i := i + 1 }
+    i := 0
+    WHILE i < n DO
+    {   num := arr!i
+        idx := ((num - minv) * n) / (maxv - minv + 1)
+        IF idx >= n THEN idx := n - 1
+        LET bkt = buckets + idx*n
+        bkt!(counts!idx) := num
+        counts!idx := counts!idx + 1
+        i := i + 1
+    }
+    pos := 0
+    b := 0
+    WHILE b < n DO
+    {   LET bkt = buckets + b*n
+        insertionsort(bkt, counts!b)
+        i := 0
+        WHILE i < counts!b DO
+        {   arr!pos := bkt!i
+            pos := pos + 1
+            i := i + 1
+        }
+        b := b + 1
+    }
+}
+
+LET start() = VALOF
+{   LET data = VEC 10
+    LET bckt = VEC 100
+    LET cnt = VEC 10
+    LET i = 0
+    arr := data; buckets := bckt; counts := cnt; n := 10
+    data!0 := 78; data!1 := 17; data!2 := 39; data!3 := 26; data!4 := 72
+    data!5 := 94; data!6 := 21; data!7 := 12; data!8 := 23; data!9 := 68
+    bucketsort(data, 10)
+    WHILE i < 10 DO { writef("%N ", data!i); i := i + 1 }
+    wrch('*N')
+    RESULTIS 0
+}
