@@ -1,0 +1,16 @@
+val _ = (
+  datatype node = Leaf | Branch of int * node * node;
+
+  fun insert (Leaf, v) = Branch (v, Leaf, Leaf)
+    | insert (Branch (x, l, r), v) =
+        if v < x then Branch (x, insert (l, v), r)
+        else if v > x then Branch (x, l, insert (r, v))
+        else Branch (x, l, r);
+
+  fun inorder Leaf = []
+    | inorder (Branch (x, l, r)) = inorder l @ [x] @ inorder r;
+
+  fun treeSort arr = inorder (foldl insert Leaf arr);
+
+  val _ = print (Int.toString (hd (treeSort [5, 2, 8, 1, 9, 3])))
+);
