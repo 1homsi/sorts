@@ -1,0 +1,29 @@
+Node ::= {
+  value -> 0.
+  left -> Nil.
+  right -> Nil.
+}.
+
+insert := [| :node :val |
+  node isNil ifTrue: [^ Node clone `value: val].
+  val < node value ifTrue: [node left: (insert value: node left value: val)].
+  val > node value ifTrue: [node right: (insert value: node right value: val)].
+  node
+].
+
+inorder := [| :node |
+  node isNil ifFalse: [
+    inorder value: node left.
+    node value print.
+    inorder value: node right.
+  ]
+].
+
+define: #treeSort as: [| :arr |
+  | root |
+  root := Nil.
+  arr do: [| :val | root := insert value: root value: val].
+  inorder value: root.
+].
+
+treeSort value: #(5 2 8 1 9 3).
