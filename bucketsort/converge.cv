@@ -1,0 +1,16 @@
+bucketSort := func(arr, maxVal) {
+    buckets := List.new(maxVal, {List.new()})
+    arr.each(func(num) {
+        if (num >= 0 and num < maxVal) {
+            buckets[num].append(num)
+        }
+    })
+    result := List.new()
+    buckets.each(func(bucket) {
+        bucket.each(func(num) {
+            result.append(num)
+        })
+    })
+    result
+}
+Sys.print(bucketSort([5, 2, 8, 1, 9, 3], 10))
