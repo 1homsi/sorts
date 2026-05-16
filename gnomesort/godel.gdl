@@ -1,0 +1,17 @@
+PREDICATE Gnomesort([], []).
+PREDICATE Gnomesort([H|T], Sorted) :-
+  Gnomesort(T, SortedT),
+  InsertSorted(H, SortedT, Sorted).
+
+PREDICATE InsertSorted(X, [], [X]).
+PREDICATE InsertSorted(X, [H|T], [X,H|T]) :-
+  X =< H.
+PREDICATE InsertSorted(X, [H|T], [H|Rest]) :-
+  X > H,
+  InsertSorted(X, T, Rest).
+
+PREDICATE Main :-
+  Gnomesort([5, 2, 8, 1, 9, 3], Result),
+  Write(Result).
+
+:- initialization(Main).
