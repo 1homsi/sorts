@@ -1,0 +1,23 @@
+@php
+function gnomeSort($arr) {
+    $n = count($arr);
+    $i = 0;
+    while ($i < $n) {
+        if ($i == 0 || $arr[$i] >= $arr[$i-1]) {
+            $i++;
+        } else {
+            [$arr[$i], $arr[$i-1]] = [$arr[$i-1], $arr[$i]];
+            $i--;
+        }
+    }
+    return $arr;
+}
+$data = [5, 3, 8, 1, 9, 2, 7, 4, 6, 0];
+$sorted = gnomeSort($data);
+@endphp
+
+<ul>
+@foreach ($sorted as $val)
+    <li>{{ $val }}</li>
+@endforeach
+</ul>
