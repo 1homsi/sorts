@@ -1,0 +1,14 @@
+PROC GNOMESORT (ARR(), N) $
+    ITEM I = 0 $
+    ITEM TMP $
+    FOR I := 0 BY 0 WHILE I < N DO
+        IF I EQ 0 OR ARR(I) GE ARR(I-1) THEN
+            I := I + 1
+        ELSE
+            TMP := ARR(I) $
+            ARR(I) := ARR(I-1) $
+            ARR(I-1) := TMP $
+            I := I - 1
+        END
+    END
+END $
