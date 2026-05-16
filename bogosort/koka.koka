@@ -1,26 +1,6 @@
-import std/core
-import std/random
-
-fun is-sorted(arr : list<int>) : bool
-  match arr
-    Nil -> True
-    Cons(_, Nil) -> True
-    Cons(x, Cons(y, rest)) -> x <= y && is-sorted(Cons(y, rest))
-
-fun shuffle(arr : list<int>) : <random> list<int>
-  val v = arr.vector
-  val n = v.length
-  for(n - 1, 1) fn(i)
-    val j = random-int() % (i + 1)
-    val tmp = v[i]
-    v[i] := v[j]
-    v[j] := tmp
-  v.list
-
-fun bogosort(arr : list<int>) : <random> list<int>
-  if is-sorted(arr) then arr
-  else bogosort(shuffle(arr))
-
-fun main()
-  val arr = [3, 1, 4, 1, 5, 9, 2, 6]
-  println(bogosort(arr).show)
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
