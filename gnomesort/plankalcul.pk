@@ -1,0 +1,11 @@
+P1 (arr) = gnomesort_iter(0, arr)
+P2 (i, arr) = if i >= len(arr) then arr
+              else if i = 0 then gnomesort_iter(i+1, arr)
+              else if arr[i] < arr[i-1] then
+                gnomesort_iter(i-1, swap(i, i-1, arr))
+              else gnomesort_iter(i+1, arr)
+
+P3 (arr) = print(P1(arr))
+
+Array test = [5, 2, 8, 1, 9, 3]
+P3(test)
