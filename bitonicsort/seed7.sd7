@@ -1,0 +1,50 @@
+$ include "seed7_05.s7i";
+
+var array integer: arr is [] (3, 7, 4, 8, 6, 2, 1, 5);
+
+const proc: compareAndSwap (inout array integer: a, in integer: i, in integer: j, in boolean: dir) is func
+  local
+    var integer: tmp is 0;
+  begin
+    if dir = (a[i] > a[j]) then
+      tmp := a[i]; a[i] := a[j]; a[j] := tmp;
+    end if;
+  end func;
+
+const proc: bitonicMerge (inout array integer: a, in integer: lo, in integer: cnt, in boolean: dir) is func
+  local
+    var integer: k is 0;
+    var integer: i is 0;
+  begin
+    if cnt > 1 then
+      k := cnt div 2;
+      for i range lo to pred(lo + k) do
+        compareAndSwap(a, i, i + k, dir);
+      end for;
+      bitonicMerge(a, lo, k, dir);
+      bitonicMerge(a, lo + k, k, dir);
+    end if;
+  end func;
+
+const proc: bitonicSort (inout array integer: a, in integer: lo, in integer: cnt, in boolean: dir) is func
+  local
+    var integer: k is 0;
+  begin
+    if cnt > 1 then
+      k := cnt div 2;
+      bitonicSort(a, lo, k, TRUE);
+      bitonicSort(a, lo + k, k, FALSE);
+      bitonicMerge(a, lo, cnt, dir);
+    end if;
+  end func;
+
+const proc: main is func
+  local
+    var integer: i is 0;
+  begin
+    bitonicSort(arr, 1, length(arr), TRUE);
+    for i range 1 to length(arr) do
+      write(arr[i] <& " ");
+    end for;
+    writeln;
+  end func;
