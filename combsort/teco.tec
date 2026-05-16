@@ -1,0 +1,27 @@
+HKM(
+Q[arr] 6I
+gap <- 6I
+
+< !gap <= 1? (
+gap <- gap * 10 / 13 I
+!gap < 1? gap <- 1 I
+
+swapped <- 0 I
+i <- 0 I
+
+< i < [arr] - gap? (
+!Q[arr][i] > Q[arr][i+gap]? (
+temp <- Q[arr][i] I
+Q[arr][i] <- Q[arr][i+gap] I
+Q[arr][i+gap] <- temp I
+swapped <- 1 I
+)
+i <- i + 1 I
+)
+>
+
+) !swapped?
+>
+
+[arr]
+)
