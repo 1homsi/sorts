@@ -1,0 +1,8 @@
+G/5,2,8,1,9,3/  "Load array"
+[
+  :I  "Loop counter"
+  J   "Left pointer"
+  K   "Mid pointer"
+  L   "Right pointer"
+  <I-6> @I V
+]
