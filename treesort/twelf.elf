@@ -1,0 +1,19 @@
+node : type.
+empty : node.
+branch : int -> node -> node -> node.
+
+insert : node -> int -> node -> type.
+insert_empty : insert empty X (branch X empty empty).
+insert_left : insert (branch V L R) X (branch V L' R)
+              <- insert L X L'.
+insert_right : insert (branch V L R) X (branch V L R')
+               <- insert R X R'.
+insert_same : insert (branch V L R) V (branch V L R).
+
+inorder : node -> (int -> list int -> list int) -> type.
+inorder_empty : inorder empty (fn _ l => l).
+inorder_branch : inorder (branch V L R) F
+                 <- inorder L FL
+                 <- inorder R FR.
+
+tree_sort : list int -> list int -> type.
