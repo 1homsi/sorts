@@ -1,0 +1,21 @@
+function bucketSort(arr, maxVal) {
+    if (maxVal == 0) return arr;
+    var buckets = new Array(maxVal);
+    for (var i = 0; i < maxVal; i++) {
+        buckets[i] = [];
+    }
+    for (var i = 0; i < arr.length; i++) {
+        var num = arr[i];
+        if (num >= 0 && num < maxVal) {
+            buckets[num].push(num);
+        }
+    }
+    var result = [];
+    for (var i = 0; i < maxVal; i++) {
+        for (var j = 0; j < buckets[i].length; j++) {
+            result.push(buckets[i][j]);
+        }
+    }
+    return result;
+}
+WScript.Echo(bucketSort([5, 2, 8, 1, 9, 3], 10));
