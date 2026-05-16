@@ -1,0 +1,17 @@
+#lang racket
+
+(define (comb-sort! vec)
+  (define n (vector-length vec))
+  (define gap n)
+  (define sorted #f)
+  (let loop ()
+    (set! gap (max 1 (exact (floor (/ gap 1.3)))))
+    (set! sorted (= gap 1))
+    (for ([i (in-range (- n gap))])
+      (when (> (vector-ref vec i) (vector-ref vec (+ i gap)))
+        (define tmp (vector-ref vec i))
+        (vector-set! vec i (vector-ref vec (+ i gap)))
+        (vector-set! vec (+ i gap) tmp)
+        (set! sorted #f)))
+    (unless sorted (loop)))
+  vec)
