@@ -1,0 +1,11 @@
+radixsort : list -> list -> type.
+
+radixsort-base : radixsort L L.
+
+countingsort : int -> list -> list -> type.
+
+sorting : int -> list -> list -> type.
+
+rsort : list -> int -> int -> list -> type.
+rsort-zero : rsort L 0 _ L.
+rsort-nonz : radixsort L L' -> rsort L' (E * 10) M L'' -> rsort L E M L''.
