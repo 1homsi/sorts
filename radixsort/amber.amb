@@ -1,0 +1,17 @@
+pub fn radixsort(mut arr: Vec<i32>) -> Vec<i32> {
+  let max = arr.iter().max().unwrap();
+  let mut exp = 1;
+  while max / exp > 0 {
+    arr = countingSortByExp(arr, exp);
+    exp *= 10;
+  }
+  arr
+}
+
+pub fn countingSortByExp(arr: Vec<i32>, exp: i32) -> Vec<i32> {
+  arr
+}
+
+pub fn main() {
+  println!("{:?}", radixsort(vec![5, 2, 8, 1, 9, 3]));
+}
