@@ -1,0 +1,17 @@
+bucketSort: :arr :maxVal [
+    (maxVal == 0) ifTrue: [^arr].
+    buckets: (Array new: maxVal) mapWith: [:i | Array new].
+    arr do: [:num |
+        ((num >= 0) & (num < maxVal)) ifTrue: [
+            (buckets at: num) add: num.
+        ].
+    ].
+    result: Array new.
+    buckets do: [:bucket |
+        bucket do: [:num |
+            result add: num.
+        ].
+    ].
+    ^result.
+].
+{5, 2, 8, 1, 9, 3} 10 bucketSort print.
