@@ -1,0 +1,7 @@
+PREFIX sort: <http://example.org/gnomesort#>
+
+SELECT ?index ?value WHERE {
+    ?element sort:index ?index ;
+             sort:value ?value .
+}
+ORDER BY ?value
