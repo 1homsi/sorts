@@ -1,0 +1,25 @@
+module CocktailSort where
+
+import Data.List (sort)
+
+cocktailSort :: [Int] -> [Int]
+cocktailSort [] = []
+cocktailSort xs = go xs True 0 (length xs - 1)
+  where
+    go arr False _ _ = arr
+    go arr True s e
+      | s >= e = arr
+      | otherwise =
+          let (arr1, sw1) = fwd arr s e False
+              (arr2, sw2) = if sw1 then bwd arr1 s (e-1) False else (arr1, False)
+          in if sw1 then go arr2 sw2 (s+1) (e-1) else arr1
+    fwd arr i e sw
+      | i >= e = (arr, sw)
+      | arr !! i > arr !! (i+1) = fwd (swap arr i (i+1)) (i+1) e True
+      | otherwise = fwd arr (i+1) e sw
+    bwd arr s i sw
+      | i < s = (arr, sw)
+      | arr !! i > arr !! (i+1) = bwd (swap arr i (i+1)) s (i-1) True
+      | otherwise = bwd arr s (i-1) sw
+    swap lst i j =
+      [if k==i then lst!!j else if k==j then lst!!i else lst!!k | k<-[0..length lst-1]]
