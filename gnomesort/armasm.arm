@@ -1,0 +1,31 @@
+        .data
+arr:    .word 5,3,8,1,9,2,7,4,6,0
+
+        .text
+        .global _start
+_start:
+        ldr r0, =arr
+        mov r1, #10
+        mov r2, #0
+
+loop:
+        cmp r2, r1
+        bge done
+        cmp r2, #0
+        beq advance
+        lsl r3, r2, #2
+        add r4, r0, r3
+        ldr r5, [r4]
+        ldr r6, [r4, #-4]
+        cmp r5, r6
+        bge advance
+        str r6, [r4]
+        str r5, [r4, #-4]
+        sub r2, r2, #1
+        b   loop
+advance:
+        add r2, r2, #1
+        b   loop
+done:
+        mov r7, #1
+        swi 0
