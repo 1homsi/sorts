@@ -1,0 +1,70 @@
+$ include "seed7_05.s7i";
+  include "float.s7i";
+
+const proc: insertionSort (inout array float: bucket) is func
+  local
+    var integer: i is 0;
+    var integer: j is 0;
+    var float: key is 0.0;
+  begin
+    for i range 2 to length(bucket) do
+      key := bucket[i];
+      j := i - 1;
+      while j >= 1 and bucket[j] > key do
+        bucket[j + 1] := bucket[j];
+        decr(j);
+      end while;
+      bucket[j + 1] := key;
+    end for;
+  end func;
+
+const func array float: bucketSort (in array float: arr) is func
+  result
+    var array float: result is 0 times 0.0;
+  local
+    var integer: n is 0;
+    var float: minV is 0.0;
+    var float: maxV is 0.0;
+    var integer: idx is 0;
+    var integer: pos is 1;
+    var float: num is 0.0;
+    var array array float: buckets is 0 times (0 times 0.0);
+    var array integer: counts is 0 times 0;
+  begin
+    n := length(arr);
+    if n > 0 then
+      minV := arr[1]; maxV := arr[1];
+      for num range arr do
+        if num < minV then minV := num; end if;
+        if num > maxV then maxV := num; end if;
+      end for;
+      buckets := n times (0 times 0.0);
+      counts := n times 0;
+      for num range arr do
+        idx := trunc((num - minV) / (maxV - minV + 1.0) * float(n)) + 1;
+        if idx > n then idx := n; end if;
+        incr(counts[idx]);
+        buckets[idx] := buckets[idx] & [num];
+      end for;
+      result := n times 0.0;
+      for idx range 1 to n do
+        insertionSort(buckets[idx]);
+        for num range buckets[idx] do
+          result[pos] := num;
+          incr(pos);
+        end for;
+      end for;
+    end if;
+  end func;
+
+const proc: main is func
+  local
+    var array float: data is [] (0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68);
+    var float: v is 0.0;
+  begin
+    data := bucketSort(data);
+    for v range data do
+      write(v <& " ");
+    end for;
+    writeln;
+  end func;
