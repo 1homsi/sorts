@@ -1,0 +1,32 @@
+module CycleSort
+
+from "array" include Array
+from "list" include List
+
+let cycleSort = (arr) => {
+  let n = Array.length(arr)
+  let writes = Box.make(0)
+  for (let cycleStart = 0; cycleStart < n - 1; cycleStart += 1) {
+    let item = Box.make(arr[cycleStart])
+    let pos = Box.make(cycleStart)
+    for (let i = cycleStart + 1; i < n; i += 1) {
+      if (arr[i] < Box.unbox(item)) {
+        Box.update(pos, p => p + 1)
+      }
+    }
+    if (Box.unbox(pos) != cycleStart) {
+      while (Box.unbox(item) == arr[Box.unbox(pos)]) {
+        Box.update(pos, p => p + 1)
+      }
+      let tmp = arr[Box.unbox(pos)]
+      arr[Box.unbox(pos)] = Box.unbox(item)
+      Box.update(item, _ => tmp)
+      Box.update(writes, w => w + 1)
+    }
+  }
+  Box.unbox(writes)
+}
+
+let arr = [> 5, 4, 3, 2, 1]
+ignore(cycleSort(arr))
+print(arr)
