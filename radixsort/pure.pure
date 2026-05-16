@@ -1,0 +1,16 @@
+radixsort arr = rsort arr 1 (max arr) with
+  rsort arr exp _ | exp > max arr = arr
+  rsort arr exp m = rsort (countingSortByExp arr exp) (exp*10) m;
+end;
+
+countingSortByExp arr exp = out with
+  n = #arr;
+  output = array n;
+  count = array 10;
+  _ = [count!((arr!i/exp) mod 10) = count!((arr!i/exp) mod 10) + 1 | i = 0..n-1];
+  _ = [count!i = count!i + count!(i-1) | i = 1..9];
+  _ = [output!(count!((arr!i/exp) mod 10) - 1) = arr!i | i = n-1..-1..0];
+  out = list output
+end;
+
+radixsort [5, 2, 8, 1, 9, 3];
