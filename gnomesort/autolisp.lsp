@@ -1,0 +1,13 @@
+(defun gnome-sort (lst / i n arr tmp)
+  (setq arr (apply 'vector lst))
+  (setq n (length lst))
+  (setq i 0)
+  (while (< i n)
+    (if (or (= i 0) (>= (svref arr i) (svref arr (1- i))))
+        (setq i (1+ i))
+      (progn
+        (setq tmp (svref arr i))
+        (svset arr i (svref arr (1- i)))
+        (svset arr (1- i) tmp)
+        (setq i (1- i)))))
+  arr)
