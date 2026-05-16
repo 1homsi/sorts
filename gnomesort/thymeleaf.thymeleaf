@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<ul>
+  <li th:each="val : ${sorted}" th:text="${val}"></li>
+</ul>
+</body>
+</html>
