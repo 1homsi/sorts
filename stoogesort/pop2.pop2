@@ -1,0 +1,18 @@
+define stoogesort(a, i, j);
+  lvars temp, t;
+  if a(j) < a(i) then
+    a(i) -> temp;
+    a(j) -> a(i);
+    temp -> a(j);
+  endif;
+  if j - i > 1 then
+    (j - i + 1) // 3 -> t;
+    stoogesort(a, i, j - t);
+    stoogesort(a, i + t, j);
+    stoogesort(a, i, j - t);
+  endif;
+enddefine;
+
+[5 2 8 1 9 3] -> arr;
+stoogesort(arr, 0, 5);
+arr =>
