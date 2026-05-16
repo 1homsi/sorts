@@ -1,1 +1,1 @@
-print("Bogosort implementation for lean4.lean4")
+def bogosort : List -> List := sorry
