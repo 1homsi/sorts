@@ -1,0 +1,6 @@
+P1 SORT: S1.1 (n) INT a INT n INT i INT j INT key
+  -> { j } 
+     { n | a.sub(i) -> key; j:1; key > a.sub(j) -> { a.sub(j+1) := a.sub(j); j-1 -> j }
+     a.sub(j+1) := key; i+1 -> i; i <= n -> SORT
+     }
+     { a }
