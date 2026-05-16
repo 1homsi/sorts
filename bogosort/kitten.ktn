@@ -1,0 +1,9 @@
+(A -> (do (check-sort A) (show A) (shuffle A) (bogosort)) (A shuffle show))
+
+(define check-sort (A -> (drop (A length 1 - 0 over (A at over 1 + A at >) any))))
+
+(define show (A -> (A print)))
+
+(define shuffle (A -> (... A reverse)))
+
+(3 1 2 (3 vector) bogosort)
