@@ -1,0 +1,16 @@
+(de bubbleSort (Lst)
+   (let Arr (apply array Lst)
+      (let N (length Lst)
+         (loop
+            (let Swapped NIL
+               (for I (- N 1)
+                  (when (> (get Arr I) (get Arr (inc I)))
+                     (let Tmp (get Arr I)
+                        (set (nth Arr I) (get Arr (inc I)))
+                        (set (nth Arr (inc I)) Tmp) )
+                     (on Swapped) ) )
+               (dec 'N)
+               (NIL Swapped) ) ) )
+      Arr ) )
+
+(println (bubbleSort (64 34 25 12 22 11 90)))
