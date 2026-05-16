@@ -1,0 +1,20 @@
+Process CombSort
+  Gap <- 6
+  Swapped <- true
+  While Gap > 1 or Swapped
+    Gap <- Gap * 10 / 13
+    If Gap < 1
+      Gap <- 1
+    End
+    Swapped <- false
+    For i <- 0 to 6 - Gap - 1
+      If Array[i] > Array[i + Gap]
+        Temp <- Array[i]
+        Array[i] <- Array[i + Gap]
+        Array[i + Gap] <- Temp
+        Swapped <- true
+      End
+    End
+  End
+  Print Array
+End Process
