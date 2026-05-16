@@ -1,1 +1,3 @@
-print("Bogosort implementation for dxhlsl.dxhlsl")
+void bogosort() {
+    if (!is_sorted()) shuffle();
+}
