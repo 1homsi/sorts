@@ -1,0 +1,54 @@
+.assembly GnomeSort {}
+.class public GnomeSort {
+    .method public static void gnomeSort(int32[] arr) cil managed {
+        .locals init (int32 i, int32 cur, int32 prv, int32 n)
+        ldarg.0
+        ldlen
+        conv.i4
+        stloc.3
+        ldc.i4.0
+        stloc.0
+    loop:
+        ldloc.0
+        ldloc.3
+        bge done
+        ldloc.0
+        brfalse advance
+        ldarg.0
+        ldloc.0
+        ldelem.i4
+        stloc.1
+        ldarg.0
+        ldloc.0
+        ldc.i4.1
+        sub
+        ldelem.i4
+        stloc.2
+        ldloc.1
+        ldloc.2
+        bge advance
+        ldarg.0
+        ldloc.0
+        ldloc.2
+        stelem.i4
+        ldarg.0
+        ldloc.0
+        ldc.i4.1
+        sub
+        ldloc.1
+        stelem.i4
+        ldloc.0
+        ldc.i4.1
+        sub
+        stloc.0
+        br loop
+    advance:
+        ldloc.0
+        ldc.i4.1
+        add
+        stloc.0
+        br loop
+    done:
+        ret
+    }
+}
