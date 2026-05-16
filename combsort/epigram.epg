@@ -1,0 +1,15 @@
+let comb_sort : (n : Nat) -> Vec n Int -> Vec n Int =
+  \ n arr ->
+    let go : (gap : Nat) -> Vec n Int -> Vec n Int =
+          \ gap arr ->
+            (case gap of
+              | zero => arr
+              | suc gap' =>
+                  let new_gap = (gap * 10) / 13 in
+                  if new_gap < 1
+                  then go 1 (swapPass arr gap)
+                  else go new_gap (swapPass arr new_gap)
+              end)
+    in go n arr
+
+in comb_sort 6 [5, 2, 8, 1, 9, 3]
