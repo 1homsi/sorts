@@ -1,0 +1,11 @@
+module InsertionSort where
+
+import Lava
+
+insertionSort :: [Sig Int] -> [Sig Int]
+insertionSort [] = []
+insertionSort (x:xs) = insertSorted x (insertionSort xs)
+
+insertSorted :: Sig Int -> [Sig Int] -> [Sig Int]
+insertSorted x [] = [x]
+insertSorted x (y:ys) = mux (x `leq` y) (x:y:ys) (y : insertSorted x ys)
