@@ -1,0 +1,29 @@
+function countingsort(arr) {
+  if (arr.length === 0) return arr;
+
+  var max = 0;
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] > max) max = arr[i];
+  }
+
+  var count = new Array(max + 1);
+  for (var i = 0; i <= max; i++) {
+    count[i] = 0;
+  }
+
+  for (var i = 0; i < arr.length; i++) {
+    count[arr[i]]++;
+  }
+
+  var output = [];
+  for (var i = 0; i <= max; i++) {
+    for (var j = 0; j < count[i]; j++) {
+      output.push(i);
+    }
+  }
+
+  return output;
+}
+
+var test = [5, 2, 8, 1, 9, 3];
+WScript.Echo(countingsort(test));
