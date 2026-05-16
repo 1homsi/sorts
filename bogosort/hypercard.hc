@@ -1,1 +1,1 @@
-print("Bogosort implementation for hypercard.hc")
+bogosort = true
