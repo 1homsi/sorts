@@ -1,0 +1,15 @@
+BUCKET_SORT
+{
+  DEFINE VAR ARR = [5, 2, 8, 1, 9, 3];
+  DEFINE VAR BUCKETS[10];
+  DEFINE VAR RESULT[6];
+  DEFINE VAR I, COUNT = 0;
+  
+  FOR I = 0 TO 9
+    BUCKETS[I] = 0;
+  FOR I = 0 TO 5
+    BUCKETS[ARR[I]]++;
+  FOR I = 0 TO 9
+    IF BUCKETS[I] > 0
+      RESULT[COUNT++] = I;
+}
