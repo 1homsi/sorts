@@ -1,0 +1,16 @@
+define insertionSort (Var[Int] -- Var[Int]):
+  dup length (Int) var n (Int):
+    2 n (Int) range:
+      dup (Int Var) at (Int) var key (Int):
+        swap 1 - (Int) var j (Int):
+          j 0 >= key (Var[Int] Int) at (Int) > and:
+            dup j (Int Var[Int]) set (Int) dup j 1 - (Int Var) at (Int) swap (Int)
+            1 - (Var) -> j
+          .
+          j 1 + (Int Var) set (Int) key (Int) swap
+        .
+      .
+    .
+  .;
+
+[5 2 8 1 9 3] (Var[Int]) insertionSort print
