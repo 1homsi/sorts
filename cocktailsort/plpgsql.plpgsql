@@ -1,0 +1,39 @@
+CREATE OR REPLACE FUNCTION cocktail_sort_fn(arr INTEGER[])
+RETURNS INTEGER[] AS $$
+DECLARE
+    swapped BOOLEAN;
+    start_idx INTEGER;
+    end_idx INTEGER;
+    tmp INTEGER;
+    result INTEGER[];
+BEGIN
+    result := arr;
+    swapped := TRUE;
+    start_idx := 1;
+    end_idx := array_length(result, 1);
+    WHILE swapped LOOP
+        swapped := FALSE;
+        FOR i IN start_idx..end_idx-1 LOOP
+            IF result[i] > result[i+1] THEN
+                tmp := result[i];
+                result[i] := result[i+1];
+                result[i+1] := tmp;
+                swapped := TRUE;
+            END IF;
+        END LOOP;
+        EXIT WHEN NOT swapped;
+        swapped := FALSE;
+        end_idx := end_idx - 1;
+        FOR i IN REVERSE start_idx..end_idx-1 LOOP
+            IF result[i] > result[i+1] THEN
+                tmp := result[i];
+                result[i] := result[i+1];
+                result[i+1] := tmp;
+                swapped := TRUE;
+            END IF;
+        END LOOP;
+        start_idx := start_idx + 1;
+    END LOOP;
+    RETURN result;
+END;
+$$ LANGUAGE plpgsql;
