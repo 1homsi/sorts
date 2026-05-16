@@ -1,0 +1,53 @@
+structure CycleSort = struct
+    fun cycleSort arr =
+        let
+            val n = Array.length arr
+            val writes = ref 0
+        in
+            Array.appi (fn (cycleStart, _) =>
+                if cycleStart >= n - 1 then ()
+                else
+                    let
+                        val item = ref (Array.sub (arr, cycleStart))
+                        val pos = ref cycleStart
+                    in
+                        Array.appi (fn (i, v) =>
+                            if i > cycleStart andalso v < !item
+                            then pos := !pos + 1
+                            else ()
+                        ) arr;
+                        if !pos = cycleStart then ()
+                        else (
+                            while !item = Array.sub (arr, !pos) do
+                                pos := !pos + 1;
+                            let val tmp = Array.sub (arr, !pos) in
+                                Array.update (arr, !pos, !item);
+                                item := tmp
+                            end;
+                            writes := !writes + 1;
+                            while !pos <> cycleStart do (
+                                pos := cycleStart;
+                                Array.appi (fn (i, v) =>
+                                    if i > cycleStart andalso v < !item
+                                    then pos := !pos + 1
+                                    else ()
+                                ) arr;
+                                while !item = Array.sub (arr, !pos) do
+                                    pos := !pos + 1;
+                                let val t = Array.sub (arr, !pos) in
+                                    Array.update (arr, !pos, !item);
+                                    item := t
+                                end;
+                                writes := !writes + 1
+                            )
+                        )
+                    end
+            ) arr;
+            !writes
+        end
+end
+
+val arr = Array.fromList [5, 4, 3, 2, 1]
+val _ = CycleSort.cycleSort arr
+val _ = Array.app (fn x => print (Int.toString x ^ " ")) arr
+val _ = print "\n"
