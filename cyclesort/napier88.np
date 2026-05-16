@@ -1,0 +1,45 @@
+let
+  cycleSort = proc(arr : array of integer) -> array of integer is
+    var n : integer is arr.size;
+    var pos : integer is 0;
+    while pos < n do
+      var item : integer is arr[pos];
+      var cycles : integer is 0;
+      for i in 0 to n-1 do
+        if i != pos & arr[i] < item then
+          cycles := cycles + 1
+        fi
+      od;
+      if cycles != 0 then
+        while arr[pos] = item do
+          pos := pos + 1
+        od;
+        var temp : integer is arr[pos];
+        arr[pos] := item;
+        item := temp;
+        while cycles > 0 do
+          cycles := 0;
+          for i in 0 to n-1 do
+            if i != pos & arr[i] < item then
+              cycles := cycles + 1
+            fi
+          od;
+          while arr[pos] = item do
+            pos := pos + 1
+          od;
+          temp := arr[pos];
+          arr[pos] := item;
+          item := temp;
+          cycles := cycles - 1
+        od
+      fi;
+      pos := pos + 1
+    od;
+    arr
+  end;
+in
+  let arr = [5, 2, 8, 1, 9, 3]
+  in
+    write(cycleSort(arr))
+  end
+end
