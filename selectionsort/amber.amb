@@ -1,0 +1,20 @@
+object SelectionSort {
+    def selectionSort(arr: List[Int]): List[Int] = {
+        val n = arr.length
+        var a = arr.toArray
+        for (i <- 0 until n - 1) {
+            var minIdx = i
+            for (j <- i + 1 until n) {
+                if (a(j) < a(minIdx)) {
+                    minIdx = j
+                }
+            }
+            val tmp = a(i)
+            a(i) = a(minIdx)
+            a(minIdx) = tmp
+        }
+        a.toList
+    }
+}
+
+println(SelectionSort.selectionSort(List(5, 2, 8, 1, 9, 3)))
