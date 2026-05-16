@@ -1,0 +1,5 @@
+!Shell Sort in TECO!
+0,6$P= !input array!
+$| !loop through array!
+G= !gap!
+$| !inner loop!
