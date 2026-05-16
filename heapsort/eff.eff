@@ -1,0 +1,36 @@
+effect ARRAY =
+  val get : int -> int
+  val set : int -> int -> ()
+
+let heapsort arr =
+  let n = Array.length arr in
+  for i = n / 2 - 1 downto 0 do
+    siftdown arr i n
+  done;
+  for i = n - 1 downto 1 do
+    let temp = arr.(0) in
+    arr.(0) <- arr.(i);
+    arr.(i) <- temp;
+    siftdown arr 0 i
+  done;
+  arr
+
+let siftdown arr idx n =
+  let largest = ref idx in
+  let left = 2 * idx + 1 in
+  let right = 2 * idx + 2 in
+  if left < n && arr.(left) > arr.(!largest) then
+    largest := left;
+  if right < n && arr.(right) > arr.(!largest) then
+    largest := right;
+  if !largest != idx then
+    let temp = arr.(idx) in
+    (arr.(idx) <- arr.(!largest);
+     arr.(!largest) <- temp;
+     siftdown arr !largest n)
+
+let _ =
+  let arr = [|5; 2; 8; 1; 9; 3|] in
+  let _ = heapsort arr in
+  Array.iter (Printf.printf "%d ") arr;
+  print_newline ()
