@@ -1,0 +1,25 @@
+function insertionSort(arr)
+    local a = {}
+    for i, v in ipairs(arr) do a[i] = v end
+    local n = #a
+    for i = 2, n do
+        local key = a[i]
+        local j = i - 1
+        while j >= 1 and a[j] > key do
+            a[j + 1] = a[j]
+            j = j - 1
+        end
+        a[j + 1] = key
+    end
+    return a
+end
+
+local sorted = {}
+
+function love.load()
+    sorted = insertionSort({5, 3, 1, 4, 2})
+end
+
+function love.draw()
+    love.graphics.print(table.concat(sorted, ", "), 50, 50)
+end
