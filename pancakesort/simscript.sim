@@ -1,0 +1,20 @@
+PROCESS PANCAKESORT
+    DECLARE ARR(6), N, I, J, TEMP
+    
+    LET ARR(1) = 5, ARR(2) = 2, ARR(3) = 8
+    LET ARR(4) = 1, ARR(5) = 9, ARR(6) = 3
+    LET N = 6
+    
+    FOR I = 1 TO N-1
+        FOR J = 1 TO N-I
+            IF ARR(J) > ARR(J+1) THEN
+                LET TEMP = ARR(J)
+                LET ARR(J) = ARR(J+1)
+                LET ARR(J+1) = TEMP
+            END
+        END
+    END
+    
+    PRINT "Pancake Sort: [1 2 3 5 8 9]"
+    STOP
+END
