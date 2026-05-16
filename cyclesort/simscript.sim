@@ -1,0 +1,49 @@
+PREAMBLE
+  DEFINE ARR AS AN ARRAY OF 6 ELEMENTS
+  DEFINE N, POS, ITEM, CYCLES, I, TEMP AS INTEGER VARIABLES
+END
+
+MAIN
+  LET N = 6
+  LET ARR(1) = 5
+  LET ARR(2) = 2
+  LET ARR(3) = 8
+  LET ARR(4) = 1
+  LET ARR(5) = 9
+  LET ARR(6) = 3
+  
+  LET POS = 1
+  DO WHILE POS <= N
+    LET ITEM = ARR(POS)
+    LET CYCLES = 0
+    FOR I = 1 TO N
+      IF I <> POS AND ARR(I) < ITEM THEN
+        LET CYCLES = CYCLES + 1
+    NEXT I
+    
+    IF CYCLES <> 0 THEN
+      DO WHILE ARR(POS) = ITEM
+        LET POS = POS + 1
+      END WHILE
+      LET TEMP = ARR(POS)
+      LET ARR(POS) = ITEM
+      LET ITEM = TEMP
+      
+      DO WHILE CYCLES > 0
+        LET CYCLES = 0
+        FOR I = 1 TO N
+          IF I <> POS AND ARR(I) < ITEM THEN
+            LET CYCLES = CYCLES + 1
+        NEXT I
+        DO WHILE ARR(POS) = ITEM
+          LET POS = POS + 1
+        END WHILE
+        LET TEMP = ARR(POS)
+        LET ARR(POS) = ITEM
+        LET ITEM = TEMP
+        LET CYCLES = CYCLES - 1
+      END WHILE
+    END IF
+    LET POS = POS + 1
+  END WHILE
+END
