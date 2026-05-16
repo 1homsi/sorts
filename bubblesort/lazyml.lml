@@ -1,0 +1,13 @@
+bubble_pass [] = ([], false)
+  | bubble_pass [x] = ([x], false)
+  | bubble_pass (x::y::rest) =
+    if x > y then
+      let (sorted, _) = bubble_pass (x::rest) in
+      (y::sorted, true)
+    else
+      let (sorted, sw) = bubble_pass (y::rest) in
+      (x::sorted, sw)
+
+rec bubble_sort lst =
+  let (sorted, swapped) = bubble_pass lst in
+  if swapped then bubble_sort sorted else sorted
