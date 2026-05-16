@@ -1,0 +1,34 @@
+import Stabilizer.{aggregate, for}
+
+object Heapsort
+  run() = (arr: ZZ32, ...) -> ()
+    sorted = array(1,2,3,4,5,6)
+    n = |sorted|
+    for i in (n DIV 2 - 1) DOWN TO 0 do
+      siftDown(sorted, i, n)
+    end
+    for i in (n - 1) DOWN TO 1 do
+      temp: ZZ32 = sorted[0]
+      sorted[0] := sorted[i]
+      sorted[i] := temp
+      siftDown(sorted, 0, i)
+    end
+    println(sorted)
+  
+  siftDown(arr, i, n) = ()
+    largest: ZZ32 = i
+    left: ZZ32 = 2*i + 1
+    right: ZZ32 = 2*i + 2
+    if left < n AND arr[left] > arr[largest] then
+      largest := left
+    end
+    if right < n AND arr[right] > arr[largest] then
+      largest := right
+    end
+    if largest ≠ i then
+      temp: ZZ32 = arr[i]
+      arr[i] := arr[largest]
+      arr[largest] := temp
+      siftDown(arr, largest, n)
+    end
+end
