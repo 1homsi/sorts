@@ -1,0 +1,21 @@
+CLASS MAIN
+  DEF bucket_sort(arr: LIST, max_val: INT) -> LIST
+    IF max_val = 0 THEN
+      RETURN arr
+    FI
+    VAR buckets: ARRAY[LIST] := NEW ARRAY[max_val]
+    FOR i IN 0..max_val-1 DO
+      buckets[i] := []
+    OD
+    FOR num IN arr DO
+      IF num >= 0 AND num < max_val THEN
+        buckets[num] := buckets[num] ++ [num]
+      FI
+    OD
+    VAR result: LIST := []
+    FOR i IN 0..max_val-1 DO
+      result := result ++ buckets[i]
+    OD
+    RETURN result
+  END
+END
