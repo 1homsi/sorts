@@ -1,0 +1,14 @@
+bucket_sort arr max_val
+  | max_val == 0 = arr
+  | otherwise = collect_buckets buckets
+  where
+    buckets = init_buckets max_val
+    init_buckets 0 = []
+    init_buckets n = [] : init_buckets (n - 1)
+    put_in_bucket idx num = take idx buckets ++ 
+                            [num : buckets !! idx] ++ 
+                            drop (idx + 1) buckets
+    collect_buckets [] = []
+    collect_buckets (b:bs) = b ++ collect_buckets bs
+
+main = print (bucket_sort [5, 2, 8, 1, 9, 3] 10)
