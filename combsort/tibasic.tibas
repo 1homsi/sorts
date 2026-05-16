@@ -1,0 +1,21 @@
+:DelVar A
+:{5,2,8,1,9,3}→A
+:6→N
+:N→G
+:1→S
+:While G>1 or S=1
+:  int(G*10/13)→G
+:  If G<1
+:    1→G
+:  End
+:  0→S
+:  For(I,1,N-G)
+:    If A(I)>A(I+G)
+:      A(I)→T
+:      A(I+G)→A(I)
+:      T→A(I+G)
+:      1→S
+:    End
+:  End
+:End
+:Disp A
