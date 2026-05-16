@@ -1,0 +1,19 @@
+        DEFINE('COMBSRT(N)')                            :(COMBSRT_END)
+COMBSRT GAP = N
+        SORTED = 0
+SRTOUT  EQ(SORTED,1)                                    :S(SRTEND)
+        GAP = INTEGER(GAP * 10 / 13)
+        LT(GAP,1)                                       :S(S1)
+        EQ(GAP,1)                                       :S(S2):(SRTIN)
+S1      GAP = 1
+S2      SORTED = 1
+SRTIN   I = 1
+SRTIN2  LE(I + GAP, N)                                  :F(SRTOUT)
+        GT(A<I>,A<I + GAP>)                             :F(SRTNX)
+        TMP = A<I>
+        A<I> = A<I + GAP>
+        A<I + GAP> = TMP
+        SORTED = 0
+SRTNX   I = I + 1                                      :(SRTIN2)
+SRTEND  RETURN
+COMBSRT_END
