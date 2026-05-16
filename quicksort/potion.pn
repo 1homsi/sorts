@@ -1,0 +1,21 @@
+quicksort = method(arr)
+  if (arr length <= 1)
+    return arr
+  end
+
+  pivot = arr[0]
+  less = []
+  greater = []
+
+  (1..arr length) each(i)
+    if (arr[i] <= pivot)
+      less append(arr[i])
+    else
+      greater append(arr[i])
+    end
+  end
+
+  return (quicksort(less)) + [pivot] + (quicksort(greater))
+end
+
+printline(quicksort([5, 2, 8, 1, 9, 3]))
