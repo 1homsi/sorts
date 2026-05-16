@@ -1,0 +1,12 @@
+        COMIT BUBBLE SORT
+        SHELF 64 34 25 12 22 11 90
+OUTER   SWAPPED = 0
+        FULL $1 $2 $3 $4 $5 $6 $7 /INNER
+INNER   MATCH (X)(Y)(REST)
+        IF X GT Y
+          SWAP (Y)(X)(REST) / INNER
+          SWAPPED = 1
+        ELSE MATCH (X)(REST) / INNER
+DONE    IF SWAPPED = 1 GOTO OUTER
+        PRINT $1 $2 $3 $4 $5 $6 $7
+        STOP
