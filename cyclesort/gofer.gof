@@ -1,0 +1,19 @@
+cyclesort arr = go arr 0 (length arr)
+  where
+    go a pos n
+      | pos >= n = a
+      | otherwise = go a'' (pos+1) n
+      where
+        item = a !! pos
+        cycles = length [i | i <- [0..n-1], i /= pos, a !! i < item]
+        a' = if cycles == 0 then a else update_cycle a pos item cycles
+        a'' = a'
+    
+    update_cycle a pos item cycles
+      | cycles == 0 = a
+      | otherwise = update_cycle a' pos item' (cycles-1)
+      where
+        pos' = until (\i -> a !! i /= item) (+1) pos
+        temp = a !! pos'
+        a' = take pos' a ++ [item] ++ drop (pos'+1) a
+        item' = temp
