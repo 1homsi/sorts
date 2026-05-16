@@ -1,0 +1,21 @@
+GNOME-SORT
+  W1 = 0     ; index i
+  W2 = N     ; array length
+LOOP
+  J W1 W2 DONE    ; if i >= n, done
+  J W1 Z ADVANCE  ; if i = 0, advance
+  ; compare arr[i] with arr[i-1]
+  ; if arr[i] >= arr[i-1], advance
+  ; else swap and decrease i
+  LA W3 ARR W1    ; load arr[i]
+  LA W4 ARR W1-1  ; load arr[i-1]
+  JS W3 W4 SWAP   ; if arr[i] < arr[i-1], swap
+ADVANCE
+  INC W1          ; i++
+  J LOOP
+SWAP
+  ; exchange arr[i] and arr[i-1]
+  DEC W1          ; i--
+  J LOOP
+DONE
+  END
