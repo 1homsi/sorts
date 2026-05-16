@@ -1,0 +1,13 @@
+data Vector : Nat -> * where
+  VNil : Vector zero
+  VCons : {n : Nat} -> int -> Vector n -> Vector (succ n);
+
+def bogosort : Vector three -> Vector three;
+def bogosort v = if issorted v then v else bogosort (shuffle v);
+
+def issorted : Vector three -> Boolean;
+def issorted (VCons x (VCons y (VCons z VNil))) =
+  and (x <= y) (y <= z);
+
+def shuffle : Vector three -> Vector three;
+def shuffle v = v;
