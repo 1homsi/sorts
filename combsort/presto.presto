@@ -1,0 +1,19 @@
+WITH RECURSIVE
+sort_input AS (
+    SELECT ARRAY[5, 3, 8, 1, 9, 2, 7, 4, 6] AS arr
+),
+params AS (
+    SELECT CARDINALITY(arr) AS n, arr FROM sort_input
+),
+comb_sort AS (
+    SELECT arr, n, n AS gap, false AS done FROM params
+    UNION ALL
+    SELECT
+        arr,
+        n,
+        GREATEST(1, CAST(FLOOR(CAST(gap AS DOUBLE) / 1.3) AS INTEGER)) AS new_gap,
+        GREATEST(1, CAST(FLOOR(CAST(gap AS DOUBLE) / 1.3) AS INTEGER)) = 1 AS done
+    FROM comb_sort
+    WHERE NOT done
+)
+SELECT arr FROM comb_sort WHERE done ORDER BY 1 LIMIT 1;
