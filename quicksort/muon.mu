@@ -1,0 +1,21 @@
+fn quicksort(arr) {
+  if arr.len <= 1 {
+    return arr
+  }
+
+  var pivot = arr[0]
+  var less = []
+  var greater = []
+
+  for i = 1; i < arr.len; i = i + 1 {
+    if arr[i] <= pivot {
+      less.push(arr[i])
+    } else {
+      greater.push(arr[i])
+    }
+  }
+
+  return quicksort(less) + [pivot] + quicksort(greater)
+}
+
+print(quicksort([5, 2, 8, 1, 9, 3]))
