@@ -1,4 +1,4 @@
-func shellSort(_ arr: inout [Int]) {
+func shellsort(_ arr: inout [Int]) {
     let n = arr.count
     var gap = n / 2
     while gap > 0 {
@@ -14,7 +14,3 @@ func shellSort(_ arr: inout [Int]) {
         gap /= 2
     }
 }
-
-var arr = [64, 34, 25, 12, 22, 11, 90]
-shellSort(&arr)
-print(arr)
