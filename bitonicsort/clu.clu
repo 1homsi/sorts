@@ -1,0 +1,44 @@
+bitonic_sort = cluster is sort
+
+rep = array[int]
+
+compare_and_swap = proc (arr: rep, i, j: int, dir: bool)
+    ai: int := arr[i]
+    aj: int := arr[j]
+    if dir = (ai > aj) then
+        arr[i] := aj
+        arr[j] := ai
+    end
+end compare_and_swap
+
+bitonic_merge = proc (arr: rep, lo, cnt: int, dir: bool)
+    if cnt > 1 then
+        k: int := cnt / 2
+        for i: int in int$from_to(lo, lo + k - 1) do
+            compare_and_swap(arr, i, i + k, dir)
+        end
+        bitonic_merge(arr, lo, k, dir)
+        bitonic_merge(arr, lo + k, k, dir)
+    end
+end bitonic_merge
+
+sort = proc (arr: rep, lo, cnt: int, dir: bool)
+    if cnt > 1 then
+        k: int := cnt / 2
+        sort(arr, lo, k, true)
+        sort(arr, lo + k, k, false)
+        bitonic_merge(arr, lo, cnt, dir)
+    end
+end sort
+
+end bitonic_sort
+
+start_up = proc ()
+    data: array[int] := array[int]$[3, 7, 4, 8, 6, 2, 1, 5]
+    bitonic_sort$sort(data, 0, 8, true)
+    for x: int in array[int]$elements(data) do
+        po$print(int$unparse(x))
+        po$print(" ")
+    end
+    po$print("\n")
+end start_up
