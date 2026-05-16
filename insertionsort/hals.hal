@@ -1,0 +1,17 @@
+DECLARE SORT_PROC PROCEDURE;
+
+SVE_INSERTION_SORT:
+VALUES ARE ASSIGNED AS FOLLOWS:
+  ARR INITIALIZES TO
+    (5, 2, 8, 1, 9, 3);
+  N = 6;
+  DO FOR I = 2 TO N;
+    KEY = ARR(I);
+    J = I - 1;
+    DO WHILE J > 0 AND ARR(J) > KEY;
+      ARR(J+1) = ARR(J);
+      J = J - 1;
+    END;
+    ARR(J+1) = KEY;
+  END;
+  PRINT ARR;
