@@ -1,0 +1,29 @@
+bitonicsort :: (arr: [..]int, lo: int, cnt: int, dir: int) {
+    if cnt > 1 {
+        k := cnt / 2
+        bitonicsort(arr, lo, k, 1)
+        bitonicsort(arr, lo + k, k, 0)
+        bitonicmerge(arr, lo, cnt, dir)
+    }
+}
+
+bitonicmerge :: (arr: [..]int, lo: int, cnt: int, dir: int) {
+    if cnt > 1 {
+        k := cnt / 2
+        for i in lo..lo + cnt - k {
+            if ((arr[i] > arr[i + k]) == (dir == 1)) {
+                tmp := arr[i]
+                arr[i] = arr[i + k]
+                arr[i + k] = tmp
+            }
+        }
+        bitonicmerge(arr, lo, k, dir)
+        bitonicmerge(arr, lo + k, k, dir)
+    }
+}
+
+main :: () {
+    arr := int.[5, 2, 8, 1, 9, 3, 7, 4]
+    bitonicsort(arr, 0, 8, 1)
+    print(arr)
+}
