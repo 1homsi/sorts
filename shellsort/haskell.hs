@@ -1,23 +1,10 @@
-import Data.List (intercalate)
-import Data.Vector (Vector, fromList, toList, (!), (//))
-import qualified Data.Vector as V
-
-shellSort :: Vector Int -> Vector Int
-shellSort vec = go vec (V.length vec `div` 2)
+shellsort :: [Int] -> [Int]
+shellsort xs = shell xs (length xs `div` 2)
   where
-    go v 0 = v
-    go v gap = go (insertionPass v gap (gap) (V.length v)) (gap `div` 2)
-    insertionPass v gap i n
-      | i >= n = v
-      | otherwise =
-          let temp = v ! i
-              v' = shiftBack v gap i temp
-          in insertionPass v' gap (i + 1) n
-    shiftBack v gap j temp
-      | j < gap || v ! (j - gap) <= temp = v // [(j, temp)]
-      | otherwise = shiftBack (v // [(j, v ! (j - gap))]) gap (j - gap) temp
-
-main :: IO ()
-main = do
-  let arr = fromList [64, 34, 25, 12, 22, 11, 90]
-  print $ toList $ shellSort arr
+    shell arr 0 = arr
+    shell arr gap = shell (pass arr gap 0) (gap `div` 2)
+    pass arr _ i | i >= length arr = arr
+    pass arr gap i = pass (swap arr i gap) gap (i + 1)
+    swap arr i gap
+        | arr !! i < arr !! (i - gap) = arr
+        | otherwise = take (i - gap) arr ++ [arr !! i] ++ take (gap - 1) (drop (i - gap + 1) arr) ++ [arr !! (i - gap)] ++ drop (i + 1) arr
