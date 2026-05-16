@@ -1,0 +1,50 @@
+const merge = {arr, left, mid, right
+  var i = left
+  var j = mid + 1
+  var k = 0
+  var result = [][:]
+
+  while i <= mid && j <= right
+    if arr[i] <= arr[j]
+      result[k] = arr[i]
+      i += 1
+    else
+      result[k] = arr[j]
+      j += 1
+    ;;
+    k += 1
+  ;;
+  
+  while i <= mid
+    result[k] = arr[i]
+    i += 1
+    k += 1
+  ;;
+  
+  while j <= right
+    result[k] = arr[j]
+    j += 1
+    k += 1
+  ;;
+  
+  for idx = 0; idx < k; idx++
+    arr[left + idx] = result[idx]
+  ;;
+}
+
+const mergesort = {arr, left, right
+  if left < right
+    var mid = (left + right) / 2
+    mergesort(arr, left, mid)
+    mergesort(arr, mid + 1, right)
+    merge(arr, left, mid, right)
+  ;;
+}
+
+const main = {
+  var arr = [5, 2, 8, 1, 9, 3][:]
+  mergesort(arr, 0, 5)
+  for x in arr
+    std.put("{} ", x)
+  ;;
+}
