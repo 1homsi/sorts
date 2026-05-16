@@ -1,5 +1,6 @@
-[3 1 4 1 5 9 2 6]
-{
-  .{1$>}+1$,,(;{2rand?}+$\;
-  .2<{>}*!
-}do
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
