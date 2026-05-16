@@ -1,0 +1,34 @@
+object Node(value: ZZ32, left: Node, right: Node)
+  getter isEmpty() = false
+  getter asValue() = value
+  getter leftChild() = left
+  getter rightChild() = right
+end
+
+object EmptyNode
+  getter isEmpty() = true
+end
+
+api (f: Node) -> Node = insert(f, v: ZZ32): Node
+  if f.isEmpty then Node(v, EmptyNode, EmptyNode)
+  elif v < f.asValue then Node(f.asValue, insert(f.leftChild, v), f.rightChild)
+  elif v > f.asValue then Node(f.asValue, f.leftChild, insert(f.rightChild, v))
+  else f
+  end
+end
+
+api (f: Node) -> () = inorder(f):
+  if not f.isEmpty then
+    inorder(f.leftChild)
+    println(f.asValue)
+    inorder(f.rightChild)
+  end
+end
+
+api treeSort(arr: Array[ZZ32, 1]) =
+  var root = EmptyNode
+  for val in arr do root := insert(root, val) end
+  inorder(root)
+end
+
+treeSort([5, 2, 8, 1, 9, 3])
