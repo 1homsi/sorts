@@ -1,0 +1,10 @@
+rec quicksort : List Int -> List Int =
+  fn xs => case xs of
+    | Nil => Nil
+    | Cons x Nil => Cons x Nil
+    | Cons p rest =>
+      let less = filter (fn y => y <= p) rest
+      let greater = filter (fn y => y > p) rest
+      in append (quicksort less) (Cons p (quicksort greater))
+
+val () = print_list (quicksort (Cons 5 (Cons 2 (Cons 8 (Cons 1 (Cons 9 (Cons 3 Nil)))))))
