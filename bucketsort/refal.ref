@@ -1,0 +1,9 @@
+$ENTRY Go { = <BucketSort 5 2 8 1 9 3>; }
+
+BucketSort { e.Nums = <Sort <InitBuckets 10> e.Nums>; }
+
+InitBuckets { 0 = ; s.N = () <InitBuckets s.N - 1>; }
+
+Sort { e.B = <Collect e.B>; }
+
+Collect { = ; s.N e.Rest = s.N <Collect e.Rest>; }
