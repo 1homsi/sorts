@@ -1,0 +1,29 @@
+fmod COMB-SORT is
+  sort IntList .
+  subsort Int < IntList .
+  op nil : -> IntList [ctor] .
+  op __ : IntList IntList -> IntList [ctor assoc id: nil] .
+
+  op comb-sort : IntList -> IntList .
+  vars X Y Z : Int .
+  vars L : IntList .
+
+  eq comb-sort(X) = X .
+  eq comb-sort(X Y L) = comb-sort-aux(X Y L, length(X Y L)) .
+endfm
+
+fmod COMB-SORT-AUX is
+  sort IntList .
+  subsort Int < IntList .
+
+  op length : IntList -> Int .
+  op comb-sort-aux : IntList Int -> IntList .
+
+  var L : IntList .
+  var N : Int .
+
+  eq length(nil) = 0 .
+  eq length(X L) = 1 + length(L) [owise] .
+
+  eq comb-sort-aux(L, 1) = L .
+endfm
