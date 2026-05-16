@@ -1,0 +1,33 @@
+def countingsort(arr: list<int>): list<int> {
+  if arr.size() == 0:
+    return arr
+  end
+
+  var max = 0
+  for val in arr:
+    if val > max:
+      max = val
+    end
+  end
+
+  var count = list<int>(max + 1)
+  for i in range(max + 1):
+    count[i] = 0
+  end
+
+  for val in arr:
+    count[val] = count[val] + 1
+  end
+
+  var output = list<int>()
+  for i in range(max + 1):
+    for j in range(count[i]):
+      output.append(i)
+    end
+  end
+
+  return output
+}
+
+var test = [5, 2, 8, 1, 9, 3]
+io.writeln(countingsort(test))
