@@ -1,0 +1,20 @@
+method gnome_sort(arr : int[], n : int) : void {
+  var i : int = 0;
+  var cur : int;
+  var prv : int;
+label loop:
+  if i >= n goto done;
+  if i == 0 goto advance;
+  cur = arr[i];
+  prv = arr[i-1];
+  if cur >= prv goto advance;
+  arr[i] = prv;
+  arr[i-1] = cur;
+  i = i - 1;
+  goto loop;
+label advance:
+  i = i + 1;
+  goto loop;
+label done:
+  return;
+}
