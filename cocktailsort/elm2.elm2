@@ -1,0 +1,64 @@
+module CocktailSort2 exposing (cocktailSort2)
+
+import Array exposing (Array)
+
+swapAt2 : Int -> Int -> Array Int -> Array Int
+swapAt2 i j arr =
+    case (Array.get i arr, Array.get j arr) of
+        (Just a, Just b) ->
+            arr |> Array.set i b |> Array.set j a
+        _ ->
+            arr
+
+cocktailSort2 : Array Int -> Array Int
+cocktailSort2 arr =
+    let
+        n = Array.length arr
+    in
+    goSort arr True 0 (n - 1)
+
+goSort : Array Int -> Bool -> Int -> Int -> Array Int
+goSort arr swapped start end =
+    if not swapped then
+        arr
+    else if start >= end then
+        arr
+    else
+        let
+            (arr1, sw1) = passForward arr start end False
+        in
+        if not sw1 then
+            arr1
+        else
+            let
+                (arr2, sw2) = passBackward arr1 (end - 1) start False
+            in
+            goSort arr2 sw2 (start + 1) (end - 1)
+
+passForward : Array Int -> Int -> Int -> Bool -> (Array Int, Bool)
+passForward arr i end sw =
+    if i >= end then
+        (arr, sw)
+    else
+        let
+            a = Maybe.withDefault 0 (Array.get i arr)
+            b = Maybe.withDefault 0 (Array.get (i + 1) arr)
+        in
+        if a > b then
+            passForward (swapAt2 i (i + 1) arr) (i + 1) end True
+        else
+            passForward arr (i + 1) end sw
+
+passBackward : Array Int -> Int -> Int -> Bool -> (Array Int, Bool)
+passBackward arr i start sw =
+    if i < start then
+        (arr, sw)
+    else
+        let
+            a = Maybe.withDefault 0 (Array.get i arr)
+            b = Maybe.withDefault 0 (Array.get (i + 1) arr)
+        in
+        if a > b then
+            passBackward (swapAt2 i (i + 1) arr) (i - 1) start True
+        else
+            passBackward arr (i - 1) start sw
