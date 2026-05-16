@@ -1,0 +1,15 @@
+open^insertion_sort[
+    in^arr.
+    (insert_loop | done^[])
+]
+
+where insert_loop =
+    open^elem.
+    (compare | shift | place)
+
+where compare = open^cmp.
+    if less_or_equal then place
+    else shift
+
+where shift = open^prev.(push | compare)
+where place = open^pos.(store | done^[])
