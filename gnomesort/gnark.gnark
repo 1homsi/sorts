@@ -1,0 +1,20 @@
+package main
+
+import (
+    "github.com/consensys/gnark/frontend"
+    "github.com/consensys/gnark-crypto/ecc"
+    "github.com/consensys/gnark/backend/groth16"
+)
+
+type GnomeSortCircuit struct {
+    In  [10]frontend.Variable
+    Out [10]frontend.Variable `gnark:",public"`
+}
+
+func (c *GnomeSortCircuit) Define(api frontend.API) error {
+    for i := 1; i < 10; i++ {
+        diff := api.Sub(c.Out[i], c.Out[i-1])
+        api.AssertIsLessOrEqual(0, diff)
+    }
+    return nil
+}
