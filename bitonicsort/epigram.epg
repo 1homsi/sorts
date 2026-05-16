@@ -1,0 +1,18 @@
+bitonicsort : Vec 8 Int -> Vec 8 Int
+bitonicsort arr = bitonicsort' arr 0 8 1
+  where
+    bitonicsort' arr lo cnt dir =
+      if cnt > 1 then
+        let k = cnt / 2
+        in bitonicmerge (bitonicsort' (bitonicsort' arr lo k 1) (lo + k) k 0) lo cnt dir
+      else
+        arr
+
+    bitonicmerge arr lo cnt dir =
+      if cnt > 1 then
+        let k = cnt / 2
+        in bitonicmerge (bitonicmerge (swap arr lo k dir) lo k dir) (lo + k) k dir
+      else
+        arr
+
+    swap arr lo k dir = arr
