@@ -1,0 +1,16 @@
+MODL radixsort GLOBAL
+  DECL arr ARRAY INTEGER;
+  DECL max INTEGER;
+  DECL exp INTEGER;
+  DECL result ARRAY INTEGER;
+
+  CALL getMax(arr) GIVING max;
+  SET exp = 1;
+
+  WHILE max / exp > 0
+    CALL countingSortByExp(arr, exp) GIVING arr;
+    SET exp = exp * 10;
+  END;
+
+  RETURN arr;
+ENDMODL;
