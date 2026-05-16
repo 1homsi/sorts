@@ -1,0 +1,10 @@
+[package]
+name = "gnome-sort"
+version = "1.0.0"
+edition = "2021"
+
+[[bin]]
+name = "gnome_sort"
+path = "src/main.rs"
+
+[dependencies]
