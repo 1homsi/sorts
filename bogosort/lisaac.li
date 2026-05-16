@@ -1,0 +1,27 @@
+Section Header
+
+  + name := BOGOSORT;
+
+Section Inherit
+
+  - parent : OBJECT := OBJECT;
+
+Section Public
+
+  - bogosort(arr : ARRAY) : ARRAY <-
+  (
+    (arr.is_sorted.not).if {
+      bogosort(arr.shuffle)
+    } else {
+      arr
+    }
+  );
+
+  - is_sorted(arr : ARRAY) : BOOLEAN <-
+  (
+    arr.all { |x, i| (i = arr.upper) | (x <= arr.item(i+1)) }
+  );
+
+  - shuffle(arr : ARRAY) : ARRAY <- arr;
+
+  - main <- bogosort([3, 1, 2]).print;
