@@ -1,0 +1,15 @@
+class SelectionSort {
+    static sort(arr) {
+        var n = arr.count
+        for (i in 0...n) {
+            var minIdx = i
+            for (j in (i+1)...n) {
+                if (arr[j] < arr[minIdx]) minIdx = j
+            }
+            var tmp = arr[i]
+            arr[i] = arr[minIdx]
+            arr[minIdx] = tmp
+        }
+        return arr
+    }
+}

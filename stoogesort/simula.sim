@@ -1,0 +1,30 @@
+Begin
+    Integer Array Arr(1:8);
+    Integer I, First, Last, Tmp, T, N;
+
+    Procedure StoogeSort(First, Last);
+    Integer First, Last;
+    Begin
+        If Arr(First) > Arr(Last) Then
+        Begin
+            Tmp := Arr(First);
+            Arr(First) := Arr(Last);
+            Arr(Last) := Tmp;
+        End;
+        N := Last - First + 1;
+        If N > 2 Then
+        Begin
+            T := (N * 2) // 3;
+            StoogeSort(First, First + T - 1);
+            StoogeSort(Last - T + 1, Last);
+            StoogeSort(First, First + T - 1);
+        End;
+    End;
+
+    Arr(1):=3; Arr(2):=1; Arr(3):=4; Arr(4):=1;
+    Arr(5):=5; Arr(6):=9; Arr(7):=2; Arr(8):=6;
+    StoogeSort(1, 8);
+    For I:=1 Step 1 Until 8 Do
+        OutInt(Arr(I), 4);
+    OutImage;
+End

@@ -1,0 +1,15 @@
+SELECTSORT: PROCEDURE;
+    DECLARE ARR(10) FIXED BINARY;
+    DECLARE (N, I, J, MINIDX, TMP) FIXED BINARY;
+    N = 5;
+    ARR(1) = 5; ARR(2) = 3; ARR(3) = 1; ARR(4) = 4; ARR(5) = 2;
+    DO I = 1 TO N - 1;
+        MINIDX = I;
+        DO J = I + 1 TO N;
+            IF ARR(J) < ARR(MINIDX) THEN MINIDX = J;
+        END;
+        TMP = ARR(I);
+        ARR(I) = ARR(MINIDX);
+        ARR(MINIDX) = TMP;
+    END;
+END SELECTSORT;

@@ -1,0 +1,24 @@
+program shell_sort;
+
+procedure shell_sort(arr);
+    n := #arr;
+    gap := n div 2;
+    loop while gap > 0 do
+        loop for i in [gap+1..n] do
+            temp := arr(i);
+            j := i;
+            loop while j > gap and arr(j - gap) > temp do
+                arr(j) := arr(j - gap);
+                j := j - gap;
+            end loop;
+            arr(j) := temp;
+        end loop;
+        gap := gap div 2;
+    end loop;
+    return arr;
+end procedure;
+
+arr := [64, 34, 25, 12, 22, 11, 90];
+print(shell_sort(arr));
+
+end program;

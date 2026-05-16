@@ -1,0 +1,16 @@
+fn selection_sort(arr: [Field; 5]) -> [Field; 5] {
+    let mut result = arr;
+    for i in 0..5 {
+        let mut min_idx = i;
+        for j in i+1..5 {
+            let is_less = result[j] < result[min_idx];
+            if is_less {
+                min_idx = j;
+            }
+        }
+        let tmp = result[i];
+        result[i] = result[min_idx];
+        result[min_idx] = tmp;
+    }
+    result
+}

@@ -1,0 +1,13 @@
+:: Start
+<<set $arr to [5, 3, 1, 4, 2]>>
+<<set $n to $arr.length>>
+<<set $i to 1>>
+<<for ; $i lt $n ; $i++>>
+  <<set $key to $arr[$i]>>
+  <<set $j to $i - 1>>
+  <<for ; $j gte 0 and $arr[$j] gt $key ; $j-->>
+    <<set $arr[$j + 1] to $arr[$j]>>
+  <</for>>
+  <<set $arr[$j + 1] to $key>>
+<</for>>
+Sorted: <<= $arr.join(", ")>>

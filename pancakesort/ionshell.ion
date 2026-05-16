@@ -1,0 +1,39 @@
+#!/usr/bin/env ion
+
+fn flip arr k
+    let left = 0
+    let right = $k
+    while test $left -lt $right
+        let tmp = $arr[$left]
+        let arr[$left] = $arr[$right]
+        let arr[$right] = $tmp
+        let left = $(math $left + 1)
+        let right = $(math $right - 1)
+    end
+end
+
+fn find_max_idx arr size
+    let max_idx = 0
+    let i = 1
+    while test $i -lt $size
+        if test $arr[$i] -gt $arr[$max_idx]
+            let max_idx = $i
+        end
+        let i = $(math $i + 1)
+    end
+    echo $max_idx
+end
+
+let arr = [3 6 2 7 4 1 5]
+let size = 7
+while test $size -gt 1
+    let mi = $(find_max_idx $arr $size)
+    if test $mi -ne $(math $size - 1)
+        if test $mi -ne 0
+            flip $arr $mi
+        end
+        flip $arr $(math $size - 1)
+    end
+    let size = $(math $size - 1)
+end
+echo $arr

@@ -1,0 +1,39 @@
+MERGESORT: MODULE
+
+SYNMODE int_array = ARRAY(1:7) OF INT;
+
+DCL arr int_array := (38,27,43,3,9,82,10);
+DCL tmp int_array;
+
+MERGE: PROC(lo, mid, hi INT);
+    DCL (i, j, k, x) INT;
+    i := lo; j := mid + 1; k := lo;
+    DO WHILE i <= mid AND j <= hi;
+        IF arr(i) <= arr(j) THEN
+            tmp(k) := arr(i); i := i + 1;
+        ELSE
+            tmp(k) := arr(j); j := j + 1;
+        FI;
+        k := k + 1;
+    OD;
+    DO WHILE i <= mid; tmp(k) := arr(i); i := i+1; k := k+1; OD;
+    DO WHILE j <= hi; tmp(k) := arr(j); j := j+1; k := k+1; OD;
+    FOR x := lo TO hi DO arr(x) := tmp(x); OD;
+END MERGE;
+
+MSORT: PROC(lo, hi INT);
+    DCL mid INT;
+    IF lo >= hi THEN RETURN; FI;
+    mid := (lo + hi) / 2;
+    CALL MSORT(lo, mid);
+    CALL MSORT(mid + 1, hi);
+    CALL MERGE(lo, mid, hi);
+END MSORT;
+
+DCL i INT;
+CALL MSORT(1, 7);
+FOR i := 1 TO 7 DO
+    WRITELN(arr(i));
+OD;
+
+END MERGESORT;

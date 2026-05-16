@@ -1,0 +1,36 @@
+object merge_sort {
+    field arr: array[int] := array[int](7);
+
+    method merge(lo: int, mid: int, hi: int): void {
+        let tmp: array[int] := array[int](hi - lo + 1);
+        var i: int := lo;
+        var j: int := mid + 1;
+        var k: int := 0;
+        while i <= mid && j <= hi {
+            if self.arr[i] <= self.arr[j] then {
+                tmp[k] := self.arr[i]; i := i + 1;
+            } else {
+                tmp[k] := self.arr[j]; j := j + 1;
+            };
+            k := k + 1;
+        };
+        while i <= mid { tmp[k] := self.arr[i]; i:=i+1; k:=k+1; };
+        while j <= hi  { tmp[k] := self.arr[j]; j:=j+1; k:=k+1; };
+        var x: int := 0;
+        while x < hi - lo + 1 { self.arr[lo + x] := tmp[x]; x := x+1; };
+    }
+
+    method sort(lo: int, hi: int): void {
+        if lo >= hi then return;
+        let mid: int := (lo + hi) / 2;
+        self.sort(lo, mid);
+        self.sort(mid + 1, hi);
+        self.merge(lo, mid, hi);
+    }
+
+    method main(): void {
+        self.arr := [38, 27, 43, 3, 9, 82, 10];
+        self.sort(0, 6);
+        print(self.arr);
+    }
+}

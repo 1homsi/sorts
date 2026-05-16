@@ -1,0 +1,15 @@
+module SelectionSortWasm
+
+provide let selectionSort = (arr) => {
+  let n = Array.length(arr)
+  for (let mut i = 0; i < n; i += 1) {
+    let mut minIdx = i
+    for (let mut j = i + 1; j < n; j += 1) {
+      if (arr[j] < arr[minIdx]) minIdx = j
+    }
+    let tmp = arr[i]
+    arr[i] = arr[minIdx]
+    arr[minIdx] = tmp
+  }
+  arr
+}

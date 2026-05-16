@@ -1,0 +1,11 @@
+let selectionSort = \arr ->
+  match arr with
+  | [] -> []
+  | _ ->
+    let m = fold_left (fun a b -> if a < b then a else b) (head arr) arr in
+    m :: selectionSort (remove_first m arr)
+
+let remove_first = \x \lst ->
+  match lst with
+  | [] -> []
+  | y :: ys -> if y = x then ys else y :: remove_first x ys

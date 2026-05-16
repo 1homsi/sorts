@@ -1,0 +1,52 @@
+define main
+
+function flip( arr : array[integer]; k : integer
+             returns array[integer] )
+let
+    result := array_fill( arr );
+    left := 0;
+    right := k
+in
+    for i in left, right while left < right cross
+        result[left] := arr[right];
+        result[right] := arr[left];
+        left + 1;
+        right - 1
+    returns array of result
+    end for
+end let
+end function
+
+function find_max_idx( arr : array[integer]; size : integer
+                      returns integer )
+let
+    indices := for i in 1, size - 1 returns array of i end for
+in
+    reduce(fn(a, b : integer returns integer)
+               if arr[a] >= arr[b] then a else b end if,
+           0, indices)
+end let
+end function
+
+function pancake_sort( arr : array[integer]
+                      returns array[integer] )
+let
+    n := array_size(arr)
+in
+    for sz := n
+    while sz > 1
+    returns value of
+        let mi := find_max_idx(arr, sz) in
+        if mi ~= sz - 1 then
+            let a1 := if mi ~= 0 then flip(arr, mi) else arr end if in
+            flip(a1, sz - 1)
+        else arr
+        end if
+    end let
+    end for
+end let
+end function
+
+function main( returns array[integer] )
+    pancake_sort( array[ 3, 6, 2, 7, 4, 1, 5 ] )
+end function

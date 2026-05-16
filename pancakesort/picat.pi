@@ -1,0 +1,33 @@
+main =>
+    Arr = {3, 6, 2, 7, 4, 1, 5},
+    pancake_sort(Arr),
+    println(Arr).
+
+pancake_sort(Arr) =>
+    N = len(Arr),
+    foreach(Size in N..-1..2)
+        MaxIdx = find_max_idx(Arr, Size),
+        if MaxIdx != Size then
+            if MaxIdx != 1 then flip(Arr, MaxIdx - 1) end,
+            flip(Arr, Size - 1)
+        end
+    end.
+
+find_max_idx(Arr, Size) = MaxIdx =>
+    MaxIdx = 1,
+    foreach(I in 2..Size)
+        if Arr[I] > Arr[MaxIdx] then MaxIdx := I end
+    end.
+
+flip(Arr, K) =>
+    Left = 1,
+    Right = K + 1,
+    flip_loop(Arr, Left, Right).
+
+flip_loop(Arr, Left, Right) =>
+    if Left < Right then
+        tmp = Arr[Left],
+        Arr[Left] := Arr[Right],
+        Arr[Right] := tmp,
+        flip_loop(Arr, Left + 1, Right - 1)
+    end.

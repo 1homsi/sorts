@@ -1,0 +1,20 @@
+(defun merge-lists (left right)
+  (cond
+    ((null left) right)
+    ((null right) left)
+    ((<= (car left) (car right))
+     (cons (car left) (merge-lists (cdr left) right)))
+    (t
+     (cons (car right) (merge-lists left (cdr right))))))
+
+(defun merge-sort (lst)
+  (cond
+    ((<= (length lst) 1) lst)
+    (t
+     (let ((mid (/ (length lst) 2)))
+       (merge-lists
+         (merge-sort (firstn lst mid))
+         (merge-sort (lastn lst (- (length lst) mid))))))))
+
+(print (merge-sort '(38 27 43 3 9 82 10)))
+(terpri)

@@ -1,0 +1,30 @@
+BEGIN
+    INTEGER ARRAY ARR[0:7], OUTPUT[0:7], CNT[0:9];
+    INTEGER N, MAXVAL, EXP, I, IDX;
+    ARR[0] := 170; ARR[1] := 45; ARR[2] := 75; ARR[3] := 90;
+    ARR[4] := 802; ARR[5] := 24; ARR[6] := 2; ARR[7] := 66;
+    N := 8;
+    MAXVAL := ARR[0];
+    I := 1;
+    LOOP: IF I >= N THEN GOTO SORT;
+        IF ARR[I] > MAXVAL THEN MAXVAL := ARR[I];
+        I := I + 1;
+        GOTO LOOP;
+    SORT: EXP := 1;
+    EXPLOOP: IF MAXVAL / EXP = 0 THEN GOTO DONE;
+        FOR I := 0 UNTIL 9 DO CNT[I] := 0;
+        FOR I := 0 UNTIL N-1 DO BEGIN
+            IDX := (ARR[I] / EXP) REM 10;
+            CNT[IDX] := CNT[IDX] + 1;
+        END;
+        FOR I := 1 UNTIL 9 DO CNT[I] := CNT[I] + CNT[I-1];
+        FOR I := N-1 STEP -1 UNTIL 0 DO BEGIN
+            IDX := (ARR[I] / EXP) REM 10;
+            CNT[IDX] := CNT[IDX] - 1;
+            OUTPUT[CNT[IDX]] := ARR[I];
+        END;
+        FOR I := 0 UNTIL N-1 DO ARR[I] := OUTPUT[I];
+        EXP := EXP * 10;
+        GOTO EXPLOOP;
+    DONE: FOR I := 0 UNTIL N-1 DO PRINT(ARR[I]);
+END

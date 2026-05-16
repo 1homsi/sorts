@@ -1,0 +1,17 @@
+-- BubbleSort in gBETA
+origin '~gbeta/gb';
+
+-- BubbleSort:descriptor --
+(# arr: @array(# element:< integer #);
+   bubbleSort: (#
+     enter arr[]
+   do
+     (for 7-1 repeat
+        (for inx: arr.range-1 repeat
+           (if arr[inx] > arr[inx+1] then
+              arr[inx] <-> arr[inx+1]
+           if)
+        for)
+     repeat)
+   #)
+#)

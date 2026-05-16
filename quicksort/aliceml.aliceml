@@ -1,0 +1,14 @@
+structure QuickSort =
+struct
+    fun quicksort [] = []
+      | quicksort (pivot::rest) =
+        let
+            val left = List.filter (fn x => x <= pivot) rest
+            val right = List.filter (fn x => x > pivot) rest
+        in
+            quicksort left @ [pivot] @ quicksort right
+        end
+
+    val sorted = quicksort [3, 6, 8, 10, 1, 2, 1]
+    val _ = List.app (fn x => print (Int.toString x ^ " ")) sorted
+end

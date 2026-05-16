@@ -1,0 +1,19 @@
+(defmodule ShellSort
+  (defn shell-sort [arr]
+    (let [n (Array.length arr)]
+      (let-do [gap (/ n 2)]
+        (while (> gap 0)
+          (do
+            (for [i gap n]
+              (let-do [temp (Array.nth arr i)
+                       j i]
+                (while (and (>= j gap) (> @(Array.nth arr (- j gap)) @temp))
+                  (do
+                    (Array.aset! arr j @(Array.nth arr (- j gap)))
+                    (set! j (- j gap))))
+                (Array.aset! arr j @temp)))
+            (set! gap (/ gap 2))))
+        arr))))
+
+(let [arr (Array.copy-map &[64 34 25 12 22 11 90] &id)]
+  (println* &(ShellSort.shell-sort arr)))

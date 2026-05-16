@@ -1,0 +1,34 @@
+module QUICKSORT:
+input START;
+output DONE;
+output RESULT: integer;
+
+var arr := {3, 6, 8, 10, 1, 2, 1} : integer array(7);
+var n := 7 : integer;
+
+procedure sort(arr, 0, n-1);
+
+procedure sort(inout arr: integer array; in low, high: integer):
+    if low < high then
+        var pivot := arr[high] : integer;
+        var i := low : integer;
+        var j := low : integer;
+        loop
+            exit when j >= high;
+            if arr[j] <= pivot then
+                var tmp := arr[i] : integer;
+                arr[i] := arr[j];
+                arr[j] := tmp;
+                i := i + 1
+            end if;
+            j := j + 1
+        end loop;
+        var tmp := arr[i] : integer;
+        arr[i] := arr[high];
+        arr[high] := tmp;
+        sort(arr, low, i-1);
+        sort(arr, i+1, high)
+    end if
+end procedure
+
+end module

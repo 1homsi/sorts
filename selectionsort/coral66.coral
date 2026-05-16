@@ -1,0 +1,19 @@
+SECTION 'SELSORT'
+
+INTEGER ARRAY ARR(1:10);
+INTEGER N, I, J, MINIDX, TMP;
+
+PROCEDURE SELSORT;
+BEGIN
+    N := 5;
+    ARR(1) := 5; ARR(2) := 3; ARR(3) := 1; ARR(4) := 4; ARR(5) := 2;
+    FOR I := 1 STEP 1 UNTIL N-1 DO
+    BEGIN
+        MINIDX := I;
+        FOR J := I+1 STEP 1 UNTIL N DO
+            IF ARR(J) < ARR(MINIDX) THEN MINIDX := J;
+        TMP := ARR(I);
+        ARR(I) := ARR(MINIDX);
+        ARR(MINIDX) := TMP
+    END
+END;

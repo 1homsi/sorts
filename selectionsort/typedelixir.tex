@@ -1,0 +1,9 @@
+defmodule SelectionSort do
+  @spec selection_sort(list(integer())) :: list(integer())
+  def selection_sort([]), do: []
+  def selection_sort(list) do
+    min = Enum.min(list)
+    rest = List.delete(list, min)
+    [min | selection_sort(rest)]
+  end
+end

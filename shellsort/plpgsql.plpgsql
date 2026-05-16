@@ -1,0 +1,24 @@
+CREATE OR REPLACE FUNCTION shell_sort(arr integer[]) RETURNS integer[] AS $$
+DECLARE
+    n integer := array_length(arr, 1);
+    gap integer := n / 2;
+    temp integer;
+    j integer;
+BEGIN
+    WHILE gap > 0 LOOP
+        FOR i IN (gap + 1)..n LOOP
+            temp := arr[i];
+            j := i;
+            WHILE j > gap AND arr[j - gap] > temp LOOP
+                arr[j] := arr[j - gap];
+                j := j - gap;
+            END LOOP;
+            arr[j] := temp;
+        END LOOP;
+        gap := gap / 2;
+    END LOOP;
+    RETURN arr;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT shell_sort(ARRAY[64, 34, 25, 12, 22, 11, 90]);

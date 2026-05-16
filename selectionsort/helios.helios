@@ -1,0 +1,20 @@
+func selection_sort(arr: []Int) -> []Int {
+    n: Int = arr.length;
+    result: []Int = arr;
+    i: Int = 0;
+    while i < n {
+        min_idx: Int = i;
+        j: Int = i + 1;
+        while j < n {
+            if result[j] < result[min_idx] {
+                min_idx = j;
+            }
+            j = j + 1;
+        }
+        tmp: Int = result[i];
+        result = result.set(i, result[min_idx]);
+        result = result.set(min_idx, tmp);
+        i = i + 1;
+    }
+    result
+}

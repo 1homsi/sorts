@@ -1,0 +1,26 @@
+MODULE SHELLSORT;
+
+PROCEDURE SHELLSORT(VAR ARR: ARRAY OF INTEGER; N: INTEGER);
+VAR GAP, I, J, TEMP: INTEGER;
+BEGIN
+    GAP := N DIV 2;
+    WHILE GAP > 0 DO BEGIN
+        FOR I := GAP TO N - 1 DO BEGIN
+            TEMP := ARR[I];
+            J := I;
+            WHILE (J >= GAP) AND (ARR[J - GAP] > TEMP) DO BEGIN
+                ARR[J] := ARR[J - GAP];
+                J := J - GAP;
+            END;
+            ARR[J] := TEMP;
+        END;
+        GAP := GAP DIV 2;
+    END;
+END;
+
+VAR ARR: ARRAY[0..6] OF INTEGER;
+BEGIN
+    ARR[0] := 64; ARR[1] := 34; ARR[2] := 25; ARR[3] := 12;
+    ARR[4] := 22; ARR[5] := 11; ARR[6] := 90;
+    SHELLSORT(ARR, 7);
+END.

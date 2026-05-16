@@ -1,0 +1,16 @@
+:- initialization(main).
+
+main :-
+    selection_sort([5,3,1,4,2], Sorted),
+    write(Sorted), nl.
+
+selection_sort([], []).
+selection_sort(List, [Min|Sorted]) :-
+    min_member(Min, List),
+    delete(List, Min, Rest),
+    selection_sort(Rest, Sorted).
+
+min_member(Min, [Min]) :- !.
+min_member(Min, [H|T]) :-
+    min_member(M, T),
+    (H < M -> Min = H ; Min = M).

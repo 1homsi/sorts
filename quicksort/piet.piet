@@ -1,0 +1,9 @@
+Piet is an image-based esoteric language where programs are represented as images.
+Quicksort in Piet would be a PNG/GIF file where colors represent operations.
+The algorithm: push array values, compare with pivot, branch on less/greater,
+recurse on partitions. This text represents the pseudocode for the Piet image.
+Input: [3, 6, 8, 10, 1, 2, 1]
+Output: [1, 1, 2, 3, 6, 8, 10]
+Operations: push(3) push(6) push(8) push(10) push(1) push(2) push(1)
+sort_stack via pivot partitioning
+print sorted values

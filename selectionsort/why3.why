@@ -1,0 +1,18 @@
+module SelectionSort
+  use int.Int
+  use array.Array
+  use array.ArraySwap
+
+  let selection_sort (arr: array int): unit
+    writes { arr }
+    ensures { forall i j. 0 <= i < j < length arr -> arr[i] <= arr[j] }
+  =
+    let n = length arr in
+    for i = 0 to n - 2 do
+      let min_idx = ref i in
+      for j = i + 1 to n - 1 do
+        if arr[j] < arr[!min_idx] then min_idx := j
+      done;
+      swap arr i !min_idx
+    done
+end

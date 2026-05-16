@@ -1,0 +1,52 @@
+use Array: all;
+use StdIO: all;
+
+int[.] pancake_flip(int[.] arr, int k)
+{
+    n = shape(arr)[0];
+    i = 0;
+    j = k;
+    res = arr;
+    while (i < j) {
+        tmp = res[i];
+        res[i] = res[j];
+        res[j] = tmp;
+        i = i + 1;
+        j = j - 1;
+    }
+    return res;
+}
+
+int max_idx(int[.] arr, int sz)
+{
+    mi = 0;
+    i = 1;
+    while (i < sz) {
+        if (arr[i] > arr[mi]) { mi = i; }
+        i = i + 1;
+    }
+    return mi;
+}
+
+int[.] psort(int[.] arr)
+{
+    sz = shape(arr)[0];
+    a = arr;
+    while (sz > 1) {
+        mi = max_idx(a, sz);
+        if (mi != sz - 1) {
+            if (mi != 0) { a = pancake_flip(a, mi); }
+            a = pancake_flip(a, sz - 1);
+        }
+        sz = sz - 1;
+    }
+    return a;
+}
+
+int main()
+{
+    arr = [3, 6, 2, 7, 4, 1, 5];
+    sorted = psort(arr);
+    printf("%s\n", String(sorted));
+    return 0;
+}

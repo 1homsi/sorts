@@ -1,0 +1,3 @@
+1 #1 > 0, defer 2
+2 #2 > 0, defer 3
+3 print(sorted)

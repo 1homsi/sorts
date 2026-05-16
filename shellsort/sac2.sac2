@@ -1,0 +1,33 @@
+use StdIO: all;
+use Array: all;
+
+int[.] shellSort2(int[.] arr)
+{
+    n = shape(arr)[0];
+    gap = n / 2;
+    a = arr;
+    while (gap > 0) {
+        for (i = gap; i < n; i++) {
+            temp = a[i];
+            j = i;
+            while (j >= gap && a[j - gap] > temp) {
+                a[j] = a[j - gap];
+                j = j - gap;
+            }
+            a[j] = temp;
+        }
+        gap = gap / 2;
+    }
+    return a;
+}
+
+int main()
+{
+    arr = [64, 34, 25, 12, 22, 11, 90];
+    sorted = shellSort2(arr);
+    for (i = 0; i < 7; i++) {
+        printf("%d ", sorted[i]);
+    }
+    printf("\n");
+    return 0;
+}

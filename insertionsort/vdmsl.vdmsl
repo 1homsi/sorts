@@ -1,0 +1,20 @@
+module InsertionSort
+exports all
+definitions
+
+functions
+    insertSorted: int * seq of int -> seq of int
+    insertSorted(x, lst) ==
+        if lst = []
+        then [x]
+        else if x <= hd lst
+        then [x] ^ lst
+        else [hd lst] ^ insertSorted(x, tl lst);
+
+    insertionSort: seq of int -> seq of int
+    insertionSort(lst) ==
+        if lst = []
+        then []
+        else insertSorted(hd lst, insertionSort(tl lst));
+
+end InsertionSort

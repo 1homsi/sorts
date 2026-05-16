@@ -1,0 +1,13 @@
+module insertionSort
+
+input: List<Int> = List(5, 3, 1, 4, 2)
+
+output: List<Int> = sortList(input)
+
+function sortList(arr: List<Int>): List<Int> =
+  arr.fold(List(), (acc, x) -> insertSorted(x, acc))
+
+function insertSorted(x: Int, arr: List<Int>): List<Int> =
+  if (arr.isEmpty) List(x)
+  else if (x <= arr.first) List(x) + arr
+  else List(arr.first) + insertSorted(x, arr.rest)

@@ -1,0 +1,36 @@
+Begin
+   Integer Array arr(1:8);
+   Integer Array output(1:8);
+   Integer Array count(0:9);
+   Integer n, i, idx, maxVal, exp;
+
+   arr(1) := 170; arr(2) := 45; arr(3) := 75; arr(4) := 90;
+   arr(5) := 802; arr(6) := 24; arr(7) := 2;  arr(8) := 66;
+   n := 8;
+
+   maxVal := arr(1);
+   For i := 2 Step 1 Until n Do
+      If arr(i) > maxVal Then maxVal := arr(i);
+
+   exp := 1;
+   While maxVal // exp > 0 Do Begin
+      For i := 0 Step 1 Until 9 Do count(i) := 0;
+      For i := 1 Step 1 Until n Do Begin
+         idx := (arr(i) // exp) Mod 10;
+         count(idx) := count(idx) + 1;
+      End;
+      For i := 1 Step 1 Until 9 Do
+         count(i) := count(i) + count(i-1);
+      For i := n Step -1 Until 1 Do Begin
+         idx := (arr(i) // exp) Mod 10;
+         count(idx) := count(idx) - 1;
+         output(count(idx) + 1) := arr(i);
+      End;
+      For i := 1 Step 1 Until n Do arr(i) := output(i);
+      exp := exp * 10;
+   End;
+
+   For i := 1 Step 1 Until n Do
+      OutInt(arr(i), 5);
+   OutImage;
+End

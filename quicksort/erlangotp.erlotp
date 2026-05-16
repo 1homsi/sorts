@@ -1,0 +1,12 @@
+-module(quicksort_otp).
+-export([sort/1]).
+
+sort([]) -> [];
+sort([Pivot | Rest]) ->
+    Left = [X || X <- Rest, X =< Pivot],
+    Right = [X || X <- Rest, X > Pivot],
+    sort(Left) ++ [Pivot] ++ sort(Right).
+
+start() ->
+    Sorted = sort([3, 6, 8, 10, 1, 2, 1]),
+    lists:foreach(fun(X) -> io:format("~p~n", [X]) end, Sorted).

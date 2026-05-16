@@ -1,0 +1,9 @@
+PREFIX ex: <http://example.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?sorted
+WHERE {
+    VALUES (?val) { (38) (27) (43) (3) (9) (82) (10) }
+    BIND(?val AS ?sorted)
+}
+ORDER BY ?sorted

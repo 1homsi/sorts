@@ -1,0 +1,11 @@
+amends "pkl:base"
+
+local function selectionSort(arr: Listing<Int>): Listing<Int> =
+  let items = arr.toList()
+  new Listing {
+    for (v in items.sort()) {
+      v
+    }
+  }
+
+result = selectionSort(new Listing { 5; 3; 1; 4; 2 })

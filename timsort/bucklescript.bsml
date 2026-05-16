@@ -1,0 +1,48 @@
+let min_run = 32
+
+let rec insert_val x lst =
+  match lst with
+  | [] -> [x]
+  | h :: t -> if x <= h then x :: h :: t else h :: insert_val x t
+
+let rec insertion_sort lst =
+  match lst with
+  | [] -> []
+  | h :: t -> insert_val h (insertion_sort t)
+
+let rec merge_runs xs ys =
+  match (xs, ys) with
+  | ([], _) -> ys
+  | (_, []) -> xs
+  | (x :: xs', y :: ys') ->
+    if x <= y then x :: merge_runs xs' ys
+    else y :: merge_runs xs ys'
+
+let rec chunks_of n lst =
+  match lst with
+  | [] -> []
+  | _ ->
+    let chunk = Belt.List.take lst n |> Option.value ~default:[] in
+    let rest = Belt.List.drop lst n |> Option.value ~default:[] in
+    chunk :: chunks_of n rest
+
+let rec merge_pairs runs =
+  match runs with
+  | [] -> []
+  | [x] -> [x]
+  | x :: y :: rest -> merge_runs x y :: merge_pairs rest
+
+let rec merge_all runs =
+  match runs with
+  | [x] -> x
+  | _ -> merge_all (merge_pairs runs)
+
+let timsort lst =
+  match lst with
+  | [] -> lst
+  | _ -> merge_all (List.map insertion_sort (chunks_of min_run lst))
+
+let () =
+  let result = timsort [5; 2; 8; 1; 9; 3; 7; 4; 6] in
+  List.iter (fun x -> Printf.printf "%d " x) result;
+  print_newline ()

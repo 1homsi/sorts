@@ -1,0 +1,24 @@
+class SelectionSort
+
+operations
+
+public selectionSort: seq of int ==> seq of int
+selectionSort(lst) ==
+  if lst = []
+  then return []
+  else (
+    dcl m : int := hd lst;
+    for x in tl lst do
+      if x < m then m := x;
+    return [m] ^ selectionSort(removeFirst(m, lst))
+  );
+
+private removeFirst: int * seq of int ==> seq of int
+removeFirst(x, lst) ==
+  if lst = []
+  then return []
+  elseif hd lst = x
+  then return tl lst
+  else return [hd lst] ^ removeFirst(x, tl lst)
+
+end SelectionSort

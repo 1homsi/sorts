@@ -1,0 +1,8 @@
+DEFINE
+    minimum == [< ] fold ;
+    remove-first == [ = not ] filter ;
+    selection-sort ==
+        [ null ]
+        [ ]
+        [ dup minimum swap over remove-first selection-sort cons ]
+        ifte ;

@@ -1,0 +1,13 @@
+fun quicksort [] = []
+  | quicksort (pivot::rest) =
+    let
+        val left = List.filter (fn x => x <= pivot) rest
+        val right = List.filter (fn x => x > pivot) rest
+    in
+        quicksort left @ [pivot] @ quicksort right
+    end
+
+val _ =
+    let val sorted = quicksort [3, 6, 8, 10, 1, 2, 1]
+    in print (String.concatWith " " (map Int.toString sorted) ^ "\n")
+    end

@@ -1,0 +1,21 @@
+function insertionSort(arr) {
+  const a = [...arr];
+  const n = a.length;
+  for (let i = 1; i < n; i++) {
+    const key = a[i];
+    let j = i - 1;
+    while (j >= 0 && a[j] > key) {
+      a[j + 1] = a[j];
+      j--;
+    }
+    a[j + 1] = key;
+  }
+  return a;
+}
+
+Neutralino.init();
+
+document.getElementById('sort-btn').addEventListener('click', () => {
+  const sorted = insertionSort([5, 3, 1, 4, 2]);
+  document.getElementById('output').textContent = sorted.join(', ');
+});

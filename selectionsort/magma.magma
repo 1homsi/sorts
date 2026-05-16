@@ -1,0 +1,17 @@
+function SelectionSort(arr)
+    n := #arr;
+    for i := 1 to n-1 do
+        minIdx := i;
+        for j := i+1 to n do
+            if arr[j] lt arr[minIdx] then
+                minIdx := j;
+            end if;
+        end for;
+        tmp := arr[i];
+        arr[i] := arr[minIdx];
+        arr[minIdx] := tmp;
+    end for;
+    return arr;
+end function;
+
+SelectionSort([5,3,1,4,2]);

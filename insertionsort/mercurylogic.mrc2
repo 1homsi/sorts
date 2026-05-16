@@ -1,0 +1,16 @@
+:- module mercury_logic_isort.
+:- interface.
+:- import_module list.
+:- pred isort(list(int)::in, list(int)::out) is det.
+:- implementation.
+:- pred ins(int::in, list(int)::in, list(int)::out) is det.
+
+isort([], []).
+isort([H|T], Sorted) :-
+    isort(T, ST),
+    ins(H, ST, Sorted).
+
+ins(X, [], [X]).
+ins(X, [H|T], Result) :-
+    ( X =< H -> Result = [X,H|T]
+    ; ins(X, T, R), Result = [H|R] ).

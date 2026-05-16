@@ -1,0 +1,36 @@
+      H DFTACTGRP(*NO)
+      D Arr             S              5I 0 DIM(7)
+      D N               S              5I 0
+      D Gap             S              5I 0
+      D I               S              5I 0
+      D J               S              5I 0
+      D Temp            S              5I 0
+      C                   EVAL      Arr(1) = 64
+      C                   EVAL      Arr(2) = 34
+      C                   EVAL      Arr(3) = 25
+      C                   EVAL      Arr(4) = 12
+      C                   EVAL      Arr(5) = 22
+      C                   EVAL      Arr(6) = 11
+      C                   EVAL      Arr(7) = 90
+      C                   EVAL      N = 7
+      C                   EVAL      Gap = N / 2
+      C                   DOW       Gap > 0
+      C                   EVAL      I = Gap + 1
+      C                   DOW       I <= N
+      C                   EVAL      Temp = Arr(I)
+      C                   EVAL      J = I
+      C                   DOW       J > Gap AND Arr(J-Gap) > Temp
+      C                   EVAL      Arr(J) = Arr(J-Gap)
+      C                   EVAL      J = J - Gap
+      C                   ENDDO
+      C                   EVAL      Arr(J) = Temp
+      C                   EVAL      I = I + 1
+      C                   ENDDO
+      C                   EVAL      Gap = Gap / 2
+      C                   ENDDO
+      C                   EVAL      I = 1
+      C                   DOW       I <= N
+      C                   DSPLY                   Arr(I)
+      C                   EVAL      I = I + 1
+      C                   ENDDO
+      C                   SETON                                        LR

@@ -1,0 +1,14 @@
+: INSERTION-SORT ( addr n -- )
+  1 DO
+    I CELLS OVER + @
+    I 1- 0 DO
+      DUP I CELLS 3 PICK + @ > IF
+        I CELLS 3 PICK + @
+        I 1+ CELLS 3 PICK + !
+      ELSE
+        LEAVE
+      THEN
+    -1 +LOOP
+    CELLS OVER + !
+  LOOP
+  DROP ;

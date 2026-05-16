@@ -1,0 +1,15 @@
+sort IntList = List(Int);
+
+map selection_sort: IntList -> IntList;
+    min_elem: IntList -> Int;
+    remove_first: Int # IntList -> IntList;
+
+var l: IntList; x: Int; h: Int; t: IntList;
+
+eqn selection_sort([]) = [];
+    selection_sort(l) = min_elem(l) |> selection_sort(remove_first(min_elem(l), l));
+    min_elem([x]) = x;
+    min_elem(x |> t) = if(x < min_elem(t), x, min_elem(t));
+    remove_first(x, []) = [];
+    remove_first(x, x |> t) = t;
+    remove_first(x, h |> t) = h |> remove_first(x, t);

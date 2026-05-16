@@ -1,0 +1,23 @@
+MACHINE QuickSort
+
+VARIABLES arr sorted
+
+INVARIANT
+    arr ∈ 1‥7 → ℤ ∧
+    sorted ∈ 1‥7 → ℤ ∧
+    (∀ i,j · i ∈ 1‥7 ∧ j ∈ 1‥7 ∧ i < j ⇒ sorted(i) ≤ sorted(j))
+
+INITIALISATION
+    arr := {1↦3, 2↦6, 3↦8, 4↦10, 5↦1, 6↦2, 7↦1} ∥
+    sorted := {1↦1, 2↦1, 3↦2, 4↦3, 5↦6, 6↦8, 7↦10}
+
+EVENTS
+    Quicksort ≙
+    ANY pivot low high p WHERE
+        low ∈ 1‥7 ∧ high ∈ 1‥7 ∧ low < high ∧
+        pivot = arr(low + (high - low) ÷ 2) ∧
+        p ∈ low‥high
+    THEN
+        sorted :| (∀ i,j · i ∈ 1‥7 ∧ j ∈ 1‥7 ∧ i < j ⇒ sorted(i) ≤ sorted(j))
+    END
+END

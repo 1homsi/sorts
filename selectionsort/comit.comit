@@ -1,0 +1,15 @@
+        SELSORT/ARR,N
+        I=1
+OUTER   (I GE N) -> DONE
+        MINIDX=I
+        J=I+1
+INNER   (J GT N) -> SWAP
+        (ARR.J LT ARR.MINIDX) -> NEWMIN
+        J=J+1 -> INNER
+NEWMIN  MINIDX=J
+        J=J+1 -> INNER
+SWAP    TMP=ARR.I
+        ARR.I=ARR.MINIDX
+        ARR.MINIDX=TMP
+        I=I+1 -> OUTER
+DONE    END

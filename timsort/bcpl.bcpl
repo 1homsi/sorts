@@ -1,0 +1,69 @@
+GET "libhdr"
+
+GLOBAL
+$( arr:200; n:201; minrun:202 $)
+
+LET insertionsort(left, right) BE
+$( LET i = left + 1
+   UNTIL i > right DO
+   $( LET key = arr!i
+      LET j = i - 1
+      WHILE j >= left & arr!j > key DO
+      $( arr!(j+1) := arr!j
+         j := j - 1
+      $)
+      arr!(j+1) := key
+      i := i + 1
+   $)
+$)
+
+LET merge(left, mid, right) BE
+$( LET lp = VEC 255
+   LET rp = VEC 255
+   LET ln = mid - left + 1
+   LET rn = right - mid
+   LET i = 0
+   LET j = 0
+   LET k = left
+   FOR x = 0 TO ln-1 DO lp!x := arr!(left+x)
+   FOR x = 0 TO rn-1 DO rp!x := arr!(mid+1+x)
+   UNTIL i >= ln | j >= rn DO
+   $( TEST lp!i <= rp!j
+      THEN $( arr!k := lp!i; i := i+1 $)
+      ELSE $( arr!k := rp!j; j := j+1 $)
+      k := k+1
+   $)
+   UNTIL i >= ln DO $( arr!k := lp!i; i := i+1; k := k+1 $)
+   UNTIL j >= rn DO $( arr!k := rp!j; j := j+1; k := k+1 $)
+$)
+
+LET start() = VALOF
+$( LET size = 0
+   n := 9
+   minrun := 32
+   arr!0:=5; arr!1:=2; arr!2:=8; arr!3:=1; arr!4:=9
+   arr!5:=3; arr!6:=7; arr!7:=4; arr!8:=6
+   LET i = 0
+   UNTIL i >= n DO
+   $( LET right = i + minrun - 1
+      IF right >= n THEN right := n - 1
+      insertionsort(i, right)
+      i := i + minrun
+   $)
+   size := minrun
+   UNTIL size >= n DO
+   $( LET left = 0
+      UNTIL left >= n DO
+      $( LET mid = left + size - 1
+         LET right = left + 2*size - 1
+         IF mid >= n THEN mid := n - 1
+         IF right >= n THEN right := n - 1
+         IF mid < right THEN merge(left, mid, right)
+         left := left + 2*size
+      $)
+      size := size * 2
+   $)
+   FOR i = 0 TO n-1 DO writef("%N ", arr!i)
+   newline()
+   RESULTIS 0
+$)

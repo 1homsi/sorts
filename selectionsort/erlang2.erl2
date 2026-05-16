@@ -1,0 +1,8 @@
+-module(selectionsort2).
+-export([sort/1]).
+
+sort([]) -> [];
+sort(List) ->
+    Min = lists:min(List),
+    Rest = lists:delete(Min, List),
+    [Min | sort(Rest)].

@@ -1,0 +1,20 @@
+letrec shellSort =
+  \arr:^(Array Int).
+  let n = Array.length arr in
+  let gap = ref (n / 2) in
+  while (!gap > 0) {
+    for i = !gap to (n - 1) {
+      let temp = arr[i] in
+      let j = ref i in
+      while (!j >= !gap && arr[!j - !gap] > temp) {
+        arr[!j] <- arr[!j - !gap];
+        j := !j - !gap
+      };
+      arr[!j] <- temp
+    };
+    gap := !gap / 2
+  }
+in
+let arr = Array.fromList [64; 34; 25; 12; 22; 11; 90] in
+shellSort arr;
+Array.iter (fn x => (print x; print " ")) arr

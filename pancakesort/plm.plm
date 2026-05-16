@@ -1,0 +1,32 @@
+PANCAKE: DO;
+    DECLARE ARR (7) INTEGER;
+    DECLARE (N, SIZE, MAXI, I, LEFT, RIGHT, TMP) INTEGER;
+
+    FLIP: PROCEDURE (K);
+        DECLARE K INTEGER;
+        LEFT = 0; RIGHT = K;
+        DO WHILE LEFT < RIGHT;
+            TMP = ARR(LEFT);
+            ARR(LEFT) = ARR(RIGHT);
+            ARR(RIGHT) = TMP;
+            LEFT = LEFT + 1;
+            RIGHT = RIGHT - 1;
+        END;
+    END FLIP;
+
+    ARR(0)=3; ARR(1)=6; ARR(2)=2; ARR(3)=7;
+    ARR(4)=4; ARR(5)=1; ARR(6)=5;
+    N = 7; SIZE = N;
+
+    DO WHILE SIZE > 1;
+        MAXI = 0;
+        DO I = 1 TO SIZE - 1;
+            IF ARR(I) > ARR(MAXI) THEN MAXI = I;
+        END;
+        IF MAXI <> SIZE - 1 THEN DO;
+            IF MAXI <> 0 THEN CALL FLIP(MAXI);
+            CALL FLIP(SIZE - 1);
+        END;
+        SIZE = SIZE - 1;
+    END;
+END PANCAKE;

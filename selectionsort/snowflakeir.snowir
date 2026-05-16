@@ -1,0 +1,19 @@
+fn selection_sort(arr: [i32]) -> [i32] {
+    n = arr.length
+    i = 0
+    while i < n {
+        min_idx = i
+        j = i + 1
+        while j < n {
+            if arr[j] < arr[min_idx] {
+                min_idx = j
+            }
+            j += 1
+        }
+        tmp = arr[i]
+        arr[i] = arr[min_idx]
+        arr[min_idx] = tmp
+        i += 1
+    }
+    arr
+}

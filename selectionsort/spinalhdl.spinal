@@ -1,0 +1,26 @@
+import spinal.core._
+import spinal.lib._
+
+case class SelectionSort(n: Int = 5, w: Int = 8) extends Component {
+    val io = new Bundle {
+        val input  = in Vec(UInt(w bits), n)
+        val output = out Vec(UInt(w bits), n)
+    }
+    val arr = Vec(Reg(UInt(w bits)) init(0), n)
+    for (i <- 0 until n) {
+        arr(i) := io.input(i)
+    }
+    for (i <- 0 until n - 1) {
+        var minIdx = i
+        for (j <- i + 1 until n) {
+            when(arr(j) < arr(minIdx)) { minIdx = j }
+        }
+        val tmp = arr(i).clone
+        tmp := arr(i)
+        arr(i) := arr(minIdx)
+        arr(minIdx) := tmp
+    }
+    for (i <- 0 until n) {
+        io.output(i) := arr(i)
+    }
+}

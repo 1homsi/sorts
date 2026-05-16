@@ -1,0 +1,19 @@
+public class QuickSort {
+    public static int[] Quicksort(int[] arr) {
+        if (arr.Length <= 1) return arr;
+        int pivot = arr[arr.Length / 2];
+        var left = new List<int>();
+        var mid = new List<int>();
+        var right = new List<int>();
+        foreach (var x in arr) {
+            if (x < pivot) left.Add(x);
+            else if (x == pivot) mid.Add(x);
+            else right.Add(x);
+        }
+        var result = new List<int>();
+        result.AddRange(Quicksort(left.ToArray()));
+        result.AddRange(mid);
+        result.AddRange(Quicksort(right.ToArray()));
+        return result.ToArray();
+    }
+}

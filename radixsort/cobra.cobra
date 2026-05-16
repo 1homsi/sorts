@@ -1,0 +1,28 @@
+class RadixSort
+    def countingSort(arr as List<of int>, exp as int)
+        n = arr.count
+        output = List<of int>(n, 0)
+        count = List<of int>(10, 0)
+        for x in arr
+            count[(x // exp) % 10] += 1
+        for i in 1 : 10
+            count[i] += count[i - 1]
+        for i in n - 1 : -1 : -1
+            idx = (arr[i] // exp) % 10
+            count[idx] -= 1
+            output[count[idx]] = arr[i]
+        for i in 0 : n
+            arr[i] = output[i]
+
+    def sort(arr as List<of int>) as List<of int>
+        if arr.count == 0, return arr
+        maxVal = arr.max
+        exp = 1
+        while maxVal // exp > 0
+            countingSort(arr, exp)
+            exp *= 10
+        return arr
+
+    def main
+        arr = [170, 45, 75, 90, 802, 24, 2, 66]
+        print sort(arr)

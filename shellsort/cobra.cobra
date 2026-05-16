@@ -1,0 +1,18 @@
+class ShellSort
+    def shellSort(arr as List<of int>) as List<of int>
+        n = arr.count
+        gap = n // 2
+        while gap > 0
+            for i in gap : n
+                temp = arr[i]
+                j = i
+                while j >= gap and arr[j - gap] > temp
+                    arr[j] = arr[j - gap]
+                    j -= gap
+                arr[j] = temp
+            gap //= 2
+        return arr
+
+    def main
+        arr = [64, 34, 25, 12, 22, 11, 90]
+        print shellSort(arr)

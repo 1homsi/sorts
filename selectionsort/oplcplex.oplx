@@ -1,0 +1,10 @@
+int n = 5;
+int input[1..n] = [5, 3, 1, 4, 2];
+int sorted[1..n];
+
+subject to {
+    forall(i in 1..n-1)
+        sorted[i] <= sorted[i+1];
+    forall(v in input)
+        exists(i in 1..n) sorted[i] == v;
+}

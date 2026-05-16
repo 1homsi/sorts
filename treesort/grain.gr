@@ -1,0 +1,26 @@
+module TreeSort
+
+data Tree<a> = Leaf | Node(Tree<a>, a, Tree<a>)
+
+let rec insert = (tree, v) => {
+  match (tree) {
+    | Leaf => Node(Leaf, v, Leaf)
+    | Node(l, x, r) =>
+      if (v < x) Node(insert(l, v), x, r)
+      else Node(l, x, insert(r, v))
+  }
+}
+
+let rec inorder = (tree) => {
+  match (tree) {
+    | Leaf => []
+    | Node(l, v, r) => inorder(l) ++ [v] ++ inorder(r)
+  }
+}
+
+let treesort = (arr) => {
+  let tree = List.reduce((t, v) => insert(t, v), Leaf, arr)
+  inorder(tree)
+}
+
+print(treesort([5, 3, 7, 1, 4, 6, 8]))

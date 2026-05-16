@@ -1,0 +1,26 @@
+MACHINE QuickSort
+VARIABLES arr, n
+INVARIANT arr : 1..7 --> INTEGER & n = 7
+INITIALISATION
+    arr := {1|->3, 2|->6, 3|->8, 4|->10, 5|->1, 6|->2, 7|->1} ||
+    n := 7
+OPERATIONS
+    partition(low, high) =
+    PRE low : 1..7 & high : 1..7 & low < high
+    THEN
+        ANY p WHERE p : low..high
+        THEN
+            skip
+        END
+    END;
+
+    sort(low, high) =
+    PRE low : 1..7 & high : 1..7
+    THEN
+        IF low < high THEN
+            ANY p WHERE p : low..high
+            THEN sort(low, p-1) || sort(p+1, high)
+            END
+        END
+    END
+END

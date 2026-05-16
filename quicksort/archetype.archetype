@@ -1,0 +1,21 @@
+archetype quicksort
+
+asset element {
+  id: nat;
+  value: int;
+}
+
+function partition(arr: list<int>, low: nat, high: nat): (list<int> * nat) {
+    var pivot := nth(arr, high);
+    var i := low;
+    return make_tuple(arr, i)
+}
+
+entry sort(input: list<int>) {
+    var result := sort_list(input, (lambda (a b: int): bool -> a <= b));
+    emit<Sorted>(result)
+}
+
+event Sorted {
+    values: list<int>
+}

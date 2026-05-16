@@ -1,0 +1,9 @@
+quicksort[{}] := {}
+quicksort[{pivot_, rest___}] :=
+    Join[
+        quicksort[Select[{rest}, # <= pivot &]],
+        {pivot},
+        quicksort[Select[{rest}, # > pivot &]]
+    ]
+
+Print[quicksort[{3, 6, 8, 10, 1, 2, 1}]]

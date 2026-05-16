@@ -1,0 +1,21 @@
+machine SelectionSort
+variables arr n i minIdx
+invariants
+    @inv1 arr : seq(INT)
+    @inv2 n = card(dom(arr))
+events
+    INITIALISATION
+    begin
+        @act1 arr := {1|->5, 2|->3, 3|->1, 4|->4, 5|->2}
+        @act2 n := 5
+        @act3 i := 1
+    end
+    
+    Sort
+    when @grd1 i < n
+    begin
+        @act1 minIdx := min({j | j : i..n & arr(j) = min(arr[i..n])})
+        @act2 arr := arr <+ {i |-> arr(minIdx), minIdx |-> arr(i)}
+        @act3 i := i + 1
+    end
+end

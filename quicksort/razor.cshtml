@@ -1,0 +1,30 @@
+@{
+    int Partition(int[] arr, int low, int high) {
+        int pivot = arr[high];
+        int i = low;
+        for (int j = low; j < high; j++) {
+            if (arr[j] <= pivot) {
+                (arr[i], arr[j]) = (arr[j], arr[i]);
+                i++;
+            }
+        }
+        (arr[i], arr[high]) = (arr[high], arr[i]);
+        return i;
+    }
+
+    void Quicksort(int[] arr, int low, int high) {
+        if (low < high) {
+            int p = Partition(arr, low, high);
+            Quicksort(arr, low, p - 1);
+            Quicksort(arr, p + 1, high);
+        }
+    }
+
+    int[] arr = { 3, 6, 8, 10, 1, 2, 1 };
+    Quicksort(arr, 0, arr.Length - 1);
+}
+<ul>
+@foreach (var x in arr) {
+    <li>@x</li>
+}
+</ul>

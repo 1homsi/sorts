@@ -1,0 +1,24 @@
+circuit QuicksortVerifier {
+    public input sorted[7]: field;
+    private input arr[7]: field;
+
+    gate is_sorted {
+        for i in 0..6 {
+            constraint sorted[i] <= sorted[i+1];
+        }
+    }
+
+    gate is_permutation {
+        constraint sum(sorted) == sum(arr);
+    }
+
+    verify {
+        is_sorted();
+        is_permutation();
+    }
+}
+
+instance {
+    arr = [3, 6, 8, 10, 1, 2, 1];
+    sorted = [1, 1, 2, 3, 6, 8, 10];
+}

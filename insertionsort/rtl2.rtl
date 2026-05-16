@@ -1,0 +1,13 @@
+PROC insertion_sort(arr : REF VECTOR OF INTEGER; n : INTEGER);
+VAR i, j, key : INTEGER;
+BEGIN
+  FOR i := 1 TO n-1 DO
+    key := arr[i];
+    j := i - 1;
+    WHILE j >= 0 AND arr[j] > key DO
+      arr[j+1] := arr[j];
+      j := j - 1;
+    OD;
+    arr[j+1] := key;
+  OD;
+END;

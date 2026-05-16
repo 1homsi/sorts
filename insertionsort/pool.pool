@@ -1,0 +1,14 @@
+CLASS InsertionSort
+    METHOD sort(arr : Array[Integer]; n : Integer)
+        VAR i, j, key : Integer
+        FOR i := 1 TO n-1 DO
+            key := arr.at(i);
+            j := i - 1;
+            WHILE j >= 0 AND arr.at(j) > key DO
+                arr.put(j+1, arr.at(j));
+                j := j - 1;
+            OD;
+            arr.put(j+1, key);
+        OD;
+    END sort
+END InsertionSort

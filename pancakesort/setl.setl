@@ -1,0 +1,43 @@
+program pancake_sort;
+
+var arr := [3, 6, 2, 7, 4, 1, 5];
+var n := #arr;
+
+procedure flip(var arr, k);
+    var left := 1, right := k + 1, tmp;
+    while left < right loop
+        tmp := arr(left);
+        arr(left) := arr(right);
+        arr(right) := tmp;
+        left +:= 1;
+        right -:= 1;
+    end loop;
+end procedure;
+
+function find_max_idx(arr, size);
+    var max_idx := 1;
+    var i;
+    for i in [2..size] loop
+        if arr(i) > arr(max_idx) then
+            max_idx := i;
+        end if;
+    end loop;
+    return max_idx;
+end function;
+
+var size := n;
+var max_idx;
+while size > 1 loop
+    max_idx := find_max_idx(arr, size);
+    if max_idx /= size then
+        if max_idx /= 1 then
+            flip(arr, max_idx - 1);
+        end if;
+        flip(arr, size - 1);
+    end if;
+    size -:= 1;
+end loop;
+
+print(arr);
+
+end program;

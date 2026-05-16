@@ -1,0 +1,16 @@
+        DEFINE('SELECTION.SORT(ARR,N)')
+*
+SELECTION.SORT
+        MINIDX = 0
+        I = 0
+OUTER   I = I + 1
+        GT(I,N-1)                              :S(RETURN)
+        MINIDX = I
+        J = I
+INNER   J = J + 1
+        GT(J,N)                                :S(SWAP)
+        LT(ARR<J>,ARR<MINIDX>)               :F(INNER)
+        MINIDX = J                             :(INNER)
+SWAP    TMP = ARR<I>
+        ARR<I> = ARR<MINIDX>
+        ARR<MINIDX> = TMP                      :(OUTER)

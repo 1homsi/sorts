@@ -1,0 +1,43 @@
+module timsort
+
+val min-run = 32
+
+fun insert-val(x : int, lst : list<int>) : list<int>
+  match lst
+    Nil -> [x]
+    Cons(h, t) -> if x <= h then Cons(x, Cons(h, t)) else Cons(h, insert-val(x, t))
+
+fun insertion-sort(lst : list<int>) : list<int>
+  match lst
+    Nil -> []
+    Cons(h, t) -> insert-val(h, insertion-sort(t))
+
+fun merge-runs(xs : list<int>, ys : list<int>) : list<int>
+  match (xs, ys)
+    (Nil, _) -> ys
+    (_, Nil) -> xs
+    (Cons(x, xrest), Cons(y, yrest)) ->
+      if x <= y then Cons(x, merge-runs(xrest, ys))
+      else Cons(y, merge-runs(xs, yrest))
+
+fun chunks-of(n : int, lst : list<int>) : list<list<int>>
+  if lst.is-nil then []
+  else Cons(lst.take(n), chunks-of(n, lst.drop(n)))
+
+fun merge-pairs(runs : list<list<int>>) : list<list<int>>
+  match runs
+    Nil -> []
+    Cons(x, Nil) -> [x]
+    Cons(x, Cons(y, rest)) -> Cons(merge-runs(x, y), merge-pairs(rest))
+
+fun merge-all(runs : list<list<int>>) : list<int>
+  match runs
+    Cons(x, Nil) -> x
+    _ -> merge-all(merge-pairs(runs))
+
+fun timsort(lst : list<int>) : list<int>
+  if lst.is-nil then lst
+  else merge-all(lst.chunks-of(min-run).map(insertion-sort))
+
+fun main()
+  println(timsort([5, 2, 8, 1, 9, 3, 7, 4, 6]).show)

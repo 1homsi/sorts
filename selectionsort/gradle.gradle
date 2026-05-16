@@ -1,0 +1,17 @@
+def selectionSort(arr) {
+    def n = arr.size()
+    for (def i = 0; i < n; i++) {
+        def minIdx = i
+        for (def j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIdx]) minIdx = j
+        }
+        def tmp = arr[i]; arr[i] = arr[minIdx]; arr[minIdx] = tmp
+    }
+    return arr
+}
+
+task sort {
+    doLast {
+        println selectionSort([5, 3, 1, 4, 2])
+    }
+}

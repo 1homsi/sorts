@@ -1,0 +1,13 @@
+let quicksort = fun arr =>
+  if std.array.length arr <= 1 then arr
+  else
+    let pivot = arr |> std.array.elem_at (std.array.length arr / 2) in
+    let left = arr |> std.array.filter (fun x => x < pivot) in
+    let middle = arr |> std.array.filter (fun x => x == pivot) in
+    let right = arr |> std.array.filter (fun x => x > pivot) in
+    quicksort left @ middle @ quicksort right
+in
+
+{
+  sorted = quicksort [3, 6, 8, 10, 1, 2, 1]
+}

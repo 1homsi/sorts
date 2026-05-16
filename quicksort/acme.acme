@@ -1,0 +1,27 @@
+!cpu 65c02
+* = $0800
+
+arr     !byte 3, 6, 8, 10, 1, 2, 1
+n       !byte 7
+
+quicksort:
+        lda #0
+        sta lo
+        lda n
+        sec
+        sbc #1
+        sta hi
+        jsr qs_inner
+        rts
+
+qs_inner:
+        lda lo
+        cmp hi
+        bge done
+        jsr partition
+        jsr qs_inner
+done:   rts
+
+lo      !byte 0
+hi      !byte 0
+pivot   !byte 0

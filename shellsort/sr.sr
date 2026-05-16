@@ -1,0 +1,24 @@
+resource ShellSort()
+    var arr[7] : int := (64, 34, 25, 12, 22, 11, 90)
+    var n := 7
+    var gap := n / 2
+    var i, j, temp : int
+
+    process main
+        do gap > 0 ->
+            fa i := gap to n - 1 ->
+                temp := arr[i]
+                j := i
+                do j >= gap & arr[j - gap] > temp ->
+                    arr[j] := arr[j - gap]
+                    j := j - gap
+                od
+                arr[j] := temp
+            af
+            gap := gap / 2
+        od
+        fa i := 1 to n ->
+            write(arr[i])
+        af
+    end process
+end resource

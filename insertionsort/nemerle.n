@@ -1,0 +1,17 @@
+using System;
+using System.Collections.Generic;
+
+module InsertionSort {
+    public InsertionSort(arr : array[int]) : void {
+        def n = arr.Length;
+        for (mutable i = 1; i < n; i++) {
+            def key = arr[i];
+            mutable j = i - 1;
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = key;
+        }
+    }
+}

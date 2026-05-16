@@ -1,0 +1,41 @@
+        ORG 0100H
+
+arr:    DB 3, 6, 8, 10, 1, 2, 1
+n:      DB 7
+
+quicksort:
+        LD A, 0
+        LD (low), A
+        LD A, (n)
+        DEC A
+        LD (high), A
+        CALL qs_inner
+        RET
+
+qs_inner:
+        LD A, (low)
+        LD B, A
+        LD A, (high)
+        CP B
+        RET C
+        RET Z
+        CALL partition
+        CALL qs_inner
+        RET
+
+partition:
+        LD HL, arr
+        LD A, (high)
+        LD E, A
+        LD D, 0
+        ADD HL, DE
+        LD A, (HL)
+        LD (pivot), A
+        LD A, (low)
+        LD (i), A
+        RET
+
+low:    DB 0
+high:   DB 0
+i:      DB 0
+pivot:  DB 0

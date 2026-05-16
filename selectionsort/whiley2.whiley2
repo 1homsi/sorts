@@ -1,0 +1,17 @@
+function selectionSort(arr: int[]) -> (int[] result)
+ensures |result| == |arr|
+ensures all { i in 0..|result|-1 | result[i] <= result[i+1] }:
+    int n = |arr|
+    int i = 0
+    while i < n:
+        int min_idx = i
+        int j = i + 1
+        while j < n:
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+            j = j + 1
+        int tmp = arr[i]
+        arr[i] = arr[min_idx]
+        arr[min_idx] = tmp
+        i = i + 1
+    return arr

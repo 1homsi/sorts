@@ -1,0 +1,10 @@
+to quicksort :list
+  if (length :list) <= 1 [output :list]
+  let [pivot] item (int ((length :list) / 2) + 1) :list
+  let [left] filter [? < :pivot] :list
+  let [middle] filter [? = :pivot] :list
+  let [right] filter [? > :pivot] :list
+  output sentence (quicksort :left) sentence :middle (quicksort :right)
+end
+
+print quicksort [3 6 8 10 1 2 1]

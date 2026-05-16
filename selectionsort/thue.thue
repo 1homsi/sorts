@@ -1,0 +1,6 @@
+a::=~Sort started
+::=
+aabba ::= aabba
+a ::= 1
+b ::= 0
+::=

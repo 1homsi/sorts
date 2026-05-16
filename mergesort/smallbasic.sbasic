@@ -1,0 +1,60 @@
+arr[0]=38
+arr[1]=27
+arr[2]=43
+arr[3]=3
+arr[4]=9
+arr[5]=82
+arr[6]=10
+
+lo=0
+hi=6
+MergeSort()
+
+For i=0 To 6
+    TextWindow.Write(arr[i] + " ")
+EndFor
+TextWindow.WriteLine("")
+
+Sub MergeSort
+    If lo >= hi Then Return
+    mid = Math.Floor((lo + hi) / 2)
+    savelo = lo
+    savehi = hi
+    savemid = mid
+    hi = mid
+    MergeSort()
+    lo = savelo
+    hi = savehi
+    mid = savemid
+    lo = mid + 1
+    MergeSort()
+    lo = savelo
+    hi = savehi
+    mid = savemid
+    i = lo
+    j = mid + 1
+    k = lo
+    While i <= mid And j <= hi
+        If arr[i] <= arr[j] Then
+            tmp[k] = arr[i]
+            i = i + 1
+        Else
+            tmp[k] = arr[j]
+            j = j + 1
+        EndIf
+        k = k + 1
+    EndWhile
+    While i <= mid
+        tmp[k] = arr[i]
+        i = i + 1
+        k = k + 1
+    EndWhile
+    While j <= hi
+        tmp[k] = arr[j]
+        j = j + 1
+        k = k + 1
+    EndWhile
+    For x = lo To hi
+        arr[x] = tmp[x]
+    EndFor
+EndSub

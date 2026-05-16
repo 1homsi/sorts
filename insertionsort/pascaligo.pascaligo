@@ -1,0 +1,11 @@
+function insert (const x : int; const lst : list(int)) : list(int) is
+  case lst of [
+    nil -> list [x]
+  | h # t -> if x <= h then x # h # t else h # insert(x, t)
+  ]
+
+function insertion_sort (const lst : list(int)) : list(int) is
+  case lst of [
+    nil -> nil
+  | h # t -> insert(h, insertion_sort(t))
+  ]

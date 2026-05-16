@@ -1,0 +1,17 @@
+define merge(left, right) =
+    if length(left) = 0 then right
+    else if length(right) = 0 then left
+    else if left[1] <= right[1]
+    then left[1] :: merge(rest(left), right)
+    else right[1] :: merge(left, rest(right));
+
+define mergeSort(lst) =
+    if length(lst) <= 1 then lst
+    else
+        let n = length(lst),
+            mid = n div 2,
+            left = mergeSort(lst[1..mid]),
+            right = mergeSort(lst[mid+1..n])
+        in merge(left, right);
+
+print(mergeSort([38, 27, 43, 3, 9, 82, 10]));

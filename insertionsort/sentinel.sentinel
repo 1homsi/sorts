@@ -1,0 +1,23 @@
+import "strings"
+
+insertion_sort = func(arr) {
+    a = arr
+    n = length(a)
+    i = 1
+    for i < n {
+        key = a[i]
+        j = i - 1
+        for j >= 0 and a[j] > key {
+            a[j + 1] = a[j]
+            j = j - 1
+        }
+        a[j + 1] = key
+        i = i + 1
+    }
+    return a
+}
+
+main = rule {
+    result = insertion_sort([5, 3, 1, 4, 2])
+    result == [1, 2, 3, 4, 5]
+}

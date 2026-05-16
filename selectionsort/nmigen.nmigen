@@ -1,0 +1,28 @@
+from nmigen import *
+from nmigen.sim import *
+
+class SelectionSort(Elaboratable):
+    def __init__(self, n=5, w=8):
+        self.n = n
+        self.arr = Array([Signal(w, name=f"arr_{i}") for i in range(n)])
+        self.done = Signal()
+
+    def elaborate(self, platform):
+        m = Module()
+        with m.FSM():
+            with m.State("SORT"):
+                for i in range(self.n - 1):
+                    min_idx = Signal(range(self.n), init=i)
+                    for j in range(i + 1, self.n):
+                        with m.If(self.arr[j] < self.arr[min_idx]):
+                            m.d.comb += min_idx.eq(j)
+                    tmp = Signal(8)
+                    m.d.sync += [
+                        tmp.eq(self.arr[i]),
+                        self.arr[i].eq(self.arr[min_idx]),
+                        self.arr[min_idx].eq(tmp),
+                    ]
+                m.next = "DONE"
+            with m.State("DONE"):
+                m.d.comb += self.done.eq(1)
+        return m

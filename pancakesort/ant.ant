@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="PancakeSort" default="sort" basedir=".">
+    <target name="sort">
+        <script language="groovy">
+            def arr = [3, 6, 2, 7, 4, 1, 5]
+            def flip = { a, k ->
+                def (left, right) = [0, k]
+                while (left &lt; right) {
+                    [a[left], a[right]] = [a[right], a[left]]
+                    left++; right--
+                }
+            }
+            def size = arr.size()
+            while (size > 1) {
+                def maxIdx = 0
+                (1..&lt;size).each { i -> if (arr[i] > arr[maxIdx]) maxIdx = i }
+                if (maxIdx != size - 1) {
+                    if (maxIdx != 0) flip(arr, maxIdx)
+                    flip(arr, size - 1)
+                }
+                size--
+            }
+            println arr
+        </script>
+    </target>
+</project>

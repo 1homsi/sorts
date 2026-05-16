@@ -1,0 +1,74 @@
+MODULE TimSort;
+
+IMPORT Out;
+
+CONST MinRun = 32;
+
+VAR arr: ARRAY 9 OF INTEGER;
+    lp, rp: ARRAY 256 OF INTEGER;
+
+PROCEDURE InsertionSort(left, right: INTEGER);
+VAR i, j, key: INTEGER;
+BEGIN
+    i := left + 1;
+    WHILE i <= right DO
+        key := arr[i];
+        j := i - 1;
+        WHILE (j >= left) & (arr[j] > key) DO
+            arr[j + 1] := arr[j];
+            DEC(j);
+        END;
+        arr[j + 1] := key;
+        INC(i);
+    END;
+END InsertionSort;
+
+PROCEDURE Merge(left, mid, right: INTEGER);
+VAR ln, rn, i, j, k: INTEGER;
+BEGIN
+    ln := mid - left + 1;
+    rn := right - mid;
+    FOR i := 0 TO ln - 1 DO lp[i] := arr[left + i] END;
+    FOR i := 0 TO rn - 1 DO rp[i] := arr[mid + 1 + i] END;
+    i := 0; j := 0; k := left;
+    WHILE (i < ln) & (j < rn) DO
+        IF lp[i] <= rp[j] THEN arr[k] := lp[i]; INC(i);
+        ELSE arr[k] := rp[j]; INC(j); END;
+        INC(k);
+    END;
+    WHILE i < ln DO arr[k] := lp[i]; INC(i); INC(k) END;
+    WHILE j < rn DO arr[k] := rp[j]; INC(j); INC(k) END;
+END Merge;
+
+PROCEDURE Timsort;
+VAR n, i, size, left, mid, right: INTEGER;
+BEGIN
+    n := 9;
+    i := 0;
+    WHILE i < n DO
+        IF i + MinRun - 1 < n THEN right := i + MinRun - 1 ELSE right := n - 1 END;
+        InsertionSort(i, right);
+        INC(i, MinRun);
+    END;
+    size := MinRun;
+    WHILE size < n DO
+        left := 0;
+        WHILE left < n DO
+            IF left + size - 1 < n THEN mid := left + size - 1 ELSE mid := n - 1 END;
+            IF left + 2*size - 1 < n THEN right := left + 2*size - 1 ELSE right := n - 1 END;
+            IF mid < right THEN Merge(left, mid, right) END;
+            INC(left, 2 * size);
+        END;
+        size := size * 2;
+    END;
+END Timsort;
+
+BEGIN
+    arr[0]:=5; arr[1]:=2; arr[2]:=8; arr[3]:=1; arr[4]:=9;
+    arr[5]:=3; arr[6]:=7; arr[7]:=4; arr[8]:=6;
+    Timsort;
+    FOR i := 0 TO 8 DO
+        Out.Int(arr[i], 4);
+    END;
+    Out.Ln;
+END TimSort.

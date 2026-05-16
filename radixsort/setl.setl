@@ -1,0 +1,36 @@
+program radix_sort;
+
+procedure counting_sort(arr, exp);
+    n := #arr;
+    output := [0 : i in [1..n]];
+    count := [0 : i in [0..9]];
+    for x in arr loop
+        idx := (x div exp) mod 10;
+        count(idx + 1) := count(idx + 1) + 1;
+    end loop;
+    for i in [2..10] loop
+        count(i) := count(i) + count(i - 1);
+    end loop;
+    for i in [n, n-1..1] loop
+        idx := (arr(i) div exp) mod 10;
+        output(count(idx + 1)) := arr(i);
+        count(idx + 1) := count(idx + 1) - 1;
+    end loop;
+    return output;
+end procedure;
+
+procedure radix_sort(arr);
+    if #arr = 0 then return arr; end if;
+    max_val := max/ arr;
+    exp := 1;
+    while max_val div exp > 0 loop
+        arr := counting_sort(arr, exp);
+        exp := exp * 10;
+    end loop;
+    return arr;
+end procedure;
+
+arr := [170, 45, 75, 90, 802, 24, 2, 66];
+print(radix_sort(arr));
+
+end program;

@@ -1,0 +1,26 @@
+use std::crypto::sha256;
+
+fn partition(arr: [u64; 7], low: u64, high: u64) -> (u64, [u64; 7]) {
+    let pivot = arr[high];
+    let mut i = low;
+    let mut result = arr;
+    let mut j = low;
+    while j < high {
+        if result[j] <= pivot {
+            let tmp = result[i];
+            result[i] = result[j];
+            result[j] = tmp;
+            i = i + 1;
+        }
+        j = j + 1;
+    }
+    let tmp = result[i];
+    result[i] = result[high];
+    result[high] = tmp;
+    (i, result)
+}
+
+fn main(arr: [u64; 7]) -> [u64; 7] {
+    let (p, sorted) = partition(arr, 0, 6);
+    sorted
+}

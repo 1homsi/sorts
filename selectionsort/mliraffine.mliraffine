@@ -1,0 +1,32 @@
+#map0 = affine_map<(d0) -> (d0)>
+#map1 = affine_map<(d0, d1) -> (d1)>
+
+func.func @selection_sort(%arg0: memref<?xi32>) {
+  %c0 = arith.constant 0 : index
+  %c1 = arith.constant 1 : index
+  %n = memref.dim %arg0, %c0 : memref<?xi32>
+  
+  affine.for %i = 0 to %n {
+    %min_ptr = memref.alloca() : memref<index>
+    memref.store %i, %min_ptr[] : memref<index>
+    %i1 = arith.addi %i, %c1 : index
+    
+    affine.for %j = max(#map0(%i) + 1) to %n {
+      %cur_min = memref.load %min_ptr[] : memref<index>
+      %vj = memref.load %arg0[%j] : memref<?xi32>
+      %vm = memref.load %arg0[%cur_min] : memref<?xi32>
+      %less = arith.cmpi slt, %vj, %vm : i32
+      scf.if %less {
+        memref.store %j, %min_ptr[] : memref<index>
+      }
+    }
+    
+    %final_min = memref.load %min_ptr[] : memref<index>
+    %vi = memref.load %arg0[%i] : memref<?xi32>
+    %vfm = memref.load %arg0[%final_min] : memref<?xi32>
+    memref.store %vfm, %arg0[%i] : memref<?xi32>
+    memref.store %vi, %arg0[%final_min] : memref<?xi32>
+  }
+  
+  return
+}

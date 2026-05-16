@@ -1,0 +1,17 @@
+{%- macro selection_sort(arr) -%}
+{%- set result = arr | list -%}
+{%- set n = result | length -%}
+{%- for i in range(n) -%}
+  {%- set min_idx = namespace(val=i) -%}
+  {%- for j in range(i + 1, n) -%}
+    {%- if result[j] < result[min_idx.val] -%}
+      {%- set min_idx.val = j -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- set tmp = result[i] -%}
+  {%- if result.update({i: result[min_idx.val], min_idx.val: tmp}) -%}{%- endif -%}
+{%- endfor -%}
+{{ result | join(', ') }}
+{%- endmacro -%}
+
+{{ selection_sort([5, 3, 1, 4, 2]) }}

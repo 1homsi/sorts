@@ -1,0 +1,18 @@
+class InsertionSort2 = (
+    public sort: arr = (
+        | n i key j |
+        n := arr size.
+        i := 1.
+        [i < n] whileTrue: [
+            key := arr at: i + 1.
+            j := i.
+            [j >= 1 and: [(arr at: j) > key]] whileTrue: [
+                arr at: j + 1 put: (arr at: j).
+                j := j - 1.
+            ].
+            arr at: j + 1 put: key.
+            i := i + 1.
+        ].
+        ^arr
+    )
+)

@@ -1,0 +1,18 @@
+; IPL-V (Information Processing Language) - quicksort approximation
+; IPL was one of the first list-processing languages (1956)
+; This represents symbolic list operations
+
+(DEFINE QUICKSORT
+  (LAMBDA (LIST)
+    (COND
+      ((NULL LIST) NIL)
+      ((NULL (CDR LIST)) LIST)
+      (T
+        (LET ((PIVOT (CAR LIST))
+              (REST (CDR LIST)))
+          (APPEND
+            (QUICKSORT (FILTER (LAMBDA (X) (LESSP X PIVOT)) REST))
+            (CONS PIVOT
+              (QUICKSORT (FILTER (LAMBDA (X) (GREATERP X PIVOT)) REST)))))))))
+
+(QUICKSORT '(3 6 8 10 1 2 1))

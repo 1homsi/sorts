@@ -1,0 +1,18 @@
+{
+  description = "Selection sort in Nix";
+  
+  outputs = { self, nixpkgs }: {
+    lib.selectionSort = lst:
+      let
+        removeFirst = x: l:
+          if l == [] then []
+          else if builtins.head l == x then builtins.tail l
+          else [(builtins.head l)] ++ removeFirst x (builtins.tail l);
+        listMin = l:
+          builtins.foldl' (a: b: if b < a then b else a) (builtins.head l) l;
+        go = l:
+          if l == [] then []
+          else let m = listMin l; in [m] ++ go (removeFirst m l);
+      in go lst;
+  };
+}

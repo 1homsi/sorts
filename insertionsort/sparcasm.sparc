@@ -1,0 +1,42 @@
+        .section ".data"
+arr:    .word 5, 3, 1, 4, 2
+n:      .word 5
+
+        .section ".text"
+        .global main
+main:
+        set  arr, %l0
+        set  n, %l1
+        ld   [%l1], %l1
+        mov  1, %l2
+outer:
+        cmp  %l2, %l1
+        bge  done
+        nop
+        sll  %l2, 2, %l3
+        ld   [%l0 + %l3], %l4
+        sub  %l2, 1, %l5
+inner:
+        cmp  %l5, 0
+        bl   place
+        nop
+        sll  %l5, 2, %l6
+        ld   [%l0 + %l6], %l7
+        cmp  %l7, %l4
+        ble  place
+        nop
+        add  %l6, 4, %o0
+        st   %l7, [%l0 + %o0]
+        sub  %l5, 1, %l5
+        ba   inner
+        nop
+place:
+        add  %l5, 1, %o1
+        sll  %o1, 2, %o1
+        st   %l4, [%l0 + %o1]
+        add  %l2, 1, %l2
+        ba   outer
+        nop
+done:
+        mov  1, %g1
+        ta   0

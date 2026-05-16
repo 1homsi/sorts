@@ -1,0 +1,27 @@
+(defun flip (arr k)
+  (let ((left 0) (right k) tmp)
+    (loop
+      (if (>= left right) (return arr))
+      (setq tmp (aref arr left))
+      (setf (aref arr left) (aref arr right))
+      (setf (aref arr right) tmp)
+      (incf left) (decf right))))
+
+(defun find-max-idx (arr size)
+  (let ((max-idx 0))
+    (do ((i 1 (1+ i)))
+        ((>= i size) max-idx)
+      (when (> (aref arr i) (aref arr max-idx))
+        (setq max-idx i)))))
+
+(defun pancake-sort (arr)
+  (let ((n (length arr)))
+    (do ((size n (1- size)))
+        ((<= size 1) arr)
+      (let ((mi (find-max-idx arr size)))
+        (when (/= mi (1- size))
+          (when (/= mi 0) (flip arr mi))
+          (flip arr (1- size)))))))
+
+(let ((arr (make-array 7 :initial-contents '(3 6 2 7 4 1 5))))
+  (print (pancake-sort arr)))

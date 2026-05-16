@@ -1,0 +1,13 @@
+module SelectionSort2 where
+
+import Data.List (minimumBy, deleteBy)
+
+selectionSort :: [Int] -> [Int]
+selectionSort [] = []
+selectionSort xs =
+    let m = minimum xs
+        rest = deleteFirst m xs
+    in m : selectionSort rest
+  where
+    deleteFirst _ [] = []
+    deleteFirst x (y:ys) = if x == y then ys else y : deleteFirst x ys

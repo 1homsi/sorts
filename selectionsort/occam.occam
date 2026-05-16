@@ -1,0 +1,15 @@
+PROC selection.sort([]INT arr, VAL INT n)
+    INT min.idx, tmp:
+    SEQ i = 0 FOR n - 1
+        SEQ
+            min.idx := i
+            SEQ j = i + 1 FOR n - i - 1
+                IF
+                    arr[j] < arr[min.idx]
+                        min.idx := j
+                    TRUE
+                        SKIP
+            tmp := arr[i]
+            arr[i] := arr[min.idx]
+            arr[min.idx] := tmp
+:

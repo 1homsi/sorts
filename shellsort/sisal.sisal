@@ -1,0 +1,35 @@
+define type IntArray = array[integer];
+
+function ShellSort(arr: IntArray) returns IntArray
+let
+    n := array_size(arr);
+    gap := n / 2;
+    result := loop
+        init a := arr; g := gap;
+        while g > 0
+        repeat
+            a2 := for i in g .. n - 1 cross a
+                  returns value of InsertionPass(a, g, i)
+                  end for;
+            new a := a2;
+            new g := g / 2
+        returns value of a
+        end loop;
+in
+    result
+end function;
+
+function InsertionPass(arr: IntArray; gap, i: integer) returns IntArray
+let
+    temp := arr[i];
+    result := loop
+        init a := arr; j := i;
+        while j >= gap & a[j - gap] > temp
+        repeat
+            new a := array_replace(a, j, a[j - gap]);
+            new j := j - gap
+        returns value of array_replace(a, j, temp)
+        end loop;
+in
+    result
+end function;

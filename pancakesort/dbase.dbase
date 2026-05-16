@@ -1,0 +1,48 @@
+PROCEDURE pancake_sort
+DECLARE arr[7]
+STORE 3 TO arr[1]
+STORE 6 TO arr[2]
+STORE 2 TO arr[3]
+STORE 7 TO arr[4]
+STORE 4 TO arr[5]
+STORE 1 TO arr[6]
+STORE 5 TO arr[7]
+
+STORE 7 TO size
+DO WHILE size > 1
+    STORE 1 TO maxIdx
+    STORE 2 TO i
+    DO WHILE i <= size
+        IF arr[i] > arr[maxIdx]
+            STORE i TO maxIdx
+        ENDIF
+        STORE i + 1 TO i
+    ENDDO
+    IF maxIdx # size
+        IF maxIdx # 1
+            DO flip WITH maxIdx - 1
+        ENDIF
+        DO flip WITH size - 1
+    ENDIF
+    STORE size - 1 TO size
+ENDDO
+
+STORE 1 TO i
+DO WHILE i <= 7
+    ? arr[i]
+    STORE i + 1 TO i
+ENDDO
+RETURN
+
+PROCEDURE flip
+PARAMETERS k
+STORE 1 TO lft
+STORE k + 1 TO rgt
+DO WHILE lft < rgt
+    STORE arr[lft] TO tmp
+    STORE arr[rgt] TO arr[lft]
+    STORE tmp TO arr[rgt]
+    STORE lft + 1 TO lft
+    STORE rgt - 1 TO rgt
+ENDDO
+RETURN

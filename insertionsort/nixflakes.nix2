@@ -1,0 +1,21 @@
+{
+  description = "Insertion Sort in Nix";
+
+  outputs = { self, nixpkgs }: {
+    packages.x86_64-linux.insertionSort =
+      let
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        insert = x: lst:
+          if lst == [] then [x]
+          else
+            let h = builtins.head lst; t = builtins.tail lst;
+            in if x <= h then [x] ++ [h] ++ t
+               else [h] ++ (insert x t);
+        insertionSort = lst:
+          if lst == [] then []
+          else
+            let h = builtins.head lst; t = builtins.tail lst;
+            in insert h (insertionSort t);
+      in pkgs.writeText "result" (builtins.toString (insertionSort [5 3 1 4 2]));
+  };
+}

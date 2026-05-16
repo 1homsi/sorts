@@ -1,0 +1,16 @@
+selectionSort IS OPERATION arr {
+  n := tally arr;
+  result := arr;
+  FOR i FROM 0 TO n - 2 DO
+    minIdx := i;
+    FOR j FROM i + 1 TO n - 1 DO
+      IF result@j < result@minIdx THEN
+        minIdx := j
+      ENDIF
+    ENDFOR;
+    tmp := result@i;
+    result@i := result@minIdx;
+    result@minIdx := tmp
+  ENDFOR;
+  result
+}

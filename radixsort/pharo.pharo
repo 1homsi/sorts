@@ -1,0 +1,37 @@
+Object subclass: #RadixSort
+    instanceVariableNames: ''
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'RadixSort'
+
+RadixSort class >> getDigit: x exp: exp [
+    ^ (x // exp) \\ 10
+]
+
+RadixSort class >> countingSort: arr exp: exp [
+    | result |
+    result := OrderedCollection new.
+    0 to: 9 do: [:d |
+        arr do: [:x |
+            ((self getDigit: x exp: exp) = d) ifTrue: [result add: x]
+        ]
+    ].
+    ^ result
+]
+
+RadixSort class >> sort: arr [
+    | maxVal exp result |
+    arr isEmpty ifTrue: [^ arr].
+    maxVal := arr inject: 0 into: [:m :x | x > m ifTrue: [x] ifFalse: [m]].
+    exp := 1.
+    result := arr copy.
+    [maxVal // exp > 0] whileTrue: [
+        result := self countingSort: result exp: exp.
+        exp := exp * 10.
+    ].
+    ^ result
+]
+
+| result |
+result := RadixSort sort: #(170 45 75 90 802 24 2 66) asOrderedCollection.
+Transcript showCr: result printString.

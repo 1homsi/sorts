@@ -1,0 +1,29 @@
+MODULE ShellSort2;
+FROM IO IMPORT WriteInt, WriteLn;
+
+VAR
+  arr : ARRAY [0..6] OF INTEGER;
+  n, gap, i, j, temp : INTEGER;
+
+BEGIN
+  arr[0] := 64; arr[1] := 34; arr[2] := 25; arr[3] := 12;
+  arr[4] := 22; arr[5] := 11; arr[6] := 90;
+  n := 7;
+  gap := n DIV 2;
+  WHILE gap > 0 DO
+    FOR i := gap TO n - 1 DO
+      temp := arr[i];
+      j := i;
+      WHILE (j >= gap) AND (arr[j - gap] > temp) DO
+        arr[j] := arr[j - gap];
+        j := j - gap
+      END;
+      arr[j] := temp
+    END;
+    gap := gap DIV 2
+  END;
+  FOR i := 0 TO n - 1 DO
+    WriteInt(arr[i])
+  END;
+  WriteLn
+END ShellSort2.

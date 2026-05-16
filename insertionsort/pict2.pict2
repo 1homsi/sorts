@@ -1,0 +1,15 @@
+letrec insert2 =
+    fun (x: int, lst: list[int]) ->
+        match lst with
+        | [] -> [x]
+        | y :: ys ->
+            if x <= y then x :: y :: ys
+            else y :: insert2(x, ys)
+
+letrec insertionSort2 =
+    fun (lst: list[int]) ->
+        match lst with
+        | [] -> []
+        | x :: xs -> insert2(x, insertionSort2(xs))
+
+in insertionSort2

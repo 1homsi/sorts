@@ -1,0 +1,34 @@
+program mergesort;
+
+op merge(left, right);
+    result := [];
+    i := 1; j := 1;
+    while i <= #left and j <= #right loop
+        if left(i) <= right(j) then
+            result with:= left(i); i := i + 1;
+        else
+            result with:= right(j); j := j + 1;
+        end if;
+    end loop;
+    while i <= #left loop
+        result with:= left(i); i := i + 1;
+    end loop;
+    while j <= #right loop
+        result with:= right(j); j := j + 1;
+    end loop;
+    return result;
+end op;
+
+op mergeSort(arr);
+    n := #arr;
+    if n <= 1 then return arr; end if;
+    mid := n / 2;
+    left := mergeSort(arr(1..mid));
+    right := mergeSort(arr(mid+1..n));
+    return merge(left, right);
+end op;
+
+arr := [38, 27, 43, 3, 9, 82, 10];
+print(mergeSort(arr));
+
+end program;

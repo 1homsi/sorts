@@ -1,0 +1,32 @@
+| MergeSortMorph |
+
+MergeSortMorph := Morph new.
+
+MergeSortMorph extend [
+    merge: left with: right [
+        | result i j |
+        result := OrderedCollection new.
+        i := 1. j := 1.
+        [i <= left size and: [j <= right size]] whileTrue: [
+            (left at: i) <= (right at: j)
+                ifTrue: [result add: (left at: i). i := i + 1]
+                ifFalse: [result add: (right at: j). j := j + 1]].
+        [i <= left size] whileTrue: [result add: (left at: i). i := i + 1].
+        [j <= right size] whileTrue: [result add: (right at: j). j := j + 1].
+        ^result asArray
+    ]
+
+    sort: arr [
+        | mid left right |
+        arr size <= 1 ifTrue: [^arr].
+        mid := arr size // 2.
+        left := self sort: (arr copyFrom: 1 to: mid).
+        right := self sort: (arr copyFrom: mid + 1 to: arr size).
+        ^self merge: left with: right
+    ]
+]
+
+| arr sorted |
+arr := #(38 27 43 3 9 82 10).
+sorted := MergeSortMorph sort: arr.
+Transcript showCr: sorted printString.

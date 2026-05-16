@@ -1,0 +1,22 @@
+type tree
+    Leaf
+    Node(left: tree, v: int, right: tree)
+
+fun insert(tree: tree, v: int): tree
+    match tree
+        Leaf -> Node(Leaf, v, Leaf)
+        Node(l, x, r) ->
+            if v < x then Node(insert(l, v), x, r)
+            else Node(l, x, insert(r, v))
+
+fun inorder(tree: tree): list<int>
+    match tree
+        Leaf -> []
+        Node(l, v, r) -> inorder(l) ++ [v] ++ inorder(r)
+
+fun treesort(arr: list<int>): list<int>
+    val tree = arr.foldl(Leaf) fn(t, v) { insert(t, v) }
+    inorder(tree)
+
+fun main()
+    println(treesort([5, 3, 7, 1, 4, 6, 8]))

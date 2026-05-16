@@ -1,0 +1,23 @@
+procedure shellSort(arr)
+    n := *arr
+    gap := n / 2
+    while gap > 0 do {
+        every i := gap to n - 1 do {
+            temp := arr[i + 1]
+            j := i
+            while j >= gap & arr[j - gap + 1] > temp do {
+                arr[j + 1] := arr[j - gap + 1]
+                j -:= gap
+            }
+            arr[j + 1] := temp
+        }
+        gap /:= 2
+    }
+    return arr
+end
+
+procedure main()
+    arr := [64, 34, 25, 12, 22, 11, 90]
+    shellSort(arr)
+    every write(!arr, " ")
+end

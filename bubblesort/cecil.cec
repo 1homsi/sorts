@@ -1,0 +1,21 @@
+object bubble_sorter isa object {
+    method bubble_sort(arr: array[int]) : array[int] {
+        var n: int := arr.size;
+        var swapped: bool := true;
+        while (swapped) {
+            swapped := false;
+            var i: int := 0;
+            while (i < n - 1) {
+                if arr[i] > arr[i+1] then {
+                    val tmp: int := arr[i];
+                    arr[i] := arr[i+1];
+                    arr[i+1] := tmp;
+                    swapped := true;
+                };
+                i := i + 1;
+            };
+            n := n - 1;
+        };
+        arr
+    }
+}

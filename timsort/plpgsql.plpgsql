@@ -1,0 +1,60 @@
+CREATE OR REPLACE FUNCTION timsort(arr integer[]) RETURNS integer[] AS $$
+DECLARE
+    n integer := array_length(arr, 1);
+    min_run integer := 32;
+    i integer;
+    sz integer;
+    left_idx integer;
+    mid_idx integer;
+    right_idx integer;
+    key integer;
+    j integer;
+    lp integer[];
+    rp integer[];
+    pi integer;
+    pj integer;
+    pk integer;
+BEGIN
+    i := 1;
+    WHILE i <= n LOOP
+        right_idx := LEAST(i + min_run - 1, n);
+        FOR x IN i+1..right_idx LOOP
+            key := arr[x];
+            j := x - 1;
+            WHILE j >= i AND arr[j] > key LOOP
+                arr[j+1] := arr[j];
+                j := j - 1;
+            END LOOP;
+            arr[j+1] := key;
+        END LOOP;
+        i := i + min_run;
+    END LOOP;
+
+    sz := min_run;
+    WHILE sz < n LOOP
+        left_idx := 1;
+        WHILE left_idx <= n LOOP
+            mid_idx := LEAST(left_idx + sz - 1, n);
+            right_idx := LEAST(left_idx + 2*sz - 1, n);
+            IF mid_idx < right_idx THEN
+                lp := arr[left_idx:mid_idx];
+                rp := arr[mid_idx+1:right_idx];
+                pi := 1; pj := 1; pk := left_idx;
+                WHILE pi <= array_length(lp,1) AND pj <= array_length(rp,1) LOOP
+                    IF lp[pi] <= rp[pj] THEN arr[pk] := lp[pi]; pi := pi + 1;
+                    ELSE arr[pk] := rp[pj]; pj := pj + 1; END IF;
+                    pk := pk + 1;
+                END LOOP;
+                WHILE pi <= array_length(lp,1) LOOP arr[pk] := lp[pi]; pi := pi+1; pk := pk+1; END LOOP;
+                WHILE pj <= array_length(rp,1) LOOP arr[pk] := rp[pj]; pj := pj+1; pk := pk+1; END LOOP;
+            END IF;
+            left_idx := left_idx + 2*sz;
+        END LOOP;
+        sz := sz * 2;
+    END LOOP;
+
+    RETURN arr;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT timsort(ARRAY[5,2,8,1,9,3,7,4,6]);

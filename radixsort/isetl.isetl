@@ -1,0 +1,32 @@
+counting_sort := func(arr, exp);
+    n := #arr;
+    output := [0 : i in [1..n]];
+    count := [0 : i in [0..9]];
+    for x in arr do
+        idx := (x div exp) mod 10;
+        count(idx + 1) := count(idx + 1) + 1;
+    end;
+    for i in [2..10] do
+        count(i) := count(i) + count(i - 1);
+    end;
+    for i in [n, n-1..1] do
+        idx := (arr(i) div exp) mod 10;
+        output(count(idx + 1)) := arr(i);
+        count(idx + 1) := count(idx + 1) - 1;
+    end;
+    return output;
+end;
+
+radix_sort := func(arr);
+    if #arr = 0 then return arr; end;
+    max_val := max/ arr;
+    exp := 1;
+    while max_val div exp > 0 do
+        arr := counting_sort(arr, exp);
+        exp := exp * 10;
+    end;
+    return arr;
+end;
+
+arr := [170, 45, 75, 90, 802, 24, 2, 66];
+print(radix_sort(arr));

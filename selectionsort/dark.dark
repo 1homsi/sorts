@@ -1,0 +1,6 @@
+let selectionSort (arr: List<Int>): List<Int> =
+  let n = List.length arr in
+  List.fold arr [] (fun acc x ->
+    let min = List.fold acc x (fun m y -> if y < m then y else m) in
+    List.append acc [min]
+  )

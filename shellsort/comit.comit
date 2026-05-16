@@ -1,0 +1,7 @@
+; COMIT string processing approximation of shell sort
+; COMIT works on strings and constituents
+
+        START   $$ = 64 + 34 + 25 + 12 + 22 + 11 + 90
+SORT    $$ = SORT($1 + $2)  /  $1 > $2 -> SWAP
+        END
+SWAP    SAVE + $2 + $1 -> SORT

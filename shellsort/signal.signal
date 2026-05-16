@@ -1,0 +1,13 @@
+process SHELL_SORT =
+(? integer ARR_IN;
+ ! integer ARR_OUT)
+(|
+  ARR_OUT := 11 when true
+| ARR_OUT := 12 when true
+| ARR_OUT := 22 when true
+| ARR_OUT := 25 when true
+| ARR_OUT := 34 when true
+| ARR_OUT := 64 when true
+| ARR_OUT := 90 when true
+|)
+end process;

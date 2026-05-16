@@ -1,0 +1,18 @@
+fun stooge-sort( arr : vector<int>, first : int, last : int ) : div vector<int>
+    val a = arr[first]
+    val b = arr[last]
+    val arr1 = if a > b then arr.set(first, b).set(last, a) else arr
+    val n = last - first + 1
+    if n > 2 then
+        val t = (n * 2) / 3
+        val arr2 = stooge-sort(arr1, first, first + t - 1)
+        val arr3 = stooge-sort(arr2, last - t + 1, last)
+        stooge-sort(arr3, first, first + t - 1)
+    else arr1
+
+fun main()
+    val arr = vector(8, 0)
+    arr.set(0,3); arr.set(1,1); arr.set(2,4); arr.set(3,1)
+    arr.set(4,5); arr.set(5,9); arr.set(6,2); arr.set(7,6)
+    val sorted = stooge-sort(arr, 0, arr.length - 1)
+    println(sorted.show)

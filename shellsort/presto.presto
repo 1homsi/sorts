@@ -1,0 +1,4 @@
+WITH arr AS (
+    SELECT val FROM UNNEST(ARRAY[64, 34, 25, 12, 22, 11, 90]) AS t(val)
+)
+SELECT val FROM arr ORDER BY val;

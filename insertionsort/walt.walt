@@ -1,0 +1,19 @@
+const memory: Memory = { initial: 1 };
+
+export function insertionSort(arr: i32, n: i32): void {
+  let i: i32 = 1;
+  let j: i32 = 0;
+  let key: i32 = 0;
+  let tmp: i32 = 0;
+  while (i < n) {
+    key = i32.load(arr + i * 4);
+    j = i - 1;
+    while (j >= 0 && i32.load(arr + j * 4) > key) {
+      tmp = i32.load(arr + j * 4);
+      i32.store(arr + (j + 1) * 4, tmp);
+      j = j - 1;
+    }
+    i32.store(arr + (j + 1) * 4, key);
+    i = i + 1;
+  }
+}

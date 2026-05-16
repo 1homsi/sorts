@@ -1,0 +1,39 @@
+//STOOGE   JOB (ACCT),'STOOGE SORT',CLASS=A,MSGCLASS=X
+//STEP1    EXEC PGM=IEFBR14
+//SYSIN    DD *
+  IDENTIFICATION DIVISION.
+  PROGRAM-ID. STOOGESORT.
+  DATA DIVISION.
+  WORKING-STORAGE SECTION.
+  01 ARR.
+     05 A OCCURS 8 TIMES PIC 9(4).
+  01 FIRST    PIC 9(4).
+  01 LAST     PIC 9(4).
+  01 TMP      PIC 9(4).
+  01 T        PIC 9(4).
+  01 N        PIC 9(4).
+  PROCEDURE DIVISION.
+  MAIN.
+      MOVE 3 TO A(1)
+      MOVE 1 TO A(2)
+      MOVE 4 TO A(3)
+      MOVE 1 TO A(4)
+      MOVE 5 TO A(5)
+      MOVE 9 TO A(6)
+      MOVE 2 TO A(7)
+      MOVE 6 TO A(8)
+      MOVE 1 TO FIRST
+      MOVE 8 TO LAST
+      PERFORM STOOGE-SORT
+      STOP RUN.
+  STOOGE-SORT.
+      IF A(FIRST) > A(LAST)
+          MOVE A(FIRST) TO TMP
+          MOVE A(LAST) TO A(FIRST)
+          MOVE TMP TO A(LAST)
+      END-IF
+      COMPUTE N = LAST - FIRST + 1
+      IF N > 2
+          COMPUTE T = N * 2 / 3
+      END-IF.
+/*

@@ -1,0 +1,34 @@
+INTEGER ARRAY ARR(0:7);
+INTEGER ARRAY OUTPUT(0:7);
+INTEGER ARRAY CNT(0:9);
+INTEGER N, MAXVAL, EXP, I, IDX;
+
+BEGIN
+N := 8;
+ARR(0) := 170; ARR(1) := 45; ARR(2) := 75; ARR(3) := 90;
+ARR(4) := 802; ARR(5) := 24; ARR(6) := 2;  ARR(7) := 66;
+MAXVAL := ARR(0);
+FOR I := 1 STEP 1 UNTIL N-1 DO
+    IF ARR(I) GTR MAXVAL THEN MAXVAL := ARR(I);
+EXP := 1;
+WHILE MAXVAL/EXP GTR 0 DO
+    BEGIN
+    FOR I := 0 STEP 1 UNTIL 9 DO CNT(I) := 0;
+    FOR I := 0 STEP 1 UNTIL N-1 DO
+        BEGIN
+        IDX := (ARR(I)/EXP) MOD 10;
+        CNT(IDX) := CNT(IDX) + 1;
+        END;
+    FOR I := 1 STEP 1 UNTIL 9 DO
+        CNT(I) := CNT(I) + CNT(I-1);
+    FOR I := N-1 STEP -1 UNTIL 0 DO
+        BEGIN
+        IDX := (ARR(I)/EXP) MOD 10;
+        CNT(IDX) := CNT(IDX) - 1;
+        OUTPUT(CNT(IDX)) := ARR(I);
+        END;
+    FOR I := 0 STEP 1 UNTIL N-1 DO ARR(I) := OUTPUT(I);
+    EXP := EXP * 10;
+    END;
+FOR I := 0 STEP 1 UNTIL N-1 DO PRINT ARR(I);
+END

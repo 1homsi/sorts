@@ -1,0 +1,33 @@
+main =>
+    Arr = {3, 6, 8, 10, 1, 2, 1},
+    quicksort(Arr, 1, 7),
+    println(Arr).
+
+quicksort(Arr, Low, High) =>
+    Low < High,
+    partition(Arr, Low, High, P),
+    quicksort(Arr, Low, P - 1),
+    quicksort(Arr, P + 1, High).
+quicksort(_, _, _) => true.
+
+partition(Arr, Low, High, I) =>
+    Pivot = Arr[High],
+    I = Low,
+    J = Low,
+    partition_loop(Arr, Low, High, Pivot, I, J).
+
+partition_loop(Arr, Low, High, Pivot, I0, J) =>
+    J < High,
+    (Arr[J] =< Pivot ->
+        Tmp = Arr[I0],
+        Arr[I0] := Arr[J],
+        Arr[J] := Tmp,
+        I1 = I0 + 1
+    ;
+        I1 = I0
+    ),
+    partition_loop(Arr, Low, High, Pivot, I1, J + 1).
+partition_loop(Arr, _, High, _, I, _) =>
+    Tmp = Arr[I],
+    Arr[I] := Arr[High],
+    Arr[High] := Tmp.

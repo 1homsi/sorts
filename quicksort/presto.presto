@@ -1,0 +1,7 @@
+WITH input AS (
+    SELECT val FROM UNNEST(ARRAY[3, 6, 8, 10, 1, 2, 1]) AS t(val)
+),
+sorted AS (
+    SELECT val FROM input ORDER BY val
+)
+SELECT array_agg(val) AS sorted_array FROM sorted;

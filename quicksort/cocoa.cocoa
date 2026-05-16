@@ -1,0 +1,11 @@
+Define Quicksort(L)
+  If Len(L) <= 1 Then Return L; EndIf;
+  Pivot := L[Div(Len(L), 2) + 1];
+  Left := [X In L | X < Pivot];
+  Mid := [X In L | X = Pivot];
+  Right := [X In L | X > Pivot];
+  Return Concat(Quicksort(Left), Concat(Mid, Quicksort(Right)));
+EndDefine;
+
+L := [3, 6, 8, 10, 1, 2, 1];
+PrintLn Quicksort(L);

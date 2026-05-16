@@ -1,0 +1,15 @@
+function Quicksort(arr)
+    if #arr le 1 then
+        return arr;
+    end if;
+    pivot := arr[#arr div 2 + 1];
+    left := [x : x in arr | x lt pivot];
+    mid := [x : x in arr | x eq pivot];
+    right := [x : x in arr | x gt pivot];
+    return Quicksort(left) cat mid cat Quicksort(right);
+end function;
+
+result := Quicksort([3, 6, 8, 10, 1, 2, 1]);
+for x in result do
+    print x;
+end for;

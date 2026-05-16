@@ -1,0 +1,40 @@
+%!PS
+
+/arr [3 6 8 10 1 2 1] def
+
+/swap {
+    arr exch 2 copy get 3 1 roll
+    4 -1 roll get
+    4 1 roll put
+    3 1 roll put
+} def
+
+/partition {
+    /high exch def
+    /low exch def
+    /pivot arr high get def
+    /i low def
+    low 1 high 1 sub {
+        /j exch def
+        arr j get pivot le {
+            i j swap
+            /i i 1 add def
+        } if
+    } for
+    i high swap
+    i
+} def
+
+/quicksort {
+    /high exch def
+    /low exch def
+    low high lt {
+        low high partition /p exch def
+        low p 1 sub quicksort
+        p 1 add high quicksort
+    } if
+} def
+
+0 arr length 1 sub quicksort
+
+arr { = } forall

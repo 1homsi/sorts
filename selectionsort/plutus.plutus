@@ -1,0 +1,19 @@
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DataKinds #-}
+module SelectionSort where
+
+import PlutusTx.Prelude hiding (sort)
+import qualified PlutusTx.List as List
+
+{-# INLINABLE selectionSort #-}
+selectionSort :: [Integer] -> [Integer]
+selectionSort [] = []
+selectionSort xs =
+    let m = List.minimum xs
+        rest = removeFirst m xs
+    in m : selectionSort rest
+  where
+    removeFirst _ [] = []
+    removeFirst x (y:ys)
+        | x == y    = ys
+        | otherwise = y : removeFirst x ys

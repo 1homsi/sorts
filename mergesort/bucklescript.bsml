@@ -1,0 +1,20 @@
+let rec merge left right =
+  match left, right with
+  | [], _ -> right
+  | _, [] -> left
+  | lh :: lt, rh :: rt ->
+    if lh <= rh then lh :: merge lt right
+    else rh :: merge left rt
+
+let rec merge_sort lst =
+  let n = List.length lst in
+  if n <= 1 then lst
+  else
+    let mid = n / 2 in
+    let left = Belt.List.take lst mid |> Option.value ~default:[] in
+    let right = Belt.List.drop lst mid |> Option.value ~default:[] in
+    merge (merge_sort left) (merge_sort right)
+
+let () =
+  let result = merge_sort [38; 27; 43; 3; 9; 82; 10] in
+  List.iter (fun x -> Js.log x) result

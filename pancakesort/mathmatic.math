@@ -1,0 +1,44 @@
+; MATH-MATIC approximation (early algebraic compiler for UNIVAC)
+; MATH-MATIC translated mathematical notation to machine code
+
+SET A(1) = 3
+SET A(2) = 6
+SET A(3) = 2
+SET A(4) = 7
+SET A(5) = 4
+SET A(6) = 1
+SET A(7) = 5
+SET N = 7
+SET SIZE = N
+
+LOOP-OUTER:
+    IF SIZE .LE. 1 THEN GOTO DONE
+    SET MAXI = 1
+    SET I = 2
+LOOP-INNER:
+    IF I .GT. SIZE THEN GOTO DO-FLIP
+    IF A(I) .GT. A(MAXI) THEN SET MAXI = I
+    SET I = I + 1
+    GOTO LOOP-INNER
+DO-FLIP:
+    IF MAXI .EQ. SIZE THEN GOTO DECREMENT
+    IF MAXI .EQ. 1 THEN GOTO SECOND-FLIP
+    SET L = 1, R = MAXI
+FLIP1:
+    IF L .GE. R THEN GOTO SECOND-FLIP
+    SET T = A(L), A(L) = A(R), A(R) = T
+    SET L = L + 1, R = R - 1
+    GOTO FLIP1
+SECOND-FLIP:
+    SET L = 1, R = SIZE
+FLIP2:
+    IF L .GE. R THEN GOTO DECREMENT
+    SET T = A(L), A(L) = A(R), A(R) = T
+    SET L = L + 1, R = R - 1
+    GOTO FLIP2
+DECREMENT:
+    SET SIZE = SIZE - 1
+    GOTO LOOP-OUTER
+DONE:
+    PRINT A
+    STOP

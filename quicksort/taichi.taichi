@@ -1,0 +1,27 @@
+import taichi as ti
+
+ti.init(arch=ti.cpu)
+
+@ti.kernel
+def quicksort(arr: ti.template(), low: int, high: int):
+    if low < high:
+        p = partition(arr, low, high)
+        quicksort(arr, low, p - 1)
+        quicksort(arr, p + 1, high)
+
+@ti.func
+def partition(arr: ti.template(), low: int, high: int) -> int:
+    pivot = arr[high]
+    i = low
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            arr[i], arr[j] = arr[j], arr[i]
+            i += 1
+    arr[i], arr[high] = arr[high], arr[i]
+    return i
+
+n = 7
+arr = ti.field(dtype=ti.i32, shape=n)
+arr.from_numpy([3, 6, 8, 10, 1, 2, 1])
+quicksort(arr, 0, n - 1)
+print(arr.to_numpy())

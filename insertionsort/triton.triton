@@ -1,0 +1,18 @@
+import triton
+import triton.language as tl
+import torch
+
+@triton.jit
+def insertion_sort_kernel(x_ptr, n, BLOCK_SIZE: tl.constexpr):
+    pid = tl.program_id(0)
+    offsets = tl.arange(0, BLOCK_SIZE)
+    mask = offsets < n
+    x = tl.load(x_ptr + offsets, mask=mask)
+    for i in range(1, BLOCK_SIZE):
+        key = x[i]
+        j = i - 1
+        while j >= 0 and x[j] > key:
+            x[j + 1] = x[j]
+            j -= 1
+        x[j + 1] = key
+    tl.store(x_ptr + offsets, x, mask=mask)

@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<ul th:with="sorted=${#lists.sort(arr)}">
+    <li th:each="x : ${sorted}" th:text="${x}"></li>
+</ul>
+</body>
+</html>

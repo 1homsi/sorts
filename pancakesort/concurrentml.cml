@@ -1,0 +1,40 @@
+structure PancakeSort =
+struct
+    val arr = Array.fromList [3, 6, 2, 7, 4, 1, 5]
+
+    fun flip k =
+        let
+            fun go left right =
+                if left < right then
+                    let val tmp = Array.sub(arr, left)
+                    in Array.update(arr, left, Array.sub(arr, right));
+                       Array.update(arr, right, tmp);
+                       go (left+1) (right-1)
+                    end
+                else ()
+        in go 0 k end
+
+    fun findMaxIdx size =
+        let fun go i mi =
+                if i >= size then mi
+                else if Array.sub(arr, i) > Array.sub(arr, mi)
+                     then go (i+1) i
+                     else go (i+1) mi
+        in go 1 0 end
+
+    fun sort () =
+        let fun go sz =
+                if sz <= 1 then ()
+                else let val mi = findMaxIdx sz
+                     in if mi <> sz - 1 then
+                            (if mi <> 0 then flip mi else ();
+                             flip (sz-1))
+                        else ();
+                        go (sz-1)
+                     end
+        in go (Array.length arr) end
+end
+
+val () = PancakeSort.sort()
+val () = Array.app (fn x => print(Int.toString x ^ " ")) PancakeSort.arr
+val () = print "\n"

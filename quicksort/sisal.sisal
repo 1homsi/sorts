@@ -1,0 +1,24 @@
+define main
+
+function quicksort(arr: array[integer] returns array[integer])
+let
+    n := array_size(arr);
+    pivot := arr[n/2]
+in
+    if n <= 1 then
+        arr
+    else
+        array_concat(
+            array_concat(
+                quicksort(for x in arr when x < pivot gather x end for),
+                for x in arr when x = pivot gather x end for
+            ),
+            quicksort(for x in arr when x > pivot gather x end for)
+        )
+    end if
+end let
+end function
+
+function main(returns array[integer])
+    quicksort(array_create(7, [3, 6, 8, 10, 1, 2, 1]))
+end function

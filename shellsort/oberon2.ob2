@@ -1,0 +1,32 @@
+MODULE ShellSort2;
+IMPORT Out;
+
+VAR arr: ARRAY 7 OF INTEGER;
+
+PROCEDURE Sort(VAR a: ARRAY OF INTEGER; n: INTEGER);
+VAR gap, i, j, temp: INTEGER;
+BEGIN
+  gap := n DIV 2;
+  WHILE gap > 0 DO
+    FOR i := gap TO n - 1 DO
+      temp := a[i];
+      j := i;
+      WHILE (j >= gap) & (a[j - gap] > temp) DO
+        a[j] := a[j - gap];
+        j := j - gap
+      END;
+      a[j] := temp
+    END;
+    gap := gap DIV 2
+  END
+END Sort;
+
+BEGIN
+  arr[0] := 64; arr[1] := 34; arr[2] := 25; arr[3] := 12;
+  arr[4] := 22; arr[5] := 11; arr[6] := 90;
+  Sort(arr, 7);
+  FOR VAR i := 0 TO 6 DO
+    Out.Int(arr[i], 4)
+  END;
+  Out.Ln
+END ShellSort2.

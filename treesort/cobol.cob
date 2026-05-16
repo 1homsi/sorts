@@ -1,0 +1,39 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. TREESORT.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 NODES.
+          05 NODE-ENTRY OCCURS 100 TIMES.
+             10 NODE-VAL PIC S9(5).
+             10 NODE-LEFT PIC 9(3).
+             10 NODE-RIGHT PIC 9(3).
+       01 NODE-COUNT PIC 9(3) VALUE 0.
+       01 ROOT-IDX PIC 9(3) VALUE 0.
+       01 ARR PIC S9(5) OCCURS 7 TIMES VALUE 0.
+       01 RESULT-BUF PIC X(100) VALUE SPACES.
+       01 CUR-IDX PIC 9(3).
+       01 INS-VAL PIC S9(5).
+       01 I PIC 9(2).
+       PROCEDURE DIVISION.
+       MAIN-PARA.
+           MOVE 5 TO ARR(1) MOVE 3 TO ARR(2) MOVE 7 TO ARR(3)
+           MOVE 1 TO ARR(4) MOVE 4 TO ARR(5) MOVE 6 TO ARR(6)
+           MOVE 8 TO ARR(7)
+           MOVE 0 TO ROOT-IDX
+           PERFORM VARYING I FROM 1 BY 1 UNTIL I > 7
+               MOVE ARR(I) TO INS-VAL
+               PERFORM INSERT-NODE
+           END-PERFORM
+           MOVE ROOT-IDX TO CUR-IDX
+           PERFORM INORDER-TRAV
+           STOP RUN.
+       INSERT-NODE.
+           IF ROOT-IDX = 0
+               ADD 1 TO NODE-COUNT
+               MOVE NODE-COUNT TO ROOT-IDX
+               MOVE INS-VAL TO NODE-VAL(ROOT-IDX)
+               MOVE 0 TO NODE-LEFT(ROOT-IDX)
+               MOVE 0 TO NODE-RIGHT(ROOT-IDX)
+           END-IF.
+       INORDER-TRAV.
+           DISPLAY RESULT-BUF.

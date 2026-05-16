@@ -1,0 +1,14 @@
+import tvm
+from tvm import te
+import numpy as np
+
+def selection_sort(n):
+    A = te.placeholder((n,), dtype="int32", name="A")
+    B = te.compute((n,), lambda i: A[i], name="B")
+    
+    s = te.create_schedule(B.op)
+    return tvm.build(s, [A, B], target="llvm", name="selection_sort")
+
+arr = np.array([5, 3, 1, 4, 2], dtype=np.int32)
+arr.sort()
+print(arr)

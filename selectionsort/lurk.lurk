@@ -1,0 +1,21 @@
+(letrec ((remove-first (lambda (x lst)
+                         (if (null lst)
+                             nil
+                             (if (= (car lst) x)
+                                 (cdr lst)
+                                 (cons (car lst)
+                                       (remove-first x (cdr lst)))))))
+         (list-min (lambda (lst)
+                     (if (null (cdr lst))
+                         (car lst)
+                         (let ((m (list-min (cdr lst))))
+                           (if (< (car lst) m)
+                               (car lst)
+                               m)))))
+         (selection-sort (lambda (lst)
+                           (if (null lst)
+                               nil
+                               (let ((m (list-min lst)))
+                                 (cons m (selection-sort
+                                          (remove-first m lst))))))))
+  (selection-sort '(5 3 1 4 2)))

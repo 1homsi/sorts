@@ -1,0 +1,57 @@
+.device ATmega328P
+.org 0x0000
+
+.dseg
+arr: .byte 5
+
+.cseg
+.org 0x0000
+
+selection_sort:
+    ldi r16, 0          ; i = 0
+outer:
+    cpi r16, 4
+    brge done
+    mov r17, r16        ; min_idx = i
+    mov r18, r16
+    inc r18             ; j = i + 1
+inner:
+    cpi r18, 5
+    brge do_swap
+    ldi ZL, low(arr)
+    ldi ZH, high(arr)
+    add ZL, r18
+    adc ZH, r1
+    ld r19, Z           ; arr[j]
+    ldi ZL, low(arr)
+    ldi ZH, high(arr)
+    add ZL, r17
+    adc ZH, r1
+    ld r20, Z           ; arr[min_idx]
+    cp r19, r20
+    brge next_j
+    mov r17, r18
+next_j:
+    inc r18
+    rjmp inner
+do_swap:
+    ldi ZL, low(arr)
+    ldi ZH, high(arr)
+    add ZL, r16
+    adc ZH, r1
+    ld r19, Z
+    ldi ZL, low(arr)
+    ldi ZH, high(arr)
+    add ZL, r17
+    adc ZH, r1
+    ld r20, Z
+    st Z, r19
+    ldi ZL, low(arr)
+    ldi ZH, high(arr)
+    add ZL, r16
+    adc ZH, r1
+    st Z, r20
+    inc r16
+    rjmp outer
+done:
+    ret

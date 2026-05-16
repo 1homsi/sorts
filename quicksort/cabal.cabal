@@ -1,0 +1,9 @@
+cabal-version: 3.0
+name: quicksort
+version: 1.0.0
+synopsis: Quicksort implementation
+
+executable quicksort
+  main-is: Main.hs
+  build-depends: base >= 4.0
+  default-language: Haskell2010

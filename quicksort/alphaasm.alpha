@@ -1,0 +1,37 @@
+        .data
+arr:    .long 3, 6, 8, 10, 1, 2, 1
+
+        .text
+        .ent main
+main:
+        lda     $0, arr
+        bis     $31, $31, $16
+        lda     $17, 6
+        bsr     $26, quicksort
+        ret     $31, ($26), 1
+        .end main
+
+        .ent quicksort
+quicksort:
+        cmplt   $17, $18, $1
+        beq     $1, qs_done
+        lda     $sp, -48($sp)
+        stq     $26, 40($sp)
+        stq     $16, 32($sp)
+        stq     $17, 24($sp)
+        stq     $18, 16($sp)
+        bsr     $26, partition
+        mov     $0, $19
+        ldq     $16, 32($sp)
+        ldq     $17, 24($sp)
+        subq    $19, 1, $18
+        bsr     $26, quicksort
+        ldq     $16, 32($sp)
+        addq    $19, 1, $17
+        ldq     $18, 16($sp)
+        bsr     $26, quicksort
+        ldq     $26, 40($sp)
+        lda     $sp, 48($sp)
+qs_done:
+        ret     $31, ($26), 1
+        .end quicksort

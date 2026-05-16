@@ -1,0 +1,20 @@
+fn selectionSort(arr &[]int) []int {
+  n = len(arr);
+  result = arr;
+  i = 0;
+  while i < n {
+    min_idx = i;
+    j = i + 1;
+    while j < n {
+      if result[j] < result[min_idx] {
+        min_idx = j;
+      }
+      j = j + 1;
+    }
+    tmp = result[i];
+    result[i] = result[min_idx];
+    result[min_idx] = tmp;
+    i = i + 1;
+  }
+  return result;
+}

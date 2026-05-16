@@ -1,0 +1,28 @@
+import chisel3._
+import chisel3.util._
+
+class SelectionSort(n: Int = 5, w: Int = 8) extends Module {
+    val io = IO(new Bundle {
+        val in  = Input(Vec(n, UInt(w.W)))
+        val out = Output(Vec(n, UInt(w.W)))
+        val done = Output(Bool())
+    })
+    val arr = RegInit(VecInit(Seq.fill(n)(0.U(w.W))))
+    val sorted = RegInit(false.B)
+    
+    when(!sorted) {
+        arr := io.in
+        for (i <- 0 until n) {
+            var minIdx = i
+            for (j <- i+1 until n) {
+                when(arr(j) < arr(minIdx)) { minIdx = j }
+            }
+            val tmp = arr(i)
+            arr(i) := arr(minIdx)
+            arr(minIdx) := tmp
+        }
+        sorted := true.B
+    }
+    io.out := arr
+    io.done := sorted
+}

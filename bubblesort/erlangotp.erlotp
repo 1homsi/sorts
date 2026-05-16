@@ -1,0 +1,14 @@
+-module(bubblesort).
+-export([bubblesort/1]).
+
+bubblesort([]) -> [];
+bubblesort([X]) -> [X];
+bubblesort(List) ->
+    case pass(List) of
+        {Pass, true} -> Pass;
+        {Pass, false} -> bubblesort(Pass)
+    end.
+
+pass([X]) -> {[X], true};
+pass([X, Y | T]) when X > Y -> {[Y | Rest], Changed} = pass([X | T]), {[Y | Rest], true};
+pass([X | Rest]) -> {Pass, Changed} = pass(Rest), {[X | Pass], Changed}.

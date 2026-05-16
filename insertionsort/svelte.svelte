@@ -1,0 +1,22 @@
+<script>
+  let arr = [5, 3, 1, 4, 2];
+  let sorted = [];
+
+  function insertionSort(input) {
+    const a = [...input];
+    const n = a.length;
+    for (let i = 1; i < n; i++) {
+      const key = a[i];
+      let j = i - 1;
+      while (j >= 0 && a[j] > key) {
+        a[j + 1] = a[j];
+        j--;
+      }
+      a[j + 1] = key;
+    }
+    return a;
+  }
+</script>
+
+<button on:click={() => sorted = insertionSort(arr)}>Sort</button>
+<p>{sorted.join(', ')}</p>

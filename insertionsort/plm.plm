@@ -1,0 +1,13 @@
+INSERTION$SORT: PROCEDURE (ARR, N) PUBLIC;
+    DECLARE ARR(*) ADDRESS, N ADDRESS;
+    DECLARE (I, J, KEY) ADDRESS;
+    DO I = 1 TO N - 1;
+        KEY = ARR(I);
+        J = I - 1;
+        DO WHILE J >= 0 AND ARR(J) > KEY;
+            ARR(J+1) = ARR(J);
+            J = J - 1;
+        END;
+        ARR(J+1) = KEY;
+    END;
+END INSERTION$SORT;

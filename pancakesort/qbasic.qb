@@ -1,0 +1,35 @@
+DIM arr(6) AS INTEGER
+DATA 3, 6, 2, 7, 4, 1, 5
+FOR i = 0 TO 6: READ arr(i): NEXT i
+
+SUB Flip (k AS INTEGER)
+    DIM left AS INTEGER, right AS INTEGER, tmp AS INTEGER
+    left = 0: right = k
+    WHILE left < right
+        tmp = arr(left): arr(left) = arr(right): arr(right) = tmp
+        left = left + 1: right = right - 1
+    WEND
+END SUB
+
+FUNCTION FindMaxIdx (size AS INTEGER) AS INTEGER
+    DIM maxIdx AS INTEGER, i AS INTEGER
+    maxIdx = 0
+    FOR i = 1 TO size - 1
+        IF arr(i) > arr(maxIdx) THEN maxIdx = i
+    NEXT i
+    FindMaxIdx = maxIdx
+END FUNCTION
+
+DIM size AS INTEGER, maxIdx AS INTEGER
+size = 7
+WHILE size > 1
+    maxIdx = FindMaxIdx(size)
+    IF maxIdx <> size - 1 THEN
+        IF maxIdx <> 0 THEN Flip maxIdx
+        Flip size - 1
+    END IF
+    size = size - 1
+WEND
+
+FOR i = 0 TO 6: PRINT arr(i); " ";: NEXT i
+PRINT

@@ -1,0 +1,35 @@
+package radixsort
+
+uses java.util.ArrayList
+uses java.util.Arrays
+
+class RadixSort {
+    static function countingSort(arr: int[], exp: int) : void {
+        var n = arr.length
+        var output = new int[n]
+        var count = new int[10]
+        for (x in arr) { count[(x / exp) % 10]++ }
+        for (i in 1..9) { count[i] += count[i-1] }
+        for (i in n-1..0 step -1) {
+            var idx = (arr[i] / exp) % 10
+            output[--count[idx]] = arr[i]
+        }
+        for (i in 0..|arr.length) { arr[i] = output[i] }
+    }
+
+    static function sort(arr: int[]) : int[] {
+        if (arr.length == 0) return arr
+        var max = arr.max()
+        var exp = 1
+        while (max / exp > 0) {
+            countingSort(arr, exp)
+            exp *= 10
+        }
+        return arr
+    }
+
+    static function main(args: String[]) {
+        var arr = {170, 45, 75, 90, 802, 24, 2, 66}
+        print(Arrays.toString(sort(arr)))
+    }
+}

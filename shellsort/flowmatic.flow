@@ -1,0 +1,11 @@
+(0) READ-ITEM A B
+(1) COMPARE A(I) TO B(J) ; IF GREATER GO TO OPERATION 5 ; OTHERWISE GO TO OPERATION 2
+(2) STORE A(I) IN TEMP
+(3) STORE B(J) IN A(I)
+(4) STORE TEMP IN B(J) ; GO TO OPERATION 1
+(5) WRITE-ITEM SORTED
+(6) STOP
+; Shell sort: generalization of insertion sort with gap sequence
+; Input array: 64 34 25 12 22 11 90
+; Process: gap=3, insertion sort, gap=1, insertion sort
+; Output: 11 12 22 25 34 64 90

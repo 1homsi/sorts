@@ -1,0 +1,26 @@
+#include <linux/bpf.h>
+#include <bpf/bpf_helpers.h>
+
+static __always_inline void swap(int *a, int *b) {
+    int t = *a; *a = *b; *b = t;
+}
+
+static __always_inline int partition(int arr[], int lo, int hi) {
+    int pivot = arr[hi], i = lo;
+    for (int j = lo; j < hi; j++) {
+        if (arr[j] <= pivot) {
+            swap(&arr[i++], &arr[j]);
+        }
+    }
+    swap(&arr[i], &arr[hi]);
+    return i;
+}
+
+SEC("xdp")
+int xdp_quicksort(struct xdp_md *ctx) {
+    int arr[7] = {3, 6, 8, 10, 1, 2, 1};
+    int p = partition(arr, 0, 6);
+    return XDP_PASS;
+}
+
+char _license[] SEC("license") = "GPL";

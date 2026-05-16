@@ -1,0 +1,45 @@
+-- Mjolner BETA System implementation of merge sort --
+
+MergeSort: (#
+    arr: [38, 27, 43, 3, 9, 82, 10];
+    tmp: array[7] of integer;
+
+    merge:
+        (# lo, mid, hi: @integer
+        enter (lo, mid, hi)
+        do
+            (# i: @integer := lo; j: @integer := mid+1; k: @integer := lo
+            do
+                (while i <= mid and j <= hi
+                repeat
+                    (if arr[i] <= arr[j]
+                    then tmp[k] := arr[i]; i := i+1
+                    else tmp[k] := arr[j]; j := j+1
+                    if);
+                    k := k+1
+                while);
+                (while i <= mid repeat tmp[k]:=arr[i]; i:=i+1; k:=k+1 while);
+                (while j <= hi repeat tmp[k]:=arr[j]; j:=j+1; k:=k+1 while);
+                (for x: lo to hi repeat arr[x] := tmp[x] for)
+            #)
+        #);
+
+    msort:
+        (# lo, hi: @integer
+        enter (lo, hi)
+        do
+            (if lo < hi
+            then
+                (# mid: @integer := (lo+hi)/2
+                do
+                    (lo, mid) -> msort;
+                    (mid+1, hi) -> msort;
+                    (lo, mid, hi) -> merge
+                #)
+            if)
+        #)
+
+do
+    (1, 7) -> msort;
+    (for i: 1 to 7 repeat arr[i] -> putint; putspace for)
+#)

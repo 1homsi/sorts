@@ -1,0 +1,34 @@
+let flip arr k =
+  let left = ref 0 and right = ref k in
+  while !left < !right do
+    let tmp = arr.(!left) in
+    arr.(!left) <- arr.(!right);
+    arr.(!right) <- tmp;
+    incr left; decr right
+  done
+
+let find_max_idx arr size =
+  let max_idx = ref 0 in
+  for i = 1 to size - 1 do
+    if arr.(i) > arr.(!max_idx) then max_idx := i
+  done;
+  !max_idx
+
+let pancake_sort arr =
+  let n = Array.length arr in
+  let size = ref n in
+  while !size > 1 do
+    let mi = find_max_idx arr !size in
+    if mi <> !size - 1 then begin
+      if mi <> 0 then flip arr mi;
+      flip arr (!size - 1)
+    end;
+    decr size
+  done;
+  arr
+
+let () =
+  let arr = [| 3; 6; 2; 7; 4; 1; 5 |] in
+  let _ = pancake_sort arr in
+  Array.iter (fun x -> Printf.printf "%d " x) arr;
+  print_newline ()

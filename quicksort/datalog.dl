@@ -1,0 +1,12 @@
+.decl input(val: number)
+input(3). input(6). input(8). input(10). input(1). input(2). input(1).
+
+.decl less_than_count(val: number, cnt: number)
+less_than_count(v, c) :-
+    input(v),
+    c = count : { input(x), x < v }.
+
+.decl sorted(rank: number, val: number)
+sorted(r + 1, v) :- less_than_count(v, r).
+
+.output sorted

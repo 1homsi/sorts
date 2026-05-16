@@ -1,0 +1,40 @@
+        ARR = ARRAY('7')
+        ARR<1> = 3
+        ARR<2> = 6
+        ARR<3> = 2
+        ARR<4> = 7
+        ARR<5> = 4
+        ARR<6> = 1
+        ARR<7> = 5
+        N = 7
+        SIZE = N
+
+OUTER   GT(SIZE, 1) :F(PRINT)
+        MAXIDX = 1
+        I = 2
+FINDMAX LE(I, SIZE) :F(DOFLIP)
+        GT(ARR<I>, ARR<MAXIDX>) :F(NEXT)
+        MAXIDX = I
+NEXT    I = I + 1 :(FINDMAX)
+DOFLIP  EQ(MAXIDX, SIZE) :T(DECR)
+        EQ(MAXIDX, 1) :T(FLIP2)
+        LEFT = 1
+        RIGHT = MAXIDX - 1
+        CALL FLIP
+FLIP2   LEFT = 1
+        RIGHT = SIZE - 1
+        CALL FLIP
+DECR    SIZE = SIZE - 1 :(OUTER)
+
+FLIP    LT(LEFT, RIGHT) :F(RETURN)
+        TMP = ARR<LEFT>
+        ARR<LEFT> = ARR<RIGHT>
+        ARR<RIGHT> = TMP
+        LEFT = LEFT + 1
+        RIGHT = RIGHT - 1 :(FLIP)
+
+PRINT   I = 1
+PLOOP   LE(I, N) :F(END)
+        OUTPUT = ARR<I>
+        I = I + 1 :(PLOOP)
+END

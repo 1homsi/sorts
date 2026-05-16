@@ -1,0 +1,17 @@
+:- module insertion_sort.
+:- interface.
+:- import_module list.
+:- pred insertion_sort(list(int)::in, list(int)::out) is det.
+:- implementation.
+
+insertion_sort([], []).
+insertion_sort([H|T], Sorted) :-
+    insertion_sort(T, SortedT),
+    insert(H, SortedT, Sorted).
+
+:- pred insert(int::in, list(int)::in, list(int)::out) is det.
+insert(X, [], [X]).
+insert(X, [H|T], Result) :-
+    ( X =< H -> Result = [X, H | T]
+    ; insert(X, T, R), Result = [H | R]
+    ).

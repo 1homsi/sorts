@@ -1,0 +1,20 @@
+fun merge(left : list<int>, right : list<int>) : list<int>
+    match (left, right)
+        (Nil, _) -> right
+        (_, Nil) -> left
+        (Cons(lh, lt), Cons(rh, rt)) ->
+            if lh <= rh then Cons(lh, merge(lt, right))
+            else Cons(rh, merge(left, rt))
+
+fun merge-sort(lst : list<int>) : list<int>
+    val n = lst.length
+    if n <= 1 then lst
+    else
+        val mid = n / 2
+        val left = lst.take(mid)
+        val right = lst.drop(mid)
+        merge(merge-sort(left), merge-sort(right))
+
+fun main()
+    val arr = [38, 27, 43, 3, 9, 82, 10]
+    println(merge-sort(arr).show)

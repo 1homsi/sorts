@@ -1,0 +1,10 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX ex: <http://example.org/>
+
+SELECT ?sorted WHERE {
+  {
+    SELECT (MIN(?val) AS ?sorted) WHERE {
+      ex:list ex:contains ?val .
+    }
+  }
+}

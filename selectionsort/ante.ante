@@ -1,0 +1,11 @@
+fn selection_sort(arr: mut &[i32]) -> &[i32] =
+    n = arr.len()
+    for i in 0..n do
+        min_idx = mut i
+        for j in i+1..n do
+            if arr[j] < arr[min_idx] then
+                min_idx := j
+        tmp = arr[i]
+        arr[i] = arr[min_idx]
+        arr[min_idx] = tmp
+    arr

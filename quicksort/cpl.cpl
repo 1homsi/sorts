@@ -1,0 +1,47 @@
+SECTION "QUICKSORT"
+
+GET "LIBHDR"
+
+LET PARTITION(ARR, LOW, HIGH) = VALOF
+$(
+    LET PIVOT = ARR!HIGH
+    LET I = LOW
+    LET J = LOW
+    LET TMP = 0
+    WHILE J < HIGH DO
+    $(
+        IF ARR!J <= PIVOT THEN
+        $(
+            TMP := ARR!I
+            ARR!I := ARR!J
+            ARR!J := TMP
+            I := I + 1
+        $)
+        J := J + 1
+    $)
+    TMP := ARR!I
+    ARR!I := ARR!HIGH
+    ARR!HIGH := TMP
+    RESULTIS I
+$)
+
+LET QUICKSORT(ARR, LOW, HIGH) BE
+$(
+    IF LOW < HIGH THEN
+    $(
+        LET P = PARTITION(ARR, LOW, HIGH)
+        QUICKSORT(ARR, LOW, P - 1)
+        QUICKSORT(ARR, P + 1, HIGH)
+    $)
+$)
+
+LET GO() BE
+$(
+    LET ARR = VEC 7
+    ARR!0:=3; ARR!1:=6; ARR!2:=8; ARR!3:=10
+    ARR!4:=1; ARR!5:=2; ARR!6:=1
+    QUICKSORT(ARR, 0, 6)
+    FOR I = 0 TO 6 DO WRITEF("%N ", ARR!I)
+$)
+
+END

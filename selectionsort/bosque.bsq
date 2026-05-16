@@ -1,0 +1,21 @@
+namespace SelectionSort;
+
+function selectionSort(arr: List<Int>): List<Int> {
+    let n = arr.size();
+    var result = arr;
+    var i = 0;
+    while i < n {
+        var minIdx = i;
+        var j = i + 1;
+        while j < n {
+            if result.get(j) < result.get(minIdx) {
+                minIdx = j;
+            }
+            j = j + 1;
+        }
+        let tmp = result.get(i);
+        result = result.set(i, result.get(minIdx)).set(minIdx, tmp);
+        i = i + 1;
+    }
+    return result;
+}

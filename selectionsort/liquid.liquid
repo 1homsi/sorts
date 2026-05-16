@@ -1,0 +1,5 @@
+{% assign arr = "5,3,1,4,2" | split: "," %}
+{% assign sorted = arr | sort %}
+{% for val in sorted %}
+  {{ val }}
+{% endfor %}

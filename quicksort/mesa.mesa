@@ -1,0 +1,34 @@
+DIRECTORY Quicksort;
+PROGRAM Quicksort IMPORTS IO EXPORTS MAIN =
+BEGIN
+
+arr: ARRAY [0..6] OF INTEGER ← [3, 6, 8, 10, 1, 2, 1];
+
+Partition: PROC [low, high: INTEGER] RETURNS [p: INTEGER] = {
+    pivot: INTEGER ← arr[high];
+    i: INTEGER ← low;
+    tmp: INTEGER;
+    FOR j: INTEGER IN [low..high) DO
+        IF arr[j] <= pivot THEN {
+            tmp ← arr[i]; arr[i] ← arr[j]; arr[j] ← tmp;
+            i ← i + 1;
+        };
+    ENDLOOP;
+    tmp ← arr[i]; arr[i] ← arr[high]; arr[high] ← tmp;
+    RETURN [i];
+};
+
+Quicksort: PROC [low, high: INTEGER] = {
+    IF low < high THEN {
+        p: INTEGER ← Partition[low, high];
+        Quicksort[low, p - 1];
+        Quicksort[p + 1, high];
+    };
+};
+
+MAIN: PROC = {
+    Quicksort[0, 6];
+    FOR i: INTEGER IN [0..6] DO IO.PutFR["%d ", arr[i]] ENDLOOP;
+};
+
+END.

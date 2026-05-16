@@ -1,0 +1,12 @@
+quicksort is operation lst {
+    if tally lst <= 1 then lst
+    else
+        pivot := lst at (floor (tally lst / 2));
+        left := lst pick (lst < pivot);
+        middle := lst pick (lst = pivot);
+        right := lst pick (lst > pivot);
+        (quicksort left) link middle link (quicksort right)
+    endif
+}
+
+write quicksort [3, 6, 8, 10, 1, 2, 1];

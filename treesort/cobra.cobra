@@ -1,0 +1,37 @@
+class Node
+    var val as int
+    var left as Node?
+    var right as Node?
+
+    def init(v as int)
+        .val = v
+        .left = nil
+        .right = nil
+
+class TreeSort
+    def insert(node as Node?, val as int) as Node
+        if node is nil
+            return Node(val)
+        if val < node.val
+            node.left = .insert(node.left, val)
+        else
+            node.right = .insert(node.right, val)
+        return node
+
+    def inorder(node as Node?, result as List<of int>)
+        if node is nil
+            return
+        .inorder(node.left, result)
+        result.add(node.val)
+        .inorder(node.right, result)
+
+    def treesort(arr as List<of int>) as List<of int>
+        root as Node? = nil
+        for v in arr
+            root = .insert(root, v)
+        result = List<of int>()
+        .inorder(root, result)
+        return result
+
+    def main
+        print .treesort([5, 3, 7, 1, 4, 6, 8])

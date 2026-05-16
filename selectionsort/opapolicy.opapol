@@ -1,0 +1,21 @@
+package selectionsort
+
+import future.keywords
+
+default allow := false
+
+allow if {
+    input.method == "POST"
+    input.path == "/sort"
+    is_valid_request
+}
+
+is_valid_request if {
+    input.body.array
+    count(input.body.array) > 0
+    count(input.body.array) <= 1000
+}
+
+sorted_result(arr) := result if {
+    result := sort(arr)
+}

@@ -1,0 +1,38 @@
+        ORG 0000H
+
+arr:    DB 3, 6, 8, 10, 1, 2, 1
+n:      DB 7
+
+low     EQU 30H
+high    EQU 31H
+i       EQU 32H
+j       EQU 33H
+pivot   EQU 34H
+tmp     EQU 35H
+
+main:
+        MOV low, #0
+        MOV high, #6
+        LCALL quicksort
+        SJMP $
+
+quicksort:
+        MOV A, low
+        MOV B, high
+        CJNE A, B, qs_ne
+        RET
+qs_ne:  JC qs_do
+        RET
+qs_do:  LCALL partition
+        RET
+
+partition:
+        MOV DPTR, #arr
+        MOV A, high
+        MOVC A, @A+DPTR
+        MOV pivot, A
+        MOV A, low
+        MOV i, A
+        RET
+
+        END

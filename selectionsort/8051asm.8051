@@ -1,0 +1,77 @@
+        ORG 0000H
+        
+ARR_BASE EQU 30H
+N       EQU 35H
+I       EQU 36H
+J       EQU 37H
+MIN_IDX EQU 38H
+TMP     EQU 39H
+
+MAIN:
+        MOV N, #05H
+        MOV 30H, #05H
+        MOV 31H, #03H
+        MOV 32H, #01H
+        MOV 33H, #04H
+        MOV 34H, #02H
+        MOV I, #00H
+
+OUTER:
+        MOV A, I
+        CJNE A, #04H, NOT_DONE
+        LJMP DONE
+NOT_DONE:
+        MOV MIN_IDX, I
+        MOV J, I
+        INC J
+
+INNER:
+        MOV A, J
+        CJNE A, #05H, COMPARE
+        LJMP DO_SWAP
+COMPARE:
+        MOV R0, J
+        ADD A, #ARR_BASE
+        MOV R1, A
+        MOV A, @R1
+        MOV B, A
+        MOV R0, MIN_IDX
+        MOV A, R0
+        ADD A, #ARR_BASE
+        MOV R1, A
+        MOV A, @R1
+        CLR C
+        SUBB A, B
+        JNC NEXT_J
+        MOV MIN_IDX, J
+NEXT_J:
+        INC J
+        LJMP INNER
+
+DO_SWAP:
+        MOV R0, I
+        MOV A, R0
+        ADD A, #ARR_BASE
+        MOV R1, A
+        MOV TMP, @R1
+        MOV R0, MIN_IDX
+        MOV A, R0
+        ADD A, #ARR_BASE
+        MOV R0, A
+        MOV A, @R0
+        MOV R1, I
+        MOV R2, A
+        MOV R0, R1
+        ADD A, #ARR_BASE
+        MOV R1, A
+        MOV @R1, R2
+        MOV A, MIN_IDX
+        ADD A, #ARR_BASE
+        MOV R1, A
+        MOV @R1, TMP
+        INC I
+        LJMP OUTER
+
+DONE:
+        SJMP $
+        END

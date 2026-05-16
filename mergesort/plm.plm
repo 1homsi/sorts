@@ -1,0 +1,40 @@
+MERGESORT: DO;
+
+DECLARE (ARR(7), TMP(7)) INTEGER;
+DECLARE (I, J, K, LO, HI, MID) INTEGER;
+
+ARR(1) = 38; ARR(2) = 27; ARR(3) = 43; ARR(4) = 3;
+ARR(5) = 9;  ARR(6) = 82; ARR(7) = 10;
+
+MERGE: PROCEDURE(LO, MID, HI);
+    DECLARE (LO, MID, HI) INTEGER;
+    DECLARE (I, J, K, X) INTEGER;
+    I = LO; J = MID + 1; K = LO;
+    DO WHILE (I <= MID) AND (J <= HI);
+        IF ARR(I) <= ARR(J) THEN DO;
+            TMP(K) = ARR(I); I = I + 1;
+        END; ELSE DO;
+            TMP(K) = ARR(J); J = J + 1;
+        END;
+        K = K + 1;
+    END;
+    DO WHILE I <= MID; TMP(K) = ARR(I); I = I+1; K = K+1; END;
+    DO WHILE J <= HI; TMP(K) = ARR(J); J = J+1; K = K+1; END;
+    DO X = LO TO HI; ARR(X) = TMP(X); END;
+END MERGE;
+
+MSORT: PROCEDURE(LO, HI) RECURSIVE;
+    DECLARE (LO, HI, MID) INTEGER;
+    IF LO >= HI THEN RETURN;
+    MID = (LO + HI) / 2;
+    CALL MSORT(LO, MID);
+    CALL MSORT(MID + 1, HI);
+    CALL MERGE(LO, MID, HI);
+END MSORT;
+
+CALL MSORT(1, 7);
+DO I = 1 TO 7;
+    CALL OUTPUT(ARR(I));
+END;
+
+END MERGESORT;

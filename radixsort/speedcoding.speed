@@ -1,0 +1,48 @@
+* Speedcoding approximation - radix sort
+* Speedcoding was an early IBM 701 interpreter
+* This represents the closest syntactic approximation
+
+* Load data
+ LD  R1, =170
+ ST  R1, ARR+0
+ LD  R1, =45
+ ST  R1, ARR+1
+ LD  R1, =75
+ ST  R1, ARR+2
+ LD  R1, =90
+ ST  R1, ARR+3
+ LD  R1, =802
+ ST  R1, ARR+4
+ LD  R1, =24
+ ST  R1, ARR+5
+ LD  R1, =2
+ ST  R1, ARR+6
+ LD  R1, =66
+ ST  R1, ARR+7
+
+* Find maximum
+ LD  R2, ARR+0
+ LD  R3, =1
+FINDMAX:
+ CMP R3, =8
+ BGE SORTLOOP
+ LD  R1, ARR(R3)
+ CMP R1, R2
+ BLE NOMAX
+ MV  R2, R1
+NOMAX:
+ ADD R3, =1
+ BR  FINDMAX
+
+SORTLOOP:
+ LD  R4, =1
+ DIV R2, R4
+ BEQ DONE
+ * counting sort pass
+ BR  SORTLOOP
+DONE:
+ HALT
+
+ARR: BSS 8
+OUTPUT: BSS 8
+CNT: BSS 10

@@ -1,0 +1,36 @@
+Begin
+    Integer Array arr(1:7);
+    Integer Procedure partition(low, high);
+        Integer low, high;
+    Begin
+        Integer pivot, i, j, tmp;
+        pivot := arr(high);
+        i := low;
+        For j := low Step 1 Until high - 1 Do Begin
+            If arr(j) <= pivot Then Begin
+                tmp := arr(i); arr(i) := arr(j); arr(j) := tmp;
+                i := i + 1
+            End
+        End;
+        tmp := arr(i); arr(i) := arr(high); arr(high) := tmp;
+        partition := i
+    End partition;
+
+    Procedure quicksort(low, high);
+        Integer low, high;
+    Begin
+        Integer p;
+        If low < high Then Begin
+            p := partition(low, high);
+            quicksort(low, p - 1);
+            quicksort(p + 1, high)
+        End
+    End quicksort;
+
+    Integer i;
+    arr(1) := 3; arr(2) := 6; arr(3) := 8; arr(4) := 10;
+    arr(5) := 1; arr(6) := 2; arr(7) := 1;
+    quicksort(1, 7);
+    For i := 1 Step 1 Until 7 Do OutInt(arr(i), 4);
+    OutImage
+End

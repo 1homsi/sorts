@@ -1,0 +1,15 @@
+* SPICE cannot implement insertion sort algorithmically.
+* This is a sorted voltage divider ladder as closest representation.
+.TITLE Insertion Sort Analog Approximation
+V1 n1 0 DC 5
+V2 n2 0 DC 3
+V3 n3 0 DC 1
+V4 n4 0 DC 4
+V5 n5 0 DC 2
+R1 n1 out1 1k
+R2 n2 out2 1k
+R3 n3 out3 1k
+R4 n4 out4 1k
+R5 n5 out5 1k
+.OP
+.END

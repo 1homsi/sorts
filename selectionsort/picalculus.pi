@@ -1,0 +1,6 @@
+new sort, result.
+(sort![5,3,1,4,2].0)
+| (sort?arr.
+   let n = length(arr) in
+   let sorted = selectionSort(arr, n) in
+   result!sorted.0)

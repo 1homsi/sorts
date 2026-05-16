@@ -1,0 +1,22 @@
+def stoogeSort(arr, first, last) {
+    if (arr[first] > arr[last]) {
+        def tmp = arr[first]
+        arr[first] = arr[last]
+        arr[last] = tmp
+    }
+    def n = last - first + 1
+    if (n > 2) {
+        def t = (int)(n * 2 / 3)
+        stoogeSort(arr, first, first + t - 1)
+        stoogeSort(arr, last - t + 1, last)
+        stoogeSort(arr, first, first + t - 1)
+    }
+}
+
+def sortDSL = {
+    data([3, 1, 4, 1, 5, 9, 2, 6]) {
+        stoogeSort(it, 0, it.size() - 1)
+        println it
+    }
+}
+sortDSL()

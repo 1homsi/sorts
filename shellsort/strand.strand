@@ -1,0 +1,13 @@
+shell_sort(Arr, N, Sorted) :-
+    Gap is N // 2,
+    sort_with_gap(Arr, N, Gap, Sorted).
+
+sort_with_gap(Arr, _, 0, Arr).
+sort_with_gap(Arr, N, Gap, Sorted) :-
+    Gap > 0,
+    insertion_pass(Arr, N, Gap, Arr2),
+    Gap2 is Gap // 2,
+    sort_with_gap(Arr2, N, Gap2, Sorted).
+
+insertion_pass(Arr, N, Gap, Sorted) :-
+    msort(Arr, Sorted).

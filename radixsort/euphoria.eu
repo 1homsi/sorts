@@ -1,0 +1,42 @@
+include std/io.e
+
+function counting_sort(sequence arr, integer exp)
+    integer n = length(arr)
+    sequence output = repeat(0, n)
+    sequence cnt = repeat(0, 10)
+    integer idx
+    for i = 1 to n do
+        idx = remainder(floor(arr[i] / exp), 10) + 1
+        cnt[idx] += 1
+    end for
+    for i = 2 to 10 do
+        cnt[i] += cnt[i - 1]
+    end for
+    for i = n to 1 by -1 do
+        idx = remainder(floor(arr[i] / exp), 10) + 1
+        output[cnt[idx]] = arr[i]
+        cnt[idx] -= 1
+    end for
+    return output
+end function
+
+function radix_sort(sequence arr)
+    if length(arr) = 0 then return arr end if
+    integer max_val = arr[1]
+    for i = 2 to length(arr) do
+        if arr[i] > max_val then max_val = arr[i] end if
+    end for
+    integer exp = 1
+    while floor(max_val / exp) > 0 do
+        arr = counting_sort(arr, exp)
+        exp *= 10
+    end while
+    return arr
+end function
+
+sequence arr = {170, 45, 75, 90, 802, 24, 2, 66}
+arr = radix_sort(arr)
+for i = 1 to length(arr) do
+    printf(1, "%d ", {arr[i]})
+end for
+puts(1, "\n")

@@ -1,0 +1,31 @@
+using System;
+using System.Console;
+
+module Quicksort {
+    partition(arr : array[int], low : int, high : int) : int {
+        def pivot = arr[high];
+        mutable i = low;
+        for (mutable j = low; j < high; j++) {
+            when (arr[j] <= pivot) {
+                def tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+                i++;
+            }
+        }
+        def tmp = arr[i]; arr[i] = arr[high]; arr[high] = tmp;
+        i
+    }
+
+    quicksort(arr : array[int], low : int, high : int) : void {
+        when (low < high) {
+            def p = partition(arr, low, high);
+            quicksort(arr, low, p - 1);
+            quicksort(arr, p + 1, high);
+        }
+    }
+
+    Main() : void {
+        def arr = array[3, 6, 8, 10, 1, 2, 1];
+        quicksort(arr, 0, arr.Length - 1);
+        WriteLine(string.Join(" ", arr));
+    }
+}

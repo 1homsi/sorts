@@ -1,0 +1,37 @@
+            DIMENSION ARR(7)
+            INTEGER N,SIZE,MAXI,I,LEFT,RIGHT,TMP
+            DATA ARR/3,6,2,7,4,1,5/
+            N=7
+            SIZE=N
+OUTER       WHENEVER SIZE.LE.1,TRANSFER TO DONE
+            MAXI=1
+            I=2
+FINDMAX     WHENEVER I.GT.SIZE,TRANSFER TO DOFLIP
+            WHENEVER ARR(I).GT.ARR(MAXI),MAXI=I
+            I=I+1
+            TRANSFER TO FINDMAX
+DOFLIP      WHENEVER MAXI.E.SIZE,TRANSFER TO DECR
+            WHENEVER MAXI.E.1,TRANSFER TO FLIP2
+            LEFT=1
+            RIGHT=MAXI
+FLIP1       WHENEVER LEFT.GE.RIGHT,TRANSFER TO FLIP2
+            TMP=ARR(LEFT)
+            ARR(LEFT)=ARR(RIGHT)
+            ARR(RIGHT)=TMP
+            LEFT=LEFT+1
+            RIGHT=RIGHT-1
+            TRANSFER TO FLIP1
+FLIP2       LEFT=1
+            RIGHT=SIZE
+FLIP3       WHENEVER LEFT.GE.RIGHT,TRANSFER TO DECR
+            TMP=ARR(LEFT)
+            ARR(LEFT)=ARR(RIGHT)
+            ARR(RIGHT)=TMP
+            LEFT=LEFT+1
+            RIGHT=RIGHT-1
+            TRANSFER TO FLIP3
+DECR        SIZE=SIZE-1
+            TRANSFER TO OUTER
+DONE        THROUGH PRINT,FOR I=1,1,I.G.N
+PRINT       PRINT FORMAT F,ARR(I)
+            END OF PROGRAM

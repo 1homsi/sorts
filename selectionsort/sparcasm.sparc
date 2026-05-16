@@ -1,0 +1,54 @@
+        .section ".data"
+arr:    .word 5, 3, 1, 4, 2
+n:      .word 5
+
+        .section ".text"
+        .global selection_sort
+
+selection_sort:
+        save %sp, -96, %sp
+        sethi %hi(arr), %l0
+        or %l0, %lo(arr), %l0
+        sethi %hi(n), %l1
+        ld [%l1 + %lo(n)], %l1
+        mov 0, %l2
+
+outer:
+        sub %l1, 1, %l3
+        cmp %l2, %l3
+        bge done
+        nop
+        mov %l2, %l3
+        add %l2, 1, %l4
+
+inner:
+        cmp %l4, %l1
+        bge swap
+        nop
+        sll %l4, 2, %l5
+        ld [%l0 + %l5], %l5
+        sll %l3, 2, %l6
+        ld [%l0 + %l6], %l6
+        cmp %l5, %l6
+        bge next
+        nop
+        mov %l4, %l3
+next:
+        add %l4, 1, %l4
+        b inner
+        nop
+
+swap:
+        sll %l2, 2, %l5
+        ld [%l0 + %l5], %l6
+        sll %l3, 2, %l7
+        ld [%l0 + %l7], %o0
+        st %o0, [%l0 + %l5]
+        st %l6, [%l0 + %l7]
+        add %l2, 1, %l2
+        b outer
+        nop
+
+done:
+        ret
+        restore

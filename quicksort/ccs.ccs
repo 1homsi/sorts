@@ -1,0 +1,13 @@
+agent QUICKSORT =
+    in(x).
+    (LESS(x) | GREATER(x) |
+     QUICKSORT_L | QUICKSORT_R)
+
+agent LESS(pivot) =
+    in(y). if y <= pivot then out(y).LESS(pivot) else LESS(pivot)
+
+agent GREATER(pivot) =
+    in(y). if y > pivot then out(y).GREATER(pivot) else GREATER(pivot)
+
+agent MAIN =
+    QUICKSORT

@@ -1,0 +1,27 @@
+module ShellSort
+    var arr : array 1..7 of int
+    var n, gap, i, j, temp : int
+
+    procedure ShellSort()
+        arr[1] := 64; arr[2] := 34; arr[3] := 25; arr[4] := 12
+        arr[5] := 22; arr[6] := 11; arr[7] := 90
+        n := 7; gap := n div 2
+        loop
+            exit when gap <= 0
+            for i := gap + 1 to n do
+                temp := arr[i]; j := i
+                loop
+                    exit when j <= gap or arr[j - gap] <= temp
+                    arr[j] := arr[j - gap]; j := j - gap
+                end loop
+                arr[j] := temp
+            end for
+            gap := gap div 2
+        end loop
+        for i := 1 to n do
+            put arr[i], " "
+        end for
+    end ShellSort
+
+    body ShellSort()
+end ShellSort

@@ -1,0 +1,28 @@
+        ARRAY = ARRAY('7')
+        ARRAY<1> = 64
+        ARRAY<2> = 34
+        ARRAY<3> = 25
+        ARRAY<4> = 12
+        ARRAY<5> = 22
+        ARRAY<6> = 11
+        ARRAY<7> = 90
+        N = 7
+        GAP = N / 2
+GLOOP   GAP = GT(GAP,0) GAP             :F(PRINT)
+        I = GAP
+ILOOP   I = LT(I,N) I                   :F(GDONE)
+        TEMP = ARRAY<I>
+        J = I
+JLOOP   J = GE(J,GAP) J                 :F(JDONE)
+        PREV = ARRAY<J - GAP>
+        GT(PREV,TEMP)                    :F(JDONE)
+        ARRAY<J> = PREV
+        J = J - GAP                      :(JLOOP)
+JDONE   ARRAY<J> = TEMP
+        I = I + 1                        :(ILOOP)
+GDONE   GAP = GAP / 2                   :(GLOOP)
+PRINT   K = 1
+PLOOP   K = LE(K,N) K                   :F(END)
+        OUTPUT = ARRAY<K>
+        K = K + 1                        :(PLOOP)
+END

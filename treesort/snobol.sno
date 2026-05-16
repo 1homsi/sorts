@@ -1,0 +1,49 @@
+        NODECOUNT = 0
+        ROOT = 0
+
+INSERT  NODES = IDENT(NODECOUNT,'0') 'no'
+        NODECOUNT = NODECOUNT + 1
+        IDX = NODECOUNT
+        VAL.IDX = V
+        LEFT.IDX = 0
+        RIGHT.IDX = 0     :(INSEND)
+INSERT2 GT(V,VAL.IDX) :S(GORIGHT)
+        NL = LEFT.IDX
+        IDENT(NL,'0') :S(NEWLEFT)
+        IDX = NL
+        V = V            :(INSERT2)
+NEWLEFT NODECOUNT = NODECOUNT + 1
+        NL = NODECOUNT
+        LEFT.IDX = NL
+        VAL.NL = V
+        LEFT.NL = 0
+        RIGHT.NL = 0     :(INSEND)
+GORIGHT NR = RIGHT.IDX
+        IDENT(NR,'0') :S(NEWRIGHT)
+        IDX = NR         :(INSERT2)
+NEWRIGHT NODECOUNT = NODECOUNT + 1
+        NR = NODECOUNT
+        RIGHT.IDX = NR
+        VAL.NR = V
+        LEFT.NR = 0
+        RIGHT.NR = 0
+INSEND
+
+INORDER IDENT(IDX,'0') :S(RETURN)
+        SAVE = IDX
+        IDX = LEFT.IDX
+        INORDER
+        IDX = SAVE
+        OUTPUT = OUTPUT ' ' VAL.IDX
+        IDX = RIGHT.IDX
+        INORDER
+        IDX = SAVE       :(RETURN)
+
+        DATA = '5 3 7 1 4 6 8'
+LOOP    DATA LEN(1) . V SPAN(' ') =  :F(DONE)
+        IDX = ROOT
+        INSERT              :(LOOP)
+DONE    IDX = ROOT
+        OUTPUT = ''
+        INORDER
+END

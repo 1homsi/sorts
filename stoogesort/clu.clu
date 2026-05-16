@@ -1,0 +1,22 @@
+stooge_sort = proc (arr: array[int], first, last: int)
+    if arr[first] > arr[last] then
+        tmp: int := arr[first]
+        arr[first] := arr[last]
+        arr[last] := tmp
+    end
+    n: int := last - first + 1
+    if n > 2 then
+        t: int := n * 2 / 3
+        stooge_sort(arr, first, first + t - 1)
+        stooge_sort(arr, last - t + 1, last)
+        stooge_sort(arr, first, first + t - 1)
+    end
+end stooge_sort
+
+start_up = proc ()
+    arr: array[int] := array[int]$[3, 1, 4, 1, 5, 9, 2, 6]
+    stooge_sort(arr, 1, 8)
+    for x: int in array[int]$elements(arr) do
+        stream$putl(po, int$unparse(x))
+    end
+end start_up

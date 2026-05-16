@@ -1,0 +1,24 @@
+main =>
+    Arr = [38, 27, 43, 3, 9, 82, 10],
+    Sorted = merge_sort(Arr),
+    println(Sorted).
+
+merge_sort([]) = [].
+merge_sort([X]) = [X].
+merge_sort(List) = Sorted =>
+    Len = length(List),
+    Mid = Len // 2,
+    Left = [List[I] : I in 1..Mid],
+    Right = [List[I] : I in Mid+1..Len],
+    SortedLeft = merge_sort(Left),
+    SortedRight = merge_sort(Right),
+    Sorted = merge(SortedLeft, SortedRight).
+
+merge([], Right) = Right.
+merge(Left, []) = Left.
+merge([Lh|Lt], [Rh|Rt]) = Result =>
+    if Lh =< Rh then
+        Result = [Lh | merge(Lt, [Rh|Rt])]
+    else
+        Result = [Rh | merge([Lh|Lt], Rt)]
+    end.

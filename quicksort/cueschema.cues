@@ -1,0 +1,12 @@
+package quicksort
+
+#SortedList: {
+    elements: [...int]
+    sorted: bool
+    sorted: elements[i] <= elements[i+1] for i in range(0, len(elements)-1)
+}
+
+quicksort: #SortedList & {
+    elements: [1, 1, 2, 3, 6, 8, 10]
+    sorted: true
+}

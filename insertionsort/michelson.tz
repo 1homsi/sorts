@@ -1,0 +1,41 @@
+parameter (list int);
+storage (list int);
+code {
+  CAR;
+  NIL int;
+  SWAP;
+  ITER {
+    SWAP;
+    DIP { DUP };
+    PUSH bool True;
+    LOOP {
+      DUP;
+      IF_CONS {
+        DUP;
+        DIP {
+          SWAP;
+          DUP;
+          DIP { SWAP };
+          COMPARE;
+          GT;
+        };
+        IF {
+          SWAP;
+          DIP { CONS };
+          PUSH bool True;
+        } {
+          SWAP;
+          CONS;
+          DROP;
+          PUSH bool False;
+        };
+      } {
+        DROP;
+        PUSH bool False;
+      };
+    };
+    CONS;
+  };
+  NIL operation;
+  PAIR;
+}

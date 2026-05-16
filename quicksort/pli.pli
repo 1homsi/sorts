@@ -1,0 +1,27 @@
+ QUICKSORT: PROCEDURE OPTIONS(MAIN);
+    DECLARE arr(7) FIXED BIN(31) INITIAL(3,6,8,10,1,2,1);
+    DECLARE (i, n) FIXED BIN(31);
+    n = 7;
+    CALL QS(1, n);
+    DO i = 1 TO n;
+        PUT SKIP LIST(arr(i));
+    END;
+
+    QS: PROCEDURE(low, high) RECURSIVE;
+        DECLARE (low, high) FIXED BIN(31);
+        DECLARE (pivot, tmp, i, j, p) FIXED BIN(31);
+        IF low >= high THEN RETURN;
+        pivot = arr(high);
+        i = low;
+        DO j = low TO high - 1;
+            IF arr(j) <= pivot THEN DO;
+                tmp = arr(i); arr(i) = arr(j); arr(j) = tmp;
+                i = i + 1;
+            END;
+        END;
+        tmp = arr(i); arr(i) = arr(high); arr(high) = tmp;
+        p = i;
+        CALL QS(low, p - 1);
+        CALL QS(p + 1, high);
+    END QS;
+ END QUICKSORT;

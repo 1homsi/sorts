@@ -1,0 +1,11 @@
+def quicksort(lst) {
+    if: (lst.length() <= 1) then: { lst } else: {
+        def pivot := lst[lst.length() / 2];
+        def left := lst.select(: x | x < pivot);
+        def middle := lst.select(: x | x == pivot);
+        def right := lst.select(: x | x > pivot);
+        quicksort(left) + middle + quicksort(right)
+    }
+};
+
+system.println(quicksort([3, 6, 8, 10, 1, 2, 1]));

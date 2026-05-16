@@ -1,0 +1,12 @@
+def quicksort(lst: List[Int]): List[Int]
+    if lst.length() <= 1
+        lst
+    else
+        val pivot = lst.get(lst.length() / 2)
+        val left = lst.filter(x => x < pivot)
+        val middle = lst.filter(x => x == pivot)
+        val right = lst.filter(x => x > pivot)
+        quicksort(left) ++ middle ++ quicksort(right)
+
+val result = quicksort([3, 6, 8, 10, 1, 2, 1])
+println(result)

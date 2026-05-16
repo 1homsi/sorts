@@ -1,0 +1,18 @@
+DEFINE
+  flip ==
+    [swap] map ;
+
+  pancake-sort ==
+    dup size
+    [1 >]
+    [
+      dup find-max-idx
+      dup 0 >
+      [flip] [pop] ifte
+      size 1 - flip
+      size 1 -
+    ]
+    while
+    pop ;
+
+[3 6 2 7 4 1 5] pancake-sort .

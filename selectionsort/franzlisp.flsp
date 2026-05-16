@@ -1,0 +1,11 @@
+(defun selection-sort (lst)
+  (cond
+    ((null lst) nil)
+    (t (let ((m (apply 'min lst)))
+         (cons m (selection-sort (remove-first m lst)))))))
+
+(defun remove-first (x lst)
+  (cond
+    ((null lst) nil)
+    ((equal x (car lst)) (cdr lst))
+    (t (cons (car lst) (remove-first x (cdr lst))))))

@@ -1,0 +1,29 @@
+module Main exposing (..)
+
+import Browser
+import Html exposing (Html, div, text)
+
+quicksort : List comparable -> List comparable
+quicksort lst =
+    case lst of
+        [] -> []
+        pivot :: rest ->
+            let
+                left = List.filter (\x -> x <= pivot) rest
+                right = List.filter (\x -> x > pivot) rest
+            in
+            quicksort left ++ [ pivot ] ++ quicksort right
+
+type alias Model = List Int
+type Msg = NoOp
+
+init : () -> (Model, Cmd Msg)
+init _ = ( quicksort [ 3, 6, 8, 10, 1, 2, 1 ], Cmd.none )
+
+update : Msg -> Model -> (Model, Cmd Msg)
+update _ model = (model, Cmd.none)
+
+view : Model -> Html Msg
+view model = div [] [ text (Debug.toString model) ]
+
+main = Browser.element { init = init, update = update, view = view, subscriptions = \_ -> Sub.none }

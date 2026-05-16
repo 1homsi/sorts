@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="quicksort" default="sort" basedir=".">
+    <target name="sort">
+        <script language="javascript"><![CDATA[
+            function quicksort(arr) {
+                if (arr.length <= 1) return arr;
+                var pivot = arr[Math.floor(arr.length / 2)];
+                var left = arr.filter(function(x) { return x < pivot; });
+                var middle = arr.filter(function(x) { return x === pivot; });
+                var right = arr.filter(function(x) { return x > pivot; });
+                return quicksort(left).concat(middle).concat(quicksort(right));
+            }
+            var result = quicksort([3, 6, 8, 10, 1, 2, 1]);
+            project.log("Sorted: " + result.join(", "));
+        ]]></script>
+    </target>
+</project>

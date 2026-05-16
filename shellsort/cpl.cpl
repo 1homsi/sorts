@@ -1,0 +1,34 @@
+SECTION "SHELLSORT"
+
+GET "LIBHDR"
+
+LET SHELLSORT(ARR, N) BE
+$(
+    LET GAP = N/2
+    WHILE GAP > 0 DO
+    $(
+        FOR I = GAP TO N-1 DO
+        $(
+            LET TEMP = ARR!I
+            LET J = I
+            WHILE J >= GAP & ARR!(J-GAP) > TEMP DO
+            $(
+                ARR!J := ARR!(J-GAP)
+                J := J - GAP
+            $)
+            ARR!J := TEMP
+        $)
+        GAP := GAP/2
+    $)
+$)
+
+LET START() = VALOF
+$(
+    LET ARR = VEC 7
+    ARR!0 := 64; ARR!1 := 34; ARR!2 := 25; ARR!3 := 12
+    ARR!4 := 22; ARR!5 := 11; ARR!6 := 90
+    SHELLSORT(ARR, 7)
+    FOR I = 0 TO 6 DO WRITEF("%N ", ARR!I)
+    WRCH('*N')
+    RESULTIS 0
+$)

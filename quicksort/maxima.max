@@ -1,0 +1,13 @@
+quicksort(lst) :=
+    if emptyp(lst) then []
+    else block(
+        [pivot : first(lst),
+         rest : rest(lst)],
+        append(
+            quicksort(sublist(rest, lambda([x], x <= pivot))),
+            [pivot],
+            quicksort(sublist(rest, lambda([x], x > pivot)))
+        )
+    )$
+
+print(quicksort([3, 6, 8, 10, 1, 2, 1]));

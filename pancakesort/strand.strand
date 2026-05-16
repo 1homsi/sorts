@@ -1,0 +1,34 @@
+process pancake_sort {
+    shared arr[7] : integer := {3, 6, 2, 7, 4, 1, 5};
+
+    procedure flip(k : integer) {
+        left : integer := 0;
+        right : integer := k;
+        tmp : integer;
+        while left < right do {
+            tmp := arr[left];
+            arr[left] := arr[right];
+            arr[right] := tmp;
+            left := left + 1;
+            right := right - 1;
+        }
+    }
+
+    size : integer := 7;
+    maxIdx : integer;
+    i : integer;
+
+    while size > 1 do {
+        maxIdx := 0;
+        i := 1;
+        while i < size do {
+            if arr[i] > arr[maxIdx] then maxIdx := i;
+            i := i + 1;
+        }
+        if maxIdx != size - 1 then {
+            if maxIdx != 0 then flip(maxIdx);
+            flip(size - 1);
+        }
+        size := size - 1;
+    }
+}

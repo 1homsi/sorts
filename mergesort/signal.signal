@@ -1,0 +1,23 @@
+process MERGE_SORT =
+(? integer CLK_IN)
+(! integer SORTED_OUT)
+{
+    type int_array = integer^7;
+    var arr : int_array := [|38;27;43;3;9;82;10|];
+    var tmp : int_array;
+    var lo, hi, mid, i, j, k : integer;
+
+    function merge(lo, mid, hi : integer; arr, tmp : int_array)
+    returns (arr : int_array) =
+    (| i := lo | j := mid + 1 | k := lo |)
+    | loop when (i <= mid) and (j <= hi) do
+        if arr[i] <= arr[j] then
+            (| tmp[k] := arr[i] | i := i + 1 |)
+        else
+            (| tmp[k] := arr[j] | j := j + 1 |)
+        end if;
+        k := k + 1
+      end loop
+    end function;
+}
+end process;

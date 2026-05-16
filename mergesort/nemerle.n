@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+
+module MergeSort {
+    merge(left : list[int], right : list[int]) : list[int] {
+        match (left, right) {
+        | ([], _) => right
+        | (_, []) => left
+        | (lh :: lt, rh :: rt) =>
+            if (lh <= rh) lh :: merge(lt, right)
+            else rh :: merge(left, rt)
+        }
+    }
+
+    mergeSort(lst : list[int]) : list[int] {
+        def n = lst.Length;
+        if (n <= 1) lst
+        else {
+            def mid = n / 2;
+            def left = lst.Take(mid).ToList();
+            def right = lst.Skip(mid).ToList();
+            merge(mergeSort(left), mergeSort(right))
+        }
+    }
+
+    Main() : void {
+        def arr = [38, 27, 43, 3, 9, 82, 10];
+        Console.WriteLine(mergeSort(arr));
+    }
+}

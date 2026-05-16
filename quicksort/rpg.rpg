@@ -1,0 +1,50 @@
+     H DFTACTGRP(*NO)
+     D arr             S              5I 0 DIM(7)
+     D pivot           S              5I 0
+     D tmp             S              5I 0
+     D i               S              5I 0
+     D j               S              5I 0
+     D low             S              5I 0
+     D high            S              5I 0
+     D p               S              5I 0
+      /free
+       arr(1) = 3;  arr(2) = 6;  arr(3) = 8;  arr(4) = 10;
+       arr(5) = 1;  arr(6) = 2;  arr(7) = 1;
+       low = 1; high = 7;
+       exsr quicksort;
+       for i = 1 to 7;
+         dsply arr(i);
+       endfor;
+       *inlr = *on;
+
+       begsr quicksort;
+         if low < high;
+           pivot = arr(high);
+           i = low;
+           for j = low to high - 1;
+             if arr(j) <= pivot;
+               tmp = arr(i); arr(i) = arr(j); arr(j) = tmp;
+               i = i + 1;
+             endif;
+           endfor;
+           tmp = arr(i); arr(i) = arr(high); arr(high) = tmp;
+           p = i;
+           exsr quicksort_left;
+           exsr quicksort_right;
+         endif;
+       endsr;
+
+       begsr quicksort_left;
+         if low < p - 1;
+           high = p - 1;
+           exsr quicksort;
+         endif;
+       endsr;
+
+       begsr quicksort_right;
+         if p + 1 < high;
+           low = p + 1;
+           exsr quicksort;
+         endif;
+       endsr;
+      /end-free

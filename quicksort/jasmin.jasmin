@@ -1,0 +1,86 @@
+.class public Quicksort
+.super java/lang/Object
+
+.method public static partition([III)I
+    .limit stack 10
+    .limit locals 7
+    aload_0
+    iload_2
+    iaload
+    istore 3
+    iload_1
+    istore 4
+    iload_1
+    istore 5
+loop:
+    iload 5
+    iload_2
+    if_icmpge end_loop
+    aload_0
+    iload 5
+    iaload
+    iload 3
+    if_icmpgt no_swap
+    aload_0
+    iload 4
+    iaload
+    istore 6
+    aload_0
+    iload 4
+    aload_0
+    iload 5
+    iaload
+    iastore
+    aload_0
+    iload 5
+    iload 6
+    iastore
+    iinc 4 1
+no_swap:
+    iinc 5 1
+    goto loop
+end_loop:
+    aload_0
+    iload 4
+    iaload
+    istore 6
+    aload_0
+    iload 4
+    aload_0
+    iload_2
+    iaload
+    iastore
+    aload_0
+    iload_2
+    iload 6
+    iastore
+    iload 4
+    ireturn
+.end method
+
+.method public static quicksort([III)V
+    .limit stack 6
+    .limit locals 4
+    iload_1
+    iload_2
+    if_icmpge done
+    aload_0
+    iload_1
+    iload_2
+    invokestatic Quicksort/partition([III)I
+    istore 3
+    aload_0
+    iload_1
+    iload 3
+    iconst_1
+    isub
+    invokestatic Quicksort/quicksort([III)V
+    aload_0
+    iload 3
+    iconst_1
+    iadd
+    iload_2
+    invokestatic Quicksort/quicksort([III)V
+done:
+    return
+.end method

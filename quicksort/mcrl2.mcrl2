@@ -1,0 +1,17 @@
+sort IntList = List(Int);
+
+map quicksort: IntList -> IntList;
+    partition_lt: Int # IntList -> IntList;
+    partition_gt: Int # IntList -> IntList;
+
+var p: Int; xs: IntList;
+
+eqn quicksort([]) = [];
+    quicksort(p |> xs) = quicksort(partition_lt(p, xs)) ++ [p] ++ quicksort(partition_gt(p, xs));
+    partition_lt(p, []) = [];
+    partition_lt(p, head(xs) |> tail(xs)) = if(head(xs) <= p, head(xs) |> partition_lt(p, tail(xs)), partition_lt(p, tail(xs)));
+    partition_gt(p, []) = [];
+    partition_gt(p, head(xs) |> tail(xs)) = if(head(xs) > p, head(xs) |> partition_gt(p, tail(xs)), partition_gt(p, tail(xs)));
+
+init
+    tau;

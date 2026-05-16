@@ -1,0 +1,15 @@
+SELECTION_SORT: PROC(ARR, N)
+    DCL ARR(10) INT;
+    DCL N, I, J, MINIDX, TMP INT;
+    DO I = 0 TO N-2;
+        MINIDX = I;
+        DO J = I+1 TO N-1;
+            IF ARR(J) < ARR(MINIDX) THEN
+                MINIDX = J;
+            FI;
+        OD;
+        TMP = ARR(I);
+        ARR(I) = ARR(MINIDX);
+        ARR(MINIDX) = TMP;
+    OD;
+END SELECTION_SORT;

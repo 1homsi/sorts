@@ -1,0 +1,24 @@
+#(ds,merge,(
+  #(eq,#(cc,A),,,
+    #(rs,B),
+    #(eq,#(cc,B),,,
+      #(rs,A),
+      #(le,#(car,A),#(car,B),,
+        #(cc,#(car,A), #(merge,#(cdr,A),B)),
+        #(cc,#(car,B), #(merge,A,#(cdr,B)))
+      )
+    )
+  )
+))
+
+#(ds,mergesort,(
+  #(le,#(length,A),1,,
+    #(rs,A),
+    #(merge,
+      #(mergesort,#(take,A,#(div,#(length,A),2))),
+      #(mergesort,#(drop,A,#(div,#(length,A),2)))
+    )
+  )
+))
+
+#(mergesort,(38,27,43,3,9,82,10))

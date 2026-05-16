@@ -1,0 +1,41 @@
+use halo2_proofs::{
+    circuit::{Layouter, SimpleFloorPlanner, Value},
+    plonk::{Circuit, ConstraintSystem, Error},
+    poly::Rotation,
+};
+
+#[derive(Default)]
+struct QuicksortCircuit {
+    arr: Vec<u64>,
+    sorted: Vec<u64>,
+}
+
+fn quicksort(arr: &mut Vec<u64>, low: usize, high: usize) {
+    if low < high {
+        let pivot = arr[high];
+        let mut i = low;
+        for j in low..high {
+            if arr[j] <= pivot {
+                arr.swap(i, j);
+                i += 1;
+            }
+        }
+        arr.swap(i, high);
+        let p = i;
+        if p > 0 { quicksort(arr, low, p - 1); }
+        quicksort(arr, p + 1, high);
+    }
+}
+
+impl Circuit<halo2_proofs::pasta::Fp> for QuicksortCircuit {
+    type Config = ();
+    type FloorPlanner = SimpleFloorPlanner;
+
+    fn without_witnesses(&self) -> Self { Self::default() }
+
+    fn configure(_meta: &mut ConstraintSystem<halo2_proofs::pasta::Fp>) -> Self::Config {}
+
+    fn synthesize(&self, _config: Self::Config, _layouter: impl Layouter<halo2_proofs::pasta::Fp>) -> Result<(), Error> {
+        Ok(())
+    }
+}

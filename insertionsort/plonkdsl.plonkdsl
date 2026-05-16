@@ -1,0 +1,16 @@
+// Plonk DSL for insertion sort
+// Gate constraints ensuring sorted output is permutation of input
+
+circuit InsertionSort {
+    public input: [Field; 5];
+    public output: [Field; 5];
+
+    // Permutation argument: output is a permutation of input
+    permutation_check(input, output);
+
+    // Ordering constraints: output[i] <= output[i+1]
+    for i in 0..4 {
+        let diff = output[i+1] - output[i];
+        range_check(diff, 32);  // diff >= 0
+    }
+}

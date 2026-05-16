@@ -1,0 +1,31 @@
+import gleam/list
+import gleam/order
+
+pub fn selection_sort(lst: List(Int)) -> List(Int) {
+  case lst {
+    [] -> []
+    _ -> {
+      let min_val = list.fold(lst, case list.first(lst) {
+        Ok(v) -> v
+        Error(_) -> 0
+      }, fn(acc, x) {
+        case x < acc {
+          True -> x
+          False -> acc
+        }
+      })
+      let rest = list_remove_first(min_val, lst)
+      [min_val, ..selection_sort(rest)]
+    }
+  }
+}
+
+fn list_remove_first(x: Int, lst: List(Int)) -> List(Int) {
+  case lst {
+    [] -> []
+    [h, ..t] -> case h == x {
+      True -> t
+      False -> [h, ..list_remove_first(x, t)]
+    }
+  }
+}

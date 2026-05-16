@@ -1,0 +1,11 @@
+; IPL (Information Processing Language) - shell sort
+; IPL is a list processing language; closest representation:
+
+SHELLSORT
+  W1 <- (64 34 25 12 22 11 90)  ; Input list
+  W2 <- SORT(W1)                 ; Sort by gap insertion
+  PRINT W2                       ; Output sorted list
+
+; Gap sequence: n/2, n/4, ..., 1
+; Each pass: insertion sort with current gap
+; Result: (11 12 22 25 34 64 90)

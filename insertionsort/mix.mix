@@ -1,0 +1,33 @@
+ * MIX Insertion Sort
+ * Array stored at addresses 1000-1004
+ * N = 5
+        ORIG    1000
+ARR     CON     5
+        CON     3
+        CON     1
+        CON     4
+        CON     2
+        ORIG    2000
+START   ENT1    1
+OUTER   CMP1    =5=
+        JGE     DONE
+        LDA     ARR,1
+        STA     KEY
+        ENT2    0,1
+        DEC2    1
+INNER   CMP2    =-1=
+        JE      PLACE
+        LDA     ARR,2
+        CMPA    KEY
+        JLE     PLACE
+        STA     ARR+1,2
+        DEC2    1
+        JMP     INNER
+PLACE   INC2    1
+        LDA     KEY
+        STA     ARR,2
+        INC1    1
+        JMP     OUTER
+DONE    HLT
+KEY     CON     0
+        END     START

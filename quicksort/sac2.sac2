@@ -1,0 +1,20 @@
+use Array: all;
+use StdIO: all;
+
+int[.] quicksort(int[.] arr) {
+    if (shape(arr)[0] <= 1) {
+        return arr;
+    }
+    pivot = arr[shape(arr)[0] / 2];
+    left = {[i] -> arr[i] | [i] <- idx_shape_sel([shape(arr)[0]], [0]), arr[i] < pivot};
+    middle = {[i] -> arr[i] | [i] <- idx_shape_sel([shape(arr)[0]], [0]), arr[i] == pivot};
+    right = {[i] -> arr[i] | [i] <- idx_shape_sel([shape(arr)[0]], [0]), arr[i] > pivot};
+    return cat(1, cat(1, quicksort(left), middle), quicksort(right));
+}
+
+int main() {
+    arr = [3, 6, 8, 10, 1, 2, 1];
+    result = quicksort(arr);
+    print(result);
+    return 0;
+}

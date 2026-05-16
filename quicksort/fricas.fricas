@@ -1,0 +1,9 @@
+quicksort(lst: List Integer): List Integer ==
+    empty? lst => []
+    pivot := first lst
+    rest := rest lst
+    left := select(x +-> x <= pivot, rest)
+    right := select(x +-> x > pivot, rest)
+    concat(quicksort left, concat([pivot], quicksort right))
+
+quicksort [3, 6, 8, 10, 1, 2, 1]

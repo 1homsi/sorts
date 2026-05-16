@@ -1,0 +1,47 @@
+int arr[8];
+int output[8];
+int count[10];
+int n = 8;
+
+proctype CountingSort(int exp) {
+    int i, idx;
+    for (i : 0..9) { count[i] = 0; }
+    for (i : 0..(n-1)) {
+        idx = (arr[i] / exp) % 10;
+        count[idx]++;
+    }
+    for (i : 1..9) {
+        count[i] = count[i] + count[i-1];
+    }
+    i = n - 1;
+    do
+    :: i >= 0 ->
+        idx = (arr[i] / exp) % 10;
+        count[idx]--;
+        output[count[idx]] = arr[i];
+        i--;
+    :: i < 0 -> break
+    od;
+    for (i : 0..(n-1)) { arr[i] = output[i]; }
+}
+
+init {
+    int max_val, exp, i;
+    arr[0] = 170; arr[1] = 45; arr[2] = 75; arr[3] = 90;
+    arr[4] = 802; arr[5] = 24; arr[6] = 2;  arr[7] = 66;
+    max_val = arr[0];
+    for (i : 1..(n-1)) {
+        if :: arr[i] > max_val -> max_val = arr[i]; :: else fi;
+    }
+    exp = 1;
+    do
+    :: max_val / exp > 0 ->
+        run CountingSort(exp);
+        exp = exp * 10;
+    :: else -> break
+    od;
+    for (i : 0..(n-1)) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}

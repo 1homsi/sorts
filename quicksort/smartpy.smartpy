@@ -1,0 +1,25 @@
+import smartpy as sp
+
+@sp.module
+def main():
+    class Quicksort(sp.Contract):
+        def __init__(self):
+            self.data.arr = sp.list([3, 6, 8, 10, 1, 2, 1], t=sp.int)
+            self.data.sorted = sp.list([], t=sp.int)
+
+        @sp.entrypoint
+        def sort(self):
+            arr = self.data.arr
+            result = sp.local("result", sp.list([], t=sp.int))
+            with sp.for_("x", arr) as x:
+                inserted = sp.local("inserted", False)
+                new_list = sp.local("new_list", sp.list([], t=sp.int))
+                with sp.for_("y", result.value) as y:
+                    with sp.if_(~inserted.value & (x <= y)):
+                        new_list.value.push(x)
+                        inserted.value = True
+                    new_list.value.push(y)
+                with sp.if_(~inserted.value):
+                    new_list.value.push(x)
+                result.value = new_list.value
+            self.data.sorted = result.value

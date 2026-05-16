@@ -1,0 +1,31 @@
+PROC Quicksort:(low%, high%)
+    LOCAL pivot%, i%, j%, tmp%
+    IF low% < high%
+        pivot% = arr%(high%)
+        i% = low%
+        FOR j% = low% TO high% - 1
+            IF arr%(j%) <= pivot%
+                tmp% = arr%(i%)
+                arr%(i%) = arr%(j%)
+                arr%(j%) = tmp%
+                i% = i% + 1
+            ENDIF
+        NEXT j%
+        tmp% = arr%(i%)
+        arr%(i%) = arr%(high%)
+        arr%(high%) = tmp%
+        Quicksort:(low%, i% - 1)
+        Quicksort:(i% + 1, high%)
+    ENDIF
+ENDP
+
+PROC Main:
+    LOCAL arr%(7)
+    arr%(0)=3: arr%(1)=6: arr%(2)=8: arr%(3)=10
+    arr%(4)=1: arr%(5)=2: arr%(6)=1
+    Quicksort:(0, 6)
+    LOCAL i%
+    FOR i% = 0 TO 6
+        PRINT arr%(i%)
+    NEXT i%
+ENDP

@@ -1,0 +1,31 @@
+( MATH-MATIC was a 1950s algebraic programming language for UNIVAC.
+  It expressed computations as mathematical formulas. The following
+  represents merge sort logic in MATH-MATIC inspired pseudocode. )
+
+PROBLEM MERGESORT
+INPUT: ARR(1..7) = (38, 27, 43, 3, 9, 82, 10)
+OUTPUT: SORTED(1..7)
+
+DEFINE MERGE(LEFT(1..M), RIGHT(1..N)) ->RESULT(1..M+N)
+    K = 1, I = 1, J = 1
+    LOOP WHILE I <= M AND J <= N:
+        IF LEFT(I) <= RIGHT(J) THEN RESULT(K) = LEFT(I), I = I+1
+        ELSE RESULT(K) = RIGHT(J), J = J+1
+        K = K + 1
+    END LOOP
+    COPY LEFT(I..M) TO RESULT(K..K+M-I)
+    COPY RIGHT(J..N) TO RESULT(K+M-I+1..M+N)
+END DEFINE
+
+DEFINE MERGESORT(A(1..N)) -> SORTED(1..N)
+    IF N <= 1 THEN SORTED = A
+    ELSE:
+        MID = FLOOR(N/2)
+        LEFT = MERGESORT(A(1..MID))
+        RIGHT = MERGESORT(A(MID+1..N))
+        SORTED = MERGE(LEFT, RIGHT)
+END DEFINE
+
+RESULT = MERGESORT(ARR)
+PRINT RESULT
+END PROBLEM

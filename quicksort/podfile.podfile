@@ -1,0 +1,15 @@
+platform :ios, '15.0'
+
+target 'QuicksortApp' do
+  use_frameworks!
+  pod 'QuicksortLib', '~> 1.0'
+end
+
+def quicksort(arr)
+  return arr if arr.length <= 1
+  pivot = arr[arr.length / 2]
+  left = arr.select { |x| x < pivot }
+  mid = arr.select { |x| x == pivot }
+  right = arr.select { |x| x > pivot }
+  quicksort(left) + mid + quicksort(right)
+end

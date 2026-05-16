@@ -1,0 +1,10 @@
+recursive function selection_sort (const lst : list (int)) : list (int) is
+  case lst of
+    Nil -> nil
+  | Cons (_, _) ->
+    block {
+      var m : int := List.head_opt (lst) |> Option.unopt;
+      for x in list lst do
+        if x < m then m := x
+    } with m # selection_sort (List.filter (function (x : int) : bool is x =/= m, lst))
+  end

@@ -1,0 +1,16 @@
+fn insertionSort(arr &[]int) []int {
+    newArr = arr.clone();
+    n = newArr.len();
+    i = 1;
+    while i < n {
+        key = newArr[i];
+        j = i - 1;
+        while j >= 0 and newArr[j] > key {
+            newArr[j + 1] = newArr[j];
+            j = j - 1;
+        }
+        newArr[j + 1] = key;
+        i = i + 1;
+    }
+    return newArr;
+}

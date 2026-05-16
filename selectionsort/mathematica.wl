@@ -1,0 +1,9 @@
+selectionSort[lst_] := Module[{arr = lst, n = Length[lst], minIdx, tmp},
+  Do[
+    minIdx = i;
+    Do[If[arr[[j]] < arr[[minIdx]], minIdx = j], {j, i+1, n}];
+    tmp = arr[[i]]; arr[[i]] = arr[[minIdx]]; arr[[minIdx]] = tmp,
+    {i, 1, n-1}
+  ];
+  arr
+]

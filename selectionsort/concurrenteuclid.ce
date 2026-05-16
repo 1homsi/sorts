@@ -1,0 +1,18 @@
+module SelectionSort
+    var arr: array 1..10 of integer
+    var n, i, j, minIdx, tmp: integer
+
+    procedure Sort
+        for i := 1 to n-1 do
+            minIdx := i
+            for j := i+1 to n do
+                if arr[j] < arr[minIdx] then
+                    minIdx := j
+                end if
+            end for
+            tmp := arr[i]
+            arr[i] := arr[minIdx]
+            arr[minIdx] := tmp
+        end for
+    end procedure
+end module

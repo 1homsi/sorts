@@ -1,0 +1,71 @@
+Object subclass: #TimSort
+    instanceVariableNames: 'minRun'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Sorting'.
+
+TimSort class >> new [
+    | ts |
+    ts := super new.
+    ts init.
+    ^ts
+]
+
+TimSort >> init [
+    minRun := 32.
+]
+
+TimSort >> insertionSort: arr from: left to: right [
+    left + 1 to: right do: [:i |
+        | key j |
+        key := arr at: i.
+        j := i - 1.
+        [j >= left and: [(arr at: j) > key]] whileTrue: [
+            arr at: j + 1 put: (arr at: j).
+            j := j - 1.
+        ].
+        arr at: j + 1 put: key.
+    ].
+]
+
+TimSort >> merge: arr from: left mid: mid to: right [
+    | lp rp i j k |
+    lp := arr copyFrom: left to: mid.
+    rp := arr copyFrom: mid + 1 to: right.
+    i := 1. j := 1. k := left.
+    [i <= lp size and: [j <= rp size]] whileTrue: [
+        (lp at: i) <= (rp at: j)
+            ifTrue: [arr at: k put: (lp at: i). i := i + 1.]
+            ifFalse: [arr at: k put: (rp at: j). j := j + 1.].
+        k := k + 1.
+    ].
+    [i <= lp size] whileTrue: [arr at: k put: (lp at: i). i := i + 1. k := k + 1.].
+    [j <= rp size] whileTrue: [arr at: k put: (rp at: j). j := j + 1. k := k + 1.].
+]
+
+TimSort >> sort: arr [
+    | n i size left mid right |
+    n := arr size.
+    i := 1.
+    [i <= n] whileTrue: [
+        self insertionSort: arr from: i to: (i + minRun - 1 min: n).
+        i := i + minRun.
+    ].
+    size := minRun.
+    [size < n] whileTrue: [
+        left := 1.
+        [left <= n] whileTrue: [
+            mid := (left + size - 1) min: n.
+            right := (left + 2 * size - 1) min: n.
+            mid < right ifTrue: [self merge: arr from: left mid: mid to: right].
+            left := left + 2 * size.
+        ].
+        size := size * 2.
+    ].
+    ^arr
+]
+
+| ts arr |
+ts := TimSort new.
+arr := #(5 2 8 1 9 3 7 4 6) asOrderedCollection asArray.
+Transcript showCr: (ts sort: arr) printString.

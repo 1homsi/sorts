@@ -1,0 +1,35 @@
+begin
+    integer array arr[0:6];
+    integer n, size, maxi, i, left, right, tmp;
+
+    procedure flip(integer k);
+    begin
+        left := 0; right := k;
+        while left < right do
+        begin
+            tmp := arr[left];
+            arr[left] := arr[right];
+            arr[right] := tmp;
+            left := left + 1;
+            right := right - 1
+        end
+    end;
+
+    arr[0]:=3; arr[1]:=6; arr[2]:=2; arr[3]:=7;
+    arr[4]:=4; arr[5]:=1; arr[6]:=5;
+    n := 7; size := n;
+    while size > 1 do
+    begin
+        maxi := 0;
+        for i := 1 step 1 until size-1 do
+            if arr[i] > arr[maxi] then maxi := i;
+        if maxi != size-1 then
+        begin
+            if maxi != 0 then flip(maxi);
+            flip(size-1)
+        end;
+        size := size - 1
+    end;
+    for i := 0 step 1 until n-1 do
+        outinteger(1, arr[i])
+end

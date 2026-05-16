@@ -1,0 +1,22 @@
+shellSort : [Nat] -> [Nat]
+shellSort arr =
+  n = List.size arr
+  go arr gap =
+    if gap <= 0 then arr
+    else
+      arr' = List.foldLeft (fn a i ->
+        temp = List.unsafeAt i a
+        shiftBack a gap i temp
+      ) arr (List.range gap n)
+      go arr' (gap Nat./ 2)
+  go arr (n Nat./ 2)
+
+shiftBack : [Nat] -> Nat -> Nat -> Nat -> [Nat]
+shiftBack arr gap j temp =
+  if j >= gap && List.unsafeAt (j Nat.- gap) arr > temp then
+    arr' = List.unsafeSet j (List.unsafeAt (j Nat.- gap) arr) arr
+    shiftBack arr' gap (j Nat.- gap) temp
+  else
+    List.unsafeSet j temp arr
+
+result = shellSort [64, 34, 25, 12, 22, 11, 90]

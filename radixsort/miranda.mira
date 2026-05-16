@@ -1,0 +1,13 @@
+getDigit x exp = (x div exp) mod 10
+
+countingSort xs exp
+    = concat [filter (\x -> getDigit x exp = d) xs | d <- [0..9]]
+
+radixSortLoop xs maxVal exp
+    = xs,                                          if maxVal div exp = 0
+    = radixSortLoop (countingSort xs exp) maxVal (exp * 10),  otherwise
+
+radixSort [] = []
+radixSort xs = radixSortLoop xs (foldl1 max xs) 1
+
+main = print (radixSort [170, 45, 75, 90, 802, 24, 2, 66])

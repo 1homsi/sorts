@@ -1,0 +1,31 @@
+use yew::prelude::*;
+
+fn insertion_sort(arr: Vec<i32>) -> Vec<i32> {
+    let mut a = arr;
+    let n = a.len();
+    for i in 1..n {
+        let key = a[i];
+        let mut j = i as isize - 1;
+        while j >= 0 && a[j as usize] > key {
+            a[(j + 1) as usize] = a[j as usize];
+            j -= 1;
+        }
+        a[(j + 1) as usize] = key;
+    }
+    a
+}
+
+#[function_component(App)]
+fn app() -> Html {
+    let sorted = use_state(|| vec![]);
+    let on_click = {
+        let sorted = sorted.clone();
+        Callback::from(move |_| sorted.set(insertion_sort(vec![5, 3, 1, 4, 2])))
+    };
+    html! {
+        <div>
+            <button onclick={on_click}>{"Sort"}</button>
+            <p>{ (*sorted).iter().map(|x| x.to_string()).collect::<Vec<_>>().join(", ") }</p>
+        </div>
+    }
+}

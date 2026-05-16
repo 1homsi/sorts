@@ -1,0 +1,19 @@
+module Main where
+
+import FRP.Yampa
+
+quicksort :: Ord a => [a] -> [a]
+quicksort [] = []
+quicksort (pivot:rest) =
+    quicksort [x | x <- rest, x <= pivot]
+    ++ [pivot] ++
+    quicksort [x | x <- rest, x > pivot]
+
+sortSF :: SF [Int] [Int]
+sortSF = arr quicksort
+
+main :: IO ()
+main = do
+    let input = [3, 6, 8, 10, 1, 2, 1]
+    let output = embed sortSF (deltaEncode 1.0 [input])
+    print (last output)

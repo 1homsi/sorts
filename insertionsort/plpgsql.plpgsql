@@ -1,0 +1,18 @@
+CREATE OR REPLACE FUNCTION insertion_sort(arr integer[]) RETURNS integer[] AS $$
+DECLARE
+    n integer := array_length(arr, 1);
+    key integer;
+    j integer;
+BEGIN
+    FOR i IN 2 .. n LOOP
+        key := arr[i];
+        j := i - 1;
+        WHILE j >= 1 AND arr[j] > key LOOP
+            arr[j + 1] := arr[j];
+            j := j - 1;
+        END LOOP;
+        arr[j + 1] := key;
+    END LOOP;
+    RETURN arr;
+END;
+$$ LANGUAGE plpgsql;

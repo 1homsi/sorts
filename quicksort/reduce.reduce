@@ -1,0 +1,13 @@
+procedure quicksort(lst);
+    if null lst then nil
+    else begin
+        scalar pivot, rest, left, right;
+        pivot := car lst;
+        rest := cdr lst;
+        left := select(lambda x: x <= pivot, rest);
+        right := select(lambda x: x > pivot, rest);
+        return append(quicksort left, pivot . quicksort right)
+    end$
+
+write quicksort {3, 6, 8, 10, 1, 2, 1};
+end;

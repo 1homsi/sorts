@@ -1,0 +1,27 @@
+using System;
+using System.Console;
+
+module StoogeSort {
+    mutable arr : array[int] = array[3, 1, 4, 1, 5, 9, 2, 6];
+
+    stoogeSort(first : int, last : int) : void {
+        when (arr[first] > arr[last]) {
+            def tmp = arr[first];
+            arr[first] = arr[last];
+            arr[last] = tmp;
+        }
+        def n = last - first + 1;
+        when (n > 2) {
+            def t = n * 2 / 3;
+            stoogeSort(first, first + t - 1);
+            stoogeSort(last - t + 1, last);
+            stoogeSort(first, first + t - 1);
+        }
+    }
+
+    Main() : void {
+        stoogeSort(0, arr.Length - 1);
+        foreach (x in arr) Write($"$x ");
+        WriteLine();
+    }
+}

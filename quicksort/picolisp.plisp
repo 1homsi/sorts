@@ -1,0 +1,11 @@
+(de quicksort (Lst)
+   (if (>= 1 (length Lst))
+      Lst
+      (let Pivot (car Lst)
+         (let Rest (cdr Lst)
+            (append
+               (quicksort (filter '((X) (<= X Pivot)) Rest))
+               (list Pivot)
+               (quicksort (filter '((X) (> X Pivot)) Rest)) ) ) ) ) )
+
+(println (quicksort (3 6 8 10 1 2 1)))

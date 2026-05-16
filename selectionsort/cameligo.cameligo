@@ -1,0 +1,11 @@
+let rec remove_first (x : int) (lst : int list) : int list =
+  match lst with
+  | [] -> []
+  | y :: ys -> if x = y then ys else y :: remove_first x ys
+
+let rec selection_sort (lst : int list) : int list =
+  match lst with
+  | [] -> []
+  | _ ->
+    let m = List.fold_left (fun acc x -> if x < acc then x else acc) (List.head lst) lst in
+    m :: selection_sort (remove_first m lst)

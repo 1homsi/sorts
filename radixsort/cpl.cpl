@@ -1,0 +1,35 @@
+§ RADIX SORT IN CPL §
+
+§ This represents the closest CPL approximation §
+
+let N = 8
+
+let GetDigit(x, exp) = (x div exp) rem 10
+
+let CountingSort(arr, exp) = val result where
+    let n = N
+    let output = array[1..n] of int
+    let cnt = array[0..9] of int initially 0
+    for i = 1 step 1 until n do
+        let idx = GetDigit(arr[i], exp)
+        cnt[idx] := cnt[idx] + 1
+    for i = 1 step 1 until 9 do
+        cnt[i] := cnt[i] + cnt[i-1]
+    for i = n step -1 until 1 do
+        let idx = GetDigit(arr[i], exp)
+        cnt[idx] := cnt[idx] - 1
+        output[cnt[idx] + 1] := arr[i]
+    result = output
+
+let RadixSort(arr) = val sorted where
+    let maxVal = max(arr)
+    let result = arr
+    let exp = 1
+    while maxVal div exp > 0 do
+        result := CountingSort(result, exp)
+        exp := exp × 10
+    sorted = result
+
+start:
+    let arr = [170, 45, 75, 90, 802, 24, 2, 66]
+    print RadixSort(arr)

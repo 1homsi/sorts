@@ -1,0 +1,35 @@
+using System;
+using System.Console;
+
+module RadixSort {
+    countingSort(arr : array[int], exp : int) : void {
+        def n = arr.Length;
+        def output = array(n);
+        def count = array(10);
+        foreach (x in arr) count[(x / exp) % 10]++;
+        for (mutable i = 1; i < 10; i++) count[i] += count[i - 1];
+        for (mutable i = n - 1; i >= 0; i--) {
+            def idx = (arr[i] / exp) % 10;
+            count[idx]--;
+            output[count[idx]] = arr[i];
+        }
+        Array.Copy(output, arr, n);
+    }
+
+    radixSort(arr : array[int]) : void {
+        when (arr.Length == 0) return;
+        mutable max = arr[0];
+        foreach (x in arr) when (x > max) max = x;
+        mutable exp = 1;
+        while (max / exp > 0) {
+            countingSort(arr, exp);
+            exp *= 10;
+        }
+    }
+
+    Main() : void {
+        def arr = array[170, 45, 75, 90, 802, 24, 2, 66];
+        radixSort(arr);
+        WriteLine(string.Join(", ", arr));
+    }
+}

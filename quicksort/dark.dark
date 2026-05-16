@@ -1,0 +1,11 @@
+let quicksort = (lst: List<Int>) ->
+  if List.length lst <= 1
+  then lst
+  else
+    let pivot = List.getAt lst (List.length lst / 2) |> Option.withDefault 0
+    let left = List.filter lst (\x -> x < pivot)
+    let middle = List.filter lst (\x -> x == pivot)
+    let right = List.filter lst (\x -> x > pivot)
+    List.append (List.append (quicksort left) middle) (quicksort right)
+
+quicksort [3; 6; 8; 10; 1; 2; 1]

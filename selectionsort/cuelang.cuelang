@@ -1,0 +1,6 @@
+package main
+
+import "list"
+
+input: [5, 3, 1, 4, 2]
+output: list.Sort(input, list.Ascending)

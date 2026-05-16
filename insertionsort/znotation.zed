@@ -1,0 +1,9 @@
+┌ InsertionSort ──────────────────────────────
+│ arr : seq ℤ
+│ result : seq ℤ
+├──────────────────────────────────────────────
+│ ∀ i, j : dom result •
+│   i < j ⇒ result(i) ≤ result(j)
+│ ran result = ran arr
+│ #result = #arr
+└──────────────────────────────────────────────

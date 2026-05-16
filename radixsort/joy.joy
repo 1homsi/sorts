@@ -1,0 +1,18 @@
+DEFINE
+    get-digit == swap / floor 10 rem ;
+
+    counting-sort ==
+        [pop] dip
+        10 [iota] [] map
+        [[[get-digit] dip =] filter] map concat ;
+
+    radix-sort ==
+        dup null
+        []
+        [dup maximum 1
+         [2dup swap / floor 0 >]
+         [counting-sort 10 *]
+         while pop]
+        ifte .
+
+[170 45 75 90 802 24 2 66] radix-sort put newline

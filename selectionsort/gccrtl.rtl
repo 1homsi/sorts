@@ -1,0 +1,14 @@
+(define_insn "selection_sort"
+  [(set (match_operand:SI 0 "register_operand" "=r")
+        (match_operand:SI 1 "general_operand" "r"))]
+  ""
+  {
+    operands[0] = gen_reg_rtx(SImode);
+    emit_move_insn(operands[0], operands[1]);
+    return "";
+  })
+
+;; RTL representation of selection sort
+;; (set (reg:SI i) (const_int 0))
+;; (set (reg:SI n) (array_length arr))
+;; outer: compare i < n, find min, swap, increment i

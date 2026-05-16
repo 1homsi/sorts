@@ -1,0 +1,8 @@
+(defn bubblesort [arr]
+  (setv n (len arr))
+  (for [i (range n)]
+    (for [j (range (- n i 1))]
+      (when (> (get arr j) (get arr (+ j 1)))
+        (setv (get arr j) (get arr (+ j 1)))
+        (setv (get arr (+ j 1)) (get arr j)))))
+  arr)

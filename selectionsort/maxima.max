@@ -1,0 +1,17 @@
+selection_sort(lst) := block(
+    [n, arr, min_idx, tmp],
+    arr: copy(lst),
+    n: length(arr),
+    for i: 1 thru n-1 do (
+        min_idx: i,
+        for j: i+1 thru n do (
+            if arr[j] < arr[min_idx] then min_idx: j
+        ),
+        tmp: arr[i],
+        arr[i]: arr[min_idx],
+        arr[min_idx]: tmp
+    ),
+    arr
+);
+
+selection_sort([5, 3, 1, 4, 2]);

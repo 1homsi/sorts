@@ -1,0 +1,18 @@
+        A = ARRAY(7)
+        A<1> = 64; A<2> = 34; A<3> = 25; A<4> = 12
+        A<5> = 22; A<6> = 11; A<7> = 90
+        N = 7; GAP = N / 2
+GLOOP   GT(GAP, 0)                       :F(PRINT)
+        I = GAP
+ILOOP   LT(I, N)                         :F(GNEXT)
+        TEMP = A<I>; J = I
+JLOOP   GE(J, GAP)                       :F(JDONE)
+        P = A<J - GAP>
+        GT(P, TEMP)                      :F(JDONE)
+        A<J> = P; J = J - GAP           :(JLOOP)
+JDONE   A<J> = TEMP; I = I + 1         :(ILOOP)
+GNEXT   GAP = GAP / 2                   :(GLOOP)
+PRINT   K = 1
+PLOOP   LE(K, N)                         :F(END)
+        OUTPUT = A<K>; K = K + 1        :(PLOOP)
+END

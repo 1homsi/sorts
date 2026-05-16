@@ -1,0 +1,26 @@
+( COMIT was a 1957 string processing language for the IBM 704.
+  It operated on a workspace divided into constituents separated by +.
+  The following expresses merge sort in COMIT-inspired pseudocode. )
+
+        COMIT MERGESORT PROGRAM
+
+$       = 38+27+43+3+9+82+10    / workspace initialization
+
+(SORT)  /1+2/ -> /COMP/         / pick up two elements
+(COMP)  $1>$2 = $2+$1           / if out of order, swap (bubble step)
+        $1<=$2 -                / keep order
+        = (SORT)                / continue sorting
+
+( Full merge sort requires recursive splitting — expressed here as:
+  1. Find midpoint of workspace
+  2. Recursively sort left half
+  3. Recursively sort right half
+  4. Merge the two sorted halves )
+
+(MERGE) /1/ + /2/               / merge two sorted sequences
+        $1<=$2 -> TAKE-LEFT     / take smaller element
+        $1>$2 -> TAKE-RIGHT
+(TAKE-LEFT) MOVE $1 TO OUTPUT, ADVANCE
+(TAKE-RIGHT) MOVE $2 TO OUTPUT, ADVANCE
+
+        END

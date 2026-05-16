@@ -1,0 +1,29 @@
+import chisel3._
+import chisel3.util._
+
+object QuicksortSim extends App {
+  def partition(arr: Array[Int], low: Int, high: Int): Int = {
+    val pivot = arr(high)
+    var i = low
+    for (j <- low until high) {
+      if (arr(j) <= pivot) {
+        val tmp = arr(i); arr(i) = arr(j); arr(j) = tmp
+        i += 1
+      }
+    }
+    val tmp = arr(i); arr(i) = arr(high); arr(high) = tmp
+    i
+  }
+
+  def quicksort(arr: Array[Int], low: Int, high: Int): Unit = {
+    if (low < high) {
+      val p = partition(arr, low, high)
+      quicksort(arr, low, p - 1)
+      quicksort(arr, p + 1, high)
+    }
+  }
+
+  val arr = Array(3, 6, 8, 10, 1, 2, 1)
+  quicksort(arr, 0, arr.length - 1)
+  arr.foreach(println)
+}

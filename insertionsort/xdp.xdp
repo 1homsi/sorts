@@ -1,0 +1,33 @@
+#include <linux/bpf.h>
+#include <bpf/bpf_helpers.h>
+#include <linux/if_ether.h>
+#include <linux/ip.h>
+
+struct {
+    __uint(type, BPF_MAP_TYPE_ARRAY);
+    __uint(max_entries, 16);
+    __type(key, __u32);
+    __type(value, __s32);
+} sort_map SEC(".maps");
+
+SEC("xdp_sort")
+int xdp_insertion_sort(struct xdp_md *ctx) {
+    __s32 a[5] = {5, 3, 1, 4, 2};
+    int n = 5;
+    for (int i = 1; i < n; i++) {
+        __s32 key = a[i];
+        int j = i - 1;
+        while (j >= 0 && a[j] > key) {
+            a[j + 1] = a[j];
+            j--;
+        }
+        a[j + 1] = key;
+    }
+    for (int k = 0; k < n; k++) {
+        __u32 idx = k;
+        bpf_map_update_elem(&sort_map, &idx, &a[k], BPF_ANY);
+    }
+    return XDP_PASS;
+}
+
+char _license[] SEC("license") = "GPL";

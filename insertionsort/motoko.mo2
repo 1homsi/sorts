@@ -1,0 +1,21 @@
+import Array "mo:base/Array";
+import Int "mo:base/Int";
+
+actor InsertionSort {
+  public func insertionSort(arr : [Int]) : async [Int] {
+    var a = Array.thaw<Int>(arr);
+    let n = a.size();
+    var i = 1;
+    while (i < n) {
+      let key = a[i];
+      var j = i - 1;
+      while (j >= 0 and a[j] > key) {
+        a[j + 1] := a[j];
+        j -= 1;
+      };
+      a[j + 1] := key;
+      i += 1;
+    };
+    Array.freeze<Int>(a)
+  };
+};

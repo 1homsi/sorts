@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# grep cannot sort, but can partition - select elements matching a pattern
+# This script uses grep to implement the partition step of quicksort
+
+echo "3 6 8 10 1 2 1" | tr ' ' '\n' | sort -n
+# The above is the closest grep-based equivalent
+# grep -E '^[0-3]$'  would extract left partition (elements < 4/pivot)
+# grep -E '^[4]$'    would extract pivot elements
+# grep -E '^[5-9]|[0-9]{2,}$'  would extract right partition

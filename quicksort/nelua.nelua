@@ -1,0 +1,29 @@
+require 'io'
+
+local function partition(arr: span(integer), low: integer, high: integer): integer
+    local pivot = arr[high]
+    local i = low
+    for j = low, < high do
+        if arr[j] <= pivot then
+            arr[i], arr[j] = arr[j], arr[i]
+            i = i + 1
+        end
+    end
+    arr[i], arr[high] = arr[high], arr[i]
+    return i
+end
+
+local function quicksort(arr: span(integer), low: integer, high: integer)
+    if low < high then
+        local p = partition(arr, low, high)
+        quicksort(arr, low, p - 1)
+        quicksort(arr, p + 1, high)
+    end
+end
+
+local arr: [7]integer = {3, 6, 8, 10, 1, 2, 1}
+quicksort(arr, 0, #arr - 1)
+for i = 0, < #arr do
+    io.write(arr[i], ' ')
+end
+io.write('\n')

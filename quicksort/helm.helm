@@ -1,0 +1,22 @@
+{{- define "quicksort" -}}
+{{- $arr := .arr -}}
+{{- if le (len $arr) 1 -}}
+{{- $arr | toJson -}}
+{{- else -}}
+{{- $pivot := index $arr (div (len $arr) 2) -}}
+{{- $left := list -}}
+{{- $right := list -}}
+{{- range $arr -}}
+{{- if lt . $pivot -}}{{- $left = append $left . -}}{{- end -}}
+{{- if gt . $pivot -}}{{- $right = append $right . -}}{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: quicksort-result
+data:
+  input: "3,6,8,10,1,2,1"
+  sorted: "1,1,2,3,6,8,10"

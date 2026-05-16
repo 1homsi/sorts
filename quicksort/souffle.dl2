@@ -1,0 +1,12 @@
+.decl input(val: number)
+input(3). input(6). input(8). input(10). input(1). input(2). input(1).
+
+.decl rank(val: number, r: number)
+rank(v, c) :-
+    input(v),
+    c = count : { input(x), x < v }.
+
+.decl sorted_output(pos: number, val: number)
+sorted_output(r + 1, v) :- rank(v, r).
+
+.output sorted_output

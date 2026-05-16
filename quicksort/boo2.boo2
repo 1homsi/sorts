@@ -1,0 +1,23 @@
+def partition(arr as (int), low as int, high as int) as int:
+    pivot = arr[high]
+    i = low
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            tmp = arr[i]
+            arr[i] = arr[j]
+            arr[j] = tmp
+            i += 1
+    tmp = arr[i]
+    arr[i] = arr[high]
+    arr[high] = tmp
+    return i
+
+def quicksort(arr as (int), low as int, high as int):
+    if low < high:
+        p = partition(arr, low, high)
+        quicksort(arr, low, p - 1)
+        quicksort(arr, p + 1, high)
+
+arr = (3, 6, 8, 10, 1, 2, 1)
+quicksort(arr, 0, len(arr) - 1)
+print(join(arr))

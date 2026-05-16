@@ -1,0 +1,20 @@
+import "math"
+
+quicksort = func(arr) {
+    if length(arr) <= 1 {
+        return arr
+    }
+    pivot = arr[length(arr) / 2]
+    left = filter(arr, func(x) { x < pivot })
+    middle = filter(arr, func(x) { x == pivot })
+    right = filter(arr, func(x) { x > pivot })
+    return quicksort(left) + middle + quicksort(right)
+}
+
+sorted = quicksort([3, 6, 8, 10, 1, 2, 1])
+
+main = rule {
+    all i, v in sorted {
+        i == 0 or sorted[i-1] <= v
+    }
+}

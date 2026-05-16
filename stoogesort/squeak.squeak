@@ -1,0 +1,26 @@
+Object subclass: #StoogeSort
+    instanceVariableNames: ''
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'StoogeSort'
+
+stoogeSort: arr from: first to: last
+    | tmp t n |
+    (arr at: first) > (arr at: last) ifTrue: [
+        tmp := arr at: first.
+        arr at: first put: (arr at: last).
+        arr at: last put: tmp
+    ].
+    n := last - first + 1.
+    n > 2 ifTrue: [
+        t := n * 2 // 3.
+        self stoogeSort: arr from: first to: first + t - 1.
+        self stoogeSort: arr from: last - t + 1 to: last.
+        self stoogeSort: arr from: first to: first + t - 1
+    ].
+
+| s arr |
+s := StoogeSort new.
+arr := #(3 1 4 1 5 9 2 6) asOrderedCollection.
+s stoogeSort: arr from: 1 to: arr size.
+Transcript showCr: arr printString.

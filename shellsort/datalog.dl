@@ -1,0 +1,8 @@
+.decl input_arr(idx: number, val: number)
+input_arr(0, 64). input_arr(1, 34). input_arr(2, 25). input_arr(3, 12).
+input_arr(4, 22). input_arr(5, 11). input_arr(6, 90).
+
+.decl sorted(rank: number, val: number)
+sorted(r, v) :- input_arr(_, v), r = count : { input_arr(_, v2), v2 < v }.
+
+.output sorted

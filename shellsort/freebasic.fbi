@@ -1,0 +1,21 @@
+Dim arr(1 To 7) As Integer = {64, 34, 25, 12, 22, 11, 90}
+Dim As Integer n = 7, gap, i, j, temp
+
+gap = n \ 2
+While gap > 0
+    For i = gap + 1 To n
+        temp = arr(i)
+        j = i
+        While j > gap AndAlso arr(j - gap) > temp
+            arr(j) = arr(j - gap)
+            j -= gap
+        Wend
+        arr(j) = temp
+    Next i
+    gap \= 2
+Wend
+
+For i = 1 To n
+    Print arr(i); " ";
+Next i
+Print

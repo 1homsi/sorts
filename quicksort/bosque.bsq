@@ -1,0 +1,20 @@
+namespace Main;
+
+function quicksort(lst: List<Int>): List<Int> {
+    if(List<Int>::size(lst) <= 1i) {
+        return lst;
+    }
+
+    let pivot = List<Int>::get(lst, List<Int>::size(lst) / 2i);
+    let left = List<Int>::filter(lst, fn(x: Int): Bool => x < pivot);
+    let middle = List<Int>::filter(lst, fn(x: Int): Bool => x == pivot);
+    let right = List<Int>::filter(lst, fn(x: Int): Bool => x > pivot);
+
+    return List<Int>::concat(List<Int>::concat(quicksort(left), middle), quicksort(right));
+}
+
+entrypoint function main(): void {
+    let arr = List<Int>{3i, 6i, 8i, 10i, 1i, 2i, 1i};
+    let sorted = quicksort(arr);
+    assert |sorted| == 7i;
+}

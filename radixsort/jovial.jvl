@@ -1,0 +1,42 @@
+BEGIN MAIN COMPOOL
+    ITEM ARR I(31) = (170, 45, 75, 90, 802, 24, 2, 66);
+    ITEM OUTPUT I(31) TABLE 8;
+    ITEM CNT I(15) TABLE 10;
+    ITEM N I(7) = 8;
+    ITEM MAXVAL I(31);
+    ITEM EXP I(31);
+    ITEM I I(7);
+    ITEM IDX I(7);
+END
+
+PROC COUNTING$SORT (EXP)
+ITEM EXP I(31);
+BEGIN
+    FOR I = 0, 1, 9; CNT(I) = 0; END
+    FOR I = 0, 1, N-1;
+        IDX = (ARR(I) / EXP) MOD 10;
+        CNT(IDX) = CNT(IDX) + 1;
+    END
+    FOR I = 1, 1, 9;
+        CNT(I) = CNT(I) + CNT(I-1);
+    END
+    FOR I = N-1, -1, 0;
+        IDX = (ARR(I) / EXP) MOD 10;
+        CNT(IDX) = CNT(IDX) - 1;
+        OUTPUT(CNT(IDX)) = ARR(I);
+    END
+    FOR I = 0, 1, N-1; ARR(I) = OUTPUT(I); END
+END
+
+PROC RADIX$SORT;
+BEGIN
+    MAXVAL = ARR(0);
+    FOR I = 1, 1, N-1;
+        IF ARR(I) > MAXVAL; MAXVAL = ARR(I);
+    END
+    EXP = 1;
+    WHILE MAXVAL / EXP > 0;
+        COUNTING$SORT(EXP);
+        EXP = EXP * 10;
+    END
+END

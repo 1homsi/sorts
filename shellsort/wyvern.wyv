@@ -1,0 +1,18 @@
+def shellSort(arr: DynList[Int], n: Int): DynList[Int]
+    var gap: Int = n / 2
+    while (gap > 0)
+        var i: Int = gap
+        while (i < n)
+            var temp: Int = arr.get(i)
+            var j: Int = i
+            while (j >= gap && arr.get(j - gap) > temp)
+                arr.set(j, arr.get(j - gap))
+                j = j - gap
+            arr.set(j, temp)
+            i = i + 1
+        gap = gap / 2
+    arr
+
+val arr = DynList.of(64, 34, 25, 12, 22, 11, 90)
+val sorted = shellSort(arr, 7)
+print(sorted)

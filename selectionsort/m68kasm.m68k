@@ -1,0 +1,47 @@
+        ORG $1000
+
+ARR     DC.W 5,3,1,4,2
+N       DC.W 5
+
+SELECTION_SORT:
+        MOVEA.L #ARR, A0
+        MOVE.W N, D7
+        CLR.W D0
+
+OUTER:
+        MOVE.W D7, D1
+        SUBQ.W #1, D1
+        CMP.W D1, D0
+        BGE DONE
+        MOVE.W D0, D3
+        MOVE.W D0, D2
+        ADDQ.W #1, D2
+
+INNER:
+        CMP.W D7, D2
+        BGE SWAP
+        MOVE.W D2, D4
+        ADD.W D4, D4
+        MOVE.W (A0,D4.W), D5
+        MOVE.W D3, D6
+        ADD.W D6, D6
+        CMP.W (A0,D6.W), D5
+        BGE NEXT
+        MOVE.W D2, D3
+NEXT:
+        ADDQ.W #1, D2
+        BRA INNER
+
+SWAP:
+        MOVE.W D0, D4
+        ADD.W D4, D4
+        MOVE.W D3, D5
+        ADD.W D5, D5
+        MOVE.W (A0,D4.W), D6
+        MOVE.W (A0,D5.W), (A0,D4.W)
+        MOVE.W D6, (A0,D5.W)
+        ADDQ.W #1, D0
+        BRA OUTER
+
+DONE:
+        RTS

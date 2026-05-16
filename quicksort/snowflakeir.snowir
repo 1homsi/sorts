@@ -1,0 +1,23 @@
+function partition(arr: [i32], low: i32, high: i32) -> i32 {
+    pivot = arr[high]
+    i = low
+    j = low
+    while j < high:
+        if arr[j] <= pivot:
+            tmp = arr[i]
+            arr[i] = arr[j]
+            arr[j] = tmp
+            i = i + 1
+        j = j + 1
+    tmp = arr[i]
+    arr[i] = arr[high]
+    arr[high] = tmp
+    return i
+}
+
+function quicksort(arr: [i32], low: i32, high: i32) {
+    if low < high:
+        p = call partition(arr, low, high)
+        call quicksort(arr, low, p - 1)
+        call quicksort(arr, p + 1, high)
+}

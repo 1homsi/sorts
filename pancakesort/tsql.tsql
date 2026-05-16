@@ -1,0 +1,36 @@
+DECLARE @arr TABLE (idx INT, val INT);
+INSERT INTO @arr VALUES (0,3),(1,6),(2,2),(3,7),(4,4),(5,1),(6,5);
+
+DECLARE @n INT = 7, @size INT, @maxIdx INT, @i INT;
+DECLARE @leftV INT, @rightV INT, @tmp INT;
+
+SET @size = @n;
+WHILE @size > 1
+BEGIN
+    SELECT TOP 1 @maxIdx = idx FROM @arr WHERE idx < @size ORDER BY val DESC;
+    IF @maxIdx != @size - 1
+    BEGIN
+        IF @maxIdx != 0
+        BEGIN
+            SET @leftV = 0; SET @rightV = @maxIdx;
+            WHILE @leftV < @rightV
+            BEGIN
+                SELECT @tmp = val FROM @arr WHERE idx = @leftV;
+                UPDATE @arr SET val = (SELECT val FROM @arr WHERE idx = @rightV) WHERE idx = @leftV;
+                UPDATE @arr SET val = @tmp WHERE idx = @rightV;
+                SET @leftV = @leftV + 1; SET @rightV = @rightV - 1;
+            END
+        END;
+        SET @leftV = 0; SET @rightV = @size - 1;
+        WHILE @leftV < @rightV
+        BEGIN
+            SELECT @tmp = val FROM @arr WHERE idx = @leftV;
+            UPDATE @arr SET val = (SELECT val FROM @arr WHERE idx = @rightV) WHERE idx = @leftV;
+            UPDATE @arr SET val = @tmp WHERE idx = @rightV;
+            SET @leftV = @leftV + 1; SET @rightV = @rightV - 1;
+        END
+    END;
+    SET @size = @size - 1;
+END;
+
+SELECT val FROM @arr ORDER BY idx;

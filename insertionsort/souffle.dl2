@@ -1,0 +1,11 @@
+.decl input_num(pos: number, val: number)
+.decl less_count(val: number, cnt: number)
+.decl sorted(rank: number, val: number)
+
+less_count(v, c) :-
+    input_num(_, v),
+    c = count : { input_num(_, w), w < v }.
+
+sorted(c + 1, v) :- less_count(v, c).
+
+.output sorted

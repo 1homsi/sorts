@@ -1,0 +1,20 @@
+def shellSort(arr) {
+    def n = arr.size()
+    def gap = n.intdiv(2)
+    while (gap > 0) {
+        for (int i = gap; i < n; i++) {
+            def temp = arr[i]
+            def j = i
+            while (j >= gap && arr[j - gap] > temp) {
+                arr[j] = arr[j - gap]
+                j -= gap
+            }
+            arr[j] = temp
+        }
+        gap = gap.intdiv(2)
+    }
+    arr
+}
+
+def arr = [64, 34, 25, 12, 22, 11, 90]
+println shellSort(arr)

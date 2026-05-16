@@ -1,0 +1,10 @@
+def quicksort(List arr) {
+    if (arr.size() <= 1) return arr
+    def pivot = arr[arr.size().intdiv(2)]
+    def left = arr.grep { it < pivot }
+    def middle = arr.grep { it == pivot }
+    def right = arr.grep { it > pivot }
+    quicksort(left) + middle + quicksort(right)
+}
+
+println quicksort([3, 6, 8, 10, 1, 2, 1])

@@ -1,0 +1,21 @@
+from myhdl import *
+
+def selection_sort(clk, arr_in, arr_out, n):
+    arr = [Signal(intbv(0)) for _ in range(n)]
+    
+    @always(clk.posedge)
+    def logic():
+        for i in range(n):
+            arr[i].next = arr_in[i]
+        for i in range(n - 1):
+            min_idx = i
+            for j in range(i + 1, n):
+                if arr[j] < arr[min_idx]:
+                    min_idx = j
+            tmp = arr[i]
+            arr[i].next = arr[min_idx]
+            arr[min_idx].next = tmp
+        for i in range(n):
+            arr_out[i].next = arr[i]
+    
+    return logic

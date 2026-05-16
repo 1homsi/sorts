@@ -1,0 +1,32 @@
+Public Sub Main()
+    Dim arr As New Integer[7]
+    arr[0] = 3: arr[1] = 6: arr[2] = 8: arr[3] = 10
+    arr[4] = 1: arr[5] = 2: arr[6] = 1
+    QuickSort(arr, 0, arr.Count - 1)
+    Dim i As Integer
+    For i = 0 To arr.Count - 1
+        Print arr[i]; " ";
+    Next
+    Print
+End Sub
+
+Public Function Partition(arr As Integer[], low As Integer, high As Integer) As Integer
+    Dim pivot As Integer = arr[high]
+    Dim i As Integer = low, j As Integer, tmp As Integer
+    For j = low To high - 1
+        If arr[j] <= pivot Then
+            tmp = arr[i]: arr[i] = arr[j]: arr[j] = tmp
+            i++
+        End If
+    Next
+    tmp = arr[i]: arr[i] = arr[high]: arr[high] = tmp
+    Return i
+End Function
+
+Public Sub QuickSort(arr As Integer[], low As Integer, high As Integer)
+    If low < high Then
+        Dim p As Integer = Partition(arr, low, high)
+        QuickSort(arr, low, p - 1)
+        QuickSort(arr, p + 1, high)
+    End If
+End Sub

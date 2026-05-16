@@ -1,0 +1,12 @@
+method quicksort(arr: List[Integer]): List[Integer] {
+    match arr with {
+        case Nil => Nil
+        case Cons(pivot, rest) =>
+            val left = rest.filter(x => x <= pivot)
+            val right = rest.filter(x => x > pivot)
+            quicksort(left) ++ List(pivot) ++ quicksort(right)
+    }
+}
+
+val sorted = quicksort(List(3, 6, 8, 10, 1, 2, 1))
+println(sorted)

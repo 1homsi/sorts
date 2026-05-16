@@ -1,0 +1,23 @@
+<div x-data="{
+    arr: [5, 3, 1, 4, 2],
+    sorted: [],
+    selectionSort() {
+        const n = this.arr.length;
+        const result = [...this.arr];
+        for (let i = 0; i < n; i++) {
+            let minIdx = i;
+            for (let j = i + 1; j < n; j++) {
+                if (result[j] < result[minIdx]) minIdx = j;
+            }
+            [result[i], result[minIdx]] = [result[minIdx], result[i]];
+        }
+        this.sorted = result;
+    }
+}">
+    <button @click="selectionSort()">Sort</button>
+    <ul>
+        <template x-for="val in sorted">
+            <li x-text="val"></li>
+        </template>
+    </ul>
+</div>

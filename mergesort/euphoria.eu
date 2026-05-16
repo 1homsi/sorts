@@ -1,0 +1,40 @@
+include std/io.e
+
+function merge(sequence left, sequence right)
+    sequence result = {}
+    integer i = 1, j = 1
+    while i <= length(left) and j <= length(right) do
+        if left[i] <= right[j] then
+            result = append(result, left[i])
+            i += 1
+        else
+            result = append(result, right[j])
+            j += 1
+        end if
+    end while
+    while i <= length(left) do
+        result = append(result, left[i])
+        i += 1
+    end while
+    while j <= length(right) do
+        result = append(result, right[j])
+        j += 1
+    end while
+    return result
+end function
+
+function merge_sort(sequence arr)
+    integer n = length(arr)
+    if n <= 1 then return arr end if
+    integer mid = floor(n / 2)
+    sequence left = merge_sort(arr[1..mid])
+    sequence right = merge_sort(arr[mid+1..n])
+    return merge(left, right)
+end function
+
+sequence arr = {38, 27, 43, 3, 9, 82, 10}
+sequence sorted = merge_sort(arr)
+for i = 1 to length(sorted) do
+    printf(1, "%d ", sorted[i])
+end for
+puts(1, "\n")

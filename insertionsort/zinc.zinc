@@ -1,0 +1,15 @@
+fn insertion_sort(arr: [u8; 5]) -> [u8; 5] {
+    let mut a = arr;
+    for i in 1..5 {
+        let key = a[i];
+        let mut j = i;
+        for _k in 0..5 {
+            if j > 0 && a[j - 1] > key {
+                a[j] = a[j - 1];
+                j -= 1;
+            }
+        }
+        a[j] = key;
+    }
+    a
+}

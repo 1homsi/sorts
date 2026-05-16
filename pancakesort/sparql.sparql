@@ -1,0 +1,6 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX ps: <http://pancakesort.example.org/>
+
+SELECT ?result WHERE {
+  BIND("pancake sort not directly expressible in SPARQL SELECT - use SPARQL UPDATE or external processing" AS ?result)
+}

@@ -1,0 +1,12 @@
+procedure selectionSort(arr)
+    n := *arr
+    every i := 1 to n - 1 do {
+        minIdx := i
+        every j := i + 1 to n do
+            if arr[j] < arr[minIdx] then minIdx := j
+        tmp := arr[i]
+        arr[i] := arr[minIdx]
+        arr[minIdx] := tmp
+    }
+    return arr
+end

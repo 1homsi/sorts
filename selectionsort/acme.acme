@@ -1,0 +1,39 @@
+!cpu 6502
+
+*=$c000
+
+selection_sort:
+    ldx #0
+outer_loop:
+    cpx #4
+    bge done
+    stx min_idx
+    txa
+    clc
+    adc #1
+    tay
+inner_loop:
+    cpy #5
+    bge do_swap
+    lda arr, y
+    cmp arr, x
+    bcs next_j
+    sty min_idx
+next_j:
+    iny
+    bne inner_loop
+do_swap:
+    lda arr, x
+    pha
+    ldy min_idx
+    lda arr, y
+    sta arr, x
+    pla
+    sta arr, y
+    inx
+    bne outer_loop
+done:
+    rts
+
+arr: !byte 5, 3, 1, 4, 2
+min_idx: !byte 0

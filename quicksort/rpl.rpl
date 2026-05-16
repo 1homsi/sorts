@@ -1,0 +1,19 @@
+%%HP: T(3)A(R)F(.);
+\<<
+  { 3 6 8 10 1 2 1 }
+  \-> arr
+  \<<
+    arr SIZE 1 \<=
+    IF arr
+    ELSE
+      arr arr SIZE 2 / IP GET \-> pivot
+      \<<
+        arr { \-> x << x pivot < >> } STREAM
+        pivot
+        arr { \-> x << x pivot > >> } STREAM
+        QUICKSORT SWAP QUICKSORT
+        + SWAP +
+      \>>
+    END
+  \>>
+\>>

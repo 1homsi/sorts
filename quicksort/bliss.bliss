@@ -1,0 +1,49 @@
+MODULE quicksort (MAIN = main) =
+BEGIN
+
+LIBRARY 'BLISSLIB';
+
+OWN arr : VECTOR [7] INITIAL (3, 6, 8, 10, 1, 2, 1);
+
+ROUTINE partition (low, high) =
+BEGIN
+    LOCAL pivot, i, j, tmp;
+    pivot = .arr [.high];
+    i = .low;
+    INCR j FROM .low TO .high - 1 DO
+    BEGIN
+        IF .arr [.j] LEQ .pivot THEN
+        BEGIN
+            tmp = .arr [.i];
+            arr [.i] = .arr [.j];
+            arr [.j] = .tmp;
+            i = .i + 1;
+        END;
+    END;
+    tmp = .arr [.i];
+    arr [.i] = .arr [.high];
+    arr [.high] = .tmp;
+    .i
+END;
+
+ROUTINE quicksort (low, high) =
+BEGIN
+    IF .low LSS .high THEN
+    BEGIN
+        LOCAL p;
+        p = partition (.low, .high);
+        quicksort (.low, .p - 1);
+        quicksort (.p + 1, .high);
+    END;
+    0
+END;
+
+ROUTINE main =
+BEGIN
+    quicksort (0, 6);
+    INCR i FROM 0 TO 6 DO
+        $FAO ('!SL ', 0, .arr [.i]);
+    0
+END;
+
+END ELUDOM

@@ -1,0 +1,6 @@
+insert x [] = [x]
+insert x (y:ys) = x:y:ys, if x<=y
+                = y:insert x ys, otherwise
+
+insertion_sort [] = []
+insertion_sort (x:xs) = insert x (insertion_sort xs)

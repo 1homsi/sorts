@@ -1,0 +1,13 @@
+(define selection-sort
+  [] -> []
+  Xs -> (let Min (list-min Xs)
+          (cons Min (selection-sort (remove-first Min Xs)))))
+
+(define list-min
+  [X] -> X
+  [X | Xs] -> (let M (list-min Xs) (if (< X M) X M)))
+
+(define remove-first
+  _ [] -> []
+  X [X | Xs] -> Xs
+  X [Y | Ys] -> [Y | (remove-first X Ys)])

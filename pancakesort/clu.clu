@@ -1,0 +1,42 @@
+pancake_sort = proc (arr: array[int]) returns (array[int])
+    flip = proc (a: array[int], k: int)
+        left: int := array_low(a)
+        right: int := array_low(a) + k
+        while left < right do
+            tmp: int := a[left]
+            a[left] := a[right]
+            a[right] := tmp
+            left := left + 1
+            right := right - 1
+        end
+    end flip
+
+    find_max = proc (a: array[int], size: int) returns (int)
+        max_idx: int := 0
+        for i: int in int$from_to(1, size - 1) do
+            if a[array_low(a) + i] > a[array_low(a) + max_idx] then
+                max_idx := i
+            end
+        end
+        return(max_idx)
+    end find_max
+
+    size: int := array_size(arr)
+    while size > 1 do
+        max_idx: int := find_max(arr, size)
+        if max_idx ~= size - 1 then
+            if max_idx ~= 0 then flip(arr, max_idx) end
+            flip(arr, size - 1)
+        end
+        size := size - 1
+    end
+    return(arr)
+end pancake_sort
+
+start = proc ()
+    arr: array[int] := array[int]$[3, 6, 2, 7, 4, 1, 5]
+    sorted: array[int] := pancake_sort(arr)
+    for v: int in array[int]$elements(sorted) do
+        stream$putl(stream$primary_output(), int$unparse(v))
+    end
+end start

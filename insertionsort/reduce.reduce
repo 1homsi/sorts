@@ -1,0 +1,16 @@
+procedure insertion_sort(arr);
+  integer n, i, j, key;
+  array a(1:length arr);
+  for i := 1 : length arr do a(i) := part(arr,i);
+  n := length arr;
+  for i := 2 : n do <<
+    key := a(i);
+    j := i - 1;
+    while j >= 1 and a(j) > key do <<
+      a(j+1) := a(j);
+      j := j - 1
+    >>;
+    a(j+1) := key
+  >>;
+  return a
+end;

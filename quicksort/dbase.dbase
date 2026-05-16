@@ -1,0 +1,41 @@
+STORE 0 TO arr0,arr1,arr2,arr3,arr4,arr5,arr6
+STORE 3 TO arr0
+STORE 6 TO arr1
+STORE 8 TO arr2
+STORE 10 TO arr3
+STORE 1 TO arr4
+STORE 2 TO arr5
+STORE 1 TO arr6
+
+DO QUICKSORT WITH 0, 6
+
+PROCEDURE QUICKSORT
+PARAMETERS plow, phigh
+IF plow < phigh
+    DO PARTITION WITH plow, phigh
+    IF plow < p - 1
+        DO QUICKSORT WITH plow, p - 1
+    ENDIF
+    IF p + 1 < phigh
+        DO QUICKSORT WITH p + 1, phigh
+    ENDIF
+ENDIF
+RETURN
+
+PROCEDURE PARTITION
+PARAMETERS plow, phigh
+STORE &("arr"+LTRIM(STR(phigh))) TO pivot
+STORE plow TO i
+FOR j = plow TO phigh - 1
+    IF &("arr"+LTRIM(STR(j))) <= pivot
+        STORE &("arr"+LTRIM(STR(i))) TO tmp
+        STORE &("arr"+LTRIM(STR(j))) TO &("arr"+LTRIM(STR(i)))
+        STORE tmp TO &("arr"+LTRIM(STR(j)))
+        STORE i + 1 TO i
+    ENDIF
+NEXT
+STORE &("arr"+LTRIM(STR(i))) TO tmp
+STORE &("arr"+LTRIM(STR(phigh))) TO &("arr"+LTRIM(STR(i)))
+STORE tmp TO &("arr"+LTRIM(STR(phigh)))
+STORE i TO p
+RETURN

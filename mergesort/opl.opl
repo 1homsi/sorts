@@ -1,0 +1,35 @@
+PROC MergeSort:
+    LOCAL arr%(7), tmp%(7), i%
+    arr%(1)=38: arr%(2)=27: arr%(3)=43: arr%(4)=3
+    arr%(5)=9: arr%(6)=82: arr%(7)=10
+    MSort:(1,7)
+    FOR i%=1 TO 7
+        PRINT arr%(i%)
+    NEXT i%
+ENDP
+
+PROC MSort:(lo%,hi%)
+    LOCAL mid%
+    IF lo%>=hi% : RETURN : ENDIF
+    mid%=(lo%+hi%)/2
+    MSort:(lo%,mid%)
+    MSort:(mid%+1,hi%)
+    Merge:(lo%,mid%,hi%)
+ENDP
+
+PROC Merge:(lo%,mid%,hi%)
+    EXTERNAL arr%(), tmp%()
+    LOCAL i%,j%,k%,x%
+    i%=lo%: j%=mid%+1: k%=lo%
+    WHILE i%<=mid% AND j%<=hi%
+        IF arr%(i%)<=arr%(j%)
+            tmp%(k%)=arr%(i%): i%=i%+1
+        ELSE
+            tmp%(k%)=arr%(j%): j%=j%+1
+        ENDIF
+        k%=k%+1
+    ENDWH
+    WHILE i%<=mid%: tmp%(k%)=arr%(i%): i%=i%+1: k%=k%+1: ENDWH
+    WHILE j%<=hi%: tmp%(k%)=arr%(j%): j%=j%+1: k%=k%+1: ENDWH
+    FOR x%=lo% TO hi%: arr%(x%)=tmp%(x%): NEXT x%
+ENDP

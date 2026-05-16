@@ -1,0 +1,36 @@
+use ark_ff::Field;
+use ark_r1cs_std::prelude::*;
+use ark_relations::r1cs::{ConstraintSynthesizer, ConstraintSystemRef, SynthesisError};
+
+struct QuicksortCircuit<F: Field> {
+    arr: Vec<F>,
+    sorted: Vec<F>,
+}
+
+fn quicksort(arr: &mut Vec<i64>, low: usize, high: usize) {
+    if low < high {
+        let pivot = arr[high];
+        let mut i = low;
+        for j in low..high {
+            if arr[j] <= pivot {
+                arr.swap(i, j);
+                i += 1;
+            }
+        }
+        arr.swap(i, high);
+        let p = i;
+        if p > 0 { quicksort(arr, low, p - 1); }
+        quicksort(arr, p + 1, high);
+    }
+}
+
+impl<F: Field> ConstraintSynthesizer<F> for QuicksortCircuit<F> {
+    fn generate_constraints(self, cs: ConstraintSystemRef<F>) -> Result<(), SynthesisError> {
+        for i in 0..self.sorted.len()-1 {
+            let a = FpVar::new_witness(cs.clone(), || Ok(self.sorted[i]))?;
+            let b = FpVar::new_witness(cs.clone(), || Ok(self.sorted[i+1]))?;
+            a.enforce_cmp(&b, std::cmp::Ordering::Less, true)?;
+        }
+        Ok(())
+    }
+}

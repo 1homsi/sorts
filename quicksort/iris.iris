@@ -1,0 +1,27 @@
+From iris.heap_lang Require Import lang proofmode notation.
+From iris.heap_lang.lib Require Import array.
+
+Section quicksort.
+Context `{!heapGS Σ}.
+
+Definition partition : val :=
+  rec: "partition" "arr" "low" "high" :=
+    let: "pivot" := !("arr" +ₗ "high") in
+    let: "i" := ref "low" in
+    let: "j" := ref "low" in
+    (rec: "loop" "j" :=
+      if: "j" < "high" then
+        if: !("arr" +ₗ "j") ≤ "pivot" then
+          let: "tmp" := !("arr" +ₗ !"i") in
+          "arr" +ₗ !"i" <- !("arr" +ₗ "j");;
+          "arr" +ₗ "j" <- "tmp";;
+          "i" <- !"i" + #1
+        end;;
+        "loop" ("j" + #1)
+      end) "low";;
+    let: "tmp" := !("arr" +ₗ !"i") in
+    "arr" +ₗ !"i" <- !("arr" +ₗ "high");;
+    "arr" +ₗ "high" <- "tmp";;
+    !"i".
+
+End quicksort.

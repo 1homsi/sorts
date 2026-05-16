@@ -1,0 +1,37 @@
+$ ARR[0] = 64
+$ ARR[1] = 34
+$ ARR[2] = 25
+$ ARR[3] = 12
+$ ARR[4] = 22
+$ ARR[5] = 11
+$ ARR[6] = 90
+$ N = 7
+$ GAP = N / 2
+$GAP_LOOP:
+$ IF GAP .LE. 0 THEN GOTO PRINT
+$ I = GAP
+$I_LOOP:
+$ IF I .GE. N THEN GOTO GAP_DONE
+$ TEMP = ARR['I']
+$ J = I
+$J_LOOP:
+$ IF J .LT. GAP THEN GOTO J_DONE
+$ JMG = J - GAP
+$ IF ARR['JMG'] .LE. TEMP THEN GOTO J_DONE
+$ ARR['J'] = ARR['JMG']
+$ J = J - GAP
+$ GOTO J_LOOP
+$J_DONE:
+$ ARR['J'] = TEMP
+$ I = I + 1
+$ GOTO I_LOOP
+$GAP_DONE:
+$ GAP = GAP / 2
+$ GOTO GAP_LOOP
+$PRINT:
+$ I = 0
+$PRINT_LOOP:
+$ IF I .GE. N THEN EXIT
+$ WRITE SYS$OUTPUT ARR['I']
+$ I = I + 1
+$ GOTO PRINT_LOOP

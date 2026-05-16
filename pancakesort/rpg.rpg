@@ -1,0 +1,50 @@
+     H DFTACTGRP(*NO)
+     FQSYSPRT   O    F  132        PRINTER
+     D arr           S              5I 0 DIM(7) CTDATA PERRCD(7)
+     D n             S              5I 0 INZ(7)
+     D size          S              5I 0
+     D maxIdx        S              5I 0
+     D i             S              5I 0
+     D left          S              5I 0
+     D right         S              5I 0
+     D tmp           S              5I 0
+     D result        S             50A
+      /FREE
+       size = n;
+       DOW size > 1;
+         maxIdx = 1;
+         FOR i = 2 TO size;
+           IF arr(i) > arr(maxIdx);
+             maxIdx = i;
+           ENDIF;
+         ENDFOR;
+         IF maxIdx <> size;
+           IF maxIdx <> 1;
+             left = 1; right = maxIdx;
+             DOW left < right;
+               tmp = arr(left);
+               arr(left) = arr(right);
+               arr(right) = tmp;
+               left += 1; right -= 1;
+             ENDDO;
+           ENDIF;
+           left = 1; right = size;
+           DOW left < right;
+             tmp = arr(left);
+             arr(left) = arr(right);
+             arr(right) = tmp;
+             left += 1; right -= 1;
+           ENDDO;
+         ENDIF;
+         size -= 1;
+       ENDDO;
+       FOR i = 1 TO n;
+         result = %TRIM(result) + %CHAR(arr(i)) + ' ';
+       ENDFOR;
+       EXCEPT OUTPUT;
+       *INLR = *ON;
+      /END-FREE
+     OQSYSPRT   E             OUTPUT
+     O                                        result
+**CTDATA arr
+0003000600020007000400010005

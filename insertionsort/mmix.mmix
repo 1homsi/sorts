@@ -1,0 +1,39 @@
+arr     IS      $0
+n       IS      $1
+i       IS      $2
+j       IS      $3
+key     IS      $4
+tmp     IS      $5
+addr    IS      $6
+
+        LOC     Data_Segment
+ARR     TETRA   5,3,1,4,2
+N       TETRA   5
+
+        LOC     #100
+Main    LDA     arr, ARR
+        LDA     n, N
+        LDTU    n, n, 0
+        SET     i, 1
+Outer   CMP     tmp, i, n
+        BNN     tmp, Done
+        SL      addr, i, 2
+        ADD     addr, arr, addr
+        LDTU    key, addr, 0
+        SUB     j, i, 1
+Inner   BN      j, Place
+        SL      addr, j, 2
+        ADD     addr, arr, addr
+        LDTU    tmp, addr, 0
+        CMP     tmp, tmp, key
+        BNP     tmp, Place
+        STT     tmp, addr, 4
+        SUB     j, j, 1
+        JMP     Inner
+Place   ADD     j, j, 1
+        SL      addr, j, 2
+        ADD     addr, arr, addr
+        STT     key, addr, 0
+        ADD     i, i, 1
+        JMP     Outer
+Done    TRAP    0,Halt,0

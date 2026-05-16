@@ -1,0 +1,21 @@
+structure SelectionSort =
+struct
+    fun selectionSort (arr : int array) =
+        let
+            val n = Array.length arr
+        in
+            Array.appi (fn (i, _) =>
+                let
+                    val minIdx = ref i
+                    val _ = Array.appi (fn (j, v) =>
+                        if j > i andalso v < Array.sub(arr, !minIdx)
+                        then minIdx := j
+                        else ()) arr
+                    val tmp = Array.sub(arr, i)
+                in
+                    Array.update(arr, i, Array.sub(arr, !minIdx));
+                    Array.update(arr, !minIdx, tmp)
+                end) arr;
+            arr
+        end
+end

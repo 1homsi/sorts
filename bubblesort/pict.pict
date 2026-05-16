@@ -1,0 +1,19 @@
+let bubbleSort (arr: Array Int) : Array Int =
+  let n = ref (Array.length arr) in
+  let swapped = ref true in
+  while !swapped do
+    swapped := false;
+    for i = 0 to !n - 2 do
+      if Array.get arr i > Array.get arr (i + 1) then begin
+        let tmp = Array.get arr i in
+        Array.set arr i (Array.get arr (i + 1));
+        Array.set arr (i + 1) tmp;
+        swapped := true
+      end
+    done;
+    n := !n - 1
+  done;
+  arr
+
+let arr = Array.fromList [64, 34, 25, 12, 22, 11, 90]
+let sorted = bubbleSort arr

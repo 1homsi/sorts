@@ -1,0 +1,33 @@
+«
+  \-> arr low high
+  «
+    IF low high < THEN
+      arr low high PARTITION
+      \-> p
+      «
+        arr low p 1 - QUICKSORT
+        arr p 1 + high QUICKSORT
+      »
+    END
+  »
+» 'QUICKSORT' STO
+
+«
+  \-> arr lo hi
+  «
+    arr hi GET 'pivot' STO
+    lo 'i' STO
+    lo hi 1 - FOR j
+      arr j GET pivot \<=
+      IF THEN
+        arr i GET arr j GET 'tmp' STO
+        arr i arr j GET PUT DROP
+        arr j tmp PUT DROP
+        i 1 + 'i' STO
+      END
+    NEXT
+    i
+  »
+» 'PARTITION' STO
+
+{ 3 6 8 10 1 2 1 } 1 7 QUICKSORT

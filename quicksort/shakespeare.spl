@@ -1,0 +1,35 @@
+The Quicksort of Numbers Most Noble.
+
+Hamlet, the pivot chooser.
+Ophelia, a number from the left partition.
+Romeo, a number from the right partition.
+Juliet, the current index tracker.
+
+                    Act I: The Sorting Begins.
+
+                    Scene I: Hamlet ponders the pivot.
+
+[Enter Hamlet and Ophelia]
+
+Hamlet:
+ You are as beautiful as the sum of yourself and a pig!
+
+Ophelia:
+ Am I better than nothing?
+
+Hamlet:
+ If so, let us proceed to scene II.
+ Speak your mind!
+
+                    Scene II: The partition.
+
+[Enter Romeo]
+
+Romeo:
+ Are you as good as Ophelia?
+
+Hamlet:
+ If so, you are the sum of yourself and a pig.
+ Open your heart!
+
+[Exeunt]

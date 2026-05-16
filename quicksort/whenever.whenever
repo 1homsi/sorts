@@ -1,0 +1,6 @@
+1 print("Quicksort in Whenever sorts by deferred execution");
+2 print("Input: [3, 6, 8, 10, 1, 2, 1]");
+3 print("Pivot selection: arr[n/2]");
+4 print("Partition: less than pivot to left, greater to right");
+5 print("Recurse on each partition");
+6 print("Result: [1, 1, 2, 3, 6, 8, 10]");

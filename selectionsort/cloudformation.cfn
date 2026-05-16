@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Selection Sort implementation
+Parameters:
+  InputArray:
+    Type: CommaDelimitedList
+    Default: "5,3,1,4,2"
+Resources:
+  SortFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Runtime: python3.11
+      Handler: index.handler
+      Code:
+        ZipFile: |
+          def selection_sort(arr):
+              n = len(arr)
+              for i in range(n):
+                  min_idx = i
+                  for j in range(i+1, n):
+                      if arr[j] < arr[min_idx]:
+                          min_idx = j
+                  arr[i], arr[min_idx] = arr[min_idx], arr[i]
+              return arr
+          def handler(event, context):
+              return selection_sort(event.get('array', []))
+      Role: !Sub 'arn:aws:iam::${AWS::AccountId}:role/lambda-role'
+Outputs:
+  FunctionName:
+    Value: !Ref SortFunction

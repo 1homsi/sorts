@@ -1,0 +1,42 @@
+MODULE RADIX;
+
+ARRAY ARR [0:7] OF INT;
+ARRAY OUTPUT [0:7] OF INT;
+ARRAY CNT [0:9] OF INT;
+INT N, MAXVAL, EXP, I, IDX;
+
+PROC COUNTING_SORT (E: INT);
+BEGIN
+    FOR I := 0 TO 9 DO CNT [I] := 0 OD;
+    FOR I := 0 TO N-1 DO
+        IDX := (ARR [I] / E) REM 10;
+        CNT [IDX] := CNT [IDX] + 1;
+    OD;
+    FOR I := 1 TO 9 DO
+        CNT [I] := CNT [I] + CNT [I-1];
+    OD;
+    FOR I := N-1 DOWNTO 0 DO
+        IDX := (ARR [I] / E) REM 10;
+        CNT [IDX] := CNT [IDX] - 1;
+        OUTPUT [CNT [IDX]] := ARR [I];
+    OD;
+    FOR I := 0 TO N-1 DO ARR [I] := OUTPUT [I] OD;
+END COUNTING_SORT;
+
+PROC RADIX_SORT;
+BEGIN
+    N := 8;
+    ARR [0] := 170; ARR [1] := 45; ARR [2] := 75; ARR [3] := 90;
+    ARR [4] := 802; ARR [5] := 24; ARR [6] := 2;  ARR [7] := 66;
+    MAXVAL := ARR [0];
+    FOR I := 1 TO N-1 DO
+        IF ARR [I] > MAXVAL THEN MAXVAL := ARR [I] FI;
+    OD;
+    EXP := 1;
+    WHILE MAXVAL / EXP > 0 DO
+        COUNTING_SORT (EXP);
+        EXP := EXP * 10;
+    OD;
+END RADIX_SORT;
+
+END RADIX;

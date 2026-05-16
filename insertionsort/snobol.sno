@@ -1,0 +1,12 @@
+        DEFINE('ISORT(N)')
+        DEFINE('INSERT(X,POS)')
+ISORT   I = 2
+LOOP    GT(I,N)                         :S(RETURN)
+        KEY = ARR<I>
+        J = I - 1
+INNER   LE(J,0)                         :S(PLACE)
+        GT(ARR<J>,KEY)                  :F(PLACE)
+        ARR<J + 1> = ARR<J>
+        J = J - 1                       :(INNER)
+PLACE   ARR<J + 1> = KEY
+        I = I + 1                       :(LOOP)

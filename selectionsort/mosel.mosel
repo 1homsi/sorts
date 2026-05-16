@@ -1,0 +1,28 @@
+model SelectionSort
+uses "mmxprs"
+
+declarations
+    n = 5
+    arr: array(1..n) of integer
+end-declarations
+
+arr := [5, 3, 1, 4, 2]
+
+procedure sort
+    declarations
+        minIdx, tmp: integer
+    end-declarations
+    forall(i in 1..n-1) do
+        minIdx := i
+        forall(j in i+1..n) do
+            if arr(j) < arr(minIdx) then minIdx := j end-if
+        end-do
+        tmp := arr(i)
+        arr(i) := arr(minIdx)
+        arr(minIdx) := tmp
+    end-do
+end-procedure
+
+sort
+writeln(arr)
+end-model

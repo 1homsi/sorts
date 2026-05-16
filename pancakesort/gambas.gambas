@@ -1,0 +1,33 @@
+Public Sub Main()
+    Dim arr As Integer[] = [3, 6, 2, 7, 4, 1, 5]
+    Dim size As Integer = arr.Count
+    Dim maxIdx As Integer
+    Dim i As Integer
+
+    While size > 1
+        maxIdx = 0
+        For i = 1 To size - 1
+            If arr[i] > arr[maxIdx] Then maxIdx = i
+        Next
+        If maxIdx <> size - 1 Then
+            If maxIdx <> 0 Then Flip(arr, maxIdx)
+            Flip(arr, size - 1)
+        End If
+        Dec size
+    Wend
+
+    Print arr.Join(", ")
+End Sub
+
+Public Sub Flip(arr As Integer[], k As Integer)
+    Dim left As Integer = 0
+    Dim right As Integer = k
+    Dim tmp As Integer
+    While left < right
+        tmp = arr[left]
+        arr[left] = arr[right]
+        arr[right] = tmp
+        Inc left
+        Dec right
+    Wend
+End Sub

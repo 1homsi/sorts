@@ -1,0 +1,21 @@
+package quicksort.gatekeeper
+
+import future.keywords.in
+
+violation[{"msg": msg}] {
+    input.review.object.kind == "List"
+    elements := input.review.object.items
+    not is_sorted(elements)
+    msg := "Elements are not sorted"
+}
+
+is_sorted(arr) {
+    count(arr) > 0
+    every i in numbers.range(0, count(arr) - 2) {
+        arr[i] <= arr[i + 1]
+    }
+}
+
+sorted_array(arr) := result {
+    result := sort(arr)
+}

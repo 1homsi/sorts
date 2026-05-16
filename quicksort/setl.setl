@@ -1,0 +1,13 @@
+procedure quicksort(s);
+    if #s <= 1 then
+        return s;
+    end if;
+    pivot := s[#s div 2 + 1];
+    left := [x in s | x < pivot];
+    middle := [x in s | x = pivot];
+    right := [x in s | x > pivot];
+    return quicksort(left) + middle + quicksort(right);
+end procedure;
+
+s := [3, 6, 8, 10, 1, 2, 1];
+print(quicksort(s));

@@ -1,0 +1,32 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-selection-sort',
+  template: `
+    <button (click)="sort()">Sort</button>
+    <ul>
+      <li *ngFor="let val of sorted">{{ val }}</li>
+    </ul>
+  `
+})
+export class SelectionSortComponent {
+  arr = [5, 3, 1, 4, 2];
+  sorted: number[] = [];
+
+  selectionSort(arr: number[]): number[] {
+    const n = arr.length;
+    const result = [...arr];
+    for (let i = 0; i < n; i++) {
+      let minIdx = i;
+      for (let j = i + 1; j < n; j++) {
+        if (result[j] < result[minIdx]) minIdx = j;
+      }
+      [result[i], result[minIdx]] = [result[minIdx], result[i]];
+    }
+    return result;
+  }
+
+  sort() {
+    this.sorted = this.selectionSort(this.arr);
+  }
+}

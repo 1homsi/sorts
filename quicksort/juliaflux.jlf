@@ -1,0 +1,26 @@
+using Flux
+
+function partition!(arr, low, high)
+    pivot = arr[high]
+    i = low
+    for j in low:high-1
+        if arr[j] <= pivot
+            arr[i], arr[j] = arr[j], arr[i]
+            i += 1
+        end
+    end
+    arr[i], arr[high] = arr[high], arr[i]
+    i
+end
+
+function quicksort!(arr, low, high)
+    if low < high
+        p = partition!(arr, low, high)
+        quicksort!(arr, low, p - 1)
+        quicksort!(arr, p + 1, high)
+    end
+end
+
+arr = [3, 6, 8, 10, 1, 2, 1]
+quicksort!(arr, 1, length(arr))
+foreach(println, arr)

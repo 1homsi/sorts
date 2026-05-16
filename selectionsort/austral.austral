@@ -1,0 +1,20 @@
+module SelectionSort is
+    function selectionSort(arr: Array[Int32], n: Int32): Array[Int32] is
+        var i: Int32 := 0;
+        while i < n - 1 do
+            var minIdx: Int32 := i;
+            var j: Int32 := i + 1;
+            while j < n do
+                if arr[j] < arr[minIdx] then
+                    minIdx := j;
+                end if;
+                j := j + 1;
+            end while;
+            var tmp: Int32 := arr[i];
+            arr[i] := arr[minIdx];
+            arr[minIdx] := tmp;
+            i := i + 1;
+        end while;
+        return arr;
+    end;
+end module.

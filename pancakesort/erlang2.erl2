@@ -1,0 +1,24 @@
+-module(erlang2).
+-export([main/0, pancake_sort/1]).
+
+flip(Arr, K) ->
+    {Front, Back} = lists:split(K + 1, Arr),
+    lists:reverse(Front) ++ Back.
+
+find_max_idx(Arr, Size) ->
+    Sub = lists:sublist(Arr, Size),
+    MaxVal = lists:max(Sub),
+    Pos = length(lists:takewhile(fun(X) -> X =/= MaxVal end, Sub)),
+    Pos.
+
+sort(Arr, 1) -> Arr;
+sort(Arr, Size) ->
+    Mi = find_max_idx(Arr, Size),
+    A1 = if Mi =/= 0 -> flip(Arr, Mi); true -> Arr end,
+    A2 = flip(A1, Size - 1),
+    sort(A2, Size - 1).
+
+pancake_sort(Arr) -> sort(Arr, length(Arr)).
+
+main() ->
+    io:format("~p~n", [pancake_sort([3, 6, 2, 7, 4, 1, 5])]).

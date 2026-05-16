@@ -1,0 +1,47 @@
+:- module pancake_sort2.
+:- interface.
+:- import_module io.
+:- pred main(io::di, io::uo) is det.
+
+:- implementation.
+:- import_module list, int, array.
+
+main(!IO) :-
+    array.from_list([3, 6, 2, 7, 4, 1, 5], A0),
+    sort(A0, 7, A1),
+    io.write(A1, !IO), io.nl(!IO).
+
+:- pred sort(array(int)::array_di, int::in, array(int)::array_uo) is det.
+sort(!.A, Size, !:A) :-
+    ( Size =< 1 -> !:A = !.A
+    ;
+        find_max(!.A, Size, 0, 1, Mi),
+        ( Mi \= Size - 1 ->
+            ( Mi \= 0 -> do_flip(!.A, Mi, !:A) ; !:A = !.A ),
+            do_flip(!.A, Size - 1, !:A)
+        ; !:A = !.A
+        ),
+        sort(!.A, Size - 1, !:A)
+    ).
+
+:- pred do_flip(array(int)::array_di, int::in, array(int)::array_uo) is det.
+do_flip(!.A, K, !:A) :- do_flip_loop(!.A, 0, K, !:A).
+
+:- pred do_flip_loop(array(int)::array_di, int::in, int::in, array(int)::array_uo) is det.
+do_flip_loop(!.A, L, R, !:A) :-
+    ( L < R ->
+        array.lookup(!.A, L, VL), array.lookup(!.A, R, VR),
+        array.set(L, VR, !A), array.set(R, VL, !A),
+        do_flip_loop(!.A, L+1, R-1, !:A)
+    ; !:A = !.A
+    ).
+
+:- pred find_max(array(int)::in, int::in, int::in, int::in, int::out) is det.
+find_max(A, Size, Mi, I, Result) :-
+    ( I >= Size -> Result = Mi
+    ;
+        array.lookup(A, I, VI), array.lookup(A, Mi, VM),
+        ( VI > VM -> find_max(A, Size, I, I+1, Result)
+        ; find_max(A, Size, Mi, I+1, Result)
+        )
+    ).

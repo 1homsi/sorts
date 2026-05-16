@@ -1,0 +1,38 @@
+using System.Console;
+using System.Collections.Generic;
+
+class Node {
+    public val : int;
+    public mutable left : Node;
+    public mutable right : Node;
+    public this(v : int) { val = v; left = null; right = null; }
+}
+
+module TreeSort {
+    insert(node : Node, val : int) : Node {
+        if (node == null) Node(val)
+        else if (val < node.val) { node.left = insert(node.left, val); node }
+        else { node.right = insert(node.right, val); node }
+    }
+
+    inorder(node : Node, result : List[int]) : void {
+        when (node != null) {
+            inorder(node.left, result);
+            result.Add(node.val);
+            inorder(node.right, result);
+        }
+    }
+
+    treesort(arr : array[int]) : List[int] {
+        mutable root : Node = null;
+        foreach (v in arr) root = insert(root, v);
+        def result = List.[int]();
+        inorder(root, result);
+        result
+    }
+
+    Main() : void {
+        def sorted = treesort(array[5, 3, 7, 1, 4, 6, 8]);
+        WriteLine(string.Join(" ", sorted));
+    }
+}

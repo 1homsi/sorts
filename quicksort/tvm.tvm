@@ -1,0 +1,21 @@
+import tvm
+from tvm import te
+import numpy as np
+
+def quicksort_np(arr, low, high):
+    if low < high:
+        pivot = arr[high]
+        i = low
+        for j in range(low, high):
+            if arr[j] <= pivot:
+                arr[i], arr[j] = arr[j], arr[i]
+                i += 1
+        arr[i], arr[high] = arr[high], arr[i]
+        p = i
+        quicksort_np(arr, low, p - 1)
+        quicksort_np(arr, p + 1, high)
+
+arr = np.array([3, 6, 8, 10, 1, 2, 1], dtype=np.int32)
+quicksort_np(arr, 0, len(arr) - 1)
+for x in arr:
+    print(x)

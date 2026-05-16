@@ -1,0 +1,18 @@
+procedure quicksort(lst)
+    if *lst <= 1 then return lst
+    pivot := lst[*lst / 2 + 1]
+    left := []
+    middle := []
+    right := []
+    every x := !lst do {
+        if x < pivot then put(left, x)
+        else if x = pivot then put(middle, x)
+        else put(right, x)
+    }
+    return quicksort(left) ||| middle ||| quicksort(right)
+end
+
+procedure main()
+    lst := [3, 6, 8, 10, 1, 2, 1]
+    every write(!quicksort(lst))
+end

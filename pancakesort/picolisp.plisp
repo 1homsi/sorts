@@ -1,0 +1,27 @@
+(de flip (Arr K)
+   (let (Left 0  Right K)
+      (while (< Left Right)
+         (let Tmp (get Arr (inc Left))
+            (set (nth Arr (inc Left)) (get Arr (inc Right)))
+            (set (nth Arr (inc Right)) Tmp) )
+         (inc 'Left)
+         (dec 'Right) ) ) )
+
+(de findMaxIdx (Arr Size)
+   (let MaxIdx 0
+      (for (I 1 (< I Size) (inc I))
+         (when (> (get Arr (inc I)) (get Arr (inc MaxIdx)))
+            (setq MaxIdx I) ) )
+      MaxIdx ) )
+
+(de pancakeSort (Arr)
+   (let Size (length Arr)
+      (while (> Size 1)
+         (let MaxIdx (findMaxIdx Arr Size)
+            (when (<> MaxIdx (dec Size))
+               (when (<> MaxIdx 0) (flip Arr MaxIdx))
+               (flip Arr (dec Size)) ) )
+         (dec 'Size) )
+      Arr ) )
+
+(println (pancakeSort (list 3 6 2 7 4 1 5)))

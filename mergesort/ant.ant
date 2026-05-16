@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MergeSort" default="sort" basedir=".">
+
+    <target name="sort">
+        <script language="groovy">
+            def merge(left, right) {
+                def result = []
+                def i = 0, j = 0
+                while (i &lt; left.size() &amp;&amp; j &lt; right.size()) {
+                    if (left[i] &lt;= right[j]) result &lt;&lt; left[i++]
+                    else result &lt;&lt; right[j++]
+                }
+                while (i &lt; left.size()) result &lt;&lt; left[i++]
+                while (j &lt; right.size()) result &lt;&lt; right[j++]
+                return result
+            }
+
+            def mergeSort(arr) {
+                if (arr.size() &lt;= 1) return arr
+                def mid = arr.size() / 2
+                def left = mergeSort(arr[0..&lt;mid])
+                def right = mergeSort(arr[mid..&lt;arr.size()])
+                return merge(left, right)
+            }
+
+            def arr = [38, 27, 43, 3, 9, 82, 10]
+            println mergeSort(arr)
+        </script>
+    </target>
+
+</project>

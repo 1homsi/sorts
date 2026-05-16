@@ -1,0 +1,38 @@
+process PANCAKE_SORT =
+(? integer RUN;
+ ! integer RESULT)
+(|
+  cell arr[7] := {3, 6, 2, 7, 4, 1, 5};
+  cell size := 7;
+  cell maxIdx := 0;
+
+  RESULT := cell_sort(RUN, arr, size)
+
+  where
+
+  function cell_sort(trigger, arr, size) =
+    if size <= 1 then arr
+    else
+      let maxIdx := find_max(arr, size) in
+      let arr1 := if maxIdx <> 0 then flip(arr, maxIdx) else arr in
+      let arr2 := flip(arr1, size - 1) in
+      cell_sort(trigger, arr2, size - 1)
+    end
+
+  function flip(arr, k) =
+    reverse_prefix(arr, 0, k)
+
+  function reverse_prefix(arr, l, r) =
+    if l >= r then arr
+    else swap_and_recurse(arr, l, r)
+    end
+
+  function find_max(arr, size) =
+    find_max_loop(arr, size, 0, 1)
+
+  function find_max_loop(arr, size, mi, i) =
+    if i >= size then mi
+    else if arr[i] > arr[mi] then find_max_loop(arr, size, i, i+1)
+    else find_max_loop(arr, size, mi, i+1)
+    end
+|)

@@ -1,0 +1,10 @@
+fun quicksort(lst: list<int>): list<int>
+  match lst
+    Nil -> Nil
+    Cons(pivot, rest) ->
+      val left = rest.filter(fn(x) { x <= pivot })
+      val right = rest.filter(fn(x) { x > pivot })
+      quicksort(left) ++ [pivot] ++ quicksort(right)
+
+fun main()
+  println(quicksort([3, 6, 8, 10, 1, 2, 1]))

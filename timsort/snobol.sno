@@ -1,0 +1,40 @@
+* SNOBOL4 Timsort - insertion sort on array elements
+* Uses SNOBOL arrays and pattern matching
+
+        DEFINE('ISORT(ARR,LEFT,RIGHT)I,J,KEY')
+        DEFINE('TIMSORT(ARR,N)I,SZ,LEFT,MID,RIGHT')
+
+ISORT   I = LEFT + 1
+IS1     GT(I,RIGHT)                             :S(ISORT_END)
+        KEY = ARR<I>
+        J = I - 1
+IS2     LT(J,LEFT)                              :S(IS3)
+        GT(ARR<J>,KEY)                          :F(IS3)
+        ARR<J + 1> = ARR<J>
+        J = J - 1                               :(IS2)
+IS3     ARR<J + 1> = KEY
+        I = I + 1                               :(IS1)
+ISORT_END
+        RETURN
+
+TIMSORT I = 0
+TIM1    GE(I,N)                                 :S(TIM2)
+        RIGHT = I + 32 - 1
+        GT(RIGHT,N - 1)                         :F(TIM1A)
+        RIGHT = N - 1
+TIM1A   ISORT(ARR,I,RIGHT)
+        I = I + 32                              :(TIM1)
+TIM2
+        OUTPUT = 'Timsort complete'
+        RETURN
+
+        ARR = ARRAY(9)
+        ARR<1> = 5; ARR<2> = 2; ARR<3> = 8
+        ARR<4> = 1; ARR<5> = 9; ARR<6> = 3
+        ARR<7> = 7; ARR<8> = 4; ARR<9> = 6
+        TIMSORT(ARR,9)
+        I = 1
+PLOOP   GT(I,9)                                 :S(END)
+        OUTPUT = ARR<I>
+        I = I + 1                               :(PLOOP)
+END

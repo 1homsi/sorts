@@ -1,0 +1,36 @@
+Dim arr(0 To 7) As Integer
+Dim output(0 To 7) As Integer
+Dim cnt(0 To 9) As Integer
+Dim i As Integer, idx As Integer, maxVal As Integer, exp As Integer
+
+arr(0)=170: arr(1)=45: arr(2)=75: arr(3)=90
+arr(4)=802: arr(5)=24: arr(6)=2:  arr(7)=66
+
+maxVal = arr(0)
+For i = 1 To 7
+    If arr(i) > maxVal Then maxVal = arr(i)
+Next i
+
+exp = 1
+Do While maxVal \ exp > 0
+    For i = 0 To 9: cnt(i) = 0: Next i
+    For i = 0 To 7
+        idx = (arr(i) \ exp) Mod 10
+        cnt(idx) = cnt(idx) + 1
+    Next i
+    For i = 1 To 9
+        cnt(i) = cnt(i) + cnt(i-1)
+    Next i
+    For i = 7 To 0 Step -1
+        idx = (arr(i) \ exp) Mod 10
+        cnt(idx) = cnt(idx) - 1
+        output(cnt(idx)) = arr(i)
+    Next i
+    For i = 0 To 7: arr(i) = output(i): Next i
+    exp = exp * 10
+Loop
+
+For i = 0 To 7
+    Print arr(i); " ";
+Next i
+Print

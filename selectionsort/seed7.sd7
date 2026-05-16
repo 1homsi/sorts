@@ -1,0 +1,19 @@
+const proc: selectionSort (inout array integer: arr) is func
+    local
+        var integer: i is 0;
+        var integer: j is 0;
+        var integer: minIdx is 0;
+        var integer: tmp is 0;
+    begin
+        for i range 1 to length(arr) - 1 do
+            minIdx := i;
+            for j range i + 1 to length(arr) do
+                if arr[j] < arr[minIdx] then
+                    minIdx := j;
+                end if;
+            end for;
+            tmp := arr[i];
+            arr[i] := arr[minIdx];
+            arr[minIdx] := tmp;
+        end for;
+    end func;

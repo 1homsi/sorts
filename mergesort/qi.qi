@@ -1,0 +1,24 @@
+(define merge
+    [] R -> R
+    L [] -> L
+    [Lh | Lt] [Rh | Rt] -> [Lh | (merge Lt [Rh | Rt])] where (<= Lh Rh)
+    L [Rh | Rt] -> [Rh | (merge L Rt)])
+
+(define take-n
+    _ 0 -> []
+    [H | T] N -> [H | (take-n T (- N 1))])
+
+(define drop-n
+    Lst 0 -> Lst
+    [_ | T] N -> (drop-n T (- N 1)))
+
+(define merge-sort
+    [] -> []
+    [X] -> [X]
+    Lst -> (let N (length Lst)
+                Mid (round (/ N 2))
+                Left (take-n Lst Mid)
+                Right (drop-n Lst Mid)
+            (merge (merge-sort Left) (merge-sort Right))))
+
+(output "~A~%" (merge-sort [38 27 43 3 9 82 10]))

@@ -1,0 +1,18 @@
+apiVersion: v2
+name: selection-sort
+description: Helm chart for selection sort service
+type: application
+version: 0.1.0
+
+values:
+  inputArray:
+    - 5
+    - 3
+    - 1
+    - 4
+    - 2
+
+template: |
+  {{- range $i, $v := .Values.inputArray }}
+  {{ $v }}
+  {{- end }}

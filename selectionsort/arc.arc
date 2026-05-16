@@ -1,0 +1,11 @@
+(def selection-sort (lst)
+  (if (no lst)
+    '()
+    (let m (apply min lst)
+      (cons m (selection-sort (rem m lst 1))))))
+
+(def rem (x lst n)
+  (if (no lst) '()
+      (is n 0) (cdr lst)
+      (is (car lst) x) (rem x (cdr lst) (- n 1))
+      (cons (car lst) (rem x (cdr lst) n))))

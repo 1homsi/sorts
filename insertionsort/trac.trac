@@ -1,0 +1,13 @@
+#(ds,insertion-sort,
+  #(ss,arr,#(cl,##(1)))
+  #(ss,n,#(cl,##(2)))
+  #(ss,i,1)
+  #(loop,
+    #(lt,#(cl,i),#(cl,n),
+      #(ss,key,#(cl,arr,#(cl,i)))
+      #(ss,j,#(su,#(cl,i),1))
+      #(inner)
+      #(ss,i,#(ad,#(cl,i),1))
+    )
+  )
+)

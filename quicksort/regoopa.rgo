@@ -1,0 +1,13 @@
+package quicksort
+
+import future.keywords.in
+
+quicksort(arr) := sorted {
+    sorted := [x | some x in arr; count([y | some y in arr; y < x]) + count([y | some y in arr; y == x; y <= x]) >= 1]
+}
+
+sorted_array := quicksort([3, 6, 8, 10, 1, 2, 1])
+
+allow {
+    sorted_array[i] <= sorted_array[i+1]
+}

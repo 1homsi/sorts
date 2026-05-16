@@ -1,0 +1,43 @@
+module quicksort_tb;
+    reg [31:0] arr [0:6];
+    integer i, j, pivot, tmp, low, high, p;
+
+    task partition;
+        input integer lo, hi;
+        output integer result;
+        integer k;
+        begin
+            pivot = arr[hi];
+            i = lo;
+            for (k = lo; k < hi; k = k + 1) begin
+                if (arr[k] <= pivot) begin
+                    tmp = arr[i]; arr[i] = arr[k]; arr[k] = tmp;
+                    i = i + 1;
+                end
+            end
+            tmp = arr[i]; arr[i] = arr[hi]; arr[hi] = tmp;
+            result = i;
+        end
+    endtask
+
+    task quicksort;
+        input integer lo, hi;
+        integer pp;
+        begin
+            if (lo < hi) begin
+                partition(lo, hi, pp);
+                quicksort(lo, pp - 1);
+                quicksort(pp + 1, hi);
+            end
+        end
+    endtask
+
+    initial begin
+        arr[0] = 3; arr[1] = 6; arr[2] = 8; arr[3] = 10;
+        arr[4] = 1; arr[5] = 2; arr[6] = 1;
+        quicksort(0, 6);
+        for (i = 0; i <= 6; i = i + 1)
+            $display("%0d", arr[i]);
+        $finish;
+    end
+endmodule

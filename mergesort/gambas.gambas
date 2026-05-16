@@ -1,0 +1,32 @@
+Public arr As Integer[] = [38, 27, 43, 3, 9, 82, 10]
+Public tmp As New Integer[7]
+
+Public Sub Merge(lo As Integer, mid As Integer, hi As Integer)
+    Dim i As Integer = lo, j As Integer = mid + 1, k As Integer = lo, x As Integer
+    While i <= mid And j <= hi
+        If arr[i] <= arr[j] Then
+            tmp[k] = arr[i]: Inc i
+        Else
+            tmp[k] = arr[j]: Inc j
+        End If
+        Inc k
+    Wend
+    While i <= mid: tmp[k] = arr[i]: Inc i: Inc k: Wend
+    While j <= hi: tmp[k] = arr[j]: Inc j: Inc k: Wend
+    For x = lo To hi: arr[x] = tmp[x]: Next
+End Sub
+
+Public Sub MergeSort(lo As Integer, hi As Integer)
+    If lo >= hi Then Return
+    Dim mid As Integer = (lo + hi) \ 2
+    MergeSort(lo, mid)
+    MergeSort(mid + 1, hi)
+    Merge(lo, mid, hi)
+End Sub
+
+Public Sub Main()
+    MergeSort(0, 6)
+    Dim i As Integer
+    For i = 0 To 6: Print arr[i]; " ";: Next
+    Print
+End Sub

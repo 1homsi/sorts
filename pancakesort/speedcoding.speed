@@ -1,0 +1,33 @@
+; Speedcoding approximation for pancake sort
+; Speedcoding was an early interpreted language for IBM 701
+; Using symbolic notation similar to the original
+
+LOAD   R1, =3    ; arr[0]
+STORE  R1, ARR+0
+LOAD   R1, =6    ; arr[1]
+STORE  R1, ARR+1
+LOAD   R1, =2    ; arr[2]
+STORE  R1, ARR+2
+LOAD   R1, =7    ; arr[3]
+STORE  R1, ARR+3
+LOAD   R1, =4    ; arr[4]
+STORE  R1, ARR+4
+LOAD   R1, =1    ; arr[5]
+STORE  R1, ARR+5
+LOAD   R1, =5    ; arr[6]
+STORE  R1, ARR+6
+
+LOAD   R2, =7    ; SIZE = 7
+OUTER:
+  LOAD  R3, =1
+  CMPR  R2, R3
+  JLE   DONE
+  ; find max idx
+  ; flip operations
+  ; (full implementation requires memory-mapped array ops)
+  SUB   R2, R2, =1
+  JUMP  OUTER
+DONE:
+  HALT
+
+ARR: WORDS 7

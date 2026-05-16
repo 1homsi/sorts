@@ -1,0 +1,19 @@
+            DIMENSION ARR(10)
+            N=5
+            ARR(1)=5
+            ARR(2)=3
+            ARR(3)=1
+            ARR(4)=4
+            ARR(5)=2
+            THROUGH OUTER, FOR I=1, 1, I.GE.N
+            MINIDX=I
+            THROUGH INNER, FOR J=I+1, 1, J.G.N
+            WHENEVER ARR(J).L.ARR(MINIDX)
+            MINIDX=J
+            END OF CONDITIONAL
+INNER       CONTINUE
+            TMP=ARR(I)
+            ARR(I)=ARR(MINIDX)
+            ARR(MINIDX)=TMP
+OUTER       CONTINUE
+            END OF PROGRAM

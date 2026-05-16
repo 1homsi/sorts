@@ -1,0 +1,2 @@
+SelectionSort = sort!5.sort!3.sort!1.sort!4.sort!2.0
+               | (sort?x.sort?y.if x > y then (result!y.result!x.0) else (result!x.result!y.0))

@@ -1,0 +1,14 @@
+(ns quicksort.core
+  (:require [clojure.core.logic :refer :all]
+            [clojure.core.logic.arithmetic :refer :all]))
+
+(defn quicksort [lst]
+  (if (empty? lst)
+    lst
+    (let [pivot (first lst)
+          rest (rest lst)
+          left (filter #(<= % pivot) rest)
+          right (filter #(> % pivot) rest)]
+      (concat (quicksort left) [pivot] (quicksort right)))))
+
+(println (quicksort [3 6 8 10 1 2 1]))

@@ -1,0 +1,27 @@
+let partition arr low high =
+  let pivot = arr.(high) in
+  let i = ref low in
+  for j = low to high - 1 do
+    if arr.(j) <= pivot then begin
+      let tmp = arr.(!i) in
+      arr.(!i) <- arr.(j);
+      arr.(j) <- tmp;
+      incr i
+    end
+  done;
+  let tmp = arr.(!i) in
+  arr.(!i) <- arr.(high);
+  arr.(high) <- tmp;
+  !i
+
+let rec quicksort arr low high =
+  if low < high then begin
+    let p = partition arr low high in
+    quicksort arr low (p - 1);
+    quicksort arr (p + 1) high
+  end
+
+let () =
+  let arr = [|3; 6; 8; 10; 1; 2; 1|] in
+  quicksort arr 0 (Array.length arr - 1);
+  Array.iter (Printf.printf "%d\n") arr

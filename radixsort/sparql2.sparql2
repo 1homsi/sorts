@@ -1,0 +1,12 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?val WHERE {
+    VALUES ?val { "170"^^xsd:integer "45"^^xsd:integer "75"^^xsd:integer
+                  "90"^^xsd:integer "802"^^xsd:integer "24"^^xsd:integer
+                  "2"^^xsd:integer "66"^^xsd:integer }
+    BIND((?val MOD 10) AS ?d0)
+    BIND(((?val / 10) MOD 10) AS ?d1)
+    BIND(((?val / 100) MOD 10) AS ?d2)
+}
+ORDER BY ?d0 ?d1 ?d2 ?val

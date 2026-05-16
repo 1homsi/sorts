@@ -1,0 +1,23 @@
+BEGIN
+    INTEGER ARRAY arr(1:7);
+    INTEGER n, gap, i, j, temp;
+    arr(1) := 64; arr(2) := 34; arr(3) := 25; arr(4) := 12;
+    arr(5) := 22; arr(6) := 11; arr(7) := 90;
+    n := 7;
+    gap := n // 2;
+    WHILE gap > 0 DO BEGIN
+        FOR i := gap + 1 STEP 1 UNTIL n DO BEGIN
+            temp := arr(i);
+            j := i;
+            WHILE j > gap AND arr(j - gap) > temp DO BEGIN
+                arr(j) := arr(j - gap);
+                j := j - gap;
+            END;
+            arr(j) := temp;
+        END;
+        gap := gap // 2;
+    END;
+    FOR i := 1 STEP 1 UNTIL n DO
+        OutInt(arr(i), 4);
+    OutImage;
+END

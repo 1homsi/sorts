@@ -1,0 +1,54 @@
+use Array: all;
+use StdIO: all;
+
+int[.] flip(int[.] arr, int k)
+{
+    n = shape(arr)[0];
+    left = 0;
+    right = k;
+    res = arr;
+    while (left < right) {
+        tmp = res[left];
+        res[left] = res[right];
+        res[right] = tmp;
+        left = left + 1;
+        right = right - 1;
+    }
+    return res;
+}
+
+int findMaxIdx(int[.] arr, int size)
+{
+    maxIdx = 0;
+    i = 1;
+    while (i < size) {
+        if (arr[i] > arr[maxIdx]) {
+            maxIdx = i;
+        }
+        i = i + 1;
+    }
+    return maxIdx;
+}
+
+int[.] pancakeSort(int[.] arr)
+{
+    size = shape(arr)[0];
+    a = arr;
+    while (size > 1) {
+        mi = findMaxIdx(a, size);
+        if (mi != size - 1) {
+            if (mi != 0) { a = flip(a, mi); }
+            a = flip(a, size - 1);
+        }
+        size = size - 1;
+    }
+    return a;
+}
+
+int main()
+{
+    arr = [3, 6, 2, 7, 4, 1, 5];
+    sorted = pancakeSort(arr);
+    printf("%s\n", String(sorted));
+    return 0;
+}

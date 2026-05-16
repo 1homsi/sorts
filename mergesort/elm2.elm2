@@ -1,0 +1,29 @@
+module Main exposing (main)
+
+import Html exposing (text)
+import List
+
+mergeHelp : List Int -> List Int -> List Int
+mergeHelp left right =
+    case ( left, right ) of
+        ( [], _ ) -> right
+        ( _, [] ) -> left
+        ( lh :: lt, rh :: rt ) ->
+            if lh <= rh then
+                lh :: mergeHelp lt right
+            else
+                rh :: mergeHelp left rt
+
+mergeSort : List Int -> List Int
+mergeSort lst =
+    let n = List.length lst
+    in
+    if n <= 1 then lst
+    else
+        let mid = n // 2
+        in mergeHelp
+            (mergeSort (List.take mid lst))
+            (mergeSort (List.drop mid lst))
+
+main =
+    text (Debug.toString (mergeSort [38, 27, 43, 3, 9, 82, 10]))

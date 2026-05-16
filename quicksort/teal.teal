@@ -1,0 +1,23 @@
+local function quicksort(arr: {integer}, low: integer, high: integer): nil
+    if low < high then
+        local pivot = arr[high]
+        local i = low
+        for j = low, high - 1 do
+            if arr[j] <= pivot then
+                local tmp = arr[i]
+                arr[i] = arr[j]
+                arr[j] = tmp
+                i = i + 1
+            end
+        end
+        local tmp = arr[i]
+        arr[i] = arr[high]
+        arr[high] = tmp
+        quicksort(arr, low, i - 1)
+        quicksort(arr, i + 1, high)
+    end
+end
+
+local arr: {integer} = {3, 6, 8, 10, 1, 2, 1}
+quicksort(arr, 1, #arr)
+print(table.concat(arr, " "))

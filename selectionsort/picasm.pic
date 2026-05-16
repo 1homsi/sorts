@@ -1,0 +1,48 @@
+        PROCESSOR 16F877A
+        #include <p16F877A.inc>
+        
+        CBLOCK 0x20
+            arr_0, arr_1, arr_2, arr_3, arr_4
+            n, i, j, minIdx, tmp
+        ENDC
+        
+        ORG 0x000
+        
+SELECTION_SORT
+        MOVLW .5
+        MOVWF n
+        MOVLW .5; arr[0]
+        MOVWF arr_0
+        MOVLW .3
+        MOVWF arr_1
+        MOVLW .1
+        MOVWF arr_2
+        MOVLW .4
+        MOVWF arr_3
+        MOVLW .2
+        MOVWF arr_4
+        CLRF i
+OUTER
+        MOVF i,W
+        SUBLW .4
+        BTFSC STATUS,C
+        GOTO DONE
+        MOVF i,W
+        MOVWF minIdx
+        MOVF i,W
+        ADDLW .1
+        MOVWF j
+INNER
+        MOVF j,W
+        SUBLW .5
+        BTFSS STATUS,C
+        GOTO DO_SWAP
+        ; compare arr[j] < arr[minIdx]
+        INCF i,F
+        GOTO OUTER
+DO_SWAP
+        INCF i,F
+        GOTO OUTER
+DONE
+        RETURN
+        END

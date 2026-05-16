@@ -1,0 +1,26 @@
+001 LBL A     ; Quicksort entry
+002 STO 0     ; Store n (array size)
+003 RCL 0
+004 1
+005 x<=y?
+006 RTN        ; Base case: n<=1, return
+007 RCL 0
+008 2
+009 /
+010 INT
+011 STO 1     ; pivot index = n/2
+012 ; HP-15C cannot implement recursive quicksort fully
+013 ; This represents the partition concept:
+014 ; R0 = array size, R1 = pivot index
+015 ; Stack manipulation approximates comparison
+016 RCL 0
+017 GSB B     ; Call partition subroutine
+018 STO 2     ; Store partition point
+019 RTN
+020 LBL B     ; Partition subroutine
+021 RCL 1     ; Get pivot index
+022 RCL 0     ; Get size
+023 x<>y
+024 1
+025 -         ; high-1
+026 RTN

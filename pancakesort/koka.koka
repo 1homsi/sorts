@@ -1,0 +1,31 @@
+fun flip(arr : vector<int>, k : int) : vector<int>
+  val n = arr.length
+  fun go(a : vector<int>, left : int, right : int) : vector<int>
+    if left >= right then a
+    else
+      val tmp = a[left]
+      val a1 = a.set(left, a[right])
+      val a2 = a1.set(right, tmp)
+      go(a2, left + 1, right - 1)
+  go(arr, 0, k)
+
+fun find-max-idx(arr : vector<int>, size : int) : int
+  fun go(i : int, mi : int) : int
+    if i >= size then mi
+    elif arr[i] > arr[mi] then go(i + 1, i)
+    else go(i + 1, mi)
+  go(1, 0)
+
+fun pancake-sort(arr : vector<int>) : vector<int>
+  fun go(a : vector<int>, size : int) : vector<int>
+    if size <= 1 then a
+    else
+      val mi = find-max-idx(a, size)
+      val a1 = if mi != 0 then flip(a, mi) else a
+      val a2 = flip(a1, size - 1)
+      go(a2, size - 1)
+  go(arr, arr.length)
+
+fun main()
+  val arr = vector([3, 6, 2, 7, 4, 1, 5])
+  println(pancake-sort(arr).show)

@@ -1,0 +1,20 @@
+int arr[5];
+int n = 5;
+
+proctype InsertionSort() {
+    int i = 1, j, key;
+    do
+    :: i < n ->
+        key = arr[i];
+        j = i - 1;
+        do
+        :: j >= 0 && arr[j] > key ->
+            arr[j+1] = arr[j];
+            j--;
+        :: else -> break
+        od;
+        arr[j+1] = key;
+        i++;
+    :: else -> break
+    od;
+}

@@ -1,0 +1,12 @@
+        DEFINE('ISORT4(ARR,N)')
+        DEFINE('INSERT4(X,POS)')
+ISORT4  I = 1
+LOOP4   GT(I,N)                         :S(RETURN)
+        KEY = ARR<I>
+        J = I - 1
+INN4    LE(J,0)                         :S(PLACE4)
+        GT(ARR<J>,KEY)                  :F(PLACE4)
+        ARR<J + 1> = ARR<J>
+        J = J - 1                       :(INN4)
+PLACE4  ARR<J + 1> = KEY
+        I = I + 1                       :(LOOP4)

@@ -1,0 +1,28 @@
+module TreeSort2 exposing (main)
+
+import Html exposing (text)
+
+type BSTree comparable
+    = Empty
+    | Branch (BSTree comparable) comparable (BSTree comparable)
+
+bstInsert : BSTree comparable -> comparable -> BSTree comparable
+bstInsert tree v =
+    case tree of
+        Empty -> Branch Empty v Empty
+        Branch l x r ->
+            if v < x then Branch (bstInsert l v) x r
+            else Branch l x (bstInsert r v)
+
+bstInorder : BSTree comparable -> List comparable
+bstInorder tree =
+    case tree of
+        Empty -> []
+        Branch l v r -> bstInorder l ++ [ v ] ++ bstInorder r
+
+treesort : List comparable -> List comparable
+treesort arr =
+    List.foldl (\v t -> bstInsert t v) Empty arr |> bstInorder
+
+main =
+    text (Debug.toString (treesort [ 5, 3, 7, 1, 4, 6, 8 ]))

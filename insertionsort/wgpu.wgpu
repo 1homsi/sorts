@@ -1,0 +1,20 @@
+@group(0) @binding(0) var<storage, read> input: array<i32>;
+@group(0) @binding(1) var<storage, read_write> output: array<i32>;
+
+@compute @workgroup_size(1)
+fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
+    let n = arrayLength(&input);
+    for (var i = 0u; i < n; i++) {
+        output[i] = input[i];
+    }
+    for (var i = 1u; i < n; i++) {
+        let key = output[i];
+        var j = i32(i) - 1;
+        loop {
+            if j < 0 || output[u32(j)] <= key { break; }
+            output[u32(j + 1)] = output[u32(j)];
+            j -= 1;
+        }
+        output[u32(j + 1)] = key;
+    }
+}

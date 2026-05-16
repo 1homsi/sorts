@@ -1,0 +1,14 @@
+(SelectionSort Nil) = Nil
+(SelectionSort list) =
+  let min = (ListMin list)
+  let rest = (RemoveFirst min list)
+  (Cons min (SelectionSort rest))
+
+(ListMin (Cons x Nil)) = x
+(ListMin (Cons x xs)) =
+  let m = (ListMin xs)
+  (If (< x m) x m)
+
+(RemoveFirst x Nil) = Nil
+(RemoveFirst x (Cons y ys)) =
+  (If (== x y) ys (Cons y (RemoveFirst x ys)))

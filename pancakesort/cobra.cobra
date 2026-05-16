@@ -1,0 +1,27 @@
+class PancakeSort
+    def flip(arr as int[], k as int)
+        left, right = 0, k
+        while left < right
+            tmp = arr[left]
+            arr[left] = arr[right]
+            arr[right] = tmp
+            left += 1
+            right -= 1
+
+    def sort(arr as int[]) as int[]
+        size = arr.length
+        while size > 1
+            maxIdx = 0
+            for i in 1 : size
+                if arr[i] > arr[maxIdx]
+                    maxIdx = i
+            if maxIdx <> size - 1
+                if maxIdx <> 0
+                    .flip(arr, maxIdx)
+                .flip(arr, size - 1)
+            size -= 1
+        return arr
+
+    def main
+        arr = @[3, 6, 2, 7, 4, 1, 5]
+        print .sort(arr)

@@ -1,0 +1,19 @@
+let get_digit = fun x exp -> (x / exp) mod 10 in
+
+let counting_sort = fun arr exp ->
+    List.fold_left (fun acc d ->
+        acc @ List.filter (fun x -> get_digit x exp = d) arr
+    ) [] (List.init 10 (fun i -> i)) in
+
+let radix_sort = fun arr ->
+    if arr = [] then []
+    else
+        let max_val = List.fold_left max 0 arr in
+        let rec loop arr exp =
+            if max_val / exp = 0 then arr
+            else loop (counting_sort arr exp) (exp * 10)
+        in
+        loop arr 1 in
+
+let arr = [170; 45; 75; 90; 802; 24; 2; 66] in
+radix_sort arr

@@ -1,0 +1,45 @@
+PROCEDURE mergesort
+PARAMETERS arr, lo, hi
+IF lo >= hi
+    RETURN
+ENDIF
+mid = INT((lo + hi) / 2)
+DO mergesort WITH arr, lo, mid
+DO mergesort WITH arr, mid + 1, hi
+DO merge WITH arr, lo, mid, hi
+RETURN
+
+PROCEDURE merge
+PARAMETERS arr, lo, mid, hi
+DIMENSION tmp(hi - lo + 1)
+i = lo
+j = mid + 1
+k = 1
+DO WHILE i <= mid .AND. j <= hi
+    IF arr(i) <= arr(j)
+        tmp(k) = arr(i)
+        i = i + 1
+    ELSE
+        tmp(k) = arr(j)
+        j = j + 1
+    ENDIF
+    k = k + 1
+ENDDO
+DO WHILE i <= mid
+    tmp(k) = arr(i); i = i + 1; k = k + 1
+ENDDO
+DO WHILE j <= hi
+    tmp(k) = arr(j); j = j + 1; k = k + 1
+ENDDO
+FOR x = lo TO hi
+    arr(x) = tmp(x - lo + 1)
+ENDFOR
+RETURN
+
+DIMENSION arr(7)
+arr(1)=38; arr(2)=27; arr(3)=43; arr(4)=3
+arr(5)=9; arr(6)=82; arr(7)=10
+DO mergesort WITH arr, 1, 7
+FOR i = 1 TO 7
+    ? arr(i)
+ENDFOR

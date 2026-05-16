@@ -1,0 +1,30 @@
+include std/io.e
+
+function partition(sequence arr, integer low, integer high)
+    integer pivot = arr[high]
+    integer i = low
+    integer tmp
+    for j = low to high - 1 do
+        if arr[j] <= pivot then
+            tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp
+            i += 1
+        end if
+    end for
+    tmp = arr[i]; arr[i] = arr[high]; arr[high] = tmp
+    return {arr, i}
+end function
+
+function quicksort(sequence arr, integer low, integer high)
+    if low < high then
+        sequence res = partition(arr, low, high)
+        arr = res[1]
+        integer p = res[2]
+        arr = quicksort(arr, low, p - 1)
+        arr = quicksort(arr, p + 1, high)
+    end if
+    return arr
+end function
+
+sequence arr = {3, 6, 8, 10, 1, 2, 1}
+arr = quicksort(arr, 1, length(arr))
+print(1, arr)

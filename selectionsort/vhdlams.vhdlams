@@ -1,0 +1,28 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity SelectionSortAMS is
+end SelectionSortAMS;
+
+architecture Behavioral of SelectionSortAMS is
+    type arr_type is array (0 to 4) of real;
+    quantity arr : arr_type := (5.0, 3.0, 1.0, 4.0, 2.0);
+begin
+    process
+        variable min_idx : integer;
+        variable tmp : real;
+    begin
+        for i in 0 to 3 loop
+            min_idx := i;
+            for j in i+1 to 4 loop
+                if arr(j) < arr(min_idx) then
+                    min_idx := j;
+                end if;
+            end loop;
+            tmp := arr(i);
+            arr(i) := arr(min_idx);
+            arr(min_idx) := tmp;
+        end loop;
+        wait;
+    end process;
+end Behavioral;

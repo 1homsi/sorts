@@ -1,0 +1,47 @@
+(*
+  Pict is a concurrent programming language based on the pi-calculus.
+  Computation is expressed as processes communicating over channels.
+*)
+
+(* merge sort via channel-based communication *)
+
+def merge(leftCh: Chan(List(Int)), rightCh: Chan(List(Int)), resCh: Chan(List(Int))) =
+  left <- leftCh;
+  right <- rightCh;
+  case left of
+    nil => resCh ! right
+  | lh::lt => case right of
+      nil => resCh ! left
+    | rh::rt =>
+        if lh <= rh then
+          restCh = new Chan(List(Int));
+          run merge(lt ! (), right ! (), restCh);
+          rest <- restCh;
+          resCh ! (lh :: rest)
+        else
+          restCh = new Chan(List(Int));
+          run merge(left ! (), rt ! (), restCh);
+          rest <- restCh;
+          resCh ! (rh :: rest)
+
+def mergeSort(arrCh: Chan(List(Int)), resCh: Chan(List(Int))) =
+  arr <- arrCh;
+  case arr of
+    nil => resCh ! nil
+  | [x] => resCh ! [x]
+  | _ =>
+      let n = length arr in
+      let mid = n / 2 in
+      leftIn = new; rightIn = new; leftOut = new; rightOut = new;
+      leftIn ! (take mid arr);
+      rightIn ! (drop mid arr);
+      run mergeSort(leftIn, leftOut);
+      run mergeSort(rightIn, rightOut);
+      run merge(leftOut, rightOut, resCh)
+
+run
+  input = new; output = new;
+  input ! [38, 27, 43, 3, 9, 82, 10];
+  run mergeSort(input, output);
+  result <- output;
+  print result

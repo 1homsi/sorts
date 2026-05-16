@@ -1,0 +1,21 @@
+class ShellSort usingPlatform: platform = (
+    | arr |
+    shellSort: anArray = (
+        | n gap temp j |
+        n := anArray size.
+        gap := n // 2.
+        [gap > 0] whileTrue: [
+            gap to: n - 1 do: [:i |
+                temp := anArray at: i + 1.
+                j := i.
+                [j >= gap and: [(anArray at: j) > temp]] whileTrue: [
+                    anArray at: j + 1 put: (anArray at: j).
+                    j := j - gap.
+                ].
+                anArray at: j + 1 put: temp.
+            ].
+            gap := gap // 2.
+        ].
+        ^anArray
+    )
+)

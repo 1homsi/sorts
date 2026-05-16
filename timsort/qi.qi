@@ -1,0 +1,43 @@
+(define insert-val
+  X [] -> [X]
+  X [H | T] -> [X H | T] where (<= X H)
+  X [H | T] -> [H | (insert-val X T)])
+
+(define isort
+  [] -> []
+  [H | T] -> (insert-val H (isort T)))
+
+(define mmerge
+  [] Ys -> Ys
+  Xs [] -> Xs
+  [X | Xs] [Y | Ys] -> [X | (mmerge Xs [Y | Ys])] where (<= X Y)
+  [X | Xs] [Y | Ys] -> [Y | (mmerge [X | Xs] Ys)])
+
+(define take-n
+  0 _ -> []
+  _ [] -> []
+  N [H | T] -> [H | (take-n (- N 1) T)])
+
+(define drop-n
+  0 Xs -> Xs
+  _ [] -> []
+  N [_ | T] -> (drop-n (- N 1) T))
+
+(define chunks
+  _ [] -> []
+  N Xs -> [(take-n N Xs) | (chunks N (drop-n N Xs))])
+
+(define mpairs
+  [] -> []
+  [X] -> [X]
+  [X Y | R] -> [(mmerge X Y) | (mpairs R)])
+
+(define mall
+  [X] -> X
+  Xs -> (mall (mpairs Xs)))
+
+(define timsort
+  [] -> []
+  Xs -> (mall (map (fn isort) (chunks 32 Xs))))
+
+(output "~A~%" (timsort [5 2 8 1 9 3 7 4 6]))

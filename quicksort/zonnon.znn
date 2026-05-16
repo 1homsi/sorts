@@ -1,0 +1,39 @@
+module Quicksort;
+import Out;
+
+var arr: array 7 of integer;
+
+procedure {public} Partition(low, high: integer): integer;
+var pivot, tmp, i, j: integer;
+begin
+    pivot := arr[high]; i := low;
+    j := low;
+    while j < high do
+        if arr[j] <= pivot then
+            tmp := arr[i]; arr[i] := arr[j]; arr[j] := tmp;
+            i := i + 1
+        end;
+        j := j + 1
+    end;
+    tmp := arr[i]; arr[i] := arr[high]; arr[high] := tmp;
+    return i
+end Partition;
+
+procedure {public} Quicksort(low, high: integer);
+var p: integer;
+begin
+    if low < high then
+        p := Partition(low, high);
+        Quicksort(low, p - 1);
+        Quicksort(p + 1, high)
+    end
+end Quicksort;
+
+var i: integer;
+begin
+    arr[0]:=3; arr[1]:=6; arr[2]:=8; arr[3]:=10;
+    arr[4]:=1; arr[5]:=2; arr[6]:=1;
+    Quicksort(0, 6);
+    for i := 0 to 6 do Out.Int(arr[i], 4) end;
+    Out.Ln
+end Quicksort.

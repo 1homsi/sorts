@@ -1,0 +1,56 @@
+        .data
+arr:    .long 5, 3, 1, 4, 2
+n:      .long 5
+
+        .text
+        .globl selection_sort
+
+selection_sort:
+        mflr r0
+        stw r0, 4(r1)
+        stwu r1, -48(r1)
+        stmw r14, 8(r1)
+        
+        lis r14, arr@ha
+        la r14, arr@l(r14)
+        lis r15, n@ha
+        lwz r15, n@l(r15)
+        li r16, 0
+
+outer:
+        addi r3, r15, -1
+        cmpw r16, r3
+        bge done
+        mr r17, r16
+        addi r18, r16, 1
+
+inner:
+        cmpw r18, r15
+        bge swap_elem
+        slwi r3, r18, 2
+        lwzx r19, r14, r3
+        slwi r3, r17, 2
+        lwzx r20, r14, r3
+        cmpw r19, r20
+        bge next
+        mr r17, r18
+next:
+        addi r18, r18, 1
+        b inner
+
+swap_elem:
+        slwi r3, r16, 2
+        lwzx r19, r14, r3
+        slwi r4, r17, 2
+        lwzx r20, r14, r4
+        stwx r20, r14, r3
+        stwx r19, r14, r4
+        addi r16, r16, 1
+        b outer
+
+done:
+        lmw r14, 8(r1)
+        lwz r0, 52(r1)
+        addi r1, r1, 48
+        mtlr r0
+        blr

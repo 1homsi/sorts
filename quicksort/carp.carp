@@ -1,0 +1,20 @@
+(defn partition [arr low high]
+    (let [pivot (Array.nth arr high)
+          i (ref low)]
+        (for [j low high]
+            (when (<= (Array.nth arr j) @pivot)
+                (Array.swap! arr @i j)
+                (swap! i &(+ @i 1))))
+        (Array.swap! arr @i high)
+        @i))
+
+(defn quicksort [arr low high]
+    (when (< low high)
+        (let [p (partition arr low high)]
+            (quicksort arr low (- p 1))
+            (quicksort arr (+ p 1) high))))
+
+(defn main []
+    (let [arr (Array.literal 3 6 8 10 1 2 1)]
+        (quicksort &arr 0 (- (Array.length &arr) 1))
+        (println* &arr)))

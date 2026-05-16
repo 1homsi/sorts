@@ -1,0 +1,41 @@
+Object subclass: #BSTNode
+    instanceVariableNames: 'val left right'
+    classVariableNames: ''
+    package: 'TreeSort'.
+
+BSTNode class >> withVal: v [
+    ^self new initVal: v
+]
+
+BSTNode >> initVal: v [
+    val := v. left := nil. right := nil.
+]
+
+BSTNode >> insert: v [
+    v < val
+        ifTrue: [left isNil
+            ifTrue: [left := BSTNode withVal: v]
+            ifFalse: [left insert: v]]
+        ifFalse: [right isNil
+            ifTrue: [right := BSTNode withVal: v]
+            ifFalse: [right insert: v]]
+]
+
+BSTNode >> inorder: col [
+    left ifNotNil: [:l | l inorder: col].
+    col add: val.
+    right ifNotNil: [:r | r inorder: col].
+]
+
+treesort: arr [
+    | root result |
+    arr do: [:v |
+        root isNil
+            ifTrue: [root := BSTNode withVal: v]
+            ifFalse: [root insert: v]].
+    result := OrderedCollection new.
+    root ifNotNil: [:r | r inorder: result].
+    ^result
+]
+
+Transcript showCr: (treesort: #(5 3 7 1 4 6 8)) printString.

@@ -1,0 +1,38 @@
+using System;
+using System.Collections;
+
+class Program
+{
+    static int Partition(int[] arr, int low, int high)
+    {
+        int pivot = arr[high];
+        int i = low;
+        for (int j = low; j < high; j++)
+        {
+            if (arr[j] <= pivot)
+            {
+                int tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+                i++;
+            }
+        }
+        int t = arr[i]; arr[i] = arr[high]; arr[high] = t;
+        return i;
+    }
+
+    static void Quicksort(int[] arr, int low, int high)
+    {
+        if (low < high)
+        {
+            int p = Partition(arr, low, high);
+            Quicksort(arr, low, p - 1);
+            Quicksort(arr, p + 1, high);
+        }
+    }
+
+    static void Main()
+    {
+        int[] arr = .(3, 6, 8, 10, 1, 2, 1);
+        Quicksort(arr, 0, arr.Count - 1);
+        Console.WriteLine(arr);
+    }
+}

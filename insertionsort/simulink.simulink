@@ -1,0 +1,13 @@
+function sorted = insertion_sort(arr)
+    n = length(arr);
+    sorted = arr;
+    for i = 2:n
+        key = sorted(i);
+        j = i - 1;
+        while j >= 1 && sorted(j) > key
+            sorted(j + 1) = sorted(j);
+            j = j - 1;
+        end
+        sorted(j + 1) = key;
+    end
+end

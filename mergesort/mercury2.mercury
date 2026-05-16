@@ -1,0 +1,38 @@
+:- module mercury2.
+:- interface.
+:- import_module io.
+:- pred main(io::di, io::uo) is det.
+
+:- implementation.
+:- import_module list, int.
+
+:- pred merge_sort(list(int)::in, list(int)::out) is det.
+:- pred merge_sorted(list(int)::in, list(int)::in, list(int)::out) is det.
+
+merge_sort([], []).
+merge_sort([X], [X]).
+merge_sort([A, B | Rest], Sorted) :-
+    List = [A, B | Rest],
+    length(List, Len),
+    Mid = Len // 2,
+    length(Left, Mid),
+    append(Left, Right, List),
+    merge_sort(Left, SortedLeft),
+    merge_sort(Right, SortedRight),
+    merge_sorted(SortedLeft, SortedRight, Sorted).
+
+merge_sorted([], Right, Right).
+merge_sorted(Left, [], Left).
+merge_sorted([Lh|Lt], [Rh|Rt], Result) :-
+    ( Lh =< Rh ->
+        merge_sorted(Lt, [Rh|Rt], Rest),
+        Result = [Lh|Rest]
+    ;
+        merge_sorted([Lh|Lt], Rt, Rest),
+        Result = [Rh|Rest]
+    ).
+
+main(!IO) :-
+    merge_sort([38,27,43,3,9,82,10], Sorted),
+    write(Sorted, !IO),
+    nl(!IO).

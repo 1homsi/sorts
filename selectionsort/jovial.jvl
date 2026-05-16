@@ -1,0 +1,13 @@
+PROC SELSORT(ARR, N) $
+    ITEM ARR(10) S(16);
+    ITEM N, I, J, MINIDX, TMP S(16);
+    FOR I = 0 TO N-2 $
+        MINIDX = I;
+        FOR J = I+1 TO N-1 $
+            IF ARR(J) LSS ARR(MINIDX) THEN MINIDX = J;
+        TERM
+        TMP = ARR(I);
+        ARR(I) = ARR(MINIDX);
+        ARR(MINIDX) = TMP;
+    TERM
+TERM

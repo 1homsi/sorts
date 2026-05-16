@@ -1,0 +1,14 @@
+def quicksort(List arr) {
+    if (arr.size() <= 1) return arr
+    def pivot = arr[arr.size() / 2 as int]
+    def left = arr.findAll { it < pivot }
+    def middle = arr.findAll { it == pivot }
+    def right = arr.findAll { it > pivot }
+    quicksort(left) + middle + quicksort(right)
+}
+
+task sort {
+    doLast {
+        println quicksort([3, 6, 8, 10, 1, 2, 1])
+    }
+}

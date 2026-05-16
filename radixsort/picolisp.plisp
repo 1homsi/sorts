@@ -1,0 +1,22 @@
+(de get-digit (X Exp)
+   (% (/ X Exp) 10) )
+
+(de counting-sort (Arr Exp)
+   (apply append
+      (mapcar
+         '((D)
+            (filter
+               '((X) (= (get-digit X Exp) D))
+               Arr ) )
+         (range 0 9) ) ) )
+
+(de radix-sort (Arr)
+   (if (not Arr)
+      Arr
+      (let (MaxVal (apply max Arr)  Exp 1)
+         (while (> (/ MaxVal Exp) 0)
+            (setq Arr (counting-sort Arr Exp))
+            (setq Exp (* Exp 10)) )
+         Arr ) ) )
+
+(println (radix-sort '(170 45 75 90 802 24 2 66)))

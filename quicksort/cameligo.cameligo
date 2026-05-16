@@ -1,0 +1,11 @@
+let rec quicksort (arr : int list) : int list =
+    match arr with
+    | [] -> []
+    | pivot :: rest ->
+        let left = List.filter (fun x -> x <= pivot) rest in
+        let right = List.filter (fun x -> x > pivot) rest in
+        quicksort left @ (pivot :: quicksort right)
+
+let () =
+    let result = quicksort [3; 6; 8; 10; 1; 2; 1] in
+    List.iter (fun x -> Printf.printf "%d\n" x) result

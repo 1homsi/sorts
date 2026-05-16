@@ -1,0 +1,13 @@
+Kind2.SelectionSort/sort (arr: List U60) : List U60
+Kind2.SelectionSort/sort [] = []
+Kind2.SelectionSort/sort lst =
+  let m = List.minimum lst 0
+  let rest = List.removeFirst m lst
+  (List.cons m (Kind2.SelectionSort/sort rest))
+
+List.minimum (lst: List U60) (default: U60) : U60
+List.minimum [] d = d
+List.minimum [x] _ = x
+List.minimum (x, xs) _ =
+  let m = List.minimum xs x
+  if x < m then x else m

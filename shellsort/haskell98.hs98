@@ -1,0 +1,32 @@
+import Data.IORef
+import Data.Array.IO
+
+shellSort :: IOArray Int Int -> Int -> IO ()
+shellSort arr n = do
+    let gapLoop 0 = return ()
+        gapLoop gap = do
+            mapM_ (insertItem arr n gap) [gap..n-1]
+            gapLoop (gap `div` 2)
+    gapLoop (n `div` 2)
+
+insertItem :: IOArray Int Int -> Int -> Int -> Int -> IO ()
+insertItem arr n gap i = do
+    temp <- readArray arr i
+    let shiftBack j = do
+          if j >= gap
+            then do
+              prev <- readArray arr (j - gap)
+              if prev > temp
+                then do
+                  writeArray arr j prev
+                  shiftBack (j - gap)
+                else writeArray arr j temp
+            else writeArray arr j temp
+    shiftBack i
+
+main :: IO ()
+main = do
+    arr <- newListArray (0, 6) [64, 34, 25, 12, 22, 11, 90] :: IO (IOArray Int Int)
+    shellSort arr 7
+    xs <- getElems arr
+    print xs

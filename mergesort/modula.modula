@@ -1,0 +1,40 @@
+MODULE MergeSort;
+
+FROM Terminal IMPORT Write;
+
+CONST N = 7;
+
+VAR arr: ARRAY [1..N] OF INTEGER;
+VAR tmp: ARRAY [1..N] OF INTEGER;
+
+PROCEDURE Merge(lo, mid, hi: INTEGER);
+VAR i, j, k, x: INTEGER;
+BEGIN
+    i := lo; j := mid + 1; k := lo;
+    WHILE (i <= mid) AND (j <= hi) DO
+        IF arr[i] <= arr[j] THEN tmp[k] := arr[i]; INC(i)
+        ELSE tmp[k] := arr[j]; INC(j) END;
+        INC(k)
+    END;
+    WHILE i <= mid DO tmp[k] := arr[i]; INC(i); INC(k) END;
+    WHILE j <= hi DO tmp[k] := arr[j]; INC(j); INC(k) END;
+    FOR x := lo TO hi DO arr[x] := tmp[x] END
+END Merge;
+
+PROCEDURE MSort(lo, hi: INTEGER);
+VAR mid: INTEGER;
+BEGIN
+    IF lo >= hi THEN RETURN END;
+    mid := (lo + hi) DIV 2;
+    MSort(lo, mid);
+    MSort(mid + 1, hi);
+    Merge(lo, mid, hi)
+END MSort;
+
+VAR i: INTEGER;
+BEGIN
+    arr[1]:=38; arr[2]:=27; arr[3]:=43; arr[4]:=3;
+    arr[5]:=9; arr[6]:=82; arr[7]:=10;
+    MSort(1, N);
+    FOR i := 1 TO N DO Write(arr[i]) END
+END MergeSort.

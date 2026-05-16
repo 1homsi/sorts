@@ -1,0 +1,30 @@
+Dim Shared arr(6) As Integer, tmp(6) As Integer
+arr(0)=38: arr(1)=27: arr(2)=43: arr(3)=3
+arr(4)=9: arr(5)=82: arr(6)=10
+
+Sub Merge(lo As Integer, mid As Integer, hi As Integer)
+    Dim i As Integer, j As Integer, k As Integer, x As Integer
+    i = lo: j = mid + 1: k = lo
+    While i <= mid AndAlso j <= hi
+        If arr(i) <= arr(j) Then tmp(k) = arr(i): i += 1
+        Else tmp(k) = arr(j): j += 1
+        End If
+        k += 1
+    Wend
+    While i <= mid: tmp(k) = arr(i): i += 1: k += 1: Wend
+    While j <= hi: tmp(k) = arr(j): j += 1: k += 1: Wend
+    For x = lo To hi: arr(x) = tmp(x): Next x
+End Sub
+
+Sub MergeSort(lo As Integer, hi As Integer)
+    If lo >= hi Then Exit Sub
+    Dim mid As Integer = (lo + hi) \ 2
+    MergeSort(lo, mid)
+    MergeSort(mid + 1, hi)
+    Merge(lo, mid, hi)
+End Sub
+
+MergeSort(0, 6)
+Dim i As Integer
+For i = 0 To 6: Print arr(i); " ";: Next i
+Print

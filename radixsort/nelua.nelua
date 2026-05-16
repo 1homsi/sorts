@@ -1,0 +1,32 @@
+function radix_sort(arr)
+    if #arr == 0 then return arr end
+    local max_val = math.max(table.unpack(arr))
+    local exp = 1
+    while math.floor(max_val / exp) > 0 do
+        counting_sort(arr, exp)
+        exp = exp * 10
+    end
+    return arr
+end
+
+function counting_sort(arr, exp)
+    local n = #arr
+    local output = {}
+    local count = {}
+    for i = 1, 10 do count[i] = 0 end
+    for i = 1, n do
+        local idx = math.floor(arr[i] / exp) % 10 + 1
+        count[idx] = count[idx] + 1
+    end
+    for i = 2, 10 do
+        count[i] = count[i] + count[i - 1]
+    end
+    for i = n, 1, -1 do
+        local idx = math.floor(arr[i] / exp) % 10 + 1
+        output[count[idx]] = arr[i]
+        count[idx] = count[idx] - 1
+    end
+    for i = 1, n do
+        arr[i] = output[i]
+    end
+end

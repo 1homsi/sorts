@@ -1,0 +1,57 @@
+.class public SelectionSort
+.super java/lang/Object
+
+.method public static selectionSort([I)V
+    .limit stack 5
+    .limit locals 5
+    
+    aload_0
+    arraylength
+    istore_1
+    
+    iconst_0
+    istore_2
+    
+OUTER:
+    iload_2
+    iload_1
+    if_icmpge DONE
+    
+    iload_2
+    istore_3
+    iload_2
+    iconst_1
+    iadd
+    istore 4
+    
+INNER:
+    iload 4
+    iload_1
+    if_icmpge SWAP
+    aload_0
+    iload 4
+    iaload
+    aload_0
+    iload_3
+    iaload
+    if_icmpge NEXT
+    iload 4
+    istore_3
+NEXT:
+    iinc 4 1
+    goto INNER
+    
+SWAP:
+    aload_0
+    iload_2
+    aload_0
+    iload_3
+    iaload
+    iastore
+    
+    iinc 2 1
+    goto OUTER
+    
+DONE:
+    return
+.end method

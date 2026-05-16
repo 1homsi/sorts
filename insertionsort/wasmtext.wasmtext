@@ -1,0 +1,36 @@
+(module
+  (memory (export "mem") 1)
+  (func (export "insertion_sort") (param $arr i32) (param $n i32)
+    (local $i i32)
+    (local $j i32)
+    (local $key i32)
+    (local $tmp i32)
+    (local.set $i (i32.const 1))
+    (block $outer_break
+      (loop $outer
+        (br_if $outer_break (i32.ge_s (local.get $i) (local.get $n)))
+        (local.set $key
+          (i32.load
+            (i32.add (local.get $arr)
+              (i32.mul (local.get $i) (i32.const 4)))))
+        (local.set $j (i32.sub (local.get $i) (i32.const 1)))
+        (block $inner_break
+          (loop $inner
+            (br_if $inner_break (i32.lt_s (local.get $j) (i32.const 0)))
+            (local.set $tmp
+              (i32.load
+                (i32.add (local.get $arr)
+                  (i32.mul (local.get $j) (i32.const 4)))))
+            (br_if $inner_break (i32.le_s (local.get $tmp) (local.get $key)))
+            (i32.store
+              (i32.add (local.get $arr)
+                (i32.mul (i32.add (local.get $j) (i32.const 1)) (i32.const 4)))
+              (local.get $tmp))
+            (local.set $j (i32.sub (local.get $j) (i32.const 1)))
+            (br $inner)))
+        (i32.store
+          (i32.add (local.get $arr)
+            (i32.mul (i32.add (local.get $j) (i32.const 1)) (i32.const 4)))
+          (local.get $key))
+        (local.set $i (i32.add (local.get $i) (i32.const 1)))
+        (br $outer)))))

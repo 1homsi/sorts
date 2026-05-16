@@ -1,0 +1,15 @@
+opam-version: "2.0"
+name: "insertion-sort"
+version: "1.0.0"
+synopsis: "Insertion sort implementation"
+description: """
+  let rec insert x = function
+    | [] -> [x]
+    | h :: t -> if x <= h then x :: h :: t else h :: insert x t
+
+  let rec insertion_sort = function
+    | [] -> []
+    | x :: xs -> insert x (insertion_sort xs)
+"""
+maintainer: "user@example.com"
+license: "MIT"

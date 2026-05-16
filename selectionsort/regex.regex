@@ -1,0 +1,5 @@
+(?:(\d+)(?:,(\d+))*){
+  # Selection sort conceptually: find min, move to front, repeat
+  # Regex alone cannot implement imperative sorting;
+  # this represents the pattern matching step
+}

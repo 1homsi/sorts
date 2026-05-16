@@ -1,0 +1,17 @@
+amends "pkl:base"
+
+local function quicksort(lst: Listing<Int>): Listing<Int> =
+  if (lst.length <= 1)
+    lst
+  else
+    let pivot = lst[lst.length ~/ 2]
+    let left = lst.filter((x) -> x < pivot)
+    let middle = lst.filter((x) -> x == pivot)
+    let right = lst.filter((x) -> x > pivot)
+    new Listing<Int> {
+      ...quicksort(left)
+      ...middle
+      ...quicksort(right)
+    }
+
+result = quicksort(new Listing<Int> { 3; 6; 8; 10; 1; 2; 1 })

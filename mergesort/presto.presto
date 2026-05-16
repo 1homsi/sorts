@@ -1,0 +1,10 @@
+WITH input_data AS (
+    SELECT val FROM UNNEST(ARRAY[38, 27, 43, 3, 9, 82, 10]) AS t(val)
+),
+merge_sorted AS (
+    SELECT val, ROW_NUMBER() OVER (ORDER BY val) AS rank
+    FROM input_data
+)
+SELECT val AS sorted_value
+FROM merge_sorted
+ORDER BY rank;

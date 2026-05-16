@@ -1,0 +1,32 @@
+CREATE TABLE #SortInput (id INT IDENTITY(1,1), val INT);
+INSERT INTO #SortInput (val) VALUES (5),(2),(8),(1),(9),(3),(7),(4),(6);
+
+DECLARE @n INT = 9;
+DECLARE @minRun INT = 32;
+DECLARE @i INT, @j INT, @key INT, @right INT, @size INT, @left INT, @mid INT;
+DECLARE @arr TABLE (idx INT, val INT);
+
+INSERT INTO @arr SELECT id, val FROM #SortInput ORDER BY id;
+
+SET @i = 1;
+WHILE @i <= @n
+BEGIN
+    SET @right = CASE WHEN @i + @minRun - 1 < @n THEN @i + @minRun - 1 ELSE @n END;
+    SET @j = @i + 1;
+    WHILE @j <= @right
+    BEGIN
+        SET @key = (SELECT val FROM @arr WHERE idx = @j);
+        DECLARE @k INT = @j - 1;
+        WHILE @k >= @i AND (SELECT val FROM @arr WHERE idx = @k) > @key
+        BEGIN
+            UPDATE @arr SET val = (SELECT val FROM @arr WHERE idx = @k) WHERE idx = @k + 1;
+            SET @k = @k - 1;
+        END;
+        UPDATE @arr SET val = @key WHERE idx = @k + 1;
+        SET @j = @j + 1;
+    END;
+    SET @i = @i + @minRun;
+END;
+
+SELECT val FROM @arr ORDER BY idx;
+DROP TABLE #SortInput;

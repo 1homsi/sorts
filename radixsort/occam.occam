@@ -1,0 +1,50 @@
+PROC counting.sort([]INT arr, VAL INT exp, VAL INT n)
+  [8]INT output :
+  [10]INT count :
+  INT idx :
+  SEQ
+    SEQ i = 0 FOR 10
+      count[i] := 0
+    SEQ i = 0 FOR n
+      SEQ
+        idx := (arr[i] / exp) REM 10
+        count[idx] := count[idx] + 1
+    SEQ i = 1 FOR 9
+      count[i] := count[i] + count[i - 1]
+    SEQ i = n - 1 FOR n STEP -1
+      SEQ
+        idx := (arr[i] / exp) REM 10
+        count[idx] := count[idx] - 1
+        output[count[idx]] := arr[i]
+    SEQ i = 0 FOR n
+      arr[i] := output[i]
+:
+
+PROC radix.sort([]INT arr, VAL INT n)
+  INT max.val, exp :
+  SEQ
+    max.val := arr[0]
+    SEQ i = 1 FOR n - 1
+      IF
+        arr[i] > max.val
+          max.val := arr[i]
+        TRUE
+          SKIP
+    exp := 1
+    WHILE (max.val / exp) > 0
+      SEQ
+        counting.sort(arr, exp, n)
+        exp := exp * 10
+:
+
+[8]INT arr :
+SEQ
+  arr[0] := 170
+  arr[1] := 45
+  arr[2] := 75
+  arr[3] := 90
+  arr[4] := 802
+  arr[5] := 24
+  arr[6] := 2
+  arr[7] := 66
+  radix.sort(arr, 8)

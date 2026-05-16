@@ -1,0 +1,53 @@
+        .section .data
+arr:    .word 5, 3, 1, 4, 2
+n:      .word 5
+
+        .section .text
+        .global selection_sort
+
+selection_sort:
+        stp x29, x30, [sp, #-48]!
+        stp x19, x20, [sp, #16]
+        stp x21, x22, [sp, #32]
+        
+        adr x0, arr
+        adr x1, n
+        ldr w1, [x1]
+        mov w19, #0
+
+outer:
+        sub w2, w1, #1
+        cmp w19, w2
+        bge done
+        mov w20, w19
+        add w21, w19, #1
+
+inner:
+        cmp w21, w1
+        bge swap_elem
+        lsl x2, x21, #2
+        ldr w2, [x0, x2]
+        lsl x3, x20, #2
+        ldr w3, [x0, x3]
+        cmp w2, w3
+        bge next
+        mov w20, w21
+next:
+        add w21, w21, #1
+        b inner
+
+swap_elem:
+        lsl x2, x19, #2
+        ldr w3, [x0, x2]
+        lsl x4, x20, #2
+        ldr w22, [x0, x4]
+        str w22, [x0, x2]
+        str w3, [x0, x4]
+        add w19, w19, #1
+        b outer
+
+done:
+        ldp x19, x20, [sp, #16]
+        ldp x21, x22, [sp, #32]
+        ldp x29, x30, [sp], #48
+        ret

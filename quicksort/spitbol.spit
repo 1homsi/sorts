@@ -1,0 +1,26 @@
+        DEFINE('QUICKSORT(ARR,LOW,HIGH)PIVOT,I,J,TMP,P')
+
+QUICKSORT
+        GE(LOW,HIGH)  :S(RETURN)
+        PIVOT = ARR<HIGH>
+        I = LOW
+        J = LOW
+QS1     GE(J,HIGH)  :S(QS2)
+        GT(ARR<J>,PIVOT)  :S(QS3)
+        TMP = ARR<I>; ARR<I> = ARR<J>; ARR<J> = TMP
+        I = I + 1
+QS3     J = J + 1  :(QS1)
+QS2     TMP = ARR<I>; ARR<I> = ARR<HIGH>; ARR<HIGH> = TMP
+        P = I
+        QUICKSORT(ARR, LOW, P - 1)
+        QUICKSORT(ARR, P + 1, HIGH)  :(RETURN)
+
+        ARR = TABLE()
+        ARR<1>=3; ARR<2>=6; ARR<3>=8; ARR<4>=10
+        ARR<5>=1; ARR<6>=2; ARR<7>=1
+        QUICKSORT(ARR, 1, 7)
+        I = 1
+LOOP    LE(I,7)  :F(END)
+        OUTPUT = ARR<I>
+        I = I + 1  :(LOOP)
+END

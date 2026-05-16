@@ -1,0 +1,13 @@
+(module quicksort)
+
+(define (quicksort lst)
+  (if (<= (length lst) 1)
+      lst
+      (let ((pivot (list-ref lst (quotient (length lst) 2))))
+        (let ((left (filter (lambda (x) (<= x pivot)) lst))
+              (middle (filter (lambda (x) (= x pivot)) lst))
+              (right (filter (lambda (x) (> x pivot)) lst)))
+          (append (quicksort left) middle (quicksort right))))))
+
+(display (quicksort '(3 6 8 10 1 2 1)))
+(newline)

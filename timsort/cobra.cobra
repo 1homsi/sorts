@@ -1,0 +1,46 @@
+class TimSort
+    shared
+        var minRun = 32
+
+        def insertionSort(arr as int[], left as int, right as int)
+            for i in left+1:right+1
+                key = arr[i]
+                j = i - 1
+                while j >= left and arr[j] > key
+                    arr[j+1] = arr[j]
+                    j -= 1
+                arr[j+1] = key
+
+        def merge(arr as int[], left as int, mid as int, right as int)
+            lp = arr[left:mid+1].clone to int[]
+            rp = arr[mid+1:right+1].clone to int[]
+            i, j, k = 0, 0, left
+            while i < lp.length and j < rp.length
+                if lp[i] <= rp[j]
+                    arr[k] = lp[i]; i += 1
+                else
+                    arr[k] = rp[j]; j += 1
+                k += 1
+            while i < lp.length; arr[k] = lp[i]; i += 1; k += 1
+            while j < rp.length; arr[k] = rp[j]; j += 1; k += 1
+
+        def timsort(arr as int[])
+            n = arr.length
+            i = 0
+            while i < n
+                insertionSort(arr, i, (i + minRun - 1).min(n - 1))
+                i += minRun
+            size = minRun
+            while size < n
+                left = 0
+                while left < n
+                    mid = (left + size - 1).min(n - 1)
+                    right = (left + 2 * size - 1).min(n - 1)
+                    if mid < right; merge(arr, left, mid, right)
+                    left += 2 * size
+                size *= 2
+
+        def main
+            arr = @[5, 2, 8, 1, 9, 3, 7, 4, 6]
+            timsort(arr)
+            print arr

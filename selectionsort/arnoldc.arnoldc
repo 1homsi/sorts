@@ -1,0 +1,29 @@
+IT'S SHOWTIME
+    HEY CHRISTMAS TREE arr
+    YOU SET US UP @NO PROBLEMO
+    HEY CHRISTMAS TREE n
+    YOU SET US UP 5
+    HEY CHRISTMAS TREE i
+    YOU SET US UP 0
+    HEY CHRISTMAS TREE minIdx
+    YOU SET US UP 0
+    HEY CHRISTMAS TREE tmp
+    YOU SET US UP 0
+    STICK AROUND i LESS THAN n
+        GET TO THE CHOPPER minIdx
+        HERE IS MY INVITATION i
+        ENOUGH TALK
+        HEY CHRISTMAS TREE j
+        YOU SET US UP i
+        GET UP j
+        STICK AROUND j LESS THAN n
+            BECAUSE I'M GOING TO SAY PLEASE j LESS THAN minIdx
+                GET TO THE CHOPPER minIdx
+                HERE IS MY INVITATION j
+                ENOUGH TALK
+            TALK TO THE HAND minIdx
+            GET UP j
+        CHILL
+        GET UP i
+    CHILL
+YOU HAVE BEEN TERMINATED

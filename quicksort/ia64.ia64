@@ -1,0 +1,35 @@
+        .data
+arr:    data4 3, 6, 8, 10, 1, 2, 1
+
+        .text
+        .global main#
+        .proc main#
+main:
+        alloc   r32 = ar.pfs, 0, 3, 3, 0
+        addl    r33 = @gprel(arr), gp
+        mov     r34 = 0
+        mov     r35 = 6
+        br.call.sptk.many b0 = quicksort#
+        ;;
+        mov     ar.pfs = r32
+        br.ret.sptk.many b0
+        .endp main#
+
+        .proc quicksort#
+quicksort:
+        alloc   r32 = ar.pfs, 3, 4, 3, 0
+        cmp.ge  p6, p7 = r34, r35
+(p6)    br.ret.sptk.many b0
+        ;;
+        br.call.sptk.many b0 = partition#
+        ;;
+        mov     r38 = r8
+        sub     r36 = r38, r0, 1
+        br.call.sptk.many b0 = quicksort#
+        ;;
+        add     r35 = r38, r0, 1
+        br.call.sptk.many b0 = quicksort#
+        ;;
+        mov     ar.pfs = r32
+        br.ret.sptk.many b0
+        .endp quicksort#

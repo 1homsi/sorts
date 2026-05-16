@@ -1,0 +1,22 @@
+import util.
+
+get_digit(X, Exp) = (X div Exp) mod 10.
+
+counting_sort(Arr, Exp) = Result =>
+    Result = [X : D in 0..9, X in Arr, get_digit(X, Exp) =:= D].
+
+radix_sort([]) = [].
+radix_sort(Arr) = Sorted =>
+    MaxVal = max(Arr),
+    radix_loop(Arr, MaxVal, 1) = Sorted.
+
+radix_loop(Arr, MaxVal, Exp) = Result =>
+    if MaxVal div Exp =:= 0 then
+        Result = Arr
+    else
+        Result = radix_loop(counting_sort(Arr, Exp), MaxVal, Exp * 10)
+    end.
+
+main =>
+    Arr = [170, 45, 75, 90, 802, 24, 2, 66],
+    println(radix_sort(Arr)).

@@ -1,0 +1,10 @@
+DEFINE
+    insert == [dup null] [pop unit] [uncons [<=] [swons] [] ifte] linrec ;
+    isort  == [] [insert] fold ;
+    mmerge == [null] [pop] [uncons [swap uncons [<=] [swons swapd] [swapd swons swapd] ifte mmerge] dip] linrec ;
+    chunks == [null] [[32 take] [32 drop] cleave] [chunks] ifte ;
+    mpairs == dup size 1 <= [] [[uncons uncons mmerge swons mpairs] [] ifte] ifte ;
+    mall   == dup size 1 = [first] [mpairs mall] ifte ;
+    timsort == chunks [isort] map mall ;
+
+[5 2 8 1 9 3 7 4 6] timsort .

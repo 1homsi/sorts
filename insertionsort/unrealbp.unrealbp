@@ -1,0 +1,21 @@
+// Unreal Blueprint represented as Kismet/pseudocode
+// Function: InsertionSort
+// Inputs: Array (TArray<int32> arr)
+// Outputs: TArray<int32> Sorted
+
+BeginPlay -> CallFunction(InsertionSort, arr=[5,3,1,4,2]) -> PrintString(Result)
+
+Function InsertionSort(arr: TArray<int32>): TArray<int32>
+  Local: a = arr
+  Local: n = arr.Num()
+  ForLoop(i=1, n-1):
+    Local: key = a[i]
+    Local: j = i - 1
+    WhileLoop(j >= 0 AND a[j] > key):
+      SetArrayElem(a, j+1, a[j])
+      j = j - 1
+    EndWhile
+    SetArrayElem(a, j+1, key)
+  EndFor
+  Return a
+EndFunction

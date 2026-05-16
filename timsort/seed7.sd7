@@ -1,0 +1,84 @@
+$ include "seed7_05.s7i";
+
+const integer: MIN_RUN is 32;
+
+var array integer: arr is [] (5, 2, 8, 1, 9, 3, 7, 4, 6);
+
+proc insertionSort (inout array integer: a, in integer: left, in integer: right) is
+  local
+    var integer: i is 0;
+    var integer: j is 0;
+    var integer: key is 0;
+  begin
+    for i range left + 1 to right do
+      key := a[i];
+      j := i - 1;
+      while j >= left and a[j] > key do
+        a[j + 1] := a[j];
+        decr(j);
+      end while;
+      a[j + 1] := key;
+    end for;
+  end proc;
+
+proc merge (inout array integer: a, in integer: left, in integer: mid, in integer: right) is
+  local
+    var array integer: lp is 0 times 0;
+    var array integer: rp is 0 times 0;
+    var integer: i is 0;
+    var integer: j is 0;
+    var integer: k is 0;
+  begin
+    lp := a[left .. mid];
+    rp := a[mid + 1 .. right];
+    i := 1; j := 1; k := left;
+    while i <= length(lp) and j <= length(rp) do
+      if lp[i] <= rp[j] then
+        a[k] := lp[i]; incr(i);
+      else
+        a[k] := rp[j]; incr(j);
+      end if;
+      incr(k);
+    end while;
+    while i <= length(lp) do
+      a[k] := lp[i]; incr(i); incr(k);
+    end while;
+    while j <= length(rp) do
+      a[k] := rp[j]; incr(j); incr(k);
+    end while;
+  end proc;
+
+const proc: main is func
+  local
+    var integer: n is 0;
+    var integer: i is 0;
+    var integer: size is 0;
+    var integer: left is 0;
+    var integer: mid is 0;
+    var integer: right is 0;
+  begin
+    n := length(arr);
+    i := 1;
+    while i <= n do
+      right := min(i + MIN_RUN - 1, n);
+      insertionSort(arr, i, right);
+      i +:= MIN_RUN;
+    end while;
+    size := MIN_RUN;
+    while size < n do
+      left := 1;
+      while left <= n do
+        mid := min(left + size - 1, n);
+        right := min(left + 2 * size - 1, n);
+        if mid < right then
+          merge(arr, left, mid, right);
+        end if;
+        left +:= 2 * size;
+      end while;
+      size *:= 2;
+    end while;
+    for i range 1 to n do
+      write(arr[i] <& " ");
+    end for;
+    writeln;
+  end func;

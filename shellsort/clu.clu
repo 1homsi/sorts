@@ -1,0 +1,25 @@
+shell_sort = proc(arr: array[int])
+    n: int := array[int]$size(arr)
+    gap: int := n / 2
+    while gap > 0 do
+        for i: int in int$from_to(gap, n - 1) do
+            temp: int := arr[i]
+            j: int := i
+            while j >= gap cand arr[j - gap] > temp do
+                arr[j] := arr[j - gap]
+                j := j - gap
+            end
+            arr[j] := temp
+        end
+        gap := gap / 2
+    end
+end shell_sort
+
+start = proc()
+    arr: array[int] := array[int]$[64, 34, 25, 12, 22, 11, 90]
+    shell_sort(arr)
+    for v: int in array[int]$elements(arr) do
+        stream$putint(stream$primary_output(), v)
+        stream$putc(stream$primary_output(), ' ')
+    end
+end start

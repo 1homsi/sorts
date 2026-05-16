@@ -1,0 +1,28 @@
+Dim arr(6) As Integer = {3, 6, 8, 10, 1, 2, 1}
+
+Function partition(low As Integer, high As Integer) As Integer
+    Dim pivot As Integer = arr(high)
+    Dim i As Integer = low, j As Integer, tmp As Integer
+    For j = low To high - 1
+        If arr(j) <= pivot Then
+            tmp = arr(i): arr(i) = arr(j): arr(j) = tmp
+            i += 1
+        End If
+    Next
+    tmp = arr(i): arr(i) = arr(high): arr(high) = tmp
+    Return i
+End Function
+
+Sub quicksort(low As Integer, high As Integer)
+    If low < high Then
+        Dim p As Integer = partition(low, high)
+        quicksort(low, p - 1)
+        quicksort(p + 1, high)
+    End If
+End Sub
+
+quicksort(0, 6)
+For i As Integer = 0 To 6
+    Print arr(i); " ";
+Next
+Print

@@ -1,0 +1,29 @@
+#lang racket
+
+(define (flip! vec k)
+  (let loop ((left 0) (right k))
+    (when (< left right)
+      (let ((tmp (vector-ref vec left)))
+        (vector-set! vec left (vector-ref vec right))
+        (vector-set! vec right tmp)
+        (loop (+ left 1) (- right 1))))))
+
+(define (find-max-idx vec size)
+  (let loop ((i 1) (max-idx 0))
+    (if (= i size)
+        max-idx
+        (loop (+ i 1)
+              (if (> (vector-ref vec i) (vector-ref vec max-idx)) i max-idx)))))
+
+(define (pancake-sort! vec)
+  (let loop ((size (vector-length vec)))
+    (when (> size 1)
+      (let ((max-idx (find-max-idx vec size)))
+        (unless (= max-idx (- size 1))
+          (unless (= max-idx 0) (flip! vec max-idx))
+          (flip! vec (- size 1)))
+        (loop (- size 1)))))
+  vec)
+
+(define arr (vector 3 6 2 7 4 1 5))
+(displayln (pancake-sort! arr))

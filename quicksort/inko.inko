@@ -1,0 +1,36 @@
+import std.stdio (STDOUT)
+
+fn partition(arr: mut Array[Int], low: Int, high: Int) -> Int {
+    let pivot = arr.get(high)
+    let mut i = low
+    let mut j = low
+    while j < high {
+        if arr.get(j) <= pivot {
+            let tmp = arr.get(i)
+            arr.set(i, arr.get(j))
+            arr.set(j, tmp)
+            i += 1
+        }
+        j += 1
+    }
+    let tmp = arr.get(i)
+    arr.set(i, arr.get(high))
+    arr.set(high, tmp)
+    i
+}
+
+fn quicksort(arr: mut Array[Int], low: Int, high: Int) {
+    if low < high {
+        let p = partition(arr, low, high)
+        quicksort(arr, low, p - 1)
+        quicksort(arr, p + 1, high)
+    }
+}
+
+class async Main {
+    fn async main {
+        let mut arr = [3, 6, 8, 10, 1, 2, 1]
+        quicksort(arr, 0, arr.length - 1)
+        STDOUT.new.print(arr.to_string)
+    }
+}

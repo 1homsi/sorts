@@ -1,0 +1,9 @@
+amends "pkl:base"
+
+local function insertSorted(x: Int, lst: List<Int>): List<Int> =
+  if (lst.isEmpty) List(x)
+  else if (x <= lst.first) List(x) + lst
+  else List(lst.first) + insertSorted(x, lst.drop(1))
+
+function insertionSort(lst: List<Int>): List<Int> =
+  lst.fold(List(), (acc, x) -> insertSorted(x, acc))

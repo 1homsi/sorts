@@ -1,0 +1,40 @@
+begin
+    integer array arr[0:6];
+    integer pivot, i, j, tmp, p;
+
+    procedure partition(low, high; integer result p);
+    integer low, high, p;
+    begin
+        pivot := arr[high];
+        i := low;
+        for j := low step 1 until high - 1 do
+        begin
+            if arr[j] <= pivot then
+            begin
+                tmp := arr[i];
+                arr[i] := arr[j];
+                arr[j] := tmp;
+                i := i + 1
+            end
+        end;
+        tmp := arr[i]; arr[i] := arr[high]; arr[high] := tmp;
+        p := i
+    end;
+
+    procedure quicksort(low, high);
+    integer low, high;
+    begin
+        if low < high then
+        begin
+            partition(low, high; p);
+            quicksort(low, p - 1);
+            quicksort(p + 1, high)
+        end
+    end;
+
+    arr[0]:=3; arr[1]:=6; arr[2]:=8; arr[3]:=10;
+    arr[4]:=1; arr[5]:=2; arr[6]:=1;
+    quicksort(0, 6);
+    for i := 0 step 1 until 6 do
+        outinteger(1, arr[i])
+end

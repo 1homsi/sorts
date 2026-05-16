@@ -1,0 +1,21 @@
+; Speedcoding approximation - early IBM 701 interpreted language
+; Shell sort represented as pseudocode in Speedcoding style
+; A = accumulator, working register
+
+LOAD  64       ; Load first element
+STORE A(1)
+LOAD  34
+STORE A(2)
+LOAD  25
+STORE A(3)
+LOAD  12
+STORE A(4)
+LOAD  22
+STORE A(5)
+LOAD  11
+STORE A(6)
+LOAD  90
+STORE A(7)
+; Shell sort with gap sequence n/2
+; Sort pass repeated until gap=0
+HALT

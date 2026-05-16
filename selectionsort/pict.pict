@@ -1,0 +1,11 @@
+let selectionSort (arr: list[int]): list[int] =
+  match arr with
+  | [] -> []
+  | _ ->
+    let m = List.min arr in
+    m :: selectionSort (List.remove_first m arr)
+
+let remove_first (x: int) (lst: list[int]): list[int] =
+  match lst with
+  | [] -> []
+  | y :: ys -> if y == x then ys else y :: remove_first x ys

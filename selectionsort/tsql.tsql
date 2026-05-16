@@ -1,0 +1,20 @@
+CREATE PROCEDURE SelectionSort AS
+BEGIN
+    DECLARE @arr TABLE (pos INT, val INT)
+    INSERT INTO @arr VALUES (1,5),(2,3),(3,1),(4,4),(5,2)
+    DECLARE @n INT = 5, @i INT = 1, @j INT, @minIdx INT, @tmp INT
+    WHILE @i < @n BEGIN
+        SET @minIdx = @i
+        SET @j = @i + 1
+        WHILE @j <= @n BEGIN
+            IF (SELECT val FROM @arr WHERE pos = @j) < (SELECT val FROM @arr WHERE pos = @minIdx)
+                SET @minIdx = @j
+            SET @j = @j + 1
+        END
+        SET @tmp = (SELECT val FROM @arr WHERE pos = @i)
+        UPDATE @arr SET val = (SELECT val FROM @arr WHERE pos = @minIdx) WHERE pos = @i
+        UPDATE @arr SET val = @tmp WHERE pos = @minIdx
+        SET @i = @i + 1
+    END
+    SELECT val FROM @arr ORDER BY pos
+END

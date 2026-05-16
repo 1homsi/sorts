@@ -1,0 +1,16 @@
+selectionSort: anArray
+    | n i j minIdx tmp |
+    n := anArray size.
+    i := 1.
+    [i <= n - 1] whileTrue: [
+        minIdx := i.
+        j := i + 1.
+        [j <= n] whileTrue: [
+            (anArray at: j) < (anArray at: minIdx)
+                ifTrue: [minIdx := j].
+            j := j + 1].
+        tmp := anArray at: i.
+        anArray at: i put: (anArray at: minIdx).
+        anArray at: minIdx put: tmp.
+        i := i + 1].
+    ^anArray

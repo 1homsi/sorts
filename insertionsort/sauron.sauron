@@ -1,0 +1,46 @@
+use sauron::prelude::*;
+
+fn insertion_sort(arr: Vec<i32>) -> Vec<i32> {
+    let mut a = arr;
+    let n = a.len();
+    for i in 1..n {
+        let key = a[i];
+        let mut j = i as isize - 1;
+        while j >= 0 && a[j as usize] > key {
+            a[(j + 1) as usize] = a[j as usize];
+            j -= 1;
+        }
+        a[(j + 1) as usize] = key;
+    }
+    a
+}
+
+enum Msg {
+    Sort,
+}
+
+struct App {
+    arr: Vec<i32>,
+    sorted: Vec<i32>,
+}
+
+impl Application<Msg> for App {
+    fn view(&self) -> Node<Msg> {
+        div(
+            [],
+            [
+                button([on_click(|_| Msg::Sort)], [text("Sort")]),
+                p([], [text(self.sorted.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(", "))]),
+            ],
+        )
+    }
+
+    fn update(&mut self, msg: Msg) -> Cmd<Self, Msg> {
+        match msg {
+            Msg::Sort => {
+                self.sorted = insertion_sort(self.arr.clone());
+            }
+        }
+        Cmd::none()
+    }
+}

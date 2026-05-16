@@ -1,0 +1,46 @@
+function result = treesort(arr)
+    node_val = zeros(1, 1000);
+    node_left = zeros(1, 1000);
+    node_right = zeros(1, 1000);
+    node_count = 0;
+
+    function idx = new_node(v)
+        node_count = node_count + 1;
+        idx = node_count;
+        node_val(idx) = v;
+        node_left(idx) = 0;
+        node_right(idx) = 0;
+    end
+
+    function do_insert(idx, v)
+        if v < node_val(idx)
+            if node_left(idx) == 0
+                node_left(idx) = new_node(v);
+            else
+                do_insert(node_left(idx), v);
+            end
+        else
+            if node_right(idx) == 0
+                node_right(idx) = new_node(v);
+            else
+                do_insert(node_right(idx), v);
+            end
+        end
+    end
+
+    function inorder(idx)
+        if idx == 0, return; end
+        inorder(node_left(idx));
+        result(end+1) = node_val(idx);
+        inorder(node_right(idx));
+    end
+
+    result = [];
+    root = new_node(arr(1));
+    for i = 2:length(arr)
+        do_insert(root, arr(i));
+    end
+    inorder(root);
+end
+
+disp(treesort([5 3 7 1 4 6 8]))

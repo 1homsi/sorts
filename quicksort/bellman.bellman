@@ -1,0 +1,33 @@
+use bellman::{Circuit, ConstraintSystem, SynthesisError};
+use bls12_381::Scalar;
+
+struct QuicksortCircuit {
+    arr: Vec<Option<Scalar>>,
+    sorted: Vec<Option<Scalar>>,
+}
+
+fn quicksort(arr: &mut Vec<u64>, low: usize, high: usize) {
+    if low < high {
+        let pivot = arr[high];
+        let mut i = low;
+        for j in low..high {
+            if arr[j] <= pivot {
+                arr.swap(i, j);
+                i += 1;
+            }
+        }
+        arr.swap(i, high);
+        let p = i;
+        if p > 0 { quicksort(arr, low, p - 1); }
+        quicksort(arr, p + 1, high);
+    }
+}
+
+impl Circuit<Scalar> for QuicksortCircuit {
+    fn synthesize<CS: ConstraintSystem<Scalar>>(self, cs: &mut CS) -> Result<(), SynthesisError> {
+        let sorted_vars: Vec<_> = self.sorted.iter().enumerate()
+            .map(|(i, v)| cs.alloc(|| format!("sorted_{}", i), || v.ok_or(SynthesisError::AssignmentMissing)))
+            .collect::<Result<Vec<_>, _>>()?;
+        Ok(())
+    }
+}

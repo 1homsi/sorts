@@ -1,0 +1,15 @@
+SHELLSORT
+    NEW ARR,N,GAP,I,J,TEMP
+    SET ARR(1)=64,ARR(2)=34,ARR(3)=25,ARR(4)=12
+    SET ARR(5)=22,ARR(6)=11,ARR(7)=90
+    SET N=7,GAP=N\2
+    FOR  Q:GAP<=0  DO
+    . FOR I=GAP+1:1:N DO
+    . . SET TEMP=ARR(I),J=I
+    . . FOR  Q:(J<=GAP)!(ARR(J-GAP)<=TEMP)  DO
+    . . . SET ARR(J)=ARR(J-GAP),J=J-GAP
+    . . SET ARR(J)=TEMP
+    . SET GAP=GAP\2
+    FOR I=1:1:N WRITE ARR(I)," "
+    WRITE !
+    QUIT

@@ -1,0 +1,33 @@
+( IPL (Information Processing Language) was a 1956 list-processing language.
+  It operated on symbolic list structures. The following expresses merge sort
+  in IPL-inspired pseudocode using its list notation. )
+
+DEFINE PROCESS MERGESORT
+  SYMBOL LIST W0 = (38 27 43 3 9 82 10)
+  CALL MSORT WITH W0
+  PRINT W0
+END
+
+DEFINE PROCESS MSORT
+  IF LENGTH(W0) <= 1 THEN RETURN
+  LET N = LENGTH(W0)
+  LET MID = N / 2
+  LET W1 = FIRST-N(W0, MID)
+  LET W2 = REST-N(W0, MID)
+  CALL MSORT WITH W1
+  CALL MSORT WITH W2
+  CALL MERGE WITH W1, W2, W0
+END
+
+DEFINE PROCESS MERGE
+  INPUT: W1, W2
+  OUTPUT: W3 = EMPTY-LIST
+  SYMBOL P1 = W1, P2 = W2
+  LOOP:
+    IF P1 = * THEN COPY W2-REST TO W3, RETURN
+    IF P2 = * THEN COPY W1-REST TO W3, RETURN
+    IF SYMBOL(P1) <= SYMBOL(P2)
+    THEN APPEND SYMBOL(P1) TO W3, ADVANCE P1
+    ELSE APPEND SYMBOL(P2) TO W3, ADVANCE P2
+    GO TO LOOP
+END

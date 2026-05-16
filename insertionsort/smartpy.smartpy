@@ -1,0 +1,22 @@
+import smartpy as sp
+
+@sp.module
+def main():
+    class InsertionSort(sp.Contract):
+        def __init__(self):
+            self.data.arr = sp.list([], t=sp.int)
+
+        @sp.entrypoint
+        def sort(self, arr):
+            a = arr
+            n = sp.len(a)
+            i = sp.local("i", 1)
+            while i.value < n:
+                key = a[i.value]
+                j = sp.local("j", i.value - 1)
+                while (j.value >= 0) & (a[j.value] > key):
+                    a[j.value + 1] = a[j.value]
+                    j.value -= 1
+                a[j.value + 1] = key
+                i.value += 1
+            self.data.arr = a

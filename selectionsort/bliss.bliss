@@ -1,0 +1,25 @@
+MODULE selection_sort(MAIN=sort_main) =
+BEGIN
+
+ROUTINE selection_sort(arr: REF VECTOR, n) =
+BEGIN
+    LOCAL i, j, min_idx, tmp;
+    INCR i FROM 0 TO .n - 2 DO
+    BEGIN
+        min_idx = .i;
+        INCR j FROM .i + 1 TO .n - 1 DO
+            IF .arr[.j] LSS .arr[.min_idx] THEN min_idx = .j;
+        tmp = .arr[.i];
+        arr[.i] = .arr[.min_idx];
+        arr[.min_idx] = .tmp
+    END;
+    0
+END;
+
+ROUTINE sort_main =
+BEGIN
+    0
+END;
+
+END
+ELUDOM

@@ -1,0 +1,22 @@
+type tree = Leaf | Node of tree * int * tree
+
+let rec insert tree v =
+  match tree with
+  | Leaf -> Node(Leaf, v, Leaf)
+  | Node(l, x, r) ->
+    if v < x then Node(insert l v, x, r)
+    else Node(l, x, insert r v)
+
+let rec inorder tree =
+  match tree with
+  | Leaf -> []
+  | Node(l, v, r) -> inorder l @ [v] @ inorder r
+
+let treesort arr =
+  let tree = List.fold_left insert Leaf arr in
+  inorder tree
+
+let () =
+  let sorted = treesort [5; 3; 7; 1; 4; 6; 8] in
+  List.iter (fun x -> print_int x; print_char ' ') sorted;
+  print_newline ()

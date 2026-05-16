@@ -1,0 +1,21 @@
+DIRECTORY ShellSort USING [];
+
+ShellSort: PROGRAM = BEGIN
+
+  ShellSortProc: PROCEDURE [arr: LONG POINTER TO ARRAY OF INTEGER, n: INTEGER] = BEGIN
+    gap: INTEGER ← n / 2;
+    WHILE gap > 0 DO
+      FOR i: INTEGER IN [gap .. n) DO
+        temp: INTEGER ← arr[i];
+        j: INTEGER ← i;
+        WHILE j >= gap AND arr[j - gap] > temp DO
+          arr[j] ← arr[j - gap];
+          j ← j - gap;
+        ENDLOOP;
+        arr[j] ← temp;
+      ENDLOOP;
+      gap ← gap / 2;
+    ENDLOOP;
+  END;
+
+END.

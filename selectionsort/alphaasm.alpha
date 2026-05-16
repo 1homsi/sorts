@@ -1,0 +1,60 @@
+        .data
+arr:    .long 5, 3, 1, 4, 2
+n:      .long 5
+
+        .text
+        .globl selection_sort
+
+selection_sort:
+        lda     $sp, -48($sp)
+        stq     $ra, 0($sp)
+        stq     $s0, 8($sp)
+        stq     $s1, 16($sp)
+        stq     $s2, 24($sp)
+        stq     $s3, 32($sp)
+        stq     $s4, 40($sp)
+        
+        lda     $s0, arr
+        ldl     $s1, n
+        clr     $s2
+
+outer:
+        subl    $s1, 1, $t0
+        cmple   $s2, $t0, $t1
+        beq     $t1, done
+        mov     $s2, $s3
+        addl    $s2, 1, $s4
+
+inner:
+        cmple   $s4, $s1, $t0
+        beq     $t0, do_swap
+        s4addl  $s4, $s0, $t1
+        ldl     $t1, ($t1)
+        s4addl  $s3, $s0, $t2
+        ldl     $t2, ($t2)
+        cmplt   $t1, $t2, $t3
+        beq     $t3, next
+        mov     $s4, $s3
+next:
+        addl    $s4, 1, $s4
+        br      inner
+
+do_swap:
+        s4addl  $s2, $s0, $t0
+        ldl     $t1, ($t0)
+        s4addl  $s3, $s0, $t2
+        ldl     $t3, ($t2)
+        stl     $t3, ($t0)
+        stl     $t1, ($t2)
+        addl    $s2, 1, $s2
+        br      outer
+
+done:
+        ldq     $ra, 0($sp)
+        ldq     $s0, 8($sp)
+        ldq     $s1, 16($sp)
+        ldq     $s2, 24($sp)
+        ldq     $s3, 32($sp)
+        ldq     $s4, 40($sp)
+        lda     $sp, 48($sp)
+        ret

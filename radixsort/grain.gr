@@ -1,0 +1,47 @@
+module RadixSort
+
+from "list" include List
+from "array" include Array
+from "number" include Number
+
+let getDigit = (x, exp) => x / exp % 10
+
+let countingSort = (arr, exp) => {
+  let n = Array.length(arr)
+  let output = Array.make(n, 0)
+  let count = Array.make(10, 0)
+  Array.forEach(x => {
+    let idx = getDigit(x, exp)
+    count[idx] = count[idx] + 1
+  }, arr)
+  for (let mut i = 1; i < 10; i += 1) {
+    count[i] = count[i] + count[i - 1]
+  }
+  for (let mut i = n - 1; i >= 0; i -= 1) {
+    let idx = getDigit(arr[i], exp)
+    count[idx] = count[idx] - 1
+    output[count[idx]] = arr[i]
+  }
+  Array.forEach2((_, v) => v, arr, output) |> ignore
+  for (let mut i = 0; i < n; i += 1) {
+    arr[i] = output[i]
+  }
+}
+
+let radixSort = (arr) => {
+  let n = Array.length(arr)
+  if (n == 0) void
+  else {
+    let mut maxVal = arr[0]
+    Array.forEach(x => { if (x > maxVal) maxVal = x }, arr)
+    let mut exp = 1
+    while (maxVal / exp > 0) {
+      countingSort(arr, exp)
+      exp = exp * 10
+    }
+  }
+}
+
+let arr = [> 170, 45, 75, 90, 802, 24, 2, 66]
+radixSort(arr)
+print(arr)

@@ -1,0 +1,20 @@
+(define (insert tree v)
+  (if (null? tree)
+      (list v '() '())
+      (if (< v (car tree))
+          (list (car tree) (insert (cadr tree) v) (caddr tree))
+          (list (car tree) (cadr tree) (insert (caddr tree) v)))))
+
+(define (inorder tree)
+  (if (null? tree)
+      '()
+      (append (inorder (cadr tree)) (list (car tree)) (inorder (caddr tree)))))
+
+(define (treesort arr)
+  (let loop ((rest arr) (tree '()))
+    (if (null? rest)
+        (inorder tree)
+        (loop (cdr rest) (insert tree (car rest))))))
+
+(display (treesort '(5 3 7 1 4 6 8)))
+(newline)

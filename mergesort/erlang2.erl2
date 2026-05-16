@@ -1,0 +1,18 @@
+-module(erlang2).
+-export([mergesort/1]).
+
+mergesort([]) -> [];
+mergesort([X]) -> [X];
+mergesort(List) ->
+    Len = length(List),
+    Mid = Len div 2,
+    Left = lists:sublist(List, Mid),
+    Right = lists:nthtail(Mid, List),
+    merge(mergesort(Left), mergesort(Right)).
+
+merge([], R) -> R;
+merge(L, []) -> L;
+merge([Lh|Lt], [Rh|Rt]) when Lh =< Rh ->
+    [Lh | merge(Lt, [Rh|Rt])];
+merge(L, [Rh|Rt]) ->
+    [Rh | merge(L, Rt)].

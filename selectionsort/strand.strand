@@ -1,0 +1,15 @@
+selection_sort([], []).
+selection_sort([H|T], Sorted) :-
+    list_min([H|T], Min),
+    delete_first([H|T], Min, Rest),
+    selection_sort(Rest, SortedRest),
+    Sorted = [Min|SortedRest].
+
+list_min([X], X).
+list_min([X|Xs], Min) :-
+    list_min(Xs, M),
+    (X < M -> Min = X ; Min = M).
+
+delete_first([], _, []).
+delete_first([X|Xs], X, Xs).
+delete_first([H|T], X, [H|R]) :- X \= H, delete_first(T, X, R).

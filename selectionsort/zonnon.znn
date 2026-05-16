@@ -1,0 +1,22 @@
+module SelectionSort;
+var
+    arr: array 10 of integer;
+    n: integer;
+
+procedure Sort;
+var i, j, minIdx, tmp: integer;
+begin
+    for i := 0 to n - 2 do
+        minIdx := i;
+        for j := i + 1 to n - 1 do
+            if arr[j] < arr[minIdx] then minIdx := j end
+        end;
+        tmp := arr[i]; arr[i] := arr[minIdx]; arr[minIdx] := tmp
+    end
+end Sort;
+
+begin
+    n := 5;
+    arr[0] := 5; arr[1] := 3; arr[2] := 1; arr[3] := 4; arr[4] := 2;
+    Sort
+end SelectionSort.

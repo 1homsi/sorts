@@ -1,0 +1,22 @@
+dec flip : list(num) # num -> list(num);
+--- flip(lst, k) <=
+    let front == take(k+1, lst) in
+    let back  == drop(k+1, lst) in
+    rev(front) ++ back;
+
+dec findMaxIdx : list(num) # num -> num;
+--- findMaxIdx(lst, size) <=
+    let sub == take(size, lst) in
+    let maxVal == fold(max, hd(sub), tl(sub)) in
+    length(takewhile(fn x => x =/= maxVal, sub));
+
+dec pancakeSort : list(num) # num -> list(num);
+--- pancakeSort(lst, 1) <= lst;
+--- pancakeSort(lst, size) <=
+    let mi == findMaxIdx(lst, size) in
+    let lst1 == if mi =/= 0 then flip(lst, mi) else lst in
+    let lst2 == flip(lst1, size - 1) in
+    pancakeSort(lst2, size - 1);
+
+dec main : list(num);
+--- main <= pancakeSort([3, 6, 2, 7, 4, 1, 5], 7);

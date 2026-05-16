@@ -1,0 +1,24 @@
+from myhdl import *
+
+def insertion_sort(clk, rst, data_in, data_out, done, N=8):
+    arr = [Signal(intbv(0)[8:]) for _ in range(N)]
+
+    @always(clk.posedge, rst.posedge)
+    def logic():
+        if rst:
+            done.next = 0
+        else:
+            for k in range(N):
+                arr[k].next = data_in[k]
+            for i in range(1, N):
+                key = int(arr[i])
+                j = i - 1
+                while j >= 0 and int(arr[j]) > key:
+                    arr[j+1].next = arr[j]
+                    j -= 1
+                arr[j+1].next = key
+            for k in range(N):
+                data_out[k].next = arr[k]
+            done.next = 1
+
+    return logic

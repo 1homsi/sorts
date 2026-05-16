@@ -1,0 +1,20 @@
+defmodule SelectionSortWire do
+  use Phoenix.LiveView
+
+  def selection_sort([]), do: []
+  def selection_sort(list) do
+    min = Enum.min(list)
+    rest = List.delete(list, min)
+    [min | selection_sort(rest)]
+  end
+
+  def render(assigns) do
+    ~H"""
+    <div>
+      <%= for n <- @sorted do %>
+        <span><%= n %></span>
+      <% end %>
+    </div>
+    """
+  end
+end

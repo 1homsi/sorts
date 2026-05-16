@@ -1,0 +1,18 @@
+proc insertionSort(list arr)
+{
+  list a = arr;
+  int n = size(a);
+  int i, j, key;
+  for (i = 2; i <= n; i++)
+  {
+    key = a[i];
+    j = i - 1;
+    while (j >= 1 && a[j] > key)
+    {
+      a[j+1] = a[j];
+      j--;
+    }
+    a[j+1] = key;
+  }
+  return(a);
+}

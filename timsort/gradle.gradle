@@ -1,0 +1,53 @@
+def MIN_RUN = 32
+
+def insertionSort(arr, left, right) {
+    for (def i = left + 1; i <= right; i++) {
+        def key = arr[i]
+        def j = i - 1
+        while (j >= left && arr[j] > key) {
+            arr[j + 1] = arr[j]
+            j--
+        }
+        arr[j + 1] = key
+    }
+}
+
+def merge(arr, left, mid, right) {
+    def lp = arr[left..mid].toList()
+    def rp = arr[(mid+1)..right].toList()
+    def i = 0, j = 0, k = left
+    while (i < lp.size() && j < rp.size()) {
+        if (lp[i] <= rp[j]) arr[k++] = lp[i++]
+        else arr[k++] = rp[j++]
+    }
+    while (i < lp.size()) arr[k++] = lp[i++]
+    while (j < rp.size()) arr[k++] = rp[j++]
+}
+
+def timsort(arr) {
+    def n = arr.size()
+    def i = 0
+    while (i < n) {
+        insertionSort(arr, i, Math.min(i + MIN_RUN - 1, n - 1))
+        i += MIN_RUN
+    }
+    def size = MIN_RUN
+    while (size < n) {
+        def left = 0
+        while (left < n) {
+            def mid = Math.min(left + size - 1, n - 1)
+            def right = Math.min(left + 2 * size - 1, n - 1)
+            if (mid < right) merge(arr, left, mid, right)
+            left += 2 * size
+        }
+        size *= 2
+    }
+    arr
+}
+
+task sortTask {
+    doLast {
+        def arr = [5, 2, 8, 1, 9, 3, 7, 4, 6]
+        println timsort(arr)
+    }
+}

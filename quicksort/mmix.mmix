@@ -1,0 +1,40 @@
+arr     TETRA 3,6,8,10,1,2,1
+
+        LOC #100
+
+Main    GETA $0,arr
+        SET $1,0
+        SET $2,6
+        PUSHJ $3,Quicksort
+        TRAP 0,Halt,0
+
+Quicksort CMP $10,$1,$2
+        BGE $10,QSDone
+        PUSHJ $11,Partition
+        SET $12,$11
+        SUB $2,$12,1
+        PUSHJ $11,Quicksort
+        ADD $1,$12,1
+        PUSHJ $11,Quicksort
+QSDone  POP 0,0
+
+Partition SET $20,$2
+        SL $21,$20,2
+        LDTU $22,$0,$21
+        SET $23,$1
+        SET $24,$1
+PLoop   CMP $25,$24,$2
+        BGE $25,PDone
+        SL $26,$24,2
+        LDTU $27,$0,$26
+        CMP $28,$27,$22
+        BGT $28,NoSwap
+        SL $29,$23,2
+        LDTU $30,$0,$29
+        STTU $27,$0,$29
+        STTU $30,$0,$26
+        INCL $23,1
+NoSwap  INCL $24,1
+        JMP PLoop
+PDone   SET $255,$23
+        POP 1,0

@@ -1,0 +1,24 @@
+package quicksort.policy
+
+import future.keywords.in
+
+default allow := false
+
+quicksort(arr) := sorted {
+    count(arr) <= 1
+    sorted := arr
+}
+
+quicksort(arr) := sorted {
+    count(arr) > 1
+    pivot := arr[count(arr) / 2]
+    left := [x | some x in arr; x < pivot]
+    middle := [x | some x in arr; x == pivot]
+    right := [x | some x in arr; x > pivot]
+    sorted := array.concat(array.concat(quicksort(left), middle), quicksort(right))
+}
+
+allow {
+    sorted := quicksort([3, 6, 8, 10, 1, 2, 1])
+    sorted[i] <= sorted[i+1]
+}

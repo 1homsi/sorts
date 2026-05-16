@@ -1,0 +1,25 @@
+package {
+    import flash.display.Sprite;
+
+    public class actionscript extends Sprite {
+        private function stoogeSort(arr:Array, first:int, last:int):void {
+            if (arr[first] > arr[last]) {
+                var tmp:int = arr[first];
+                arr[first] = arr[last];
+                arr[last] = tmp;
+            }
+            if (last - first + 1 > 2) {
+                var t:int = int((last - first + 1) * 2 / 3);
+                stoogeSort(arr, first, first + t - 1);
+                stoogeSort(arr, last - t + 1, last);
+                stoogeSort(arr, first, first + t - 1);
+            }
+        }
+
+        public function actionscript() {
+            var arr:Array = [3, 1, 4, 1, 5, 9, 2, 6];
+            stoogeSort(arr, 0, arr.length - 1);
+            trace(arr);
+        }
+    }
+}

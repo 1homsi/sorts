@@ -1,0 +1,30 @@
+QUICKSORT: DO;
+    DECLARE ARR(7) INTEGER;
+    ARR(0)=3; ARR(1)=6; ARR(2)=8; ARR(3)=10;
+    ARR(4)=1; ARR(5)=2; ARR(6)=1;
+
+    PARTITION: PROCEDURE(LOW, HIGH) INTEGER;
+        DECLARE (LOW, HIGH, PIVOT, I, J, TMP) INTEGER;
+        PIVOT = ARR(HIGH);
+        I = LOW;
+        DO J = LOW TO HIGH - 1;
+            IF ARR(J) <= PIVOT THEN DO;
+                TMP = ARR(I); ARR(I) = ARR(J); ARR(J) = TMP;
+                I = I + 1;
+            END;
+        END;
+        TMP = ARR(I); ARR(I) = ARR(HIGH); ARR(HIGH) = TMP;
+        RETURN I;
+    END PARTITION;
+
+    QS: PROCEDURE(LOW, HIGH) RECURSIVE;
+        DECLARE (LOW, HIGH, P) INTEGER;
+        IF LOW < HIGH THEN DO;
+            P = PARTITION(LOW, HIGH);
+            CALL QS(LOW, P - 1);
+            CALL QS(P + 1, HIGH);
+        END;
+    END QS;
+
+    CALL QS(0, 6);
+END QUICKSORT;

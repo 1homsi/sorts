@@ -1,0 +1,7 @@
+SelectionSort
+  arr : seq ℤ
+  sorted : seq ℤ
+─────────────────────────────
+  ∀ i, j : dom sorted • i < j ⇒ sorted(i) ≤ sorted(j)
+  ran sorted = ran arr
+  # sorted = # arr

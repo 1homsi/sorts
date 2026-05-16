@@ -1,0 +1,29 @@
+state MergeSort {
+    val arr: List[Int] = List(38, 27, 43, 3, 9, 82, 10)
+
+    method merge(left: List[Int], right: List[Int]): List[Int] {
+        match left, right {
+            case Nil, _ => right
+            case _, Nil => left
+            case Cons(lh, lt), Cons(rh, rt) =>
+                if lh <= rh then Cons(lh, merge(lt, right))
+                else Cons(rh, merge(left, rt))
+        }
+    }
+
+    method sort(lst: List[Int]): List[Int] {
+        val n = lst.length
+        if n <= 1 then lst
+        else {
+            val mid = n / 2
+            val left = sort(lst.take(mid))
+            val right = sort(lst.drop(mid))
+            merge(left, right)
+        }
+    }
+
+    method main(): Unit {
+        val result = sort(arr)
+        print(result)
+    }
+}

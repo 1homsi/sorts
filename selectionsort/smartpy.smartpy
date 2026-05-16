@@ -1,0 +1,22 @@
+import smartpy as sp
+
+@sp.module
+def main():
+    class SelectionSort(sp.Contract):
+        @sp.entrypoint
+        def sort(self, arr):
+            n = sp.len(arr)
+            result = sp.copy(arr)
+            i = sp.local("i", 0)
+            with sp.while_(i.value < n):
+                min_idx = sp.local("min_idx", i.value)
+                j = sp.local("j", i.value + 1)
+                with sp.while_(j.value < n):
+                    with sp.if_(result[j.value] < result[min_idx.value]):
+                        min_idx.value = j.value
+                    j.value += 1
+                tmp = sp.local("tmp", result[i.value])
+                result[i.value] = result[min_idx.value]
+                result[min_idx.value] = tmp.value
+                i.value += 1
+            self.data.sorted = result

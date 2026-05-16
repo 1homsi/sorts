@@ -1,0 +1,17 @@
+package selectionsort.gatekeeper
+
+import future.keywords
+
+violation[{"msg": msg}] {
+    input.review.object.kind == "SortRequest"
+    array := input.review.object.spec.array
+    not is_valid_array(array)
+    msg := "Array must be non-empty and contain integers"
+}
+
+is_valid_array(arr) {
+    count(arr) > 0
+    every elem in arr {
+        is_number(elem)
+    }
+}

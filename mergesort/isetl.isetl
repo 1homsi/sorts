@@ -1,0 +1,26 @@
+merge := func(left, right);
+    result := [];
+    i := 1; j := 1;
+    while i <= #left and j <= #right do
+        if left(i) <= right(j) then
+            result := result + [left(i)]; i := i + 1;
+        else
+            result := result + [right(j)]; j := j + 1;
+        end;
+    end;
+    while i <= #left do result := result + [left(i)]; i := i + 1; end;
+    while j <= #right do result := result + [right(j)]; j := j + 1; end;
+    return result;
+end;
+
+mergesort := func(arr);
+    n := #arr;
+    if n <= 1 then return arr; end;
+    mid := n div 2;
+    left := mergesort(arr(1..mid));
+    right := mergesort(arr(mid+1..n));
+    return merge(left, right);
+end;
+
+arr := [38, 27, 43, 3, 9, 82, 10];
+print(mergesort(arr));

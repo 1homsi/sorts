@@ -1,0 +1,70 @@
+function %partition(i64, i32, i32) -> i32 {
+block0(v0: i64, v1: i32, v2: i32):
+    v3 = uextend.i64 v2
+    v4 = imul_imm v3, 4
+    v5 = iadd v0, v4
+    v6 = load.i32 little v5
+    v7 = stack_slot 4, 4
+    stack_store v1, v7
+    v8 = stack_slot 4, 4
+    stack_store v1, v8
+    jump block1
+
+block1:
+    v9 = stack_load.i32 v8
+    v10 = icmp slt v9, v2
+    brif v10, block2, block3
+
+block2:
+    v11 = uextend.i64 v9
+    v12 = imul_imm v11, 4
+    v13 = iadd v0, v12
+    v14 = load.i32 little v13
+    v15 = icmp sle v14, v6
+    brif v15, block4, block5
+
+block4:
+    v16 = stack_load.i32 v7
+    v17 = uextend.i64 v16
+    v18 = imul_imm v17, 4
+    v19 = iadd v0, v18
+    v20 = load.i32 little v19
+    store little v14, v19
+    store little v20, v13
+    v21 = iadd_imm v16, 1
+    stack_store v21, v7
+    jump block5
+
+block5:
+    v22 = stack_load.i32 v8
+    v23 = iadd_imm v22, 1
+    stack_store v23, v8
+    jump block1
+
+block3:
+    v24 = stack_load.i32 v7
+    v25 = uextend.i64 v24
+    v26 = imul_imm v25, 4
+    v27 = iadd v0, v26
+    v28 = load.i32 little v27
+    store little v6, v27
+    store little v28, v5
+    return v24
+}
+
+function %quicksort(i64, i32, i32) {
+block0(v0: i64, v1: i32, v2: i32):
+    v3 = icmp slt v1, v2
+    brif v3, block1, block2
+
+block1:
+    v4 = call %partition(v0, v1, v2)
+    v5 = iadd_imm v4, -1
+    call %quicksort(v0, v1, v5)
+    v6 = iadd_imm v4, 1
+    call %quicksort(v0, v6, v2)
+    jump block2
+
+block2:
+    return
+}

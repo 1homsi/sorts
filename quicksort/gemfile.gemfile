@@ -1,0 +1,12 @@
+source "https://rubygems.org"
+
+gem "quicksort", "~> 1.0"
+
+def quicksort(arr)
+  return arr if arr.length <= 1
+  pivot = arr[arr.length / 2]
+  left = arr.select { |x| x < pivot }
+  middle = arr.select { |x| x == pivot }
+  right = arr.select { |x| x > pivot }
+  quicksort(left) + middle + quicksort(right)
+end

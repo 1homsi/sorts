@@ -1,0 +1,48 @@
+include std/io.e
+
+function flip(sequence arr, integer k)
+    integer left, right, tmp
+    left = 1
+    right = k + 1
+    while left < right do
+        tmp = arr[left]
+        arr[left] = arr[right]
+        arr[right] = tmp
+        left += 1
+        right -= 1
+    end while
+    return arr
+end function
+
+function find_max_idx(sequence arr, integer size)
+    integer max_idx, i
+    max_idx = 1
+    for i = 2 to size do
+        if arr[i] > arr[max_idx] then
+            max_idx = i
+        end if
+    end for
+    return max_idx
+end function
+
+function pancake_sort(sequence arr)
+    integer size, max_idx
+    size = length(arr)
+    while size > 1 do
+        max_idx = find_max_idx(arr, size)
+        if max_idx != size then
+            if max_idx != 1 then
+                arr = flip(arr, max_idx - 1)
+            end if
+            arr = flip(arr, size - 1)
+        end if
+        size -= 1
+    end while
+    return arr
+end function
+
+sequence arr
+arr = {3, 6, 2, 7, 4, 1, 5}
+arr = pancake_sort(arr)
+print(1, arr)
+puts(1, "\n")

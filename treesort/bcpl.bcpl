@@ -1,0 +1,53 @@
+GET "libhdr"
+
+GLOBAL
+    nodecount: 200
+    nodevals:  201
+    nodelefts: 202
+    noderights:203
+
+LET newnode(v) = VALOF
+$(
+    nodecount := nodecount + 1
+    nodevals!nodecount := v
+    nodelefts!nodecount := 0
+    noderights!nodecount := 0
+    RESULTIS nodecount
+$)
+
+LET insert(idx, v) = VALOF
+$(
+    IF idx = 0 THEN RESULTIS newnode(v)
+    IF v < nodevals!idx THEN
+    $(
+        nodelefts!idx := insert(nodelefts!idx, v)
+        RESULTIS idx
+    $)
+    noderights!idx := insert(noderights!idx, v)
+    RESULTIS idx
+$)
+
+LET inorder(idx) BE
+$(
+    IF idx = 0 THEN RETURN
+    inorder(nodelefts!idx)
+    writef("%n ", nodevals!idx)
+    inorder(noderights!idx)
+$)
+
+LET start() BE
+$(
+    LET arr = TABLE 5, 3, 7, 1, 4, 6, 8
+    LET root = 0
+    nodecount := 0
+    nodevals := getvec(200)
+    nodelefts := getvec(200)
+    noderights := getvec(200)
+    FOR i = 0 TO 6 DO
+        root := insert(root, arr!i)
+    inorder(root)
+    newline()
+    freevec(nodevals)
+    freevec(nodelefts)
+    freevec(noderights)
+$)

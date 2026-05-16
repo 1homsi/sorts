@@ -1,0 +1,35 @@
+CREATE OR REPLACE FUNCTION merge_arrays(left int[], right int[]) RETURNS int[] AS $$
+DECLARE
+    result int[] := '{}';
+    i int := 1;
+    j int := 1;
+BEGIN
+    WHILE i <= array_length(left, 1) AND j <= array_length(right, 1) LOOP
+        IF left[i] <= right[j] THEN
+            result := result || left[i]; i := i + 1;
+        ELSE
+            result := result || right[j]; j := j + 1;
+        END IF;
+    END LOOP;
+    WHILE i <= array_length(left, 1) LOOP result := result || left[i]; i := i + 1; END LOOP;
+    WHILE j <= array_length(right, 1) LOOP result := result || right[j]; j := j + 1; END LOOP;
+    RETURN result;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION merge_sort(arr int[]) RETURNS int[] AS $$
+DECLARE
+    n int := array_length(arr, 1);
+    mid int;
+    left int[];
+    right int[];
+BEGIN
+    IF n <= 1 THEN RETURN arr; END IF;
+    mid := n / 2;
+    left := merge_sort(arr[1:mid]);
+    right := merge_sort(arr[mid+1:n]);
+    RETURN merge_arrays(left, right);
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT merge_sort(ARRAY[38,27,43,3,9,82,10]);

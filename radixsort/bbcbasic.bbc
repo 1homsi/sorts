@@ -1,0 +1,30 @@
+10 DIM arr(7), output(7), cnt(9)
+20 arr(0)=170:arr(1)=45:arr(2)=75:arr(3)=90
+30 arr(4)=802:arr(5)=24:arr(6)=2:arr(7)=66
+40 maxVal=arr(0)
+50 FOR i=1 TO 7
+60   IF arr(i)>maxVal THEN maxVal=arr(i)
+70 NEXT i
+80 exp=1
+90 WHILE maxVal DIV exp > 0
+100   FOR i=0 TO 9:cnt(i)=0:NEXT i
+110   FOR i=0 TO 7
+120     idx=(arr(i) DIV exp) MOD 10
+130     cnt(idx)=cnt(idx)+1
+140   NEXT i
+150   FOR i=1 TO 9
+160     cnt(i)=cnt(i)+cnt(i-1)
+170   NEXT i
+180   FOR i=7 TO 0 STEP -1
+190     idx=(arr(i) DIV exp) MOD 10
+200     cnt(idx)=cnt(idx)-1
+210     output(cnt(idx))=arr(i)
+220   NEXT i
+230   FOR i=0 TO 7:arr(i)=output(i):NEXT i
+240   exp=exp*10
+250 ENDWHILE
+260 FOR i=0 TO 7
+270   PRINT arr(i);" ";
+280 NEXT i
+290 PRINT
+300 END

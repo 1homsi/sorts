@@ -1,0 +1,23 @@
+module Main where
+
+flipArr :: [Int] -> Int -> [Int]
+flipArr arr k = reverse (take (k+1) arr) ++ drop (k+1) arr
+
+findMaxIdx :: [Int] -> Int -> Int
+findMaxIdx arr size =
+    let sub = take size arr
+        maxVal = maximum sub
+    in length (takeWhile (/= maxVal) sub)
+
+pancakeSort :: [Int] -> [Int]
+pancakeSort arr = go arr (length arr)
+  where
+    go ys 1 = ys
+    go ys sz =
+        let mi = findMaxIdx ys sz
+            ys1 = if mi /= 0 then flipArr ys mi else ys
+            ys2 = flipArr ys1 (sz - 1)
+        in go ys2 (sz - 1)
+
+main :: IO ()
+main = print (pancakeSort [3, 6, 2, 7, 4, 1, 5])

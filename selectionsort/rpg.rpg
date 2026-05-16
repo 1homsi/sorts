@@ -1,0 +1,24 @@
+     D arr            S             10I 0 DIM(10)
+     D n              S             10I 0
+     D i              S             10I 0
+     D j              S             10I 0
+     D minIdx         S             10I 0
+     D tmp            S             10I 0
+     C                   EVAL      n = 5
+     C                   EVAL      arr(1) = 5
+     C                   EVAL      arr(2) = 3
+     C                   EVAL      arr(3) = 1
+     C                   EVAL      arr(4) = 4
+     C                   EVAL      arr(5) = 2
+     C                   FOR       i = 1 TO n - 1
+     C                   EVAL      minIdx = i
+     C                   FOR       j = i + 1 TO n
+     C                   IF        arr(j) < arr(minIdx)
+     C                   EVAL      minIdx = j
+     C                   ENDIF
+     C                   ENDFOR
+     C                   EVAL      tmp = arr(i)
+     C                   EVAL      arr(i) = arr(minIdx)
+     C                   EVAL      arr(minIdx) = tmp
+     C                   ENDFOR
+     C                   SETON                                        LR

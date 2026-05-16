@@ -1,0 +1,19 @@
+-module(erlang2).
+-export([radix_sort/1, main/0]).
+
+counting_sort(Arr, Exp) ->
+    lists:concat(
+        [lists:filter(fun(X) -> (X div Exp) rem 10 =:= D end, Arr)
+         || D <- lists:seq(0, 9)]).
+
+radix_sort([]) -> [];
+radix_sort(Arr) ->
+    Max = lists:max(Arr),
+    radix_loop(Arr, Max, 1).
+
+radix_loop(Arr, Max, Exp) when Max div Exp > 0 ->
+    radix_loop(counting_sort(Arr, Exp), Max, Exp * 10);
+radix_loop(Arr, _, _) -> Arr.
+
+main() ->
+    io:format("~p~n", [radix_sort([170, 45, 75, 90, 802, 24, 2, 66])]).

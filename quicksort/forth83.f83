@@ -1,0 +1,37 @@
+CREATE DATA 3 , 6 , 8 , 10 , 1 , 2 , 1 ,
+
+: ARR@ ( i -- n ) CELLS DATA + @ ;
+: ARR! ( n i -- ) CELLS DATA + ! ;
+
+: SWAP-ELEMS ( i j -- )
+  2DUP ARR@ OVER ARR@
+  ROT ARR! SWAP ARR! ;
+
+: PARTITION ( low high -- p )
+  DUP ARR@ >R
+  OVER
+  BEGIN 2DUP < WHILE
+    DUP ARR@ R@ <= IF
+      2 PICK OVER SWAP-ELEMS
+      ROT 1+ -ROT
+    THEN
+    1+
+  REPEAT
+  DROP NIP
+  DUP ARR@ R> SWAP
+  2 PICK ARR!
+  SWAP ARR!
+  R> DROP ;
+
+: QS ( low high -- )
+  2DUP < IF
+    2DUP PARTITION
+    ROT DROP
+    OVER 1- 2 PICK ROT QS
+    1+ QS
+  ELSE
+    2DROP
+  THEN ;
+
+0 6 QS
+7 0 DO I ARR@ . LOOP CR

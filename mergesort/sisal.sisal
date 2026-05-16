@@ -1,0 +1,40 @@
+define merge
+function merge(left, right: array[integer] returns array[integer])
+    let ln := array_size(left)
+        rn := array_size(right)
+    in
+    if ln = 0 then right
+    elseif rn = 0 then left
+    else
+        let lh := left[1]
+            rh := right[1]
+        in
+        if lh <= rh then
+            array_fill(lh, merge(array_resth(left), right))
+        else
+            array_fill(rh, merge(left, array_resth(right)))
+        end if
+        end let
+    end if
+    end let
+end function
+
+define mergeSort
+function mergeSort(arr: array[integer] returns array[integer])
+    let n := array_size(arr)
+    in
+    if n <= 1 then arr
+    else
+        let mid := n / 2
+            left := mergeSort(arr[1 .. mid])
+            right := mergeSort(arr[mid+1 .. n])
+        in merge(left, right)
+        end let
+    end if
+    end let
+end function
+
+let arr := array_fill(38, array_fill(27, array_fill(43, array_fill(3,
+            array_fill(9, array_fill(82, array_fill(10, array_none)))))))
+in mergeSort(arr)
+end let

@@ -1,0 +1,10 @@
+(defun selection-sort (arr)
+  (let ((n (length arr)))
+    (dotimes (i n arr)
+      (let ((min-idx i))
+        (cl-loop for j from (1+ i) below n do
+                 (when (< (aref arr j) (aref arr min-idx))
+                   (setq min-idx j)))
+        (let ((tmp (aref arr i)))
+          (aset arr i (aref arr min-idx))
+          (aset arr min-idx tmp))))))

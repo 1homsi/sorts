@@ -1,0 +1,25 @@
+function sorted = quicksort(arr, low, high)
+    if low < high then
+        [arr, p] = partition(arr, low, high);
+        arr = quicksort(arr, low, p-1);
+        arr = quicksort(arr, p+1, high);
+    end
+    sorted = arr;
+endfunction
+
+function [arr, p] = partition(arr, low, high)
+    pivot = arr(high);
+    i = low;
+    for j = low:high-1
+        if arr(j) <= pivot then
+            tmp = arr(i); arr(i) = arr(j); arr(j) = tmp;
+            i = i + 1;
+        end
+    end
+    tmp = arr(i); arr(i) = arr(high); arr(high) = tmp;
+    p = i;
+endfunction
+
+arr = [3, 6, 8, 10, 1, 2, 1];
+sorted = quicksort(arr, 1, length(arr));
+disp(sorted);

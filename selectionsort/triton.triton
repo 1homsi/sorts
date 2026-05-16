@@ -1,0 +1,18 @@
+import triton
+import triton.language as tl
+import torch
+
+@triton.jit
+def selection_sort_kernel(arr_ptr, n: tl.constexpr):
+    pid = tl.program_id(0)
+    if pid == 0:
+        for i in range(n):
+            min_idx = i
+            for j in range(i + 1, n):
+                val_j = tl.load(arr_ptr + j)
+                val_m = tl.load(arr_ptr + min_idx)
+                if val_j < val_m:
+                    min_idx = j
+            tmp = tl.load(arr_ptr + i)
+            tl.store(arr_ptr + i, tl.load(arr_ptr + min_idx))
+            tl.store(arr_ptr + min_idx, tmp)

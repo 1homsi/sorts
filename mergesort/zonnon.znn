@@ -1,0 +1,42 @@
+module MergeSortZonnon;
+
+import Out;
+
+const N = 7;
+
+var arr: array N of integer;
+var tmp: array N of integer;
+
+procedure Merge(lo, mid, hi: integer);
+var i, j, k: integer;
+begin
+    i := lo; j := mid + 1; k := lo;
+    while (i <= mid) & (j <= hi) do
+        if arr[i] <= arr[j] then tmp[k] := arr[i]; inc(i)
+        else tmp[k] := arr[j]; inc(j) end;
+        inc(k)
+    end;
+    while i <= mid do tmp[k] := arr[i]; inc(i); inc(k) end;
+    while j <= hi do tmp[k] := arr[j]; inc(j); inc(k) end;
+    for i := lo to hi do arr[i] := tmp[i] end
+end Merge;
+
+procedure MSort(lo, hi: integer);
+var mid: integer;
+begin
+    if lo < hi then
+        mid := (lo + hi) div 2;
+        MSort(lo, mid);
+        MSort(mid + 1, hi);
+        Merge(lo, mid, hi)
+    end
+end MSort;
+
+var i: integer;
+begin
+    arr[0]:=38; arr[1]:=27; arr[2]:=43; arr[3]:=3;
+    arr[4]:=9; arr[5]:=82; arr[6]:=10;
+    MSort(0, N-1);
+    for i := 0 to N-1 do Out.Int(arr[i], 5) end;
+    Out.Ln
+end MergeSortZonnon.

@@ -1,0 +1,17 @@
+process QUICKSORT =
+(? integer value; ! integer sorted_value)
+(|
+  array := {3, 6, 8, 10, 1, 2, 1};
+  n := 7;
+  pivot := array[n/2];
+  less := [x in array | x < pivot];
+  equal := [x in array | x = pivot];
+  greater := [x in array | x > pivot];
+  result := sort(less) @ equal @ sort(greater);
+  sorted_value := result
+|)
+where
+  sort := process
+  ...
+  end process
+end process;

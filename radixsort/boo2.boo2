@@ -1,0 +1,34 @@
+import System
+
+def countingSort(arr as (int), exp as int):
+    n = len(arr)
+    output = array(int, n)
+    count = array(int, 10)
+    for x in arr:
+        count[(x / exp) % 10] += 1
+    for i in range(1, 10):
+        count[i] += count[i - 1]
+    i = n - 1
+    while i >= 0:
+        idx = (arr[i] / exp) % 10
+        count[idx] -= 1
+        output[count[idx]] = arr[i]
+        i -= 1
+    for i in range(n):
+        arr[i] = output[i]
+
+def radixSort(arr as (int)):
+    if len(arr) == 0:
+        return
+    maxVal = arr[0]
+    for x in arr:
+        if x > maxVal:
+            maxVal = x
+    exp = 1
+    while maxVal / exp > 0:
+        countingSort(arr, exp)
+        exp *= 10
+
+arr = (170, 45, 75, 90, 802, 24, 2, 66)
+radixSort(arr)
+print(join(str(x) for x in arr, ', '))

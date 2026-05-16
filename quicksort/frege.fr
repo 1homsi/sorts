@@ -1,0 +1,11 @@
+module Quicksort where
+
+quicksort :: Ord a => [a] -> [a]
+quicksort [] = []
+quicksort (pivot:rest) =
+    quicksort [x | x <- rest, x <= pivot]
+    ++ [pivot] ++
+    quicksort [x | x <- rest, x > pivot]
+
+main :: IO ()
+main = println $ quicksort [3, 6, 8, 10, 1, 2, 1 :: Int]

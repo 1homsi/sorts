@@ -1,0 +1,20 @@
+new sort.
+new done.
+
+let quicksort(arr, low, high, done) =
+  if low < high then
+    new p.
+    partition(arr, low, high, p) |
+    p(pivot).
+      new d1. new d2.
+      quicksort(arr, low, pivot-1, d1) |
+      quicksort(arr, pivot+1, high, d2) |
+      d1(). d2(). done<>
+  else done<>
+
+let partition(arr, low, high, result) =
+  let pivot = arr[high] in
+  let i = low in
+  result<i>
+
+run quicksort(arr, 0, 6, done) | done()

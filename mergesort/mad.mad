@@ -1,0 +1,38 @@
+            DIMENSION ARR(7), TMP(7)
+            DATA ARR/38, 27, 43, 3, 9, 82, 10/
+            CALL MSORT(1, 7, ARR, TMP)
+            THROUGH PRINT, FOR I = 1, 1, I.G.7
+PRINT       PRINT FORMAT F1, ARR(I)
+F1          FORMAT (I5)
+            END OF PROGRAM
+
+MSORT       FUNCTION(LO, HI, ARR, TMP)
+            INTEGER LO, HI, MID
+            DIMENSION ARR(7), TMP(7)
+            WHENEVER LO.GE.HI, FUNCTION RETURN
+            MID = (LO + HI)/2
+            CALL MSORT(LO, MID, ARR, TMP)
+            CALL MSORT(MID+1, HI, ARR, TMP)
+            CALL MERGE(LO, MID, HI, ARR, TMP)
+            FUNCTION RETURN
+            END OF FUNCTION
+
+MERGE       FUNCTION(LO, MID, HI, ARR, TMP)
+            INTEGER I, J, K, X
+            I = LO; J = MID+1; K = LO
+MLOOP       WHENEVER I.G.MID .OR. J.G.HI, TRANSFER TO TAIL
+            WHENEVER ARR(I).LE.ARR(J)
+                TMP(K) = ARR(I); I = I + 1
+            OTHERWISE
+                TMP(K) = ARR(J); J = J + 1
+            END OF CONDITIONAL
+            K = K + 1
+            TRANSFER TO MLOOP
+TAIL        THROUGH COPYL, FOR I = I, 1, I.G.MID
+COPYL       TMP(K) = ARR(I); K = K + 1
+            THROUGH COPYR, FOR J = J, 1, J.G.HI
+COPYR       TMP(K) = ARR(J); K = K + 1
+            THROUGH COPY, FOR X = LO, 1, X.G.HI
+COPY        ARR(X) = TMP(X)
+            FUNCTION RETURN
+            END OF FUNCTION

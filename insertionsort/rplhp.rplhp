@@ -1,0 +1,20 @@
+\<<
+    -> arr n
+    \<<
+        1 n 1 - FOR i
+            arr i 1 + GET
+            -> key
+            \<<
+                i 1 - -> j
+                \<<
+                    WHILE j 1 >= arr j GET key > AND REPEAT
+                        arr j GET arr j 1 + PUT
+                        j 1 - 'j' STO
+                    END
+                    key arr j 1 + PUT
+                \>>
+            \>>
+        NEXT
+        arr
+    \>>
+\>>

@@ -1,0 +1,15 @@
+(def shell-sort (arr)
+  (let n (len arr)
+    (let gap (trunc (/ n 2))
+      (while (> gap 0)
+        (for i gap (- n 1)
+          (let temp (arr i)
+            (let j i
+              (while (and (>= j gap) (> (arr (- j gap)) temp))
+                (= (arr j) (arr (- j gap)))
+                (= j (- j gap)))
+              (= (arr j) temp))))
+        (= gap (trunc (/ gap 2))))))
+  arr)
+
+(pr (shell-sort (list->vector '(64 34 25 12 22 11 90))))

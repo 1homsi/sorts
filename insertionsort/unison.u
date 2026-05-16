@@ -1,0 +1,9 @@
+insert : Nat -> [Nat] -> [Nat]
+insert x = cases
+  [] -> [x]
+  h +: t -> if x <= h then x +: h +: t else h +: insert x t
+
+insertionSort : [Nat] -> [Nat]
+insertionSort = cases
+  [] -> []
+  h +: t -> insert h (insertionSort t)

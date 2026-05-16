@@ -1,0 +1,37 @@
+        .data
+arr:    .long 3, 6, 8, 10, 1, 2, 1
+
+        .text
+        .global _main
+
+_main:
+        mov.l   arr_addr, r4
+        mov     #0, r5
+        mov     #6, r6
+        bsr     quicksort
+        nop
+        rts
+        nop
+
+quicksort:
+        cmp/ge  r6, r5
+        bt      qs_done
+        sts.l   pr, @-r15
+        bsr     partition
+        nop
+        mov     r0, r7
+        mov     r7, r6
+        add     #-1, r6
+        bsr     quicksort
+        nop
+        add     #1, r7
+        mov     r7, r5
+        bsr     quicksort
+        nop
+        lds.l   @r15+, pr
+qs_done:
+        rts
+        nop
+
+arr_addr:
+        .long arr

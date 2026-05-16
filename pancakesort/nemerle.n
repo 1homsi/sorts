@@ -1,0 +1,37 @@
+using System;
+using System.Console;
+
+module PancakeSort {
+    flip(arr : array[int], k : int) : void {
+        mutable left = 0;
+        mutable right = k;
+        while (left < right) {
+            def tmp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = tmp;
+            left++;
+            right--;
+        }
+    }
+
+    pancakeSort(arr : array[int]) : void {
+        mutable size = arr.Length;
+        while (size > 1) {
+            mutable maxIdx = 0;
+            for (mutable i = 1; i < size; i++) {
+                when (arr[i] > arr[maxIdx]) maxIdx = i;
+            }
+            when (maxIdx != size - 1) {
+                when (maxIdx != 0) flip(arr, maxIdx);
+                flip(arr, size - 1);
+            }
+            size--;
+        }
+    }
+
+    Main() : void {
+        def arr = array[3, 6, 2, 7, 4, 1, 5];
+        pancakeSort(arr);
+        WriteLine(string.Join(", ", arr));
+    }
+}

@@ -1,0 +1,12 @@
+Sub InsertionSort
+    n = Array.GetItemCount(arr)
+    For i = 1 To n - 1
+        key = arr[i]
+        j = i - 1
+        While j >= 0 And arr[j] > key
+            arr[j+1] = arr[j]
+            j = j - 1
+        EndWhile
+        arr[j+1] = key
+    EndFor
+EndSub

@@ -1,0 +1,11 @@
+defmodule TypedQuicksort do
+  @spec sort(list(integer())) :: list(integer())
+  def sort([]), do: []
+  def sort([pivot | rest]) do
+    left = Enum.filter(rest, fn x -> x <= pivot end)
+    right = Enum.filter(rest, fn x -> x > pivot end)
+    sort(left) ++ [pivot] ++ sort(right)
+  end
+end
+
+TypedQuicksort.sort([3, 6, 8, 10, 1, 2, 1]) |> Enum.each(&IO.puts/1)

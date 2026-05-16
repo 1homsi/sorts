@@ -1,0 +1,31 @@
+module Quicksort
+
+use int.Int
+use array.Array
+use array.ArrayPermut
+
+let rec quicksort (arr: array int) (low high: int) : unit
+    requires { 0 <= low /\ high < length arr }
+    ensures { permut_sub arr (old arr) low high }
+    variant { high - low }
+  = if low < high then begin
+      let p = partition arr low high in
+      quicksort arr low (p - 1);
+      quicksort arr (p + 1) high
+    end
+
+let partition (arr: array int) (low high: int) : int
+    requires { 0 <= low < high < length arr }
+    ensures { low <= result <= high }
+  = let pivot = arr[high] in
+    let i = ref low in
+    for j = low to high - 1 do
+      if arr[j] <= pivot then begin
+        let tmp = arr[!i] in arr[!i] <- arr[j]; arr[j] <- tmp;
+        incr i
+      end
+    done;
+    let tmp = arr[!i] in arr[!i] <- arr[high]; arr[high] <- tmp;
+    !i
+
+end

@@ -1,0 +1,17 @@
+scilla_version 0
+
+library SelectionSort
+
+let selection_sort =
+    fun (lst : List Int32) =>
+        let nil = Nil {Int32} in
+        let rec sort =
+            fun (remaining : List Int32) =>
+            match remaining with
+            | Nil => Nil {Int32}
+            | Cons h t =>
+                let m = @list_min Int32 remaining h in
+                let rest = @list_filter Int32 (fun x => builtin neq x m) remaining in
+                Cons {Int32} m (sort rest)
+            end
+        in sort lst

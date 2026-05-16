@@ -1,0 +1,18 @@
+package gatekeepersort
+
+import future.keywords.in
+
+violation[{"msg": msg}] {
+    input.review.object.kind == "SortRequest"
+    arr := input.review.object.spec.values
+    not is_sorted(arr)
+    msg := sprintf("Array %v is not sorted", [arr])
+}
+
+is_sorted(arr) {
+    every i in numbers.range(0, count(arr) - 2) {
+        arr[i] <= arr[i + 1]
+    }
+}
+
+sorted_result(arr) = sort(arr)

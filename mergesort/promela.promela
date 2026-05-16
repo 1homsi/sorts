@@ -1,0 +1,39 @@
+int arr[7];
+int tmp[7];
+
+proctype merge(int lo; int mid; int hi) {
+    int i = lo, j = mid + 1, k = lo;
+    do
+    :: (i <= mid && j <= hi) ->
+        if
+        :: arr[i] <= arr[j] -> tmp[k] = arr[i]; i++; k++;
+        :: else -> tmp[k] = arr[j]; j++; k++;
+        fi
+    :: (i > mid || j > hi) -> break
+    od;
+    do :: i <= mid -> tmp[k] = arr[i]; i++; k++; :: else -> break od;
+    do :: j <= hi -> tmp[k] = arr[j]; j++; k++; :: else -> break od;
+    i = lo;
+    do :: i <= hi -> arr[i] = tmp[i]; i++; :: else -> break od;
+}
+
+proctype mergesort(int lo; int hi) {
+    int mid;
+    if
+    :: lo < hi ->
+        mid = (lo + hi) / 2;
+        run mergesort(lo, mid);
+        run mergesort(mid + 1, hi);
+        run merge(lo, mid, hi);
+    :: else -> skip
+    fi
+}
+
+init {
+    arr[0]=38; arr[1]=27; arr[2]=43; arr[3]=3;
+    arr[4]=9; arr[5]=82; arr[6]=10;
+    run mergesort(0, 6);
+    int i = 0;
+    do :: i < 7 -> printf("%d ", arr[i]); i++; :: else -> break od;
+    printf("\n");
+}

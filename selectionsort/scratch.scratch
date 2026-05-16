@@ -1,0 +1,18 @@
+when green flag clicked
+set [n v] to [5]
+set [arr v] to [5 3 1 4 2]
+set [i v] to [1]
+repeat until <(i) > ((n) - (1))>
+    set [minIdx v] to (i)
+    set [j v] to ((i) + (1))
+    repeat until <(j) > (n)>
+        if <(item (j) of [arr v]) < (item (minIdx) of [arr v])> then
+            set [minIdx v] to (j)
+        end
+        change [j v] by (1)
+    end
+    set [tmp v] to (item (i) of [arr v])
+    replace item (i) of [arr v] with (item (minIdx) of [arr v])
+    replace item (minIdx) of [arr v] with (tmp)
+    change [i v] by (1)
+end

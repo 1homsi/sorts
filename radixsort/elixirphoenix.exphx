@@ -1,0 +1,21 @@
+radix_sort(Array) ->
+    case Array of
+        [] -> [];
+        _ -> 
+            MaxVal = lists:max(Array),
+            radix_sort_helper(Array, 1, MaxVal)
+    end.
+
+radix_sort_helper(Array, Exp, MaxVal) when Exp > MaxVal ->
+    Array;
+radix_sort_helper(Array, Exp, MaxVal) ->
+    Sorted = counting_sort(Array, Exp),
+    radix_sort_helper(Sorted, Exp * 10, MaxVal).
+
+counting_sort(Array, Exp) ->
+    N = length(Array),
+    Count = lists:duplicate(10, 0),
+    Output = lists:duplicate(N, 0),
+    CountUpdated = update_counts(Array, Exp, Count, 1),
+    CountPrefixed = prefix_sum(CountUpdated),
+    fill_output(Array, Exp, CountPrefixed, Output, N).

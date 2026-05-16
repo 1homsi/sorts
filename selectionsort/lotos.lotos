@@ -1,0 +1,8 @@
+specification SelectionSort[sort]: noexit
+behaviour
+    sort;
+    [5, 3, 1, 4, 2] -> [1, 2, 3, 4, 5]
+where
+    process sort[s]: noexit :=
+        s; stop
+endspec

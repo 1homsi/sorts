@@ -1,0 +1,22 @@
+def get_digit x exp = (x / exp) mod 10
+
+def counting_sort arr exp =
+    concat_list (map_list (lambda d ->
+        filter_list (lambda x -> (get_digit x exp) == d) arr)
+        (make_list 10))
+
+def make_list n =
+    if n == 0 then []
+    else append_list (make_list (n-1)) [n-1]
+
+def radix_sort_loop arr max_val exp =
+    if (max_val / exp) == 0 then arr
+    else radix_sort_loop (counting_sort arr exp) max_val (exp * 10)
+
+def radix_sort arr =
+    if arr == [] then []
+    else
+        let max_val = fold_left (lambda a x -> if x > a then x else a) 0 arr
+        in radix_sort_loop arr max_val 1
+
+main = print (radix_sort [170, 45, 75, 90, 802, 24, 2, 66])

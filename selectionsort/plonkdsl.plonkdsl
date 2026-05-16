@@ -1,0 +1,18 @@
+circuit SelectionSort {
+    inputs: [a: Field; 5]
+    outputs: [sorted: Field; 5]
+    
+    witness {
+        indices: [usize; 5]
+    }
+    
+    constraints {
+        for i in 0..5 {
+            sorted[i] == a[indices[i]];
+        }
+        for i in 0..4 {
+            sorted[i] <= sorted[i+1];
+        }
+        permutation(a, sorted);
+    }
+}

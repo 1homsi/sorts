@@ -1,0 +1,33 @@
+int arr[7];
+int n = 7;
+
+proctype shellSort() {
+    int gap, i, j, temp;
+    arr[0] = 64; arr[1] = 34; arr[2] = 25; arr[3] = 12;
+    arr[4] = 22; arr[5] = 11; arr[6] = 90;
+    gap = n / 2;
+    do
+    :: gap > 0 ->
+        i = gap;
+        do
+        :: i < n ->
+            temp = arr[i];
+            j = i;
+            do
+            :: (j >= gap) && (arr[j - gap] > temp) ->
+                arr[j] = arr[j - gap];
+                j = j - gap;
+            :: else -> break
+            od;
+            arr[j] = temp;
+            i++;
+        :: else -> break
+        od;
+        gap = gap / 2;
+    :: else -> break
+    od;
+}
+
+init {
+    run shellSort();
+}

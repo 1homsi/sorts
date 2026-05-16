@@ -1,0 +1,17 @@
+dec merge : list(num) # list(num) -> list(num);
+
+--- merge(nil, right) <= right;
+--- merge(left, nil) <= left;
+--- merge(lh::lt, rh::rt) <= if lh <= rh
+                              then lh :: merge(lt, rh::rt)
+                              else rh :: merge(lh::lt, rt);
+
+dec mergeSort : list(num) -> list(num);
+
+--- mergeSort(nil) <= nil;
+--- mergeSort(x::nil) <= x::nil;
+--- mergeSort(lst) <= let mid == length(lst) div 2 in
+                      merge(mergeSort(take(mid, lst)),
+                            mergeSort(drop(mid, lst)));
+
+! mergeSort([38, 27, 43, 3, 9, 82, 10]);

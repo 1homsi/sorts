@@ -1,0 +1,16 @@
+(Quicksort Nil) = Nil
+(Quicksort (Cons pivot rest)) =
+  let left  = (Filter (lte pivot) rest)
+  let right = (Filter (gt  pivot) rest)
+  (Concat (Quicksort left) (Cons pivot (Quicksort right)))
+
+(Filter f Nil)       = Nil
+(Filter f (Cons h t)) = case (f h) {
+  True  : (Cons h (Filter f t))
+  False : (Filter f t)
+}
+
+(lte x) = lambda y (LE x y)
+(gt  x) = lambda y (GT x y)
+
+(Main) = (Quicksort (Cons 3 (Cons 6 (Cons 8 (Cons 10 (Cons 1 (Cons 2 (Cons 1 Nil))))))))

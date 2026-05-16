@@ -1,0 +1,5 @@
+Piet program for selection sort - represented as color block description:
+Push 5, push 3, push 1, push 4, push 2
+Find minimum, swap to front, repeat
+This is a conceptual representation as Piet is an image-based language.
+The algorithm selects minimum element and moves it to sorted position.

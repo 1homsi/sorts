@@ -1,0 +1,27 @@
+let flip = fun arr k ->
+  let rec go arr left right =
+    if left < right then
+      let tmp = List.nth arr left in
+      let arr1 = List.mapi (fun i x -> if i = left then List.nth arr right else if i = right then tmp else x) arr in
+      go arr1 (left + 1) (right - 1)
+    else arr
+  in go arr 0 k
+
+let find_max_idx = fun arr size ->
+  let rec go i mi =
+    if i >= size then mi
+    else if List.nth arr i > List.nth arr mi then go (i + 1) i
+    else go (i + 1) mi
+  in go 1 0
+
+let pancake_sort = fun arr ->
+  let rec go arr size =
+    if size <= 1 then arr
+    else
+      let mi = find_max_idx arr size in
+      let arr1 = if mi != 0 then flip arr mi else arr in
+      let arr2 = flip arr1 (size - 1) in
+      go arr2 (size - 1)
+  in go arr (List.length arr)
+
+let _ = pancake_sort [3; 6; 2; 7; 4; 1; 5]

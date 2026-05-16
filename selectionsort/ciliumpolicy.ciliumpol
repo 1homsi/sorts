@@ -1,0 +1,20 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "selection-sort-policy"
+spec:
+  endpointSelector:
+    matchLabels:
+      app: selection-sort
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        app: client
+    toPorts:
+    - ports:
+      - port: "80"
+        protocol: TCP
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        app: sorted-output

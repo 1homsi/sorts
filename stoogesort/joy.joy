@@ -1,0 +1,17 @@
+DEFINE
+    stooge-sort == [
+        dup2 [swap] dip swap
+        2dup [] cons swap [first] dip swap
+        [last] dip2
+        > [swap2] [drop2] ifte
+        size 2 >
+        [
+            size 2 * 3 /i
+            [first] [last] stooge-sort
+            [last swap -] [last] stooge-sort
+            [first] [last swap -] stooge-sort
+        ]
+        []
+        ifte
+    ].
+[3 1 4 1 5 9 2 6] 0 7 stooge-sort .

@@ -1,0 +1,16 @@
+SelectionSort: (# 
+    arr: [10]@integer;
+    n, i, j, minIdx, tmp: @integer;
+    sort: (#
+    do
+        (for i: n-1 repeat
+            minIdx := i;
+            (for j: i+1, n-1 repeat
+                (if arr[j] < arr[minIdx] then minIdx := j if)
+            for);
+            tmp := arr[i];
+            arr[i] := arr[minIdx];
+            arr[minIdx] := tmp
+        for)
+    #)
+#)

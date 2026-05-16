@@ -1,0 +1,24 @@
+class ShellSort {
+    static function shellSort(arr:Array<Int>):Array<Int> {
+        var n = arr.length;
+        var gap = Std.int(n / 2);
+        while (gap > 0) {
+            for (i in gap...n) {
+                var temp = arr[i];
+                var j = i;
+                while (j >= gap && arr[j - gap] > temp) {
+                    arr[j] = arr[j - gap];
+                    j -= gap;
+                }
+                arr[j] = temp;
+            }
+            gap = Std.int(gap / 2);
+        }
+        return arr;
+    }
+
+    static function main() {
+        var arr = [64, 34, 25, 12, 22, 11, 90];
+        trace(shellSort(arr));
+    }
+}

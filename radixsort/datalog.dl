@@ -1,0 +1,18 @@
+.decl Input(pos: number, val: number)
+Input(0, 170). Input(1, 45). Input(2, 75). Input(3, 90).
+Input(4, 802). Input(5, 24). Input(6, 2). Input(7, 66).
+
+.decl MaxVal(m: number)
+MaxVal(m) :- m = max v : Input(_, v).
+
+.decl Digit(pos: number, val: number, exp: number, d: number)
+Digit(pos, val, exp, (val / exp) % 10) :-
+    Input(pos, val),
+    exp = 1.
+
+.decl Sorted(rank: number, val: number)
+Sorted(rank, val) :-
+    Input(_, val),
+    rank = count : { Input(_, v), (v % 10) < (val % 10) }.
+
+.output Sorted

@@ -1,0 +1,41 @@
+MODULE PancakeSort;
+IMPORT Out;
+
+VAR arr: ARRAY 7 OF INTEGER;
+
+PROCEDURE Flip(k: INTEGER);
+VAR left, right, tmp: INTEGER;
+BEGIN
+    left := 0; right := k;
+    WHILE left < right DO
+        tmp := arr[left]; arr[left] := arr[right]; arr[right] := tmp;
+        INC(left); DEC(right)
+    END
+END Flip;
+
+PROCEDURE Sort;
+VAR size, i, maxIdx: INTEGER;
+BEGIN
+    size := 7;
+    WHILE size > 1 DO
+        maxIdx := 0;
+        FOR i := 1 TO size - 1 DO
+            IF arr[i] > arr[maxIdx] THEN maxIdx := i END
+        END;
+        IF maxIdx # size - 1 THEN
+            IF maxIdx # 0 THEN Flip(maxIdx) END;
+            Flip(size - 1)
+        END;
+        DEC(size)
+    END
+END Sort;
+
+BEGIN
+    arr[0] := 3; arr[1] := 6; arr[2] := 2; arr[3] := 7;
+    arr[4] := 4; arr[5] := 1; arr[6] := 5;
+    Sort;
+    FOR maxIdx := 0 TO 6 DO
+        Out.Int(arr[maxIdx], 4)
+    END;
+    Out.Ln
+END PancakeSort.

@@ -1,0 +1,23 @@
+module Main where
+
+import Prelude
+import Data.Array (filter, cons, sortBy)
+import Data.Ord (compare)
+import Effect (Effect)
+import Effect.Console (log)
+import Data.Show (show)
+
+quicksort :: Array Int -> Array Int
+quicksort arr = case arr of
+  [] -> []
+  _ ->
+    let pivot = arr `unsafeIndex` 0
+        rest = drop 1 arr
+        left = filter (_ <= pivot) rest
+        right = filter (_ > pivot) rest
+    in quicksort left <> [pivot] <> quicksort right
+
+main :: Effect Unit
+main = do
+  let sorted = quicksort [3, 6, 8, 10, 1, 2, 1]
+  traverse_ (log <<< show) sorted

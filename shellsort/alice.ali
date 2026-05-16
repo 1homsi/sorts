@@ -1,0 +1,24 @@
+import structure TextIO from "x-alice:/lib/system/TextIO"
+import structure Array from "x-alice:/lib/data/Array"
+
+fun shellSort arr =
+    let
+        val n = Array.length arr
+        fun shiftBack (gap, j, temp) =
+            if j >= gap andalso Array.sub(arr, j - gap) > temp
+            then (Array.update(arr, j, Array.sub(arr, j - gap)); shiftBack(gap, j - gap, temp))
+            else Array.update(arr, j, temp)
+        fun insertPass (gap, i) =
+            if i >= n then ()
+            else (shiftBack(gap, i, Array.sub(arr, i)); insertPass(gap, i + 1))
+        fun gapLoop 0 = ()
+          | gapLoop gap = (insertPass(gap, gap); gapLoop(gap div 2))
+    in
+        gapLoop (n div 2);
+        arr
+    end
+
+val arr = Array.fromList [64, 34, 25, 12, 22, 11, 90]
+val _ = shellSort arr
+val _ = Array.app (fn x => TextIO.print(Int.toString x ^ " ")) arr
+val _ = TextIO.print "\n"

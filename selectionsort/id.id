@@ -1,0 +1,15 @@
+selectionSort arr n =
+    let loop i arr =
+        if i >= n-1 then arr
+        else
+            let minIdx = findMin arr i (i+1) n i
+                arr' = swap arr i minIdx
+            in loop (i+1) arr'
+        findMin arr i j n minIdx =
+            if j >= n then minIdx
+            else if arr[j] < arr[minIdx] then findMin arr i (j+1) n j
+            else findMin arr i (j+1) n minIdx
+        swap arr i j =
+            let tmp = arr[i]
+            in arr[i:=arr[j]][j:=tmp]
+    in loop 0 arr

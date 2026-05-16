@@ -1,0 +1,22 @@
+module SelectionSort
+exports all
+definitions
+
+functions
+
+selectionSort: seq of int -> seq of int
+selectionSort(lst) ==
+  if lst = []
+  then []
+  else let m = minVal(lst)
+       in [m] ^ selectionSort(removeFirst(m, lst));
+
+minVal: seq1 of int -> int
+minVal([x]) == x
+minVal([x] ^ rest) == let m = minVal(rest) in if x < m then x else m;
+
+removeFirst: int * seq of int -> seq of int
+removeFirst(-, []) == []
+removeFirst(x, [y] ^ ys) == if x = y then ys else [y] ^ removeFirst(x, ys)
+
+end SelectionSort

@@ -1,0 +1,36 @@
+import System.Collections.Generic
+
+class TreeNode:
+    public val as int
+    public left as TreeNode
+    public right as TreeNode
+    def constructor(v as int):
+        val = v
+        left = null
+        right = null
+
+def treeInsert(node as TreeNode, val as int) as TreeNode:
+    if node is null:
+        return TreeNode(val)
+    if val < node.val:
+        node.left = treeInsert(node.left, val)
+    else:
+        node.right = treeInsert(node.right, val)
+    return node
+
+def treeInorder(node as TreeNode, result as List[of int]):
+    if node is null:
+        return
+    treeInorder(node.left, result)
+    result.Add(node.val)
+    treeInorder(node.right, result)
+
+def treesort(arr as (int)) as List[of int]:
+    root as TreeNode = null
+    for v in arr:
+        root = treeInsert(root, v)
+    result = List[of int]()
+    treeInorder(root, result)
+    return result
+
+print(treesort((5, 3, 7, 1, 4, 6, 8)))

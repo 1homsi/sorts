@@ -1,0 +1,28 @@
+module StoogeSort
+
+from "array" include Array
+from "list" include List
+
+let stoogeSort = (arr, first, last) => {
+    let rec sort = (arr, first, last) => {
+        let a = Array.get(first, arr)
+        let b = Array.get(last, arr)
+        let arr = if (a > b) {
+            Array.set(first, b, arr)
+            Array.set(last, a, arr)
+            arr
+        } else arr
+        let n = last - first + 1
+        if (n > 2) {
+            let t = (n * 2) / 3
+            let arr = sort(arr, first, first + t - 1)
+            let arr = sort(arr, last - t + 1, last)
+            sort(arr, first, first + t - 1)
+        } else arr
+    }
+    sort(arr, first, last)
+}
+
+let arr = [> 3, 1, 4, 1, 5, 9, 2, 6]
+let _ = stoogeSort(arr, 0, Array.length(arr) - 1)
+print(arr)

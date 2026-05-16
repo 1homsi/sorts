@@ -1,0 +1,8 @@
+selectionSort : [Int] -> [Int]
+selectionSort lst =
+  match lst with
+  [] -> []
+  _ ->
+    let m = List.foldLeft min (List.head lst) lst
+        rest = List.filter (x -> x != m) lst
+    in m +: selectionSort rest

@@ -1,0 +1,11 @@
+module SelectionSort exposing (selectionSort)
+
+import List exposing (minimum, filter)
+
+selectionSort : List comparable -> List comparable
+selectionSort lst =
+    case minimum lst of
+        Nothing -> []
+        Just m ->
+            let rest = List.filter (\x -> x /= m) lst
+            in m :: selectionSort rest

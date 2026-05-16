@@ -1,0 +1,12 @@
+module SelectionSort where
+
+selectionSort :: Ord a => [a] -> [a]
+selectionSort [] = []
+selectionSort xs = m : selectionSort rest
+  where
+    m = minimum xs
+    rest = deleteFirst m xs
+    deleteFirst _ [] = []
+    deleteFirst x (y:ys)
+      | x == y = ys
+      | otherwise = y : deleteFirst x ys

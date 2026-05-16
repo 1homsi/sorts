@@ -1,0 +1,28 @@
+let get_digit x exp = (x / exp) mod 10
+
+let counting_sort arr exp =
+    Array.concat
+        (Array.to_list
+            (Array.init 10 (fun d ->
+                Array.of_list
+                    (List.filter (fun x -> get_digit x exp = d)
+                        (Array.to_list arr)))))
+
+let radix_sort arr =
+    if Array.length arr = 0 then arr
+    else begin
+        let max_val = Array.fold_left max arr.(0) arr in
+        let exp = ref 1 in
+        let result = ref arr in
+        while max_val / !exp > 0 do
+            result := counting_sort !result !exp;
+            exp := !exp * 10
+        done;
+        !result
+    end
+
+let () =
+    let arr = [|170; 45; 75; 90; 802; 24; 2; 66|] in
+    let sorted = radix_sort arr in
+    Array.iter (fun x -> print_int x; print_char ' ') sorted;
+    print_newline ()

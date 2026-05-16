@@ -1,0 +1,19 @@
+service: insertion-sort
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.12
+  region: us-east-1
+
+functions:
+  insertionSort:
+    handler: handler.insertion_sort
+    events:
+      - http:
+          path: sort
+          method: post
+
+package:
+  individually: true

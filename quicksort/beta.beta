@@ -1,0 +1,37 @@
+ORIGIN '~beta/basiclib/betaenv';
+
+PROGRAM Quicksort: (#
+    arr: [7] @integer;
+
+    partition: (# low, high: @integer; exit int #)
+    (# pivot, i, j, tmp: @integer;
+    do
+        arr[high] -> pivot; low -> i;
+        low -> j;
+        loop: (j < high) -> if true then
+            (arr[j] <= pivot) -> if true then
+                arr[i] -> tmp; arr[j] -> arr[i]; tmp -> arr[j];
+                i + 1 -> i
+            if;
+            j + 1 -> j;
+            restart loop
+        if;
+        arr[i] -> tmp; arr[high] -> arr[i]; tmp -> arr[high];
+        i -> exit
+    #);
+
+    quicksort: (# low, high, p: @integer; #)
+    (# do
+        (low < high) -> if true then
+            partition -> p;
+            quicksort(# do low -> low; p - 1 -> high #);
+            quicksort(# do p + 1 -> low; high -> high #)
+        if
+    #);
+
+do
+    3 -> arr[0]; 6 -> arr[1]; 8 -> arr[2]; 10 -> arr[3];
+    1 -> arr[4]; 2 -> arr[5]; 1 -> arr[6];
+    quicksort(# do 0 -> low; 6 -> high #);
+    (for i: 7 repeat arr[i] -> putint; ' ' -> put for)
+#)

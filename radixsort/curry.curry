@@ -1,0 +1,20 @@
+import List
+
+getDigit :: Int -> Int -> Int
+getDigit x exp = (x `div` exp) `mod` 10
+
+countingSort :: [Int] -> Int -> [Int]
+countingSort xs exp =
+    concatMap (\d -> filter (\x -> getDigit x exp == d) xs) [0..9]
+
+radixSort :: [Int] -> [Int]
+radixSort [] = []
+radixSort xs =
+    let maxVal = maximum xs
+        loop arr exp
+            | maxVal `div` exp == 0 = arr
+            | otherwise = loop (countingSort arr exp) (exp * 10)
+    in loop xs 1
+
+main :: IO ()
+main = print $ radixSort [170, 45, 75, 90, 802, 24, 2, 66]

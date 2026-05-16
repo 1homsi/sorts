@@ -1,0 +1,33 @@
+        DEFINE('MSORT(A,N)MID,LEFT,RIGHT,I')
+        DEFINE('MERGE(L,R)I,J,K')
+
+MSORT   MSORT = A
+        LE(N,1)                           :S(MSORT.END)
+        MID = N / 2
+        LEFT = MSORT(A<1,MID>, MID)
+        RIGHT = MSORT(A<MID+1,N>, N-MID)
+        MSORT = MERGE(LEFT, RIGHT)
+MSORT.END
+        RETURN
+
+MERGE   I = 1; J = 1; K = 0
+MLOOP   GT(I, SIZE(L)) GT(J, SIZE(R)) :S(MLOOP)F(MLOOP)
+        LE(L<I>,R<J>)                     :S(TAKE.L)
+        K = K + 1; RESULT<K> = R<J>; J = J + 1 :(MLOOP)
+TAKE.L  K = K + 1; RESULT<K> = L<I>; I = I + 1 :(MLOOP)
+REST.L  GT(I, SIZE(L))                    :S(REST.R)
+        K = K + 1; RESULT<K> = L<I>; I = I + 1 :(REST.L)
+REST.R  GT(J, SIZE(R))                    :S(DONE)
+        K = K + 1; RESULT<K> = R<J>; J = J + 1 :(REST.R)
+DONE    MERGE = RESULT
+        RETURN
+
+        A = ARRAY(7)
+        A<1>=38; A<2>=27; A<3>=43; A<4>=3
+        A<5>=9; A<6>=82; A<7>=10
+        SORTED = MSORT(A, 7)
+        I = 1
+PRINT   LE(I,7)                           :F(END)
+        OUTPUT = SORTED<I>
+        I = I + 1                          :(PRINT)
+END

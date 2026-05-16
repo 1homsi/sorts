@@ -1,0 +1,29 @@
+module body Quicksort is
+    function Partition(arr: Fixed_Array[Int32], low: Index, high: Index): Index is
+        let pivot: Int32 := arr[high];
+        let i: Index := low;
+        let j: Index := low;
+        while j < high do
+            if arr[j] <= pivot then
+                let tmp: Int32 := arr[i];
+                arr[i] := arr[j];
+                arr[j] := tmp;
+                i := i + 1;
+            end if;
+            j := j + 1;
+        end while;
+        let tmp: Int32 := arr[i];
+        arr[i] := arr[high];
+        arr[high] := tmp;
+        return i;
+    end;
+
+    function Quicksort(arr: Fixed_Array[Int32], low: Index, high: Index): Unit is
+        if low < high then
+            let p: Index := Partition(arr, low, high);
+            Quicksort(arr, low, p - 1);
+            Quicksort(arr, p + 1, high);
+        end if;
+        return nil;
+    end;
+end module body.

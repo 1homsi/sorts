@@ -1,0 +1,25 @@
+uses java.util.ArrayList
+uses java.util.List
+
+function merge(left: List<Integer>, right: List<Integer>): List<Integer> {
+    var result = new ArrayList<Integer>()
+    var i = 0; var j = 0
+    while (i < left.size() && j < right.size()) {
+        if (left.get(i) <= right.get(j)) { result.add(left.get(i++)) }
+        else { result.add(right.get(j++)) }
+    }
+    while (i < left.size()) result.add(left.get(i++))
+    while (j < right.size()) result.add(right.get(j++))
+    return result
+}
+
+function mergeSort(arr: List<Integer>): List<Integer> {
+    if (arr.size() <= 1) return arr
+    var mid = arr.size() / 2
+    var left = mergeSort(arr.subList(0, mid))
+    var right = mergeSort(arr.subList(mid, arr.size()))
+    return merge(left, right)
+}
+
+var arr: List<Integer> = {38, 27, 43, 3, 9, 82, 10}
+print(mergeSort(arr))

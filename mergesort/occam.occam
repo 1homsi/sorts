@@ -1,0 +1,53 @@
+PROC merge.sort ()
+    INT arr [7], tmp [7]:
+    SEQ
+        arr [0] := 38
+        arr [1] := 27
+        arr [2] := 43
+        arr [3] := 3
+        arr [4] := 9
+        arr [5] := 82
+        arr [6] := 10
+        PROC merge (VAL INT lo, mid, hi)
+            INT i, j, k:
+            SEQ
+                i := lo
+                j := mid + 1
+                k := lo
+                WHILE (i <= mid) AND (j <= hi)
+                    IF
+                        arr [i] <= arr [j]
+                            SEQ
+                                tmp [k] := arr [i]
+                                i := i + 1
+                        TRUE
+                            SEQ
+                                tmp [k] := arr [j]
+                                j := j + 1
+                    k := k + 1
+                WHILE i <= mid
+                    SEQ
+                        tmp [k] := arr [i]
+                        i := i + 1
+                        k := k + 1
+                WHILE j <= hi
+                    SEQ
+                        tmp [k] := arr [j]
+                        j := j + 1
+                        k := k + 1
+                SEQ k = lo FOR (hi - lo + 1)
+                    arr [k] := tmp [k]
+        PROC msort (VAL INT lo, hi)
+            INT mid:
+            IF
+                lo >= hi
+                    SKIP
+                TRUE
+                    SEQ
+                        mid := (lo + hi) / 2
+                        msort (lo, mid)
+                        msort (mid + 1, hi)
+                        merge (lo, mid, hi)
+        msort (0, 6)
+        SEQ i = 0 FOR 7
+            out.int (arr [i], 0, stdout)

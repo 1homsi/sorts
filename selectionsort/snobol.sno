@@ -1,0 +1,15 @@
+        DEFINE('SELECTIONSORT(N)')
+SELECTIONSORT
+        I = 1
+OUTER   I GT N - 1                             :S(DONE)
+        MINIDX = I
+        J = I + 1
+INNER   J GT N                                 :S(SWAP)
+        LT(ARR<J>, ARR<MINIDX>)               :F(NEXT)
+        MINIDX = J
+NEXT    J = J + 1                              :(INNER)
+SWAP    TMP = ARR<I>
+        ARR<I> = ARR<MINIDX>
+        ARR<MINIDX> = TMP
+        I = I + 1                              :(OUTER)
+DONE    RETURN

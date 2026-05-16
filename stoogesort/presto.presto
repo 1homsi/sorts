@@ -1,0 +1,7 @@
+WITH arr AS (
+    SELECT * FROM (VALUES (0,3),(1,1),(2,4),(3,1),(4,5),(5,9),(6,2),(7,6)) AS t(idx, val)
+),
+sorted AS (
+    SELECT val FROM arr ORDER BY val
+)
+SELECT val FROM sorted;

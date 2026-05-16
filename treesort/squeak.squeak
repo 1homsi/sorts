@@ -1,0 +1,39 @@
+Object subclass: #SqueakBSTNode
+    instanceVariableNames: 'val left right'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'TreeSort'.
+
+SqueakBSTNode class >> withVal: v [
+    ^self new initVal: v
+]
+
+SqueakBSTNode >> initVal: v [
+    val := v. left := nil. right := nil.
+]
+
+SqueakBSTNode >> insert: v [
+    v < val
+        ifTrue: [left isNil
+            ifTrue: [left := SqueakBSTNode withVal: v]
+            ifFalse: [left insert: v]]
+        ifFalse: [right isNil
+            ifTrue: [right := SqueakBSTNode withVal: v]
+            ifFalse: [right insert: v]]
+]
+
+SqueakBSTNode >> inorder: col [
+    left isNil ifFalse: [left inorder: col].
+    col add: val.
+    right isNil ifFalse: [right inorder: col].
+]
+
+| arr root result |
+arr := #(5 3 7 1 4 6 8).
+arr do: [:v |
+    root isNil
+        ifTrue: [root := SqueakBSTNode withVal: v]
+        ifFalse: [root insert: v]].
+result := OrderedCollection new.
+root inorder: result.
+Transcript showCr: result printString.

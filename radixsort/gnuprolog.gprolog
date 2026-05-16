@@ -1,0 +1,23 @@
+radix_sort([], []).
+radix_sort(Arr, Sorted) :-
+    Arr \= [],
+    max_list(Arr, MaxVal),
+    radix_sort_helper(Arr, 1, MaxVal, Sorted).
+
+radix_sort_helper(Arr, Exp, MaxVal, Arr) :-
+    Exp > MaxVal, !.
+radix_sort_helper(Arr, Exp, MaxVal, Sorted) :-
+    counting_sort(Arr, Exp, ArrSorted),
+    NextExp is Exp * 10,
+    radix_sort_helper(ArrSorted, NextExp, MaxVal, Sorted).
+
+counting_sort([], _, []).
+counting_sort(Arr, Exp, Sorted) :-
+    length(Arr, N),
+    sort_by_digit(Arr, Exp, Sorted).
+
+sort_by_digit([], _, []).
+sort_by_digit([H|T], Exp, Sorted) :-
+    Idx is (H // Exp) mod 10,
+    sort_by_digit(T, Exp, Rest),
+    insert_by_digit(H, Idx, Rest, Sorted).

@@ -1,0 +1,26 @@
+DIMENSION arr(7)
+arr(1)=3:arr(2)=6:arr(3)=8:arr(4)=10
+arr(5)=1:arr(6)=2:arr(7)=1
+
+QuickSort(1, 7)
+FOR i=1 TO 7: ?arr(i): NEXT i
+
+FUNCTION Partition(low, high)
+    pivot=arr(high): i=low
+    FOR j=low TO high-1
+        IF arr(j)<=pivot
+            tmp=arr(i): arr(i)=arr(j): arr(j)=tmp
+            i=i+1
+        ENDIF
+    NEXT j
+    tmp=arr(i): arr(i)=arr(high): arr(high)=tmp
+    RETURN i
+ENDFUNC
+
+PROCEDURE QuickSort(low, high)
+    IF low<high
+        p=Partition(low,high)
+        QuickSort(low,p-1)
+        QuickSort(p+1,high)
+    ENDIF
+ENDPROC

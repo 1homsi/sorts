@@ -1,0 +1,6 @@
+const selectionSort = (lst: list<int>): list<int> => {
+  if (List.size(lst) == 0n) return list([]);
+  const m = List.fold_left(([acc, x]: [int, int]): int => x < acc ? x : acc, Option.unopt(List.head(lst)), lst);
+  const rest = List.filter(x => x != m, lst);
+  return list([m, ...selectionSort(rest)]);
+};

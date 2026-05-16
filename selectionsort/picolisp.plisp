@@ -1,0 +1,10 @@
+(de selection-sort (Lst)
+   (when Lst
+      (let Min (apply min Lst)
+         (cons Min (selection-sort (remove Min Lst))) ) ) )
+
+(de remove (X Lst)
+   (cond
+      ((not Lst) NIL)
+      ((= X (car Lst)) (cdr Lst))
+      (T (cons (car Lst) (remove X (cdr Lst)))) ) )

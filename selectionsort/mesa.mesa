@@ -1,0 +1,18 @@
+SelectionSort: PROGRAM =
+BEGIN
+    arr: ARRAY [1..10] OF INTEGER;
+    n, i, j, minIdx, tmp: INTEGER;
+    
+    Sort: PROCEDURE =
+    BEGIN
+        FOR i IN [1..n-1] DO
+        BEGIN
+            minIdx <- i;
+            FOR j IN [i+1..n] DO
+                IF arr[j] < arr[minIdx] THEN minIdx <- j;
+            tmp <- arr[i];
+            arr[i] <- arr[minIdx];
+            arr[minIdx] <- tmp
+        END
+    END;
+END.

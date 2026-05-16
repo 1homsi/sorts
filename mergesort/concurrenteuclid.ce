@@ -1,0 +1,41 @@
+module MergeSort;
+
+import Io;
+
+var arr: array 1..7 of integer;
+var tmp: array 1..7 of integer;
+
+procedure Merge(lo, mid, hi: integer);
+var i, j, k, x: integer;
+begin
+    i := lo; j := mid + 1; k := lo;
+    loop
+        exit when i > mid or j > hi;
+        if arr[i] <= arr[j] then
+            tmp[k] := arr[i]; i := i + 1;
+        else
+            tmp[k] := arr[j]; j := j + 1;
+        end if;
+        k := k + 1;
+    end loop;
+    loop exit when i > mid; tmp[k] := arr[i]; i := i+1; k := k+1; end loop;
+    loop exit when j > hi; tmp[k] := arr[j]; j := j+1; k := k+1; end loop;
+    for x := lo to hi do arr[x] := tmp[x]; end for;
+end Merge;
+
+procedure MSort(lo, hi: integer);
+var mid: integer;
+begin
+    if lo >= hi then return; end if;
+    mid := (lo + hi) / 2;
+    MSort(lo, mid);
+    MSort(mid + 1, hi);
+    Merge(lo, mid, hi);
+end MSort;
+
+begin
+    arr[1]:=38; arr[2]:=27; arr[3]:=43; arr[4]:=3;
+    arr[5]:=9; arr[6]:=82; arr[7]:=10;
+    MSort(1, 7);
+    for i := 1 to 7 do Io.Write(arr[i]); end for;
+end MergeSort;

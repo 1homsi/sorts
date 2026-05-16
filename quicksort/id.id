@@ -1,0 +1,10 @@
+def quicksort arr =
+  if #arr <= 1 then arr
+  else
+    let pivot = arr[#arr / 2]
+    let left = { x | x <- arr, x < pivot }
+    let middle = { x | x <- arr, x = pivot }
+    let right = { x | x <- arr, x > pivot }
+    in quicksort left ++ middle ++ quicksort right
+
+in quicksort [3, 6, 8, 10, 1, 2, 1]

@@ -1,0 +1,28 @@
+Public Sub ShellSort(arr As Integer[])
+  Dim n As Integer = arr.Count
+  Dim gap As Integer = n \ 2
+  Dim i, j, temp As Integer
+  While gap > 0
+    For i = gap To n - 1
+      temp = arr[i]
+      j = i
+      While j >= gap And arr[j - gap] > temp
+        arr[j] = arr[j - gap]
+        j -= gap
+      Wend
+      arr[j] = temp
+    Next
+    gap = gap \ 2
+  Wend
+End Sub
+
+Public Sub Main()
+  Dim arr As New Integer[]
+  arr.Push(64):arr.Push(34):arr.Push(25):arr.Push(12)
+  arr.Push(22):arr.Push(11):arr.Push(90)
+  ShellSort(arr)
+  For Each v As Integer In arr
+    Print v; " ";
+  Next
+  Print
+End Sub

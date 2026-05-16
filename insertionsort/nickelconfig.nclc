@@ -1,0 +1,21 @@
+let insert = fun x arr =>
+  arr |> std.array.fold_right
+    (fun elem acc =>
+      if x <= elem then
+        [x] @ [elem] @ (std.array.drop_first acc)
+      else
+        [elem] @ acc)
+    [x]
+in
+
+let insertion_sort = fun arr =>
+  std.array.fold_left
+    (fun sorted x => insert x sorted)
+    []
+    arr
+in
+
+{
+  input = [5, 3, 1, 4, 2],
+  output = insertion_sort [5, 3, 1, 4, 2],
+}

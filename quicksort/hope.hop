@@ -1,0 +1,11 @@
+dec quicksort : list(num) -> list(num);
+--- quicksort nil <= nil;
+--- quicksort (pivot::rest) <=
+    quicksort(filter(lambda x => x <= pivot, rest)) ++
+    (pivot :: quicksort(filter(lambda x => x > pivot, rest)));
+
+dec filter : (num -> truval) # list(num) -> list(num);
+--- filter(p, nil) <= nil;
+--- filter(p, h::t) <= if p(h) then h :: filter(p, t) else filter(p, t);
+
+quicksort(3::6::8::10::1::2::1::nil);

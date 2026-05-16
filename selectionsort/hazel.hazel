@@ -1,0 +1,10 @@
+let selection_sort (arr : List Int) : List Int =
+  let rec go (remaining : List Int) (acc : List Int) : List Int =
+    match remaining with
+    | [] -> acc
+    | _ ->
+      let m = List.fold_left (fun a b -> if b < a then b else a) (List.hd remaining) remaining in
+      let rest = List.filter (fun x -> x != m) remaining in
+      go rest (acc @ [m])
+  in
+  go arr []

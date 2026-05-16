@@ -1,0 +1,12 @@
+Define SelectionSort(arr)
+  Foreach i In 1..Len(arr)-1 Do
+    MinIdx := i;
+    Foreach j In i+1..Len(arr) Do
+      If arr[j] < arr[MinIdx] Then MinIdx := j; EndIf;
+    EndForeach;
+    Tmp := arr[i]; arr[i] := arr[MinIdx]; arr[MinIdx] := Tmp;
+  EndForeach;
+  Return arr;
+EndDefine;
+
+SelectionSort([5,3,1,4,2]);

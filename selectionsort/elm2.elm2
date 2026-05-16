@@ -1,0 +1,17 @@
+module SelectionSort2 exposing (selectionSort)
+
+selectionSort : List comparable -> List comparable
+selectionSort lst =
+    case lst of
+        [] -> []
+        _ ->
+            case List.minimum lst of
+                Nothing -> lst
+                Just m ->
+                    m :: selectionSort (removeFirst m lst)
+
+removeFirst : comparable -> List comparable -> List comparable
+removeFirst x lst =
+    case lst of
+        [] -> []
+        h :: t -> if h == x then t else h :: removeFirst x t

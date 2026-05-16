@@ -1,0 +1,17 @@
+function InsertionSort(arr: array[integer]) returns array[integer]
+let n := array_size(arr);
+    result := arr
+in
+    for i in 1, n-1 cross
+        result
+    returns result
+        key := result[i];
+        j := i - 1;
+        while j >= 0 and result[j] > key do
+            result[j+1] := result[j];
+            j := j - 1
+        end while;
+        result[j+1] := key
+    end for
+end let
+end function

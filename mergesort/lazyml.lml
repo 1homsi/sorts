@@ -1,0 +1,22 @@
+let rec merge left right =
+    match left with
+    | [] -> right
+    | lh :: lt ->
+        match right with
+        | [] -> left
+        | rh :: rt ->
+            if lh <= rh then lh :: merge lt right
+            else rh :: merge left rt
+
+let rec merge_sort lst =
+    match lst with
+    | [] -> []
+    | [x] -> [x]
+    | _ ->
+        let n = length lst in
+        let mid = n / 2 in
+        let left = take mid lst in
+        let right = drop mid lst in
+        merge (merge_sort left) (merge_sort right)
+
+let result = merge_sort [38; 27; 43; 3; 9; 82; 10]

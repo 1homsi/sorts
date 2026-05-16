@@ -1,0 +1,34 @@
+(define shell-sort
+  Lst ->
+    (let A (absvector (length Lst))
+         N (length Lst)
+         _ (fill-vector A 0 Lst)
+         _ (do-shell-sort A N (trunc (/ N 2)))
+         (vector->list A 0 N)))
+
+(define fill-vector
+  _ _ [] -> done
+  A I [H|T] -> (let _ (<-address A I H) (fill-vector A (+ I 1) T)))
+
+(define do-shell-sort
+  _ _ 0 -> done
+  A N Gap ->
+    (let _ (insertion-pass A Gap Gap N)
+         (do-shell-sort A N (trunc (/ Gap 2)))))
+
+(define insertion-pass
+  A _ I N -> done where (>= I N)
+  A Gap I N ->
+    (let Temp (address-> A I)
+         _ (shift-back A Gap I Temp)
+         (insertion-pass A Gap (+ I 1) N)))
+
+(define shift-back
+  A Gap J Temp -> (<-address A J Temp) where (< J Gap)
+  A Gap J Temp ->
+    (if (> (<-address A (- J Gap)) Temp)
+        (let _ (<-address A J (<-address A (- J Gap)))
+             (shift-back A Gap (- J Gap) Temp))
+        (<-address A J Temp)))
+
+(print (shell-sort [64 34 25 12 22 11 90]))

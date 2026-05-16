@@ -1,0 +1,12 @@
+PROC SelectionSort%:(arr%(), n%)
+    LOCAL i%, j%, minIdx%, tmp%
+    FOR i% = 1 TO n% - 1
+        minIdx% = i%
+        FOR j% = i% + 1 TO n%
+            IF arr%(j%) < arr%(minIdx%) THEN minIdx% = j%
+        NEXT j%
+        tmp% = arr%(i%)
+        arr%(i%) = arr%(minIdx%)
+        arr%(minIdx%) = tmp%
+    NEXT i%
+ENDP

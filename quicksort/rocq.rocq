@@ -1,0 +1,23 @@
+Require Import List Arith.
+Import ListNotations.
+
+Fixpoint quicksort (l : list nat) : list nat :=
+  match l with
+  | [] => []
+  | pivot :: rest =>
+      let left := filter (fun x => Nat.leb x pivot) rest in
+      let right := filter (fun x => negb (Nat.leb x pivot)) rest in
+      quicksort left ++ [pivot] ++ quicksort right
+  end.
+
+Theorem quicksort_length : forall l, length (quicksort l) = length l.
+Proof.
+  intro l.
+  induction l as [| pivot rest IH].
+  - reflexivity.
+  - simpl. rewrite app_length. simpl.
+    rewrite IH.
+    omega.
+Admitted.
+
+Compute quicksort [3; 6; 8; 10; 1; 2; 1].

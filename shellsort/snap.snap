@@ -1,0 +1,19 @@
+when green flag clicked
+set [arr v] to (list (64) (34) (25) (12) (22) (11) (90))
+set [n v] to (length of (arr))
+set [gap v] to (floor ((n) / (2)))
+repeat until ((gap) = (0))
+    set [i v] to (gap)
+    repeat until ((i) >= (n))
+        set [temp v] to (item (i) of (arr))
+        set [j v] to (i)
+        repeat until ((j) < (gap)) or ((item ((j) - (gap)) of (arr)) <= (temp))
+            replace item (j) of (arr) with (item ((j) - (gap)) of (arr))
+            set [j v] to ((j) - (gap))
+        end
+        replace item (j) of (arr) with (temp)
+        change [i v] by (1)
+    end
+    set [gap v] to (floor ((gap) / (2)))
+end
+say (arr)

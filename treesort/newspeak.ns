@@ -1,0 +1,36 @@
+Newspeak3
+class TreeSort usingPlatform: platform = (
+    | OrderedCollection = platform collections OrderedCollection. |
+)(
+    class Node val: v = (
+        | val = v. left <: nil. right <: nil. |
+    )(
+        insert: aVal = (
+            aVal < val
+                ifTrue: [
+                    left isNil
+                        ifTrue: [left:: Node val: aVal]
+                        ifFalse: [left insert: aVal]]
+                ifFalse: [
+                    right isNil
+                        ifTrue: [right:: Node val: aVal]
+                        ifFalse: [right insert: aVal]]
+        )
+        inorder: result = (
+            left isNil ifFalse: [left inorder: result].
+            result add: val.
+            right isNil ifFalse: [right inorder: result].
+        )
+    )
+
+    treesort: arr = (
+        | root result |
+        arr do: [:v |
+            root isNil
+                ifTrue: [root:: Node val: v]
+                ifFalse: [root insert: v]].
+        result:: OrderedCollection new.
+        root isNil ifFalse: [root inorder: result].
+        ^result
+    )
+)

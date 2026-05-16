@@ -1,0 +1,37 @@
+merge_sort = proc(arr: array[int]) returns (array[int])
+    n: int := array_size(arr)
+    if n <= 1 then return(arr) end
+    mid: int := n / 2
+    left: array[int] := array_copy(arr, 1, mid)
+    right: array[int] := array_copy(arr, mid + 1, n - mid)
+    left := merge_sort(left)
+    right := merge_sort(right)
+    return(merge(left, right))
+end merge_sort
+
+merge = proc(left, right: array[int]) returns (array[int])
+    result: array[int] := array_new()
+    i: int := 1
+    j: int := 1
+    while i <= array_size(left) & j <= array_size(right) do
+        if left[i] <= right[j]
+            then array_append(result, left[i]); i := i + 1
+            else array_append(result, right[j]); j := j + 1
+        end
+    end
+    while i <= array_size(left) do
+        array_append(result, left[i]); i := i + 1
+    end
+    while j <= array_size(right) do
+        array_append(result, right[j]); j := j + 1
+    end
+    return(result)
+end merge
+
+start = proc()
+    arr: array[int] := array[int]$[38, 27, 43, 3, 9, 82, 10]
+    sorted: array[int] := merge_sort(arr)
+    for v: int in array_elements(sorted) do
+        stream$putl(stream$primary_output(), int_unparse(v))
+    end
+end start

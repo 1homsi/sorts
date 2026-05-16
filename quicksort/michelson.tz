@@ -1,0 +1,15 @@
+parameter (list int);
+storage (list int);
+code {
+    CAR;
+    NIL int;
+    SWAP;
+    ITER {
+        CONS
+    };
+    SORT { COMPARE; LT };
+    NIL int;
+    SWAP;
+    ITER { CONS };
+    PAIR
+}

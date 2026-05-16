@@ -1,0 +1,47 @@
+let min_run = 32
+
+let rec insert_val (x : Int) (lst : List(Int)) : List(Int) =
+  case lst of
+  | [] => [x]
+  | h :: t => if x <= h then x :: h :: t else h :: insert_val x t
+  end
+
+let rec insertion_sort (lst : List(Int)) : List(Int) =
+  case lst of
+  | [] => []
+  | h :: t => insert_val h (insertion_sort t)
+  end
+
+let rec merge_runs (xs : List(Int)) (ys : List(Int)) : List(Int) =
+  case (xs, ys) of
+  | ([], _) => ys
+  | (_, []) => xs
+  | (x :: xrest, y :: yrest) =>
+      if x <= y then x :: merge_runs xrest ys
+      else y :: merge_runs xs yrest
+  end
+
+let rec chunks_of (n : Int) (lst : List(Int)) : List(List(Int)) =
+  case lst of
+  | [] => []
+  | _ => List.take n lst :: chunks_of n (List.drop n lst)
+  end
+
+let rec merge_pairs (runs : List(List(Int))) : List(List(Int)) =
+  case runs of
+  | [] => []
+  | [x] => [x]
+  | x :: y :: rest => merge_runs x y :: merge_pairs rest
+  end
+
+let rec merge_all (runs : List(List(Int))) : List(Int) =
+  case runs of
+  | [x] => x
+  | _ => merge_all (merge_pairs runs)
+  end
+
+let timsort (lst : List(Int)) : List(Int) =
+  case lst of
+  | [] => lst
+  | _ => merge_all (List.map insertion_sort (chunks_of min_run lst))
+  end

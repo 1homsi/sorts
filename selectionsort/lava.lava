@@ -1,0 +1,10 @@
+module SelectionSort where
+
+import Lava
+
+selectionSort :: (Ord a) => [a] -> [a]
+selectionSort [] = []
+selectionSort xs =
+    let m = minimum xs
+        rest = filter (/= m) xs
+    in m : selectionSort rest

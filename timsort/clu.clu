@@ -1,0 +1,65 @@
+timsort = cluster is sort
+
+    rep = array[int]
+
+    min_run = 32
+
+    insertion_sort = proc(arr: rep, left, right: int)
+        i: int := left + 1
+        while i <= right do
+            key: int := arr[i]
+            j: int := i - 1
+            while j >= left & arr[j] > key do
+                arr[j+1] := arr[j]
+                j := j - 1
+            end
+            arr[j+1] := key
+            i := i + 1
+        end
+    end insertion_sort
+
+    merge = proc(arr: rep, left, mid, right: int)
+        lp: array[int] := array[int]$predict(1, mid-left+1)
+        rp: array[int] := array[int]$predict(1, right-mid)
+        for i: int in int$from_to(left, mid) do
+            array[int]$addh(lp, arr[i])
+        end
+        for i: int in int$from_to(mid+1, right) do
+            array[int]$addh(rp, arr[i])
+        end
+        i: int := 1
+        j: int := 1
+        k: int := left
+        while i <= array[int]$high(lp) & j <= array[int]$high(rp) do
+            if lp[i] <= rp[j] then arr[k] := lp[i]; i := i + 1
+            else arr[k] := rp[j]; j := j + 1
+            end
+            k := k + 1
+        end
+        while i <= array[int]$high(lp) do arr[k] := lp[i]; i := i+1; k := k+1 end
+        while j <= array[int]$high(rp) do arr[k] := rp[j]; j := j+1; k := k+1 end
+    end merge
+
+    sort = proc(arr: rep) returns (rep)
+        n: int := array[int]$high(arr) - array[int]$low(arr) + 1
+        i: int := 0
+        while i < n do
+            right: int := int$min(i + min_run - 1, n - 1)
+            insertion_sort(arr, i, right)
+            i := i + min_run
+        end
+        size: int := min_run
+        while size < n do
+            left: int := 0
+            while left < n do
+                mid: int := int$min(left + size - 1, n - 1)
+                right: int := int$min(left + 2*size - 1, n - 1)
+                if mid < right then merge(arr, left, mid, right) end
+                left := left + 2 * size
+            end
+            size := size * 2
+        end
+        return arr
+    end sort
+
+end timsort

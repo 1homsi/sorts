@@ -1,0 +1,12 @@
+sort Nat;
+
+map insertion_sort: List(Nat) -> List(Nat);
+    insert: Nat # List(Nat) -> List(Nat);
+
+var x: Nat; h: Nat; t: List(Nat);
+eqn
+    insertion_sort([]) = [];
+    insertion_sort(x |> t) = insert(x, insertion_sort(t));
+    insert(x, []) = [x];
+    x <= h -> insert(x, h |> t) = x |> h |> t;
+    !(x <= h) -> insert(x, h |> t) = h |> insert(x, t);

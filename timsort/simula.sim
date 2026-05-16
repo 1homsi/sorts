@@ -1,0 +1,68 @@
+Begin
+   Integer Array arr(1:9);
+   Integer minRun, n, i, j, k, key, size, left, mid, right, ln, rn;
+   Integer Array lp(1:256), rp(1:256);
+
+   minRun := 32;
+   n := 9;
+   arr(1) := 5; arr(2) := 2; arr(3) := 8; arr(4) := 1; arr(5) := 9;
+   arr(6) := 3; arr(7) := 7; arr(8) := 4; arr(9) := 6;
+
+   Procedure InsertionSort(left, right: Integer);
+   Begin
+      For i := left + 1 Step 1 Until right Do
+      Begin
+         key := arr(i);
+         j := i - 1;
+         While j >= left And arr(j) > key Do
+         Begin
+            arr(j + 1) := arr(j);
+            j := j - 1;
+         End;
+         arr(j + 1) := key;
+      End;
+   End InsertionSort;
+
+   Procedure Merge(left, mid, right: Integer);
+   Begin
+      ln := mid - left + 1;
+      rn := right - mid;
+      For i := 1 Step 1 Until ln Do lp(i) := arr(left + i - 1);
+      For i := 1 Step 1 Until rn Do rp(i) := arr(mid + i);
+      i := 1; j := 1; k := left;
+      While i <= ln And j <= rn Do
+      Begin
+         If lp(i) <= rp(j) Then Begin arr(k) := lp(i); i := i + 1; End
+         Else Begin arr(k) := rp(j); j := j + 1; End;
+         k := k + 1;
+      End;
+      While i <= ln Do Begin arr(k) := lp(i); i := i + 1; k := k + 1; End;
+      While j <= rn Do Begin arr(k) := rp(j); j := j + 1; k := k + 1; End;
+   End Merge;
+
+   i := 1;
+   While i <= n Do
+   Begin
+      right := If i + minRun - 1 < n Then i + minRun - 1 Else n;
+      InsertionSort(i, right);
+      i := i + minRun;
+   End;
+
+   size := minRun;
+   While size < n Do
+   Begin
+      left := 1;
+      While left <= n Do
+      Begin
+         mid := If left + size - 1 < n Then left + size - 1 Else n;
+         right := If left + 2*size - 1 < n Then left + 2*size - 1 Else n;
+         If mid < right Then Merge(left, mid, right);
+         left := left + 2 * size;
+      End;
+      size := size * 2;
+   End;
+
+   For i := 1 Step 1 Until n Do
+      OutInt(arr(i), 4);
+   OutImage;
+End

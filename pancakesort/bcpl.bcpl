@@ -1,0 +1,45 @@
+GET "libhdr"
+
+GLOBAL
+    arr: 200
+    n: 201
+
+LET flip(k) BE
+{   LET left = 0
+    LET right = k
+    LET tmp = 0
+    UNTIL left >= right DO
+    {   tmp := arr!left
+        arr!left := arr!right
+        arr!right := tmp
+        left := left + 1
+        right := right - 1
+    }
+}
+
+LET pancakeSort() BE
+{   LET size = n
+    LET maxIdx = 0
+    LET i = 0
+    UNTIL size <= 1 DO
+    {   maxIdx := 0
+        FOR i = 1 TO size - 1 DO
+            IF arr!i > arr!maxIdx DO maxIdx := i
+        UNLESS maxIdx = size - 1 DO
+        {   UNLESS maxIdx = 0 DO flip(maxIdx)
+            flip(size - 1)
+        }
+        size := size - 1
+    }
+}
+
+LET start() = VALOF
+{   LET data = TABLE 3, 6, 2, 7, 4, 1, 5
+    arr := data
+    n := 7
+    pancakeSort()
+    FOR i = 0 TO n - 1 DO
+        writef("%N ", arr!i)
+    wrch('*N')
+    RESULTIS 0
+}

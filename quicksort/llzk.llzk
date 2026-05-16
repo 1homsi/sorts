@@ -1,0 +1,26 @@
+module @quicksort {
+  @felt_type = i252
+
+  func @partition(%arr: !llzk.array<7 x @felt_type>, %low: index, %high: index) -> index {
+    %pivot = llzk.readarr %arr[%high] : !llzk.array<7 x @felt_type>
+    %i = llzk.alloca : !llzk.ref<index>
+    llzk.store %low, %i : !llzk.ref<index>
+    llzk.for %j = %low to %high {
+      %vj = llzk.readarr %arr[%j] : !llzk.array<7 x @felt_type>
+      %cmp = llzk.cmp le, %vj, %pivot : @felt_type
+      llzk.if %cmp {
+        %iv = llzk.load %i : !llzk.ref<index>
+        %vi = llzk.readarr %arr[%iv] : !llzk.array<7 x @felt_type>
+        llzk.writearr %vj, %arr[%iv] : !llzk.array<7 x @felt_type>
+        llzk.writearr %vi, %arr[%j] : !llzk.array<7 x @felt_type>
+        %iv1 = llzk.add %iv, 1 : index
+        llzk.store %iv1, %i : !llzk.ref<index>
+      }
+    }
+    %ifinal = llzk.load %i : !llzk.ref<index>
+    %vif = llzk.readarr %arr[%ifinal] : !llzk.array<7 x @felt_type>
+    llzk.writearr %pivot, %arr[%ifinal] : !llzk.array<7 x @felt_type>
+    llzk.writearr %vif, %arr[%high] : !llzk.array<7 x @felt_type>
+    return %ifinal : index
+  }
+}

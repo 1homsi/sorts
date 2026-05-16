@@ -1,0 +1,3 @@
+a:=[3;6;8;10;1;2;1]
+qsfunc:{x:(#x<=1)?x;p:x[@|x]/2;(qs x@x<p)++x@x=p++(qs x@x>p)}
+Pqsfunc(a)

@@ -1,0 +1,29 @@
+        DEFINE('MSORT(LST)')
+        DEFINE('MERGE(LEFT,RIGHT)')
+
+MSORT   MSORT = LST
+        (SIZE(LST) > 1)                   :F(RETURN)
+        MID = SIZE(LST) / 2
+        MLEFT = MSORT(LST[1:MID+1])
+        MRIGHT = MSORT(LST[MID+1:SIZE(LST)+1])
+        MSORT = MERGE(MLEFT, MRIGHT)      :(RETURN)
+
+MERGE   I = 1; J = 1
+        RESULT = ''
+MLOOP   (I <= SIZE(LEFT) & J <= SIZE(RIGHT)) :F(TAIL)
+        LE(LEFT[I:I+1], RIGHT[J:J+1])     :S(TAKL)
+        RESULT = RESULT RIGHT[J:J+1]
+        J = J + 1                          :(MLOOP)
+TAKL    RESULT = RESULT LEFT[I:I+1]
+        I = I + 1                          :(MLOOP)
+TAIL    (I <= SIZE(LEFT))                 :F(TAILR)
+        RESULT = RESULT LEFT[I:SIZE(LEFT)+1] :(DONE)
+TAILR   RESULT = RESULT RIGHT[J:SIZE(RIGHT)+1]
+DONE    MERGE = RESULT                    :(RETURN)
+
+        INPUT = '38 27 43 3 9 82 10'
+        LST = ARRAY(7)
+        LST[1]=38; LST[2]=27; LST[3]=43; LST[4]=3
+        LST[5]=9; LST[6]=82; LST[7]=10
+        OUTPUT = MSORT(LST)
+END

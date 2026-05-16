@@ -1,0 +1,5 @@
+SELECT ?val
+WHERE {
+  ?item <http://example.org/value> ?val .
+}
+ORDER BY ASC(?val)

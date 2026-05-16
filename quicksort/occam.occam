@@ -1,0 +1,43 @@
+PROC quicksort ([]INT arr, INT low, high)
+  IF
+    low < high
+      INT pivot, i, j, tmp:
+      SEQ
+        pivot := arr[high]
+        i := low
+        j := low
+        WHILE j < high
+          SEQ
+            IF
+              arr[j] <= pivot
+                SEQ
+                  tmp := arr[i]
+                  arr[i] := arr[j]
+                  arr[j] := tmp
+                  i := i + 1
+              TRUE
+                SKIP
+            j := j + 1
+        tmp := arr[i]
+        arr[i] := arr[high]
+        arr[high] := tmp
+        quicksort (arr, low, i - 1)
+        quicksort (arr, i + 1, high)
+    TRUE
+      SKIP
+:
+
+PROC main ()
+  [7]INT arr:
+  SEQ
+    arr[0] := 3
+    arr[1] := 6
+    arr[2] := 8
+    arr[3] := 10
+    arr[4] := 1
+    arr[5] := 2
+    arr[6] := 1
+    quicksort (arr, 0, 6)
+    SEQ i = 0 FOR 7
+      out.int (arr[i], 0, screen!)
+:

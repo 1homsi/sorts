@@ -1,0 +1,28 @@
+module RADIX_SORT:
+input ARR_IN: integer;
+output SORTED: integer;
+
+signal arr[8] : integer,
+       output_buf[8] : integer,
+       count[10] : integer,
+       max_val : integer,
+       exp : integer in
+
+loop
+  await ARR_IN;
+  present ARR_IN then
+    emit max_val(0);
+    emit exp(1);
+    loop
+      present exp then
+        if (?max_val / ?exp) > 0 then
+          emit exp(?exp * 10)
+        end if
+      end present
+    end loop;
+    emit SORTED(0)
+  end present
+end loop
+
+end signal
+end module

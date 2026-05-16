@@ -1,0 +1,16 @@
+sig Element {
+    val: Int
+}
+
+pred sorted(s: seq Element) {
+    all i: s.inds - s.lastIdx |
+        (s[i]).val <= (s[i.next]).val
+}
+
+pred selectionSort(input, output: seq Element) {
+    #input = #output
+    sorted[output]
+    output.elems = input.elems
+}
+
+run selectionSort for 5

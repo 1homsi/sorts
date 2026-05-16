@@ -1,0 +1,21 @@
+data Tree =
+  | Leaf
+  | Node(Tree, Int, Tree)
+
+let insert = fun tree v ->
+  case tree of
+  | Leaf => Node(Leaf, v, Leaf)
+  | Node(l, x, r) =>
+    if v < x then Node(insert l v, x, r)
+    else Node(l, x, insert r v)
+
+let rec inorder = fun tree ->
+  case tree of
+  | Leaf => []
+  | Node(l, v, r) => inorder l @ [v] @ inorder r
+
+let treesort = fun arr ->
+  let tree = List.fold_left insert Leaf arr in
+  inorder tree
+
+let _ = treesort [5, 3, 7, 1, 4, 6, 8]

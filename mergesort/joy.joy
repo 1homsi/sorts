@@ -1,0 +1,16 @@
+DEFINE
+    merge ==
+        [null] [pop]
+        [swap null] [pop]
+        [[first] dip dup first <=]
+        [[uncons] dip swap [merge] dip cons]
+        [swap uncons [swap merge] dip cons]
+        condnestedrec ;
+
+    mergesort ==
+        dup size 1 <=
+        []
+        [dup size 2 / floor split [mergesort] dip mergesort merge]
+        ifte ;
+
+[38 27 43 3 9 82 10] mergesort .

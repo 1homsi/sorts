@@ -1,0 +1,50 @@
+        ORG 0x0100
+
+ARR:    DB  5, 3, 1, 4, 2
+N:      DB  5
+KEY:    DB  0
+
+START:
+        LD B, 1
+OUTER:
+        LD A, (N)
+        CP B
+        JR C, DONE
+        JR Z, DONE
+        LD HL, ARR
+        LD D, 0
+        LD E, B
+        ADD HL, DE
+        LD A, (HL)
+        LD (KEY), A
+        LD C, B
+        DEC C
+INNER:
+        LD A, C
+        CP 0xFF
+        JR Z, PLACE
+        LD HL, ARR
+        LD D, 0
+        LD E, C
+        ADD HL, DE
+        LD A, (HL)
+        LD D, A
+        LD A, (KEY)
+        CP D
+        JR NC, PLACE
+        INC HL
+        LD (HL), D
+        DEC C
+        JR INNER
+PLACE:
+        LD A, (KEY)
+        LD HL, ARR
+        LD D, 0
+        LD E, C
+        INC E
+        ADD HL, DE
+        LD (HL), A
+        INC B
+        JR OUTER
+DONE:
+        HALT

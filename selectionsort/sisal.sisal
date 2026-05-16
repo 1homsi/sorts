@@ -1,0 +1,11 @@
+define SelectionSort
+function SelectionSort( arr: array[integer] returns array[integer] )
+let
+    n := array_size(arr);
+    sorted := for i in 1, n-1 cross arr
+              returns array of arr
+              end for
+in
+    sorted
+end let
+end function

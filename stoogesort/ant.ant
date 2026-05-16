@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="StoogeSort" default="sort" basedir=".">
+    <target name="sort">
+        <script language="groovy">
+            def arr = [3, 1, 4, 1, 5, 9, 2, 6]
+            def stoogeSort = null
+            stoogeSort = { a, first, last ->
+                if (a[first] > a[last]) {
+                    def tmp = a[first]; a[first] = a[last]; a[last] = tmp
+                }
+                def n = last - first + 1
+                if (n > 2) {
+                    def t = (int)(n * 2 / 3)
+                    stoogeSort(a, first, first + t - 1)
+                    stoogeSort(a, last - t + 1, last)
+                    stoogeSort(a, first, first + t - 1)
+                }
+            }
+            stoogeSort(arr, 0, arr.size() - 1)
+            println arr
+        </script>
+    </target>
+</project>

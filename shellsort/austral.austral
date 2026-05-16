@@ -1,0 +1,20 @@
+module body ShellSort is
+    function ShellSort(arr: FixedArray[Int32], n: Int32): FixedArray[Int32] is
+        var gap: Int32 := n / 2;
+        while gap > 0 do
+            var i: Int32 := gap;
+            while i < n do
+                let temp: Int32 := arr[i];
+                var j: Int32 := i;
+                while (j >= gap) and (arr[j - gap] > temp) do
+                    arr[j] := arr[j - gap];
+                    j := j - gap;
+                end while;
+                arr[j] := temp;
+                i := i + 1;
+            end while;
+            gap := gap / 2;
+        end while;
+        return arr;
+    end function;
+end module body.

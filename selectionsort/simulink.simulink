@@ -1,0 +1,15 @@
+function sorted = selectionSort(arr)
+n = length(arr);
+sorted = arr;
+for i = 1:n-1
+    min_idx = i;
+    for j = i+1:n
+        if sorted(j) < sorted(min_idx)
+            min_idx = j;
+        end
+    end
+    tmp = sorted(i);
+    sorted(i) = sorted(min_idx);
+    sorted(min_idx) = tmp;
+end
+end

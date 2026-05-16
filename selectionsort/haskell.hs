@@ -1,0 +1,11 @@
+selectionSort :: Ord a => [a] -> [a]
+selectionSort [] = []
+selectionSort xs =
+  let m = minimum xs
+      rest = deleteFirst m xs
+  in m : selectionSort rest
+  where
+    deleteFirst _ [] = []
+    deleteFirst x (y:ys)
+      | x == y    = ys
+      | otherwise = y : deleteFirst x ys

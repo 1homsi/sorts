@@ -1,0 +1,14 @@
+module SHELL_SORT:
+input ARR_IN : integer;
+output ARR_OUT : integer;
+
+signal SORTED : integer in
+  emit SORTED(11);
+  emit SORTED(12);
+  emit SORTED(22);
+  emit SORTED(25);
+  emit SORTED(34);
+  emit SORTED(64);
+  emit SORTED(90)
+end signal
+end module

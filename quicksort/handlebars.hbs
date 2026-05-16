@@ -1,0 +1,16 @@
+{{#each (sort arr)}}{{this}}
+{{/each}}
+
+{{! Helper registration in JS:
+Handlebars.registerHelper('sort', function(arr) {
+    function quicksort(a) {
+        if (a.length <= 1) return a;
+        const pivot = a[Math.floor(a.length/2)];
+        const left = a.filter(x => x < pivot);
+        const mid = a.filter(x => x === pivot);
+        const right = a.filter(x => x > pivot);
+        return [...quicksort(left), ...mid, ...quicksort(right)];
+    }
+    return quicksort(arr);
+});
+}}

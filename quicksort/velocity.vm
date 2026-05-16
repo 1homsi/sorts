@@ -1,0 +1,7 @@
+#set($arr = [3, 6, 8, 10, 1, 2, 1])
+#set($sorted = $sorter.sort($arr))
+<ul>
+#foreach($x in $sorted)
+    <li>$x</li>
+#end
+</ul>

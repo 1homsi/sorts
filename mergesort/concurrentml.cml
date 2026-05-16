@@ -1,0 +1,30 @@
+structure MergeSort =
+struct
+    fun merge ([], right) = right
+      | merge (left, []) = left
+      | merge (lh::lt, rh::rt) =
+          if lh <= rh then lh :: merge (lt, rh::rt)
+          else rh :: merge (lh::lt, rt)
+
+    fun mergeSort [] = []
+      | mergeSort [x] = [x]
+      | mergeSort lst =
+          let
+            val n = length lst
+            val mid = n div 2
+            fun take 0 _ = []
+              | take _ [] = []
+              | take n (x::xs) = x :: take (n-1) xs
+            fun drop 0 lst = lst
+              | drop _ [] = []
+              | drop n (_::xs) = drop (n-1) xs
+            val left = mergeSort (take mid lst)
+            val right = mergeSort (drop mid lst)
+          in
+            merge (left, right)
+          end
+end
+
+val result = MergeSort.mergeSort [38, 27, 43, 3, 9, 82, 10]
+val _ = app (fn x => print (Int.toString x ^ " ")) result
+val _ = print "\n"

@@ -1,0 +1,19 @@
+DELIMITER $$
+
+CREATE PROCEDURE RadixSort(INOUT arr VARCHAR(MAX))
+BEGIN
+    DECLARE n INT DEFAULT 0;
+    DECLARE max_val INT DEFAULT 0;
+    DECLARE exp INT DEFAULT 1;
+    
+    SELECT MAX(CAST(value AS INT)) INTO max_val 
+    FROM (SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(arr, ',', numbers.n), ',', -1) AS value
+          FROM numbers) AS t;
+    
+    WHILE max_val DIV exp > 0 DO
+        CALL CountingSort(arr, exp);
+        SET exp = exp * 10;
+    END WHILE;
+END$$
+
+DELIMITER ;

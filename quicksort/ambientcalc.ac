@@ -1,0 +1,12 @@
+open quicksort[
+  open partition[
+    pivot := arr[high] |
+    i := low |
+    for j := low to high-1 do
+      if arr[j] <= pivot then
+        open swap[arr[i] | arr[j]] |
+        i := i+1
+  ] |
+  open recurse_left[quicksort[low | pivot-1]] |
+  open recurse_right[quicksort[pivot+1 | high]]
+]

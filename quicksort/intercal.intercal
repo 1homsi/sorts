@@ -1,0 +1,28 @@
+        PLEASE NOTE: INTERCAL quicksort approximation
+        DO NOTE THAT INTERCAL'S CONTROL FLOW MAKES FULL QUICKSORT IMPRACTICAL
+        THIS IS THE CLOSEST REPRESENTATION POSSIBLE
+
+        DO :1 <- #3
+        DO :2 <- #6
+        DO :3 <- #8
+        DO :4 <- #10
+        DO :5 <- #1
+        DO :6 <- #2
+        DO :7 <- #1
+
+        PLEASE NOTE: PARTITION STEP - COMPARE ADJACENT ELEMENTS
+        DO (1) NEXT
+(1)     PLEASE FORGET #1
+        DO :1 <- '?:1":2' ~ '#65535
+        DO (2) NEXT
+(2)     PLEASE FORGET #1
+
+        PLEASE NOTE: RESULT WOULD BE SORTED IF INTERCAL SUPPORTED RECURSION
+        DO READ OUT :1
+        DO READ OUT :2
+        DO READ OUT :3
+        DO READ OUT :4
+        DO READ OUT :5
+        DO READ OUT :6
+        DO READ OUT :7
+        PLEASE GIVE UP

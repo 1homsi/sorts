@@ -1,0 +1,39 @@
+DIMENSION arr[7]
+arr[1]=3 & arr[2]=6 & arr[3]=2 & arr[4]=7
+arr[5]=4 & arr[6]=1 & arr[7]=5
+n=7
+
+size=n
+DO WHILE size > 1
+    maxIdx = 1
+    FOR i = 2 TO size
+        IF arr[i] > arr[maxIdx]
+            maxIdx = i
+        ENDIF
+    ENDFOR
+    IF maxIdx <> size
+        IF maxIdx <> 1
+            DO flip WITH maxIdx - 1
+        ENDIF
+        DO flip WITH size - 1
+    ENDIF
+    size = size - 1
+ENDDO
+
+FOR i = 1 TO n
+    ? arr[i]
+ENDFOR
+RETURN
+
+PROCEDURE flip
+PARAMETERS k
+lft = 1
+rgt = k + 1
+DO WHILE lft < rgt
+    tmp = arr[lft]
+    arr[lft] = arr[rgt]
+    arr[rgt] = tmp
+    lft = lft + 1
+    rgt = rgt - 1
+ENDDO
+RETURN

@@ -1,0 +1,23 @@
+BEGIN
+    ITEM ARR(7) S(15);
+    ITEM N, GAP, I, J, TEMP S(15);
+    ARR(1) = 64; ARR(2) = 34; ARR(3) = 25; ARR(4) = 12;
+    ARR(5) = 22; ARR(6) = 11; ARR(7) = 90;
+    N = 7;
+    GAP = N / 2;
+    FOR GAP > 0;
+        FOR I = GAP+1, 1, N;
+            TEMP = ARR(I);
+            J = I;
+            FOR J > GAP AND ARR(J-GAP) > TEMP;
+                ARR(J) = ARR(J-GAP);
+                J = J - GAP;
+            END;
+            ARR(J) = TEMP;
+        END;
+        GAP = GAP / 2;
+    END;
+    FOR I = 1, 1, N;
+        PRINTF '%5D', ARR(I);
+    END;
+END

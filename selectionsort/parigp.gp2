@@ -1,0 +1,13 @@
+selectionSort(v) = {
+    my(n = #v, minIdx, tmp);
+    for(i = 1, n-1,
+        minIdx = i;
+        for(j = i+1, n,
+            if(v[j] < v[minIdx], minIdx = j)
+        );
+        tmp = v[i]; v[i] = v[minIdx]; v[minIdx] = tmp
+    );
+    v
+}
+
+print(selectionSort([5,3,1,4,2]))

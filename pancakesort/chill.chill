@@ -1,0 +1,34 @@
+MODULE pancake_sort;
+  DCL arr(7) INT := (3, 6, 2, 7, 4, 1, 5);
+  DCL n INT := 7;
+  DCL size, maxi, i, left, right, tmp INT;
+
+  PROC flip(k INT);
+    left := 0;
+    right := k;
+    DO WHILE left < right;
+      tmp := arr(left);
+      arr(left) := arr(right);
+      arr(right) := tmp;
+      left +:= 1;
+      right -:= 1;
+    OD;
+  END flip;
+
+  size := n;
+  DO WHILE size > 1;
+    maxi := 0;
+    FOR i := 1 TO size - 1 DO
+      IF arr(i) > arr(maxi) THEN maxi := i FI;
+    OD;
+    IF maxi /= size - 1 THEN
+      IF maxi /= 0 THEN flip(maxi) FI;
+      flip(size - 1);
+    FI;
+    size -:= 1;
+  OD;
+
+  FOR i := 0 TO n - 1 DO
+    WRITELN(arr(i));
+  OD;
+END pancake_sort;

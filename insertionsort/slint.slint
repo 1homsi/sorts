@@ -1,0 +1,15 @@
+import { Button, VerticalBox } from "std-widgets.slint";
+
+export component InsertionSort {
+    in-out property <string> result: "";
+
+    callback sort-clicked();
+
+    VerticalBox {
+        Button {
+            text: "Sort";
+            clicked => { sort-clicked(); }
+        }
+        Text { text: result; }
+    }
+}

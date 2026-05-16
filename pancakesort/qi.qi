@@ -1,0 +1,33 @@
+(define flip
+  Arr K -> (flip-go Arr 0 K))
+
+(define flip-go
+  Arr L R -> Arr where (>= L R)
+  Arr L R ->
+    (let Tmp (nth (+ L 1) Arr)
+         _ (update-nth (+ L 1) Arr (nth (+ R 1) Arr))
+         _ (update-nth (+ R 1) Arr Tmp)
+         (flip-go Arr (+ L 1) (- R 1))))
+
+(define find-max-idx
+  Arr Size -> (fmi-go Arr Size 0 1))
+
+(define fmi-go
+  Arr Size Mi I -> Mi where (>= I Size)
+  Arr Size Mi I ->
+    (if (> (nth (+ I 1) Arr) (nth (+ Mi 1) Arr))
+        (fmi-go Arr Size I (+ I 1))
+        (fmi-go Arr Size Mi (+ I 1))))
+
+(define pancake-sort
+  Arr -> (ps-go Arr (length Arr)))
+
+(define ps-go
+  Arr 1 -> Arr
+  Arr Size ->
+    (let Mi (find-max-idx Arr Size)
+         A1 (if (> Mi 0) (flip Arr Mi) Arr)
+         A2 (flip A1 (- Size 1))
+         (ps-go A2 (- Size 1))))
+
+(output "~A" (pancake-sort [3 6 2 7 4 1 5]))

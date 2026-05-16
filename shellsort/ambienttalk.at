@@ -1,0 +1,20 @@
+def shellSort(arr) {
+    def n := arr.length;
+    def gap := (n / 2).truncate;
+    { gap > 0 }.whileTrue: {
+        (gap).to: n - 1 do: { |i|
+            def temp := arr[i];
+            def j := i;
+            { (j >= gap).and: { arr[j - gap] > temp } }.whileTrue: {
+                arr[j] := arr[j - gap];
+                j := j - gap;
+            };
+            arr[j] := temp;
+        };
+        gap := (gap / 2).truncate;
+    };
+    arr
+};
+
+def arr := [64, 34, 25, 12, 22, 11, 90];
+system.println(shellSort(arr));

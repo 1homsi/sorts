@@ -1,0 +1,51 @@
+        .data
+arr:    .word 5, 3, 1, 4, 2
+n:      .word 5
+
+        .text
+        .global selection_sort
+
+selection_sort:
+        push {r4-r11, lr}
+        ldr r0, =arr
+        ldr r1, =n
+        ldr r1, [r1]
+        mov r4, #0
+
+outer:
+        sub r2, r1, #1
+        cmp r4, r2
+        bge done
+        mov r5, r4
+        add r6, r4, #1
+
+inner:
+        cmp r6, r1
+        bge swap
+        lsl r7, r6, #2
+        add r8, r0, r7
+        ldr r8, [r8]
+        lsl r7, r5, #2
+        add r9, r0, r7
+        ldr r9, [r9]
+        cmp r8, r9
+        bge next
+        mov r5, r6
+next:
+        add r6, r6, #1
+        b inner
+
+swap:
+        lsl r7, r4, #2
+        add r8, r0, r7
+        ldr r9, [r8]
+        lsl r7, r5, #2
+        add r10, r0, r7
+        ldr r11, [r10]
+        str r11, [r8]
+        str r9, [r10]
+        add r4, r4, #1
+        b outer
+
+done:
+        pop {r4-r11, pc}

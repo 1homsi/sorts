@@ -1,0 +1,7 @@
+<% arr = [3, 6, 8, 10, 1, 2, 1] %>
+<% sorted = arr.sort %>
+<ul>
+<% sorted.each do |x| %>
+  <li><%= x %></li>
+<% end %>
+</ul>

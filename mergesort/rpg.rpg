@@ -1,0 +1,75 @@
+      * RPG IV (ILE RPG) Merge Sort
+     H DFTACTGRP(*NO) ACTGRP(*NEW)
+
+     D arr             S             10I 0 DIM(7)
+     D tmp             S             10I 0 DIM(7)
+     D i               S             10I 0
+     D j               S             10I 0
+     D k               S             10I 0
+     D lo              S             10I 0
+     D hi              S             10I 0
+     D mid             S             10I 0
+
+     C                   EVAL      arr(1) = 38
+     C                   EVAL      arr(2) = 27
+     C                   EVAL      arr(3) = 43
+     C                   EVAL      arr(4) = 3
+     C                   EVAL      arr(5) = 9
+     C                   EVAL      arr(6) = 82
+     C                   EVAL      arr(7) = 10
+     C                   CALLP     MSort(1 : 7)
+     C     i             DO        7
+     C                   DSPLY                   arr(i)
+     C                   ENDDO
+     C                   EVAL      *INLR = *ON
+
+     P MSort           B
+     D MSort           PI
+     D  plo                          10I 0 VALUE
+     D  phi                          10I 0 VALUE
+     D  pmid                         10I 0
+     C                   IF        plo >= phi
+     C                   RETURN
+     C                   ENDIF
+     C                   EVAL      pmid = (plo + phi) / 2
+     C                   CALLP     MSort(plo : pmid)
+     C                   CALLP     MSort(pmid + 1 : phi)
+     C                   CALLP     Merge(plo : pmid : phi)
+     P MSort           E
+
+     P Merge           B
+     D Merge           PI
+     D  plo                          10I 0 VALUE
+     D  pmid                         10I 0 VALUE
+     D  phi                          10I 0 VALUE
+     D  pi                           10I 0
+     D  pj                           10I 0
+     D  pk                           10I 0
+     D  px                           10I 0
+     C                   EVAL      pi = plo
+     C                   EVAL      pj = pmid + 1
+     C                   EVAL      pk = plo
+     C                   DOW       pi <= pmid AND pj <= phi
+     C                   IF        arr(pi) <= arr(pj)
+     C                   EVAL      tmp(pk) = arr(pi)
+     C                   EVAL      pi = pi + 1
+     C                   ELSE
+     C                   EVAL      tmp(pk) = arr(pj)
+     C                   EVAL      pj = pj + 1
+     C                   ENDIF
+     C                   EVAL      pk = pk + 1
+     C                   ENDDO
+     C                   DOW       pi <= pmid
+     C                   EVAL      tmp(pk) = arr(pi)
+     C                   EVAL      pi = pi + 1
+     C                   EVAL      pk = pk + 1
+     C                   ENDDO
+     C                   DOW       pj <= phi
+     C                   EVAL      tmp(pk) = arr(pj)
+     C                   EVAL      pj = pj + 1
+     C                   EVAL      pk = pk + 1
+     C                   ENDDO
+     C     px            DO        phi - plo + 1    plo
+     C                   EVAL      arr(px) = tmp(px)
+     C                   ENDDO
+     P Merge           E

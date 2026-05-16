@@ -1,0 +1,26 @@
+def countingSort(arr, exp) {
+    def n = arr.size()
+    def output = [0] * n
+    def count = [0] * 10
+    arr.each { x -> count[(x.intdiv(exp)) % 10]++ }
+    (1..9).each { i -> count[i] += count[i - 1] }
+    (n - 1..0).each { i ->
+        def idx = (arr[i].intdiv(exp)) % 10
+        output[--count[idx]] = arr[i]
+    }
+    n.times { i -> arr[i] = output[i] }
+}
+
+def radixSort(arr) {
+    if (!arr) return arr
+    def max = arr.max()
+    def exp = 1
+    while (max.intdiv(exp) > 0) {
+        countingSort(arr, exp)
+        exp *= 10
+    }
+    arr
+}
+
+def arr = [170, 45, 75, 90, 802, 24, 2, 66]
+println radixSort(arr)

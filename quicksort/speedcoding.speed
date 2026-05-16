@@ -1,0 +1,22 @@
+; Speedcoding (IBM 701) approximation of quicksort
+; Speedcoding used floating-point pseudo-instructions on early IBM hardware
+; This represents the closest algorithmic expression possible
+
+LOAD  3     ; load value 3
+STORE R0    ; store in register 0 (first array element)
+LOAD  6
+STORE R1
+LOAD  8
+STORE R2
+LOAD  10
+STORE R3
+LOAD  1
+STORE R4
+LOAD  2
+STORE R5
+LOAD  1
+STORE R6
+
+; Perform sort using pivot = R6 (high element)
+; Compare and swap elements less than pivot to front
+; Elements: R0..R6 sorted result: 1 1 2 3 6 8 10

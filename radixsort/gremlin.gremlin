@@ -1,0 +1,13 @@
+g.inject([170, 45, 75, 90, 802, 24, 2, 66]).
+  flatMap(unfold()).
+  fold().
+  repeat(
+    unfold().
+    group().by(math("_ % 10").by(identity())).
+    select(values).
+    unfold().
+    unfold().
+    fold()
+  ).
+  times(3).
+  unfold()

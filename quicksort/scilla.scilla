@@ -1,0 +1,24 @@
+scilla_version 0
+
+library QuicksortLib
+
+let quicksort : List Int32 -> List Int32 =
+    fun (arr : List Int32) =>
+        let nil = Nil {Int32} in
+        match arr with
+        | Nil => Nil {Int32}
+        | Cons pivot rest =>
+            let left = List.filter (fun (x : Int32) => Int32.lte x pivot) rest in
+            let right = List.filter (fun (x : Int32) => Int32.gt x pivot) rest in
+            let sorted_left = quicksort left in
+            let sorted_right = quicksort right in
+            List.append sorted_left (Cons {Int32} pivot sorted_right)
+        end
+
+contract Quicksort()
+
+transition Sort(arr: List Int32)
+    sorted = quicksort arr;
+    e = { _eventname: "Sorted"; values: sorted };
+    event e
+end

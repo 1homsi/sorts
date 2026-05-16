@@ -1,0 +1,14 @@
+class SelectionSort2 = (
+    public selectionSort: arr = (
+        | n minIdx tmp |
+        n := arr size.
+        1 to: n - 1 do: [:i |
+            minIdx := i.
+            i + 1 to: n do: [:j |
+                (arr at: j) < (arr at: minIdx) ifTrue: [minIdx := j]].
+            tmp := arr at: i.
+            arr at: i put: (arr at: minIdx).
+            arr at: minIdx put: tmp].
+        ^arr
+    )
+)

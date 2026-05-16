@@ -1,0 +1,13 @@
+prim partition : (Array Int) -> Int -> Int -> Int
+prim quicksort : (Array Int) -> Int -> Int -> Unit
+
+run
+  val arr = array(7, 0)
+  array_set(arr, 0, 3)
+  array_set(arr, 1, 6)
+  array_set(arr, 2, 8)
+  array_set(arr, 3, 10)
+  array_set(arr, 4, 1)
+  array_set(arr, 5, 2)
+  array_set(arr, 6, 1)
+  quicksort(arr, 0, 6)

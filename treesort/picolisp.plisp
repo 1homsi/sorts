@@ -1,0 +1,22 @@
+(de insert (Tree V)
+   (if (not Tree)
+      (list V NIL NIL)
+      (if (< V (car Tree))
+         (list (car Tree) (insert (cadr Tree) V) (caddr Tree))
+         (list (car Tree) (cadr Tree) (insert (caddr Tree) V)))))
+
+(de inorder (Tree)
+   (if (not Tree)
+      NIL
+      (append
+         (inorder (cadr Tree))
+         (list (car Tree))
+         (inorder (caddr Tree)))))
+
+(de treesort (Arr)
+   (let Tree NIL
+      (for V Arr
+         (setq Tree (insert Tree V)))
+      (inorder Tree)))
+
+(println (treesort (list 5 3 7 1 4 6 8)))

@@ -1,0 +1,60 @@
+        list p=16f877a
+        include "p16f877a.inc"
+
+        cblock 0x20
+arr:7
+n
+low
+high
+i
+j
+pivot
+tmp
+        endc
+
+        org 0x00
+        goto main
+
+main:
+        movlw   3
+        movwf   arr+0
+        movlw   6
+        movwf   arr+1
+        movlw   8
+        movwf   arr+2
+        movlw   10
+        movwf   arr+3
+        movlw   1
+        movwf   arr+4
+        movlw   2
+        movwf   arr+5
+        movlw   1
+        movwf   arr+6
+        movlw   7
+        movwf   n
+        clrf    low
+        movlw   6
+        movwf   high
+        call    quicksort
+loop:   goto    loop
+
+quicksort:
+        movf    low, W
+        subwf   high, W
+        btfsc   STATUS, C
+        return
+        call    partition
+        return
+
+partition:
+        movf    high, W
+        call    arr_get
+        movwf   pivot
+        movf    low, W
+        movwf   i
+        return
+
+arr_get:
+        return
+
+        end

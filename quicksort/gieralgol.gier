@@ -1,0 +1,34 @@
+BEGIN
+    INTEGER ARRAY ARR[0:6];
+    INTEGER I, J, TMP, PIVOT, P;
+
+    INTEGER PROCEDURE PARTITION(LOW, HIGH);
+        INTEGER LOW, HIGH;
+    BEGIN
+        PIVOT := ARR[HIGH]; I := LOW;
+        FOR J := LOW STEP 1 UNTIL HIGH - 1 DO
+            IF ARR[J] <= PIVOT THEN
+            BEGIN
+                TMP := ARR[I]; ARR[I] := ARR[J]; ARR[J] := TMP;
+                I := I + 1
+            END;
+        TMP := ARR[I]; ARR[I] := ARR[HIGH]; ARR[HIGH] := TMP;
+        PARTITION := I
+    END PARTITION;
+
+    PROCEDURE QUICKSORT(LOW, HIGH);
+        INTEGER LOW, HIGH;
+    BEGIN
+        IF LOW < HIGH THEN
+        BEGIN
+            P := PARTITION(LOW, HIGH);
+            QUICKSORT(LOW, P - 1);
+            QUICKSORT(P + 1, HIGH)
+        END
+    END QUICKSORT;
+
+    ARR[0]:=3; ARR[1]:=6; ARR[2]:=8; ARR[3]:=10;
+    ARR[4]:=1; ARR[5]:=2; ARR[6]:=1;
+    QUICKSORT(0, 6);
+    FOR I := 0 STEP 1 UNTIL 6 DO OUTINTEGER(1, ARR[I])
+END

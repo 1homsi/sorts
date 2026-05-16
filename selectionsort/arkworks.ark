@@ -1,0 +1,23 @@
+use ark_ff::Field;
+use ark_r1cs_std::prelude::*;
+use ark_relations::r1cs::{ConstraintSynthesizer, ConstraintSystemRef, SynthesisError};
+
+struct SelectionSortCircuit<F: Field> {
+    arr: Vec<F>,
+    sorted: Vec<F>,
+}
+
+impl<F: Field> ConstraintSynthesizer<F> for SelectionSortCircuit<F> {
+    fn generate_constraints(self, cs: ConstraintSystemRef<F>) -> Result<(), SynthesisError> {
+        let n = self.arr.len();
+        let mut sorted = self.arr.clone();
+        for i in 0..n {
+            let mut min_idx = i;
+            for j in i+1..n {
+                if sorted[j] < sorted[min_idx] { min_idx = j; }
+            }
+            sorted.swap(i, min_idx);
+        }
+        Ok(())
+    }
+}

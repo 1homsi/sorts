@@ -1,0 +1,52 @@
+        DEFINE('MSORT(A,LO,HI)MID,I,J,K,V')
+        DEFINE('MERGE(A,LO,MID,HI)I,J,K,V')
+
+MSORT   MSORT = A
+        GT(LO,HI)                          :S(MSORT.END)
+        EQ(LO,HI)                          :S(MSORT.END)
+        MID = (LO + HI) / 2
+        MSORT(A,LO,MID)
+        MSORT(A,MID + 1,HI)
+        MERGE(A,LO,MID,HI)
+MSORT.END
+        RETURN
+
+MERGE   I = LO
+        J = MID + 1
+        K = LO
+MERGE.LP GT(I,MID)                         :S(MERGE.R)
+        GT(J,HI)                           :S(MERGE.L)
+        LE(A<I>,A<J>)                      :S(MERGE.TL)F(MERGE.TR)
+MERGE.TL TMP<K> = A<I>
+        I = I + 1
+        K = K + 1
+                                           :MERGE.LP)
+MERGE.TR TMP<K> = A<J>
+        J = J + 1
+        K = K + 1
+                                           :(MERGE.LP)
+MERGE.L TMP<K> = A<I>
+        I = I + 1
+        K = K + 1
+        GT(I,MID)                          :S(MERGE.CP)F(MERGE.L)
+MERGE.R TMP<K> = A<J>
+        J = J + 1
+        K = K + 1
+        GT(J,HI)                           :S(MERGE.CP)F(MERGE.R)
+MERGE.CP
+        K = LO
+MERGE.UP
+        A<K> = TMP<K>
+        K = K + 1
+        GT(K,HI)                           :S(MERGE.END)F(MERGE.UP)
+MERGE.END
+        RETURN
+
+        ARR<1> = 38; ARR<2> = 27; ARR<3> = 43; ARR<4> = 3
+        ARR<5> = 9;  ARR<6> = 82; ARR<7> = 10
+        MSORT(ARR,1,7)
+        I = 1
+PRINT   OUTPUT = ARR<I>
+        I = I + 1
+        LE(I,7)                            :S(PRINT)
+END

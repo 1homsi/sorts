@@ -1,0 +1,40 @@
+RADIX: MODULE
+
+SYNMODE INT_ARR = ARRAY(0:7) INT;
+SYNMODE CNT_ARR = ARRAY(0:9) INT;
+
+DCL ARR INT_ARR := (170, 45, 75, 90, 802, 24, 2, 66);
+DCL OUTPUT INT_ARR;
+DCL CNT CNT_ARR;
+DCL N INT := 8;
+DCL MAXVAL, EXP, I, IDX INT;
+
+COUNTING_SORT: PROC(E INT);
+BEGIN
+    FOR I := 0 TO 9 DO CNT(I) := 0; OD;
+    FOR I := 0 TO N-1 DO
+        IDX := (ARR(I) / E) MOD 10;
+        CNT(IDX) := CNT(IDX) + 1;
+    OD;
+    FOR I := 1 TO 9 DO
+        CNT(I) := CNT(I) + CNT(I-1);
+    OD;
+    FOR I := N-1 TO 0 BY -1 DO
+        IDX := (ARR(I) / E) MOD 10;
+        CNT(IDX) := CNT(IDX) - 1;
+        OUTPUT(CNT(IDX)) := ARR(I);
+    OD;
+    FOR I := 0 TO N-1 DO ARR(I) := OUTPUT(I); OD;
+END COUNTING_SORT;
+
+MAXVAL := ARR(0);
+FOR I := 1 TO N-1 DO
+    IF ARR(I) > MAXVAL THEN MAXVAL := ARR(I); FI;
+OD;
+EXP := 1;
+DO WHILE MAXVAL / EXP > 0;
+    COUNTING_SORT(EXP);
+    EXP := EXP * 10;
+OD;
+
+END RADIX;

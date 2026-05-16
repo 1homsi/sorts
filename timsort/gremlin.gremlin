@@ -1,0 +1,29 @@
+g.inject([5, 2, 8, 1, 9, 3, 7, 4, 6]).
+  as('input').
+  flatMap(
+    unfold().
+    order().
+    fold()
+  )
+
+g.inject(1).
+  map{
+    def arr = [5, 2, 8, 1, 9, 3, 7, 4, 6]
+    def minRun = 32
+    def n = arr.size()
+    def i = 0
+    while (i < n) {
+      def right = Math.min(i + minRun - 1, n - 1)
+      for (def x = i + 1; x <= right; x++) {
+        def key = arr[x]
+        def j = x - 1
+        while (j >= i && arr[j] > key) {
+          arr[j+1] = arr[j]
+          j--
+        }
+        arr[j+1] = key
+      }
+      i += minRun
+    }
+    arr
+  }

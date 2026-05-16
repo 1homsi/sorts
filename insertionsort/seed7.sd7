@@ -1,0 +1,16 @@
+const proc: insertionSort (inout array integer: arr) is func
+  local
+    var integer: i is 0;
+    var integer: j is 0;
+    var integer: key is 0;
+  begin
+    for i range 2 to length(arr) do
+      key := arr[i];
+      j := i - 1;
+      while j >= 1 and arr[j] > key do
+        arr[j + 1] := arr[j];
+        decr(j);
+      end while;
+      arr[j + 1] := key;
+    end for;
+  end func;

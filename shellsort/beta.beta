@@ -1,0 +1,36 @@
+PROGRAM ShellSort
+    (# arr: [7]@integer;
+       n, gap, i, j, temp: @integer;
+
+       shellSort:
+       (# do
+            n[] -> arr.size;
+            n div 2 -> gap;
+            loop: (# do
+                (if gap > 0 then
+                    gap to n - 1 repeat:
+                    (# do
+                        arr[i] -> temp;
+                        i -> j;
+                        inner_loop: (# do
+                            (if (j >= gap) and (arr[j - gap] > temp) then
+                                arr[j - gap] -> arr[j];
+                                j - gap -> j;
+                                restart inner_loop
+                            if)
+                        #);
+                        temp -> arr[j];
+                        i + 1 -> i
+                    #);
+                    gap div 2 -> gap;
+                    restart loop
+                if)
+            #)
+       #);
+
+    do
+       64 -> arr[1]; 34 -> arr[2]; 25 -> arr[3]; 12 -> arr[4];
+       22 -> arr[5]; 11 -> arr[6]; 90 -> arr[7];
+       7 -> n;
+       shellSort;
+    #)

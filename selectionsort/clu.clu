@@ -1,0 +1,13 @@
+selection_sort = proc (arr: array[int]) returns (array[int])
+    n: int := array[int]$size(arr)
+    for i: int in int$from_to(0, n-2) do
+        min_idx: int := i
+        for j: int in int$from_to(i+1, n-1) do
+            if arr[j] < arr[min_idx] then min_idx := j end
+        end
+        tmp: int := arr[i]
+        arr[i] := arr[min_idx]
+        arr[min_idx] := tmp
+    end
+    return arr
+end selection_sort

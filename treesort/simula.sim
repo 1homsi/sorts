@@ -1,0 +1,44 @@
+BEGIN
+    CLASS Node(v);
+    INTEGER v;
+    BEGIN
+        INTEGER val;
+        REF(Node) left, right;
+        val := v;
+        left :- NONE;
+        right :- NONE;
+    END;
+
+    PROCEDURE Insert(VAR root, v);
+    REF(Node) VAR root;
+    INTEGER v;
+    BEGIN
+        IF root == NONE THEN
+            root :- NEW Node(v)
+        ELSE IF v < root.val THEN
+            Insert(root.left, v)
+        ELSE
+            Insert(root.right, v);
+    END;
+
+    PROCEDURE Inorder(node);
+    REF(Node) node;
+    BEGIN
+        IF node == NONE THEN GOTO done;
+        Inorder(node.left);
+        OutInt(node.val, 4);
+        Inorder(node.right);
+        done:
+    END;
+
+    INTEGER arr(7);
+    REF(Node) root;
+    INTEGER i;
+    arr(1):=5; arr(2):=3; arr(3):=7; arr(4):=1;
+    arr(5):=4; arr(6):=6; arr(7):=8;
+    root :- NONE;
+    FOR i := 1 STEP 1 UNTIL 7 DO
+        Insert(root, arr(i));
+    Inorder(root);
+    OutImage;
+END

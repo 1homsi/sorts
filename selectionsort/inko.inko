@@ -1,0 +1,17 @@
+fn pub selection_sort(arr: mut Array[Int]) -> Array[Int] {
+  let n = arr.length
+  let mut i = 0
+  while i < n {
+    let mut min_idx = i
+    let mut j = i + 1
+    while j < n {
+      if arr.get(j) < arr.get(min_idx) { min_idx = j }
+      j += 1
+    }
+    let tmp = arr.get(i)
+    arr.set(i, arr.get(min_idx))
+    arr.set(min_idx, tmp)
+    i += 1
+  }
+  arr
+}

@@ -1,0 +1,60 @@
+PROC PancakeSort (CHAN OF BYTE out)
+  INT arr [7]:
+  INT n, size, maxIdx, i, left, right, tmp:
+  SEQ
+    arr [0] := 3
+    arr [1] := 6
+    arr [2] := 2
+    arr [3] := 7
+    arr [4] := 4
+    arr [5] := 1
+    arr [6] := 5
+    n := 7
+    size := n
+    WHILE size > 1
+      SEQ
+        maxIdx := 0
+        i := 1
+        WHILE i < size
+          SEQ
+            IF
+              arr [i] > arr [maxIdx]
+                maxIdx := i
+              TRUE
+                SKIP
+            i := i + 1
+        IF
+          maxIdx <> (size - 1)
+            SEQ
+              IF
+                maxIdx <> 0
+                  SEQ
+                    left := 0
+                    right := maxIdx
+                    WHILE left < right
+                      SEQ
+                        tmp := arr [left]
+                        arr [left] := arr [right]
+                        arr [right] := tmp
+                        left := left + 1
+                        right := right - 1
+                TRUE
+                  SKIP
+              left := 0
+              right := size - 1
+              WHILE left < right
+                SEQ
+                  tmp := arr [left]
+                  arr [left] := arr [right]
+                  arr [right] := tmp
+                  left := left + 1
+                  right := right - 1
+          TRUE
+            SKIP
+        size := size - 1
+    i := 0
+    WHILE i < n
+      SEQ
+        out ! arr [i]
+        i := i + 1
+:

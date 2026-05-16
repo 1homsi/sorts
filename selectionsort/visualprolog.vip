@@ -1,0 +1,13 @@
+implement selectionSort
+    open core, list
+
+    class predicates
+        selectionSort : (integer*) -> integer*.
+
+    clauses
+        selectionSort([]) = [].
+        selectionSort(Lst) = [Min | selectionSort(Rest)] :-
+            Min = list::minimum(Lst),
+            Rest = list::delete(Min, Lst).
+
+end implement selectionSort

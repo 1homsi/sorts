@@ -1,0 +1,34 @@
+class Node2 {
+    public var val:Int;
+    public var left:Node2;
+    public var right:Node2;
+    public function new(v:Int) { val = v; left = null; right = null; }
+}
+
+class TreeSort2 {
+    static function insert(node:Node2, val:Int):Node2 {
+        if (node == null) return new Node2(val);
+        if (val < node.val) node.left = insert(node.left, val);
+        else node.right = insert(node.right, val);
+        return node;
+    }
+
+    static function inorder(node:Node2, result:Array<Int>):Void {
+        if (node == null) return;
+        inorder(node.left, result);
+        result.push(node.val);
+        inorder(node.right, result);
+    }
+
+    static function treesort(arr:Array<Int>):Array<Int> {
+        var root:Node2 = null;
+        for (v in arr) root = insert(root, v);
+        var result:Array<Int> = [];
+        inorder(root, result);
+        return result;
+    }
+
+    static function main() {
+        trace(treesort([5, 3, 7, 1, 4, 6, 8]));
+    }
+}

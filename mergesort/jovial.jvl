@@ -1,0 +1,43 @@
+BEGIN
+COMPOOL
+    ITEM ARR(7) S INTEGER;
+    ITEM TMP(7) S INTEGER;
+END
+
+PROC MERGE(LO, MID, HI S INTEGER);
+BEGIN
+    ITEM I, J, K, X S INTEGER;
+    I = LO; J = MID + 1; K = LO;
+    WHILE I <= MID AND J <= HI DO
+        IF ARR(I) <= ARR(J) THEN
+            TMP(K) = ARR(I); I = I + 1;
+        ELSE
+            TMP(K) = ARR(J); J = J + 1;
+        END
+        K = K + 1;
+    END
+    WHILE I <= MID DO TMP(K) = ARR(I); I = I+1; K = K+1; END
+    WHILE J <= HI DO TMP(K) = ARR(J); J = J+1; K = K+1; END
+    FOR X = LO TO HI DO ARR(X) = TMP(X); END
+END
+
+PROC MSORT(LO, HI S INTEGER);
+BEGIN
+    ITEM MID S INTEGER;
+    IF LO >= HI THEN RETURN; END
+    MID = (LO + HI) / 2;
+    MSORT(LO, MID);
+    MSORT(MID + 1, HI);
+    MERGE(LO, MID, HI);
+END
+
+PROGRAM MAIN;
+BEGIN
+    ITEM I S INTEGER;
+    ARR(1)=38; ARR(2)=27; ARR(3)=43; ARR(4)=3;
+    ARR(5)=9; ARR(6)=82; ARR(7)=10;
+    MSORT(1, 7);
+    FOR I = 1 TO 7 DO
+        WRITEIF(ARR(I));
+    END
+END

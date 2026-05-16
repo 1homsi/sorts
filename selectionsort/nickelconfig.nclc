@@ -1,0 +1,5 @@
+let config = {
+  input = [5, 3, 1, 4, 2],
+  output = std.array.sort (fun a b => a <= b) input,
+}
+in config

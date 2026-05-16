@@ -1,0 +1,9 @@
+When
+    [Case (Deposit (Role "Sorter") (Role "Client") (Token "" "") (Constant 5))
+         (When
+             [Case (Deposit (Role "Sorter") (Role "Client") (Token "" "") (Constant 3))
+                  Close]
+             10
+             Close)]
+    5
+    Close

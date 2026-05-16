@@ -1,0 +1,45 @@
+(de insert-val (X Lst)
+   (if (not Lst) (list X)
+      (if (<= X (car Lst)) (cons X Lst)
+         (cons (car Lst) (insert-val X (cdr Lst))))))
+
+(de insertion-sort (Lst)
+   (if (not Lst) Lst
+      (insert-val (car Lst) (insertion-sort (cdr Lst)))))
+
+(de merge-runs (Xs Ys)
+   (cond
+      ((not Xs) Ys)
+      ((not Ys) Xs)
+      ((<= (car Xs) (car Ys))
+         (cons (car Xs) (merge-runs (cdr Xs) Ys)))
+      (T (cons (car Ys) (merge-runs Xs (cdr Ys))))))
+
+(de take-n (N Lst)
+   (if (or (= N 0) (not Lst)) NIL
+      (cons (car Lst) (take-n (- N 1) (cdr Lst)))))
+
+(de drop-n (N Lst)
+   (if (or (= N 0) (not Lst)) Lst
+      (drop-n (- N 1) (cdr Lst))))
+
+(de chunks-of (N Lst)
+   (if (not Lst) NIL
+      (cons (take-n N Lst) (chunks-of N (drop-n N Lst)))))
+
+(de merge-pairs (Runs)
+   (cond
+      ((not Runs) NIL)
+      ((not (cdr Runs)) Runs)
+      (T (cons (merge-runs (car Runs) (cadr Runs))
+               (merge-pairs (cddr Runs))))))
+
+(de merge-all (Runs)
+   (if (not (cdr Runs)) (car Runs)
+      (merge-all (merge-pairs Runs))))
+
+(de timsort (Lst)
+   (if (not Lst) Lst
+      (merge-all (mapcar 'insertion-sort (chunks-of 32 Lst)))))
+
+(println (timsort '(5 2 8 1 9 3 7 4 6)))

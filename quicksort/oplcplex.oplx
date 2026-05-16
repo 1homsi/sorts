@@ -1,0 +1,12 @@
+int n = 7;
+int data[1..n] = [3, 6, 8, 10, 1, 2, 1];
+
+dvar int sorted[1..n];
+
+subject to {
+  forall(i in 1..n-1) sorted[i] <= sorted[i+1];
+  forall(v in {1, 2, 3, 6, 8, 10})
+    sum(i in 1..n)(sorted[i] == v) == sum(i in 1..n)(data[i] == v);
+}
+
+minimize 0;

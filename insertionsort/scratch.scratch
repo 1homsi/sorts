@@ -1,0 +1,14 @@
+when green flag clicked
+set [n v] to (5)
+set [arr v] to [5 3 1 4 2]
+set [i v] to (2)
+repeat until <(i) > (n)>
+    set [key v] to (item (i) of [arr v])
+    set [j v] to ((i) - (1))
+    repeat until <<(j) < (1)> or <(item (j) of [arr v]) <= (key)>>
+        replace item ((j) + (1)) of [arr v] with (item (j) of [arr v])
+        set [j v] to ((j) - (1))
+    end
+    replace item ((j) + (1)) of [arr v] with (key)
+    change [i v] by (1)
+end

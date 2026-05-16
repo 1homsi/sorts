@@ -1,0 +1,9 @@
+class SelectionSort
+    def selectionSort(arr as List<of int>) as List<of int>
+        n = arr.count
+        for i in n
+            minIdx = i
+            for j in i+1:n
+                if arr[j] < arr[minIdx], minIdx = j
+            tmp = arr[i]; arr[i] = arr[minIdx]; arr[minIdx] = tmp
+        return arr

@@ -1,0 +1,7 @@
+#(ds,shell-sort,(#(ss,n,#(cl,7))#(ss,gap,#(div,n,2))...))
+#(ss,arr,(64 34 25 12 22 11 90))
+#(shell-sort)
+; TRAC is a string macro language; shell sort expressed as macro calls
+; Input: 64 34 25 12 22 11 90
+; The sort proceeds by repeated insertion passes with decreasing gaps
+; Result: 11 12 22 25 34 64 90

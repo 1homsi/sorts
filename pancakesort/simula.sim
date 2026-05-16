@@ -1,0 +1,35 @@
+BEGIN
+    INTEGER ARRAY arr(1:7);
+    INTEGER n, size, i, maxIdx, left, right, tmp;
+
+    arr(1) := 3; arr(2) := 6; arr(3) := 2; arr(4) := 7;
+    arr(5) := 4; arr(6) := 1; arr(7) := 5;
+    n := 7;
+
+    PROCEDURE flip(k);
+    INTEGER k;
+    BEGIN
+        left := 1; right := k;
+        WHILE left < right DO BEGIN
+            tmp := arr(left);
+            arr(left) := arr(right);
+            arr(right) := tmp;
+            left := left + 1;
+            right := right - 1
+        END
+    END;
+
+    FOR size := n STEP -1 UNTIL 2 DO BEGIN
+        maxIdx := 1;
+        FOR i := 2 STEP 1 UNTIL size DO
+            IF arr(i) > arr(maxIdx) THEN maxIdx := i;
+        IF maxIdx <> size THEN BEGIN
+            IF maxIdx <> 1 THEN flip(maxIdx - 1);
+            flip(size - 1)
+        END
+    END;
+
+    FOR i := 1 STEP 1 UNTIL n DO
+        OUTINT(arr(i), 4);
+    OUTIMAGE
+END

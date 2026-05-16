@@ -1,0 +1,14 @@
+InsertionSort: (# sort: (#
+    arr: ^Array[Integer]; n: @Integer
+    do
+        (for i: 1 to n-1 repeat
+            (key: @Integer; j: @Integer;
+             arr[i] -> key;
+             i-1 -> j;
+             (while j >= 0 and arr[j] > key repeat
+                 arr[j] -> arr[j+1];
+                 j-1 -> j);
+             key -> arr[j+1])
+        end for)
+    #)
+#)

@@ -1,0 +1,41 @@
+module PancakeSort exposing (..)
+
+import Array exposing (Array)
+import Array
+
+flipArr : Array Int -> Int -> Array Int
+flipArr arr k =
+    let
+        front = Array.toList (Array.slice 0 (k + 1) arr)
+        back = Array.toList (Array.slice (k + 1) (Array.length arr) arr)
+    in
+    Array.fromList (List.reverse front ++ back)
+
+findMaxIdx : Array Int -> Int -> Int
+findMaxIdx arr size =
+    let
+        go i maxIdx =
+            if i >= size then maxIdx
+            else
+                let
+                    vi = Maybe.withDefault 0 (Array.get i arr)
+                    vm = Maybe.withDefault 0 (Array.get maxIdx arr)
+                in
+                go (i + 1) (if vi > vm then i else maxIdx)
+    in
+    go 1 0
+
+pancakeSort : Array Int -> Array Int
+pancakeSort arr =
+    let
+        go a size =
+            if size <= 1 then a
+            else
+                let
+                    maxIdx = findMaxIdx a size
+                    a1 = if maxIdx /= 0 then flipArr a maxIdx else a
+                    a2 = flipArr a1 (size - 1)
+                in
+                go a2 (size - 1)
+    in
+    go arr (Array.length arr)

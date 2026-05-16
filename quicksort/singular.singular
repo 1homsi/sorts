@@ -1,0 +1,17 @@
+proc quicksort(list lst) {
+    if (size(lst) <= 1) { return(lst); }
+    int pivot = lst[size(lst) div 2 + 1];
+    list left, mid, right;
+    int i;
+    for (i = 1; i <= size(lst); i++) {
+        if (lst[i] < pivot) { left = left + list(lst[i]); }
+        else if (lst[i] == pivot) { mid = mid + list(lst[i]); }
+        else { right = right + list(lst[i]); }
+    }
+    return(quicksort(left) + mid + quicksort(right));
+}
+
+list arr = 3, 6, 8, 10, 1, 2, 1;
+list result = quicksort(arr);
+int i;
+for (i = 1; i <= size(result); i++) { print(result[i]); }

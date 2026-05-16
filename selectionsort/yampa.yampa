@@ -1,0 +1,8 @@
+import FRP.Yampa
+
+selectionSort :: [Int] -> [Int]
+selectionSort [] = []
+selectionSort xs =
+    let m = minimum xs
+        rest = filter (/= m) xs
+    in m : selectionSort rest

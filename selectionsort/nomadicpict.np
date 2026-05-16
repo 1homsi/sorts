@@ -1,0 +1,6 @@
+let selectionSort (arr: list[int]): list[int] =
+  match arr with
+  | [] -> []
+  | _ ->
+    let m = List.min arr in
+    m :: selectionSort (List.removeFirst m arr)

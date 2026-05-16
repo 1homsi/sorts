@@ -1,0 +1,14 @@
+MACHINE SelectionSort
+VARIABLES arr, n
+INVARIANT arr : seq(INTEGER) & n = size(arr)
+INITIALISATION arr := [5,3,1,4,2] || n := 5
+OPERATIONS
+    sort =
+    ANY sorted WHERE
+        sorted : seq(INTEGER) &
+        size(sorted) = n &
+        !i,j.(i : 1..n & j : 1..n & i < j => sorted(i) <= sorted(j)) &
+        ran(sorted) = ran(arr)
+    THEN arr := sorted
+    END
+END

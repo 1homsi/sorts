@@ -1,0 +1,31 @@
+import spinal.core._
+import spinal.lib._
+
+case class InsertionSort(n: Int = 8) extends Component {
+    val io = new Bundle {
+        val input  = in Vec(UInt(8 bits), n)
+        val output = out Vec(UInt(8 bits), n)
+        val done   = out Bool()
+    }
+
+    val arr  = Vec(RegInit(U(0, 8 bits)), n)
+    val done = RegInit(False)
+
+    when(!done) {
+        arr.assignFromBits(io.input.asBits)
+        for (i <- 1 until n) {
+            val key = arr(i)
+            for (j <- (i-1) downto 0) {
+                when(arr(j) > key) {
+                    arr(j + 1) := arr(j)
+                } otherwise {
+                    arr(j + 1) := key
+                }
+            }
+        }
+        done.set()
+    }
+
+    io.output := arr
+    io.done   := done
+}

@@ -1,0 +1,19 @@
+fn shell_sort(arr: [int]) -> [int]
+    let n = len(arr)
+    let gap = n / 2
+    while test $gap -gt 0
+        for i in $(seq $gap (math $n - 1))
+            let temp = $arr[$i]
+            let j = $i
+            while test $j -ge $gap && test $arr[$(math $j - $gap)] -gt $temp
+                let $arr[$j] = $arr[$(math $j - $gap)]
+                let j = $(math $j - $gap)
+            end
+            let $arr[$j] = $temp
+        end
+        let gap = $(math $gap / 2)
+    end
+    echo $arr
+end
+
+shell_sort 64 34 25 12 22 11 90

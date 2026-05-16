@@ -1,0 +1,11 @@
+fun quicksort(lst) {
+    switch (lst) {
+        case [] -> []
+        case pivot :: rest ->
+            var left = filter(fun(x) { x <= pivot }, rest);
+            var right = filter(fun(x) { x > pivot }, rest);
+            quicksort(left) ++ [pivot] ++ quicksort(right)
+    }
+}
+
+println(intToString(hd(quicksort([3, 6, 8, 10, 1, 2, 1]))));

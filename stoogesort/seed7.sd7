@@ -1,0 +1,33 @@
+$ include "seed7_05.s7i";
+
+const proc: stoogeSort (inout array integer: arr, in integer: first, in integer: last) is func
+    local
+        var integer: tmp is 0;
+        var integer: t is 0;
+        var integer: n is 0;
+    begin
+        if arr[first] > arr[last] then
+            tmp := arr[first];
+            arr[first] := arr[last];
+            arr[last] := tmp;
+        end if;
+        n := last - first + 1;
+        if n > 2 then
+            t := n * 2 div 3;
+            stoogeSort(arr, first, first + t - 1);
+            stoogeSort(arr, last - t + 1, last);
+            stoogeSort(arr, first, first + t - 1);
+        end if;
+    end func;
+
+const proc: main is func
+    local
+        var array integer: arr is [] (3, 1, 4, 1, 5, 9, 2, 6);
+        var integer: i is 0;
+    begin
+        stoogeSort(arr, 1, length(arr));
+        for i range arr do
+            write(i <& " ");
+        end for;
+        writeln;
+    end func;

@@ -1,0 +1,24 @@
+def quicksort(arr, low, high, reply) =
+  if low >= high then reply()
+  else
+    def p(pivot) =
+      def d1() & d2() = reply() in
+      quicksort(arr, low, pivot-1, d1) | quicksort(arr, pivot+1, high, d2)
+    in partition(arr, low, high, p)
+
+and partition(arr, low, high, reply) =
+  let pivot = arr[high] in
+  let i = ref low in
+  for j = low to high-1 do
+    if arr[j] <= pivot then begin
+      let t = arr[!i] in arr[!i] <- arr[j]; arr[j] <- t;
+      incr i
+    end
+  done;
+  let t = arr[!i] in arr[!i] <- arr[high]; arr[high] <- t;
+  reply(!i)
+
+run
+  let arr = [|3;6;8;10;1;2;1|] in
+  def done() = Array.iter (Printf.printf "%d\n") arr in
+  quicksort(arr, 0, 6, done)

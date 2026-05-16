@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script defer src="alpinejs.min.js"></script>
+</head>
+<body>
+<div x-data="{
+    arr: [3, 6, 8, 10, 1, 2, 1],
+    sorted: [],
+    quicksort(arr) {
+        if (arr.length <= 1) return arr;
+        const pivot = arr[Math.floor(arr.length / 2)];
+        const left = arr.filter(x => x < pivot);
+        const mid = arr.filter(x => x === pivot);
+        const right = arr.filter(x => x > pivot);
+        return [...this.quicksort(left), ...mid, ...this.quicksort(right)];
+    },
+    init() { this.sorted = this.quicksort(this.arr); }
+}">
+    <ul>
+        <template x-for="x in sorted" :key="x">
+            <li x-text="x"></li>
+        </template>
+    </ul>
+</div>
+</body>
+</html>

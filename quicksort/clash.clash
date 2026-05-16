@@ -1,0 +1,15 @@
+module Quicksort where
+
+import Clash.Prelude
+import Data.List (sortBy)
+import Data.Ord (compare)
+
+quicksortList :: Ord a => [a] -> [a]
+quicksortList [] = []
+quicksortList (p:xs) =
+    quicksortList [x | x <- xs, x <= p]
+    ++ [p] ++
+    quicksortList [x | x <- xs, x > p]
+
+topEntity :: Vec 7 (Signed 32) -> Vec 7 (Signed 32)
+topEntity input = listToVecTH $ quicksortList $ toList input

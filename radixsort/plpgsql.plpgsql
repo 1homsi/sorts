@@ -1,0 +1,35 @@
+CREATE OR REPLACE FUNCTION radix_sort(arr integer[]) RETURNS integer[] AS $$
+DECLARE
+    n integer := array_length(arr, 1);
+    max_val integer;
+    exp integer := 1;
+    output integer[];
+    cnt integer[] := array_fill(0, ARRAY[10], ARRAY[0]);
+    idx integer;
+    i integer;
+BEGIN
+    IF n = 0 THEN RETURN arr; END IF;
+    SELECT max(v) INTO max_val FROM unnest(arr) v;
+    WHILE max_val / exp > 0 LOOP
+        cnt := array_fill(0, ARRAY[10], ARRAY[0]);
+        output := array_fill(0, ARRAY[n], ARRAY[1]);
+        FOR i IN 1..n LOOP
+            idx := (arr[i] / exp) % 10;
+            cnt[idx] := cnt[idx] + 1;
+        END LOOP;
+        FOR i IN 1..9 LOOP
+            cnt[i] := cnt[i] + cnt[i-1];
+        END LOOP;
+        FOR i IN REVERSE n..1 LOOP
+            idx := (arr[i] / exp) % 10;
+            output[cnt[idx]] := arr[i];
+            cnt[idx] := cnt[idx] - 1;
+        END LOOP;
+        arr := output;
+        exp := exp * 10;
+    END LOOP;
+    RETURN arr;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT radix_sort(ARRAY[170, 45, 75, 90, 802, 24, 2, 66]);

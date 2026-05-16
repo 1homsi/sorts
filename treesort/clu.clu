@@ -1,0 +1,51 @@
+tree = cluster is make_leaf, make_node, is_leaf, val, left, right
+    rep = variant[leaf: null_type, node: record[v: int, l: tree, r: tree]]
+
+    make_leaf = proc() returns(tree)
+        return(up(rep$leaf(nil)))
+    end make_leaf
+
+    make_node = proc(l: tree, v: int, r: tree) returns(tree)
+        return(up(rep$node(record{v: v, l: l, r: r})))
+    end make_node
+
+    is_leaf = proc(t: tree) returns(bool)
+        tagcase down(t)
+            tag leaf: return(true)
+            tag node: return(false)
+        end
+    end is_leaf
+
+    val = proc(t: tree) returns(int)
+        return(down(t).node.v)
+    end val
+
+    left = proc(t: tree) returns(tree)
+        return(down(t).node.l)
+    end left
+
+    right = proc(t: tree) returns(tree)
+        return(down(t).node.r)
+    end right
+end tree
+
+insert = proc(t: tree, v: int) returns(tree)
+    if tree$is_leaf(t) then return(tree$make_node(tree$make_leaf(), v, tree$make_leaf())) end
+    if v < tree$val(t)
+        then return(tree$make_node(insert(tree$left(t), v), tree$val(t), tree$right(t)))
+        else return(tree$make_node(tree$left(t), tree$val(t), insert(tree$right(t), v)))
+    end
+end insert
+
+inorder = proc(t: tree) returns(sequence[int])
+    if tree$is_leaf(t) then return(sequence[int]$()) end
+    return(sequence[int]$concat(inorder(tree$left(t)), sequence[int]$cons(tree$val(t), inorder(tree$right(t)))))
+end inorder
+
+treesort = proc(arr: sequence[int]) returns(sequence[int])
+    t: tree := tree$make_leaf()
+    for v: int in sequence[int]$elements(arr) do
+        t := insert(t, v)
+    end
+    return(inorder(t))
+end treesort

@@ -1,0 +1,11 @@
+fun selection-sort(arr : vector<int>) : vector<int>
+  val n = arr.length
+  var result := arr
+  for(0, n - 1) fn(i)
+    var min-idx := i
+    for(i + 1, n - 1) fn(j)
+      if result[j] < result[min-idx] then min-idx := j
+    val tmp = result[i]
+    result[i] := result[min-idx]
+    result[min-idx] := tmp
+  result

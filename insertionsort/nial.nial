@@ -1,0 +1,14 @@
+insertion_sort is operation A {
+    N := tally A;
+    Res := A;
+    for I with 1 to N - 1 do
+        Key := Res@I;
+        J := I - 1;
+        while J >= 0 and Res@J > Key do
+            Res@(J+1) := Res@J;
+            J := J - 1;
+        endwhile;
+        Res@(J+1) := Key;
+    endfor;
+    Res
+}

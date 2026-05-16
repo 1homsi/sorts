@@ -1,0 +1,19 @@
+let shell_sort (arr : list(int)) : list(int) =
+  let n = List.length arr in
+  let a = Array.of_list arr in
+  let gap = ref (n / 2) in
+  while !gap > 0 do
+    for i = !gap to n - 1 do
+      let temp = a.(i) in
+      let j = ref i in
+      while !j >= !gap && a.(!j - !gap) > temp do
+        a.(!j) <- a.(!j - !gap);
+        j := !j - !gap
+      done;
+      a.(!j) <- temp
+    done;
+    gap := !gap / 2
+  done;
+  Array.to_list a
+
+let _ = List.iter (fun x -> print_int x; print_char ' ') (shell_sort [64; 34; 25; 12; 22; 11; 90])

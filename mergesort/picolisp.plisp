@@ -1,0 +1,18 @@
+(de merge (Left Right)
+   (cond
+      ((not Left) Right)
+      ((not Right) Left)
+      ((>= (car Right) (car Left))
+       (cons (car Left) (merge (cdr Left) Right)))
+      (T
+       (cons (car Right) (merge Left (cdr Right)))) ) )
+
+(de merge-sort (Lst)
+   (if (<= (length Lst) 1)
+      Lst
+      (let (Mid (/ (length Lst) 2)
+            Left (head Mid Lst)
+            Right (tail (- (length Lst) Mid) Lst))
+         (merge (merge-sort Left) (merge-sort Right)) ) ) )
+
+(println (merge-sort (list 38 27 43 3 9 82 10)))

@@ -1,0 +1,29 @@
+resource mergesort()
+    procedure merge(var arr: array[*] of int; lo, mid, hi: int)
+        var tmp: array[lo:hi] of int
+        var i := lo, j := mid+1, k := lo
+        do i <= mid and j <= hi ->
+            if arr[i] <= arr[j] -> tmp[k] := arr[i]; i++
+            [] else -> tmp[k] := arr[j]; j++
+            fi
+            k++
+        od
+        do i <= mid -> tmp[k] := arr[i]; i++; k++ od
+        do j <= hi -> tmp[k] := arr[j]; j++; k++ od
+        do k := lo to hi -> arr[k] := tmp[k] od
+    end merge
+
+    procedure msort(var arr: array[*] of int; lo, hi: int)
+        if lo < hi ->
+            var mid := (lo + hi) / 2
+            msort(arr, lo, mid)
+            msort(arr, mid+1, hi)
+            merge(arr, lo, mid, hi)
+        fi
+    end msort
+
+    var arr: array[1:7] of int := ([7] 38, 27, 43, 3, 9, 82, 10)
+    msort(arr, 1, 7)
+    do i := 1 to 7 -> write(arr[i], " ") od
+    write("\n")
+end mergesort

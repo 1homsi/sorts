@@ -1,0 +1,41 @@
+        .data
+arr:    .long 5, 3, 1, 4, 2
+n:      .long 5
+
+        .text
+        .global _start
+_start:
+        mov.l   arr_k, r0
+        mov.l   n_k, r1
+        mov.l   @r1, r1
+        mov     #1, r2
+outer:
+        cmp/ge  r1, r2
+        bt      done
+        shll2   r3, r2
+        mov.l   @(r0, r3), r4
+        add     #-1, r2
+        mov     r2, r5
+inner:
+        cmp/ge  #0, r5
+        bt      place
+        shll2   r6, r5
+        mov.l   @(r0, r6), r7
+        cmp/ge  r4, r7
+        bt      place
+        add     #4, r6
+        mov.l   r7, @(r0, r6)
+        add     #-1, r5
+        bra     inner
+        nop
+place:
+        add     #1, r5
+        shll2   r6, r5
+        mov.l   r4, @(r0, r6)
+        add     #1, r2
+        bra     outer
+        nop
+done:
+        trapa   #1
+arr_k:  .long arr
+n_k:    .long n

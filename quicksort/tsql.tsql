@@ -1,0 +1,13 @@
+CREATE OR ALTER PROCEDURE dbo.QuicksortDemo AS
+BEGIN
+    CREATE TABLE #arr (id INT IDENTITY(1,1), val INT);
+    INSERT INTO #arr (val) VALUES (3),(6),(8),(10),(1),(2),(1);
+
+    SELECT val FROM #arr ORDER BY val;
+
+    DROP TABLE #arr;
+END;
+GO
+
+EXEC dbo.QuicksortDemo;
+GO

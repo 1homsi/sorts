@@ -1,0 +1,17 @@
+defmodule Bubblesort do
+  def bubblesort(list) do
+    case pass(list) do
+      {sorted, false} -> sorted
+      {unsorted, true} -> bubblesort(unsorted)
+    end
+  end
+
+  defp pass(list) do
+    Enum.reduce(list, {[], false}, fn x, {acc, changed} ->
+      case acc do
+        [h | t] when h > x -> {[x, h | t], true}
+        _ -> {[x | acc], changed}
+      end
+    end) |> (fn {acc, changed} -> {Enum.reverse(acc), changed} end).()  
+  end
+end

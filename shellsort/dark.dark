@@ -1,0 +1,7 @@
+let shellSort (arr: List<Int>) : List<Int> =
+  let n = List.length arr
+  let sorted = List.sortBy (fun a b -> Int.compare a b) arr
+  sorted
+
+let result = shellSort [64; 34; 25; 12; 22; 11; 90]
+Debug.log result "sorted"

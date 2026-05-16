@@ -1,0 +1,31 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: quicksort-policy
+spec:
+  description: "Policy representing sorted access order"
+  endpointSelector:
+    matchLabels:
+      priority: "sorted"
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        priority: "1"
+  - fromEndpoints:
+    - matchLabels:
+        priority: "1"
+  - fromEndpoints:
+    - matchLabels:
+        priority: "2"
+  - fromEndpoints:
+    - matchLabels:
+        priority: "3"
+  - fromEndpoints:
+    - matchLabels:
+        priority: "6"
+  - fromEndpoints:
+    - matchLabels:
+        priority: "8"
+  - fromEndpoints:
+    - matchLabels:
+        priority: "10"

@@ -1,0 +1,21 @@
+new done: chan
+new result: chan[list[int]]
+
+proc InsertionSort(arr: list[int], res: chan[list[int]]) =
+    match arr with
+    | [] => res ! []
+    | h :: t =>
+        new sorted_tail: chan[list[int]]
+        InsertionSort(t, sorted_tail) |
+        sorted_tail ? st =>
+        Insert(h, st, res)
+
+proc Insert(x: int, lst: list[int], res: chan[list[int]]) =
+    match lst with
+    | [] => res ! [x]
+    | h :: t =>
+        if x <= h then res ! (x :: h :: t)
+        else
+            new r: chan[list[int]]
+            Insert(x, t, r) |
+            r ? sorted => res ! (h :: sorted)

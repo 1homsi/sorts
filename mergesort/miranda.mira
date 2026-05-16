@@ -1,0 +1,15 @@
+merge [] right = right
+merge left [] = left
+merge (lh:lt) (rh:rt)
+    = lh : merge lt (rh:rt), if lh <= rh
+    = rh : merge (lh:lt) rt, otherwise
+
+mergeSort [] = []
+mergeSort [x] = [x]
+mergeSort lst = merge (mergeSort left) (mergeSort right)
+    where
+    mid = # lst div 2
+    left = take mid lst
+    right = drop mid lst
+
+main = mergeSort [38, 27, 43, 3, 9, 82, 10]

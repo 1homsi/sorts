@@ -1,0 +1,10 @@
+quicksort = \(lst: List[Int]) ->
+  if length(lst) <= 1 then lst
+  else
+    let pivot = head(lst)
+    let rest = tail(lst)
+    let left = filter(\(x: Int) -> x <= pivot, rest)
+    let right = filter(\(x: Int) -> x > pivot, rest)
+    in append(quicksort(left), cons(pivot, quicksort(right)))
+
+run(print(quicksort([3, 6, 8, 10, 1, 2, 1])))

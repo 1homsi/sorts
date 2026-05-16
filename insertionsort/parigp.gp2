@@ -1,0 +1,13 @@
+insertion_sort(arr) = {
+  my(a = Vec(arr), n = #a, key, j);
+  for(i = 2, n,
+    key = a[i];
+    j = i - 1;
+    while(j >= 1 && a[j] > key,
+      a[j+1] = a[j];
+      j--;
+    );
+    a[j+1] = key;
+  );
+  a
+}

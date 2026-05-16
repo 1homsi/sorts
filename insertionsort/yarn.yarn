@@ -1,0 +1,17 @@
+title: InsertionSort
+tags: sort
+---
+<<declare $arr = "">>
+<<declare $sorted = "">>
+<<set $arr = "5,3,1,4,2">>
+The array is: {$arr}
+<<jump DoSort>>
+===
+
+title: DoSort
+---
+<<set $sorted = insertion_sort($arr)>>
+Sorted: {$sorted}
+-> Done
+    <<jump END>>
+===

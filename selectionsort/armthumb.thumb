@@ -1,0 +1,50 @@
+        .thumb
+        .syntax unified
+        .data
+arr:    .word 5, 3, 1, 4, 2
+n:      .word 5
+
+        .text
+        .global selection_sort
+        .thumb_func
+
+selection_sort:
+        push {r4-r7, lr}
+        ldr r0, =arr
+        ldr r1, =n
+        ldr r1, [r1]
+        movs r4, #0
+
+outer:
+        subs r2, r1, #1
+        cmp r4, r2
+        bge done
+        movs r5, r4
+        adds r6, r4, #1
+
+inner:
+        cmp r6, r1
+        bge swap_elem
+        lsls r2, r6, #2
+        ldr r2, [r0, r2]
+        lsls r3, r5, #2
+        ldr r3, [r0, r3]
+        cmp r2, r3
+        bge next
+        movs r5, r6
+next:
+        adds r6, #1
+        b inner
+
+swap_elem:
+        lsls r2, r4, #2
+        ldr r3, [r0, r2]
+        lsls r7, r5, #2
+        ldr r6, [r0, r7]
+        str r6, [r0, r2]
+        str r3, [r0, r7]
+        adds r4, #1
+        b outer
+
+done:
+        pop {r4-r7, pc}

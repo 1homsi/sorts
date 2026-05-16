@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="RadixSort" default="sort" basedir=".">
+    <property name="arr" value="170,45,75,90,802,24,2,66"/>
+
+    <target name="sort">
+        <script language="javascript"><![CDATA[
+            function countingSort(arr, exp) {
+                var n = arr.length;
+                var output = new Array(n).fill(0);
+                var count = new Array(10).fill(0);
+                for (var i = 0; i < n; i++) count[Math.floor(arr[i] / exp) % 10]++;
+                for (var i = 1; i < 10; i++) count[i] += count[i - 1];
+                for (var i = n - 1; i >= 0; i--) {
+                    var idx = Math.floor(arr[i] / exp) % 10;
+                    output[--count[idx]] = arr[i];
+                }
+                for (var i = 0; i < n; i++) arr[i] = output[i];
+            }
+
+            function radixSort(arr) {
+                if (!arr.length) return arr;
+                var max = Math.max.apply(null, arr);
+                for (var exp = 1; Math.floor(max / exp) > 0; exp *= 10) countingSort(arr, exp);
+                return arr;
+            }
+
+            var arr = [170, 45, 75, 90, 802, 24, 2, 66];
+            project.log("Sorted: " + radixSort(arr).join(", "));
+        ]]></script>
+    </target>
+</project>

@@ -1,0 +1,25 @@
+class {
+  onCreate() {
+    this.state = {
+      arr: [5, 3, 1, 4, 2],
+      sorted: []
+    };
+  }
+  sort() {
+    const a = [...this.state.arr];
+    const n = a.length;
+    for (let i = 1; i < n; i++) {
+      const key = a[i];
+      let j = i - 1;
+      while (j >= 0 && a[j] > key) {
+        a[j + 1] = a[j];
+        j--;
+      }
+      a[j + 1] = key;
+    }
+    this.state.sorted = a;
+  }
+}
+
+<button on-click('sort')>Sort</button>
+<p>${state.sorted.join(', ')}</p>

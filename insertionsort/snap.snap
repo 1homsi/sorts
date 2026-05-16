@@ -1,0 +1,15 @@
+define (insertion sort %arr)
+    script variables (n) (i) (key) (j)
+    set (n) to (length of (arr))
+    set (i) to (2)
+    repeat until ((i) > (n))
+        set (key) to (item (i) of (arr))
+        set (j) to ((i) - (1))
+        repeat until (((j) < (1)) or (not ((item (j) of (arr)) > (key))))
+            replace item ((j) + (1)) of (arr) with (item (j) of (arr))
+            set (j) to ((j) - (1))
+        end
+        replace item ((j) + (1)) of (arr) with (key)
+        change (i) by (1)
+    end
+    report (arr)

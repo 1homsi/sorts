@@ -1,0 +1,8 @@
+insert(X, [], [X]).
+insert(X, [H|T], [X,H|T]) :- X =< H.
+insert(X, [H|T], [H|R]) :- X > H, insert(X, T, R).
+
+insertion_sort([], []).
+insertion_sort([H|T], Sorted) :-
+    insertion_sort(T, SortedT),
+    insert(H, SortedT, Sorted).

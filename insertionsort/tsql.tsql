@@ -1,0 +1,9 @@
+CREATE TABLE #nums (pos INT, val INT);
+
+WITH ordered AS (
+    SELECT val, ROW_NUMBER() OVER (ORDER BY val) AS rn
+    FROM #nums
+)
+SELECT rn AS pos, val
+FROM ordered
+ORDER BY rn;

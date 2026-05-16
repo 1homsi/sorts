@@ -1,0 +1,43 @@
+ORIGIN '~beta/basiclib/betaenv';
+
+PROGRAM Mjolner: (#
+    arr: [7] @integer;
+
+    quicksort: (#
+        low, high: @integer;
+    do
+        low < high ->
+        if true //
+            partition -> (# p: @integer;
+            do
+                (low, p-1) -> quicksort;
+                (p+1, high) -> quicksort
+            #)
+        if
+    #);
+
+    partition: (#
+        low, high: @integer; exit integer
+    do
+        arr[high] -> pivot;
+        low -> i;
+        WHILE j < high DO
+            arr[j] <= pivot ->
+            if true //
+                arr[i] -> tmp;
+                arr[j] -> arr[i];
+                tmp -> arr[j];
+                i+1 -> i
+            if;
+            j+1 -> j
+        OD;
+        arr[i] -> tmp; arr[high] -> arr[i]; tmp -> arr[high];
+        i -> exit
+    #);
+
+do
+    3->arr[0]; 6->arr[1]; 8->arr[2]; 10->arr[3];
+    1->arr[4]; 2->arr[5]; 1->arr[6];
+    (0, 6) -> quicksort;
+    (for i: 7 repeat arr[i] -> putint for)
+#)

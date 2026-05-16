@@ -1,0 +1,48 @@
+int arr[7];
+int n = 7;
+
+inline flip(k) {
+    int left = 0;
+    int right = k;
+    int tmp;
+    do
+    :: left < right ->
+        tmp = arr[left];
+        arr[left] = arr[right];
+        arr[right] = tmp;
+        left++;
+        right--;
+    :: else -> break
+    od
+}
+
+inline findMaxIdx(size, result) {
+    int mi = 0;
+    int i = 1;
+    do
+    :: i < size ->
+        if :: arr[i] > arr[mi] -> mi = i :: else -> skip fi;
+        i++;
+    :: else -> break
+    od;
+    result = mi;
+}
+
+active proctype PancakeSort() {
+    arr[0] = 3; arr[1] = 6; arr[2] = 2; arr[3] = 7;
+    arr[4] = 4; arr[5] = 1; arr[6] = 5;
+    int size = n;
+    int mi;
+    do
+    :: size > 1 ->
+        findMaxIdx(size, mi);
+        if :: mi != size - 1 ->
+            if :: mi != 0 -> flip(mi) :: else -> skip fi;
+            flip(size - 1);
+        :: else -> skip
+        fi;
+        size--;
+    :: else -> break
+    od;
+    printf("Sorted\n");
+}

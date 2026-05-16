@@ -1,0 +1,17 @@
+def merge left right =
+    if null left then right
+    else if null right then left
+    else if head left <= head right
+         then (head left) : merge (tail left) right
+         else (head right) : merge left (tail right)
+
+def mergeSort lst =
+    let n = length lst in
+    if n <= 1 then lst
+    else
+        let mid = n / 2 in
+        let left = take mid lst in
+        let right = drop mid lst in
+        merge (mergeSort left) (mergeSort right)
+
+mergeSort [38, 27, 43, 3, 9, 82, 10]

@@ -1,0 +1,15 @@
+begin
+    array arr[1:10];
+    integer n, i, j, minIdx, tmp;
+    n := 5;
+    arr[1] := 5; arr[2] := 3; arr[3] := 1; arr[4] := 4; arr[5] := 2;
+    for i := 1 step 1 until n-1 do
+    begin
+        minIdx := i;
+        for j := i+1 step 1 until n do
+            if arr[j] < arr[minIdx] then minIdx := j;
+        tmp := arr[i];
+        arr[i] := arr[minIdx];
+        arr[minIdx] := tmp
+    end
+end

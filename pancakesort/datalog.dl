@@ -1,0 +1,14 @@
+.decl initial_arr(idx: number, val: number)
+initial_arr(0, 3). initial_arr(1, 6). initial_arr(2, 2). initial_arr(3, 7).
+initial_arr(4, 4). initial_arr(5, 1). initial_arr(6, 5).
+
+.decl max_in_prefix(size: number, val: number)
+max_in_prefix(size, val) :-
+    initial_arr(idx, val),
+    idx < size,
+    !initial_arr(idx2, val2), idx2 < size, val2 > val.
+
+.decl sorted(idx: number, val: number)
+sorted(idx, val) :- initial_arr(idx, val).
+
+.output sorted

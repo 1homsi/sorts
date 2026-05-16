@@ -1,0 +1,14 @@
+Begin
+   Integer Array arr(1:10);
+   Integer n, i, j, minIdx, tmp;
+   n := 5;
+   arr(1) := 5; arr(2) := 3; arr(3) := 1; arr(4) := 4; arr(5) := 2;
+   For i := 1 Step 1 Until n - 1 Do Begin
+      minIdx := i;
+      For j := i + 1 Step 1 Until n Do
+         If arr(j) < arr(minIdx) Then minIdx := j;
+      tmp := arr(i);
+      arr(i) := arr(minIdx);
+      arr(minIdx) := tmp
+   End
+End

@@ -1,0 +1,18 @@
+def selectionSort(arr, n) =
+  let loop(i) =
+    if i >= n then arr
+    else
+      let findMin(j, minIdx) =
+        if j >= n then minIdx
+        else if arr[j] < arr[minIdx] then findMin(j+1, j)
+        else findMin(j+1, minIdx)
+      in
+      let minIdx = findMin(i+1, i) in
+      swap(arr, i, minIdx);
+      loop(i+1)
+  in loop(0)
+
+def swap(arr, i, j) =
+  let tmp = arr[i] in
+  arr[i] = arr[j];
+  arr[j] = tmp

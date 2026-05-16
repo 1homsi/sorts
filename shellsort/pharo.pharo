@@ -1,0 +1,20 @@
+shellSort: arr
+    | n gap temp j |
+    n := arr size.
+    gap := n // 2.
+    [gap > 0] whileTrue: [
+        gap + 1 to: n do: [:i |
+            temp := arr at: i.
+            j := i.
+            [(j > gap) and: [(arr at: j - gap) > temp]] whileTrue: [
+                arr at: j put: (arr at: j - gap).
+                j := j - gap.
+            ].
+            arr at: j put: temp.
+        ].
+        gap := gap // 2.
+    ].
+    ^arr
+
+arr := #(64 34 25 12 22 11 90) asOrderedCollection.
+Transcript showCr: (self shellSort: arr) printString.

@@ -1,0 +1,55 @@
+export function w $partition(l %arr, w %low, w %high) {
+@start
+    %pivotoff =l mul %high, 4
+    %pivotptr =l add %arr, %pivotoff
+    %pivot =w loadw %pivotptr
+    %i =l alloc4 4
+    storew %low, %i
+    %j =l alloc4 4
+    storew %low, %j
+@loop
+    %jv =w loadw %j
+    %cond =w csltw %jv, %high
+    jnz %cond, @body, @end
+@body
+    %joff =l mul %jv, 4
+    %jptr =l add %arr, %joff
+    %vj =w loadw %jptr
+    %c2 =w cslew %vj, %pivot
+    jnz %c2, @swap, @noswap
+@swap
+    %iv =w loadw %i
+    %ioff =l mul %iv, 4
+    %iptr =l add %arr, %ioff
+    %vi =w loadw %iptr
+    storew %vj, %iptr
+    storew %vi, %jptr
+    %iv1 =w add %iv, 1
+    storew %iv1, %i
+@noswap
+    %jv1 =w add %jv, 1
+    storew %jv1, %j
+    jmp @loop
+@end
+    %ifinal =w loadw %i
+    %ifoff =l mul %ifinal, 4
+    %ifptr =l add %arr, %ifoff
+    %vif =w loadw %ifptr
+    storew %pivot, %ifptr
+    storew %vif, %pivotptr
+    ret %ifinal
+}
+
+export function $quicksort(l %arr, w %low, w %high) {
+@start
+    %cond =w csltw %low, %high
+    jnz %cond, @dosort, @done
+@dosort
+    %p =w call $partition(l %arr, w %low, w %high)
+    %pm1 =w sub %p, 1
+    call $quicksort(l %arr, w %low, w %pm1)
+    %pp1 =w add %p, 1
+    call $quicksort(l %arr, w %pp1, w %high)
+@done
+    ret
+}

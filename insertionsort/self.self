@@ -1,0 +1,14 @@
+insertionSort: arr = (
+    | n key j |
+    n := arr size.
+    2 to: n do: [:i |
+        key := arr at: i.
+        j := i - 1.
+        [j >= 1 && [(arr at: j) > key]] whileTrue: [
+            arr at: j + 1 put: (arr at: j).
+            j := j - 1.
+        ].
+        arr at: j + 1 put: key.
+    ].
+    arr
+)

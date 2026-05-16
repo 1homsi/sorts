@@ -1,0 +1,14 @@
+specification QUICKSORT [SORT] : noexit
+
+library INTEGERS, BOOLEANS endlib
+
+behaviour
+    SORT
+
+where
+
+process SORT [SORT] : noexit :=
+    SORT ! 3 ! 6 ! 8 ! 10 ! 1 ! 2 ! 1;
+    exit
+
+endspec

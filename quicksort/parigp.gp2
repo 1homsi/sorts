@@ -1,0 +1,11 @@
+quicksort(v) = {
+    if (#v <= 1, return(v));
+    my(pivot = v[#v\2 + 1]);
+    my(left = select(x -> x < pivot, v));
+    my(mid = select(x -> x == pivot, v));
+    my(right = select(x -> x > pivot, v));
+    concat(quicksort(left), concat(mid, quicksort(right)))
+}
+
+v = [3, 6, 8, 10, 1, 2, 1];
+print(quicksort(v));

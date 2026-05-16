@@ -1,0 +1,26 @@
+main =>
+    Arr = {64, 34, 25, 12, 22, 11, 90},
+    shell_sort(Arr, 7),
+    println(Arr).
+
+shell_sort(Arr, N) =>
+    Gap = N div 2,
+    shell_sort_gap(Arr, N, Gap).
+
+shell_sort_gap(_, _, 0) => true.
+shell_sort_gap(Arr, N, Gap) =>
+    foreach(I in Gap..N-1)
+        Temp = Arr[I+1],
+        J = I,
+        insertion(Arr, Gap, J, Temp, J1),
+        Arr[J1+1] := Temp
+    end,
+    shell_sort_gap(Arr, N, Gap div 2).
+
+insertion(Arr, Gap, J, Temp, J1) =>
+    (J >= Gap, Arr[J-Gap+1] > Temp ->
+        Arr[J+1] := Arr[J-Gap+1],
+        insertion(Arr, Gap, J-Gap, Temp, J1)
+    ;
+        J1 = J
+    ).

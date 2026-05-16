@@ -1,0 +1,20 @@
+process SELECTION_SORT =
+{ integer array[5] }
+| array := [| 5, 3, 1, 4, 2 |];
+  do
+    integer i := 0, j, minIdx, tmp;
+    loop
+      exit when i >= 4;
+      minIdx := i;
+      j := i + 1;
+      loop
+        exit when j >= 5;
+        if array[j] < array[minIdx] then minIdx := j end if;
+        j := j + 1
+      end loop;
+      tmp := array[i];
+      array[i] := array[minIdx];
+      array[minIdx] := tmp;
+      i := i + 1
+    end loop
+  end

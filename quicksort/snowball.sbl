@@ -1,0 +1,39 @@
+routines (
+    quicksort
+    partition
+)
+
+externals (
+    main
+)
+
+integers ( low high pivot i j tmp p )
+groupings ( digits (0123456789) )
+
+routine partition (
+    $pivot = len
+    $i = $low
+    do
+        $j = $low
+        $j < $high
+        $arr[$j] <= $pivot
+        $tmp = $arr[$i]
+        $arr[$i] = $arr[$j]
+        $arr[$j] = $tmp
+        $i = $i + 1
+        $j = $j + 1
+    $tmp = $arr[$i]
+    $arr[$i] = $arr[$high]
+    $arr[$high] = $tmp
+)
+
+routine quicksort (
+    $low < $high
+    do partition
+    do quicksort (low = $low, high = $p - 1)
+    do quicksort (low = $p + 1, high = $high)
+)
+
+define main as (
+    do quicksort (low = 0, high = 6)
+)

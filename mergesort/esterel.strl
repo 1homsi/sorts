@@ -1,0 +1,27 @@
+module MERGE_SORT :
+
+input CLOCK;
+output DONE;
+relation CLOCK # DONE;
+
+var arr := {38, 27, 43, 3, 9, 82, 10} : integer array[7];
+var tmp : integer array[7];
+var n := 7 : integer;
+
+procedure merge_step(lo, mid, hi : integer) :
+    var i := lo, j := mid + 1, k := lo : integer;
+    loop
+        if i > mid or j > hi then exit end;
+        if arr[i] <= arr[j] then
+            tmp[k] := arr[i]; i := i + 1;
+        else
+            tmp[k] := arr[j]; j := j + 1;
+        end;
+        k := k + 1;
+    end;
+    while i <= mid do tmp[k] := arr[i]; i := i + 1; k := k + 1; end;
+    while j <= hi do tmp[k] := arr[j]; j := j + 1; k := k + 1; end;
+    for x := lo to hi do arr[x] := tmp[x]; end;
+end procedure;
+
+end module

@@ -1,0 +1,20 @@
+structure RadixSort =
+struct
+    fun getDigit (x, exp) = (x div exp) mod 10
+
+    fun countingSort (arr, exp) =
+        List.concat (List.tabulate (10, fn d =>
+            List.filter (fn x => getDigit (x, exp) = d) arr))
+
+    fun radixSortLoop (arr, maxVal, exp) =
+        if maxVal div exp = 0 then arr
+        else radixSortLoop (countingSort (arr, exp), maxVal, exp * 10)
+
+    fun radixSort [] = []
+      | radixSort arr =
+        let val maxVal = List.foldl Int.max 0 arr
+        in radixSortLoop (arr, maxVal, 1) end
+end
+
+val result = RadixSort.radixSort [170, 45, 75, 90, 802, 24, 2, 66]
+val _ = print (String.concatWith " " (List.map Int.toString result) ^ "\n")

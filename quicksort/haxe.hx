@@ -1,0 +1,14 @@
+class Haxe {
+    static function quicksort(arr: Array<Int>): Array<Int> {
+        if (arr.length <= 1) return arr;
+        var pivot = arr[Std.int(arr.length / 2)];
+        var left = arr.filter(x -> x < pivot);
+        var middle = arr.filter(x -> x == pivot);
+        var right = arr.filter(x -> x > pivot);
+        return quicksort(left).concat(middle).concat(quicksort(right));
+    }
+
+    static function main() {
+        trace(quicksort([3, 6, 8, 10, 1, 2, 1]));
+    }
+}

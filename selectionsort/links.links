@@ -1,0 +1,9 @@
+fun selectionSort(lst) {
+    switch (lst) {
+        case [] -> []
+        case _ ->
+            var m = fold_left(fun(a, b) { if (a < b) then a else b }, hd(lst), lst);
+            var rest = filter(fun(x) { x <> m }, lst);
+            m :: selectionSort(rest)
+    }
+}

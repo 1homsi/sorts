@@ -1,0 +1,27 @@
+Dim arr(6)
+arr(0)=3 : arr(1)=6 : arr(2)=2 : arr(3)=7
+arr(4)=4 : arr(5)=1 : arr(6)=5
+
+n=7 : size=n
+While size>1
+    maxIdx=0
+    For i=1 To size-1
+        If arr(i)>arr(maxIdx) Then maxIdx=i
+    Next i
+    If maxIdx<>size-1
+        If maxIdx<>0 Then GoSub flip_sub
+        k=size-1 : GoSub flip_sub
+    EndIf
+    size=size-1
+EndWhile
+
+For i=0 To n-1 : Print arr(i) : Next i
+End
+
+flip_sub:
+    left=0 : right=k
+    While left<right
+        tmp=arr(left) : arr(left)=arr(right) : arr(right)=tmp
+        left=left+1 : right=right-1
+    EndWhile
+Return

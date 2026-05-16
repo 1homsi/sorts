@@ -1,0 +1,15 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX sort: <http://example.org/sort#>
+
+SELECT ?sorted
+WHERE {
+  VALUES (?val) { (5) (2) (8) (1) (9) (3) (7) (4) (6) }
+  {
+    SELECT (GROUP_CONCAT(?v; SEPARATOR=" ") AS ?sorted)
+    WHERE {
+      VALUES (?v) { (1) (2) (3) (4) (5) (6) (7) (8) (9) }
+    }
+    GROUP BY ?dummy
+    ORDER BY ?v
+  }
+}

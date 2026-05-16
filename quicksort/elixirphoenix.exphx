@@ -1,0 +1,16 @@
+defmodule QuicksortPhoenix do
+  def sort([]), do: []
+  def sort([pivot | rest]) do
+    left = Enum.filter(rest, &(&1 <= pivot))
+    right = Enum.filter(rest, &(&1 > pivot))
+    sort(left) ++ [pivot] ++ sort(right)
+  end
+
+  def run do
+    [3, 6, 8, 10, 1, 2, 1]
+    |> sort()
+    |> Enum.each(&IO.puts/1)
+  end
+end
+
+QuicksortPhoenix.run()

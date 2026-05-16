@@ -1,0 +1,26 @@
+use bellman::{Circuit, ConstraintSystem, SynthesisError};
+use bls12_381::Scalar;
+
+struct SelectionSortCircuit {
+    arr: Vec<Option<Scalar>>,
+}
+
+impl Circuit<Scalar> for SelectionSortCircuit {
+    fn synthesize<CS: ConstraintSystem<Scalar>>(
+        self,
+        cs: &mut CS,
+    ) -> Result<(), SynthesisError> {
+        let mut sorted = self.arr.clone();
+        let n = sorted.len();
+        for i in 0..n {
+            let mut min_idx = i;
+            for j in i+1..n {
+                if let (Some(vj), Some(vm)) = (sorted[j], sorted[min_idx]) {
+                    if vj < vm { min_idx = j; }
+                }
+            }
+            sorted.swap(i, min_idx);
+        }
+        Ok(())
+    }
+}

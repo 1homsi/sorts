@@ -1,0 +1,11 @@
+{ parameter (list int) ;
+  storage (list int) ;
+  code { CAR ;
+         NIL int ;
+         SWAP ;
+         ITER { DIP { DUP } ;
+                GET_AND_UPDATE ;
+                IF_NONE { PUSH int 0 ; CONS }
+                        { CONS } } ;
+         NIL int ;
+         PAIR } }

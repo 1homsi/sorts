@@ -1,0 +1,20 @@
+-module(selection_sort_otp).
+-behaviour(gen_server).
+-export([start_link/0, sort/1]).
+-export([init/1, handle_call/3, handle_cast/2]).
+
+start_link() -> gen_server:start_link({local, ?MODULE}, ?MODULE, [], []).
+
+sort(List) -> gen_server:call(?MODULE, {sort, List}).
+
+init([]) -> {ok, []}.
+
+handle_call({sort, []}, _From, State) ->
+    {reply, [], State};
+handle_call({sort, List}, _From, State) ->
+    Min = lists:min(List),
+    Rest = lists:delete(Min, List),
+    {ok, Sorted} = handle_call({sort, Rest}, _From, State),
+    {reply, [Min | Sorted], State}.
+
+handle_cast(_, State) -> {noreply, State}.

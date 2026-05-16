@@ -1,0 +1,28 @@
+def flip(arr, k) {
+    def left = 0, right = k, tmp
+    while (left < right) {
+        tmp = arr[left]; arr[left] = arr[right]; arr[right] = tmp
+        left++; right--
+    }
+}
+
+def pancakeSort(arr) {
+    def size = arr.size()
+    while (size > 1) {
+        def maxIdx = 0
+        (1..<size).each { i -> if (arr[i] > arr[maxIdx]) maxIdx = i }
+        if (maxIdx != size - 1) {
+            if (maxIdx != 0) flip(arr, maxIdx)
+            flip(arr, size - 1)
+        }
+        size--
+    }
+    arr
+}
+
+task pancake {
+    doLast {
+        def arr = [3, 6, 2, 7, 4, 1, 5]
+        println pancakeSort(arr)
+    }
+}

@@ -1,0 +1,35 @@
+MODULE StoogeSort;
+
+FROM InOut IMPORT WriteInt, WriteLn;
+
+VAR
+    arr: ARRAY [0..7] OF INTEGER;
+
+PROCEDURE StoogeSort(first, last: INTEGER);
+VAR
+    tmp, t, n: INTEGER;
+BEGIN
+    IF arr[first] > arr[last] THEN
+        tmp := arr[first];
+        arr[first] := arr[last];
+        arr[last] := tmp;
+    END;
+    n := last - first + 1;
+    IF n > 2 THEN
+        t := n * 2 DIV 3;
+        StoogeSort(first, first + t - 1);
+        StoogeSort(last - t + 1, last);
+        StoogeSort(first, first + t - 1);
+    END;
+END StoogeSort;
+
+VAR i: INTEGER;
+BEGIN
+    arr[0]:=3; arr[1]:=1; arr[2]:=4; arr[3]:=1;
+    arr[4]:=5; arr[5]:=9; arr[6]:=2; arr[7]:=6;
+    StoogeSort(0, 7);
+    FOR i := 0 TO 7 DO
+        WriteInt(arr[i], 4);
+    END;
+    WriteLn;
+END StoogeSort.

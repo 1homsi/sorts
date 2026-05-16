@@ -1,0 +1,13 @@
+insertion_sort <- function(arr) {
+  n <- length(arr)
+  for (i in 2:n) {
+    key <- arr[i]
+    j <- i - 1
+    while (j >= 1 && arr[j] > key) {
+      arr[j + 1] <- arr[j]
+      j <- j - 1
+    }
+    arr[j + 1] <- key
+  }
+  arr
+}

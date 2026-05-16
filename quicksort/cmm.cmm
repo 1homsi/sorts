@@ -1,0 +1,32 @@
+foreign "C" partition(bits32 arr, bits32 low, bits32 high) : bits32 {
+    bits32 pivot;
+    bits32 i, j, tmp;
+    pivot = W32[arr + high * 4];
+    i = low;
+    j = low;
+    loop: {
+        if j >= high goto done;
+        if W32[arr + j * 4] > pivot goto noswap;
+        tmp = W32[arr + i * 4];
+        W32[arr + i * 4] = W32[arr + j * 4];
+        W32[arr + j * 4] = tmp;
+        i = i + 1;
+        noswap:
+        j = j + 1;
+        goto loop;
+    }
+    done:
+    tmp = W32[arr + i * 4];
+    W32[arr + i * 4] = W32[arr + high * 4];
+    W32[arr + high * 4] = tmp;
+    return i;
+}
+
+foreign "C" quicksort(bits32 arr, bits32 low, bits32 high) {
+    if low >= high return;
+    bits32 p;
+    p = foreign "C" partition(arr, low, high);
+    foreign "C" quicksort(arr, low, p - 1);
+    foreign "C" quicksort(arr, p + 1, high);
+    return;
+}

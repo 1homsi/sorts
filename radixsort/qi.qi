@@ -1,0 +1,28 @@
+(define get-digit
+    X Exp -> (mod (div X Exp) 10))
+
+(define filter-digit
+    _ _ [] -> []
+    D Exp [X | Xs] -> [X | (filter-digit D Exp Xs)] where (= (get-digit X Exp) D)
+    D Exp [_ | Xs] -> (filter-digit D Exp Xs))
+
+(define counting-sort-loop
+    Xs Exp 10 -> []
+    Xs Exp D -> (append (filter-digit D Exp Xs) (counting-sort-loop Xs Exp (+ D 1))))
+
+(define counting-sort
+    Xs Exp -> (counting-sort-loop Xs Exp 0))
+
+(define max-list
+    [X] -> X
+    [X | Xs] -> (let M (max-list Xs) (if (> X M) X M)))
+
+(define radix-sort-loop
+    Xs Max Exp -> Xs where (= (div Max Exp) 0)
+    Xs Max Exp -> (radix-sort-loop (counting-sort Xs Exp) Max (* Exp 10)))
+
+(define radix-sort
+    [] -> []
+    Xs -> (radix-sort-loop Xs (max-list Xs) 1))
+
+(output "~A~%" (radix-sort [170 45 75 90 802 24 2 66]))

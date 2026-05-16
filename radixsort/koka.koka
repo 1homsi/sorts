@@ -1,0 +1,20 @@
+module radixsort
+
+fun get-digit(x: int, exp: int): int
+    (x / exp) % 10
+
+fun counting-sort(xs: list<int>, exp: int): list<int>
+    list(0, 9).flatmap fn(d)
+        xs.filter fn(x) get-digit(x, exp) == d
+
+fun radix-sort(xs: list<int>): list<int>
+    if xs.is-empty then xs
+    else
+        val max-val = xs.foldl(0, max)
+        fun loop(arr, exp)
+            if max-val / exp == 0 then arr
+            else loop(counting-sort(arr, exp), exp * 10)
+        loop(xs, 1)
+
+fun main()
+    println(radix-sort([170, 45, 75, 90, 802, 24, 2, 66]).show)

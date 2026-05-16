@@ -1,0 +1,9 @@
+(ns selection-sort.core
+  (:require [clojure.core.logic :as l]))
+
+(defn selection-sort [lst]
+  (if (empty? lst)
+    []
+    (let [m (apply min lst)
+          rest (remove #{m} lst)]
+      (cons m (selection-sort rest)))))

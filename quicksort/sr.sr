@@ -1,0 +1,28 @@
+resource quicksort()
+    var arr[1:7] := ([7] 3, 6, 8, 10, 1, 2, 1)
+
+    proc partition(low, high: int) returns p: int
+        var pivot := arr[high]
+        var i := low
+        var tmp: int
+        fa j := low to high - 1 ->
+            if arr[j] <= pivot ->
+                tmp := arr[i]; arr[i] := arr[j]; arr[j] := tmp
+                i++
+            fi
+        af
+        tmp := arr[i]; arr[i] := arr[high]; arr[high] := tmp
+        p := i
+    end partition
+
+    proc qs(low, high: int)
+        if low < high ->
+            var p := partition(low, high)
+            qs(low, p - 1)
+            qs(p + 1, high)
+        fi
+    end qs
+
+    qs(1, 7)
+    fa i := 1 to 7 -> write(arr[i]) af
+end resource

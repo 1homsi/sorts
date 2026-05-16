@@ -1,0 +1,15 @@
+MODEL:
+SETS:
+  IDX / 1..7 /: DATA, SORTED;
+ENDSETS
+
+DATA:
+  DATA = 3 6 8 10 1 2 1;
+ENDDATA
+
+@FOR(IDX(I) | I #LT# 7:
+  SORTED(I) #LE# SORTED(I+1)
+);
+
+MIN = 0;
+END

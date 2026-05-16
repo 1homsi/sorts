@@ -1,0 +1,11 @@
+(defn selection-sort [arr]
+  (let [n (Array.length arr)]
+    (for [i 0 n]
+      (let [min-idx (ref i)]
+        (for [j (Int.inc i) n]
+          (when (< @(Array.nth arr j) @(Array.nth arr @min-idx))
+            (set! min-idx j)))
+        (let [tmp @(Array.nth arr i)]
+          (Array.aset! arr i @(Array.nth arr @min-idx))
+          (Array.aset! arr @min-idx tmp))))
+    arr))

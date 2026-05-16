@@ -1,0 +1,24 @@
+func.func @partition(%arr: memref<7xi32>, %low: index, %high: index) -> index {
+  %c1 = arith.constant 1 : index
+  %pivot = memref.load %arr[%high] : memref<7xi32>
+  %i = memref.alloca() : memref<1xindex>
+  memref.store %low, %i[%c1] : memref<1xindex>
+  affine.for %j = 0 to 7 {
+    %jv = memref.load %arr[%j] : memref<7xi32>
+    %cmp = arith.cmpi sle, %jv, %pivot : i32
+    scf.if %cmp {
+      %iv = memref.load %i[%c1] : memref<1xindex>
+      %vi = memref.load %arr[%iv] : memref<7xi32>
+      memref.store %jv, %arr[%iv] : memref<7xi32>
+      memref.store %vi, %arr[%j] : memref<7xi32>
+      %iv1 = arith.addi %iv, %c1 : index
+      memref.store %iv1, %i[%c1] : memref<1xindex>
+    }
+  }
+  %ifinal = memref.load %i[%c1] : memref<1xindex>
+  %vif = memref.load %arr[%ifinal] : memref<7xi32>
+  %vh = memref.load %arr[%high] : memref<7xi32>
+  memref.store %pivot, %arr[%ifinal] : memref<7xi32>
+  memref.store %vif, %arr[%high] : memref<7xi32>
+  return %ifinal : index
+}

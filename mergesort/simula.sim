@@ -1,0 +1,43 @@
+Begin
+    Integer Array arr(1:7);
+    Integer Array tmp(1:7);
+    Integer i, j, k, lo, hi, mid, n;
+
+    Procedure Merge(lo, mid, hi);
+        Integer lo, mid, hi;
+    Begin
+        i := lo; j := mid + 1; k := lo;
+        While i <= mid And j <= hi Do Begin
+            If arr(i) <= arr(j) Then Begin
+                tmp(k) := arr(i); i := i + 1;
+            End Else Begin
+                tmp(k) := arr(j); j := j + 1;
+            End;
+            k := k + 1;
+        End;
+        While i <= mid Do Begin
+            tmp(k) := arr(i); i := i + 1; k := k + 1;
+        End;
+        While j <= hi Do Begin
+            tmp(k) := arr(j); j := j + 1; k := k + 1;
+        End;
+        For i := lo Step 1 Until hi Do arr(i) := tmp(i);
+    End;
+
+    Procedure MergeSort(lo, hi);
+        Integer lo, hi;
+    Begin
+        If lo < hi Then Begin
+            mid := (lo + hi) // 2;
+            MergeSort(lo, mid);
+            MergeSort(mid + 1, hi);
+            Merge(lo, mid, hi);
+        End;
+    End;
+
+    arr(1) := 38; arr(2) := 27; arr(3) := 43; arr(4) := 3;
+    arr(5) := 9; arr(6) := 82; arr(7) := 10;
+    MergeSort(1, 7);
+    For i := 1 Step 1 Until 7 Do OutInt(arr(i), 5);
+    OutImage;
+End

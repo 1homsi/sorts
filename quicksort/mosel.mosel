@@ -1,0 +1,15 @@
+model quicksort
+uses "mmxprs"
+
+declarations
+  n = 7
+  data: array(1..n) of integer
+  sorted: array(1..n) of mpvar
+end-declarations
+
+data := [3, 6, 8, 10, 1, 2, 1]
+
+forall(i in 1..n-1) sorted(i) <= sorted(i+1)
+
+minimize(0)
+end-model

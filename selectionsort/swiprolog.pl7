@@ -1,0 +1,11 @@
+:- use_module(library(lists)).
+
+selection_sort([], []).
+selection_sort(List, [Min|Sorted]) :-
+    min_member(Min, List),
+    select(Min, List, Rest),
+    selection_sort(Rest, Sorted).
+
+:- initialization(
+    selection_sort([5,3,1,4,2], Sorted),
+    write(Sorted), nl).

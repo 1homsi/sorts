@@ -1,0 +1,11 @@
+selectionSort(arr: List Integer): List Integer ==
+  n := #arr
+  result := copy(arr)
+  for i in 1..n-1 repeat
+    minIdx := i
+    for j in i+1..n repeat
+      if result.j < result.minIdx then minIdx := j
+    tmp := result.i
+    result.i := result.minIdx
+    result.minIdx := tmp
+  result

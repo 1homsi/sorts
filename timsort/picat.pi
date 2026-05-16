@@ -1,0 +1,55 @@
+main =>
+    Arr = {5,2,8,1,9,3,7,4,6},
+    timsort(Arr),
+    foreach(X in Arr) print(X), print(' ') end,
+    nl.
+
+insertion_sort(Arr, Left, Right) =>
+    I = Left + 1,
+    while I <= Right do
+        Key = Arr[I],
+        J = ref(I - 1),
+        while J[] >= Left, Arr[J[]] > Key do
+            Arr[J[]+1] := Arr[J[]],
+            J[] := J[] - 1
+        end,
+        Arr[J[]+1] := Key,
+        I := I + 1
+    end.
+
+merge(Arr, Left, Mid, Right) =>
+    Lp = [Arr[X] : X in Left..Mid],
+    Rp = [Arr[X] : X in Mid+1..Right],
+    I = ref(1), J = ref(1), K = ref(Left),
+    Ln = length(Lp), Rn = length(Rp),
+    while I[] =< Ln, J[] =< Rn do
+        if Lp[I[]] =< Rp[J[]] then
+            Arr[K[]] := Lp[I[]], I[] := I[] + 1
+        else
+            Arr[K[]] := Rp[J[]], J[] := J[] + 1
+        end,
+        K[] := K[] + 1
+    end,
+    while I[] =< Ln do Arr[K[]] := Lp[I[]], I[] := I[]+1, K[] := K[]+1 end,
+    while J[] =< Rn do Arr[K[]] := Rp[J[]], J[] := J[]+1, K[] := K[]+1 end.
+
+timsort(Arr) =>
+    N = length(Arr),
+    MinRun = 32,
+    I = ref(1),
+    while I[] =< N do
+        R = min(I[]+MinRun-1, N),
+        insertion_sort(Arr, I[], R),
+        I[] := I[] + MinRun
+    end,
+    Size = ref(MinRun),
+    while Size[] < N do
+        Left = ref(1),
+        while Left[] =< N do
+            Mid = min(Left[]+Size[]-1, N),
+            Right = min(Left[]+2*Size[]-1, N),
+            if Mid < Right then merge(Arr, Left[], Mid, Right) end,
+            Left[] := Left[] + 2*Size[]
+        end,
+        Size[] := Size[] * 2
+    end.

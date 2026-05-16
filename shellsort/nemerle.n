@@ -1,0 +1,27 @@
+using System;
+using System.Console;
+
+module ShellSort {
+    ShellSort(arr : array[int]) : array[int] {
+        def n = arr.Length;
+        mutable gap = n / 2;
+        while (gap > 0) {
+            for (mutable i = gap; i < n; i++) {
+                def temp = arr[i];
+                mutable j = i;
+                while (j >= gap && arr[j - gap] > temp) {
+                    arr[j] = arr[j - gap];
+                    j -= gap;
+                }
+                arr[j] = temp;
+            }
+            gap /= 2;
+        }
+        arr
+    }
+
+    Main() : void {
+        def arr = array[64, 34, 25, 12, 22, 11, 90];
+        WriteLine(string.Join(" ", ShellSort(arr)));
+    }
+}

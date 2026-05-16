@@ -1,0 +1,35 @@
+fn merge(left, right)
+    let result = []
+    let i = 0
+    let j = 0
+    while test $i -lt ${len($left)}; and test $j -lt ${len($right)}
+        if test $left[$i] -le $right[$j]
+            let result = [${result[@]} $left[$i]]
+            let i = $(math $i + 1)
+        else
+            let result = [${result[@]} $right[$j]]
+            let j = $(math $j + 1)
+        end
+    end
+    while test $i -lt ${len($left)}
+        let result = [${result[@]} $left[$i]]
+        let i = $(math $i + 1)
+    end
+    while test $j -lt ${len($right)}
+        let result = [${result[@]} $right[$j]]
+        let j = $(math $j + 1)
+    end
+    return $result
+end
+
+fn merge_sort(arr)
+    let n = ${len($arr)}
+    if test $n -le 1; return $arr; end
+    let mid = $(math $n / 2)
+    let left = $(merge_sort $arr[0..$mid])
+    let right = $(merge_sort $arr[$mid..$n])
+    return $(merge $left $right)
+end
+
+let arr = [38 27 43 3 9 82 10]
+echo $(merge_sort $arr)

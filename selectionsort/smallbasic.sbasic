@@ -1,0 +1,10 @@
+arr = [5, 3, 1, 4, 2]
+n = len(arr)
+for i = 0 to n - 2
+    min_idx = i
+    for j = i + 1 to n - 1
+        if arr[j] < arr[min_idx] then min_idx = j
+    next j
+    tmp = arr[i]: arr[i] = arr[min_idx]: arr[min_idx] = tmp
+next i
+print arr

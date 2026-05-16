@@ -1,0 +1,26 @@
+class MergeSort {
+    static function merge(left:Array<Int>, right:Array<Int>):Array<Int> {
+        var result = [];
+        var i = 0, j = 0;
+        while (i < left.length && j < right.length) {
+            if (left[i] <= right[j]) result.push(left[i++]);
+            else result.push(right[j++]);
+        }
+        while (i < left.length) result.push(left[i++]);
+        while (j < right.length) result.push(right[j++]);
+        return result;
+    }
+
+    static function mergeSort(arr:Array<Int>):Array<Int> {
+        if (arr.length <= 1) return arr;
+        var mid = Std.int(arr.length / 2);
+        var left = mergeSort(arr.slice(0, mid));
+        var right = mergeSort(arr.slice(mid));
+        return merge(left, right);
+    }
+
+    static function main() {
+        var arr = [38, 27, 43, 3, 9, 82, 10];
+        trace(mergeSort(arr));
+    }
+}

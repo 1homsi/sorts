@@ -1,0 +1,35 @@
+Dim Arr(6), Tmp(6)
+Arr(0)=38: Arr(1)=27: Arr(2)=43: Arr(3)=3
+Arr(4)=9: Arr(5)=82: Arr(6)=10
+
+Proc MSORT[0, 6]
+
+For I=0 To 6
+   Print Arr(I);" ";
+Next I
+Print
+
+Procedure MSORT[LO, HI]
+   Shared Arr(), Tmp()
+   If LO>=HI Then Endproc
+   MID=(LO+HI)/2
+   MSORT[LO, MID]
+   MSORT[MID+1, HI]
+   MERGE[LO, MID, HI]
+End Proc
+
+Procedure MERGE[LO, MID, HI]
+   Shared Arr(), Tmp()
+   I=LO: J=MID+1: K=LO
+   While I<=MID And J<=HI
+      If Arr(I)<=Arr(J) Then
+         Tmp(K)=Arr(I): I=I+1
+      Else
+         Tmp(K)=Arr(J): J=J+1
+      End If
+      K=K+1
+   Wend
+   While I<=MID: Tmp(K)=Arr(I): I=I+1: K=K+1: Wend
+   While J<=HI: Tmp(K)=Arr(J): J=J+1: K=K+1: Wend
+   For X=LO To HI: Arr(X)=Tmp(X): Next X
+End Proc

@@ -1,0 +1,16 @@
+service: selection-sort
+
+provider:
+  name: aws
+  runtime: python3.11
+
+functions:
+  sort:
+    handler: handler.selection_sort
+    events:
+      - http:
+          path: sort
+          method: post
+
+package:
+  individually: true

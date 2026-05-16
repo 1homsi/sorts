@@ -1,0 +1,10 @@
+quicksort: lst -> list =
+  if size(lst) <= 1 then lst
+  else
+    pivot = lst[size(lst) / 2]
+    left = filter(< pivot, lst)
+    middle = filter(== pivot, lst)
+    right = filter(> pivot, lst)
+    quicksort(left) ++ middle ++ quicksort(right)
+
+print(quicksort([3, 6, 8, 10, 1, 2, 1]))

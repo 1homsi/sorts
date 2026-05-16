@@ -1,0 +1,29 @@
+      H DFTACTGRP(*NO)
+      D arr             S              5I 0 DIM(8)
+      D output          S              5I 0 DIM(8)
+      D cnt             S              5I 0 DIM(10)
+      D n               S              5I 0 INZ(8)
+      D maxVal          S              5I 0
+      D exp             S              5I 0
+      D idx             S              5I 0
+      D i               S              5I 0
+
+      C                   EVAL      arr(1) = 170
+      C                   EVAL      arr(2) = 45
+      C                   EVAL      arr(3) = 75
+      C                   EVAL      arr(4) = 90
+      C                   EVAL      arr(5) = 802
+      C                   EVAL      arr(6) = 24
+      C                   EVAL      arr(7) = 2
+      C                   EVAL      arr(8) = 66
+      C                   EVAL      maxVal = arr(1)
+      C                   EVAL      exp = 1
+      C     1             DO        8             i
+      C                   IF        arr(i) > maxVal
+      C                   EVAL      maxVal = arr(i)
+      C                   ENDIF
+      C                   ENDDO
+      C     maxVal/exp    DOWEQ     0
+      C                   LEAVE
+      C                   ENDDO
+      C                   SETON                                        LR

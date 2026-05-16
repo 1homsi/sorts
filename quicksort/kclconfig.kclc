@@ -1,0 +1,15 @@
+import math
+
+schema SortResult:
+    input: [int]
+    sorted: [int]
+
+    check:
+        all i, v in sorted {
+            i == 0 or sorted[i-1] <= v
+        }
+
+result = SortResult {
+    input = [3, 6, 8, 10, 1, 2, 1]
+    sorted = [1, 1, 2, 3, 6, 8, 10]
+}

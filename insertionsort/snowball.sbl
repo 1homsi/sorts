@@ -1,0 +1,19 @@
+routines (insertion_sort insert_element)
+
+routine insertion_sort
+(   $i = 1
+    $n = size of arr
+    $i < $n
+    do (
+        $key = arr[$i]
+        $j = $i - 1
+        (   $j >= 0
+            arr[$j] > $key
+        ) loop (
+            arr[$j + 1] = arr[$j]
+            $j = $j - 1
+        )
+        arr[$j + 1] = $key
+        $i = $i + 1
+    ) while ($i < $n)
+)

@@ -1,0 +1,10 @@
+let rec selection_sort = function
+  | [] -> []
+  | lst ->
+    let m = List.fold_left min (List.hd lst) lst in
+    let rest = remove_first m lst in
+    m :: selection_sort rest
+
+and remove_first x = function
+  | [] -> []
+  | y :: ys -> if x = y then ys else y :: remove_first x ys

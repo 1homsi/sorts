@@ -1,0 +1,45 @@
+DIRECTORY MergeSort USING [];
+DEFINITIONS MergeSort USING [Sort];
+
+PROGRAM MergeSort EXPORTS MergeSort =
+
+BEGIN
+
+IntArray: TYPE = ARRAY [0..7) OF INTEGER;
+arr: IntArray ← [38, 27, 43, 3, 9, 82, 10];
+tmp: IntArray;
+
+Merge: PROCEDURE [lo, mid, hi: CARDINAL] =
+BEGIN
+    i: CARDINAL ← lo;
+    j: CARDINAL ← mid + 1;
+    k: CARDINAL ← lo;
+    DO
+        IF i > mid OR j > hi THEN EXIT;
+        IF arr[i] <= arr[j] THEN
+            [tmp[k] ← arr[i]; i ← i + 1]
+        ELSE
+            [tmp[k] ← arr[j]; j ← j + 1];
+        k ← k + 1;
+    ENDLOOP;
+    WHILE i <= mid DO tmp[k] ← arr[i]; i ← i+1; k ← k+1; ENDLOOP;
+    WHILE j <= hi DO tmp[k] ← arr[j]; j ← j+1; k ← k+1; ENDLOOP;
+    FOR x: CARDINAL IN [lo..hi] DO arr[x] ← tmp[x]; ENDLOOP;
+END;
+
+MSort: PROCEDURE [lo, hi: CARDINAL] =
+BEGIN
+    mid: CARDINAL;
+    IF lo >= hi THEN RETURN;
+    mid ← (lo + hi) / 2;
+    MSort[lo, mid];
+    MSort[mid + 1, hi];
+    Merge[lo, mid, hi];
+END;
+
+Sort: PUBLIC PROCEDURE =
+BEGIN
+    MSort[0, 6];
+END;
+
+END.

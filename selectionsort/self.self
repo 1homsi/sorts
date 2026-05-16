@@ -1,0 +1,18 @@
+selectionSort: arr = (
+    | n i j minIdx tmp |
+    n := arr size.
+    i := 0.
+    [i < n] whileTrue: [
+        minIdx := i.
+        j := i + 1.
+        [j < n] whileTrue: [
+            (arr at: j) < (arr at: minIdx) ifTrue: [minIdx := j].
+            j := j + 1
+        ].
+        tmp := arr at: i.
+        arr at: i put: (arr at: minIdx).
+        arr at: minIdx put: tmp.
+        i := i + 1
+    ].
+    arr
+)

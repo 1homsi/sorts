@@ -1,0 +1,25 @@
+SHELLSORT: DO;
+
+SHELL$SORT: PROCEDURE(ARR, N);
+    DECLARE ARR(*) INTEGER;
+    DECLARE N INTEGER;
+    DECLARE (GAP, I, J, TEMP) INTEGER;
+    GAP = N / 2;
+    DO WHILE GAP > 0;
+        DO I = GAP + 1 TO N;
+            TEMP = ARR(I);
+            J = I;
+            DO WHILE J > GAP AND ARR(J - GAP) > TEMP;
+                ARR(J) = ARR(J - GAP);
+                J = J - GAP;
+            END;
+            ARR(J) = TEMP;
+        END;
+        GAP = GAP / 2;
+    END;
+END SHELL$SORT;
+
+DECLARE ARR(7) INTEGER INITIAL(64, 34, 25, 12, 22, 11, 90);
+CALL SHELL$SORT(ARR, 7);
+
+END SHELLSORT;

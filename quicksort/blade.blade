@@ -1,0 +1,16 @@
+@php
+function quicksort($arr) {
+    if (count($arr) <= 1) return $arr;
+    $pivot = $arr[floor(count($arr) / 2)];
+    $left = array_filter($arr, fn($x) => $x < $pivot);
+    $mid = array_filter($arr, fn($x) => $x == $pivot);
+    $right = array_filter($arr, fn($x) => $x > $pivot);
+    return array_merge(quicksort(array_values($left)), array_values($mid), quicksort(array_values($right)));
+}
+$sorted = quicksort([3, 6, 8, 10, 1, 2, 1]);
+@endphp
+<ul>
+@foreach ($sorted as $x)
+    <li>{{ $x }}</li>
+@endforeach
+</ul>

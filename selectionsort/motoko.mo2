@@ -1,0 +1,25 @@
+import Array "mo:base/Array";
+import Nat "mo:base/Nat";
+
+actor SelectionSort {
+    public func selectionSort(arr: [Int]): async [Int] {
+        let n = arr.size();
+        var result = Array.thaw<Int>(arr);
+        var i = 0;
+        while (i < n) {
+            var minIdx = i;
+            var j = i + 1;
+            while (j < n) {
+                if (result[j] < result[minIdx]) {
+                    minIdx := j;
+                };
+                j += 1;
+            };
+            let tmp = result[i];
+            result[i] := result[minIdx];
+            result[minIdx] := tmp;
+            i += 1;
+        };
+        Array.freeze<Int>(result)
+    };
+};

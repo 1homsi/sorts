@@ -1,0 +1,13 @@
+(defun stooge-sort (arr first last)
+    (when (> (aref arr first) (aref arr last))
+        (rotatef (aref arr first) (aref arr last)))
+    (let ((n (- last first -1)))
+        (when (> n 2)
+            (let ((tt (floor (* n 2) 3)))
+                (stooge-sort arr first (+ first tt -1))
+                (stooge-sort arr (- last tt -1) last)
+                (stooge-sort arr first (+ first tt -1))))))
+
+(let ((arr (make-array 8 :initial-contents '(3 1 4 1 5 9 2 6))))
+    (stooge-sort arr 0 7)
+    (format t "~{~a ~}~%" (coerce arr 'list)))

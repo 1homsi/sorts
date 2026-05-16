@@ -1,0 +1,13 @@
+channel sort : {0..9}
+
+SELECTION_SORT =
+    let arr = <5,3,1,4,2>
+        n = 5
+    in SORT(arr, 0, n)
+
+SORT(arr, i, n) =
+    if i >= n then SKIP
+    else
+        let minIdx = FIND_MIN(arr, i, n, i)
+        in SWAP(arr, i, minIdx);
+           SORT(arr, i+1, n)

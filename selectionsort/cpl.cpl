@@ -1,0 +1,9 @@
+SelectionSort(arr, n) = 
+    for i = 1 to n-1 do
+        let minIdx = i in
+        for j = i+1 to n do
+            if arr[j] < arr[minIdx] then set minIdx = j done;
+        let tmp = arr[i] in
+        arr[i] := arr[minIdx];
+        arr[minIdx] := tmp
+    done

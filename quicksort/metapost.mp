@@ -1,0 +1,28 @@
+vardef partition(suffix arr)(expr lo, hi) =
+    save pivot, i, j, tmp;
+    numeric pivot, i, j, tmp;
+    pivot := arr[hi];
+    i := lo;
+    for j = lo upto hi-1:
+        if arr[j] <= pivot:
+            tmp := arr[i]; arr[i] := arr[j]; arr[j] := tmp;
+            i := i + 1;
+        fi;
+    endfor;
+    tmp := arr[i]; arr[i] := arr[hi]; arr[hi] := tmp;
+    i
+enddef;
+
+vardef quicksort(suffix arr)(expr lo, hi) =
+    if lo < hi:
+        save p; numeric p;
+        p := partition(arr)(lo, hi);
+        quicksort(arr)(lo, p-1);
+        quicksort(arr)(p+1, hi);
+    fi;
+enddef;
+
+numeric arr[];
+arr[0] := 3; arr[1] := 6; arr[2] := 8; arr[3] := 10;
+arr[4] := 1; arr[5] := 2; arr[6] := 1;
+quicksort(arr)(0, 6);

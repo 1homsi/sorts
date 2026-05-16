@@ -1,0 +1,41 @@
+PROGRAM MergeSort
+
+(* BETA uses patterns and virtual functions *)
+
+MergeSort: (#
+    arr: [38, 27, 43, 3, 9, 82, 10];
+    tmp: array[7] of integer;
+
+    merge: (# lo, mid, hi: @integer
+        enter (lo, mid, hi)
+        do
+            i: @integer; j: @integer; k: @integer;
+            lo -> i; mid + 1 -> j; lo -> k;
+            (while (i <= mid) and (j <= hi) repeat
+                (if arr[i] <= arr[j] then
+                    arr[i] -> tmp[k]; i + 1 -> i;
+                else
+                    arr[j] -> tmp[k]; j + 1 -> j;
+                if);
+                k + 1 -> k;
+            while);
+            (while i <= mid repeat tmp[k] := arr[i]; i+1->i; k+1->k; while);
+            (while j <= hi repeat tmp[k] := arr[j]; j+1->j; k+1->k; while);
+            (for x: lo to hi repeat arr[x] := tmp[x]; for)
+        #);
+
+    msort: (# lo, hi: @integer
+        enter (lo, hi)
+        do
+            (if lo >= hi then leave msort if);
+            mid: @integer;
+            (lo + hi) / 2 -> mid;
+            lo -> msort(#, mid#);
+            mid + 1 -> msort(#, hi#);
+            lo -> merge(#, mid, hi#)
+        #);
+
+    do
+        1 -> msort(#, 7#);
+        (for i: 1 to 7 repeat arr[i] -> putint; for)
+#)

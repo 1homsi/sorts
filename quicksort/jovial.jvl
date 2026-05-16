@@ -1,0 +1,33 @@
+COMPOOL QSORT_POOL
+    ITEM ARR I(7);
+END COMPOOL
+
+PROCEDURE PARTITION(LOW, HIGH) VALUE I;
+    ITEM LOW, HIGH, PIVOT, I, J, TMP INTEGER;
+    PIVOT = ARR(HIGH);
+    I = LOW;
+    FOR J = LOW, HIGH - 1
+        IF ARR(J) <= PIVOT THEN
+            TMP = ARR(I); ARR(I) = ARR(J); ARR(J) = TMP;
+            I = I + 1;
+        END;
+    END;
+    TMP = ARR(I); ARR(I) = ARR(HIGH); ARR(HIGH) = TMP;
+    RETURN I;
+END;
+
+PROCEDURE QUICKSORT(LOW, HIGH);
+    ITEM LOW, HIGH, P INTEGER;
+    IF LOW < HIGH THEN
+        P = PARTITION(LOW, HIGH);
+        CALL QUICKSORT(LOW, P - 1);
+        CALL QUICKSORT(P + 1, HIGH);
+    END;
+END;
+
+PROGRAM MAIN;
+    ARR(0) = 3; ARR(1) = 6; ARR(2) = 8; ARR(3) = 10;
+    ARR(4) = 1; ARR(5) = 2; ARR(6) = 1;
+    CALL QUICKSORT(0, 6);
+    FOR I = 0, 6; WRITE(ARR(I)); END;
+END PROGRAM;

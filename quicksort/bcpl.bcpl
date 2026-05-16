@@ -1,0 +1,45 @@
+GET "libhdr"
+
+LET partition(arr, low, high) = VALOF
+$(
+    LET pivot = arr!high
+    LET i = low
+    LET j = low
+    LET tmp = 0
+    WHILE j < high DO
+    $(
+        IF arr!j <= pivot THEN
+        $(
+            tmp := arr!i
+            arr!i := arr!j
+            arr!j := tmp
+            i := i + 1
+        $)
+        j := j + 1
+    $)
+    tmp := arr!i
+    arr!i := arr!high
+    arr!high := tmp
+    RESULTIS i
+$)
+
+LET quicksort(arr, low, high) BE
+$(
+    IF low < high THEN
+    $(
+        LET p = partition(arr, low, high)
+        quicksort(arr, low, p - 1)
+        quicksort(arr, p + 1, high)
+    $)
+$)
+
+LET start() = VALOF
+$(
+    LET arr = VEC 7
+    arr!0:=3; arr!1:=6; arr!2:=8; arr!3:=10
+    arr!4:=1; arr!5:=2; arr!6:=1
+    quicksort(arr, 0, 6)
+    FOR i = 0 TO 6 DO writef("%n ", arr!i)
+    wrch('*N')
+    RESULTIS 0
+$)

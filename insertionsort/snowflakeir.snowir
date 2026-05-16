@@ -1,0 +1,15 @@
+func insertion_sort(arr: [int], n: int) -> [int] {
+  let a = arr.copy()
+  var i = 1
+  while i < n {
+    let key = a[i]
+    var j = i - 1
+    while j >= 0 && a[j] > key {
+      a[j + 1] = a[j]
+      j -= 1
+    }
+    a[j + 1] = key
+    i += 1
+  }
+  return a
+}

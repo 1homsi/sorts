@@ -1,0 +1,16 @@
+channel val : {1..10}
+
+PARTITION(pivot, low, high) =
+    if low >= high then SKIP
+    else (val?x ->
+        if x <= pivot then PARTITION(pivot, low+1, high)
+        else PARTITION(pivot, low, high-1))
+
+QUICKSORT(low, high) =
+    if low >= high then SKIP
+    else val?pivot ->
+        PARTITION(pivot, low, high);
+        QUICKSORT(low, high-1);
+        QUICKSORT(low+1, high)
+
+MAIN = QUICKSORT(0, 6)

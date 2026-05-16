@@ -1,0 +1,46 @@
+( Scratch is a visual block-based language for beginners.
+  The following represents merge sort logic in Scratch pseudocode notation. )
+
+when green flag clicked
+    set [arr v] to [38 27 43 3 9 82 10]
+    call [mergeSort] with arr 1 length of arr
+    say arr for 2 seconds
+
+define mergeSort arr lo hi
+    if lo >= hi then
+        stop this script
+    end
+    set [mid v] to ((lo + hi) / 2)
+    call [mergeSort] with arr lo mid
+    call [mergeSort] with arr (mid + 1) hi
+    call [merge] with arr lo mid hi
+
+define merge arr lo mid hi
+    set [i v] to lo
+    set [j v] to (mid + 1)
+    set [k v] to lo
+    repeat until ((i > mid) or (j > hi))
+        if (item i of arr) <= (item j of arr) then
+            set item k of tmp to item i of arr
+            change i by 1
+        else
+            set item k of tmp to item j of arr
+            change j by 1
+        end
+        change k by 1
+    end
+    repeat until i > mid
+        set item k of tmp to item i of arr
+        change i by 1
+        change k by 1
+    end
+    repeat until j > hi
+        set item k of tmp to item j of arr
+        change j by 1
+        change k by 1
+    end
+    set i to lo
+    repeat until i > hi
+        set item i of arr to item i of tmp
+        change i by 1
+    end

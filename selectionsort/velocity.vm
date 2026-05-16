@@ -1,0 +1,16 @@
+#set($arr = [5, 3, 1, 4, 2])
+#set($n = $arr.size())
+#foreach($i in [0..$math.sub($n, 2)])
+  #set($minIdx = $i)
+  #foreach($j in [$math.add($i, 1)..$math.sub($n, 1)])
+    #if($arr.get($j) < $arr.get($minIdx))
+      #set($minIdx = $j)
+    #end
+  #end
+  #set($tmp = $arr.get($i))
+  $arr.set($i, $arr.get($minIdx))
+  $arr.set($minIdx, $tmp)
+#end
+#foreach($val in $arr)
+  $val
+#end

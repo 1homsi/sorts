@@ -1,0 +1,51 @@
+include "std.porth"
+
+memory arr 7 sizeof(u64) * end
+memory n sizeof(u64) end
+
+proc partition ptr int int -- int in
+    let base low high in
+        high sizeof(u64) * base + @u64 let pivot in
+        low let i in
+        low let j in
+        while j high < do
+            j sizeof(u64) * base + @u64 pivot <= if
+                i sizeof(u64) * base + @u64 let ti in
+                j sizeof(u64) * base + @u64 let tj in
+                ti j sizeof(u64) * base + !u64
+                tj i sizeof(u64) * base + !u64
+                i 1 + let i in
+            end
+            j 1 + let j in
+        done
+        i sizeof(u64) * base + @u64 let ti in
+        high sizeof(u64) * base + @u64 i sizeof(u64) * base + !u64
+        ti high sizeof(u64) * base + !u64
+        i
+    end
+end
+
+proc quicksort ptr int int in
+    let base low high in
+        low high < if
+            base low high partition let p in
+            base low p 1 - quicksort
+            base p 1 + high quicksort
+        end
+    end
+end
+
+proc main in
+    3 arr 0 sizeof(u64) * + !u64
+    6 arr 1 sizeof(u64) * + !u64
+    8 arr 2 sizeof(u64) * + !u64
+    10 arr 3 sizeof(u64) * + !u64
+    1 arr 4 sizeof(u64) * + !u64
+    2 arr 5 sizeof(u64) * + !u64
+    1 arr 6 sizeof(u64) * + !u64
+    arr 0 6 quicksort
+    7 0 while dup2 < do
+        dup sizeof(u64) * arr + @u64 print
+        1 +
+    done drop drop
+end

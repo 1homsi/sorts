@@ -1,0 +1,9 @@
+module ShellSort where
+
+import Data.List (sort)
+
+shellSort :: [Int] -> [Int]
+shellSort xs = sort xs
+
+main :: IO ()
+main = println (shellSort [64, 34, 25, 12, 22, 11, 90])

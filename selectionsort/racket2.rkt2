@@ -1,0 +1,11 @@
+#lang racket
+(define (selection-sort vec)
+  (define n (vector-length vec))
+  (for ([i (in-range n)])
+    (define min-idx
+      (for/fold ([mi i]) ([j (in-range (add1 i) n)])
+        (if (< (vector-ref vec j) (vector-ref vec mi)) j mi)))
+    (define tmp (vector-ref vec i))
+    (vector-set! vec i (vector-ref vec min-idx))
+    (vector-set! vec min-idx tmp))
+  vec)

@@ -1,0 +1,48 @@
+$ include "seed7_05.s7i";
+
+var array integer: arr is [] (3, 6, 2, 7, 4, 1, 5);
+
+proc flip (inout array integer: arr, in integer: k) is
+  local
+    var integer: left is 1;
+    var integer: right is 0;
+    var integer: tmp is 0;
+  begin
+    right := succ(k);
+    while left < right do
+      tmp := arr[left];
+      arr[left] := arr[right];
+      arr[right] := tmp;
+      incr(left);
+      decr(right);
+    end while;
+  end proc;
+
+func integer findMaxIdx (in array integer: arr, in integer: size) is
+  local
+    var integer: maxIdx is 1;
+    var integer: i is 1;
+  begin
+    for i range 2 to size do
+      if arr[i] > arr[maxIdx] then
+        maxIdx := i;
+      end if;
+    end for;
+    return maxIdx;
+  end func;
+
+var integer: size is 7;
+var integer: maxIdx is 0;
+begin
+  while size > 1 do
+    maxIdx := findMaxIdx(arr, size);
+    if maxIdx <> size then
+      if maxIdx <> 1 then
+        flip(arr, pred(maxIdx));
+      end if;
+      flip(arr, pred(size));
+    end if;
+    decr(size);
+  end while;
+  writeln(arr);
+end

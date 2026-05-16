@@ -1,0 +1,21 @@
+import { createSignal, For } from 'solid-js';
+
+function quicksort(arr: number[]): number[] {
+    if (arr.length <= 1) return arr;
+    const pivot = arr[Math.floor(arr.length / 2)];
+    const left = arr.filter(x => x < pivot);
+    const mid = arr.filter(x => x === pivot);
+    const right = arr.filter(x => x > pivot);
+    return [...quicksort(left), ...mid, ...quicksort(right)];
+}
+
+function QuicksortComponent() {
+    const [sorted] = createSignal(quicksort([3, 6, 8, 10, 1, 2, 1]));
+    return (
+        <ul>
+            <For each={sorted()}>{x => <li>{x}</li>}</For>
+        </ul>
+    );
+}
+
+export default QuicksortComponent;

@@ -1,0 +1,14 @@
+fun insertion_sort(arr: inout Array<Int>) {
+    let n = arr.count
+    var i = 1
+    while i < n {
+        let key = arr[i]
+        var j = i - 1
+        while j >= 0 && arr[j] > key {
+            arr[j + 1] = arr[j]
+            j -= 1
+        }
+        arr[j + 1] = key
+        i += 1
+    }
+}

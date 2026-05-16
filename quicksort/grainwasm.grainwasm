@@ -1,0 +1,17 @@
+module Quicksort
+
+from "list" include List
+
+let rec quicksort = (arr) => {
+  match (arr) {
+    [] => [],
+    [pivot, ...rest] => {
+      let left = List.filter(x => x <= pivot, rest)
+      let right = List.filter(x => x > pivot, rest)
+      List.append(quicksort(left), [pivot, ...quicksort(right)])
+    }
+  }
+}
+
+let result = quicksort([3, 6, 8, 10, 1, 2, 1])
+List.forEach(x => print(toString(x)), result)

@@ -1,0 +1,15 @@
+local function selection_sort(arr: {integer}): {integer}
+    local n = #arr
+    for i = 1, n - 1 do
+        local min_idx = i
+        for j = i + 1, n do
+            if arr[j] < arr[min_idx] then
+                min_idx = j
+            end
+        end
+        local tmp = arr[i]
+        arr[i] = arr[min_idx]
+        arr[min_idx] = tmp
+    end
+    return arr
+end

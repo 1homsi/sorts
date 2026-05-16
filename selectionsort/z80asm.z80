@@ -1,0 +1,42 @@
+ORG 0x0100
+
+SELECTION_SORT:
+    LD B, 5
+    LD HL, ARR
+    LD C, 0
+OUTER:
+    LD A, C
+    CP 4
+    JR Z, DONE
+    LD D, C
+    LD E, C
+    INC E
+INNER:
+    LD A, E
+    CP 5
+    JR Z, DO_SWAP
+    LD A, (ARR + E)
+    LD IX, ARR
+    ADD IX, DE
+    CP (IX)
+    JR NC, NEXT
+    LD D, E
+NEXT:
+    INC E
+    JR INNER
+DO_SWAP:
+    LD A, (ARR + C)
+    LD HL, ARR
+    ADD HL, DE
+    LD B, (HL)
+    LD HL, ARR
+    LD IY, HL
+    ADD IY, BC
+    LD (IY), B
+    LD (HL + C), A
+    INC C
+    JR OUTER
+DONE:
+    RET
+
+ARR: DEFB 5, 3, 1, 4, 2

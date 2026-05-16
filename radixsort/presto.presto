@@ -1,0 +1,24 @@
+WITH numbers AS (
+    SELECT val FROM (VALUES (170), (45), (75), (90), (802), (24), (2), (66)) AS t(val)
+),
+max_val AS (SELECT max(val) AS m FROM numbers),
+digit1 AS (
+    SELECT val, val % 10 AS d FROM numbers
+),
+pass1 AS (
+    SELECT val FROM digit1 ORDER BY d, val
+),
+digit2 AS (
+    SELECT val, (val / 10) % 10 AS d FROM pass1
+),
+pass2 AS (
+    SELECT val FROM digit2 ORDER BY d, val
+),
+digit3 AS (
+    SELECT val, (val / 100) % 10 AS d FROM pass2
+),
+pass3 AS (
+    SELECT val FROM digit3 ORDER BY d, val
+)
+SELECT val FROM pass3
+ORDER BY val

@@ -1,0 +1,7 @@
+DEFINE
+    newnode == [swap [] [] []] cons cons cons ;
+    insert == [null] [newnode] [uncons uncons uncons [<] [insert swap cons cons] [swap insert cons] ifte cons] ifte ;
+    inorder == [null] [[]] [uncons uncons uncons inorder swap cons swap inorder concat] ifte ;
+    treesort == [[] swap [insert] fold inorder] i .
+
+[5 3 7 1 4 6 8] treesort.

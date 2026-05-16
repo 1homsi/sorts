@@ -1,0 +1,17 @@
+let List/filter = https://prelude.dhall-lang.org/List/filter
+
+let quicksort
+    : List Natural -> List Natural
+    = \(arr : List Natural) ->
+        merge
+          { None = [] : List Natural
+          , Some =
+              \(pivot : Natural) ->
+                let rest = List/drop 1 Natural arr
+                let left = List/filter Natural (\(x : Natural) -> Natural/lessThanEqual x pivot) rest
+                let right = List/filter Natural (\(x : Natural) -> Natural/greaterThan x pivot) rest
+                in quicksort left # [pivot] # quicksort right
+          }
+          (List/head Natural arr)
+
+in quicksort [3, 6, 8, 10, 1, 2, 1]

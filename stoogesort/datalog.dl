@@ -1,0 +1,11 @@
+.decl arr(idx: number, val: number)
+arr(0, 3). arr(1, 1). arr(2, 4). arr(3, 1).
+arr(4, 5). arr(5, 9). arr(6, 2). arr(7, 6).
+
+.decl sorted(idx: number, val: number)
+sorted(idx, val) :- arr(idx, val).
+
+.decl rank(val: number, r: number)
+rank(v, r) :- arr(_, v), r = count : { arr(_, v2), v2 < v }.
+
+.output sorted

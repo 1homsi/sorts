@@ -1,0 +1,16 @@
+PROGRAM selectionSort;
+VAR
+  arr: ARRAY[0..4] OF INTEGER;
+  n, i, j, minIdx, tmp: INTEGER;
+BEGIN
+  n := 5;
+  arr[0] := 5; arr[1] := 3; arr[2] := 1; arr[3] := 4; arr[4] := 2;
+  FOR i := 0 TO n - 2 DO BEGIN
+    minIdx := i;
+    FOR j := i + 1 TO n - 1 DO
+      IF arr[j] < arr[minIdx] THEN minIdx := j;
+    tmp := arr[i];
+    arr[i] := arr[minIdx];
+    arr[minIdx] := tmp
+  END
+END.

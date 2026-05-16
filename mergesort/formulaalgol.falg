@@ -1,0 +1,36 @@
+BEGIN
+    INTEGER ARRAY ARR[1:7], TMP[1:7];
+    INTEGER I;
+    ARR[1]:=38; ARR[2]:=27; ARR[3]:=43; ARR[4]:=3;
+    ARR[5]:=9; ARR[6]:=82; ARR[7]:=10;
+
+    PROCEDURE MERGE(LO, MID, HI); INTEGER LO, MID, HI;
+    BEGIN
+        INTEGER I, J, K, X;
+        I := LO; J := MID+1; K := LO;
+        WHILE I <= MID /\ J <= HI DO
+        BEGIN
+            IF ARR[I] <= ARR[J]
+            THEN BEGIN TMP[K] := ARR[I]; I := I+1; END
+            ELSE BEGIN TMP[K] := ARR[J]; J := J+1; END;
+            K := K+1;
+        END;
+        WHILE I <= MID DO BEGIN TMP[K]:=ARR[I]; I:=I+1; K:=K+1; END;
+        WHILE J <= HI DO BEGIN TMP[K]:=ARR[J]; J:=J+1; K:=K+1; END;
+        FOR X := LO STEP 1 UNTIL HI DO ARR[X] := TMP[X];
+    END;
+
+    PROCEDURE MSORT(LO, HI); INTEGER LO, HI;
+    BEGIN
+        INTEGER MID;
+        IF LO >= HI THEN GOTO DONE;
+        MID := (LO+HI) ÷ 2;
+        MSORT(LO, MID);
+        MSORT(MID+1, HI);
+        MERGE(LO, MID, HI);
+        DONE:
+    END;
+
+    MSORT(1, 7);
+    FOR I := 1 STEP 1 UNTIL 7 DO PRINT(ARR[I]);
+END

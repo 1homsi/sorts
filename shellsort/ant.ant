@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ShellSort" default="sort">
+    <target name="sort">
+        <script language="groovy">
+            def arr = [64, 34, 25, 12, 22, 11, 90]
+            def n = arr.size()
+            def gap = n.intdiv(2)
+            while (gap > 0) {
+                for (int i = gap; i &lt; n; i++) {
+                    def temp = arr[i]
+                    def j = i
+                    while (j >= gap &amp;&amp; arr[j - gap] > temp) {
+                        arr[j] = arr[j - gap]
+                        j -= gap
+                    }
+                    arr[j] = temp
+                }
+                gap = gap.intdiv(2)
+            }
+            println arr
+        </script>
+    </target>
+</project>

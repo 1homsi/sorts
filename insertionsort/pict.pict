@@ -1,0 +1,14 @@
+letrec insertionSort =
+    fun (arr: Array[Int]) ->
+        let n = Array.length arr in
+        for i = 1 to n - 1 do
+            let key = Array.get arr i in
+            let j = ref (i - 1) in
+            while !j >= 0 && Array.get arr !j > key do
+                Array.set arr (!j + 1) (Array.get arr !j);
+                j := !j - 1
+            done;
+            Array.set arr (!j + 1) key
+        done;
+        arr
+in insertionSort

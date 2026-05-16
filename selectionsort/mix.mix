@@ -1,0 +1,28 @@
+* Selection Sort in MIX Assembly
+* Array starts at address 1000
+ARR     EQU 1000
+N       EQU 5
+
+        ORIG 3000
+START   ENT1 0          * i = 0
+OUTER   CMP1 =4=        * Compare i with N-1
+        JGE DONE        * If i >= N-1, done
+        ENT2 0,1        * min_idx = i
+        INC1 1
+        ENT3 0,1        * j = i+1
+INNER   CMP3 =5=        * Compare j with N
+        JGE SWAP        * If j >= N, swap
+        LDA ARR,3       * Load arr[j]
+        CMPA ARR,2      * Compare with arr[min_idx]
+        JGE NEXT        * If arr[j] >= arr[min_idx], skip
+        ENT2 0,3        * min_idx = j
+NEXT    INC3 1          * j++
+        JMP INNER
+SWAP    LDA ARR,1       * tmp = arr[i]
+        LDX ARR,2       * Load arr[min_idx]
+        STA ARR,2       * arr[min_idx] = tmp
+        STX ARR,1       * arr[i] = arr[min_idx]
+        INC1 1          * i++
+        JMP OUTER
+DONE    HLT
+        END START

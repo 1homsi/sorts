@@ -1,0 +1,64 @@
+    LIST p=16F84A
+    #include <p16F84A.inc>
+
+    __CONFIG _CP_OFF & _WDT_OFF & _PWRTE_ON & _XT_OSC
+
+    CBLOCK 0x0C
+        arr:5
+        n
+        i
+        j
+        key
+        temp
+    ENDC
+
+    ORG 0x000
+    goto main
+
+main:
+    movlw   .5
+    movwf   n
+    movlw   .1
+    movwf   i
+outer:
+    movf    n, w
+    subwf   i, w
+    btfsc   STATUS, C
+    goto    done
+    movf    arr, w
+    movwf   key
+    movf    i, w
+    decf    i, w
+    movwf   j
+inner:
+    movf    j, f
+    btfsc   STATUS, Z
+    goto    place
+    movf    j, w
+    movwf   FSR
+    movlw   arr
+    addwf   FSR, f
+    movf    INDF, w
+    subwf   key, w
+    btfss   STATUS, C
+    goto    place
+    movf    INDF, w
+    movwf   temp
+    incf    FSR, f
+    movf    temp, w
+    movwf   INDF
+    decf    j, f
+    goto    inner
+place:
+    incf    j, w
+    movwf   FSR
+    movlw   arr
+    addwf   FSR, f
+    movf    key, w
+    movwf   INDF
+    incf    i, f
+    goto    outer
+done:
+    goto    done
+
+    END

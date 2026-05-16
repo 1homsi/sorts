@@ -1,0 +1,38 @@
+DO $$
+DECLARE
+    arr INTEGER[] := ARRAY[3, 6, 2, 7, 4, 1, 5];
+    n INTEGER := 7;
+    size_v INTEGER;
+    max_idx INTEGER;
+    i INTEGER;
+    left_v INTEGER;
+    right_v INTEGER;
+    tmp INTEGER;
+BEGIN
+    size_v := n;
+    WHILE size_v > 1 LOOP
+        max_idx := 1;
+        FOR i IN 2..size_v LOOP
+            IF arr[i] > arr[max_idx] THEN
+                max_idx := i;
+            END IF;
+        END LOOP;
+        IF max_idx != size_v THEN
+            IF max_idx != 1 THEN
+                left_v := 1; right_v := max_idx;
+                WHILE left_v < right_v LOOP
+                    tmp := arr[left_v]; arr[left_v] := arr[right_v]; arr[right_v] := tmp;
+                    left_v := left_v + 1; right_v := right_v - 1;
+                END LOOP;
+            END IF;
+            left_v := 1; right_v := size_v;
+            WHILE left_v < right_v LOOP
+                tmp := arr[left_v]; arr[left_v] := arr[right_v]; arr[right_v] := tmp;
+                left_v := left_v + 1; right_v := right_v - 1;
+            END LOOP;
+        END IF;
+        size_v := size_v - 1;
+    END LOOP;
+    RAISE NOTICE '%', arr;
+END;
+$$;

@@ -1,0 +1,32 @@
+procedure merge(left, right)
+    local result, i, j
+    result := []
+    i := 1; j := 1
+    while i <= *left & j <= *right do {
+        if left[i] <= right[j] then {
+            put(result, left[i]); i +:= 1
+        } else {
+            put(result, right[j]); j +:= 1
+        }
+    }
+    while i <= *left do { put(result, left[i]); i +:= 1 }
+    while j <= *right do { put(result, right[j]); j +:= 1 }
+    return result
+end
+
+procedure mergeSort(lst)
+    local n, mid, left, right
+    n := *lst
+    if n <= 1 then return lst
+    mid := n / 2
+    left := mergeSort(lst[1:mid+1])
+    right := mergeSort(lst[mid+1:n+1])
+    return merge(left, right)
+end
+
+procedure main()
+    local arr, sorted, i
+    arr := [38, 27, 43, 3, 9, 82, 10]
+    sorted := mergeSort(arr)
+    every i := 1 to *sorted do write(sorted[i], " ")
+end

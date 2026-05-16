@@ -1,0 +1,10 @@
+procedure selectionSort(arr[1:*]: int, n: int)
+    var minIdx, tmp: int
+    for i := 1 to n-1 do
+        minIdx := i
+        for j := i+1 to n do
+            if arr[j] < arr[minIdx] then minIdx := j fi
+        od
+        tmp := arr[i]; arr[i] := arr[minIdx]; arr[minIdx] := tmp
+    od
+end

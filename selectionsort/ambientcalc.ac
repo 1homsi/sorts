@@ -1,0 +1,18 @@
+open ambient SelectionSort {
+    input arr: [5,3,1,4,2];
+    n = 5;
+    i = 0;
+    run {
+        while i < n {
+            minIdx = i;
+            j = i + 1;
+            while j < n {
+                if arr[j] < arr[minIdx] { minIdx = j }
+                j += 1
+            }
+            swap arr[i] arr[minIdx];
+            i += 1
+        }
+    };
+    output arr
+}

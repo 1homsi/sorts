@@ -1,0 +1,41 @@
+.include "m328Pdef.inc"
+
+.dseg
+arr:    .byte 7
+n:      .byte 1
+
+.cseg
+.org 0x0000
+        jmp main
+
+main:
+        ldi     r16, 3
+        sts     arr+0, r16
+        ldi     r16, 6
+        sts     arr+1, r16
+        ldi     r16, 8
+        sts     arr+2, r16
+        ldi     r16, 10
+        sts     arr+3, r16
+        ldi     r16, 1
+        sts     arr+4, r16
+        ldi     r16, 2
+        sts     arr+5, r16
+        ldi     r16, 1
+        sts     arr+6, r16
+        ldi     r24, lo8(arr)
+        ldi     r25, hi8(arr)
+        ldi     r18, 0
+        ldi     r19, 6
+        rcall   quicksort
+loop:   rjmp    loop
+
+quicksort:
+        cp      r18, r19
+        brge    qs_ret
+        rcall   partition
+        rcall   quicksort
+qs_ret: ret
+
+partition:
+        ret

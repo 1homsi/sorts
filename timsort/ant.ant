@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="timsort" default="sort" basedir=".">
+
+    <property name="min.run" value="32"/>
+
+    <target name="sort" description="Run timsort via embedded script">
+        <script language="groovy">
+            def MIN_RUN = 32
+
+            def insertionSort = { arr, left, right ->
+                for (int i = left + 1; i <= right; i++) {
+                    def key = arr[i]; int j = i - 1
+                    while (j >= left &amp;&amp; arr[j] > key) { arr[j+1] = arr[j]; j-- }
+                    arr[j+1] = key
+                }
+            }
+
+            def merge = { arr, left, mid, right ->
+                def lp = arr[left..mid].clone()
+                def rp = arr[(mid+1)..right].clone()
+                int i = 0, j = 0, k = left
+                while (i &lt; lp.size() &amp;&amp; j &lt; rp.size()) {
+                    if (lp[i] &lt;= rp[j]) arr[k++] = lp[i++]; else arr[k++] = rp[j++]
+                }
+                while (i &lt; lp.size()) arr[k++] = lp[i++]
+                while (j &lt; rp.size()) arr[k++] = rp[j++]
+            }
+
+            def timsort = { arr ->
+                int n = arr.size(); int i = 0
+                while (i &lt; n) {
+                    insertionSort(arr, i, Math.min(i + MIN_RUN - 1, n - 1))
+                    i += MIN_RUN
+                }
+                int size = MIN_RUN
+                while (size &lt; n) {
+                    int left = 0
+                    while (left &lt; n) {
+                        int mid = Math.min(left + size - 1, n - 1)
+                        int right = Math.min(left + 2 * size - 1, n - 1)
+                        if (mid &lt; right) merge(arr, left, mid, right)
+                        left += 2 * size
+                    }
+                    size *= 2
+                }
+                arr
+            }
+
+            def arr = [5, 2, 8, 1, 9, 3, 7, 4, 6]
+            println timsort(arr)
+        </script>
+    </target>
+
+</project>

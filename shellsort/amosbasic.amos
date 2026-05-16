@@ -1,0 +1,20 @@
+Dim A(7)
+A(1)=64 : A(2)=34 : A(3)=25 : A(4)=12 : A(5)=22 : A(6)=11 : A(7)=90
+N=7
+Gap=Int(N/2)
+While Gap>0
+  For I=Gap+1 To N
+    Temp=A(I)
+    J=I
+    While J>Gap And A(J-Gap)>Temp
+      A(J)=A(J-Gap)
+      J=J-Gap
+    Wend
+    A(J)=Temp
+  Next I
+  Gap=Int(Gap/2)
+Wend
+For I=1 To N
+  Print A(I);" ";
+Next I
+Print

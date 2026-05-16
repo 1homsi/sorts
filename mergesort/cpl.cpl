@@ -1,0 +1,42 @@
+SECTION 'MERGESORT'
+
+GLOBAL
+    Arr: ARRAY 1:7 OF INTEGER;
+    Tmp: ARRAY 1:7 OF INTEGER;
+
+PROC Merge(Lo, Mid, Hi: INTEGER) =
+    VALUE Lo, Mid, Hi;
+BEGIN
+    INTEGER I, J, K, X;
+    I := Lo; J := Mid + 1; K := Lo;
+    WHILE I <= Mid AND J <= Hi DO
+        IF Arr[I] <= Arr[J] THEN
+            Tmp[K] := Arr[I]; I := I + 1;
+        ELSE
+            Tmp[K] := Arr[J]; J := J + 1;
+        REPEAT;
+        K := K + 1;
+    REPEAT;
+    WHILE I <= Mid DO Tmp[K]:=Arr[I]; I:=I+1; K:=K+1; REPEAT;
+    WHILE J <= Hi DO Tmp[K]:=Arr[J]; J:=J+1; K:=K+1; REPEAT;
+    FOR X = Lo, 1, Hi DO Arr[X] := Tmp[X]; REPEAT;
+END;
+
+PROC MSort(Lo, Hi: INTEGER) =
+    VALUE Lo, Hi;
+BEGIN
+    INTEGER Mid;
+    IF Lo >= Hi THEN RETURN;
+    Mid := (Lo + Hi) DIV 2;
+    MSort(Lo, Mid);
+    MSort(Mid + 1, Hi);
+    Merge(Lo, Mid, Hi);
+END;
+
+BEGIN
+    Arr[1]:=38; Arr[2]:=27; Arr[3]:=43; Arr[4]:=3;
+    Arr[5]:=9; Arr[6]:=82; Arr[7]:=10;
+    MSort(1, 7);
+    INTEGER I;
+    FOR I = 1, 1, 7 DO PRINT(Arr[I]); REPEAT;
+END.

@@ -1,0 +1,11 @@
+package selectionsort
+
+#Input: {
+    array: [...int]
+    array: [_, ...]
+}
+
+#Output: {
+    sorted: [...int]
+    sorted: list.Sort(#Input.array, list.Ascending)
+}

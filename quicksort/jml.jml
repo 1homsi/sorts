@@ -1,0 +1,31 @@
+public class Quicksort {
+    /*@ requires arr != null && low >= 0 && high < arr.length && low <= high;
+      @ ensures (\forall int i, j; low <= i && i < j && j <= high; arr[i] <= arr[j]);
+      @ assignable arr[low..high];
+      @*/
+    public static void quicksort(int[] arr, int low, int high) {
+        if (low < high) {
+            int p = partition(arr, low, high);
+            quicksort(arr, low, p - 1);
+            quicksort(arr, p + 1, high);
+        }
+    }
+
+    /*@ requires arr != null && low >= 0 && high < arr.length;
+      @ ensures low <= \result && \result <= high;
+      @ ensures (\forall int k; low <= k && k < \result; arr[k] <= arr[\result]);
+      @ ensures (\forall int k; \result < k && k <= high; arr[k] >= arr[\result]);
+      @*/
+    private static int partition(int[] arr, int low, int high) {
+        int pivot = arr[high];
+        int i = low;
+        for (int j = low; j < high; j++) {
+            if (arr[j] <= pivot) {
+                int tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+                i++;
+            }
+        }
+        int tmp = arr[i]; arr[i] = arr[high]; arr[high] = tmp;
+        return i;
+    }
+}

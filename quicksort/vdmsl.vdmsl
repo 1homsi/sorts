@@ -1,0 +1,17 @@
+module Quicksort
+exports all
+definitions
+
+functions
+
+quicksort: seq of int -> seq of int
+quicksort(lst) ==
+    if len lst <= 1 then lst
+    else
+        let pivot = lst(len lst div 2)
+        in
+            quicksort([x | x in seq lst & x < pivot]) ^
+            [x | x in seq lst & x = pivot] ^
+            quicksort([x | x in seq lst & x > pivot]);
+
+end Quicksort

@@ -1,0 +1,23 @@
+model InsertionSort
+uses "mmxprs"
+
+declarations
+    n = 5
+    arr: array(1..n) of integer
+    key, j: integer
+end-declarations
+
+arr(1) := 5; arr(2) := 3; arr(3) := 1; arr(4) := 4; arr(5) := 2
+
+forall(i in 2..n) do
+    key := arr(i)
+    j := i - 1
+    while j >= 1 and arr(j) > key do
+        arr(j+1) := arr(j)
+        j := j - 1
+    end-do
+    arr(j+1) := key
+end-do
+
+writeln(arr)
+end-model

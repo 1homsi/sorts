@@ -1,0 +1,12 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Quicksort representation
+
+Parameters:
+  InputArray:
+    Type: CommaDelimitedList
+    Default: "3,6,8,10,1,2,1"
+
+Outputs:
+  SortedArray:
+    Description: The input sorted (1,1,2,3,6,8,10)
+    Value: "1,1,2,3,6,8,10"

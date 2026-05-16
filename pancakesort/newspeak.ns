@@ -1,0 +1,31 @@
+class PancakeSort = (
+    flip: arr k: k = (
+        | left right tmp |
+        left := 1.
+        right := k + 1.
+        [left < right] whileTrue: [
+            tmp := arr at: left.
+            arr at: left put: (arr at: right).
+            arr at: right put: tmp.
+            left := left + 1.
+            right := right - 1.
+        ].
+    )
+
+    sort: arr = (
+        | size maxIdx |
+        size := arr size.
+        [size > 1] whileTrue: [
+            maxIdx := 1.
+            2 to: size do: [:i |
+                (arr at: i) > (arr at: maxIdx) ifTrue: [maxIdx := i].
+            ].
+            maxIdx = size ifFalse: [
+                maxIdx = 1 ifFalse: [flip: arr k: maxIdx - 1].
+                flip: arr k: size - 1.
+            ].
+            size := size - 1.
+        ].
+        arr
+    )
+)

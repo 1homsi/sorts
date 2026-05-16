@@ -1,0 +1,15 @@
+(defn stooge-sort [arr first last]
+    (when (> (arr first) (arr last))
+        (def tmp (arr first))
+        (put arr first (arr last))
+        (put arr last tmp))
+    (def n (- last first -1))
+    (when (> n 2)
+        (def t (math/floor (/ (* n 2) 3)))
+        (stooge-sort arr first (+ first t -1))
+        (stooge-sort arr (- last t -1) last)
+        (stooge-sort arr first (+ first t -1))))
+
+(def arr @[3 1 4 1 5 9 2 6])
+(stooge-sort arr 0 (- (length arr) 1))
+(print arr)

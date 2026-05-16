@@ -1,0 +1,30 @@
+using Microsoft.Maui.Controls;
+
+namespace InsertionSortApp;
+
+public partial class MainPage : ContentPage
+{
+    int[] InsertionSort(int[] arr)
+    {
+        var a = (int[])arr.Clone();
+        int n = a.Length;
+        for (int i = 1; i < n; i++)
+        {
+            int key = a[i];
+            int j = i - 1;
+            while (j >= 0 && a[j] > key)
+            {
+                a[j + 1] = a[j];
+                j--;
+            }
+            a[j + 1] = key;
+        }
+        return a;
+    }
+
+    void OnSortClicked(object sender, EventArgs e)
+    {
+        var sorted = InsertionSort(new[] { 5, 3, 1, 4, 2 });
+        ResultLabel.Text = string.Join(", ", sorted);
+    }
+}

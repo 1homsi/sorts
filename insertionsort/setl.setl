@@ -1,0 +1,13 @@
+procedure insertion_sort(arr);
+    n := #arr;
+    for i in [2..n] loop
+        key := arr(i);
+        j := i - 1;
+        while j >= 1 and arr(j) > key loop
+            arr(j+1) := arr(j);
+            j := j - 1;
+        end loop;
+        arr(j+1) := key;
+    end loop;
+    return arr;
+end procedure;

@@ -1,0 +1,38 @@
+MODULE MERGESORT;
+
+ARRAY arr[7], tmp[7] OF INTEGER;
+INTEGER i, j, k, lo, hi, mid;
+
+PROC MERGE(lo, mid, hi: INTEGER);
+    INTEGER i, j, k, x;
+BEGIN
+    i := lo; j := mid + 1; k := lo;
+    WHILE i <= mid AND j <= hi DO
+        IF arr[i] <= arr[j] THEN
+            tmp[k] := arr[i]; i := i + 1;
+        ELSE
+            tmp[k] := arr[j]; j := j + 1;
+        ENDIF;
+        k := k + 1;
+    ENDWHILE;
+    WHILE i <= mid DO tmp[k]:=arr[i]; i:=i+1; k:=k+1; ENDWHILE;
+    WHILE j <= hi DO tmp[k]:=arr[j]; j:=j+1; k:=k+1; ENDWHILE;
+    FOR x := lo TO hi DO arr[x] := tmp[x]; ENDFOR;
+END;
+
+PROC MSORT(lo, hi: INTEGER);
+    INTEGER mid;
+BEGIN
+    IF lo >= hi THEN RETURN; ENDIF;
+    mid := (lo + hi) / 2;
+    CALL MSORT(lo, mid);
+    CALL MSORT(mid + 1, hi);
+    CALL MERGE(lo, mid, hi);
+END;
+
+BEGIN
+    arr[1]:=38; arr[2]:=27; arr[3]:=43; arr[4]:=3;
+    arr[5]:=9; arr[6]:=82; arr[7]:=10;
+    CALL MSORT(1, 7);
+    FOR i := 1 TO 7 DO OUTPUT arr[i]; ENDFOR;
+END.

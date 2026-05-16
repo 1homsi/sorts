@@ -1,0 +1,18 @@
+fn stooge_sort(arr, first, last) {
+    if test $arr[$first] -gt $arr[$last]
+        let tmp = $arr[$first]
+        let arr[$first] = $arr[$last]
+        let arr[$last] = $tmp
+    end
+    let n = $last - $first + 1
+    if test $n -gt 2
+        let t = $n * 2 / 3
+        stooge_sort $arr $first ($first + $t - 1)
+        stooge_sort $arr ($last - $t + 1) $last
+        stooge_sort $arr $first ($first + $t - 1)
+    end
+}
+
+let arr = [3 1 4 1 5 9 2 6]
+stooge_sort $arr 0 7
+echo @arr

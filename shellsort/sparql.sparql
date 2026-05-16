@@ -1,0 +1,7 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?sorted WHERE {
+  VALUES ?val { 64 34 25 12 22 11 90 }
+  BIND(?val AS ?sorted)
+}
+ORDER BY ?sorted

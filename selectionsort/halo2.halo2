@@ -1,0 +1,33 @@
+use halo2_proofs::{
+    circuit::{Layouter, SimpleFloorPlanner, Value},
+    plonk::{Circuit, ConstraintSystem, Error},
+};
+
+#[derive(Default)]
+struct SelectionSortCircuit {
+    arr: [u64; 5],
+}
+
+impl Circuit<pallas::Base> for SelectionSortCircuit {
+    type Config = ();
+    type FloorPlanner = SimpleFloorPlanner;
+
+    fn without_witnesses(&self) -> Self {
+        Self::default()
+    }
+
+    fn configure(_meta: &mut ConstraintSystem<pallas::Base>) -> Self::Config {}
+
+    fn synthesize(&self, _config: Self::Config, _layouter: impl Layouter<pallas::Base>) -> Result<(), Error> {
+        let mut arr = self.arr;
+        let n = arr.len();
+        for i in 0..n {
+            let mut min_idx = i;
+            for j in i+1..n {
+                if arr[j] < arr[min_idx] { min_idx = j; }
+            }
+            arr.swap(i, min_idx);
+        }
+        Ok(())
+    }
+}

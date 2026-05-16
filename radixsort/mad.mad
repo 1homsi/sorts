@@ -1,0 +1,36 @@
+            PROGRAM RADIX
+            DIMENSION ARR(8),OUTPUT(8),CNT(10)
+            INTEGER N,MAXVAL,EXP,I,IDX
+            DATA ARR/170,45,75,90,802,24,2,66/
+            N=8
+            MAXVAL=ARR(1)
+            DO 10 I=2,N
+            IF(ARR(I).GT.MAXVAL)MAXVAL=ARR(I)
+   10       CONTINUE
+            EXP=1
+   20       IF(MAXVAL/EXP.EQ.0)GO TO 50
+            DO 30 I=1,10
+            CNT(I)=0
+   30       CONTINUE
+            DO 35 I=1,N
+            IDX=MOD(ARR(I)/EXP,10)+1
+            CNT(IDX)=CNT(IDX)+1
+   35       CONTINUE
+            DO 40 I=2,10
+            CNT(I)=CNT(I)+CNT(I-1)
+   40       CONTINUE
+            DO 45 I=N,1,-1
+            IDX=MOD(ARR(I)/EXP,10)+1
+            OUTPUT(CNT(IDX))=ARR(I)
+            CNT(IDX)=CNT(IDX)-1
+   45       CONTINUE
+            DO 48 I=1,N
+            ARR(I)=OUTPUT(I)
+   48       CONTINUE
+            EXP=EXP*10
+            GO TO 20
+   50       DO 60 I=1,N
+            PRINT 70,ARR(I)
+   70       FORMAT(I6)
+   60       CONTINUE
+            END

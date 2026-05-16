@@ -1,0 +1,26 @@
+CREATE OR REPLACE FUNCTION quicksort(arr integer[]) RETURNS integer[] AS $$
+DECLARE
+    pivot integer;
+    left_arr integer[];
+    middle_arr integer[];
+    right_arr integer[];
+    elem integer;
+BEGIN
+    IF array_length(arr, 1) <= 1 OR arr IS NULL THEN
+        RETURN arr;
+    END IF;
+    pivot := arr[(array_length(arr, 1) / 2) + 1];
+    left_arr := ARRAY[]::integer[];
+    middle_arr := ARRAY[]::integer[];
+    right_arr := ARRAY[]::integer[];
+    FOREACH elem IN ARRAY arr LOOP
+        IF elem < pivot THEN left_arr := left_arr || elem;
+        ELSIF elem = pivot THEN middle_arr := middle_arr || elem;
+        ELSE right_arr := right_arr || elem;
+        END IF;
+    END LOOP;
+    RETURN quicksort(left_arr) || middle_arr || quicksort(right_arr);
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT quicksort(ARRAY[3,6,8,10,1,2,1]);

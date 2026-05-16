@@ -1,0 +1,32 @@
+PROC shellSort([]INT arr, VAL INT n)
+  INT gap, temp, i, j:
+  SEQ
+    gap := n / 2
+    WHILE gap > 0
+      SEQ
+        SEQ i = gap FOR n - gap
+          SEQ
+            temp := arr[i]
+            j := i
+            WHILE (j >= gap) AND (arr[j - gap] > temp)
+              SEQ
+                arr[j] := arr[j - gap]
+                j := j - gap
+            arr[j] := temp
+        gap := gap / 2
+:
+
+INT n:
+[7]INT arr:
+SEQ
+  arr[0] := 64
+  arr[1] := 34
+  arr[2] := 25
+  arr[3] := 12
+  arr[4] := 22
+  arr[5] := 11
+  arr[6] := 90
+  n := 7
+  shellSort(arr, n)
+  SEQ i = 0 FOR n
+    out.int(arr[i], 0, stdout)

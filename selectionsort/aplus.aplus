@@ -1,0 +1,17 @@
+selectionSort{arr} : {
+    n := #arr;
+    i := 0;
+    do {
+        minIdx := i;
+        j := i + 1;
+        do {
+            if arr[j] < arr[minIdx] do minIdx := j;
+            j +:= 1;
+        } while j < n;
+        tmp := arr[i];
+        arr[i] := arr[minIdx];
+        arr[minIdx] := tmp;
+        i +:= 1;
+    } while i < n;
+    arr
+}

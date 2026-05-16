@@ -1,0 +1,8 @@
+Piet insertion sort - represented as pseudocode since Piet is image-based:
+Push 5, Push 3, Push 1, Push 4, Push 2
+For each element from index 1:
+  Pop key
+  Compare with previous elements
+  Shift larger elements right
+  Insert key at correct position
+Output sorted sequence

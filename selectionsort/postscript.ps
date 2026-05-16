@@ -1,0 +1,20 @@
+/selectionSort {
+    /arr exch def
+    /n arr length def
+    0 1 n 2 sub {
+        /i exch def
+        /minIdx i def
+        i 1 add 1 n 1 sub {
+            /j exch def
+            arr j get arr minIdx get lt {
+                /minIdx j def
+            } if
+        } for
+        /tmp arr i get def
+        arr i arr minIdx get put
+        arr minIdx tmp put
+    } for
+    arr
+} def
+
+[5 3 1 4 2] selectionSort pstack

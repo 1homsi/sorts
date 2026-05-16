@@ -1,0 +1,34 @@
+Dim arr(6), tmp(6)
+arr(0)=38: arr(1)=27: arr(2)=43: arr(3)=3
+arr(4)=9: arr(5)=82: arr(6)=10
+
+Gosub MergeSort_0_6
+
+For i=0 To 6
+    Print arr(i)
+Next i
+End
+
+MergeSort_0_6:
+    lo=0: hi=6
+    Gosub DoMergeSort
+Return
+
+DoMergeSort:
+    If lo>=hi Then Return
+    mid=(lo+hi)/2
+    slo=lo: shi=hi: smid=mid
+    hi=mid: Gosub DoMergeSort
+    lo=slo: hi=shi: mid=smid
+    lo=mid+1: Gosub DoMergeSort
+    lo=slo: hi=shi: mid=smid
+    i=lo: j=mid+1: k=lo
+MergeLoop:
+    If i>mid Or j>hi Then Goto AfterMerge
+    If arr(i)<=arr(j) Then tmp(k)=arr(i): i=i+1 Else tmp(k)=arr(j): j=j+1
+    k=k+1: Goto MergeLoop
+AfterMerge:
+    While i<=mid: tmp(k)=arr(i): i=i+1: k=k+1: Endwhile
+    While j<=hi: tmp(k)=arr(j): j=j+1: k=k+1: Endwhile
+    For x=lo To hi: arr(x)=tmp(x): Next x
+Return

@@ -1,0 +1,31 @@
+module quicksort::sort {
+    use std::vector;
+
+    fun partition(arr: &mut vector<u64>, low: u64, high: u64): u64 {
+        let pivot = *vector::borrow(arr, (high as u64));
+        let i = low;
+        let j = low;
+        while (j < high) {
+            let vj = *vector::borrow(arr, j);
+            if (vj <= pivot) {
+                let vi = *vector::borrow(arr, i);
+                *vector::borrow_mut(arr, i) = vj;
+                *vector::borrow_mut(arr, j) = vi;
+                i = i + 1;
+            };
+            j = j + 1;
+        };
+        let vi = *vector::borrow(arr, i);
+        *vector::borrow_mut(arr, i) = pivot;
+        *vector::borrow_mut(arr, high) = vi;
+        i
+    }
+
+    public fun quicksort(arr: &mut vector<u64>, low: u64, high: u64) {
+        if (low < high) {
+            let p = partition(arr, low, high);
+            if (p > 0) quicksort(arr, low, p - 1);
+            quicksort(arr, p + 1, high);
+        }
+    }
+}

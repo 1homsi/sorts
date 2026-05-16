@@ -1,0 +1,12 @@
+process INSERTION_SORT =
+  (? integer event in_val;
+   ! integer event out_val)
+  signal sorted_array : integer ^ 10 in
+    sorted_array := (| 0 when true |) fby
+      (| let val := current in_val
+         when present in_val in
+           (| val default sorted_array |)
+         end |);
+    out_val := sorted_array when present in_val
+  end signal
+end process;

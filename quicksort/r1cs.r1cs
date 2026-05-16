@@ -1,0 +1,30 @@
+r1cs_format: 1.0
+
+variables:
+  w0: 1
+  w1: arr_0
+  w2: arr_1
+  w3: arr_2
+  w4: arr_3
+  w5: arr_4
+  w6: arr_5
+  w7: arr_6
+  w8: sorted_0
+  w9: sorted_1
+  w10: sorted_2
+  w11: sorted_3
+  w12: sorted_4
+  w13: sorted_5
+  w14: sorted_6
+  w15: is_sorted
+
+constraints:
+  (w9 - w8) * w0 = 0
+  (w10 - w9) * w0 = 0
+  (w11 - w10) * w0 = 0
+  (w12 - w11) * w0 = 0
+  (w13 - w12) * w0 = 0
+  (w14 - w13) * w0 = 0
+  w15 * (w15 - 1) = 0
+
+public_inputs: [w8, w9, w10, w11, w12, w13, w14]

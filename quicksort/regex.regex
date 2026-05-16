@@ -1,0 +1,9 @@
+(?x)
+# Regex cannot sort numbers directly, but this demonstrates
+# the partition pattern: matching numbers less/greater than pivot
+# Input string: "3 6 8 10 1 2 1"
+# Pattern to find numbers less than pivot (e.g., 5):
+# \b([0-4])\b  -- matches 1-4 (left partition)
+# \b(5)\b      -- matches pivot
+# \b([6-9]|[1-9]\d+)\b  -- matches >5 (right partition)
+^(?:(?P<left>(?:\b[0-4]\b\s*)*))(?P<pivot>\b\d+\b)(?P<right>(?:\s*\b[5-9]\b|\s*\b[1-9]\d+\b)*)$

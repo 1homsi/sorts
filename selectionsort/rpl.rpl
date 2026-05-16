@@ -1,0 +1,17 @@
+<< -> arr
+   << arr SIZE -> n
+      << 1 n 1 - FOR i
+            i -> minIdx
+            i 1 + n FOR j
+               arr j GET arr minIdx GET < IF
+                  j 'minIdx' STO
+               END
+            NEXT
+            arr i GET -> tmp
+            arr i arr minIdx GET PUT -> arr
+            arr minIdx tmp PUT -> arr
+         NEXT
+         arr
+      >>
+   >>
+>>

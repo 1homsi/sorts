@@ -1,0 +1,28 @@
+implement main
+    open core, console, list
+
+predicates
+    quicksort : (integer*) -> integer* procedure (i)
+    partition : (integer, integer*, integer*, integer*) procedure (i,i,o,o)
+
+clauses
+    quicksort([]) = [].
+    quicksort([Pivot|Rest]) = Sorted :-
+        partition(Pivot, Rest, Less, Greater),
+        SortedLess = quicksort(Less),
+        SortedGreater = quicksort(Greater),
+        Sorted = list::append(SortedLess, [Pivot|SortedGreater]).
+
+    partition(_, [], [], []).
+    partition(Pivot, [H|T], [H|Less], Greater) :-
+        H <= Pivot, !,
+        partition(Pivot, T, Less, Greater).
+    partition(Pivot, [H|T], Less, [H|Greater]) :-
+        partition(Pivot, T, Less, Greater).
+
+    run() :-
+        Sorted = quicksort([3,6,8,10,1,2,1]),
+        write(Sorted), nl.
+end implement main
+
+goal mainExe::run(main::run).

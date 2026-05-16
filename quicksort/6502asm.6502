@@ -1,0 +1,57 @@
+        ORG $0800
+
+arr:    .byte 3, 6, 8, 10, 1, 2, 1
+n:      .byte 7
+
+quicksort:
+        LDA #0
+        STA low
+        LDA n
+        SEC
+        SBC #1
+        STA high
+        JSR qs_recurse
+        RTS
+
+qs_recurse:
+        LDA low
+        CMP high
+        BCS done
+        JSR partition
+        JSR qs_recurse
+done:   RTS
+
+partition:
+        LDX high
+        LDA arr,X
+        STA pivot
+        LDA low
+        STA i
+        LDA low
+        STA j
+loop:   LDA j
+        CMP high
+        BCS end_loop
+        LDX j
+        LDA arr,X
+        CMP pivot
+        BCS skip
+        LDX i
+        LDA arr,X
+        PHA
+        LDY j
+        LDA arr,Y
+        STA arr,X
+        PLA
+        STA arr,Y
+        INC i
+skip:   INC j
+        JMP loop
+end_loop:
+        RTS
+
+low:    .byte 0
+high:   .byte 0
+i:      .byte 0
+j:      .byte 0
+pivot:  .byte 0

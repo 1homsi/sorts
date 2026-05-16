@@ -1,0 +1,43 @@
+module PANCAKE_SORT:
+input RUN;
+output RESULT : integer;
+
+var arr := [3, 6, 2, 7, 4, 1, 5] : integer array[7];
+var size : integer;
+var maxIdx : integer;
+var left : integer;
+var right : integer;
+var tmp : integer;
+var i : integer;
+
+every RUN do
+  size := 7;
+  loop
+    exit when size <= 1;
+    maxIdx := 0;
+    i := 1;
+    loop
+      exit when i >= size;
+      if arr[i] > arr[maxIdx] then maxIdx := i end if;
+      i := i + 1;
+    end loop;
+    if maxIdx <> size - 1 then
+      if maxIdx <> 0 then
+        left := 0; right := maxIdx;
+        loop exit when left >= right;
+          tmp := arr[left]; arr[left] := arr[right]; arr[right] := tmp;
+          left := left + 1; right := right - 1;
+        end loop;
+      end if;
+      left := 0; right := size - 1;
+      loop exit when left >= right;
+        tmp := arr[left]; arr[left] := arr[right]; arr[right] := tmp;
+        left := left + 1; right := right - 1;
+      end loop;
+    end if;
+    size := size - 1;
+  end loop;
+  emit RESULT(arr[0]);
+end every;
+
+end module

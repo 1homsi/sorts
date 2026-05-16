@@ -1,0 +1,31 @@
+import { Component, State, h } from '@stencil/core';
+
+@Component({ tag: 'insertion-sort' })
+export class InsertionSort {
+  @State() sorted: number[] = [];
+  arr = [5, 3, 1, 4, 2];
+
+  sort() {
+    const a = [...this.arr];
+    const n = a.length;
+    for (let i = 1; i < n; i++) {
+      const key = a[i];
+      let j = i - 1;
+      while (j >= 0 && a[j] > key) {
+        a[j + 1] = a[j];
+        j--;
+      }
+      a[j + 1] = key;
+    }
+    this.sorted = a;
+  }
+
+  render() {
+    return (
+      <div>
+        <button onClick={() => this.sort()}>Sort</button>
+        <p>{this.sorted.join(', ')}</p>
+      </div>
+    );
+  }
+}

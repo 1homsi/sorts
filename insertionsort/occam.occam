@@ -1,0 +1,13 @@
+PROC insertion.sort([]INT arr, VAL INT n)
+  INT key, j:
+  SEQ
+    SEQ i = 1 FOR n - 1
+      SEQ
+        key := arr[i]
+        j := i - 1
+        WHILE (j >= 0) AND (arr[j] > key)
+          SEQ
+            arr[j + 1] := arr[j]
+            j := j - 1
+        arr[j + 1] := key
+:

@@ -1,0 +1,9 @@
+     C                   FOR       I=2 TO N
+     C                   EVAL      KEY=ARR(I)
+     C                   EVAL      J=I-1
+     C                   DOW       J>=1 AND ARR(J)>KEY
+     C                   EVAL      ARR(J+1)=ARR(J)
+     C                   EVAL      J=J-1
+     C                   ENDDO
+     C                   EVAL      ARR(J+1)=KEY
+     C                   ENDFOR

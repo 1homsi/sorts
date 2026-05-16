@@ -1,0 +1,24 @@
+g.inject([3, 6, 2, 7, 4, 1, 5]).
+  sideEffect{arr = it.get()}.
+  sideEffect{
+    n = arr.size()
+    (n..2).each { size ->
+      maxIdx = 0
+      (1..<size).each { i -> if (arr[i] > arr[maxIdx]) maxIdx = i }
+      if (maxIdx != size - 1) {
+        if (maxIdx != 0) {
+          left = 0; right = maxIdx
+          while (left < right) {
+            tmp = arr[left]; arr[left] = arr[right]; arr[right] = tmp
+            left++; right--
+          }
+        }
+        left = 0; right = size - 1
+        while (left < right) {
+          tmp = arr[left]; arr[left] = arr[right]; arr[right] = tmp
+          left++; right--
+        }
+      }
+    }
+  }.
+  inject(arr)

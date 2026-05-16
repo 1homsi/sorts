@@ -1,0 +1,30 @@
+def flip arr k =
+    let left = 0
+    let right = k
+    let rec loop arr l r =
+        if l < r then
+            let tmp = arr[l]
+            let arr1 = arr with [l] = arr[r]
+            let arr2 = arr1 with [r] = tmp
+            loop arr2 (l+1) (r-1)
+        else arr
+    loop arr left right
+
+def find_max_idx arr size =
+    let rec loop arr size mi i =
+        if i >= size then mi
+        else if arr[i] > arr[mi] then loop arr size i (i+1)
+        else loop arr size mi (i+1)
+    loop arr size 0 1
+
+def rec pancake_sort arr size =
+    if size <= 1 then arr
+    else
+        let mi = find_max_idx arr size
+        let arr1 = if mi != 0 then flip arr mi else arr
+        let arr2 = flip arr1 (size - 1)
+        pancake_sort arr2 (size - 1)
+
+def main () =
+    let arr = [3, 6, 2, 7, 4, 1, 5]
+    pancake_sort arr 7

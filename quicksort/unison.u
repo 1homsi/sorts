@@ -1,0 +1,11 @@
+quicksort : [Int] -> [Int]
+quicksort lst =
+  if List.size lst <= 1 then lst
+  else
+    pivot = List.at (List.size lst / 2) lst |> Optional.getOrElse 0
+    left = List.filter (x -> x < pivot) lst
+    middle = List.filter (x -> x == pivot) lst
+    right = List.filter (x -> x > pivot) lst
+    (quicksort left) ++ middle ++ (quicksort right)
+
+> quicksort [3, 6, 8, 10, 1, 2, 1]

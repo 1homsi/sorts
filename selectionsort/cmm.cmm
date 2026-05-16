@@ -1,0 +1,26 @@
+section "text" {
+  selection_sort ( bits32 arr, bits32 n ) {
+    bits32 i = 0;
+  outer:
+    if i >= n goto done;
+    bits32 min_idx = i;
+    bits32 j = i + 1;
+  inner:
+    if j >= n goto swap;
+    bits32 val_j = W32[arr + j * 4];
+    bits32 val_m = W32[arr + min_idx * 4];
+    if val_j >= val_m goto next;
+    min_idx = j;
+  next:
+    j = j + 1;
+    goto inner;
+  swap:
+    bits32 tmp = W32[arr + i * 4];
+    W32[arr + i * 4] = W32[arr + min_idx * 4];
+    W32[arr + min_idx * 4] = tmp;
+    i = i + 1;
+    goto outer;
+  done:
+    return;
+  }
+}

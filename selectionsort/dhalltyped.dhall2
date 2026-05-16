@@ -1,0 +1,7 @@
+let Prelude = https://prelude.dhall-lang.org/package.dhall
+
+let selectionSort
+    : List Natural -> List Natural
+    = \(lst : List Natural) ->
+        Prelude.List.sort Natural lst
+in selectionSort [5, 3, 1, 4, 2]

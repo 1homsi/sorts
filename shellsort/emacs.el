@@ -1,0 +1,16 @@
+(defun shell-sort (arr)
+  (let* ((n (length arr))
+         (gap (/ n 2)))
+    (while (> gap 0)
+      (cl-loop for i from gap below n do
+        (let ((temp (aref arr i))
+              (j i))
+          (while (and (>= j gap) (> (aref arr (- j gap)) temp))
+            (aset arr j (aref arr (- j gap)))
+            (setq j (- j gap)))
+          (aset arr j temp)))
+      (setq gap (/ gap 2)))
+    arr))
+
+(let ((arr (vector 64 34 25 12 22 11 90)))
+  (message "%s" (shell-sort arr)))

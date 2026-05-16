@@ -1,0 +1,30 @@
+let flip arr k =
+    let rec go a l r =
+        if l < r then
+            let tmp = List.nth a l in
+            let a1 = List.mapi (fun i x -> if i = l then List.nth a r else if i = r then tmp else x) a in
+            go a1 (l+1) (r-1)
+        else a
+    in go arr 0 k
+
+let find_max_idx arr size =
+    let sub = List.filteri (fun i _ -> i < size) arr in
+    let max_val = List.fold_left max (List.hd sub) sub in
+    let rec find x lst i = match lst with
+        | [] -> 0
+        | h :: t -> if h = x then i else find x t (i+1)
+    in find max_val sub 0
+
+let rec pancake_sort arr size =
+    if size <= 1 then arr
+    else
+        let mi = find_max_idx arr size in
+        let arr1 = if mi <> 0 then flip arr mi else arr in
+        let arr2 = flip arr1 (size - 1) in
+        pancake_sort arr2 (size - 1)
+
+let () =
+    let arr = [3; 6; 2; 7; 4; 1; 5] in
+    let result = pancake_sort arr (List.length arr) in
+    List.iter (fun x -> Printf.printf "%d " x) result;
+    print_newline ()

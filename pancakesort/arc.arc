@@ -1,0 +1,25 @@
+(def flip (arr k)
+  (let (left 0 right k)
+    (while (< left right)
+      (swap arr left right)
+      (++ left)
+      (-- right))))
+
+(def find-max-idx (arr size)
+  (let max-idx 0
+    (for i 1 (- size 1)
+      (if (> (arr i) (arr max-idx))
+          (= max-idx i)))
+    max-idx))
+
+(def pancake-sort (arr)
+  (let size (len arr)
+    (while (> size 1)
+      (let max-idx (find-max-idx arr size)
+        (if (~is max-idx (- size 1))
+            (do (if (~is max-idx 0) (flip arr max-idx))
+                (flip arr (- size 1)))))
+      (-- size))
+    arr))
+
+(pr (pancake-sort (list->array '(3 6 2 7 4 1 5))))

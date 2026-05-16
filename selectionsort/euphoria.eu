@@ -1,0 +1,16 @@
+function selection_sort(sequence arr)
+    integer n, min_idx, tmp
+    n = length(arr)
+    for i = 1 to n - 1 do
+        min_idx = i
+        for j = i + 1 to n do
+            if arr[j] < arr[min_idx] then
+                min_idx = j
+            end if
+        end for
+        tmp = arr[i]
+        arr[i] = arr[min_idx]
+        arr[min_idx] = tmp
+    end for
+    return arr
+end function

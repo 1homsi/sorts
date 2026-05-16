@@ -1,0 +1,13 @@
+QuickSort ──────────────────────────────
+│ arr : seq ℤ
+│ sorted : seq ℤ
+───────────────────────────────────────
+│ # arr ≤ 1 ⟹ sorted = arr
+│
+│ # arr > 1 ⟹
+│   ∃ pivot : ℤ; left, right : seq ℤ •
+│     pivot = arr(⌊# arr / 2⌋)
+│     ∧ left = ⟨ x : ℤ | x ∈ ran arr ∧ x < pivot ⟩
+│     ∧ right = ⟨ x : ℤ | x ∈ ran arr ∧ x > pivot ⟩
+│     ∧ sorted = QuickSort(left) ⌢ ⟨ pivot ⟩ ⌢ QuickSort(right)
+───────────────────────────────────────

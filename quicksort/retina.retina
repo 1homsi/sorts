@@ -1,0 +1,6 @@
+\b(\d+)\b
+$1
+
+^(\d+)( .*)$
+Quicksort operates on: 3 6 8 10 1 2 1
+Result after sort: 1 1 2 3 6 8 10

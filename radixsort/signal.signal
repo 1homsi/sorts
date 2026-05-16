@@ -1,0 +1,22 @@
+process RADIX_SORT =
+(? integer ARR_ELEM;
+ ! integer SORTED_ELEM)
+
+signal MAX_VAL, EXP, DIGIT : integer;
+signal PASS_DONE : event;
+
+(| when ARR_ELEM do
+     MAX_VAL := (if MAX_VAL < ARR_ELEM then ARR_ELEM else MAX_VAL)
+   ||
+   EXP := 1
+   ||
+   when PASS_DONE do
+     EXP := EXP * 10
+   ||
+   DIGIT := (ARR_ELEM / EXP) mod 10
+   ||
+   when PASS_DONE do
+     SORTED_ELEM := ARR_ELEM
+|)
+
+end process;

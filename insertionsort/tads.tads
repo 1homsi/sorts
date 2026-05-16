@@ -1,0 +1,25 @@
+#include <adv3.h>
+#include <en_us.h>
+
+insertionSort(arr) {
+    local n = arr.length();
+    for (local i = 2; i <= n; i++) {
+        local key = arr[i];
+        local j = i - 1;
+        while (j >= 1 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+    return arr;
+}
+
+main(args) {
+    local arr = [5, 3, 1, 4, 2];
+    arr = insertionSort(arr);
+    foreach (local x in arr) {
+        "<<x>> ";
+    }
+    "\n";
+}

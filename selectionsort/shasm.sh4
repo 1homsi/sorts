@@ -1,0 +1,73 @@
+        .section .data
+arr:    .long 5, 3, 1, 4, 2
+n:      .long 5
+
+        .section .text
+        .global selection_sort
+
+selection_sort:
+        sts.l pr, @-r15
+        mov.l r8, @-r15
+        mov.l r9, @-r15
+        mov.l r10, @-r15
+        mov.l r11, @-r15
+        
+        mov.l arr_addr, r0
+        mov.l n_addr, r1
+        mov.l @r1, r1
+        xor r2, r2
+
+outer:
+        mov r1, r3
+        add #-1, r3
+        cmp/ge r3, r2
+        bt done
+        mov r2, r8
+        mov r2, r9
+        add #1, r9
+
+inner:
+        cmp/ge r1, r9
+        bt swap_elem
+        shll2 r9
+        mov.l @(r0,r9), r10
+        shlr2 r9
+        shll2 r8
+        mov.l @(r0,r8), r11
+        shlr2 r8
+        cmp/ge r11, r10
+        bt next
+        mov r9, r8
+next:
+        add #1, r9
+        bra inner
+        nop
+
+swap_elem:
+        shll2 r2
+        mov.l @(r0,r2), r10
+        shlr2 r2
+        shll2 r8
+        mov.l @(r0,r8), r11
+        shlr2 r8
+        shll2 r2
+        mov.l r11, @(r0,r2)
+        shlr2 r2
+        shll2 r8
+        mov.l r10, @(r0,r8)
+        shlr2 r8
+        add #1, r2
+        bra outer
+        nop
+
+done:
+        mov.l @r15+, r11
+        mov.l @r15+, r10
+        mov.l @r15+, r9
+        mov.l @r15+, r8
+        lds.l @r15+, pr
+        rts
+        nop
+        
+arr_addr: .long arr
+n_addr:   .long n

@@ -1,0 +1,20 @@
+arr[0]=3:arr[1]=6:arr[2]=8:arr[3]=10
+arr[4]=1:arr[5]=2:arr[6]=1
+
+quicksort(0,6)
+for i=0 to 6: ? arr[i];" ";: next i: ?
+end
+
+sub quicksort(low,high)
+  if low>=high then exit sub
+  pivot=arr[high]:i=low
+  for j=low to high-1
+    if arr[j]<=pivot then
+      tmp=arr[i]:arr[i]=arr[j]:arr[j]=tmp
+      i=i+1
+    endif
+  next j
+  tmp=arr[i]:arr[i]=arr[high]:arr[high]=tmp
+  quicksort(low,i-1)
+  quicksort(i+1,high)
+end sub

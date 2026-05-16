@@ -1,0 +1,9 @@
+: swap-arr ( addr i j -- )
+    2dup cells + @ >r over cells + @ over cells + ! r> swap cells + ! ;
+
+: selection-sort ( addr n -- )
+    1 do
+        i 2dup drop swap 1+ ?do
+            i over @ < if i swap ! then
+        loop swap-arr
+    loop ;

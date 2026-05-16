@@ -1,0 +1,32 @@
+define get_digit
+    function get_digit (x, exp : integer returns integer)
+        (x / exp) mod 10
+    end function
+
+define counting_sort
+    function counting_sort (arr : array[integer]; exp : integer
+                            returns array[integer])
+        let buckets := for d in 0, 9 cross x in arr
+                          when (x / exp) mod 10 = d
+                          returns array of x
+                       end for
+        in array_of_any(for b in buckets
+                           returns value of b
+                        end for)
+        end let
+    end function
+
+define radix_sort
+    function radix_sort (arr : array[integer] returns array[integer])
+        if array_size(arr) = 0 then arr
+        else
+            let max_val := for x in arr returns value of max(x) end for;
+                result := for exp := 1
+                          while max_val / exp > 0
+                          returns value of counting_sort(arr, exp)
+                          repeat exp * 10
+                          end for
+            in result
+            end let
+        end if
+    end function

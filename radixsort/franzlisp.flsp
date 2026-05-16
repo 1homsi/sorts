@@ -1,0 +1,21 @@
+(defun get-digit (x exp)
+  (mod (truncate x exp) 10))
+
+(defun counting-sort (arr exp)
+  (apply #'append
+    (mapcar #'(lambda (d)
+                (remove-if-not #'(lambda (x) (= (get-digit x exp) d)) arr))
+            '(0 1 2 3 4 5 6 7 8 9))))
+
+(defun radix-sort (arr)
+  (if (null arr) arr
+    (let* ((max-val (apply #'max arr))
+           (exp 1)
+           (result arr))
+      (loop while (> (truncate max-val exp) 0) do
+        (setq result (counting-sort result exp))
+        (setq exp (* exp 10)))
+      result)))
+
+(print (radix-sort '(170 45 75 90 802 24 2 66)))
+(terpri)

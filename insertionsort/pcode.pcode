@@ -1,0 +1,16 @@
+PROCEDURE InsertionSort(VAR a: ARRAY OF INTEGER; n: INTEGER);
+VAR
+  i, j, key: INTEGER;
+BEGIN
+  i := 1;
+  WHILE i < n DO
+    key := a[i];
+    j := i - 1;
+    WHILE (j >= 0) AND (a[j] > key) DO
+      a[j + 1] := a[j];
+      j := j - 1
+    END;
+    a[j + 1] := key;
+    i := i + 1
+  END
+END InsertionSort;

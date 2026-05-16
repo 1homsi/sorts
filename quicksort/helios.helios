@@ -1,0 +1,18 @@
+spending quicksort_validator
+
+func quicksort(arr: []Int) -> []Int {
+    if (arr.length <= 1) {
+        arr
+    } else {
+        pivot: Int = arr.get(arr.length / 2);
+        left: []Int = arr.filter((x: Int) -> Bool { x < pivot });
+        middle: []Int = arr.filter((x: Int) -> Bool { x == pivot });
+        right: []Int = arr.filter((x: Int) -> Bool { x > pivot });
+        quicksort(left) + middle + quicksort(right)
+    }
+}
+
+func main(datum: []Int, redeemer: Data, ctx: ScriptContext) -> Bool {
+    sorted: []Int = quicksort(datum);
+    sorted.length == datum.length
+}

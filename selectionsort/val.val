@@ -1,0 +1,13 @@
+fun selectionSort(arr: mut Array<Int>): Array<Int> {
+    let n = arr.size
+    for i in 0..<n {
+        var minIdx = i
+        for j in (i+1)..<n {
+            if arr[j] < arr[minIdx] { minIdx = j }
+        }
+        let tmp = arr[i]
+        arr[i] = arr[minIdx]
+        arr[minIdx] = tmp
+    }
+    arr
+}

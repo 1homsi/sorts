@@ -1,0 +1,10 @@
+-module(quicksort).
+-export([sort/1]).
+
+sort([]) -> [];
+sort([P|T]) ->
+    sort([X || X <- T, X =< P]) ++ [P] ++ sort([X || X <- T, X > P]).
+
+main() ->
+    Sorted = sort([3, 6, 8, 10, 1, 2, 1]),
+    lists:foreach(fun(X) -> io:format("~p~n", [X]) end, Sorted).

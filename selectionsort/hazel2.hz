@@ -1,0 +1,14 @@
+let selection_sort (arr: Array(Int)) : Array(Int) =
+  let n = Array.length arr in
+  let _ = for i from 0 to n - 1 do
+    let min_idx = ref i in
+    for j from i + 1 to n - 1 do
+      if Array.get arr j < Array.get arr !min_idx then
+        min_idx := j
+      end
+    done;
+    let tmp = Array.get arr i in
+    Array.set arr i (Array.get arr !min_idx);
+    Array.set arr !min_idx tmp
+  done in
+  arr

@@ -1,0 +1,27 @@
+export function partition(arr: i32, low: i32, high: i32): i32 {
+    const pivot: i32 = i32.load(arr + high * 4);
+    let i: i32 = low;
+    let j: i32 = low;
+    while (j < high) {
+        const vj: i32 = i32.load(arr + j * 4);
+        if (vj <= pivot) {
+            const vi: i32 = i32.load(arr + i * 4);
+            i32.store(arr + i * 4, vj);
+            i32.store(arr + j * 4, vi);
+            i = i + 1;
+        }
+        j = j + 1;
+    }
+    const vi: i32 = i32.load(arr + i * 4);
+    i32.store(arr + i * 4, pivot);
+    i32.store(arr + high * 4, vi);
+    return i;
+}
+
+export function quicksort(arr: i32, low: i32, high: i32): void {
+    if (low < high) {
+        const p: i32 = partition(arr, low, high);
+        quicksort(arr, low, p - 1);
+        quicksort(arr, p + 1, high);
+    }
+}

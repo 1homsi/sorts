@@ -1,0 +1,33 @@
+PROGRAM BubbleSort
+(# arr: @array(# element:< integer #);
+   n, i, tmp: @integer;
+   swapped: @boolean;
+
+   bubbleSort: (#
+     do 7 -> n;
+        true -> swapped;
+        (while swapped do
+            false -> swapped;
+            1 -> i;
+            (while i < n do
+                arr[i] -> tmp;
+                if tmp > arr[i+1] then
+                    arr[i+1] -> arr[i];
+                    tmp -> arr[i+1];
+                    true -> swapped
+                if;
+                i+1 -> i
+            do);
+            n-1 -> n
+        do)
+   #);
+
+   init: (#
+     do 64 -> arr[1]; 34 -> arr[2]; 25 -> arr[3]; 12 -> arr[4];
+        22 -> arr[5]; 11 -> arr[6]; 90 -> arr[7];
+        bubbleSort;
+        1 -> i;
+        (while i <= 7 do arr[i] -> putint; i+1 -> i do)
+   #)
+do init
+#)

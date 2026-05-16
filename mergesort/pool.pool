@@ -1,0 +1,33 @@
+CLASS MergeSort
+    METHODS
+        merge(left, right: ARRAY OF INTEGER): ARRAY OF INTEGER
+            result := NEW ARRAY OF INTEGER[left.size + right.size]
+            i := 0; j := 0; k := 0;
+            WHILE i < left.size AND j < right.size DO
+                IF left[i] <= right[j] THEN
+                    result[k] := left[i]; i := i + 1;
+                ELSE
+                    result[k] := right[j]; j := j + 1;
+                END;
+                k := k + 1;
+            END;
+            WHILE i < left.size DO result[k] := left[i]; i := i+1; k := k+1; END;
+            WHILE j < right.size DO result[k] := right[j]; j := j+1; k := k+1; END;
+            RETURN result;
+        END
+
+        sort(arr: ARRAY OF INTEGER): ARRAY OF INTEGER
+            n := arr.size;
+            IF n <= 1 THEN RETURN arr; END;
+            mid := n / 2;
+            left := sort(arr[0..mid]);
+            right := sort(arr[mid..n]);
+            RETURN merge(left, right);
+        END
+
+        main()
+            arr := [38, 27, 43, 3, 9, 82, 10];
+            sorted := sort(arr);
+            WRITE sorted;
+        END
+END

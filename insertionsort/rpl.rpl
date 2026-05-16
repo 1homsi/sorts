@@ -1,0 +1,17 @@
+\<<
+  DUP SIZE -> arr n
+  \<<
+    1 n 1 - FOR i
+      arr i 1 + GET -> key
+      i -> j
+      \<<
+        WHILE j 1 \>= arr j GET key \> AND REPEAT
+          arr j GET arr j 1 + PUT arr SWAP STO
+          j 1 - 'j' STO
+        END
+        arr j 1 + key PUT arr SWAP STO
+      \>>
+    NEXT
+    arr
+  \>>
+\>>

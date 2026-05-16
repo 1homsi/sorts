@@ -1,0 +1,13 @@
+dec shell_sort : list(num) -> list(num);
+--- shell_sort [] <= [];
+--- shell_sort xs <= insertion_sort xs;
+
+dec insertion_sort : list(num) -> list(num);
+--- insertion_sort [] <= [];
+--- insertion_sort (x :: xs) <= insert x (insertion_sort xs);
+
+dec insert : num -> list(num) -> list(num);
+--- insert x [] <= x :: [];
+--- insert x (y :: ys) <= if x <= y then x :: y :: ys else y :: insert x ys;
+
+shell_sort [64, 34, 25, 12, 22, 11, 90];

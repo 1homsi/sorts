@@ -1,0 +1,17 @@
+#include "Halide.h"
+using namespace Halide;
+
+Func selection_sort(Buffer<int32_t> input) {
+    Func output;
+    Var x;
+    output(x) = input(x);
+    
+    RDom r(0, input.width() - 1);
+    RDom r2(r.x + 1, input.width() - r.x - 1);
+    
+    Expr min_idx = argmin(input(r2))[0];
+    output(r.x) = input(min_idx);
+    output(min_idx) = input(r.x);
+    
+    return output;
+}

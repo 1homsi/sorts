@@ -1,0 +1,24 @@
+CLASS ShellSort
+    METHOD shellSort(arr : ARRAY OF INT, n : INT) : ARRAY OF INT
+        VAR gap, i, j, temp : INT;
+        gap := n DIV 2;
+        WHILE gap > 0 DO
+            FOR i := gap TO n - 1 DO
+                temp := arr[i];
+                j := i;
+                WHILE (j >= gap) AND (arr[j - gap] > temp) DO
+                    arr[j] := arr[j - gap];
+                    j := j - gap;
+                OD;
+                arr[j] := temp;
+            OD;
+            gap := gap DIV 2;
+        OD;
+        RETURN arr;
+    END
+
+    METHOD main() : VOID
+        VAR arr : ARRAY[7] OF INT := {64, 34, 25, 12, 22, 11, 90};
+        self.shellSort(arr, 7);
+    END
+END

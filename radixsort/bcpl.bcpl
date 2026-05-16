@@ -1,0 +1,39 @@
+GET "libhdr"
+
+GLOBAL { arr: 200; output: 201; count: 202; n: 203 }
+
+LET counting.sort(exp) BE {
+    LET i, idx = 0, 0
+    FOR i = 0 TO 9 DO count!i := 0
+    FOR i = 0 TO n-1 DO {
+        idx := (arr!i / exp) REM 10
+        count!idx := count!idx + 1
+    }
+    FOR i = 1 TO 9 DO count!i := count!i + count!(i-1)
+    FOR i = n-1 TO 0 BY -1 DO {
+        idx := (arr!i / exp) REM 10
+        count!idx := count!idx - 1
+        output!(count!idx) := arr!i
+    }
+    FOR i = 0 TO n-1 DO arr!i := output!i
+}
+
+LET radix.sort() BE {
+    LET maxVal = arr!0
+    LET exp = 1
+    FOR i = 1 TO n-1 DO IF arr!i > maxVal DO maxVal := arr!i
+    UNTIL maxVal/exp = 0 DO { counting.sort(exp); exp := exp*10 }
+}
+
+LET start() = VALOF {
+    arr := VEC 8
+    output := VEC 8
+    count := VEC 10
+    n := 8
+    arr!0:=170; arr!1:=45; arr!2:=75; arr!3:=90
+    arr!4:=802; arr!5:=24; arr!6:=2; arr!7:=66
+    radix.sort()
+    FOR i = 0 TO n-1 DO { writef("%n ", arr!i) }
+    newline()
+    RESULTIS 0
+}

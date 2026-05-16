@@ -1,0 +1,15 @@
+{
+  description = "Quicksort in Nix";
+
+  outputs = { self, nixpkgs }: {
+    lib.quicksort = arr:
+      let
+        pivot = builtins.head arr;
+        rest = builtins.tail arr;
+        left = builtins.filter (x: x <= pivot) rest;
+        right = builtins.filter (x: x > pivot) rest;
+      in
+        if arr == [] then []
+        else self.lib.quicksort left ++ [pivot] ++ self.lib.quicksort right;
+  };
+}

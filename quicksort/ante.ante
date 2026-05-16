@@ -1,0 +1,26 @@
+quicksort (arr: mut &[i32], low: usz, high: usz) =
+    if low < high then
+        p = partition arr low high
+        quicksort arr low (p - 1)
+        quicksort arr (p + 1) high
+
+partition (arr: mut &[i32], low: usz, high: usz) usz =
+    pivot = arr[high]
+    i = low
+    j = low
+    while j < high do
+        if arr[j] <= pivot then
+            tmp = arr[i]
+            arr[i] := arr[j]
+            arr[j] := tmp
+            i += 1
+        j += 1
+    tmp = arr[i]
+    arr[i] := arr[high]
+    arr[high] := tmp
+    i
+
+main () =
+    arr = mut [3i32, 6, 8, 10, 1, 2, 1]
+    quicksort &arr 0 (arr.len - 1)
+    print arr

@@ -1,0 +1,26 @@
+:- module mercury2.
+:- interface.
+:- import_module io.
+:- pred main(io::di, io::uo) is det.
+:- implementation.
+:- import_module list, int.
+
+:- func get_digit(int, int) = int.
+get_digit(X, Exp) = (X // Exp) mod 10.
+
+:- func counting_sort(list(int), int) = list(int).
+counting_sort(Xs, Exp) = Sorted :-
+    Buckets = list.map(func(D) = list.filter(func(X) :- get_digit(X, Exp) = D, Xs), 0..9),
+    Sorted = list.condense(Buckets).
+
+:- func radix_sort(list(int)) = list(int).
+radix_sort([]) = [].
+radix_sort(Xs @ [_|_]) = radix_loop(Xs, list.foldl(int.max, Xs, 0), 1).
+
+:- func radix_loop(list(int), int, int) = list(int).
+radix_loop(Xs, Max, Exp) =
+    ( if Max // Exp = 0 then Xs
+      else radix_loop(counting_sort(Xs, Exp), Max, Exp * 10) ).
+
+main(!IO) :-
+    io:write_line(radix_sort([170, 45, 75, 90, 802, 24, 2, 66]), !IO).

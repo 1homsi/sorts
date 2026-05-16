@@ -1,0 +1,5 @@
+{{#*inline "sort"}}
+  {{! Plate template - sorted data provided via context }}
+  {{#each items}}{{value}}{{#unless @last}}, {{/unless}}{{/each}}
+{{/inline}}
+{{> sort items=sortedItems}}

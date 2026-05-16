@@ -1,0 +1,12 @@
+Quicksort (arr: List U32) : List U32
+Quicksort List/nil = List/nil
+Quicksort (List/cons pivot rest) =
+  let left  = List.filter (x => U32.lte x pivot) rest
+  let right = List.filter (x => U32.gtn x pivot) rest
+  List.concat (Quicksort left) (List/cons pivot (Quicksort right))
+
+Main : IO Unit
+Main = do
+  let arr = [3, 6, 8, 10, 1, 2, 1]
+  let sorted = Quicksort arr
+  IO.print (List.show sorted)

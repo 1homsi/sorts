@@ -1,0 +1,11 @@
+Public Sub SelectionSort(arr As Integer[])
+    Dim n As Integer = arr.Count
+    Dim i As Integer, j As Integer, minIdx As Integer, tmp As Integer
+    For i = 0 To n - 2
+        minIdx = i
+        For j = i + 1 To n - 1
+            If arr[j] < arr[minIdx] Then minIdx = j
+        Next
+        tmp = arr[i]: arr[i] = arr[minIdx]: arr[minIdx] = tmp
+    Next
+End Sub

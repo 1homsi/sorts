@@ -1,0 +1,13 @@
+10 DIM A%(7)
+20 A%(1)=64:A%(2)=34:A%(3)=25:A%(4)=12:A%(5)=22:A%(6)=11:A%(7)=90
+30 N%=7:G%=N%/2
+40 IF G%<=0 THEN GOTO 120
+50 FOR I%=G%+1 TO N%
+60 T%=A%(I%):J%=I%
+70 IF J%<=G% OR A%(J%-G%)<=T% THEN GOTO 90
+80 A%(J%)=A%(J%-G%):J%=J%-G%:GOTO 70
+90 A%(J%)=T%
+100 NEXT I%
+110 G%=G%/2:GOTO 40
+120 FOR I%=1 TO N%:PRINT A%(I%);" ";:NEXT I%
+130 PRINT:END

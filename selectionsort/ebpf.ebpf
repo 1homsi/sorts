@@ -1,0 +1,35 @@
+#include <linux/bpf.h>
+#include <bpf/bpf_helpers.h>
+
+struct {
+    __uint(type, BPF_MAP_TYPE_ARRAY);
+    __uint(max_entries, 10);
+    __type(key, __u32);
+    __type(value, __s32);
+} arr_map SEC(".maps");
+
+SEC("xdp")
+int selection_sort_prog(struct xdp_md *ctx) {
+    int n = 5;
+    for (int i = 0; i < n - 1; i++) {
+        __u32 min_idx = i;
+        for (int j = i + 1; j < n; j++) {
+            __u32 jj = j;
+            __u32 mm = min_idx;
+            __s32 *vj = bpf_map_lookup_elem(&arr_map, &jj);
+            __s32 *vm = bpf_map_lookup_elem(&arr_map, &mm);
+            if (vj && vm && *vj < *vm) min_idx = j;
+        }
+        __u32 ii = i, mi = min_idx;
+        __s32 *vi = bpf_map_lookup_elem(&arr_map, &ii);
+        __s32 *vmi = bpf_map_lookup_elem(&arr_map, &mi);
+        if (vi && vmi) {
+            __s32 tmp = *vi;
+            *vi = *vmi;
+            *vmi = tmp;
+        }
+    }
+    return XDP_PASS;
+}
+
+char LICENSE[] SEC("license") = "GPL";

@@ -1,0 +1,14 @@
+MODULE SelSort;
+  ARRAY arr[10] OF INTEGER;
+  INTEGER n, i, j, minIdx, tmp;
+BEGIN
+  n := 5;
+  arr[1] := 5; arr[2] := 3; arr[3] := 1; arr[4] := 4; arr[5] := 2;
+  FOR i := 1 TO n-1 DO
+    minIdx := i;
+    FOR j := i+1 TO n DO
+      IF arr[j] < arr[minIdx] THEN minIdx := j END
+    END;
+    tmp := arr[i]; arr[i] := arr[minIdx]; arr[minIdx] := tmp
+  END
+END SelSort.

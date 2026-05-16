@@ -1,0 +1,10 @@
+fn quicksort(arr: [int]) -> [int] {
+    if len(arr) <= 1 { return arr }
+    let pivot = arr[len(arr) / 2]
+    let left = filter(fn(x) { x < pivot }, arr)
+    let middle = filter(fn(x) { x == pivot }, arr)
+    let right = filter(fn(x) { x > pivot }, arr)
+    concat([quicksort(left), middle, quicksort(right)])
+}
+
+echo quicksort([3, 6, 8, 10, 1, 2, 1])

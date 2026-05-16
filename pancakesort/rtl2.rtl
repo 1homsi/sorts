@@ -1,0 +1,34 @@
+MODULE pancake_sort;
+  VAR arr: ARRAY [0..6] OF INTEGER;
+  VAR n, size, maxi, i, left, right, tmp: INTEGER;
+
+  PROC flip(k: INTEGER);
+  BEGIN
+    left := 0; right := k;
+    WHILE left < right DO
+      tmp := arr[left];
+      arr[left] := arr[right];
+      arr[right] := tmp;
+      INC(left); DEC(right);
+    END;
+  END flip;
+
+BEGIN
+  arr[0]:=3; arr[1]:=6; arr[2]:=2; arr[3]:=7;
+  arr[4]:=4; arr[5]:=1; arr[6]:=5;
+  n := 7; size := n;
+  WHILE size > 1 DO
+    maxi := 0;
+    FOR i := 1 TO size-1 DO
+      IF arr[i] > arr[maxi] THEN maxi := i END;
+    END;
+    IF maxi # size-1 THEN
+      IF maxi # 0 THEN flip(maxi) END;
+      flip(size-1);
+    END;
+    DEC(size);
+  END;
+  FOR i := 0 TO n-1 DO
+    WriteInt(arr[i], 4);
+  END;
+END pancake_sort.

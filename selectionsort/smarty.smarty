@@ -1,0 +1,7 @@
+{assign var="arr" value=[5,3,1,4,2]}
+{assign var="sorted" value=$arr|array_values|usort:"sort_asc"}
+{foreach $sorted as $val}{$val} {/foreach}
+
+{function sort_asc a b}
+  {return $a < $b ? -1 : ($a > $b ? 1 : 0)}
+{/function}

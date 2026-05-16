@@ -1,0 +1,24 @@
+radix_sort([]) :- [].
+radix_sort(Arr) :-
+    max_list(Arr, Max),
+    radix_loop(Arr, Max, 1, Sorted),
+    write(Sorted), nl.
+
+radix_loop(Arr, Max, Exp, Result) :-
+    Div is Max // Exp,
+    ( Div =:= 0 -> Result = Arr
+    ;
+        counting_sort(Arr, Exp, NewArr),
+        NewExp is Exp * 10,
+        radix_loop(NewArr, Max, NewExp, Result)
+    ).
+
+counting_sort(Arr, Exp, Sorted) :-
+    numlist(0, 9, Digits),
+    maplist(bucket(Arr, Exp), Digits, Buckets),
+    flatten(Buckets, Sorted).
+
+bucket(Arr, Exp, D, Bucket) :-
+    include([X]>>(Digit is (X // Exp) mod 10, Digit =:= D), Arr, Bucket).
+
+:- initialization(radix_sort([170, 45, 75, 90, 802, 24, 2, 66])).

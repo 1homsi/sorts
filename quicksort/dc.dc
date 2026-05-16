@@ -1,0 +1,17 @@
+[Quicksort in dc - dc operates on a stack and doesn't support arrays directly.
+This uses dc's macro system to approximate partition logic]sz
+
+[3 6 8 10 1 2 1]sz
+
+3 6 8 10 1 2 1
+
+[p]sp
+[dp]sq
+
+lqx
+lqx
+lqx
+lqx
+lqx
+lqx
+lqx

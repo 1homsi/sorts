@@ -1,0 +1,9 @@
+amends "pkl:base"
+
+local function sorted(arr: Listing<Int>): Listing<Int> =
+  arr.toList().sort()
+
+config {
+  input = new Listing { 5; 3; 1; 4; 2 }
+  output = sorted(input)
+}

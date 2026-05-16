@@ -1,0 +1,12 @@
+DEFINE quicksort ==
+  [size 1 <=] []
+  [uncons swap
+    [over <=] filter swap
+    [over >] filter swap pop
+    [quicksort] dip
+    swap quicksort
+    concat cons
+  ]
+  ifte ;
+
+[3 6 8 10 1 2 1] quicksort .

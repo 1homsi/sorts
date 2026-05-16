@@ -1,0 +1,17 @@
+#include <stddef.h>
+
+/*@ requires \valid(arr + (0..n-1));
+  @ requires n >= 0;
+  @ ensures \forall int i, j; 0 <= i < j < n ==> arr[i] <= arr[j];
+  @ assigns arr[0..n-1];
+  @*/
+void selection_sort(int arr[], int n) {
+    int i, j, min_idx, tmp;
+    for (i = 0; i < n - 1; i++) {
+        min_idx = i;
+        for (j = i + 1; j < n; j++) {
+            if (arr[j] < arr[min_idx]) min_idx = j;
+        }
+        tmp = arr[i]; arr[i] = arr[min_idx]; arr[min_idx] = tmp;
+    }
+}

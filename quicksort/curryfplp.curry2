@@ -1,0 +1,9 @@
+quicksort :: [Int] -> [Int]
+quicksort [] = []
+quicksort (pivot:rest) =
+    quicksort [x | x <- rest, x <= pivot] ++
+    [pivot] ++
+    quicksort [x | x <- rest, x > pivot]
+
+main :: IO ()
+main = print (quicksort [3, 6, 8, 10, 1, 2, 1])

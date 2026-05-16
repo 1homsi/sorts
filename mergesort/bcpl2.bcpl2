@@ -1,0 +1,45 @@
+GET "libhdr"
+
+GLOBAL
+    arr: ug
+    tmp: ug+1
+    n: ug+2
+
+LET merge(lo, mid, hi) BE
+$(
+    LET i = lo
+    LET j = mid + 1
+    LET k = lo
+    UNTIL i > mid | j > hi DO
+    $(
+        TEST arr!i <= arr!j
+        THEN $(  tmp!k := arr!i; i := i + 1  $)
+        ELSE $(  tmp!k := arr!j; j := j + 1  $)
+        k := k + 1
+    $)
+    UNTIL i > mid DO $(  tmp!k := arr!i; i := i + 1; k := k + 1  $)
+    UNTIL j > hi  DO $(  tmp!k := arr!j; j := j + 1; k := k + 1  $)
+    FOR x = lo TO hi DO arr!x := tmp!x
+$)
+
+LET msort(lo, hi) BE
+$(
+    IF lo >= hi DO RETURN
+    LET mid = (lo + hi) / 2
+    msort(lo, mid)
+    msort(mid + 1, hi)
+    merge(lo, mid, hi)
+$)
+
+LET start() = VALOF
+$(
+    n := 7
+    arr := getvec(n)
+    tmp := getvec(n)
+    arr!1:=38; arr!2:=27; arr!3:=43; arr!4:=3
+    arr!5:=9; arr!6:=82; arr!7:=10
+    msort(1, n)
+    FOR i = 1 TO n DO writef("%N ", arr!i)
+    wrch('*N')
+    RESULTIS 0
+$)

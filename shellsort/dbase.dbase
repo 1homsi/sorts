@@ -1,0 +1,27 @@
+STORE 7 TO n
+STORE INT(n/2) TO gap
+DECLARE arr[7]
+STORE 64 TO arr[1]
+STORE 34 TO arr[2]
+STORE 25 TO arr[3]
+STORE 12 TO arr[4]
+STORE 22 TO arr[5]
+STORE 11 TO arr[6]
+STORE 90 TO arr[7]
+
+DO WHILE gap > 0
+    FOR i = gap+1 TO n
+        STORE arr[i] TO temp
+        STORE i TO j
+        DO WHILE j > gap .AND. arr[j-gap] > temp
+            STORE arr[j-gap] TO arr[j]
+            STORE j-gap TO j
+        ENDDO
+        STORE temp TO arr[j]
+    ENDFOR
+    STORE INT(gap/2) TO gap
+ENDDO
+
+FOR i = 1 TO n
+    ? arr[i]
+ENDFOR

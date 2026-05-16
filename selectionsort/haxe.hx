@@ -1,0 +1,13 @@
+class SelectionSort {
+    public static function sort(arr: Array<Int>): Array<Int> {
+        var n = arr.length;
+        for (i in 0...n) {
+            var minIdx = i;
+            for (j in i+1...n) {
+                if (arr[j] < arr[minIdx]) minIdx = j;
+            }
+            var tmp = arr[i]; arr[i] = arr[minIdx]; arr[minIdx] = tmp;
+        }
+        return arr;
+    }
+}

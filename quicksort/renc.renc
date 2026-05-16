@@ -1,0 +1,12 @@
+Ren-C []
+
+quicksort: func [lst] [
+    if 1 >= length of lst [return lst]
+    pivot: pick lst round/down (length of lst) / 2
+    left: filter :lst func [x] [x < pivot]
+    middle: filter :lst func [x] [x = pivot]
+    right: filter :lst func [x] [x > pivot]
+    append append quicksort left middle quicksort right
+]
+
+print quicksort [3 6 8 10 1 2 1]

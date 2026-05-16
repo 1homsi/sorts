@@ -1,0 +1,35 @@
+        DATA('ARRAY(N)')
+        DEFINE('QUICKSORT(A,LOW,HIGH)')
+        DEFINE('PARTITION(A,LOW,HIGH)PIVOT,I,J,TMP')
+
+QUICKSORT
+        GT(LOW,HIGH)  :S(RETURN)
+        PARTITION(A,LOW,HIGH)
+        QUICKSORT(A,LOW,P - 1)
+        QUICKSORT(A,P + 1,HIGH)  :(RETURN)
+
+PARTITION
+        PIVOT = AREF(A,HIGH)
+        I = LOW
+        J = LOW
+PLOOP   GE(J,HIGH)  :S(PDONE)
+        GT(AREF(A,J),PIVOT)  :S(PNEXT)
+        TMP = AREF(A,I)
+        ASET(A,I,AREF(A,J))
+        ASET(A,J,TMP)
+        I = I + 1
+PNEXT   J = J + 1  :(PLOOP)
+PDONE   TMP = AREF(A,I)
+        ASET(A,I,AREF(A,HIGH))
+        ASET(A,HIGH,TMP)
+        P = I  :(RETURN)
+
+        ARR = ARRAY('7')
+        ASET(ARR,1,3):ASET(ARR,2,6):ASET(ARR,3,8):ASET(ARR,4,10)
+        ASET(ARR,5,1):ASET(ARR,6,2):ASET(ARR,7,1)
+        QUICKSORT(ARR,1,7)
+        I = 1
+LOOP    LE(I,7)  :F(END)
+        OUTPUT = AREF(ARR,I)
+        I = I + 1  :(LOOP)
+END

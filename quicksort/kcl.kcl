@@ -1,0 +1,15 @@
+import math
+
+fn quicksort(lst: [int]) -> [int] {
+    if len(lst) <= 1 {
+        lst
+    } else {
+        pivot = lst[math.floor(len(lst) / 2)]
+        left = [x for x in lst if x < pivot]
+        middle = [x for x in lst if x == pivot]
+        right = [x for x in lst if x > pivot]
+        quicksort(left) + middle + quicksort(right)
+    }
+}
+
+sorted = quicksort([3, 6, 8, 10, 1, 2, 1])

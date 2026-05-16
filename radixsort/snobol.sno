@@ -1,0 +1,44 @@
+ ARR = TABLE()
+ ARR<1> = 170
+ ARR<2> = 45
+ ARR<3> = 75
+ ARR<4> = 90
+ ARR<5> = 802
+ ARR<6> = 24
+ ARR<7> = 2
+ ARR<8> = 66
+ N = 8
+ MAXVAL = ARR<1>
+ I = 2
+FINDMAX ARR<I> = GT(ARR<I>, MAXVAL) ARR<I>  :S(UPDMAX)
+         I = I + 1
+         GT(I, N) :S(SORTLOOP)F(FINDMAX)
+UPDMAX MAXVAL = ARR<I>
+         I = I + 1
+         GT(I, N) :S(SORTLOOP)F(FINDMAX)
+SORTLOOP EXP = 1
+         GE(MAXVAL / EXP, 1) :F(DONE)
+         GOSUB CSORT
+         EXP = EXP * 10 :(SORTLOOP)
+DONE OUTPUT = ''
+         I = 1
+PRINT    OUTPUT = OUTPUT ARR<I> ' '
+         I = I + 1
+         LE(I, N) :S(PRINT)
+         END
+
+CSORT    COUNT = TABLE()
+         I = 0
+CLRCNT   COUNT<I> = 0
+         I = I + 1
+         LE(I, 9) :S(CLRCNT)
+         I = 1
+CNTLOOP  IDX = REMDR(ARR<I> / EXP, 10)
+         COUNT<IDX> = COUNT<IDX> + 1
+         I = I + 1
+         LE(I, N) :S(CNTLOOP)
+         I = 1
+ACCUM    COUNT<I> = COUNT<I> + COUNT<I - 1>
+         I = I + 1
+         LE(I, 9) :S(ACCUM)
+         RETURN

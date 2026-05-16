@@ -1,0 +1,31 @@
+Dim arr(6) As Integer = {3, 6, 2, 7, 4, 1, 5}
+Dim As Integer n = 7, size_, maxIdx, i, left_, right_, tmp
+
+Sub Flip(k As Integer)
+    left_ = 0: right_ = k
+    Do While left_ < right_
+        tmp = arr(left_): arr(left_) = arr(right_): arr(right_) = tmp
+        left_ += 1: right_ -= 1
+    Loop
+End Sub
+
+Function FindMaxIdx(size As Integer) As Integer
+    Dim As Integer mi = 0
+    For i = 1 To size - 1
+        If arr(i) > arr(mi) Then mi = i
+    Next
+    Return mi
+End Function
+
+size_ = n
+Do While size_ > 1
+    maxIdx = FindMaxIdx(size_)
+    If maxIdx <> size_ - 1 Then
+        If maxIdx <> 0 Then Flip(maxIdx)
+        Flip(size_ - 1)
+    End If
+    size_ -= 1
+Loop
+
+For i = 0 To n - 1: Print arr(i); " ";: Next
+Print

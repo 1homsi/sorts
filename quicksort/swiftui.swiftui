@@ -1,0 +1,8 @@
+func quicksort(_ arr: [Int]) -> [Int] {
+    guard arr.count > 1 else { return arr }
+    let pivot = arr[arr.count / 2]
+    let left = arr.filter { $0 < pivot }
+    let mid = arr.filter { $0 == pivot }
+    let right = arr.filter { $0 > pivot }
+    return quicksort(left) + mid + quicksort(right)
+}

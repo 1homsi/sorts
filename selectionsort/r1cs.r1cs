@@ -1,0 +1,12 @@
+{
+  "n_pub_inputs": 5,
+  "n_prv_inputs": 0,
+  "n_labels": 50,
+  "n_constraints": 20,
+  "description": "Selection sort R1CS constraints",
+  "constraints": [
+    {"comment": "For each position i, enforce sorted[i] <= sorted[i+1]"},
+    {"comment": "sorted[i] is minimum of remaining elements"},
+    {"a": {"0": "1"}, "b": {"1": "1"}, "c": {"2": "1"}}
+  ]
+}

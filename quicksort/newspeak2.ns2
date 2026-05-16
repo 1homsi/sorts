@@ -1,0 +1,20 @@
+class QuickSort usingPlatform: platform = (
+| private List = platform collections List. |
+)(
+    public quicksort: lst <List> ^<List> = (
+        | pivot left middle right |
+        lst size <= 1 ifTrue: [^lst].
+        pivot:: lst at: (lst size // 2) + 1.
+        left:: lst select: [:x | x < pivot].
+        middle:: lst select: [:x | x = pivot].
+        right:: lst select: [:x | x > pivot].
+        ^(quicksort: left), middle, (quicksort: right)
+    )
+
+    public main: args <Array[String]> = (
+        | arr sorted |
+        arr:: List with: 3 with: 6 with: 8 with: 10 with: 1 with: 2 with: 1.
+        sorted:: quicksort: arr.
+        Transcript show: sorted printString.
+    )
+)

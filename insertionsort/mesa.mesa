@@ -1,0 +1,12 @@
+InsertionSort: PROCEDURE [arr: ARRAY OF INTEGER, n: INTEGER] = {
+    key, j: INTEGER;
+    FOR i: INTEGER IN [1..n-1] DO
+        key <- arr[i];
+        j <- i - 1;
+        WHILE j >= 0 AND arr[j] > key DO
+            arr[j+1] <- arr[j];
+            j <- j - 1;
+        ENDLOOP;
+        arr[j+1] <- key;
+    ENDLOOP;
+};

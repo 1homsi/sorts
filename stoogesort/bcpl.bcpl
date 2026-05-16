@@ -1,0 +1,35 @@
+GET "libhdr"
+
+GLOBAL $( arr: 200; n: 201 $)
+
+LET stoogeSort(first, last) BE
+$(
+    LET tmp, t, na = ?, ?, ?
+    IF arr!first > arr!last DO
+    $(
+        tmp := arr!first
+        arr!first := arr!last
+        arr!last := tmp
+    $)
+    na := last - first + 1
+    IF na > 2 DO
+    $(
+        t := na * 2 / 3
+        stoogeSort(first, first + t - 1)
+        stoogeSort(last - t + 1, last)
+        stoogeSort(first, first + t - 1)
+    $)
+$)
+
+LET start() = VALOF
+$(
+    arr := getvec(8)
+    n := 8
+    arr!0:=3; arr!1:=1; arr!2:=4; arr!3:=1
+    arr!4:=5; arr!5:=9; arr!6:=2; arr!7:=6
+    stoogeSort(0, n-1)
+    FOR i = 0 TO n-1 DO writef("%n ", arr!i)
+    wrch('*n')
+    freevec(arr)
+    RESULTIS 0
+$)

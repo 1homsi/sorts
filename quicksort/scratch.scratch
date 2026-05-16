@@ -1,0 +1,30 @@
+when green flag clicked
+set [arr v] to [3 6 8 10 1 2 1]
+set [n v] to [7]
+call quicksort [1] [7]
+say (arr)
+
+define quicksort (low) (high)
+if <(low) < (high)> then
+    call partition (low) (high)
+    call quicksort (low) ((p) - (1))
+    call quicksort ((p) + (1)) (high)
+end
+
+define partition (low) (high)
+set [pivot v] to (item (high) of [arr v])
+set [i v] to (low)
+set [j v] to (low)
+repeat until <(j) = (high)>
+    if <(item (j) of [arr v]) <= (pivot)> then
+        set [tmp v] to (item (i) of [arr v])
+        replace item (i) of [arr v] with (item (j) of [arr v])
+        replace item (j) of [arr v] with (tmp)
+        change [i v] by (1)
+    end
+    change [j v] by (1)
+end
+set [tmp v] to (item (i) of [arr v])
+replace item (i) of [arr v] with (item (high) of [arr v])
+replace item (high) of [arr v] with (tmp)
+set [p v] to (i)

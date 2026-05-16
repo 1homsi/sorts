@@ -1,0 +1,24 @@
+MODULE shell_sort;
+
+PROC shell_sort_proc(DCL arr() INT, n INT);
+    DCL gap INT := n / 2;
+    DCL temp INT;
+    DCL i, j INT;
+    DO WHILE gap > 0;
+        FOR i := gap + 1 TO n DO
+            temp := arr(i);
+            j := i;
+            DO WHILE j > gap AND arr(j - gap) > temp;
+                arr(j) := arr(j - gap);
+                j := j - gap;
+            OD;
+            arr(j) := temp;
+        OD;
+        gap := gap / 2;
+    OD;
+END shell_sort_proc;
+
+DCL arr(7) INT := (64, 34, 25, 12, 22, 11, 90);
+CALL shell_sort_proc(arr, 7);
+
+END shell_sort;

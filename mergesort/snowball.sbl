@@ -1,0 +1,38 @@
+( Snowball is a string processing language for stemming algorithms.
+  It operates on strings using pattern matching and replacement rules.
+  Merge sort is expressed here in Snowball-inspired pseudocode notation. )
+
+routines (
+    merge_sort
+    merge
+    split
+)
+
+externals ( main )
+
+define main as (
+    ( Input: '38 27 43 3 9 82 10' )
+    ( Output: '3 9 10 27 38 43 82' )
+    ( Merge sort divides the string-represented list recursively )
+    ( then merges sorted halves )
+    setmark a
+    do merge_sort
+    -> output
+)
+
+define merge_sort as (
+    ( if length <= 1, return as-is )
+    ( else split at midpoint, recurse on each half, then merge )
+    [split][merge_sort][merge_sort][merge]
+)
+
+define merge as (
+    ( compare head elements of two sorted sequences )
+    ( emit smaller, advance that pointer )
+    ( repeat until one sequence exhausted, then emit remainder )
+)
+
+define split as (
+    ( find midpoint of current sequence )
+    ( partition into left and right halves )
+)

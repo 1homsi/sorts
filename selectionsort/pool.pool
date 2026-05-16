@@ -1,0 +1,17 @@
+CLASS SelectionSort
+    METHOD selectionSort(arr: Array): Array
+        VAR n, i, j, minIdx, tmp: INTEGER;
+    BEGIN
+        n := arr.size;
+        FOR i := 0 TO n-2 DO
+            minIdx := i;
+            FOR j := i+1 TO n-1 DO
+                IF arr.get(j) < arr.get(minIdx) THEN minIdx := j END
+            END;
+            tmp := arr.get(i);
+            arr.set(i, arr.get(minIdx));
+            arr.set(minIdx, tmp)
+        END;
+        RETURN arr
+    END selectionSort
+END SelectionSort

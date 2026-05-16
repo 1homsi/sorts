@@ -1,0 +1,13 @@
+begin
+    integer array a[1:10];
+    integer n, i, j, m, t;
+    n := 5;
+    a[1] := 5; a[2] := 3; a[3] := 1; a[4] := 4; a[5] := 2;
+    for i := 1 step 1 until n-1 do
+    begin
+        m := i;
+        for j := i+1 step 1 until n do
+            if a[j] < a[m] then m := j;
+        t := a[i]; a[i] := a[m]; a[m] := t
+    end
+end

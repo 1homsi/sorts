@@ -1,0 +1,26 @@
+defmodule QuicksortLive do
+  use Phoenix.LiveView
+
+  def mount(_params, _session, socket) do
+    arr = [3, 6, 8, 10, 1, 2, 1]
+    sorted = quicksort(arr)
+    {:ok, assign(socket, sorted: sorted)}
+  end
+
+  defp quicksort([]), do: []
+  defp quicksort([pivot | rest]) do
+    left = Enum.filter(rest, &(&1 <= pivot))
+    right = Enum.filter(rest, &(&1 > pivot))
+    quicksort(left) ++ [pivot] ++ quicksort(right)
+  end
+
+  def render(assigns) do
+    ~H"""
+    <ul>
+      <%= for x <- @sorted do %>
+        <li><%= x %></li>
+      <% end %>
+    </ul>
+    """
+  end
+end

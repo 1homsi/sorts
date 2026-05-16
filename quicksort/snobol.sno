@@ -1,0 +1,32 @@
+        ARRAY = '3 6 8 10 1 2 1'
+        N = 7
+
+        DATA('NODE(VAL,NEXT)')
+
+        DEFINE('QUICKSORT(ARR,LOW,HIGH)')
+        DEFINE('PARTITION(ARR,LOW,HIGH)P')
+
+QUICKSORT
+        GT(LOW,HIGH)   :S(RETURN)
+        P = PARTITION(ARR,LOW,HIGH)
+        QUICKSORT(ARR,LOW,P - 1)
+        QUICKSORT(ARR,P + 1,HIGH)   :(RETURN)
+
+PARTITION
+        PIVOT = ITEM(ARR,HIGH)
+        I = LOW
+        J = LOW
+PLOOP   GE(J,HIGH)   :S(PDONE)
+        LE(ITEM(ARR,J),PIVOT)   :F(PNEXT)
+        TMP = ITEM(ARR,I)
+        SETITEM(ARR,I,ITEM(ARR,J))
+        SETITEM(ARR,J,TMP)
+        I = I + 1
+PNEXT   J = J + 1   :(PLOOP)
+PDONE   TMP = ITEM(ARR,I)
+        SETITEM(ARR,I,ITEM(ARR,HIGH))
+        SETITEM(ARR,HIGH,TMP)
+        PARTITION = I   :(RETURN)
+
+        OUTPUT = 'Quicksort in SNOBOL'
+END

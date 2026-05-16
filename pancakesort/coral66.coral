@@ -1,0 +1,39 @@
+PROGRAM PANCAKE
+INTEGER ARRAY ARR (0:6);
+INTEGER N, SIZE, MAXI, I, LEFT, RIGHT, TMP;
+
+PROCEDURE FLIP(INTEGER K);
+BEGIN
+    LEFT := 0;
+    RIGHT := K;
+    WHILE LEFT < RIGHT DO
+    BEGIN
+        TMP := ARR(LEFT);
+        ARR(LEFT) := ARR(RIGHT);
+        ARR(RIGHT) := TMP;
+        LEFT := LEFT + 1;
+        RIGHT := RIGHT - 1
+    END
+END;
+
+BEGIN
+    ARR(0):=3; ARR(1):=6; ARR(2):=2; ARR(3):=7;
+    ARR(4):=4; ARR(5):=1; ARR(6):=5;
+    N := 7;
+    SIZE := N;
+    WHILE SIZE > 1 DO
+    BEGIN
+        MAXI := 0;
+        FOR I := 1 STEP 1 UNTIL SIZE-1 DO
+            IF ARR(I) > ARR(MAXI) THEN MAXI := I;
+        IF MAXI NEQ SIZE - 1 THEN
+        BEGIN
+            IF MAXI NEQ 0 THEN FLIP(MAXI);
+            FLIP(SIZE - 1)
+        END;
+        SIZE := SIZE - 1
+    END;
+    FOR I := 0 STEP 1 UNTIL N-1 DO
+        OUTPUT(ARR(I))
+END
+END PANCAKE

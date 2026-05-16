@@ -1,0 +1,11 @@
+        DEFINE('ISPIT(ARR,N)')
+ISPIT   I = 1
+SLOOP   GT(I,N)                         :S(RETURN)
+        KEY = ARR<I>
+        J = I - 1
+SINR    LE(J,0)                         :S(SPLACE)
+        GT(ARR<J>,KEY)                  :F(SPLACE)
+        ARR<J + 1> = ARR<J>
+        J = J - 1                       :(SINR)
+SPLACE  ARR<J + 1> = KEY
+        I = I + 1                       :(SLOOP)

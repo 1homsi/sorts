@@ -1,0 +1,15 @@
+        DEFINE('SELSORT(N)')
+*
+SELSORT I = 1
+OUTER   GT(I,N-1)                              :S(SELSORT.RETURN)
+        MINIDX = I
+        J = I + 1
+INNER   GT(J,N)                                :S(SWAP)
+        LT(ARR<J>,ARR<MINIDX>)               :F(NEXT4)
+        MINIDX = J
+NEXT4   J = J + 1                              :(INNER)
+SWAP    TMP = ARR<I>
+        ARR<I> = ARR<MINIDX>
+        ARR<MINIDX> = TMP
+        I = I + 1                              :(OUTER)
+SELSORT.RETURN RETURN

@@ -1,0 +1,14 @@
+{%- set arr = [3, 6, 8, 10, 1, 2, 1] -%}
+{%- macro quicksort(arr) -%}
+    {%- if arr | length <= 1 -%}
+        {{ arr | join(',') }}
+    {%- else -%}
+        {%- set pivot = arr[arr | length // 2] -%}
+        {%- set left = arr | selectattr('__lt__', pivot) | list -%}
+        {%- set right = arr | selectattr('__gt__', pivot) | list -%}
+        {{ quicksort(left) }},{{ pivot }},{{ quicksort(right) }}
+    {%- endif -%}
+{%- endmacro -%}
+{%- set sorted = arr | sort -%}
+{% for x in sorted %}{{ x }}
+{% endfor %}

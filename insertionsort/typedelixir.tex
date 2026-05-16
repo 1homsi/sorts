@@ -1,0 +1,10 @@
+defmodule TypedInsertionSort do
+  @spec sort(list(integer())) :: list(integer())
+  def sort([]), do: []
+  def sort([h | t]), do: insert(h, sort(t))
+
+  @spec insert(integer(), list(integer())) :: list(integer())
+  defp insert(x, []), do: [x]
+  defp insert(x, [h | t]) when x <= h, do: [x, h | t]
+  defp insert(x, [h | t]), do: [h | insert(x, t)]
+end

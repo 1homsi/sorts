@@ -1,0 +1,41 @@
+CREATE TABLE #numbers (id INT IDENTITY(1,1), val INT);
+INSERT INTO #numbers (val) VALUES (170), (45), (75), (90), (802), (24), (2), (66);
+
+DECLARE @max_val INT, @exp INT = 1;
+SELECT @max_val = MAX(val) FROM #numbers;
+
+CREATE TABLE #output (id INT, val INT);
+CREATE TABLE #count (digit INT, cnt INT);
+
+WHILE @max_val / @exp > 0
+BEGIN
+    DELETE FROM #count;
+    INSERT INTO #count (digit, cnt)
+    SELECT (val / @exp) % 10 AS digit, COUNT(*) AS cnt
+    FROM #numbers
+    GROUP BY (val / @exp) % 10;
+
+    WITH cum AS (
+        SELECT digit, SUM(cnt) OVER (ORDER BY digit ROWS UNBOUNDED PRECEDING) AS cumcnt
+        FROM #count
+    ),
+    ranked AS (
+        SELECT n.id, n.val, (n.val / @exp) % 10 AS digit,
+               ROW_NUMBER() OVER (PARTITION BY (n.val / @exp) % 10 ORDER BY n.id DESC) AS rn,
+               c.cumcnt
+        FROM #numbers n
+        JOIN cum c ON (n.val / @exp) % 10 = c.digit
+    )
+    SELECT id, val, cumcnt - rn + 1 AS new_pos INTO #tmp FROM ranked;
+
+    DELETE FROM #output;
+    INSERT INTO #output SELECT id, val FROM #tmp ORDER BY new_pos;
+    DROP TABLE #tmp;
+
+    DELETE FROM #numbers;
+    INSERT INTO #numbers (val) SELECT val FROM #output ORDER BY id;
+    SET @exp = @exp * 10;
+END
+
+SELECT val FROM #numbers ORDER BY id;
+DROP TABLE #numbers; DROP TABLE #output; DROP TABLE #count;

@@ -1,0 +1,26 @@
+def merge(left, right) {
+    def result := [];
+    def i := 1; def j := 1;
+    { (i <= left.length) and: (j <= right.length) } whileTrue: {
+        if: left[i] <= right[j] then: {
+            result := result + [left[i]]; i := i + 1;
+        } else: {
+            result := result + [right[j]]; j := j + 1;
+        };
+    };
+    { i <= left.length } whileTrue: { result := result + [left[i]]; i := i + 1; };
+    { j <= right.length } whileTrue: { result := result + [right[j]]; j := j + 1; };
+    result
+};
+
+def mergeSort(arr) {
+    if: arr.length <= 1 then: { arr } else: {
+        def mid := arr.length / 2;
+        def left := mergeSort(arr[1..mid]);
+        def right := mergeSort(arr[mid+1..arr.length]);
+        merge(left, right)
+    }
+};
+
+def arr := [38, 27, 43, 3, 9, 82, 10];
+system.println(mergeSort(arr));

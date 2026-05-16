@@ -1,0 +1,27 @@
+            DIMENSION ARR(7)
+            ARR(1) = 64
+            ARR(2) = 34
+            ARR(3) = 25
+            ARR(4) = 12
+            ARR(5) = 22
+            ARR(6) = 11
+            ARR(7) = 90
+            N = 7
+            GAP = N/2
+GAPLOOP     WHENEVER GAP .LE. 0, TRANSFER TO PRINT
+            THROUGH ILOOP, FOR I = GAP+1, 1, I .GE. N+1
+            TEMP = ARR(I)
+            J = I
+JLOOP       WHENEVER J .LE. GAP .OR. ARR(J-GAP) .LE. TEMP, TRANSFER TO JDONE
+            ARR(J) = ARR(J-GAP)
+            J = J - GAP
+            TRANSFER TO JLOOP
+JDONE       ARR(J) = TEMP
+ILOOP       CONTINUE
+            GAP = GAP/2
+            TRANSFER TO GAPLOOP
+PRINT       THROUGH PLOOP, FOR I = 1, 1, I .GE. N+1
+            PRINT FORMAT F1, ARR(I)
+PLOOP       CONTINUE
+            VECTOR VALUES F1 = $I6*$
+            END OF PROGRAM

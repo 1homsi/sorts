@@ -1,0 +1,47 @@
+.data
+arr: .word 5, 3, 1, 4, 2
+n:   .word 5
+
+.text
+.globl selection_sort
+
+selection_sort:
+    la s0, arr
+    la t0, n
+    lw s1, 0(t0)
+    li s2, 0
+
+outer:
+    addi t0, s1, -1
+    bge s2, t0, done
+    mv s3, s2
+    addi t1, s2, 1
+
+inner:
+    bge t1, s1, swap
+    slli t2, t1, 2
+    add t3, s0, t2
+    lw t4, 0(t3)
+    slli t2, s3, 2
+    add t5, s0, t2
+    lw t6, 0(t5)
+    bge t4, t6, next
+    mv s3, t1
+next:
+    addi t1, t1, 1
+    j inner
+
+swap:
+    slli t2, s2, 2
+    add t3, s0, t2
+    lw t4, 0(t3)
+    slli t2, s3, 2
+    add t5, s0, t2
+    lw t6, 0(t5)
+    sw t6, 0(t3)
+    sw t4, 0(t5)
+    addi s2, s2, 1
+    j outer
+
+done:
+    ret

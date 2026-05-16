@@ -1,0 +1,60 @@
+function %selection_sort(i64, i32) {
+    block0(v0: i64, v1: i32):
+        v2 = iconst.i32 0
+        jump block1(v2)
+
+    block1(v3: i32):
+        v4 = icmp slt v3, v1
+        brif v4, block2(v3), block5
+
+    block2(v3: i32):
+        v5 = iconst.i32 1
+        v6 = iadd v3, v5
+        jump block3(v3, v6)
+
+    block3(v3: i32, v7: i32):
+        v8 = icmp slt v7, v1
+        brif v8, block4, block6(v3)
+
+    block4:
+        v9 = sext.i64 v7
+        v10 = iconst.i64 4
+        v11 = imul v9, v10
+        v12 = iadd v0, v11
+        v13 = load.i32 v12
+        v14 = sext.i64 v3
+        v15 = imul v14, v10
+        v16 = iadd v0, v15
+        v17 = load.i32 v16
+        v18 = icmp slt v13, v17
+        brif v18, block7, block8
+
+    block7:
+        v19 = iconst.i32 1
+        v20 = iadd v7, v19
+        jump block3(v7, v20)
+
+    block8:
+        v21 = iconst.i32 1
+        v22 = iadd v7, v21
+        jump block3(v3, v22)
+
+    block6(v3: i32):
+        v23 = sext.i64 v3
+        v24 = iconst.i64 4
+        v25 = imul v23, v24
+        v26 = iadd v0, v25
+        v27 = load.i32 v26
+        v28 = sext.i64 v3
+        v29 = imul v28, v24
+        v30 = iadd v0, v29
+        v31 = load.i32 v30
+        store v31, v26
+        store v27, v30
+        v32 = iconst.i32 1
+        v33 = iadd v3, v32
+        jump block1(v33)
+
+    block5:
+        return
+}

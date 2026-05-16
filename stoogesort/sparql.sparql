@@ -1,0 +1,9 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX sort: <http://example.org/sort#>
+
+SELECT ?sorted WHERE {
+    VALUES (?v) { (3) (1) (4) (1) (5) (9) (2) (6) }
+    BIND(?v AS ?sorted)
+}
+ORDER BY ?sorted

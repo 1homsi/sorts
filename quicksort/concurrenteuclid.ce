@@ -1,0 +1,38 @@
+module QuickSort
+
+var arr: array 0..6 of integer
+var n: integer := 7
+
+function partition(low, high: integer): integer
+    var pivot, i, j, tmp: integer
+begin
+    pivot := arr[high]
+    i := low
+    for j := low to high - 1 do
+        if arr[j] <= pivot then
+            tmp := arr[i]; arr[i] := arr[j]; arr[j] := tmp
+            i := i + 1
+        end if
+    end for
+    tmp := arr[i]; arr[i] := arr[high]; arr[high] := tmp
+    return i
+end function
+
+procedure quicksort(low, high: integer)
+    var p: integer
+begin
+    if low < high then
+        p := partition(low, high)
+        quicksort(low, p - 1)
+        quicksort(p + 1, high)
+    end if
+end procedure
+
+begin
+    arr[0]:=3; arr[1]:=6; arr[2]:=8; arr[3]:=10
+    arr[4]:=1; arr[5]:=2; arr[6]:=1
+    quicksort(0, 6)
+    for i := 0 to 6 do
+        write(arr[i])
+    end for
+end module

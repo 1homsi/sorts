@@ -1,0 +1,24 @@
+structure SelectionSort =
+struct
+    fun selectionSort (arr : int array) : int array =
+        let
+            val n = Array.length arr
+            fun innerLoop i j minIdx =
+                if j >= n then minIdx
+                else if Array.sub(arr, j) < Array.sub(arr, minIdx)
+                     then innerLoop i (j+1) j
+                     else innerLoop i (j+1) minIdx
+            fun outerLoop i =
+                if i >= n-1 then arr
+                else
+                    let val minIdx = innerLoop i (i+1) i
+                        val tmp = Array.sub(arr, i)
+                    in
+                        Array.update(arr, i, Array.sub(arr, minIdx));
+                        Array.update(arr, minIdx, tmp);
+                        outerLoop (i+1)
+                    end
+        in
+            outerLoop 0
+        end
+end

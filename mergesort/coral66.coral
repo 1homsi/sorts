@@ -1,0 +1,37 @@
+PROGRAM MERGESORT;
+
+INTEGER ARRAY ARR(1:7), TMP(1:7);
+INTEGER I, J, K, LO, HI, MID;
+
+ROUTINE MERGE(LO, MID, HI);
+    INTEGER I, J, K, X;
+    I := LO; J := MID + 1; K := LO;
+    WHILE I <= MID AND J <= HI DO
+        IF ARR(I) <= ARR(J) THEN
+            TMP(K) := ARR(I); I := I + 1;
+        ELSE
+            TMP(K) := ARR(J); J := J + 1;
+        ENDIF;
+        K := K + 1;
+    OD;
+    WHILE I <= MID DO TMP(K) := ARR(I); I := I+1; K := K+1; OD;
+    WHILE J <= HI DO TMP(K) := ARR(J); J := J+1; K := K+1; OD;
+    FOR X := LO TO HI DO ARR(X) := TMP(X); OD;
+END;
+
+ROUTINE MSORT(LO, HI);
+    INTEGER MID;
+    IF LO >= HI THEN RETURN; ENDIF;
+    MID := (LO + HI) / 2;
+    CALL MSORT(LO, MID);
+    CALL MSORT(MID + 1, HI);
+    CALL MERGE(LO, MID, HI);
+END;
+
+ARR(1):=38; ARR(2):=27; ARR(3):=43; ARR(4):=3;
+ARR(5):=9; ARR(6):=82; ARR(7):=10;
+CALL MSORT(1, 7);
+FOR I := 1 TO 7 DO
+    PRINT(ARR(I));
+OD;
+END.

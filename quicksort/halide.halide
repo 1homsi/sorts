@@ -1,0 +1,26 @@
+#include "Halide.h"
+using namespace Halide;
+
+void quicksort_cpu(int* arr, int low, int high) {
+    if (low < high) {
+        int pivot = arr[high];
+        int i = low;
+        for (int j = low; j < high; j++) {
+            if (arr[j] <= pivot) {
+                int tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+                i++;
+            }
+        }
+        int tmp = arr[i]; arr[i] = arr[high]; arr[high] = tmp;
+        int p = i;
+        quicksort_cpu(arr, low, p - 1);
+        quicksort_cpu(arr, p + 1, high);
+    }
+}
+
+int main() {
+    int arr[] = {3, 6, 8, 10, 1, 2, 1};
+    quicksort_cpu(arr, 0, 6);
+    for (int x : arr) printf("%d\n", x);
+    return 0;
+}

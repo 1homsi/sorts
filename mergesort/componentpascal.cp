@@ -1,0 +1,41 @@
+MODULE MergeSortCP;
+
+IMPORT Out;
+
+CONST N = 7;
+
+VAR arr: ARRAY N OF INTEGER;
+    tmp: ARRAY N OF INTEGER;
+
+PROCEDURE Merge(lo, mid, hi: INTEGER);
+VAR i, j, k: INTEGER;
+BEGIN
+    i := lo; j := mid + 1; k := lo;
+    WHILE (i <= mid) & (j <= hi) DO
+        IF arr[i] <= arr[j] THEN tmp[k] := arr[i]; INC(i)
+        ELSE tmp[k] := arr[j]; INC(j) END;
+        INC(k)
+    END;
+    WHILE i <= mid DO tmp[k] := arr[i]; INC(i); INC(k) END;
+    WHILE j <= hi DO tmp[k] := arr[j]; INC(j); INC(k) END;
+    FOR i := lo TO hi DO arr[i] := tmp[i] END
+END Merge;
+
+PROCEDURE MSort(lo, hi: INTEGER);
+VAR mid: INTEGER;
+BEGIN
+    IF lo < hi THEN
+        mid := (lo + hi) DIV 2;
+        MSort(lo, mid);
+        MSort(mid + 1, hi);
+        Merge(lo, mid, hi)
+    END
+END MSort;
+
+BEGIN
+    arr[0]:=38; arr[1]:=27; arr[2]:=43; arr[3]:=3;
+    arr[4]:=9; arr[5]:=82; arr[6]:=10;
+    MSort(0, N-1);
+    FOR i := 0 TO N-1 DO Out.Int(arr[i], 5) END;
+    Out.Ln
+END MergeSortCP.

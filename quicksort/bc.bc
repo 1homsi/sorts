@@ -1,0 +1,28 @@
+arr[0] = 3; arr[1] = 6; arr[2] = 8; arr[3] = 10
+arr[4] = 1; arr[5] = 2; arr[6] = 1
+
+define partition(low, high) {
+    pivot = arr[high]
+    i = low
+    for (j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp
+            i = i + 1
+        }
+    }
+    tmp = arr[i]; arr[i] = arr[high]; arr[high] = tmp
+    return i
+}
+
+define quicksort(low, high) {
+    if (low < high) {
+        p = partition(low, high)
+        quicksort(low, p - 1)
+        quicksort(p + 1, high)
+    }
+}
+
+quicksort(0, 6)
+for (i = 0; i <= 6; i++) { print arr[i], " " }
+print "\n"
+halt

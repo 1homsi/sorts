@@ -1,0 +1,24 @@
+opam-version: "2.0"
+name: "quicksort"
+version: "1.0.0"
+synopsis: "Quicksort implementation"
+description: """
+let partition arr low high =
+  let pivot = arr.(high) in
+  let i = ref low in
+  for j = low to high - 1 do
+    if arr.(j) <= pivot then begin
+      let t = arr.(!i) in arr.(!i) <- arr.(j); arr.(j) <- t;
+      incr i
+    end
+  done;
+  let t = arr.(!i) in arr.(!i) <- arr.(high); arr.(high) <- t;
+  !i
+
+let rec quicksort arr low high =
+  if low < high then begin
+    let p = partition arr low high in
+    quicksort arr low (p-1);
+    quicksort arr (p+1) high
+  end
+"""

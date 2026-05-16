@@ -1,0 +1,11 @@
+#(ds,selection-sort,#(cl,arr,n,
+  #(cl,i,1,
+    #(cl,min-idx,i,
+      #(cl,j,#(ad,i,1),
+        #(lt,#(el,arr,j),#(el,arr,min-idx),
+          #(cl,min-idx,j))
+        #(lt,j,n,#(cl,j,#(ad,j,1),#(selection-sort,arr,n)))
+      )
+    )
+  )
+))

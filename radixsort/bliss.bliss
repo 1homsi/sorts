@@ -1,0 +1,50 @@
+MODULE RADIX_SORT (MAIN = RADIX_MAIN) =
+BEGIN
+
+LIBRARY 'SYS$LIBRARY:STARLET';
+
+LITERAL N = 8;
+
+GLOBAL
+    ARR : VECTOR [N, LONG],
+    OUTPUT : VECTOR [N, LONG],
+    CNT : VECTOR [10, LONG];
+
+ROUTINE COUNTING_SORT (EXP) =
+BEGIN
+    LOCAL I, IDX;
+    INCR I FROM 0 TO 9 DO CNT [.I] = 0;
+    INCR I FROM 0 TO N-1 DO
+    BEGIN
+        IDX = (.ARR [.I] / .EXP) MOD 10;
+        CNT [.IDX] = .CNT [.IDX] + 1;
+    END;
+    INCR I FROM 1 TO 9 DO
+        CNT [.I] = .CNT [.I] + .CNT [.I-1];
+    DECR I FROM N-1 TO 0 DO
+    BEGIN
+        IDX = (.ARR [.I] / .EXP) MOD 10;
+        CNT [.IDX] = .CNT [.IDX] - 1;
+        OUTPUT [.CNT [.IDX]] = .ARR [.I];
+    END;
+    INCR I FROM 0 TO N-1 DO ARR [.I] = .OUTPUT [.I];
+END;
+
+GLOBAL ROUTINE RADIX_MAIN =
+BEGIN
+    LOCAL MAXVAL, EXP, I;
+    ARR [0] = 170; ARR [1] = 45; ARR [2] = 75; ARR [3] = 90;
+    ARR [4] = 802; ARR [5] = 24; ARR [6] = 2;  ARR [7] = 66;
+    MAXVAL = .ARR [0];
+    INCR I FROM 1 TO N-1 DO
+        IF .ARR [.I] GTR .MAXVAL THEN MAXVAL = .ARR [.I];
+    EXP = 1;
+    WHILE .MAXVAL / .EXP GTR 0 DO
+    BEGIN
+        COUNTING_SORT (.EXP);
+        EXP = .EXP * 10;
+    END;
+    0
+END;
+
+END ELUDOM

@@ -1,0 +1,23 @@
+CREATE TABLE #arr (idx INT PRIMARY KEY, val INT);
+INSERT INTO #arr VALUES (0,3),(1,1),(2,4),(3,1),(4,5),(5,9),(6,2),(7,6);
+
+CREATE OR ALTER PROCEDURE stooge_sort @first INT, @last INT AS
+BEGIN
+    DECLARE @a INT, @b INT, @tmp INT, @t INT, @n INT;
+    SELECT @a = val FROM #arr WHERE idx = @first;
+    SELECT @b = val FROM #arr WHERE idx = @last;
+    IF @a > @b BEGIN
+        UPDATE #arr SET val = @b WHERE idx = @first;
+        UPDATE #arr SET val = @a WHERE idx = @last;
+    END
+    SET @n = @last - @first + 1;
+    IF @n > 2 BEGIN
+        SET @t = @n * 2 / 3;
+        EXEC stooge_sort @first, @first + @t - 1;
+        EXEC stooge_sort @last - @t + 1, @last;
+        EXEC stooge_sort @first, @first + @t - 1;
+    END
+END
+
+EXEC stooge_sort 0, 7;
+SELECT val FROM #arr ORDER BY idx;

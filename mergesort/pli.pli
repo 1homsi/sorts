@@ -1,0 +1,40 @@
+ MERGESORT: PROCEDURE OPTIONS(MAIN);
+    DCL ARR(7) FIXED BIN(31) INIT(38,27,43,3,9,82,10);
+    DCL TMP(7) FIXED BIN(31);
+    DCL I FIXED BIN(31);
+
+    CALL MSORT(1,7);
+
+    DO I = 1 TO 7;
+        PUT SKIP LIST(ARR(I));
+    END;
+
+ MSORT: PROCEDURE(LO,HI) RECURSIVE;
+    DCL (LO,HI) FIXED BIN(31);
+    DCL MID FIXED BIN(31);
+    IF LO >= HI THEN RETURN;
+    MID = (LO + HI) / 2;
+    CALL MSORT(LO,MID);
+    CALL MSORT(MID+1,HI);
+    CALL MERGE(LO,MID,HI);
+ END MSORT;
+
+ MERGE: PROCEDURE(LO,MID,HI);
+    DCL (LO,MID,HI) FIXED BIN(31);
+    DCL (I,J,K,X) FIXED BIN(31);
+    I = LO; J = MID+1; K = LO;
+    DO WHILE(I<=MID & J<=HI);
+        IF ARR(I) <= ARR(J) THEN DO;
+            TMP(K) = ARR(I); I = I+1;
+        END;
+        ELSE DO;
+            TMP(K) = ARR(J); J = J+1;
+        END;
+        K = K+1;
+    END;
+    DO WHILE(I<=MID); TMP(K)=ARR(I); I=I+1; K=K+1; END;
+    DO WHILE(J<=HI); TMP(K)=ARR(J); J=J+1; K=K+1; END;
+    DO X = LO TO HI; ARR(X) = TMP(X); END;
+ END MERGE;
+
+ END MERGESORT;

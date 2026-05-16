@@ -1,0 +1,62 @@
+module TimSort
+
+from "list" include List
+from "array" include Array
+
+let minRun = 32
+
+let rec insertVal = (x, lst) => {
+  match (lst) {
+    [] => [x],
+    [h, ...t] => if (x <= h) [x, h, ...t] else [h, ...insertVal(x, t)]
+  }
+}
+
+let rec insertionSort = lst => {
+  match (lst) {
+    [] => [],
+    [h, ...t] => insertVal(h, insertionSort(t))
+  }
+}
+
+let rec mergeRuns = (xs, ys) => {
+  match ((xs, ys)) {
+    ([], _) => ys,
+    (_, []) => xs,
+    ([x, ...xrest], [y, ...yrest]) =>
+      if (x <= y) [x, ...mergeRuns(xrest, ys)]
+      else [y, ...mergeRuns(xs, yrest)]
+  }
+}
+
+let rec chunksOf = (n, lst) => {
+  match (lst) {
+    [] => [],
+    _ => [List.take(n, lst), ...chunksOf(n, List.drop(n, lst))]
+  }
+}
+
+let rec mergePairs = runs => {
+  match (runs) {
+    [] => [],
+    [x] => [x],
+    [x, y, ...rest] => [mergeRuns(x, y), ...mergePairs(rest)]
+  }
+}
+
+let rec mergeAll = runs => {
+  match (runs) {
+    [] => [],
+    [x] => x,
+    _ => mergeAll(mergePairs(runs))
+  }
+}
+
+let timsort = lst => {
+  match (lst) {
+    [] => lst,
+    _ => mergeAll(List.map(insertionSort, chunksOf(minRun, lst)))
+  }
+}
+
+print(timsort([5, 2, 8, 1, 9, 3, 7, 4, 6]))

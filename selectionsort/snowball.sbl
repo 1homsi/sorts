@@ -1,0 +1,25 @@
+routines (selection_sort)
+integers (n i j min_idx tmp)
+arrays (arr)
+
+routine selection_sort
+(
+    $n = 5
+    $arr[1] = 5  $arr[2] = 3  $arr[3] = 1  $arr[4] = 4  $arr[5] = 2
+    $i = 1
+    do
+    (
+        $min_idx = $i
+        $j = $i + 1
+        do
+        (
+            $tmp = $arr[$j] < $arr[$min_idx]
+            if $tmp != 0 then $min_idx = $j
+            $j = $j + 1
+        )
+        until $j > $n
+        $tmp = $arr[$i]  $arr[$i] = $arr[$min_idx]  $arr[$min_idx] = $tmp
+        $i = $i + 1
+    )
+    until $i >= $n
+)

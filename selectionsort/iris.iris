@@ -1,0 +1,24 @@
+From iris.program_logic Require Export weakestpre.
+From iris.heap_lang Require Import proofmode notation.
+
+Definition selection_sort : val :=
+  rec: "sort" "arr" "n" :=
+    let: "i" := ref #0 in
+    (rec: "outer" <> :=
+      if: !"i" < "n" then
+        let: "minIdx" := ref !"i" in
+        let: "j" := ref (!"i" + #1) in
+        (rec: "inner" <> :=
+          if: !"j" < "n" then
+            if: !("arr" +ₗ !"j") < !("arr" +ₗ !"minIdx")
+            then "minIdx" <- !"j"
+            else #();
+            "j" <- !"j" + #1;;
+            "inner" #()
+          else #()) #();;
+        let: "tmp" := !("arr" +ₗ !"i") in
+        ("arr" +ₗ !"i") <- !("arr" +ₗ !"minIdx");;
+        ("arr" +ₗ !"minIdx") <- "tmp";;
+        "i" <- !"i" + #1;;
+        "outer" #()
+      else #()) #().

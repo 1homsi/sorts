@@ -1,0 +1,12 @@
+amends "pkl:base"
+
+local function quicksort(arr: List<Int>): List<Int> =
+    if (arr.length <= 1) arr
+    else
+        let (pivot = arr[arr.length / 2])
+        let (less = arr.filter((x) -> x < pivot))
+        let (equal = arr.filter((x) -> x == pivot))
+        let (greater = arr.filter((x) -> x > pivot))
+        quicksort(less) + equal + quicksort(greater)
+
+result: List<Int> = quicksort(List(3, 6, 8, 10, 1, 2, 1))

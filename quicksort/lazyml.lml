@@ -1,0 +1,17 @@
+let rec quicksort lst =
+  match lst with
+  | [] -> []
+  | pivot :: rest ->
+    let left = filter (fun x -> x <= pivot) rest in
+    let right = filter (fun x -> x > pivot) rest in
+    quicksort left @ [pivot] @ quicksort right
+
+and filter pred lst =
+  match lst with
+  | [] -> []
+  | x :: rest ->
+    if pred x then x :: filter pred rest
+    else filter pred rest
+
+let _ = print_string (String.concat " " (List.map string_of_int
+    (quicksort [3; 6; 8; 10; 1; 2; 1])))

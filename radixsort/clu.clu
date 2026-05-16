@@ -1,0 +1,45 @@
+radix_sort = proc (arr: array[int]) returns (array[int])
+    if array$size(arr) = 0 then return arr end
+    max_val: int := arr[array$low(arr)]
+    for x: int in array$elements(arr) do
+        if x > max_val then max_val := x end
+    end
+    exp: int := 1
+    while max_val / exp > 0 do
+        arr := counting_sort(arr, exp)
+        exp := exp * 10
+    end
+    return arr
+end radix_sort
+
+counting_sort = proc (arr: array[int], exp: int) returns (array[int])
+    n: int := array$size(arr)
+    output: array[int] := array$fill(0, n, 0)
+    count: array[int] := array$fill(0, 10, 0)
+    for x: int in array$elements(arr) do
+        idx: int := (x / exp) mod 10
+        count[idx] := count[idx] + 1
+    end
+    for i: int in int$from_to(1, 9) do
+        count[i] := count[i] + count[i-1]
+    end
+    i: int := n - 1
+    while i >= 0 do
+        x: int := arr[array$low(arr) + i]
+        idx: int := (x / exp) mod 10
+        count[idx] := count[idx] - 1
+        output[count[idx]] := x
+        i := i - 1
+    end
+    return output
+end counting_sort
+
+start = proc ()
+    arr: array[int] := array$[170, 45, 75, 90, 802, 24, 2, 66]
+    sorted: array[int] := radix_sort(arr)
+    for x: int in array$elements(sorted) do
+        po$print(int$unparse(x))
+        po$print(" ")
+    end
+    po$newline()
+end start

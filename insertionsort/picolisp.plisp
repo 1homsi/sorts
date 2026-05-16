@@ -1,0 +1,10 @@
+(de insert (X Lst)
+   (cond
+      ((not Lst) (list X))
+      ((>= (car Lst) X) (cons X Lst))
+      (T (cons (car Lst) (insert X (cdr Lst)))) ) )
+
+(de insertion-sort (Lst)
+   (if (not Lst)
+      NIL
+      (insert (car Lst) (insertion-sort (cdr Lst))) ) )

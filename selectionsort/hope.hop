@@ -1,0 +1,13 @@
+dec selectionSort : list(num) -> list(num);
+--- selectionSort([]) <= [];
+--- selectionSort(xs) <=
+    let m == minimum(xs)
+    in cons(m, selectionSort(removeFirst(m, xs)));
+
+dec minimum : list(num) -> num;
+--- minimum([x]) <= x;
+--- minimum(cons(x,xs)) <= if x < minimum(xs) then x else minimum(xs);
+
+dec removeFirst : num # list(num) -> list(num);
+--- removeFirst(x, []) <= [];
+--- removeFirst(x, cons(y,ys)) <= if x = y then ys else cons(y, removeFirst(x, ys));

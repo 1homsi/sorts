@@ -1,0 +1,8 @@
+proc selection-sort ptr int -- do
+    over over
+    0 while dup2 < do
+        dup2 over - 1 + ptr-swap
+        1 +
+    end
+    drop drop drop drop
+end

@@ -1,0 +1,17 @@
+method selectionSort(arr: Array[Int]): Array[Int] {
+    val n = arr.length;
+    var i = 0;
+    while (i < n) {
+        var minIdx = i;
+        var j = i + 1;
+        while (j < n) {
+            if (arr.get(j) < arr.get(minIdx)) { minIdx = j; }
+            j = j + 1;
+        }
+        val tmp = arr.get(i);
+        arr.set(i, arr.get(minIdx));
+        arr.set(minIdx, tmp);
+        i = i + 1;
+    }
+    arr
+}

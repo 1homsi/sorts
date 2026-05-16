@@ -1,0 +1,17 @@
+/insertion-sort {
+    /arr exch def
+    /n arr length def
+    1 1 n 1 sub {
+        /i exch def
+        /key arr i get def
+        /j i 1 sub def
+        {
+            j 0 lt { exit } if
+            arr j get key le { exit } if
+            arr j 1 add arr j get put
+            /j j 1 sub def
+        } loop
+        arr j 1 add key put
+    } for
+    arr
+} def

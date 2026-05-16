@@ -1,0 +1,33 @@
+object quicksorter isa object;
+
+method quicksort(arr: mutable-array[int], low: int, high: int): void @ quicksorter {
+    if low < high then {
+        let p = partition(arr, low, high);
+        quicksort(arr, low, p - 1);
+        quicksort(arr, p + 1, high);
+    }
+}
+
+method partition(arr: mutable-array[int], low: int, high: int): int @ quicksorter {
+    let pivot = arr[high];
+    var i: int := low;
+    var j: int := low;
+    while j < high do {
+        if arr[j] <= pivot then {
+            let tmp = arr[i];
+            arr[i] := arr[j];
+            arr[j] := tmp;
+            i := i + 1;
+        };
+        j := j + 1;
+    };
+    let tmp = arr[i];
+    arr[i] := arr[high];
+    arr[high] := tmp;
+    i
+}
+
+let qs = new(quicksorter);
+let arr = mutable-array[int].from([3, 6, 8, 10, 1, 2, 1]);
+qs.quicksort(arr, 0, arr.size - 1);
+print(arr);

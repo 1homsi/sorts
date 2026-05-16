@@ -1,0 +1,35 @@
+MODULE SHELL_SORT (MAIN = SHELL_MAIN) =
+BEGIN
+
+ROUTINE SHELL_SORT(ARR, N) =
+BEGIN
+    LOCAL GAP, I, J, TEMP;
+    GAP = .N / 2;
+    WHILE .GAP GTR 0 DO
+    BEGIN
+        INCR I FROM .GAP TO .N - 1 DO
+        BEGIN
+            TEMP = .ARR[.I];
+            J = .I;
+            WHILE .J GEQ .GAP AND .ARR[.J - .GAP] GTR .TEMP DO
+            BEGIN
+                ARR[.J] = .ARR[.J - .GAP];
+                J = .J - .GAP;
+            END;
+            ARR[.J] = .TEMP;
+        END;
+        GAP = .GAP / 2;
+    END;
+    0
+END;
+
+ROUTINE SHELL_MAIN =
+BEGIN
+    LOCAL ARR: VECTOR[7];
+    ARR[0] = 64; ARR[1] = 34; ARR[2] = 25; ARR[3] = 12;
+    ARR[4] = 22; ARR[5] = 11; ARR[6] = 90;
+    SHELL_SORT(ARR[0], 7);
+    0
+END;
+
+END ELUDOM

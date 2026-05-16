@@ -1,0 +1,21 @@
+#lang racket
+
+(define (merge-lists left right)
+  (cond
+    [(empty? left) right]
+    [(empty? right) left]
+    [(<= (first left) (first right))
+     (cons (first left) (merge-lists (rest left) right))]
+    [else
+     (cons (first right) (merge-lists left (rest right)))]))
+
+(define (merge-sort lst)
+  (define n (length lst))
+  (if (<= n 1)
+      lst
+      (let* ([mid (quotient n 2)]
+             [left (take lst mid)]
+             [right (drop lst mid)])
+        (merge-lists (merge-sort left) (merge-sort right)))))
+
+(displayln (merge-sort '(38 27 43 3 9 82 10)))

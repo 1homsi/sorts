@@ -1,0 +1,38 @@
+        .data
+arr:    .long 5, 3, 1, 4, 2
+n:      .long 5
+
+        .text
+        .globl _start
+_start:
+        lis  3, arr@ha
+        addi 3, 3, arr@l
+        lis  4, n@ha
+        lwz  4, n@l(4)
+        li   5, 1
+outer:
+        cmpw 5, 4
+        bge  done
+        slwi 6, 5, 2
+        lwzx 7, 3, 6
+        addi 8, 5, -1
+inner:
+        cmpwi 8, 0
+        blt  place
+        slwi 9, 8, 2
+        lwzx 10, 3, 9
+        cmpw 10, 7
+        ble  place
+        addi 11, 9, 4
+        stwx 10, 3, 11
+        addi 8, 8, -1
+        b    inner
+place:
+        addi 9, 8, 1
+        slwi 9, 9, 2
+        stwx 7, 3, 9
+        addi 5, 5, 1
+        b    outer
+done:
+        li   0, 1
+        sc

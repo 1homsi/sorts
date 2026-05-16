@@ -1,0 +1,31 @@
+        ORG $0200
+
+START:  LDX #0
+OUTER:  CPX #4
+        BEQ DONE
+        STX MIN_IDX
+        TXA
+        CLC
+        ADC #1
+        TAY
+INNER:  CPY #5
+        BEQ SWAP
+        LDA ARR,Y
+        CMP ARR,X
+        BCS NEXT
+        STY MIN_IDX
+NEXT:   INY
+        BNE INNER
+SWAP:   LDA ARR,X
+        PHA
+        LDY MIN_IDX
+        LDA ARR,Y
+        STA ARR,X
+        PLA
+        STA ARR,Y
+        INX
+        JMP OUTER
+DONE:   BRK
+
+ARR:    DB 5,3,1,4,2
+MIN_IDX: DB 0

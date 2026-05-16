@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using Xamarin.Forms;
+
+public class InsertionSortPage : ContentPage
+{
+    private int[] InsertionSort(int[] arr)
+    {
+        var a = (int[])arr.Clone();
+        int n = a.Length;
+        for (int i = 1; i < n; i++)
+        {
+            int key = a[i];
+            int j = i - 1;
+            while (j >= 0 && a[j] > key)
+            {
+                a[j + 1] = a[j];
+                j--;
+            }
+            a[j + 1] = key;
+        }
+        return a;
+    }
+
+    public InsertionSortPage()
+    {
+        var label = new Label();
+        var button = new Button { Text = "Sort" };
+        button.Clicked += (s, e) =>
+        {
+            var sorted = InsertionSort(new[] { 5, 3, 1, 4, 2 });
+            label.Text = string.Join(", ", sorted);
+        };
+        Content = new StackLayout { Children = { button, label } };
+    }
+}

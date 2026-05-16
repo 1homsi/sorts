@@ -1,0 +1,5 @@
+g.inject([38, 27, 43, 3, 9, 82, 10]).
+  flatMap(
+    __.unfold().order().fold()
+  ).
+  unfold()

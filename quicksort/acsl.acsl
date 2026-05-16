@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+/*@ predicate Sorted(int *a, int l, int h) =
+  @   \forall int i, j; l <= i <= j <= h ==> a[i] <= a[j];
+  @*/
+
+/*@ requires \valid(arr + (low..high));
+  @ requires low >= 0 && high >= low;
+  @ assigns arr[low..high];
+  @ ensures low <= \result <= high;
+  @*/
+int partition(int *arr, int low, int high) {
+    int pivot = arr[high];
+    int i = low;
+    /*@ loop invariant low <= i <= j <= high;
+      @ loop assigns arr[low..high], i;
+      @*/
+    for (int j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            int tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+            i++;
+        }
+    }
+    int tmp = arr[i]; arr[i] = arr[high]; arr[high] = tmp;
+    return i;
+}
+
+/*@ requires \valid(arr + (low..high));
+  @ requires low >= 0 && high < 7;
+  @ assigns arr[low..high];
+  @ ensures Sorted(arr, low, high);
+  @*/
+void quicksort(int *arr, int low, int high) {
+    if (low < high) {
+        int p = partition(arr, low, high);
+        quicksort(arr, low, p - 1);
+        quicksort(arr, p + 1, high);
+    }
+}
+
+int main() {
+    int arr[] = {3, 6, 8, 10, 1, 2, 1};
+    quicksort(arr, 0, 6);
+    for (int i = 0; i < 7; i++) printf("%d ", arr[i]);
+    return 0;
+}

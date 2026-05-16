@@ -1,0 +1,30 @@
+class PancakeSort {
+    static function flip(arr:Array<Int>, k:Int):Void {
+        var left = 0, right = k;
+        while (left < right) {
+            var tmp = arr[left]; arr[left] = arr[right]; arr[right] = tmp;
+            left++; right--;
+        }
+    }
+
+    static function pancakeSort(arr:Array<Int>):Array<Int> {
+        var size = arr.length;
+        while (size > 1) {
+            var maxIdx = 0;
+            for (i in 1...size) {
+                if (arr[i] > arr[maxIdx]) maxIdx = i;
+            }
+            if (maxIdx != size - 1) {
+                if (maxIdx != 0) flip(arr, maxIdx);
+                flip(arr, size - 1);
+            }
+            size--;
+        }
+        return arr;
+    }
+
+    static function main():Void {
+        var arr = [3, 6, 2, 7, 4, 1, 5];
+        trace(pancakeSort(arr));
+    }
+}

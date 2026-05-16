@@ -1,0 +1,33 @@
+CLASS QuickSort
+    VARIABLES arr: ARRAY[7] OF INTEGER;
+
+    METHOD sort(low, high: INTEGER)
+        IF low < high THEN
+            VARIABLE p: INTEGER;
+            p := self.partition(low, high);
+            self.sort(low, p - 1);
+            self.sort(p + 1, high)
+        FI
+    END sort
+
+    METHOD partition(low, high: INTEGER): INTEGER
+        VARIABLE pivot, i, j, tmp: INTEGER;
+        pivot := arr[high];
+        i := low; j := low;
+        WHILE j < high DO
+            IF arr[j] <= pivot THEN
+                tmp := arr[i]; arr[i] := arr[j]; arr[j] := tmp;
+                i := i + 1
+            FI;
+            j := j + 1
+        OD;
+        tmp := arr[i]; arr[i] := arr[high]; arr[high] := tmp;
+        RETURN i
+    END partition
+
+    METHOD init
+        arr[0]:=3; arr[1]:=6; arr[2]:=8; arr[3]:=10;
+        arr[4]:=1; arr[5]:=2; arr[6]:=1;
+        self.sort(0, 6);
+    END init
+END CLASS

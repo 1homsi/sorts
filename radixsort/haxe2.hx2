@@ -1,0 +1,32 @@
+class Haxe2 {
+    static function getDigit(x:Int, exp:Int):Int {
+        return Std.int(x / exp) % 10;
+    }
+
+    static function countingSort(arr:Array<Int>, exp:Int):Array<Int> {
+        var result:Array<Int> = [];
+        for (d in 0...10) {
+            for (x in arr) {
+                if (getDigit(x, exp) == d) result.push(x);
+            }
+        }
+        return result;
+    }
+
+    static function radixSort(arr:Array<Int>):Array<Int> {
+        if (arr.length == 0) return arr;
+        var max = arr[0];
+        for (x in arr) if (x > max) max = x;
+        var exp = 1;
+        while (Std.int(max / exp) > 0) {
+            arr = countingSort(arr, exp);
+            exp *= 10;
+        }
+        return arr;
+    }
+
+    static function main() {
+        var arr = [170, 45, 75, 90, 802, 24, 2, 66];
+        trace(radixSort(arr));
+    }
+}

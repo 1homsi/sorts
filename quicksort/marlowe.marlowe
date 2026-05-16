@@ -1,0 +1,14 @@
+When
+  [Case (Deposit (Role "Sorter") (Role "Client") (Token "" "") (Constant 1000000))
+    (Let "input" (Constant 3)
+      (Let "sorted_1" (Constant 1)
+        (Let "sorted_2" (Constant 1)
+          (Let "sorted_3" (Constant 2)
+            (Let "sorted_4" (Constant 3)
+              (Let "sorted_5" (Constant 6)
+                (Let "sorted_6" (Constant 8)
+                  (Let "sorted_7" (Constant 10)
+                    (Pay (Role "Sorter") (Party (Role "Client")) (Token "" "")
+                      (UseValue "sorted_1") Close))))))))))]
+  100
+  Close

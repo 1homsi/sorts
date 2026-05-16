@@ -1,0 +1,12 @@
+fun selection_sort(_ arr: inout [Int]) {
+    let n = arr.count
+    for i in 0 ..< n {
+        var min_idx = i
+        for j in i + 1 ..< n {
+            if arr[j] < arr[min_idx] { min_idx = j }
+        }
+        let tmp = arr[i]
+        arr[i] = arr[min_idx]
+        arr[min_idx] = tmp
+    }
+}

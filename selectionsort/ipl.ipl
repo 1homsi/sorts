@@ -1,0 +1,21 @@
+SelectionSort
+    W0 <- LIST(5 3 1 4 2)
+    W1 <- LENGTH(W0)
+    W2 <- 0
+OUTER
+    W3 <- W2
+    W4 <- PLUS(W2 1)
+INNER
+    COND GT(W4 W1) SWAP
+    COND LT(NTH(W0 W4) NTH(W0 W3)) NEWMIN
+    W4 <- PLUS(W4 1)
+    GOTO INNER
+NEWMIN
+    W3 <- W4
+    W4 <- PLUS(W4 1)
+    GOTO INNER
+SWAP
+    EXCHANGE W0 W2 W3
+    W2 <- PLUS(W2 1)
+    COND LT(W2 W1) OUTER
+    RETURN W0

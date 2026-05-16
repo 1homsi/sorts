@@ -1,0 +1,23 @@
+proc insertion_sort int int -- in
+  let arr n in
+    1 while dup n < do
+      let i in
+        arr i ptr+ @int
+        let key in
+          i 1 -
+          while dup 0 >= over arr swap ptr+ @int key > && do
+            let j in
+              arr j 1 + ptr+ arr j ptr+ @int swap !int
+              j 1 -
+            end
+          end
+          let j in
+            arr j 1 + ptr+ key swap !int
+          end
+        end
+        i 1 +
+      end
+    end
+    drop
+  end
+end

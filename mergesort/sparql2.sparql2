@@ -1,0 +1,9 @@
+PREFIX ex: <http://example.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?sorted_val
+WHERE {
+    VALUES (?n) { (38) (27) (43) (3) (9) (82) (10) }
+    BIND(?n AS ?sorted_val)
+}
+ORDER BY ASC(?sorted_val)

@@ -1,0 +1,23 @@
+fn shell_sort(arr &![]int, n int) void {
+    var gap = n / 2;
+    while gap > 0 {
+        var i = gap;
+        while i < n {
+            var temp = arr[i];
+            var j = i;
+            while j >= gap and arr[j - gap] > temp {
+                mut arr[j] = arr[j - gap];
+                set j = j - gap;
+            }
+            mut arr[j] = temp;
+            set i = i + 1;
+        }
+        set gap = gap / 2;
+    }
+}
+
+fn main() export {
+    var arr []int = [64, 34, 25, 12, 22, 11, 90];
+    shell_sort(&!arr, 7);
+    println(arr.str());
+}

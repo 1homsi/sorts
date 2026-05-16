@@ -1,0 +1,16 @@
+resource InsertionSort
+
+procedure insertion_sort(arr[1:*] : int; n : int)
+    var key, j : int
+    fa i := 1 to n-1 ->
+        key := arr[i]
+        j := i - 1
+        do j >= 0 and arr[j] > key ->
+            arr[j+1] := arr[j]
+            j := j - 1
+        od
+        arr[j+1] := key
+    af
+end insertion_sort
+
+end InsertionSort

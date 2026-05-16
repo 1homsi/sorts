@@ -1,0 +1,18 @@
+class InsertionSort
+
+operations
+    public Sort: seq of int ==> seq of int
+    Sort(lst) ==
+        return if lst = []
+               then []
+               else Insert(hd lst, Sort(tl lst));
+
+    public Insert: int * seq of int ==> seq of int
+    Insert(x, lst) ==
+        return if lst = []
+               then [x]
+               else if x <= hd lst
+               then [x] ^ lst
+               else [hd lst] ^ Insert(x, tl lst);
+
+end InsertionSort

@@ -1,0 +1,28 @@
+// RPG Maker MZ Plugin Script
+// Insertion Sort via JavaScript plugin
+
+(() => {
+    'use strict';
+
+    function insertionSort(arr) {
+        const a = [...arr];
+        const n = a.length;
+        for (let i = 1; i < n; i++) {
+            const key = a[i];
+            let j = i - 1;
+            while (j >= 0 && a[j] > key) {
+                a[j + 1] = a[j];
+                j--;
+            }
+            a[j + 1] = key;
+        }
+        return a;
+    }
+
+    const _Scene_Map_start = Scene_Map.prototype.start;
+    Scene_Map.prototype.start = function() {
+        _Scene_Map_start.call(this);
+        const result = insertionSort([5, 3, 1, 4, 2]);
+        console.log(result.join(', '));
+    };
+})();

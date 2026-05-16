@@ -1,0 +1,28 @@
+module quicksort
+
+sig Int {}
+sig Array {
+    elements: seq Int,
+    sorted: seq Int
+}
+
+pred quicksort_correct[a: Array] {
+    all i, j: a.sorted.inds |
+        i < j implies lte[a.sorted[i], a.sorted[j]]
+    a.elements.elems = a.sorted.elems
+}
+
+fact pivot_partition {
+    all a: Array, pivot: Int |
+        let left = {x: a.elements.elems | lt[x, pivot]} |
+        let right = {x: a.elements.elems | gt[x, pivot]} |
+        quicksort_correct[a] implies
+            (all x: left | lt[x, pivot]) and
+            (all x: right | gt[x, pivot])
+}
+
+assert SortingCorrect {
+    all a: Array | quicksort_correct[a]
+}
+
+check SortingCorrect for 7

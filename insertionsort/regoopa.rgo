@@ -1,0 +1,20 @@
+package insertionsort
+
+import future.keywords.in
+
+insertion_sort(arr) = sorted {
+    sorted := sort(arr)
+}
+
+is_sorted(arr) {
+    every i in numbers.range(0, count(arr) - 2) {
+        arr[i] <= arr[i + 1]
+    }
+}
+
+default allow = false
+
+allow {
+    input.arr
+    is_sorted(sort(input.arr))
+}

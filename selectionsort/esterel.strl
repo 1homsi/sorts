@@ -1,0 +1,10 @@
+module SELECTION_SORT:
+input ARRAY_IN: integer;
+output ARRAY_OUT: integer;
+
+signal SORTED: integer in
+  loop
+    emit SORTED(0)
+  end loop
+end signal
+end module

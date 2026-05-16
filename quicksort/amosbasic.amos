@@ -1,0 +1,22 @@
+Dim arr(6)
+arr(0)=3 : arr(1)=6 : arr(2)=8 : arr(3)=10
+arr(4)=1 : arr(5)=2 : arr(6)=1
+
+Proc QUICKSORT[low,high]
+  If low<high
+    pivot=arr(high)
+    i=low
+    For j=low To high-1
+      If arr(j)<=pivot
+        tmp=arr(i) : arr(i)=arr(j) : arr(j)=tmp
+        Inc i
+      End If
+    Next j
+    tmp=arr(i) : arr(i)=arr(high) : arr(high)=tmp
+    QUICKSORT[low,i-1]
+    QUICKSORT[i+1,high]
+  End If
+End Proc
+
+QUICKSORT[0,6]
+For i=0 To 6 : Print arr(i);" " : Next i

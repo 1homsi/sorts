@@ -1,0 +1,19 @@
+(defun insert (tree v)
+  (cond
+    ((null tree) (list v nil nil))
+    ((< v (car tree))
+     (list (car tree) (insert (cadr tree) v) (caddr tree)))
+    (t
+     (list (car tree) (cadr tree) (insert (caddr tree) v)))))
+
+(defun inorder (tree)
+  (cond
+    ((null tree) nil)
+    (t (append (inorder (cadr tree)) (list (car tree)) (inorder (caddr tree))))))
+
+(defun treesort (arr)
+  (let ((tree nil))
+    (mapc #'(lambda (v) (setq tree (insert tree v))) arr)
+    (inorder tree)))
+
+(print (treesort '(5 3 7 1 4 6 8)))

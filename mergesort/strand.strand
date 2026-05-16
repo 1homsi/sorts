@@ -1,0 +1,26 @@
+merge(Left, Right, Result) :-
+    Left = [],
+    Result = Right.
+merge(Left, Right, Result) :-
+    Right = [],
+    Result = Left.
+merge([Lh|Lt], [Rh|Rt], [Lh|Rest]) :-
+    Lh =< Rh,
+    merge(Lt, [Rh|Rt], Rest).
+merge([Lh|Lt], [Rh|Rt], [Rh|Rest]) :-
+    Lh > Rh,
+    merge([Lh|Lt], Rt, Rest).
+
+merge_sort([], []).
+merge_sort([X], [X]).
+merge_sort(List, Sorted) :-
+    length(List, N),
+    N > 1,
+    Mid is N // 2,
+    length(Left, Mid),
+    append(Left, Right, List),
+    merge_sort(Left, SL),
+    merge_sort(Right, SR),
+    merge(SL, SR, Sorted).
+
+:- merge_sort([38,27,43,3,9,82,10], S), write(S), nl.

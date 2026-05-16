@@ -1,0 +1,19 @@
+object selection_sort {
+    method sort(arr: vector[int]): vector[int] {
+        val n = arr.size();
+        var i = 0;
+        while (i < n) {
+            var min_idx = i;
+            var j = i + 1;
+            while (j < n) {
+                if (arr[j] < arr[min_idx]) min_idx = j;
+                j = j + 1;
+            }
+            val tmp = arr[i];
+            arr[i] = arr[min_idx];
+            arr[min_idx] = tmp;
+            i = i + 1;
+        }
+        arr
+    }
+}

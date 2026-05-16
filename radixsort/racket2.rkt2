@@ -1,0 +1,19 @@
+#lang racket
+
+(define (get-digit x exp)
+  (modulo (quotient x exp) 10))
+
+(define (counting-sort lst exp)
+  (apply append
+    (for/list ([d (in-range 10)])
+      (filter (lambda (x) (= (get-digit x exp) d)) lst))))
+
+(define (radix-sort lst)
+  (if (null? lst) lst
+      (let ([max-val (apply max lst)])
+        (let loop ([arr lst] [exp 1])
+          (if (> (quotient max-val exp) 0)
+              (loop (counting-sort arr exp) (* exp 10))
+              arr)))))
+
+(displayln (radix-sort '(170 45 75 90 802 24 2 66)))

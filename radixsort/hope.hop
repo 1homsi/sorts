@@ -1,0 +1,19 @@
+dec getDigit : num # num -> num;
+--- getDigit(x, exp) <= (x div exp) mod 10;
+
+dec countingSort : list(num) # num -> list(num);
+--- countingSort(xs, exp) <=
+    join [[ x | x <- xs, getDigit(x, exp) = d] | d <- [0..9]];
+
+dec radixSortLoop : list(num) # num # num -> list(num);
+--- radixSortLoop(xs, maxVal, exp) <=
+    if maxVal div exp = 0 then xs
+    else radixSortLoop(countingSort(xs, exp), maxVal, exp * 10);
+
+dec radixSort : list(num) -> list(num);
+--- radixSort([]) <= [];
+--- radixSort(xs) <=
+    let maxVal <= foldr max 0 xs
+    in radixSortLoop(xs, maxVal, 1);
+
+radixSort([170, 45, 75, 90, 802, 24, 2, 66]);

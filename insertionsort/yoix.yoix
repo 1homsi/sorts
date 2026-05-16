@@ -1,0 +1,15 @@
+import yoix.*.*;
+
+insertionSort(Array arr, int n) {
+    int key, j;
+    for (int i = 1; i < n; i++) {
+        key = (int)arr.get(i);
+        j = i - 1;
+        while (j >= 0 && (int)arr.get(j) > key) {
+            arr.set(j + 1, arr.get(j));
+            j--;
+        }
+        arr.set(j + 1, key);
+    }
+    return arr;
+}

@@ -1,0 +1,27 @@
+PROC shellSort:(a(), n%)
+    LOCAL gap%, i%, j%, temp%
+    gap% = n% / 2
+    WHILE gap% > 0
+        FOR i% = gap% TO n% - 1
+            temp% = a%(i%)
+            j% = i%
+            WHILE j% >= gap% AND a%(j% - gap%) > temp%
+                a%(j%) = a%(j% - gap%)
+                j% = j% - gap%
+            ENDWH
+            a%(j%) = temp%
+        NEXT i%
+        gap% = gap% / 2
+    ENDWH
+ENDP
+
+PROC main:
+    LOCAL arr%(7)
+    arr%(1)=64:arr%(2)=34:arr%(3)=25:arr%(4)=12
+    arr%(5)=22:arr%(6)=11:arr%(7)=90
+    shellSort:(arr%(), 7)
+    LOCAL i%
+    FOR i% = 1 TO 7
+        PRINT arr%(i%)
+    NEXT i%
+ENDP

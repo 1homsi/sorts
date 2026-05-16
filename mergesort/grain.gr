@@ -1,0 +1,27 @@
+module MergeSort
+
+from "list" include List
+from "array" include Array
+
+let rec merge = (left, right) => {
+  match ((left, right)) {
+  | ([], _) => right
+  | (_, []) => left
+  | ([lh, ...lt], [rh, ...rt]) =>
+    if (lh <= rh) [lh, ...merge(lt, right)]
+    else [rh, ...merge(left, rt)]
+  }
+}
+
+let rec mergeSort = (lst) => {
+  let n = List.length(lst)
+  if (n <= 1) lst
+  else {
+    let mid = n / 2
+    let left = mergeSort(List.take(mid, lst))
+    let right = mergeSort(List.drop(mid, lst))
+    merge(left, right)
+  }
+}
+
+print(mergeSort([38, 27, 43, 3, 9, 82, 10]))

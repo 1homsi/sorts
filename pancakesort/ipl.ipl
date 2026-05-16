@@ -1,0 +1,37 @@
+; IPL (Information Processing Language) approximation
+; IPL was one of the first high-level programming languages (1956)
+; It used list processing primitives
+
+; Define data structure as list
+(SETQ ARR (LIST 3 6 2 7 4 1 5))
+(SETQ N 7)
+
+; FLIP: reverse first k+1 elements
+(DEFUN FLIP (LST K)
+  (APPEND (REVERSE (FIRST-N LST (ADD1 K)))
+          (REST-FROM LST (ADD1 K))))
+
+; FIRST-N: take first n elements
+(DEFUN FIRST-N (LST N)
+  (COND ((ZEROP N) NIL)
+        (T (CONS (CAR LST) (FIRST-N (CDR LST) (SUB1 N))))))
+
+; FIND-MAX-IDX: find index of max in first SIZE elements
+(DEFUN FIND-MAX-IDX (LST SIZE)
+  (FIND-MAX-LOOP LST SIZE 0 1))
+
+(DEFUN FIND-MAX-LOOP (LST SIZE MI I)
+  (COND ((GE I SIZE) MI)
+        ((GREATER (NTH I LST) (NTH MI LST))
+         (FIND-MAX-LOOP LST SIZE I (ADD1 I)))
+        (T (FIND-MAX-LOOP LST SIZE MI (ADD1 I)))))
+
+; PANCAKE-SORT
+(DEFUN PANCAKE-SORT (LST SIZE)
+  (COND ((LE SIZE 1) LST)
+        (T (LET ((MI (FIND-MAX-IDX LST SIZE)))
+             (PANCAKE-SORT
+               (FLIP (IF (NOT (ZEROP MI)) (FLIP LST MI) LST) (SUB1 SIZE))
+               (SUB1 SIZE))))))
+
+(PRINT (PANCAKE-SORT ARR N))

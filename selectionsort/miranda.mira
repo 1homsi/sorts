@@ -1,0 +1,15 @@
+selectionSort [] = []
+selectionSort xs = m : selectionSort rest
+    where
+    m = minimum xs
+    rest = removeFirst m xs
+
+removeFirst x [] = []
+removeFirst x (y:ys) = ys, if x = y
+                     = y : removeFirst x ys, otherwise
+
+minimum [x] = x
+minimum (x:xs) = min x (minimum xs)
+
+min x y = x, if x <= y
+        = y, otherwise

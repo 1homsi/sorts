@@ -1,0 +1,78 @@
+.assembly Quicksort {}
+.class public Quicksort {
+    .method public static int32 Partition(int32[] arr, int32 low, int32 high) {
+        .locals init (int32 pivot, int32 i, int32 j, int32 tmp)
+        ldarg.1
+        ldarg.2
+        ldelem.i4
+        stloc.0
+        ldarg.0
+        stloc.1
+        ldarg.0
+        stloc.2
+    loop:
+        ldloc.2
+        ldarg.2
+        bge.s end_loop
+        ldarg.1
+        ldloc.2
+        ldelem.i4
+        ldloc.0
+        bgt.s no_swap
+        ldarg.1
+        ldloc.1
+        ldelem.i4
+        stloc.3
+        ldarg.1
+        ldloc.1
+        ldarg.1
+        ldloc.2
+        ldelem.i4
+        stelem.i4
+        ldarg.1
+        ldloc.2
+        ldloc.3
+        stelem.i4
+        ldloc.1
+        ldc.i4.1
+        add
+        stloc.1
+    no_swap:
+        ldloc.2
+        ldc.i4.1
+        add
+        stloc.2
+        br.s loop
+    end_loop:
+        ldloc.1
+        ret
+    }
+
+    .method public static void Quicksort(int32[] arr, int32 low, int32 high) {
+        .locals init (int32 p)
+        ldarg.0
+        ldarg.1
+        bge.s done
+        ldarg.1
+        ldarg.0
+        ldarg.1
+        ldarg.2
+        call int32 Quicksort::Partition(int32[], int32, int32)
+        stloc.0
+        ldarg.1
+        ldarg.0
+        ldarg.1
+        ldloc.0
+        ldc.i4.1
+        sub
+        call void Quicksort::Quicksort(int32[], int32, int32)
+        ldarg.1
+        ldloc.0
+        ldc.i4.1
+        add
+        ldarg.2
+        call void Quicksort::Quicksort(int32[], int32, int32)
+    done:
+        ret
+    }
+}

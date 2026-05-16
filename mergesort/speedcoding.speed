@@ -1,0 +1,26 @@
+( Speedcoding was a very early interpreted language for the IBM 701, 1953.
+  It had no loops or subroutines in the modern sense — only conditional/unconditional
+  transfers. The following is pseudocode in Speedcoding-inspired notation. )
+
+( DATA: 38 27 43 3 9 82 10 in memory locations 100-106 )
+( TMP: locations 200-206 )
+
+( MERGE SORT — bottom-up iterative approach )
+( WIDTH = 1 )
+SET R1 = 1
+( OUTER: if R1 >= 7 goto DONE )
+OUTER:
+  JUMP IF R1 >= 7 TO DONE
+  SET R2 = 0
+( INNER: if R2 >= 7 goto NEXT )
+INNER:
+  JUMP IF R2 >= 7 TO NEXT
+  ( compute mid = R2 + R1 - 1, hi = R2 + 2*R1 - 1, clamp to 6 )
+  ( ... merge locations R2..mid and mid+1..hi into TMP, copy back ... )
+  SET R2 = R2 + 2*R1
+  JUMP TO INNER
+NEXT:
+  SET R1 = R1 * 2
+  JUMP TO OUTER
+DONE:
+( output locations 100-106 )

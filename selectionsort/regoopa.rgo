@@ -1,0 +1,13 @@
+package selectionsort
+
+import future.keywords
+
+selection_sort(arr) := sorted {
+    sorted := sort(arr)
+}
+
+default allow := false
+allow if {
+    input.action == "sort"
+    count(input.array) > 0
+}

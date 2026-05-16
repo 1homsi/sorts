@@ -1,0 +1,11 @@
+defmodule InsertionSort do
+  def insertion_sort(arr) do
+    Enum.reduce(arr, [], fn x, sorted ->
+      insert(x, sorted)
+    end)
+  end
+
+  defp insert(x, []), do: [x]
+  defp insert(x, [h | t]) when x <= h, do: [x, h | t]
+  defp insert(x, [h | t]), do: [h | insert(x, t)]
+end

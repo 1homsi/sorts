@@ -1,0 +1,4 @@
+{assign var="arr" value=[3, 6, 8, 10, 1, 2, 1]}
+{assign var="sorted" value=$arr|sort}
+{foreach $sorted as $x}{$x}
+{/foreach}

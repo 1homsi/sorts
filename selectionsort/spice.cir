@@ -1,0 +1,19 @@
+* Selection Sort Concept in SPICE Netlist
+* This demonstrates a sorting network approach
+* using comparator circuits
+
+.SUBCKT COMPARATOR IN1 IN2 OUT_MIN OUT_MAX
++ params: Vdd=5
+R1 IN1 OUT_MIN 1k
+R2 IN2 OUT_MAX 1k
+.ENDS COMPARATOR
+
+* Input values as voltage sources
+V1 N1 0 DC 5
+V2 N2 0 DC 3
+V3 N3 0 DC 1
+V4 N4 0 DC 4
+V5 N5 0 DC 2
+
+.OP
+.END

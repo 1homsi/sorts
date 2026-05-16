@@ -1,0 +1,27 @@
+GET "libhdr"
+
+LET shellsort2(arr, n) BE {
+    LET gap = n/2
+    WHILE gap > 0 DO {
+        FOR i = gap TO n-1 DO {
+            LET temp = arr!i
+            LET j = i
+            WHILE j >= gap & arr!(j-gap) > temp DO {
+                arr!j := arr!(j-gap)
+                j := j - gap
+            }
+            arr!j := temp
+        }
+        gap := gap/2
+    }
+}
+
+LET start() = VALOF {
+    LET arr = VEC 7
+    arr!0 := 64; arr!1 := 34; arr!2 := 25; arr!3 := 12
+    arr!4 := 22; arr!5 := 11; arr!6 := 90
+    shellsort2(arr, 7)
+    FOR i = 0 TO 6 DO writef("%n ", arr!i)
+    wrch('*n')
+    RESULTIS 0
+}

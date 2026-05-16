@@ -1,0 +1,21 @@
+.TITLE Quicksort Analog Representation
+* Quicksort represented as a sorted voltage ladder
+* Each voltage source represents a sorted element
+
+V1 n1 0 DC 1
+V2 n2 0 DC 1
+V3 n3 0 DC 2
+V4 n4 0 DC 3
+V5 n5 0 DC 6
+V6 n6 0 DC 8
+V7 n7 0 DC 10
+
+R1 n1 n2 1k
+R2 n2 n3 1k
+R3 n3 n4 1k
+R4 n4 n5 1k
+R5 n5 n6 1k
+R6 n6 n7 1k
+
+.OP
+.END

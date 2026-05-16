@@ -1,0 +1,20 @@
+<project name="SelectionSort" default="sort">
+    <scriptdef name="selection-sort" language="javascript">
+        <attribute name="input"/>
+        <![CDATA[
+        var input = attributes.get("input").split(",").map(Number);
+        var n = input.length;
+        for (var i = 0; i < n; i++) {
+            var minIdx = i;
+            for (var j = i+1; j < n; j++) {
+                if (input[j] < input[minIdx]) minIdx = j;
+            }
+            var tmp = input[i]; input[i] = input[minIdx]; input[minIdx] = tmp;
+        }
+        self.log(input.join(","));
+        ]]>
+    </scriptdef>
+    <target name="sort">
+        <selection-sort input="5,3,1,4,2"/>
+    </target>
+</project>

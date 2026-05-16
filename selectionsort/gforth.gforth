@@ -1,0 +1,13 @@
+: swap-elements ( arr i j -- )
+    >r 2dup cells + @ swap cells + @ swap
+    rot r@ cells + ! swap rot cells + ! r> drop ;
+
+: selection-sort ( arr n -- )
+    0 do
+        i 2 pick over i do
+            j over cells + @ over cells + @ < if
+                j nip
+            then
+        loop
+        over i rot swap-elements
+    loop drop ;

@@ -1,0 +1,14 @@
+ INSERTION_SORT: PROCEDURE (ARR, N);
+    DECLARE ARR(*) FIXED BINARY,
+            N FIXED BINARY;
+    DECLARE (I, J, KEY) FIXED BINARY;
+    DO I = 2 TO N;
+        KEY = ARR(I);
+        J = I - 1;
+        DO WHILE J >= 1 & ARR(J) > KEY;
+            ARR(J+1) = ARR(J);
+            J = J - 1;
+        END;
+        ARR(J+1) = KEY;
+    END;
+ END INSERTION_SORT;

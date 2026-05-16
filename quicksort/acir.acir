@@ -1,0 +1,27 @@
+acir_format_version: 1
+
+witnesses:
+  - arr_0: Field
+  - arr_1: Field
+  - arr_2: Field
+  - arr_3: Field
+  - arr_4: Field
+  - arr_5: Field
+  - arr_6: Field
+  - sorted_0: Field
+  - sorted_1: Field
+  - sorted_2: Field
+  - sorted_3: Field
+  - sorted_4: Field
+  - sorted_5: Field
+  - sorted_6: Field
+
+constraints:
+  - sorted_0 <= sorted_1
+  - sorted_1 <= sorted_2
+  - sorted_2 <= sorted_3
+  - sorted_3 <= sorted_4
+  - sorted_4 <= sorted_5
+  - sorted_5 <= sorted_6
+
+public_inputs: [sorted_0, sorted_1, sorted_2, sorted_3, sorted_4, sorted_5, sorted_6]

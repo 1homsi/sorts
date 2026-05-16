@@ -1,0 +1,43 @@
+int arr[7];
+int n = 7;
+
+inline swap(i, j) {
+    int tmp;
+    tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp
+}
+
+inline partition(low, high, result) {
+    int pivot = arr[high];
+    int i = low;
+    int j = low;
+    do
+    :: j < high ->
+        if
+        :: arr[j] <= pivot ->
+            swap(i, j);
+            i++
+        :: else -> skip
+        fi;
+        j++
+    :: else -> break
+    od;
+    swap(i, high);
+    result = i
+}
+
+proctype quicksort_proc(int low; int high) {
+    int p;
+    if
+    :: low < high ->
+        partition(low, high, p);
+        run quicksort_proc(low, p - 1);
+        run quicksort_proc(p + 1, high)
+    :: else -> skip
+    fi
+}
+
+init {
+    arr[0] = 3; arr[1] = 6; arr[2] = 8; arr[3] = 10;
+    arr[4] = 1; arr[5] = 2; arr[6] = 1;
+    run quicksort_proc(0, 6)
+}

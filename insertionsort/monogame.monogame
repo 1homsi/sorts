@@ -1,0 +1,39 @@
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+public class InsertionSortGame : Game
+{
+    GraphicsDeviceManager graphics;
+    SpriteBatch spriteBatch;
+    SpriteFont font;
+    string result = "";
+
+    int[] InsertionSort(int[] arr)
+    {
+        var a = (int[])arr.Clone();
+        int n = a.Length;
+        for (int i = 1; i < n; i++)
+        {
+            int key = a[i];
+            int j = i - 1;
+            while (j >= 0 && a[j] > key) { a[j + 1] = a[j]; j--; }
+            a[j + 1] = key;
+        }
+        return a;
+    }
+
+    protected override void LoadContent()
+    {
+        spriteBatch = new SpriteBatch(GraphicsDevice);
+        var sorted = InsertionSort(new[] { 5, 3, 1, 4, 2 });
+        result = string.Join(", ", sorted);
+    }
+
+    protected override void Draw(GameTime gameTime)
+    {
+        GraphicsDevice.Clear(Color.CornflowerBlue);
+        spriteBatch.Begin();
+        spriteBatch.DrawString(font, result, new Vector2(50, 90), Color.White);
+        spriteBatch.End();
+    }
+}

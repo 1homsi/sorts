@@ -1,0 +1,30 @@
+.decl input(id: number, val: number)
+.input input
+
+.decl sorted_val(pos: number, val: number)
+.decl less_count(id: number, cnt: number)
+
+less_count(id, cnt) :-
+    input(id, v1),
+    cnt = count : { input(_, v2), v2 < v1 }.
+
+sorted_val(cnt, v1) :-
+    input(id, v1),
+    less_count(id, cnt).
+
+.output sorted_val
+
+.decl run_id(id: number, rid: number)
+run_id(id, rid) :- input(id, _), rid = (id - 1) / 32.
+
+.decl run_sorted(id: number, val: number, rid: number, rank: number)
+run_sorted(id, v1, rid, rank) :-
+    input(id, v1),
+    run_id(id, rid),
+    rank = count : { input(id2, v2), run_id(id2, rid), v2 <= v1 }.
+
+.decl timsort_result(rank: number, val: number)
+timsort_result(r, v) :- run_sorted(_, v, rid, local_rank),
+    r = rid * 32 + local_rank.
+
+.output timsort_result

@@ -1,0 +1,40 @@
+( Snap! extends Scratch with first-class procedures and lists.
+  The following represents merge sort in Snap! pseudocode. )
+
+script: when green flag clicked [
+    set arr to (list 38 27 43 3 9 82 10)
+    set sorted to (call mergeSort arr)
+    say sorted
+]
+
+define mergeSort arr [
+    if (length of arr) <= 1 [
+        report arr
+    ]
+    set mid to (floor of ((length of arr) / 2))
+    set left to (mergeSort (sublist arr 1 mid))
+    set right to (mergeSort (sublist arr (mid + 1) (length of arr)))
+    report (merge left right)
+]
+
+define merge left right [
+    set result to (empty list)
+    set i to 1
+    set j to 1
+    repeat until (i > (length of left)) or (j > (length of right)) [
+        if (item i of left) <= (item j of right) [
+            add (item i of left) to result
+            change i by 1
+        ] else [
+            add (item j of right) to result
+            change j by 1
+        ]
+    ]
+    repeat until (i > (length of left)) [
+        add (item i of left) to result; change i by 1
+    ]
+    repeat until (j > (length of right)) [
+        add (item j of right) to result; change j by 1
+    ]
+    report result
+]

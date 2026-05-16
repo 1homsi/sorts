@@ -1,0 +1,39 @@
+scilla_version 0
+
+library InsertionSort
+
+let insert =
+  fun (x : Int32) =>
+  fun (lst : List Int32) =>
+    let folder =
+      fun (acc : Pair (List Int32) Bool) =>
+      fun (elem : Int32) =>
+        match acc with
+        | Pair sorted inserted =>
+          match inserted with
+          | True => Pair (Cons {Int32} elem sorted) True
+          | False =>
+            let is_gt = builtin lt x elem in
+            match is_gt with
+            | True => Pair (Cons {Int32} x (Cons {Int32} elem sorted)) True
+            | False => Pair (Cons {Int32} elem sorted) False
+            end
+          end
+        end
+    in
+    let init = Pair {List Int32} {Bool} (Nil {Int32}) False in
+    let result = list_foldl {Pair (List Int32) Bool} {Int32} folder init lst in
+    match result with
+    | Pair sorted inserted =>
+      match inserted with
+      | True => sorted
+      | False => Cons {Int32} x sorted
+      end
+    end
+
+let insertion_sort =
+  fun (lst : List Int32) =>
+    list_foldl {List Int32} {Int32}
+      (fun (acc : List Int32) => fun (x : Int32) => insert x acc)
+      (Nil {Int32})
+      lst

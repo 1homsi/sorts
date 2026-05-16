@@ -1,0 +1,24 @@
+module ShellSort
+
+from "array" include Array
+
+let shellSort = (arr) => {
+  let n = Array.length(arr)
+  let gap = ref(n / 2)
+  while (gap^ > 0) {
+    for (let i = ref(gap^); i^ < n; i := i^ + 1) {
+      let temp = arr[i^]
+      let j = ref(i^)
+      while (j^ >= gap^ && arr[j^ - gap^] > temp) {
+        arr[j^] = arr[j^ - gap^]
+        j := j^ - gap^
+      }
+      arr[j^] = temp
+    }
+    gap := gap^ / 2
+  }
+  arr
+}
+
+let arr = [> 64, 34, 25, 12, 22, 11, 90]
+print(shellSort(arr))

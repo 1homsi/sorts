@@ -1,0 +1,34 @@
+quicksort = proc (arr: array[int], low, high: int)
+    if low < high then
+        p: int := partition(arr, low, high)
+        quicksort(arr, low, p - 1)
+        quicksort(arr, p + 1, high)
+    end
+end quicksort
+
+partition = proc (arr: array[int], low, high: int) returns (int)
+    pivot: int := arr[high]
+    i: int := low
+    j: int := low
+    while j < high do
+        if arr[j] <= pivot then
+            tmp: int := arr[i]
+            arr[i] := arr[j]
+            arr[j] := tmp
+            i := i + 1
+        end
+        j := j + 1
+    end
+    tmp: int := arr[i]
+    arr[i] := arr[high]
+    arr[high] := tmp
+    return i
+end partition
+
+start_up = proc ()
+    arr: array[int] := array[int]$[3, 6, 8, 10, 1, 2, 1]
+    quicksort(arr, 1, 7)
+    for x: int in array[int]$elements(arr) do
+        po$print_int(x)
+    end
+end start_up

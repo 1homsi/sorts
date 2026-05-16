@@ -1,0 +1,12 @@
+const quicksort = (arr: list<int>): list<int> => {
+    return match(arr) {
+        when ([]): [];
+        when ([pivot, ...rest]): {
+            const left = List.filter(x => x <= pivot, rest);
+            const right = List.filter(x => x > pivot, rest);
+            return List.concat(quicksort(left), list([pivot, ...quicksort(right)]));
+        }
+    }
+};
+
+const result = quicksort(list([3, 6, 8, 10, 1, 2, 1]));

@@ -1,0 +1,29 @@
+MODULE quicksort;
+
+DCL arr(0:6) INT := (3, 6, 8, 10, 1, 2, 1);
+
+PARTITION: PROC(low, high INT) RETURNS INT;
+    DCL pivot, i, j, tmp INT;
+    pivot := arr(high);
+    i := low;
+    DO FOR j := low TO high - 1;
+        IF arr(j) <= pivot THEN
+            tmp := arr(i); arr(i) := arr(j); arr(j) := tmp;
+            i := i + 1;
+        FI;
+    OD;
+    tmp := arr(i); arr(i) := arr(high); arr(high) := tmp;
+    RETURN i;
+END PARTITION;
+
+QUICKSORT: PROC(low, high INT) RECURSIVE;
+    DCL p INT;
+    IF low < high THEN
+        p := PARTITION(low, high);
+        CALL QUICKSORT(low, p - 1);
+        CALL QUICKSORT(p + 1, high);
+    FI;
+END QUICKSORT;
+
+CALL QUICKSORT(0, 6);
+END MODULE;

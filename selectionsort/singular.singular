@@ -1,0 +1,15 @@
+proc selectionSort(list arr) {
+    int n = size(arr);
+    for (int i = 1; i <= n-1; i++) {
+        int minIdx = i;
+        for (int j = i+1; j <= n; j++) {
+            if (arr[j] < arr[minIdx]) { minIdx = j; }
+        }
+        int tmp = arr[i];
+        arr[i] = arr[minIdx];
+        arr[minIdx] = tmp;
+    }
+    return(arr);
+}
+
+selectionSort(list(5,3,1,4,2));

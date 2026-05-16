@@ -1,0 +1,27 @@
+module selection_sort #(parameter N = 5, W = 8) (
+    input  wire             clk, rst,
+    input  wire [W*N-1:0]  arr_in,
+    output reg  [W*N-1:0]  arr_out,
+    output reg              done
+);
+    integer i, j, min_idx;
+    reg [W-1:0] tmp, arr [0:N-1];
+
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            done <= 0;
+        end else begin
+            for (i = 0; i < N; i = i + 1)
+                arr[i] = arr_in[i*W +: W];
+            for (i = 0; i < N; i = i + 1) begin
+                min_idx = i;
+                for (j = i+1; j < N; j = j+1)
+                    if (arr[j] < arr[min_idx]) min_idx = j;
+                tmp = arr[i]; arr[i] = arr[min_idx]; arr[min_idx] = tmp;
+            end
+            for (i = 0; i < N; i = i + 1)
+                arr_out[i*W +: W] = arr[i];
+            done <= 1;
+        end
+    end
+endmodule

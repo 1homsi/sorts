@@ -1,0 +1,10 @@
+module SelectionSort where
+
+import Data.List (minimum, delete)
+
+selectionSort :: [Int] -> [Int]
+selectionSort [] = []
+selectionSort xs =
+    let m = minimum xs
+        rest = delete m xs
+    in m : selectionSort rest

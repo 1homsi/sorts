@@ -1,0 +1,22 @@
+flipArr arr k = (reverse (take (k+1) arr)) ++ (drop (k+1) arr)
+
+findMaxIdx arr size
+    = findIdx sub maxVal 0
+      where
+      sub = take size arr
+      maxVal = max sub
+      findIdx [] _ _ = 0
+      findIdx (x:xs) mv i = i, if x = mv
+                           = findIdx xs mv (i+1), otherwise
+
+pancakeSort arr = go arr (length arr)
+    where
+    go ys 1 = ys
+    go ys sz = go ys2 (sz-1)
+        where
+        mi = findMaxIdx ys sz
+        ys1 = flipArr ys mi, if mi ~= 0
+            = ys, otherwise
+        ys2 = flipArr ys1 (sz-1)
+
+main = pancakeSort [3, 6, 2, 7, 4, 1, 5]

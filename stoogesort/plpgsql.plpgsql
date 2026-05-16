@@ -1,0 +1,26 @@
+CREATE TABLE sort_arr (idx INTEGER PRIMARY KEY, val INTEGER);
+INSERT INTO sort_arr VALUES (0,3),(1,1),(2,4),(3,1),(4,5),(5,9),(6,2),(7,6);
+
+CREATE OR REPLACE PROCEDURE stooge_sort(first INT, last INT)
+LANGUAGE plpgsql AS $$
+DECLARE
+    a INT; b INT; tmp INT; t INT; n INT;
+BEGIN
+    SELECT val INTO a FROM sort_arr WHERE idx = first;
+    SELECT val INTO b FROM sort_arr WHERE idx = last;
+    IF a > b THEN
+        UPDATE sort_arr SET val = b WHERE idx = first;
+        UPDATE sort_arr SET val = a WHERE idx = last;
+    END IF;
+    n := last - first + 1;
+    IF n > 2 THEN
+        t := n * 2 / 3;
+        CALL stooge_sort(first, first + t - 1);
+        CALL stooge_sort(last - t + 1, last);
+        CALL stooge_sort(first, first + t - 1);
+    END IF;
+END;
+$$;
+
+CALL stooge_sort(0, 7);
+SELECT val FROM sort_arr ORDER BY idx;

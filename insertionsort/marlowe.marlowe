@@ -1,0 +1,10 @@
+When
+  [ Case (Deposit (Role "Sorter") (Role "Client") (Token "" "") (Constant 100))
+      (Let "sorted"
+        (UseValue "input")
+        (Pay (Role "Sorter") (Party (Role "Client")) (Token "" "")
+          (UseValue "sorted")
+          Close))
+  ]
+  100
+  Close

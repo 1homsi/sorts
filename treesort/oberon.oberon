@@ -1,0 +1,44 @@
+MODULE TreeSort;
+IMPORT Out;
+
+TYPE
+    NodePtr = POINTER TO Node;
+    Node = RECORD
+        val: INTEGER;
+        left, right: NodePtr;
+    END;
+
+VAR root: NodePtr;
+    i: INTEGER;
+
+PROCEDURE Insert(VAR n: NodePtr; v: INTEGER);
+VAR nn: NodePtr;
+BEGIN
+    IF n = NIL THEN
+        NEW(nn);
+        nn.val := v;
+        nn.left := NIL;
+        nn.right := NIL;
+        n := nn;
+    ELSIF v < n.val THEN
+        Insert(n.left, v);
+    ELSE
+        Insert(n.right, v);
+    END;
+END Insert;
+
+PROCEDURE Inorder(n: NodePtr);
+BEGIN
+    IF n = NIL THEN RETURN; END;
+    Inorder(n.left);
+    Out.Int(n.val, 4);
+    Inorder(n.right);
+END Inorder;
+
+BEGIN
+    root := NIL;
+    Insert(root, 5); Insert(root, 3); Insert(root, 7);
+    Insert(root, 1); Insert(root, 4); Insert(root, 6); Insert(root, 8);
+    Inorder(root);
+    Out.Ln;
+END TreeSort.

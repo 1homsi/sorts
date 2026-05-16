@@ -1,0 +1,12 @@
+module Main where
+
+import Data.List (partition)
+
+quicksort :: Ord a => [a] -> [a]
+quicksort [] = []
+quicksort (x:xs) =
+    let (lt, gt) = partition (<= x) xs
+    in quicksort lt ++ [x] ++ quicksort gt
+
+main :: IO ()
+main = mapM_ print $ quicksort [3, 6, 8, 10, 1, 2, 1 :: Int]

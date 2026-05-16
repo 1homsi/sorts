@@ -1,0 +1,12 @@
+CREATE TABLE #input (id INT, val INT);
+INSERT INTO #input VALUES (1,38),(2,27),(3,43),(4,3),(5,9),(6,82),(7,10);
+
+WITH sorted AS (
+    SELECT val, ROW_NUMBER() OVER (ORDER BY val) AS rn
+    FROM #input
+)
+SELECT val AS sorted_value
+FROM sorted
+ORDER BY rn;
+
+DROP TABLE #input;

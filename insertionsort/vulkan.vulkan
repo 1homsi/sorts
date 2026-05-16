@@ -1,0 +1,28 @@
+#version 450
+
+layout(local_size_x = 1) in;
+
+layout(binding = 0) buffer InputData {
+    int arr[];
+};
+
+layout(binding = 1) buffer OutputData {
+    int sorted[];
+};
+
+layout(push_constant) uniform PushConstants {
+    int n;
+};
+
+void main() {
+    for (int i = 0; i < n; i++) sorted[i] = arr[i];
+    for (int i = 1; i < n; i++) {
+        int key = sorted[i];
+        int j = i - 1;
+        while (j >= 0 && sorted[j] > key) {
+            sorted[j + 1] = sorted[j];
+            j--;
+        }
+        sorted[j + 1] = key;
+    }
+}

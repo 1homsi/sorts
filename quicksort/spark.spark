@@ -1,0 +1,49 @@
+package Quicksort with SPARK_Mode is
+   type Arr_Type is array (Natural range <>) of Integer;
+
+   procedure Partition
+     (Arr : in out Arr_Type;
+      Low  : in Natural;
+      High : in Natural;
+      P    : out Natural)
+   with
+     Pre => Low in Arr'Range and High in Arr'Range and Low < High,
+     Post => P in Low .. High;
+
+   procedure Sort
+     (Arr : in out Arr_Type;
+      Low  : in Natural;
+      High : in Natural)
+   with
+     Pre => Low in Arr'Range and High in Arr'Range;
+
+end Quicksort;
+
+package body Quicksort with SPARK_Mode is
+
+   procedure Partition (Arr : in out Arr_Type; Low, High : Natural; P : out Natural) is
+      Pivot : Integer := Arr (High);
+      I     : Natural := Low;
+      Tmp   : Integer;
+   begin
+      for J in Low .. High - 1 loop
+         if Arr (J) <= Pivot then
+            Tmp := Arr (I); Arr (I) := Arr (J); Arr (J) := Tmp;
+            I := I + 1;
+         end if;
+      end loop;
+      Tmp := Arr (I); Arr (I) := Arr (High); Arr (High) := Tmp;
+      P := I;
+   end Partition;
+
+   procedure Sort (Arr : in out Arr_Type; Low, High : Natural) is
+      P : Natural;
+   begin
+      if Low < High then
+         Partition (Arr, Low, High, P);
+         Sort (Arr, Low, P - 1);
+         Sort (Arr, P + 1, High);
+      end if;
+   end Sort;
+
+end Quicksort;

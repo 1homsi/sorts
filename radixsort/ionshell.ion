@@ -1,0 +1,31 @@
+fn get_digit(x: int, exp: int) -> int {
+    return $(( (x / exp) % 10 ))
+}
+
+fn counting_sort(arr: str, exp: int) -> str {
+    let result = ""
+    for d in $(seq 0 9) {
+        for x in $arr {
+            if test $(get_digit $x $exp) -eq $d {
+                result = "$result $x"
+            }
+        }
+    }
+    return $result
+}
+
+fn radix_sort(arr: str) -> str {
+    let max = 0
+    for x in $arr {
+        if test $x -gt $max { let max = $x }
+    }
+    let exp = 1
+    let result = $arr
+    while test $(( max / exp )) -gt 0 {
+        let result = $(counting_sort $result $exp)
+        let exp = $(( exp * 10 ))
+    }
+    return $result
+}
+
+echo $(radix_sort "170 45 75 90 802 24 2 66")

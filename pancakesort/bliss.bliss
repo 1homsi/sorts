@@ -1,0 +1,49 @@
+MODULE pancake_sort (MAIN = pancake) =
+BEGIN
+
+GLOBAL
+    arr : VECTOR [7] INITIAL (3, 6, 2, 7, 4, 1, 5),
+    n : INITIAL (7);
+
+ROUTINE flip (k) =
+BEGIN
+    LOCAL left : INITIAL (0), right : INITIAL (.k), tmp;
+    WHILE .left LSS .right DO
+    BEGIN
+        tmp = .arr [.left];
+        arr [.left] = .arr [.right];
+        arr [.right] = .tmp;
+        left = .left + 1;
+        right = .right - 1;
+    END;
+END;
+
+ROUTINE find_max_idx (size) =
+BEGIN
+    LOCAL max_idx : INITIAL (0), i : INITIAL (1);
+    WHILE .i LSS .size DO
+    BEGIN
+        IF .arr [.i] GTR .arr [.max_idx] THEN max_idx = .i;
+        i = .i + 1;
+    END;
+    .max_idx
+END;
+
+ROUTINE pancake =
+BEGIN
+    LOCAL size : INITIAL (.n), mi;
+    WHILE .size GTR 1 DO
+    BEGIN
+        mi = find_max_idx (.size);
+        IF .mi NEQ .size - 1 THEN
+        BEGIN
+            IF .mi NEQ 0 THEN flip (.mi);
+            flip (.size - 1);
+        END;
+        size = .size - 1;
+    END;
+    0
+END;
+
+END
+ELUDOM

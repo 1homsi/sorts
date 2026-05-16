@@ -1,0 +1,15 @@
+{% set arr = [5, 3, 1, 4, 2] %}
+{% set n = arr|length %}
+{% set sorted = arr %}
+{% for i in 1..(n-1) %}
+    {% set key = sorted[i] %}
+    {% set j = i - 1 %}
+    {% for k in 0..n %}
+        {% if j >= 0 and sorted[j] > key %}
+            {% set sorted = sorted|merge({(j+1): sorted[j]}) %}
+            {% set j = j - 1 %}
+        {% endif %}
+    {% endfor %}
+    {% set sorted = sorted|merge({(j+1): key}) %}
+{% endfor %}
+{{ sorted|join(', ') }}

@@ -1,0 +1,50 @@
+module TimSort2 exposing (timsort)
+
+import List exposing (length, take, drop, map)
+
+insertVal : comparable -> List comparable -> List comparable
+insertVal x lst =
+    case lst of
+        [] -> [x]
+        h :: t ->
+            if x <= h then x :: h :: t
+            else h :: insertVal x t
+
+insertionSort : List comparable -> List comparable
+insertionSort lst =
+    case lst of
+        [] -> []
+        h :: t -> insertVal h (insertionSort t)
+
+mergeRuns : List comparable -> List comparable -> List comparable
+mergeRuns xs ys =
+    case (xs, ys) of
+        ([], _) -> ys
+        (_, []) -> xs
+        (x :: xrest, y :: yrest) ->
+            if x <= y then x :: mergeRuns xrest ys
+            else y :: mergeRuns xs yrest
+
+chunksOf : Int -> List comparable -> List (List comparable)
+chunksOf n lst =
+    if List.isEmpty lst then []
+    else take n lst :: chunksOf n (drop n lst)
+
+mergePairs : List (List comparable) -> List (List comparable)
+mergePairs runs =
+    case runs of
+        [] -> []
+        [x] -> [x]
+        x :: y :: rest -> mergeRuns x y :: mergePairs rest
+
+mergeAll : List (List comparable) -> List comparable
+mergeAll runs =
+    case runs of
+        [] -> []
+        [x] -> x
+        _ -> mergeAll (mergePairs runs)
+
+timsort : List comparable -> List comparable
+timsort lst =
+    if List.isEmpty lst then lst
+    else mergeAll (map insertionSort (chunksOf 32 lst))

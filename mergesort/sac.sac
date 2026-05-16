@@ -1,0 +1,40 @@
+use Array: all;
+use StdIO: all;
+
+int[.] merge(int[.] left, int[.] right)
+{
+    int n = shape(left)[0] + shape(right)[0];
+    int[n] result;
+    int i = 0, j = 0, k = 0;
+    while (i < shape(left)[0] && j < shape(right)[0]) {
+        if (left[i] <= right[j]) {
+            result[k] = left[i]; i++; k++;
+        } else {
+            result[k] = right[j]; j++; k++;
+        }
+    }
+    while (i < shape(left)[0]) { result[k] = left[i]; i++; k++; }
+    while (j < shape(right)[0]) { result[k] = right[j]; j++; k++; }
+    return result;
+}
+
+int[.] mergeSort(int[.] arr)
+{
+    int n = shape(arr)[0];
+    if (n <= 1) return arr;
+    int mid = n / 2;
+    int[.] left = mergeSort(arr[0..mid-1]);
+    int[.] right = mergeSort(arr[mid..n-1]);
+    return merge(left, right);
+}
+
+int main()
+{
+    int[7] arr = [38, 27, 43, 3, 9, 82, 10];
+    int[.] sorted = mergeSort(arr);
+    for (int i = 0; i < shape(sorted)[0]; i++) {
+        printf("%d ", sorted[i]);
+    }
+    printf("\n");
+    return 0;
+}

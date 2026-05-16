@@ -1,0 +1,17 @@
+module Quicksort where
+
+import PlutusTx
+import PlutusTx.Prelude
+
+{-# INLINABLE quicksort #-}
+quicksort :: [Integer] -> [Integer]
+quicksort [] = []
+quicksort (pivot:rest) =
+    quicksort [x | x <- rest, x <= pivot]
+    ++ [pivot] ++
+    quicksort [x | x <- rest, x > pivot]
+
+{-# INLINABLE validator #-}
+validator :: [Integer] -> [Integer] -> ScriptContext -> Bool
+validator datum redeemer _ctx =
+    quicksort datum == quicksort redeemer

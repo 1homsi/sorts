@@ -1,0 +1,54 @@
+use StdIO: all;
+use Array: all;
+use Math: all;
+
+int getDigit(int x, int exp)
+{
+    return((x / exp) % 10);
+}
+
+int[.] countingSort(int[.] arr, int exp)
+{
+    n = shape(arr)[0];
+    output = with {
+        ([0] <= [i] < [n]) : 0;
+    } : genarray([n], 0);
+    count = with {
+        ([0] <= [i] < [10]) : 0;
+    } : genarray([10], 0);
+    count = with {
+        ([0] <= [i] < [n]) :
+            count[getDigit(arr[i], exp)] + 1;
+    } : modarray(count);
+    result = with {
+        ([0] <= [d] < [10]) :
+            { arr[i] | i < n && getDigit(arr[i], exp) == d };
+    } : fold(++, []);
+    return(result);
+}
+
+int[.] radixSort(int[.] arr)
+{
+    if (shape(arr)[0] == 0) { return(arr); }
+    maxVal = with {
+        ([0] <= [i] < [shape(arr)[0]]) : arr[i];
+    } : fold(max, 0);
+    result = arr;
+    exp = 1;
+    while (maxVal / exp > 0) {
+        result = countingSort(result, exp);
+        exp = exp * 10;
+    }
+    return(result);
+}
+
+int main()
+{
+    arr = [170, 45, 75, 90, 802, 24, 2, 66];
+    sorted = radixSort(arr);
+    for (i = 0; i < shape(sorted)[0]; i++) {
+        printf("%d ", sorted[i]);
+    }
+    printf("\n");
+    return(0);
+}

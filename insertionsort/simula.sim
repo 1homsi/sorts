@@ -1,0 +1,16 @@
+Begin
+   Integer Array A(1:10);
+   Integer i, j, key, n;
+   n := 10;
+   For i := 2 Step 1 Until n Do
+   Begin
+      key := A(i);
+      j := i - 1;
+      While j >= 1 And A(j) > key Do
+      Begin
+         A(j+1) := A(j);
+         j := j - 1;
+      End;
+      A(j+1) := key;
+   End;
+End

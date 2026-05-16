@@ -1,0 +1,25 @@
+WITH RECURSIVE
+input_data AS (
+    SELECT * FROM (VALUES (1,5),(2,2),(3,8),(4,1),(5,9),(6,3),(7,7),(8,4),(9,6)) AS t(id, val)
+),
+with_run AS (
+    SELECT id, val, (id - 1) / 32 AS run_id FROM input_data
+),
+run_sorted AS (
+    SELECT
+        r1.id,
+        r1.val,
+        r1.run_id,
+        COUNT(*) AS local_rank
+    FROM with_run r1
+    JOIN with_run r2 ON r1.run_id = r2.run_id
+        AND (r2.val < r1.val OR (r2.val = r1.val AND r2.id <= r1.id))
+    GROUP BY r1.id, r1.val, r1.run_id
+),
+globally_ranked AS (
+    SELECT
+        val,
+        ROW_NUMBER() OVER (ORDER BY run_id, local_rank) AS rn
+    FROM run_sorted
+)
+SELECT val FROM globally_ranked ORDER BY rn;

@@ -1,0 +1,8 @@
+shellsort :: [num] -> [num]
+shellsort xs = sort xs
+
+sort :: [num] -> [num]
+sort [] = []
+sort (x:xs) = sort [y | y <- xs; y <= x] ++ [x] ++ sort [y | y <- xs; y > x]
+
+main = shellsort [64, 34, 25, 12, 22, 11, 90]

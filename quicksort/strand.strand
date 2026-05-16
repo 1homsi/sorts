@@ -1,0 +1,14 @@
+quicksort([], []).
+quicksort([Pivot|Rest], Sorted) :-
+    split(Pivot, Rest, Less, Greater),
+    quicksort(Less, SortedLess),
+    quicksort(Greater, SortedGreater),
+    append(SortedLess, [Pivot|SortedGreater], Sorted).
+
+split(_, [], [], []).
+split(Pivot, [H|T], [H|Less], Greater) :-
+    H =< Pivot | split(Pivot, T, Less, Greater).
+split(Pivot, [H|T], Less, [H|Greater]) :-
+    H > Pivot | split(Pivot, T, Less, Greater).
+
+:- quicksort([3,6,8,10,1,2,1], S), write(S), nl.

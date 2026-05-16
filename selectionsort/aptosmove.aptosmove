@@ -1,0 +1,20 @@
+module selection_sort::aptos_sort {
+    use std::vector;
+    
+    public fun selection_sort<T: copy + drop>(arr: &mut vector<T>, less_than: |&T, &T| bool) {
+        let n = vector::length(arr);
+        let i = 0;
+        while (i < n) {
+            let min_idx = i;
+            let j = i + 1;
+            while (j < n) {
+                if (less_than(vector::borrow(arr, j), vector::borrow(arr, min_idx))) {
+                    min_idx = j;
+                };
+                j = j + 1;
+            };
+            vector::swap(arr, i, min_idx);
+            i = i + 1;
+        };
+    }
+}

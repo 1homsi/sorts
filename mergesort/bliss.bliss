@@ -1,0 +1,46 @@
+MODULE MERGESORT (MAIN = MAIN) =
+BEGIN
+
+GLOBAL
+    ARR : VECTOR [7] INITIAL (38,27,43,3,9,82,10),
+    TMP : VECTOR [7];
+
+ROUTINE MERGE(LO, MID, HI) =
+BEGIN
+    LOCAL I, J, K, X;
+    I = .LO; J = .MID + 1; K = .LO;
+    WHILE .I LEQ .MID AND .J LEQ .HI DO BEGIN
+        IF .ARR[.I] LEQ .ARR[.J] THEN BEGIN
+            TMP[.K] = .ARR[.I]; I = .I + 1;
+        END ELSE BEGIN
+            TMP[.K] = .ARR[.J]; J = .J + 1;
+        END;
+        K = .K + 1;
+    END;
+    WHILE .I LEQ .MID DO BEGIN TMP[.K] = .ARR[.I]; I = .I+1; K = .K+1; END;
+    WHILE .J LEQ .HI DO BEGIN TMP[.K] = .ARR[.J]; J = .J+1; K = .K+1; END;
+    INCR X FROM .LO TO .HI DO ARR[.X] = .TMP[.X];
+    0
+END;
+
+ROUTINE MSORT(LO, HI) =
+BEGIN
+    LOCAL MID;
+    IF .LO GEQ .HI THEN RETURN 0;
+    MID = (.LO + .HI) / 2;
+    MSORT(.LO, .MID);
+    MSORT(.MID + 1, .HI);
+    MERGE(.LO, .MID, .HI);
+    0
+END;
+
+ROUTINE MAIN =
+BEGIN
+    LOCAL I;
+    MSORT(0, 6);
+    INCR I FROM 0 TO 6 DO $FAO('!SL ', .ARR[.I]);
+    0
+END;
+
+END
+ELUDOM

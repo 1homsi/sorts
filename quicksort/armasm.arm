@@ -1,0 +1,52 @@
+        .data
+arr:    .word 3, 6, 8, 10, 1, 2, 1
+n:      .word 7
+
+        .text
+        .global main
+
+main:
+        ldr     r0, =arr
+        mov     r1, #0
+        mov     r2, #6
+        bl      quicksort
+        bx      lr
+
+quicksort:
+        cmp     r1, r2
+        bxge    lr
+        push    {r0-r4, lr}
+        bl      partition
+        mov     r4, r0
+        pop     {r0-r3}
+        push    {r0, r4}
+        sub     r2, r4, #1
+        bl      quicksort
+        pop     {r0, r4}
+        add     r1, r4, #1
+        bl      quicksort
+        pop     {r4, pc}
+
+partition:
+        ldr     r3, [r0, r2, lsl #2]
+        mov     r4, r1
+        mov     r5, r1
+part_loop:
+        cmp     r5, r2
+        bge     part_done
+        ldr     r6, [r0, r5, lsl #2]
+        cmp     r6, r3
+        bgt     no_swap
+        ldr     r7, [r0, r4, lsl #2]
+        str     r6, [r0, r4, lsl #2]
+        str     r7, [r0, r5, lsl #2]
+        add     r4, r4, #1
+no_swap:
+        add     r5, r5, #1
+        b       part_loop
+part_done:
+        ldr     r7, [r0, r4, lsl #2]
+        str     r3, [r0, r4, lsl #2]
+        str     r7, [r0, r2, lsl #2]
+        mov     r0, r4
+        bx      lr

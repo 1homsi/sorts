@@ -1,0 +1,26 @@
+import std.stdio.STDOUT
+
+fn shell_sort(arr: mut Array[Int]) {
+  let n = arr.length
+  let mut gap = n / 2
+  while gap > 0 {
+    let mut i = gap
+    while i < n {
+      let temp = arr.get(i)
+      let mut j = i
+      while j >= gap and arr.get(j - gap) > temp {
+        arr.set(j, arr.get(j - gap))
+        j -= gap
+      }
+      arr.set(j, temp)
+      i += 1
+    }
+    gap /= 2
+  }
+}
+
+fn pub main {
+  let arr = [64, 34, 25, 12, 22, 11, 90]
+  shell_sort(arr)
+  STDOUT.new.print(arr.to_string)
+}
