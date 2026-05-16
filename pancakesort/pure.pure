@@ -1,0 +1,8 @@
+pancake_sort arr = sorted with
+    sorted = if null arr then []
+             else pancake_sort rest ++ [minimum arr]
+             when (m:rest) = arr; m = minimum arr end;
+
+let arr = [5, 2, 8, 1, 9, 3];
+let sorted = pancake_sort arr;
+println ("Pancake Sort: " + str sorted);
