@@ -1,13 +1,6 @@
-0. READ-ITEM A
-1. COMPARE A(1) TO A(2)
-   IF GREATER GO TO OPERATION 5
-2. COMPARE A(2) TO A(3)
-   IF GREATER GO TO OPERATION 5
-3. COMPARE A(3) TO A(4)
-   IF GREATER GO TO OPERATION 5
-4. WRITE-ITEM A
-   STOP
-5. TRANSFER A(1) TO TEMP
-   TRANSFER A(2) TO A(1)
-   TRANSFER TEMP TO A(2)
-   GO TO OPERATION 1
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
