@@ -1,0 +1,29 @@
+import chisel3._
+import chisel3.util._
+
+class GnomeSort(n: Int = 10) extends Module {
+    val io = IO(new Bundle {
+        val start = Input(Bool())
+        val done = Output(Bool())
+    })
+
+    val arr = RegInit(VecInit(Seq(5, 3, 8, 1, 9, 2, 7, 4, 6, 0).map(_.S(32.W))))
+    val i = RegInit(0.U(log2Ceil(n+1).W))
+    val tmp = Reg(SInt(32.W))
+    val done = RegInit(false.B)
+
+    io.done := done
+
+    when (!done) {
+        when (i >= n.U) {
+            done := true.B
+        } .elsewhen (i === 0.U || arr(i) >= arr(i - 1.U)) {
+            i := i + 1.U
+        } .otherwise {
+            tmp := arr(i)
+            arr(i) := arr(i - 1.U)
+            arr(i - 1.U) := tmp
+            i := i - 1.U
+        }
+    }
+}
