@@ -1,0 +1,47 @@
+package main
+import "fmt"
+
+func merge(arr []int, left, mid, right int) {
+  result := make([]int, right-left+1)
+  i, j, k := left, mid+1, 0
+  
+  for i <= mid && j <= right {
+    if arr[i] <= arr[j] {
+      result[k] = arr[i]
+      i++
+    } else {
+      result[k] = arr[j]
+      j++
+    }
+    k++
+  }
+  
+  for i <= mid {
+    result[k] = arr[i]
+    i++
+    k++
+  }
+  
+  for j <= right {
+    result[k] = arr[j]
+    j++
+    k++
+  }
+  
+  copy(arr[left:right+1], result)
+}
+
+func mergesort(arr []int, left, right int) {
+  if left < right {
+    mid := (left + right) / 2
+    mergesort(arr, left, mid)
+    mergesort(arr, mid+1, right)
+    merge(arr, left, mid, right)
+  }
+}
+
+func main() {
+  arr := []int{5, 2, 8, 1, 9, 3}
+  mergesort(arr, 0, 5)
+  fmt.Println(arr)
+}
