@@ -1,0 +1,21 @@
+        COMB-SORT ROUTINE
+        N = $ARR-SIZE
+        GAP = N
+        SORTED = 0
+START   SORTED/1                              /DONE
+        GAP = INT(GAP/1.3)
+        GAP < 1                               /SETONE
+        GAP .EQ. 1                            /SETSORT
+        GOTO PASS
+SETONE  GAP = 1
+SETSORT SORTED = 1
+PASS    I = 1
+INNER   I + GAP > N                          /START
+        $ARR(I) > $ARR(I+GAP)               /NEXT
+        TMP = $ARR(I)
+        $ARR(I) = $ARR(I+GAP)
+        $ARR(I+GAP) = TMP
+        SORTED = 0
+NEXT    I = I + 1
+        GOTO INNER
+DONE    END
