@@ -1,0 +1,14 @@
+def selectionSort (arr : List Int) : List Int =
+  n = length arr
+  result = newRef arr
+  for i in range(0, n-1)
+    minIdx = newRef i
+    for j in range(i+1, n)
+      if (!result).(j) < (!result).(!minIdx)
+        minIdx := j
+    old_result = !result
+    (!result)!i := old_result.(!minIdx)
+    (!result).(!minIdx) := old_result.i
+  !result
+
+print (selectionSort [5, 2, 8, 1, 9, 3])
