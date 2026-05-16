@@ -1,0 +1,23 @@
+#include <stdio.h>
+void shellsort(int arr[], int n) {
+  int gap = 1;
+  while (gap <= n) gap = gap * 3 + 1;
+  while (gap > 0) {
+    gap = gap / 3;
+    process gap_sort { for (int i = gap; i < n; i++) {
+      int temp = arr[i];
+      int j = i;
+      while (j >= gap && arr[j - gap] > temp) {
+        arr[j] = arr[j - gap];
+        j -= gap;
+      }
+      arr[j] = temp;
+    }}
+  }
+}
+int main() {
+  int arr[] = {5, 2, 8, 1, 9, 3};
+  shellsort(arr, 6);
+  for (int i = 0; i < 6; i++) printf("%d ", arr[i]);
+  return 0;
+}
