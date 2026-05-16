@@ -1,0 +1,18 @@
+fmod MERGESORT is
+  protecting INT-LIST .
+  
+  op merge : IntList IntList -> IntList .
+  op mergesort : IntList -> IntList .
+  
+  eq merge(nil, L) = L .
+  eq merge(L, nil) = L .
+  eq merge(X L1, Y L2) = 
+    if X <= Y then X merge(L1, Y L2) else Y merge(X L1, L2) fi .
+  
+  eq mergesort(nil) = nil .
+  eq mergesort(X) = X .
+  eq mergesort(L) = merge(mergesort(take(L, half(length(L)))), 
+                          mergesort(drop(L, half(length(L))))) .
+endfm
+
+red mergesort(5 2 8 1 9 3) .
