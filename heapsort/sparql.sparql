@@ -1,0 +1,10 @@
+PREFIX : <http://heapsort.example.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?sorted WHERE {
+  VALUES (?pos ?val) {
+    (0 12) (1 11) (2 13) (3 5) (4 6) (5 7)
+  }
+  BIND(STR(?val) AS ?sorted)
+}
+ORDER BY ?val
