@@ -1,0 +1,19 @@
+let
+  stoogesort = proc(a: var array of int, i: int, j: int) is
+    if a[j] < a[i] then
+      let temp = a[j]
+      let a[j] := a[i]
+      let a[i] := temp
+    fi;
+    if j - i > 1 then
+      let t = (j - i + 1) div 3
+      stoogesort(a, i, j - t);
+      stoogesort(a, i + t, j);
+      stoogesort(a, i, j - t);
+    fi;
+  end
+in
+  let a = [5, 2, 8, 1, 9, 3]
+  stoogesort(a, 0, 5);
+  write a;
+end
