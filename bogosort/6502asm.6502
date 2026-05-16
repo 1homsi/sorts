@@ -1,1 +1,4 @@
-print("Bogosort implementation for 6502asm.6502")
+; bogosort in assembly
+; check if sorted
+; if not, shuffle
+; repeat
