@@ -1,0 +1,39 @@
+use std
+
+fn cocktailsort(arr : int[:], n : int) -> int[:] {
+    var i = 0
+    while i < n {
+        var swapped = false
+        for var k = 0; k < n - i - 1; k += 1 {
+            if arr[k] > arr[k + 1] {
+                var temp = arr[k]
+                arr[k] = arr[k + 1]
+                arr[k + 1] = temp
+                swapped = true
+            }
+        }
+        if !swapped {
+            break
+        }
+        i += 1
+        swapped = false
+        for var k = n - i - 2; k >= 0; k -= 1 {
+            if arr[k] > arr[k + 1] {
+                var temp = arr[k]
+                arr[k] = arr[k + 1]
+                arr[k + 1] = temp
+                swapped = true
+            }
+        }
+        if !swapped {
+            break
+        }
+        i += 1
+    }
+    -> arr
+}
+
+const main = {
+    var arr = [5, 2, 8, 1, 9, 3]
+    std.put("{}", cocktailsort(arr, 6))
+}
