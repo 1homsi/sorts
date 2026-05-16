@@ -1,0 +1,17 @@
+@gnome_sort = @arr @n
+  let @i = 0
+  @loop @arr @n @i
+
+@loop = @arr @n @i
+  if (>= @i @n)
+    @arr
+  else if (== @i 0)
+    (@loop @arr @n (+ @i 1))
+  else
+    let @cur = (arr_get @arr @i)
+    let @prv = (arr_get @arr (- @i 1))
+    if (>= @cur @prv)
+      (@loop @arr @n (+ @i 1))
+    else
+      let @arr2 = (arr_set (arr_set @arr @i @prv) (- @i 1) @cur)
+      (@loop @arr2 @n (- @i 1))
