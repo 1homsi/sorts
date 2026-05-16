@@ -1,0 +1,34 @@
+Begin
+   Integer Array arr(0:5);
+   Integer n, i, tmp;
+
+   Procedure Heapify(n, i);
+      Integer n, i;
+   Begin
+      Integer largest, left, right, t;
+      largest := i;
+      left := 2*i + 1;
+      right := 2*i + 2;
+      If left < n And arr(left) > arr(largest) Then largest := left;
+      If right < n And arr(right) > arr(largest) Then largest := right;
+      If largest <> i Then
+      Begin
+         t := arr(i); arr(i) := arr(largest); arr(largest) := t;
+         Heapify(n, largest)
+      End
+   End;
+
+   arr(0) := 12; arr(1) := 11; arr(2) := 13;
+   arr(3) := 5;  arr(4) := 6;  arr(5) := 7;
+   n := 6;
+
+   For i := n // 2 - 1 Step -1 Until 0 Do Heapify(n, i);
+   For i := n - 1 Step -1 Until 1 Do
+   Begin
+      tmp := arr(0); arr(0) := arr(i); arr(i) := tmp;
+      Heapify(i, 0)
+   End;
+
+   For i := 0 Step 1 Until n-1 Do OutInt(arr(i), 5);
+   OutImage
+End
