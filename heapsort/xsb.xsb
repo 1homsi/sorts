@@ -1,0 +1,12 @@
+:- table heapsort/2.
+
+heapsort([], []).
+heapsort([H|T], Sorted) :-
+    heapsort(T, SortedT),
+    insert(H, SortedT, Sorted).
+
+insert(X, [], [X]).
+insert(X, [H|T], [X,H|T]) :- X =< H.
+insert(X, [H|T], [H|S]) :- X > H, insert(X, T, S).
+
+:- heapsort([5,2,8,1,9,3], X), write(X), nl, halt.
