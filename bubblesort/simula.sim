@@ -1,0 +1,30 @@
+BEGIN
+    INTEGER ARRAY arr(1:7);
+    INTEGER n, i, tmp;
+    BOOLEAN swapped;
+
+    arr(1) := 64; arr(2) := 34; arr(3) := 25; arr(4) := 12;
+    arr(5) := 22; arr(6) := 11; arr(7) := 90;
+
+    n := 7;
+    swapped := TRUE;
+    WHILE swapped DO
+    BEGIN
+        swapped := FALSE;
+        FOR i := 1 STEP 1 UNTIL n - 1 DO
+        BEGIN
+            IF arr(i) > arr(i+1) THEN
+            BEGIN
+                tmp := arr(i);
+                arr(i) := arr(i+1);
+                arr(i+1) := tmp;
+                swapped := TRUE;
+            END;
+        END;
+        n := n - 1;
+    END;
+
+    FOR i := 1 STEP 1 UNTIL 7 DO
+        OutInt(arr(i), 5);
+    OutImage;
+END
