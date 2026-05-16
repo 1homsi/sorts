@@ -1,0 +1,30 @@
+.class public LInsertionSortArt;
+.super Ljava/lang/Object;
+
+.method public static insertionSort([I)V
+    .registers 8
+    .annotation system Ldalvik/annotation/Throws;
+        value = {}
+    .end annotation
+    array-length v0, p0
+    const/4 v1, 0x1
+:outer
+    if-ge v1, v0, :done
+    aget v2, p0, v1
+    add-int/lit8 v3, v1, -0x1
+:inner
+    if-ltz v3, :place
+    aget v4, p0, v3
+    if-le v4, v2, :place
+    add-int/lit8 v5, v3, 0x1
+    aput v4, p0, v5
+    add-int/lit8 v3, v3, -0x1
+    goto :inner
+:place
+    add-int/lit8 v5, v3, 0x1
+    aput v2, p0, v5
+    add-int/lit8 v1, v1, 0x1
+    goto :outer
+:done
+    return-void
+.end method
