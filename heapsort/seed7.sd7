@@ -1,0 +1,43 @@
+$ include "seed7_05.s7i";
+
+const proc: heapify (inout array integer: arr, in integer: n, in integer: i) is func
+  local
+    var integer: largest is 0;
+    var integer: left is 0;
+    var integer: right is 0;
+    var integer: tmp is 0;
+  begin
+    largest := i;
+    left := 2 * i;
+    right := 2 * i + 1;
+    if left <= n and arr[left] > arr[largest] then largest := left; end if;
+    if right <= n and arr[right] > arr[largest] then largest := right; end if;
+    if largest <> i then
+      tmp := arr[i]; arr[i] := arr[largest]; arr[largest] := tmp;
+      heapify(arr, n, largest);
+    end if;
+  end func;
+
+const proc: heapsort (inout array integer: arr) is func
+  local
+    var integer: n is 0;
+    var integer: i is 0;
+    var integer: tmp is 0;
+  begin
+    n := length(arr);
+    for i range n div 2 downto 1 do heapify(arr, n, i); end for;
+    for i range n downto 2 do
+      tmp := arr[1]; arr[1] := arr[i]; arr[i] := tmp;
+      heapify(arr, i - 1, 1);
+    end for;
+  end func;
+
+const proc: main is func
+  local
+    var array integer: arr is [] (12, 11, 13, 5, 6, 7);
+    var integer: i is 0;
+  begin
+    heapsort(arr);
+    for i range 1 to length(arr) do write(arr[i] <& " "); end for;
+    writeln;
+  end func;
