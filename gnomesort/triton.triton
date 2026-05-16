@@ -1,0 +1,26 @@
+import triton
+import triton.language as tl
+import torch
+
+@triton.jit
+def gnome_sort_kernel(arr_ptr, n, BLOCK_SIZE: tl.constexpr):
+    pid = tl.program_id(0)
+    i = 0
+    while i < n:
+        if i == 0:
+            i += 1
+        else:
+            cur = tl.load(arr_ptr + i)
+            prv = tl.load(arr_ptr + i - 1)
+            if cur >= prv:
+                i += 1
+            else:
+                tl.store(arr_ptr + i, prv)
+                tl.store(arr_ptr + i - 1, cur)
+                i -= 1
+
+def gnome_sort(arr):
+    n = len(arr)
+    arr_gpu = torch.tensor(arr, device='cuda', dtype=torch.int32)
+    gnome_sort_kernel[(1,)](arr_gpu, n, BLOCK_SIZE=1)
+    return arr_gpu.cpu().tolist()
