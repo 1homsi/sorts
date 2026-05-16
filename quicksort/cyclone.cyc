@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int* quicksort(int* arr, int n) {
+  if (n <= 1) return arr;
+
+  int pivot = arr[0];
+  int* less = malloc(sizeof(int) * n);
+  int* greater = malloc(sizeof(int) * n);
+  int li = 0, gi = 0;
+
+  for (int i = 1; i < n; i++) {
+    if (arr[i] <= pivot) {
+      less[li++] = arr[i];
+    } else {
+      greater[gi++] = arr[i];
+    }
+  }
+
+  int* result = malloc(sizeof(int) * n);
+  quicksort(less, li);
+  quicksort(greater, gi);
+
+  int idx = 0;
+  for (int i = 0; i < li; i++) result[idx++] = less[i];
+  result[idx++] = pivot;
+  for (int i = 0; i < gi; i++) result[idx++] = greater[i];
+
+  free(less); free(greater);
+  return result;
+}
+
+int main() {
+  int arr[] = {5, 2, 8, 1, 9, 3};
+  int* sorted = quicksort(arr, 6);
+  for (int i = 0; i < 6; i++) printf("%d ", sorted[i]);
+  return 0;
+}
