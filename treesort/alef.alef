@@ -1,0 +1,40 @@
+#include <alef.h>
+
+typedef struct Node {
+  int value;
+  struct Node *left;
+  struct Node *right;
+} Node;
+
+Node* insert(Node *node, int val) {
+  if (node == nil) {
+    node = malloc(sizeof(Node));
+    node->value = val;
+    node->left = nil;
+    node->right = nil;
+    return node;
+  }
+  if (val < node->value) {
+    node->left = insert(node->left, val);
+  } else if (val > node->value) {
+    node->right = insert(node->right, val);
+  }
+  return node;
+}
+
+void inorder(Node *node) {
+  if (node != nil) {
+    inorder(node->left);
+    print("%d ", node->value);
+    inorder(node->right);
+  }
+}
+
+void main() {
+  int arr[] = {5, 2, 8, 1, 9, 3};
+  Node *root = nil;
+  for (int i = 0; i < 6; i++) {
+    root = insert(root, arr[i]);
+  }
+  inorder(root);
+}
