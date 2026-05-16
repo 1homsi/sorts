@@ -1,0 +1,41 @@
+[5 2 8 1 9 3] define @arr
+0 define @pos
+6 define @n
+
+(
+  @arr @pos get define @item
+  0 define @cycles
+  0 1 @n range (
+    define @i
+    @i @pos != @arr @i get @item < and (
+      @cycles 1 add define @cycles
+    ) ()
+  )
+  @cycles 0 != (
+    (@arr @pos get @item ==) (
+      @pos 1 add define @pos
+    ) loop
+    @arr @pos get define @temp
+    @arr @pos @item set
+    @temp define @item
+    (@cycles 0 >) (
+      0 define @cycles
+      0 1 @n range (
+        define @i
+        @i @pos != @arr @i get @item < and (
+          @cycles 1 add define @cycles
+        ) ()
+      )
+      (@arr @pos get @item ==) (
+        @pos 1 add define @pos
+      ) loop
+      @arr @pos get define @temp
+      @arr @pos @item set
+      @temp define @item
+      @cycles 1 sub define @cycles
+    ) loop
+  ) ()
+  @pos 1 add define @pos
+) (@pos @n <) loop
+
+@arr
