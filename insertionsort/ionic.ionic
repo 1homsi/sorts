@@ -1,0 +1,31 @@
+import { Component } from '@angular/core';
+
+function insertionSort(arr: number[]): number[] {
+  const a = [...arr];
+  const n = a.length;
+  for (let i = 1; i < n; i++) {
+    const key = a[i];
+    let j = i - 1;
+    while (j >= 0 && a[j] > key) {
+      a[j + 1] = a[j];
+      j--;
+    }
+    a[j + 1] = key;
+  }
+  return a;
+}
+
+@Component({
+  selector: 'app-home',
+  template: `
+    <ion-header><ion-toolbar><ion-title>Insertion Sort</ion-title></ion-toolbar></ion-header>
+    <ion-content>
+      <ion-button (click)="sort()">Sort</ion-button>
+      <p>{{ sorted.join(', ') }}</p>
+    </ion-content>
+  `
+})
+export class HomePage {
+  sorted: number[] = [];
+  sort() { this.sorted = insertionSort([5, 3, 1, 4, 2]); }
+}
