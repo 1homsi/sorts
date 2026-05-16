@@ -1,35 +1,4 @@
-import std.rand (Random)
-import std.stdio (STDOUT)
-
-fn is_sorted(arr: ref Array[Int]) -> Bool {
-  let n = arr.size
-  let mut i = 0
-  while i < n - 1 {
-    if arr.get(i) > arr.get(i + 1) { return false }
-    i += 1
-  }
-  true
+function bogosort(arr) public pure returns (uint[] memory) {
+  while (!isSorted(arr)) { shuffle(arr); }
+  return arr;
 }
-
-fn shuffle(arr: mut Array[Int], rng: mut Random) {
-  let n = arr.size
-  let mut i = n - 1
-  while i > 0 {
-    let j = rng.int_between(0, i)
-    let tmp = arr.get(i)
-    arr.set(i, arr.get(j))
-    arr.set(j, tmp)
-    i -= 1
-  }
-}
-
-fn bogosort(arr: mut Array[Int], rng: mut Random) {
-  while is_sorted(arr).false? {
-    shuffle(arr, rng)
-  }
-}
-
-let arr = [3, 1, 4, 1, 5, 9, 2, 6]
-let rng = Random.new
-bogosort(arr, rng)
-STDOUT.new.print("{arr}\n")
