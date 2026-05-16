@@ -1,0 +1,28 @@
+pkg gnomesort =
+  type intarr = int[:]
+  decl gnomesort : (arr : intarr -> intarr)
+;;
+
+impl gnomesort =
+  const gnomesort = {arr
+    var i = 0
+    while i < arr.len
+      if i == 0
+        i += 1
+      elif arr[i] < arr[i - 1]
+        var temp = arr[i]
+        arr[i] = arr[i - 1]
+        arr[i - 1] = temp
+        i -= 1
+      else
+        i += 1
+      ;;
+    ;;
+    -> arr
+  }
+;;
+
+const main = {
+  var test : int[6] = [5, 2, 8, 1, 9, 3]
+  std.put(gnomesort(test[:]))
+}
