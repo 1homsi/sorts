@@ -1,0 +1,21 @@
+module GnomeSort where
+
+import Prelude
+import Data.Array (length, unsafeIndex, updateAt)
+import Data.Maybe (fromMaybe)
+
+gnomeSort :: Array Int -> Array Int
+gnomeSort arr = gnomeLoop arr 0 (length arr)
+
+gnomeLoop :: Array Int -> Int -> Int -> Array Int
+gnomeLoop arr i n
+  | i >= n    = arr
+  | i == 0    = gnomeLoop arr 1 n
+  | otherwise =
+      let ai  = unsafeIndex arr i
+          ai1 = unsafeIndex arr (i - 1)
+      in if ai >= ai1
+           then gnomeLoop arr (i + 1) n
+           else
+             let arr' = fromMaybe arr (updateAt i ai1 arr >>= updateAt (i-1) ai)
+             in gnomeLoop arr' (i - 1) n
