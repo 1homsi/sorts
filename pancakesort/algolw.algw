@@ -1,0 +1,20 @@
+BEGIN
+    INTEGER ARRAY ARR(1:6);
+    INTEGER N, I, J, TEMP;
+    
+    ARR(1) := 5; ARR(2) := 2; ARR(3) := 8;
+    ARR(4) := 1; ARR(5) := 9; ARR(6) := 3;
+    N := 6;
+    
+    FOR I := 1 UNTIL N-1 DO
+        FOR J := 1 UNTIL N-I DO
+            IF ARR(J) > ARR(J+1) THEN
+                TEMP := ARR(J);
+                ARR(J) := ARR(J+1);
+                ARR(J+1) := TEMP
+            END
+        END
+    END;
+    
+    PRINT("Pancake Sort: ", ARR)
+END
