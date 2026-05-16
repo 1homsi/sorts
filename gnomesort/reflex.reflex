@@ -1,0 +1,20 @@
+import Reflex
+import Data.Vector.Mutable as VM
+
+gnomeSort :: VM.IOVector Int -> IO ()
+gnomeSort arr = do
+    let n = VM.length arr
+    loop arr 0 n
+  where
+    loop a i n
+      | i >= n = return ()
+      | i == 0 = loop a (i+1) n
+      | otherwise = do
+          x <- VM.read a i
+          y <- VM.read a (i-1)
+          if x >= y
+            then loop a (i+1) n
+            else do
+              VM.write a i y
+              VM.write a (i-1) x
+              loop a (i-1) n
