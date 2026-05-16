@@ -1,0 +1,47 @@
+rec timsort : {arr : list, minSize : int | ...} -> list =
+  fn arr => fn minSize =>
+    mergesort arr minSize
+
+and mergesort : {arr : list, minSize : int | ...} -> list =
+  fn arr => fn minSize =>
+    case arr of
+    | [] => []
+    | [x] => [x]
+    | _ =>
+        if (length arr) <= minSize
+        then insertionsort arr
+        else
+          let mid = (length arr) div 2 in
+          let left = take mid arr in
+          let right = drop mid arr in
+          merge (mergesort left minSize) (mergesort right minSize)
+
+and insertionsort : {arr : list | ...} -> list =
+  fn arr =>
+    case arr of
+    | [] => []
+    | [x] => [x]
+    | h::t => insert h (insertionsort t)
+
+and insert : {x : int, arr : list | ...} -> list =
+  fn x => fn arr =>
+    case arr of
+    | [] => [x]
+    | h::t =>
+        if x <= h then x::h::t else h::(insert x t)
+
+and merge : {left : list, right : list | ...} -> list =
+  fn left => fn right =>
+    case left of
+    | [] => right
+    | _ =>
+        case right of
+        | [] => left
+        | _ =>
+            let h1 = hd left in
+            let t1 = tl left in
+            let h2 = hd right in
+            let t2 = tl right in
+            if h1 <= h2
+            then h1::(merge t1 right)
+            else h2::(merge left t2)
