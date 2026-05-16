@@ -1,0 +1,38 @@
+PROGRAM CYCLESORT
+INTEGER ARRAY ARR(1:5)
+INTEGER N, CS, ITEM, POS, I, TMP, WRITES
+N := 5
+ARR(1) := 5
+ARR(2) := 4
+ARR(3) := 3
+ARR(4) := 2
+ARR(5) := 1
+WRITES := 0
+FOR CS := 1 STEP 1 UNTIL N - 1 DO
+BEGIN
+    ITEM := ARR(CS)
+    POS := CS
+    FOR I := CS + 1 STEP 1 UNTIL N DO
+        IF ARR(I) LESS ITEM THEN POS := POS + 1
+    IF POS NOT EQUAL CS THEN
+    BEGIN
+        WHILE ARR(POS) EQUAL ITEM DO POS := POS + 1
+        TMP := ARR(POS)
+        ARR(POS) := ITEM
+        ITEM := TMP
+        WRITES := WRITES + 1
+        WHILE POS NOT EQUAL CS DO
+        BEGIN
+            POS := CS
+            FOR I := CS + 1 STEP 1 UNTIL N DO
+                IF ARR(I) LESS ITEM THEN POS := POS + 1
+            WHILE ARR(POS) EQUAL ITEM DO POS := POS + 1
+            TMP := ARR(POS)
+            ARR(POS) := ITEM
+            ITEM := TMP
+            WRITES := WRITES + 1
+        END
+    END
+END
+FOR I := 1 STEP 1 UNTIL N DO PRINT ARR(I)
+END
