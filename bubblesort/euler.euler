@@ -1,0 +1,25 @@
+begin
+    array arr[7] := {64, 34, 25, 12, 22, 11, 90};
+    integer n, i, tmp, swapped;
+    n := 7;
+    swapped := 1;
+    while swapped != 0 do
+    begin
+        swapped := 0;
+        i := 1;
+        while i < n do
+        begin
+            if arr[i] > arr[i+1] then
+            begin
+                tmp := arr[i];
+                arr[i] := arr[i+1];
+                arr[i+1] := tmp;
+                swapped := 1
+            end;
+            i := i + 1
+        end;
+        n := n - 1
+    end;
+    for i := 1 to 7 do
+        print(arr[i])
+end
