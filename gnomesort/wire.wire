@@ -1,0 +1,32 @@
+defmodule GnomeSortWeb.SortLive do
+  use Phoenix.LiveView
+
+  def mount(_params, _session, socket) do
+    arr = [5, 3, 8, 1, 9, 2, 7, 4, 6, 0]
+    sorted = gnome_sort(List.to_tuple(arr), 0, length(arr)) |> Tuple.to_list()
+    {:ok, assign(socket, sorted: sorted)}
+  end
+
+  defp gnome_sort(arr, i, n) when i >= n, do: arr
+  defp gnome_sort(arr, 0, n), do: gnome_sort(arr, 1, n)
+  defp gnome_sort(arr, i, n) do
+    ai = elem(arr, i)
+    ai1 = elem(arr, i - 1)
+    if ai >= ai1 do
+      gnome_sort(arr, i + 1, n)
+    else
+      arr2 = arr |> put_elem(i, ai1) |> put_elem(i - 1, ai)
+      gnome_sort(arr2, i - 1, n)
+    end
+  end
+
+  def render(assigns) do
+    ~H"""
+    <ul>
+      <%= for val <- @sorted do %>
+        <li><%= val %></li>
+      <% end %>
+    </ul>
+    """
+  end
+end
