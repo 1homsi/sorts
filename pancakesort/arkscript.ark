@@ -1,0 +1,21 @@
+fun pancake_sort(arr) {
+    mut n = len(arr)
+    mut i = 0
+    
+    while i < n - 1 {
+        mut j = 0
+        while j < n - i - 1 {
+            if arr[j] > arr[j + 1] {
+                mut temp = arr[j]
+                arr[j] = arr[j + 1]
+                arr[j + 1] = temp
+            }
+            j = j + 1
+        }
+        i = i + 1
+    }
+}
+
+mut arr = [5, 2, 8, 1, 9, 3]
+pancake_sort(arr)
+print("Pancake Sort: " + (arr as str))
