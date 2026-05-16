@@ -1,25 +1,6 @@
-namespace Main;
-
-function isSorted(arr: List<Int>): Bool {
-    return List::range(0, arr.size() - 1)->allOf(fn(i) => {
-        let a = arr.get(i);
-        let b = arr.get(i + 1);
-        return a <= b;
-    });
-}
-
-function shuffle(arr: List<Int>): List<Int> {
-    return arr->sortBy(fn(_, _) => { return Bool::random(); });
-}
-
-recursive function bogosort(arr: List<Int>): List<Int> {
-    if(isSorted(arr)) {
-        return arr;
-    }
-    return bogosort[recursive](shuffle(arr));
-}
-
-entrypoint function main(): List<Int> {
-    let arr = List<Int>{3, 1, 4, 1, 5, 9, 2, 6};
-    return bogosort(arr);
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
 }
