@@ -1,0 +1,14 @@
+process HEAPSORT =
+(? integer CLK; ! integer RESULT)
+(| RESULT := HEAPIFY_RESULT when CLK
+|)
+
+where
+  process HEAPIFY_RESULT =
+  (? integer CLK; ! integer RESULT)
+  signal ARR : integer^6 in
+    (| ARR := {|12,11,13,5,6,7|} init {|12,11,13,5,6,7|}
+     | RESULT := ARR[0]
+    |)
+  end signal;
+end;
