@@ -1,0 +1,22 @@
+module GnomeSortZonnon;
+
+type IntArray = array {math} 100 of integer;
+
+procedure Sort(var arr: IntArray; n: integer);
+var
+    i, tmp: integer;
+begin
+    i := 0;
+    while i < n do
+        if (i = 0) or (arr[i] >= arr[i - 1]) then
+            inc(i)
+        else
+            tmp := arr[i];
+            arr[i] := arr[i - 1];
+            arr[i - 1] := tmp;
+            dec(i)
+        end
+    end
+end Sort;
+
+end GnomeSortZonnon.
