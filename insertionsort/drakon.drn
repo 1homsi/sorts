@@ -1,0 +1,15 @@
+INSERTION SORT
+INPUT: array
+OUTPUT: sorted array
+N := length(array)
+FOR i FROM 2 TO N
+  KEY := array[i]
+  J := i - 1
+  WHILE j >= 1 AND array[j] > KEY
+    array[j+1] := array[j]
+    J := J - 1
+  END WHILE
+  array[j+1] := KEY
+END FOR
+PRINT array
+END
