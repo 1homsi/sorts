@@ -1,34 +1,6 @@
-module bogosort
-
-def is_sorted(arr: Array<Int>) -> Bool {
-  var i = 0
-  while i < arr.size - 1 {
-    if arr[i] > arr[i + 1] { return false }
-    i = i + 1
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
   }
-  return true
+  return arr;
 }
-
-def shuffle(arr: Array<Int>) -> Array<Int> {
-  var a = arr.copy()
-  var i = a.size - 1
-  while i > 0 {
-    val j = random.nextInt(i + 1)
-    val tmp = a[i]
-    a[i] = a[j]
-    a[j] = tmp
-    i = i - 1
-  }
-  return a
-}
-
-def bogosort(arr: Array<Int>) -> Array<Int> {
-  var a = arr.copy()
-  while !is_sorted(a) {
-    a = shuffle(a)
-  }
-  return a
-}
-
-val arr = [3, 1, 4, 1, 5, 9, 2, 6]
-print(bogosort(arr))
