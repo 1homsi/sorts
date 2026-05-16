@@ -1,0 +1,22 @@
+routines (
+    gnome_sort
+)
+
+integers (i n tmp)
+
+routine gnome_sort
+(
+    $i = 0
+    do
+    (
+        $i >= $n -> break
+        $i = 0 or $a[$i] >= $a[$i - 1]
+        -> ( $i = $i + 1 )
+        (
+            $tmp = $a[$i]
+            $a[$i] = $a[$i - 1]
+            $a[$i - 1] = $tmp
+            $i = $i - 1
+        )
+    )
+)
