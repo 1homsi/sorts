@@ -1,0 +1,17 @@
+define: #radixsort -> [|arr|
+  (arr inject: (arr first) into: [|max :val|
+    (val > max ifTrue: [val] ifFalse: [max])
+  ]) `let: #max.
+  1 `let: #exp.
+  {max / exp > 0} whileTrue: [
+    (countingSortByExp: arr with: exp) `let: #arr.
+    exp * 10 `let: #exp.
+  ].
+  arr
+].
+
+define: #countingSortByExp -> [|arr exp|
+  arr
+].
+
+#radixsort sendTo: {5. 2. 8. 1. 9. 3} as: #Array.
