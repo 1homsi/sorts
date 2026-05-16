@@ -1,0 +1,13 @@
+SIMULATE
+    STORAGE    S1/1
+    
+    GENERATE   5,2,8,1,9,3
+    QUEUE      Q1
+    SEIZE      S1
+    DEPART     Q1
+    ADVANCE    1
+    RELEASE    S1
+    TERMINATE  1
+    
+    START      1
+    END
