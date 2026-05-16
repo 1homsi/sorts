@@ -1,0 +1,26 @@
+schema SortConfig:
+    input: [int]
+    output: [int]
+
+    check:
+        len(output) == len(input)
+
+def insertion_sort(arr: [int]) -> [int]:
+    a = list(arr)
+    n = len(a)
+    i = 1
+    for i in range(1, n):
+        key = a[i]
+        j = i - 1
+        for j in range(j, -1, -1):
+            if a[j] > key:
+                a[j + 1] = a[j]
+            else:
+                break
+        a[j + 1] = key
+    return a
+
+config = SortConfig {
+    input = [5, 3, 1, 4, 2]
+    output = insertion_sort([5, 3, 1, 4, 2])
+}
