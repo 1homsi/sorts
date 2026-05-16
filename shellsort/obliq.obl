@@ -1,0 +1,24 @@
+ui :=
+  {
+    shellsort = proc(arr)
+      var gap := 1;
+      var n := number_size(arr);
+      while gap <= n do
+        gap := gap * 3 + 1;
+      end;
+      while gap > 0 do
+        gap := gap / 3;
+        for i := gap to n - 1 do
+          var temp := arr[i];
+          var j := i;
+          while j >= gap and arr[j - gap] > temp do
+            arr[j] := arr[j - gap];
+            j := j - gap;
+          end;
+          arr[j] := temp;
+        end;
+      end;
+      return arr;
+    end
+  };
+(ui.shellsort([5, 2, 8, 1, 9, 3]))
