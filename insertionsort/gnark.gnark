@@ -1,0 +1,30 @@
+package main
+
+import (
+	"github.com/consensys/gnark/frontend"
+	"github.com/consensys/gnark/std/math/cmp"
+)
+
+type InsertionSortCircuit struct {
+	Input  [5]frontend.Variable `gnark:",public"`
+	Output [5]frontend.Variable `gnark:",public"`
+}
+
+func (c *InsertionSortCircuit) Define(api frontend.API) error {
+	a := c.Input
+	n := len(a)
+	for i := 1; i < n; i++ {
+		key := a[i]
+		j := i - 1
+		for j >= 0 {
+			isGt := cmp.IsLess(api, key, a[j])
+			a[j+1] = api.Select(isGt, a[j], a[j+1])
+			j--
+		}
+		a[j+1] = key
+	}
+	for i := 0; i < n; i++ {
+		api.AssertIsEqual(a[i], c.Output[i])
+	}
+	return nil
+}
