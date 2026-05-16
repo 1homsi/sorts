@@ -1,0 +1,26 @@
+HEAPSORT: DO;
+    DECLARE arr(6) WORD;
+    DECLARE (n, i, j, largest, left, right, tmp) WORD;
+
+    HEAPIFY: PROCEDURE(pn, pi);
+        DECLARE (pn, pi, lg, l, r, t) WORD;
+        lg = pi; l = 2*pi+1; r = 2*pi+2;
+        IF (l < pn) AND (arr(l) > arr(lg)) THEN lg = l;
+        IF (r < pn) AND (arr(r) > arr(lg)) THEN lg = r;
+        IF lg <> pi THEN DO;
+            t = arr(pi); arr(pi) = arr(lg); arr(lg) = t;
+            CALL HEAPIFY(pn, lg);
+        END;
+    END HEAPIFY;
+
+    arr(0)=12; arr(1)=11; arr(2)=13; arr(3)=5; arr(4)=6; arr(5)=7;
+    n = 6;
+    i = n/2 - 1;
+    DO WHILE i >= 0; CALL HEAPIFY(n, i); i = i - 1; END;
+    i = n - 1;
+    DO WHILE i > 0;
+        tmp = arr(0); arr(0) = arr(i); arr(i) = tmp;
+        CALL HEAPIFY(i, 0);
+        i = i - 1;
+    END;
+END HEAPSORT;
