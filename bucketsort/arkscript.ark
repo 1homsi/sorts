@@ -1,0 +1,19 @@
+(let arr [5 2 8 1 9 3])
+(let max-val 10)
+(let buckets [])
+(foreach (range 0 max-val) {
+  (append buckets [])
+})
+(foreach arr {
+  (let idx (arg 0))
+  (if (&& (>= idx 0) (< idx max-val)) {
+    (append (at buckets idx) idx)
+  })
+})
+(let result [])
+(foreach buckets {
+  (foreach (arg 0) {
+    (append result (arg 0))
+  })
+})
+(print result)
