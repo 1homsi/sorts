@@ -1,0 +1,34 @@
+import std/core
+import std/num/float64
+
+fun insert-sorted(x : float64, lst : list<float64>) : list<float64>
+    match lst
+        Nil -> [x]
+        Cons(h, t) ->
+            if x <= h then Cons(x, Cons(h, t))
+            else Cons(h, insert-sorted(x, t))
+
+fun insertion-sort(lst : list<float64>) : list<float64>
+    match lst
+        Nil -> []
+        Cons(h, t) -> insert-sorted(h, insertion-sort(t))
+
+fun get-idx(num : float64, mn : float64, mx : float64, n : int) : int
+    val raw = floor((num - mn) / (mx - mn + 1.0) * n.float64).int
+    min(n - 1, raw)
+
+fun bucket-sort(arr : list<float64>) : list<float64>
+    val n = arr.length
+    if n == 0 then arr
+    else
+        val mn = arr.foldl(arr.head.default(0.0), float64/min)
+        val mx = arr.foldl(arr.head.default(0.0), float64/max)
+        val buckets = list(n, [])
+        val filled = arr.foldl(buckets, fn(bs, x)
+            val idx = get-idx(x, mn, mx, n)
+            bs.map-indexed(fn(i, b) if i == idx then b ++ [x] else b))
+        filled.flatmap(insertion-sort)
+
+fun main()
+    val data = [0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68]
+    println(bucket-sort(data).show)
