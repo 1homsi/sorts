@@ -1,0 +1,21 @@
+let
+  type node = rec(val: int; left: node; right: node)
+
+  let insert = rec fn(node, val)
+    if node = null then
+      (val=val, left=null, right=null)
+    else if val < node.val then
+      (val=node.val, left=insert(node.left, val), right=node.right)
+    else if val > node.val then
+      (val=node.val, left=node.left, right=insert(node.right, val))
+    else
+      node
+
+  let inorder = rec fn(node)
+    if node = null then []
+    else inorder(node.left) ++ [node.val] ++ inorder(node.right)
+
+  let tree_sort = fn(arr) => inorder(foldl(insert, null, arr))
+in
+  tree_sort([5, 2, 8, 1, 9, 3])
+end
