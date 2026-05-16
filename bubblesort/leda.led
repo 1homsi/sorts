@@ -1,0 +1,15 @@
+WINDOW WINDOW TYPE
+
+function bubblesort(arr)
+  n = length(arr)
+  for i = 1 to n
+    for j = 1 to n - i
+      if arr[j] > arr[j + 1]
+        temp = arr[j]
+        arr[j] = arr[j + 1]
+        arr[j + 1] = temp
+      endif
+    endfor
+  endfor
+  return arr
+end
