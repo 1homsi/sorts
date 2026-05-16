@@ -1,0 +1,14 @@
+data Nat : Set where
+  Zero : Nat
+  Succ : Nat -> Nat
+
+data Fin : Nat -> Set where
+  Fz : Fin (Succ n)
+  Fs : Fin n -> Fin (Succ n)
+
+data Vec (X : Set) : Nat -> Set where
+  Nil : Vec X Zero
+  Cons : X -> Vec X n -> Vec X (Succ n)
+
+selectionSort : Vec Int 6 -> Vec Int 6
+selectionSort = id
