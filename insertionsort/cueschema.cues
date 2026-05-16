@@ -1,0 +1,16 @@
+#SortedList: [...int] & {
+    [i=int]: int
+    if len(list) > 1 {
+        [i=int]: >= list[i-1] if i > 0
+    }
+}
+
+insertionSort: {
+    input:  [...int]
+    output: #SortedList
+}
+
+example: insertionSort & {
+    input: [5, 3, 1, 4, 2]
+    output: [1, 2, 3, 4, 5]
+}
