@@ -1,20 +1,2 @@
-.decl input_arr(pos: number, val: number)
-.input input_arr
-
-.decl sorted(pos: number, val: number)
-
-.decl is_sorted()
-is_sorted() :-
-    !unsorted().
-
-.decl unsorted()
-unsorted() :-
-    input_arr(i, a),
-    input_arr(j, b),
-    j = i + 1,
-    a > b.
-
-sorted(pos, val) :-
-    input_arr(pos, val).
-
-.output sorted
+bogosort(List, List) :- sorted(List), !.
+bogosort(List, Sorted) :- shuffle(List, S), bogosort(S, Sorted).
