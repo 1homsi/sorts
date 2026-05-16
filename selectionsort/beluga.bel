@@ -1,0 +1,8 @@
+rec selectionSort : list -> list -> type =
+  | NSort : selectionSort (x :: xs) (x :: ys)
+              <- selectionSort xs ys
+  | Sorted : selectionSort [] [] ;
+
+proof : selectionSort [5;2;8;1;9;3] R.
+  - NSortval1; NSortval2; NSortval3;
+    NSortval4; NSortval5; SortedVal; -
