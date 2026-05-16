@@ -1,0 +1,52 @@
+GET "libhdr"
+
+GLOBAL
+    arr: 200
+
+LET compareAndSwap(i, j, dir) BE
+$(
+    LET ai = arr!i
+    LET aj = arr!j
+    IF (dir = 1 & ai > aj) | (dir = 0 & ai < aj) THEN
+    $(
+        arr!i := aj
+        arr!j := ai
+    $)
+$)
+
+LET bitonicMerge(lo, cnt, dir) BE
+$(
+    IF cnt > 1 THEN
+    $(
+        LET k = cnt / 2
+        LET i = lo
+        WHILE i < lo + k DO
+        $(
+            compareAndSwap(i, i + k, dir)
+            i := i + 1
+        $)
+        bitonicMerge(lo, k, dir)
+        bitonicMerge(lo + k, k, dir)
+    $)
+$)
+
+LET bitonicSort(lo, cnt, dir) BE
+$(
+    IF cnt > 1 THEN
+    $(
+        LET k = cnt / 2
+        bitonicSort(lo, k, 1)
+        bitonicSort(lo + k, k, 0)
+        bitonicMerge(lo, cnt, dir)
+    $)
+$)
+
+LET start() = VALOF
+$(
+    arr!0 := 3; arr!1 := 7; arr!2 := 4; arr!3 := 8
+    arr!4 := 6; arr!5 := 2; arr!6 := 1; arr!7 := 5
+    bitonicSort(0, 8, 1)
+    FOR i = 0 TO 7 DO writef("%n ", arr!i)
+    wrch('*n')
+    RESULTIS 0
+$)
