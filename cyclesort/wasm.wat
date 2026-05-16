@@ -1,0 +1,35 @@
+(module
+  (memory 1)
+  (func $cycle_sort (param $n i32)
+    (local $cycle_start i32)
+    (local $item i32)
+    (local $pos i32)
+    (local $i i32)
+    (local $tmp i32)
+    (local.set $cycle_start (i32.const 0))
+    (block $break
+      (loop $outer
+        (br_if $break (i32.ge_s (local.get $cycle_start) (i32.sub (local.get $n) (i32.const 1))))
+        (local.set $item (i32.load (i32.mul (local.get $cycle_start) (i32.const 4))))
+        (local.set $pos (local.get $cycle_start))
+        (local.set $i (i32.add (local.get $cycle_start) (i32.const 1)))
+        (block $break2
+          (loop $inner
+            (br_if $break2 (i32.ge_s (local.get $i) (local.get $n)))
+            (if (i32.lt_s (i32.load (i32.mul (local.get $i) (i32.const 4))) (local.get $item))
+              (then (local.set $pos (i32.add (local.get $pos) (i32.const 1)))))
+            (local.set $i (i32.add (local.get $i) (i32.const 1)))
+            (br $inner)))
+        (local.set $cycle_start (i32.add (local.get $cycle_start) (i32.const 1)))
+        (br $outer)))
+  )
+  (func $main
+    (i32.store (i32.const 0) (i32.const 5))
+    (i32.store (i32.const 4) (i32.const 4))
+    (i32.store (i32.const 8) (i32.const 3))
+    (i32.store (i32.const 12) (i32.const 2))
+    (i32.store (i32.const 16) (i32.const 1))
+    (call $cycle_sort (i32.const 5))
+  )
+  (export "main" (func $main))
+)
