@@ -1,1 +1,1 @@
-print("Bogosort implementation for flink.flink")
+bogosort = true
