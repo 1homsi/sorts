@@ -1,28 +1,6 @@
-module bogosort
-  var arr: array 1..8 of integer := (3, 1, 4, 1, 5, 9, 2, 6)
-  var n: integer := 8
-
-  procedure is_sorted() returning boolean
-    for i: integer := 1 to n-1 do
-      if arr(i) > arr(i+1) then return false end if
-    end for
-    return true
-  end is_sorted
-
-  procedure shuffle()
-    for i: integer := n downto 2 do
-      var j: integer := random(1, i)
-      var tmp: integer := arr(i)
-      arr(i) := arr(j)
-      arr(j) := tmp
-    end for
-  end shuffle
-
-  loop until is_sorted()
-    shuffle()
-  end loop
-
-  for i: integer := 1 to n do
-    put(arr(i))
-  end for
-end module
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
