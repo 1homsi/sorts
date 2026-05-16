@@ -1,0 +1,7 @@
+bubblesort([], []).
+bubblesort([X], [X]).
+bubblesort(List, Sorted) <-
+  partition(List, X, Less, Greater),
+  bubblesort(Less, SortedLess),
+  bubblesort(Greater, SortedGreater),
+  append(SortedLess, [X|SortedGreater], Sorted).
