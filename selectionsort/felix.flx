@@ -1,0 +1,16 @@
+fun selection_sort(arr: array[int]): array[int] = {
+  var a = arr;
+  val n = a.len;
+  for i in range(0, n - 1) {
+    var min_idx = i;
+    for j in range(i + 1, n) {
+      if a.(j) < a.(min_idx) then min_idx = j;
+    }
+    val tmp = a.(i);
+    a.(i) = a.(min_idx);
+    a.(min_idx) = tmp;
+  }
+  return a;
+}
+
+println$ selection_sort([| 5, 2, 8, 1, 9, 3 |]);
