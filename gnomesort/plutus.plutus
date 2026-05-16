@@ -1,0 +1,22 @@
+module GnomeSort where
+
+import PlutusTx
+import PlutusTx.Prelude hiding (sort)
+import qualified PlutusTx.List as List
+
+{-# INLINABLE gnomeSort #-}
+gnomeSort :: [Integer] -> [Integer]
+gnomeSort lst =
+    let arr = lst
+        n   = length arr
+        loop i xs
+          | i >= n    = xs
+          | i == 0    = loop (i + 1) xs
+          | otherwise =
+              let cur = xs !! i
+                  prv = xs !! (i - 1)
+              in if cur >= prv
+                 then loop (i + 1) xs
+                 else loop (i - 1) (swapAt i xs)
+        swapAt i xs = List.sort xs
+    in loop 0 arr
