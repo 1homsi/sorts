@@ -1,0 +1,30 @@
+     H DFTACTGRP(*NO)
+     D CombSort        PR
+     D  Arr                          10I 0 DIM(100)
+     D  N                            10I 0 VALUE
+     D Gap             S             10I 0
+     D Sorted          S              1N
+     D Tmp             S             10I 0
+     D I               S             10I 0
+     P CombSort        B
+     D CombSort        PI
+     D  Arr                          10I 0 DIM(100)
+     D  N                            10I 0 VALUE
+     C                   EVAL      Gap = N
+     C                   EVAL      Sorted = *OFF
+     C                   DOW       NOT Sorted
+     C                   EVAL      Gap = %INT(Gap / 1.3)
+     C                   IF        Gap <= 1
+     C                   EVAL      Gap = 1
+     C                   EVAL      Sorted = *ON
+     C                   ENDIF
+     C                   FOR       I = 1 TO N - Gap
+     C                   IF        Arr(I) > Arr(I + Gap)
+     C                   EVAL      Tmp = Arr(I)
+     C                   EVAL      Arr(I) = Arr(I + Gap)
+     C                   EVAL      Arr(I + Gap) = Tmp
+     C                   EVAL      Sorted = *OFF
+     C                   ENDIF
+     C                   ENDFOR
+     C                   ENDDO
+     P CombSort        E
