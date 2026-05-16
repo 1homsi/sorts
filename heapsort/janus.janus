@@ -1,0 +1,27 @@
+procedure heapsort(ref arr, n)
+    for i = n / 2 - 1 downto 0 do
+        siftdown(arr, i, n)
+    done;
+    for i = n - 1 downto 1 do
+        arr[0] <-> arr[i];
+        siftdown(arr, 0, i)
+    done
+end;
+
+procedure siftdown(ref arr, idx, n)
+    local largest, left, right;
+    largest = idx;
+    left = 2 * idx + 1;
+    right = 2 * idx + 2;
+    
+    if left < n && arr[left] > arr[largest] then
+        largest = left
+    fi;
+    if right < n && arr[right] > arr[largest] then
+        largest = right
+    fi;
+    if largest != idx then
+        arr[idx] <-> arr[largest];
+        siftdown(arr, largest, n)
+    fi
+end.
