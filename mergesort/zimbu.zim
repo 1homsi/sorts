@@ -1,0 +1,42 @@
+def Merge(var arr: List<int>, left: int, mid: int, right: int)
+  var i = left
+  var j = mid + 1
+  var result = List<int>()
+  
+  while i <= mid && j <= right
+    if arr[i] <= arr[j]
+      result.append(arr[i])
+      i = i + 1
+    else
+      result.append(arr[j])
+      j = j + 1
+    endif
+  endwhile
+  
+  while i <= mid
+    result.append(arr[i])
+    i = i + 1
+  endwhile
+  
+  while j <= right
+    result.append(arr[j])
+    j = j + 1
+  endwhile
+  
+  for k in range(len(result))
+    arr[left + k] = result[k]
+  endfor
+enddef
+
+def MergeSort(var arr: List<int>, left: int, right: int)
+  if left < right
+    var mid = (left + right) / 2
+    MergeSort(arr, left, mid)
+    MergeSort(arr, mid + 1, right)
+    Merge(arr, left, mid, right)
+  endif
+enddef
+
+var arr = [5, 2, 8, 1, 9, 3]
+MergeSort(arr, 0, 5)
+print(arr)
