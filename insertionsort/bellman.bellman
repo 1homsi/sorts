@@ -1,0 +1,30 @@
+use bellman::{Circuit, ConstraintSystem, SynthesisError};
+use bls12_381::Scalar;
+
+pub struct InsertionSortCircuit {
+    pub input: Option<Vec<Scalar>>,
+}
+
+impl Circuit<Scalar> for InsertionSortCircuit {
+    fn synthesize<CS: ConstraintSystem<Scalar>>(
+        self,
+        cs: &mut CS,
+    ) -> Result<(), SynthesisError> {
+        let input = self.input.unwrap_or_default();
+        let mut a = input.clone();
+        let n = a.len();
+        for i in 1..n {
+            let key = a[i];
+            let mut j = i as isize - 1;
+            while j >= 0 && a[j as usize] > key {
+                a[(j + 1) as usize] = a[j as usize];
+                j -= 1;
+            }
+            a[(j + 1) as usize] = key;
+        }
+        for (i, val) in a.iter().enumerate() {
+            cs.alloc_input(|| format!("out_{}", i), || Ok(*val))?;
+        }
+        Ok(())
+    }
+}
