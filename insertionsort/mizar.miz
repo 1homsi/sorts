@@ -1,0 +1,8 @@
+theorem InsertionSort:
+  for arr being a FinSeq of INT holds
+  ex sorted being a FinSeq of INT st
+  sorted is_sorted_nondecreasing &
+  (perm arr,sorted)
+  proof
+    skip;
+  end;
