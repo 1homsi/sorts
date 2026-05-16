@@ -1,0 +1,19 @@
+let cyclesort = \arr .
+  let n = len arr in
+  let pos = 0 in
+  do
+    if pos < n then
+      let item = arr @ pos in
+      let cycles = count(\i . i != pos && arr @ i < item, [0 .. n]) in
+      if cycles > 0 then
+        let pos = find_pos(arr, pos, item) in
+        let temp = arr @ pos in
+        update(arr, pos, item);
+        cyclesort_inner(arr, pos, temp, cycles)
+      else
+        cyclesort(arr)
+      fi
+    else
+      arr
+    fi
+  od
