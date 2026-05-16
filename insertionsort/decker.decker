@@ -1,0 +1,16 @@
+on click me do
+  local arr: (5,3,1,4,2)
+  local n: count[arr]
+  local i: 1
+  while i < n
+    local key: arr[i]
+    local j: i - 1
+    while j >= 0 & arr[j] > key
+      arr[j + 1]: arr[j]
+      j: j - 1
+    end
+    arr[j + 1]: key
+    i: i + 1
+  end
+  card["output"]["text"]: join[arr,", "]
+end
