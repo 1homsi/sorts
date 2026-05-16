@@ -1,0 +1,20 @@
+fn bubble_sort(arr: int[]) -> int[]
+    let n:int = len(arr)
+    let swapped:bool = true
+    while $swapped
+        let swapped:bool = false
+        for i:int in seq 0 $(( n - 2 ))
+            if [ $arr[$i] -gt $arr[$(( i + 1 ))] ]
+                let tmp:int = $arr[$i]
+                let arr[$i]:int = $arr[$(( i + 1 ))]
+                let arr[$(( i + 1 ))]:int = $tmp
+                let swapped:bool = true
+            end
+        end
+        let n:int = $(( n - 1 ))
+    end
+    return arr
+end
+
+let arr:int[] = [64 34 25 12 22 11 90]
+echo @(bubble_sort $arr[@])
