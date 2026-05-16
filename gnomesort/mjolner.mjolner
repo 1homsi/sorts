@@ -1,0 +1,18 @@
+gnomeSortMjolner:
+(# arr: [100] @integer;
+   n, i, tmp: @integer;
+do
+   0 -> i;
+   L: (i < n) ->
+   (# do
+       (if i = 0 or arr[i] >= arr[i-1]
+       then i + 1 -> i
+       else
+           arr[i] -> tmp;
+           arr[i-1] -> arr[i];
+           tmp -> arr[i-1];
+           i - 1 -> i
+       if);
+       L
+   #)
+#)
