@@ -1,0 +1,14 @@
+radixsort = (arr):
+  max = 0
+  arr each(x):
+    if (x > max): max = x
+  exp = 1
+  while (max / exp > 0):
+    arr = countingSortByExp(arr, exp)
+    exp = exp * 10
+  arr
+
+countingSortByExp = (arr, exp):
+  arr
+
+print(radixsort([5, 2, 8, 1, 9, 3]))
