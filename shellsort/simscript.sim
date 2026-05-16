@@ -1,0 +1,24 @@
+process Main
+  declare arr(6), n, gap, i, j, temp
+  let arr(1) = 5, arr(2) = 2, arr(3) = 8
+  let arr(4) = 1, arr(5) = 9, arr(6) = 3
+  let n = 6
+  let gap = 1
+  do while gap <= n
+    let gap = gap * 3 + 1
+  loop
+  do while gap > 0
+    let gap = gap / 3
+    for i = gap to n
+      let temp = arr(i)
+      let j = i
+      do while j > gap and arr(j - gap) > temp
+        let arr(j) = arr(j - gap)
+        let j = j - gap
+      loop
+      let arr(j) = temp
+    next i
+  loop
+  print arr
+  stop
+end
