@@ -1,0 +1,26 @@
+function insert(node: Node, val: uint) : Node {
+  if (node == null) {
+    return Node(val, null, null);
+  }
+  if (val < node.value) {
+    node.left = insert(node.left, val);
+  } else if (val > node.value) {
+    node.right = insert(node.right, val);
+  }
+  return node;
+}
+
+function inorder(node: Node) : uint[] {
+  if (node == null) { return []; }
+  return inorder(node.left) ++ [node.value] ++ inorder(node.right);
+}
+
+type Node = record { uint value; Node left; Node right };
+
+function main() : uint[] {
+  Node root = null;
+  for (uint i = 0; i < 6; i++) {
+    root = insert(root, [5,2,8,1,9,3][i]);
+  }
+  return inorder(root);
+}
