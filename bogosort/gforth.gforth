@@ -1,1 +1,1 @@
-print("Bogosort implementation for gforth.gforth")
+: bogosort ( -- ) begin dup sorted? not while shuffle repeat ;
