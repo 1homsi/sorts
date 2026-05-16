@@ -1,0 +1,22 @@
+(define $merge
+  (lambda [$xs $ys]
+    (match [xs ys]
+      {[[] $zs] zs
+       [$ws []] ws
+       [($x . $xs') ($y . $ys')]
+       (if (<= x y)
+         (cons x (merge xs' (cons y ys')))
+         (cons y (merge (cons x xs') ys')))})))
+
+(define $mergesort
+  (lambda [$xs]
+    (match xs
+      {[] []
+       [$x [x]]
+       ($x . $xs')
+       (let {[$mid (quotient (length xs) 2)]
+             [$left (take mid xs)]
+             [$right (drop mid xs)]}
+        (merge (mergesort left) (mergesort right)))})))
+
+(print (mergesort [5 2 8 1 9 3]))
