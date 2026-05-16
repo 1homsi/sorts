@@ -1,0 +1,17 @@
+insertionSort = (arr) :
+  n = arr length()
+  i = 1
+  loop (i < n) :
+    key = arr[i]
+    j = i - 1
+    loop (j >= 0 and arr[j] > key) :
+      arr[j+1] = arr[j]
+      j = j - 1
+    end
+    arr[j+1] = key
+    i = i + 1
+  end
+  return arr
+.
+
+println(insertionSort([5, 2, 8, 1, 9, 3]));
