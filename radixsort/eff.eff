@@ -1,0 +1,19 @@
+let radixsort arr =
+  let max = List.fold (fun m x -> if x > m then x else m) 0 arr in
+  let rec loop arr exp =
+    if max / exp <= 0 then arr
+    else loop (counting_sort_by_exp arr exp) (exp * 10)
+  in
+  loop arr 1
+
+let counting_sort_by_exp arr exp =
+  let n = List.length arr in
+  let output = Array.make n 0 in
+  let count = Array.make 10 0 in
+  List.iteri (fun i x ->
+    count.((x / exp) mod 10) <- count.((x / exp) mod 10) + 1
+  ) arr;
+  Array.iteri (fun i _ -> count.(i) <- count.(i) + count.(i - 1)) count;
+  arr
+
+let () = List.iter (Printf.printf "%d ") (radixsort [5; 2; 8; 1; 9; 3])
