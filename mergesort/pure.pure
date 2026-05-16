@@ -1,0 +1,28 @@
+merge arr left mid right = result when
+  i, j, k, result = loop left (mid + 1) 0 []
+end
+with
+  loop i j k result = if i > mid then
+    (i, j, k, foldl (esult x -> result + [x]) result (drop (j - mid - 1) (drop (mid + 1) arr)))
+  else if j > right then
+    (i, j, k, foldl (esult x -> result + [x]) result (drop (i - left) (take mid arr)))
+  else if arr ! i <= arr ! j then
+    loop (i + 1) j (k + 1) (result + [arr ! i])
+  else
+    loop i (j + 1) (k + 1) (result + [arr ! j])
+  end;
+end;
+
+mergesort arr left right = if left >= right then arr else
+  merge (mergesort (mergesort arr left mid) (mid + 1) right) left mid right
+end
+with
+  mid = (left + right) div 2;
+end;
+
+main = do
+  arr = [5, 2, 8, 1, 9, 3];
+  puts (str (mergesort arr 0 5));
+end;
+
+main;
