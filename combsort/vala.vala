@@ -1,0 +1,20 @@
+void comb_sort(int[] arr) {
+    int n = arr.length;
+    int gap = n;
+    bool sorted = false;
+    while (!sorted) {
+        gap = (int)(gap / 1.3);
+        if (gap <= 1) {
+            gap = 1;
+            sorted = true;
+        }
+        for (int i = 0; i + gap < n; i++) {
+            if (arr[i] > arr[i + gap]) {
+                int tmp = arr[i];
+                arr[i] = arr[i + gap];
+                arr[i + gap] = tmp;
+                sorted = false;
+            }
+        }
+    }
+}
