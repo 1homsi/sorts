@@ -1,0 +1,27 @@
+* Gnome Sort - SPICE netlist representation
+* Sorting implemented via voltage comparators and swap logic
+
+.TITLE Gnome Sort Circuit
+
+* Voltage sources representing array elements
+V1  N1  GND  5
+V2  N2  GND  3
+V3  N3  GND  8
+V4  N4  GND  1
+V5  N5  GND  9
+V6  N6  GND  2
+V7  N7  GND  7
+V8  N8  GND  4
+V9  N9  GND  6
+V10 N10 GND  0
+
+* Comparator: swap if V[i] < V[i-1]
+Xcomp1 N1 N2 SWAP_CTRL1 COMPARATOR
+Xcomp2 N2 N3 SWAP_CTRL2 COMPARATOR
+
+.SUBCKT COMPARATOR IN1 IN2 OUT
+Eout OUT GND VALUE={IF(V(IN1)>V(IN2), 1, 0)}
+.ENDS
+
+.TRAN 1n 100n
+.END
