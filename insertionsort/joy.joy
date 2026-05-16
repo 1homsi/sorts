@@ -1,0 +1,9 @@
+DEFINE insert ==
+    [small] []
+    [uncons [>=] dip [cons] [insert cons] ifte]
+    linrec;
+
+DEFINE insertion-sort ==
+    [small] []
+    [uncons insertion-sort insert]
+    linrec;
