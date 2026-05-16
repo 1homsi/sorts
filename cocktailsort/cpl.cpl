@@ -1,0 +1,34 @@
+SECTION "COCKTAIL"
+
+GET "LIBHDR"
+
+LET CocktailSort(arr, n) BE
+$( LET swapped = 1
+   LET start = 0
+   LET ending = n - 1
+   LET i, tmp = 0, 0
+   $( swapped := 0
+      FOR i = start TO ending - 1 DO
+      $( IF arr%i > arr%(i+1) DO
+         $( tmp := arr%i
+            arr%i := arr%(i+1)
+            arr%(i+1) := tmp
+            swapped := 1
+         $)
+      $)
+      IF swapped = 0 DO RETURN
+      swapped := 0
+      ending := ending - 1
+      FOR i = ending - 1 TO start BY -1 DO
+      $( IF arr%i > arr%(i+1) DO
+         $( tmp := arr%i
+            arr%i := arr%(i+1)
+            arr%(i+1) := tmp
+            swapped := 1
+         $)
+      $)
+      start := start + 1
+   $) REPEAT WHILE swapped ~= 0
+$)
+
+END
