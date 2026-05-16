@@ -1,0 +1,39 @@
+func @gnome_sort(%arr: [*]i32, %n: i32) -> void {
+entry:
+  %i = alloca i32
+  store i32 0, ptr %i
+  br %loop
+
+loop:
+  %iv = load i32, ptr %i
+  %done = icmp.ge %iv, %n
+  br.if %done, %exit, %body
+
+body:
+  %iz = icmp.eq %iv, 0
+  br.if %iz, %advance, %check
+
+check:
+  %off = mul %iv, 4
+  %p = gep %arr, %off
+  %cur = load i32, ptr %p
+  %pp = gep %arr, sub(%off, 4)
+  %prv = load i32, ptr %pp
+  %ok = icmp.ge %cur, %prv
+  br.if %ok, %advance, %swap_blk
+
+swap_blk:
+  store i32 %prv, ptr %p
+  store i32 %cur, ptr %pp
+  %dm = sub %iv, 1
+  store i32 %dm, ptr %i
+  br %loop
+
+advance:
+  %ip = add %iv, 1
+  store i32 %ip, ptr %i
+  br %loop
+
+exit:
+  ret void
+}
