@@ -1,0 +1,25 @@
+-module(insertion_sort_otp).
+-behaviour(gen_server).
+-export([start_link/0, sort/1]).
+-export([init/1, handle_call/3, handle_cast/2]).
+
+start_link() ->
+    gen_server:start_link({local, ?MODULE}, ?MODULE, [], []).
+
+sort(List) ->
+    gen_server:call(?MODULE, {sort, List}).
+
+init([]) -> {ok, []}.
+
+handle_call({sort, List}, _From, State) ->
+    Sorted = do_sort(List),
+    {reply, Sorted, State}.
+
+handle_cast(_Msg, State) -> {noreply, State}.
+
+do_sort([]) -> [];
+do_sort([H|T]) -> insert(H, do_sort(T)).
+
+insert(X, []) -> [X];
+insert(X, [H|T]) when X =< H -> [X, H | T];
+insert(X, [H|T]) -> [H | insert(X, T)].
