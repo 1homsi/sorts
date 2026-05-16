@@ -1,0 +1,7 @@
+open arithmeticTheory;
+
+val bogosort_def = Define `
+  bogosort [] = [] /  bogosort [x] = [x] /  bogosort (x::xs) = bogosort (shuffle (x::xs))
+`;
+
+val main = EVAL (bogosort_def [] [1,2,3]);
