@@ -1,0 +1,12 @@
+(define (bubble-sort arr)
+  (let ((n (vector-length arr)))
+    (do ((i 0 (+ i 1)))
+      ((= i n) arr)
+      (do ((j 0 (+ j 1)))
+        ((= j (- n 1 i)))
+        (when (> (vector-ref arr j) (vector-ref arr (+ j 1)))
+          (let ((temp (vector-ref arr j)))
+            (vector-set! arr j (vector-ref arr (+ j 1)))
+            (vector-set! arr (+ j 1) temp)))))))
+
+(print (bubble-sort #(5 2 8 1 9 3)))
