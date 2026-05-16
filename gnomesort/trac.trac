@@ -1,0 +1,17 @@
+#(ds,gnomesort,
+  #(ss,i,0)
+  #(ss,n,10)
+  #(loop,
+    #(gr,i,n,done,
+      #(eq,i,0,advance,
+        #(gr,arr.#(rs,i),arr.#(ds,i1,#(su,#(rs,i),1))#(rs,i1),advance,
+          #(ss,tmp,arr.#(rs,i))
+          #(ss,arr.#(rs,i),arr.#(rs,i1))
+          #(ss,arr.#(rs,i1),#(rs,tmp))
+          #(ss,i,#(su,#(rs,i),1))
+          loop
+        )
+      )
+    )
+  )
+)
