@@ -1,0 +1,18 @@
+quicksort: #(arr) [
+  arr size <= 1
+    ifTrue: [arr]
+    ifFalse: [
+      | pivot less greater |
+      pivot := arr at: 0.
+      less := #().
+      greater := #().
+      arr from: 1 do: #(x) [
+        (x <= pivot)
+          ifTrue: [less add: x]
+          ifFalse: [greater add: x]
+      ].
+      (quicksort value: less) , pivot , (quicksort value: greater)
+    ]
+].
+
+quicksort value: #(5 2 8 1 9 3).
