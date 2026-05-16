@@ -1,0 +1,17 @@
+R1CS Constraint System: Gnome Sort
+
+Variables:
+  x_0, x_1, ..., x_9  (input array)
+  y_0, y_1, ..., y_9  (output sorted array)
+  b_ij  (comparison bits for i < j)
+
+Constraints:
+  For sorted order: y_i <= y_{i+1} for i in 0..8
+    (y_{i+1} - y_i) * (1 - b_i) = 0
+
+  For permutation:
+    sum(x_i) = sum(y_i)
+    product(x_i + gamma) = product(y_i + gamma)  [Schwartz-Zippel]
+
+Input: [5, 3, 8, 1, 9, 2, 7, 4, 6, 0]
+Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
