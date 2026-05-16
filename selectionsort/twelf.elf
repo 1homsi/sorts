@@ -1,0 +1,10 @@
+sort : list -> list -> type.
+
+selectionSort : {L:list} sort L L -> type.
+
+sort-nil : sort nil nil.
+
+sort-cons : sort (X :: xs) (X :: ys)
+  <- sort xs ys.
+
+main : selectionSort ([5, 2, 8, 1, 9, 3] : sort _ _).
