@@ -1,0 +1,15 @@
+fun gnome_sort(arr: mut [Int]) -> [Int] {
+    var i = 0
+    let n = arr.len()
+    while i < n {
+        if i == 0 || arr[i] >= arr[i - 1] {
+            i += 1
+        } else {
+            let tmp = arr[i]
+            arr[i] = arr[i - 1]
+            arr[i - 1] = tmp
+            i -= 1
+        }
+    }
+    arr
+}
