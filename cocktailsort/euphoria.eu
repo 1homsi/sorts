@@ -1,0 +1,30 @@
+function cocktail_sort(sequence arr)
+    integer swapped, start, ending, i, tmp
+    swapped = 1
+    start = 1
+    ending = length(arr)
+    while swapped do
+        swapped = 0
+        for i = start to ending - 1 do
+            if arr[i] > arr[i + 1] then
+                tmp = arr[i]
+                arr[i] = arr[i + 1]
+                arr[i + 1] = tmp
+                swapped = 1
+            end if
+        end for
+        if not swapped then return arr end if
+        swapped = 0
+        ending -= 1
+        for i = ending - 1 to start by -1 do
+            if arr[i] > arr[i + 1] then
+                tmp = arr[i]
+                arr[i] = arr[i + 1]
+                arr[i + 1] = tmp
+                swapped = 1
+            end if
+        end for
+        start += 1
+    end while
+    return arr
+end function
