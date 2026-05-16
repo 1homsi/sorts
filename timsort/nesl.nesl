@@ -1,0 +1,30 @@
+function timsort(arr, minSize) {
+  mergesort(arr, minSize)
+}
+
+function mergesort(arr, minSize) {
+  if (#arr <= 1) then
+    arr
+  else if (#arr <= minSize) then
+    insertionsort(arr)
+  else
+    let mid = #arr / 2
+    in merge(mergesort(arr[0:mid], minSize), 
+             mergesort(arr[mid:#arr], minSize))
+}
+
+function insertionsort(arr) {
+  let result = arr
+      i = iota(1, #arr)
+  in {result[j] = (arr[j] < arr[j-1] ? arr[j] : arr[j-1]) : j in [0,#arr)}
+}
+
+function merge(left, right) {
+  let i = iota(0, #left + #right)
+      li = 0
+      ri = 0
+  in {if (li >= #left) then right[ri++]
+      else if (ri >= #right) then left[li++]
+      else if (left[li] <= right[ri]) then left[li++]
+      else right[ri++] : x in i}
+}
