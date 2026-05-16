@@ -1,0 +1,27 @@
+(DEFINEQ BITONICSORT
+  (LAMBDA (ARR LO CNT DIR)
+    (AND (GREATERP CNT 1)
+      (PROGN
+        (LET ((K (QUOTIENT CNT 2)))
+          (BITONICSORT ARR LO K 1)
+          (BITONICSORT ARR (IPLUS LO K) K 0)
+          (BITONICMERGE ARR LO CNT DIR))))))
+
+(DEFINEQ BITONICMERGE
+  (LAMBDA (ARR LO CNT DIR)
+    (AND (GREATERP CNT 1)
+      (PROGN
+        (LET ((K (QUOTIENT CNT 2)))
+          (FOR I (IPLUS LO 0) (LESSP I (IPLUS LO (IDIFFERENCE CNT K)))
+            (EQ (AND (GREATERP (AREF ARR I) (AREF ARR (IPLUS I K)))
+                     (EQ DIR 1)) T)
+            (PROG ()
+              (SETQ TMP (AREF ARR I))
+              (ASET I ARR (AREF ARR (IPLUS I K)))
+              (ASET (IPLUS I K) ARR TMP)))
+          (BITONICMERGE ARR LO K DIR)
+          (BITONICMERGE ARR (IPLUS LO K) K DIR))))))
+
+(SETQ ARR [5 2 8 1 9 3 7 4])
+(BITONICSORT ARR 0 8 1)
+(PRINT ARR)
