@@ -1,0 +1,27 @@
+PROBLEM PEARL_COMB_SORT;
+VAR
+  ARR(6) INT INIT(5, 2, 8, 1, 9, 3);
+  GAP, I, TEMP INT;
+  SWAPPED BIT;
+BEGIN
+  GAP := 6;
+  SWAPPED := 1;
+  WHILE GAP > 1 OR SWAPPED DO
+    BEGIN
+      GAP := (GAP * 10) / 13;
+      IF GAP < 1 THEN GAP := 1;
+      SWAPPED := 0;
+      FOR I FROM 0 UPTO 6 - GAP - 1 DO
+        BEGIN
+          IF ARR[I] > ARR[I + GAP] THEN
+            BEGIN
+              TEMP := ARR[I];
+              ARR[I] := ARR[I + GAP];
+              ARR[I + GAP] := TEMP;
+              SWAPPED := 1;
+            END;
+        END;
+    END;
+  FOR I FROM 0 UPTO 5 DO
+    PRINT ARR[I];
+END.
