@@ -1,0 +1,8 @@
+quicksort [] = []
+quicksort [x] = [x]
+quicksort (x::xs) =
+  (quicksort (FILTER (lambda a. a <= x) xs)) ++
+  [x] ++
+  (quicksort (FILTER (lambda a. a > x) xs))
+
+val () = print (quicksort [5, 2, 8, 1, 9, 3])
