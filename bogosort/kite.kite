@@ -1,11 +1,6 @@
-let isSorted = fn arr ->
-  arr |> pairs |> all (fn (a, b) -> a <= b)
-
-let shuffle = fn arr ->
-  arr |> randomPermutation
-
-let bogosort = fn arr ->
-  if isSorted arr then arr
-  else bogosort (shuffle arr)
-
-bogosort [3, 1, 4, 1, 5, 9, 2, 6]
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
