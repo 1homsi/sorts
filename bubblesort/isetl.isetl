@@ -1,0 +1,20 @@
+bubble_sort := func(arr);
+    n := #arr;
+    swapped := true;
+    loop while swapped do
+        swapped := false;
+        for i in [1..n-1] do
+            if arr(i) > arr(i+1) then
+                tmp := arr(i);
+                arr(i) := arr(i+1);
+                arr(i+1) := tmp;
+                swapped := true;
+            end;
+        end;
+        n := n - 1;
+    end;
+    arr;
+end func;
+
+arr := [64, 34, 25, 12, 22, 11, 90];
+print(bubble_sort(arr));
