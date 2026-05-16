@@ -1,0 +1,18 @@
+<project name="InsertionSort" default="sort">
+  <scriptdef name="insertion-sort" language="javascript">
+    <attribute name="input"/>
+    <![CDATA[
+      var arr = attributes.get("input").split(",").map(Number);
+      for (var i = 1; i < arr.length; i++) {
+        var key = arr[i], j = i - 1;
+        while (j >= 0 && arr[j] > key) { arr[j+1] = arr[j]; j--; }
+        arr[j+1] = key;
+      }
+      project.setProperty("sorted", arr.join(","));
+    ]]>
+  </scriptdef>
+  <target name="sort">
+    <insertion-sort input="5,3,1,4,2"/>
+    <echo message="${sorted}"/>
+  </target>
+</project>
