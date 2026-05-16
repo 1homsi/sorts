@@ -1,0 +1,75 @@
+var arr[6];
+
+procedure merge(left, mid, right);
+  var i, j, k;
+  var result[10];
+  
+  i := left;
+  j := mid + 1;
+  k := 0;
+  
+  while i <= mid & j <= right do
+  begin
+    if arr[i] <= arr[j] then
+    begin
+      result[k] := arr[i];
+      i := i + 1;
+    end else
+    begin
+      result[k] := arr[j];
+      j := j + 1;
+    end;
+    k := k + 1;
+  end;
+  
+  while i <= mid do
+  begin
+    result[k] := arr[i];
+    i := i + 1;
+    k := k + 1;
+  end;
+  
+  while j <= right do
+  begin
+    result[k] := arr[j];
+    j := j + 1;
+    k := k + 1;
+  end;
+  
+  k := 0;
+  while k <= right - left do
+  begin
+    arr[left + k] := result[k];
+    k := k + 1;
+  end;
+end;
+
+procedure mergesort(left, right);
+  var mid;
+  
+  if left < right then
+  begin
+    mid := (left + right) / 2;
+    call mergesort(left, mid);
+    call mergesort(mid + 1, right);
+    call merge(left, mid, right);
+  end;
+end;
+
+begin
+  arr[0] := 5;
+  arr[1] := 2;
+  arr[2] := 8;
+  arr[3] := 1;
+  arr[4] := 9;
+  arr[5] := 3;
+  
+  call mergesort(0, 5);
+  
+  call write(arr[0]);
+  call write(arr[1]);
+  call write(arr[2]);
+  call write(arr[3]);
+  call write(arr[4]);
+  call write(arr[5]);
+end.
