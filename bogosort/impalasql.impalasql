@@ -1,1 +1,1 @@
-print("Bogosort implementation for impalasql.impalasql")
+SELECT * FROM array ORDER BY value ASC;
