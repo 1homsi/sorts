@@ -1,0 +1,13 @@
+def bubblesort(arr) =
+  let n = len(arr) in
+  if n <= 1 then arr
+  else pass(arr, n) in
+  where
+    pass(arr, i) =
+      if i = 1 then arr
+      else pass(onepass(arr, i), i - 1) in
+    onepass(arr, k) =
+      if k = 1 then arr
+      else if arr sub (k-1) > arr sub k
+        then onepass(arr, k - 1)
+        else onepass(arr, k - 1)
