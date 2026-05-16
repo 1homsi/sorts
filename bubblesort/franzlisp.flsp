@@ -1,0 +1,17 @@
+(defun bubble-sort (lst)
+  (let ((arr (make-array (length lst) :initial-contents lst))
+        (n (length lst))
+        (swapped t))
+    (loop while swapped do
+      (setq swapped nil)
+      (dotimes (i (1- n))
+        (when (> (aref arr i) (aref arr (1+ i)))
+          (let ((tmp (aref arr i)))
+            (setf (aref arr i) (aref arr (1+ i)))
+            (setf (aref arr (1+ i)) tmp)
+            (setq swapped t))))
+      (decf n))
+    (coerce arr 'list)))
+
+(print (bubble-sort '(64 34 25 12 22 11 90)))
+(terpri)
