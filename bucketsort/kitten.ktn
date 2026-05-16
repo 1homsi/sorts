@@ -1,0 +1,1 @@
+define bucket-sort (arr max-val -- sorted) : <<{int} max-val {<<{int}>> >) -> {int} {&|>}; end
