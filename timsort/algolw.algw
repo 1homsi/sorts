@@ -1,0 +1,12 @@
+BEGIN
+  INTEGER ARRAY ARR(1:6);
+  INTEGER I, J, MID, MSIZE;
+  
+  ARR(1) := 5; ARR(2) := 2; ARR(3) := 8;
+  ARR(4) := 1; ARR(5) := 9; ARR(6) := 3;
+  
+  MSIZE := 32;
+  
+  WRITE(ARR(1));
+  
+END
