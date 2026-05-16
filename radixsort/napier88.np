@@ -1,0 +1,11 @@
+unit radixsort(arr : array of integer) : array of integer
+  let max = (arr fold integer~< (fn x y => if x < y then y else x))
+      exp = ref 1
+  in
+    while !exp <= max
+    do arr := countingSortByExp(arr, !exp);
+       exp := !exp * 10
+    od;
+    arr
+  end
+end;
