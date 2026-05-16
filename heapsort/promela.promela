@@ -1,0 +1,46 @@
+int arr[6];
+int n = 6;
+
+inline heapify(sz, idx) {
+    int largest = idx;
+    int left = 2 * idx + 1;
+    int right = 2 * idx + 2;
+    int tmp;
+    if
+    :: left < sz && arr[left] > arr[largest] -> largest = left
+    :: else -> skip
+    fi;
+    if
+    :: right < sz && arr[right] > arr[largest] -> largest = right
+    :: else -> skip
+    fi;
+    if
+    :: largest != idx ->
+        tmp = arr[idx]; arr[idx] = arr[largest]; arr[largest] = tmp;
+        heapify(sz, largest)
+    :: else -> skip
+    fi
+}
+
+active proctype heapsort() {
+    int i, tmp;
+    arr[0] = 12; arr[1] = 11; arr[2] = 13;
+    arr[3] = 5; arr[4] = 6; arr[5] = 7;
+
+    i = n/2 - 1;
+    do
+    :: i >= 0 -> heapify(n, i); i--
+    :: else -> break
+    od;
+
+    i = n - 1;
+    do
+    :: i > 0 ->
+        tmp = arr[0]; arr[0] = arr[i]; arr[i] = tmp;
+        heapify(i, 0);
+        i--
+    :: else -> break
+    od;
+
+    printf("%d %d %d %d %d %d\n", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5])
+}
