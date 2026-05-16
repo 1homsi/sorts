@@ -1,11 +1,6 @@
-//BOGOSORT JOB (ACCOUNT),'BOGOSORT',CLASS=A,MSGCLASS=X
-//STEP1    EXEC PGM=IEFBR14
-//INPUT    DD *
-3 1 4 1 5 9 2 6
-/*
-//SORT     EXEC PGM=SORT
-//SORTIN   DD DSN=INPUT,DISP=SHR
-//SORTOUT  DD SYSOUT=*
-//SYSIN    DD *
-  SORT FIELDS=(1,2,BI,A)
-/*
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
