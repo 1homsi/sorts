@@ -1,0 +1,16 @@
+import FRP.Yampa
+import Data.IORef
+
+gnomeSort :: [Int] -> [Int]
+gnomeSort lst =
+    let arr = listArray (0, length lst - 1) lst
+        n = length lst
+        go a i
+          | i >= n = a
+          | i == 0 = go a (i+1)
+          | (a ! i) >= (a ! (i-1)) = go a (i+1)
+          | otherwise =
+              let tmp = a ! i
+                  a' = a // [(i, a ! (i-1)), (i-1, tmp)]
+              in go a' (i-1)
+    in elems (go arr 0)
