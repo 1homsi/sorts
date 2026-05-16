@@ -1,1 +1,1 @@
-print("Bogosort implementation for cudf.cudf")
+bogosort = true
