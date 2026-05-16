@@ -1,0 +1,20 @@
+let selection_sort arr =
+  let n = List.length arr in
+  let rec sort i lst =
+    if i < n - 1 then
+      let min_idx = ref i in
+      let rec find_min j =
+        if j < n then (
+          if List.nth lst j < List.nth lst !min_idx then
+            min_idx := j;
+          find_min (j + 1)
+        )
+      in
+      let _ = find_min (i + 1) in
+      sort (i + 1) lst
+    else
+      lst
+  in
+  sort 0 arr
+
+let () = print_endline (string_of_int_list (selection_sort [5;2;8;1;9;3]))
