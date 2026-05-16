@@ -1,0 +1,24 @@
+def cocktailsort(arr)
+  n = len(arr);
+  i = 0;
+  while i < n
+    swapped = false;
+    for k = 0 to n - i - 2
+      if arr[k] > arr[k+1]
+        temp = arr[k];
+        arr[k] = arr[k+1];
+        arr[k+1] = temp;
+        swapped = true;
+      end;
+    end;
+    if not swapped
+      exit;
+    end;
+    i = i + 1;
+  end;
+  return arr;
+end;
+
+arr = [5, 2, 8, 1, 9, 3];
+result = cocktailsort(arr);
+print result;
