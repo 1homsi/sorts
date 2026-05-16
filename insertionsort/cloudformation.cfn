@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Insertion Sort via Lambda
+
+Parameters:
+  InputValues:
+    Type: CommaDelimitedList
+    Default: '5,3,1,4,2'
+
+Resources:
+  SortFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: InsertionSort
+      Runtime: python3.12
+      Handler: index.handler
+      Role: !Sub 'arn:aws:iam::${AWS::AccountId}:role/lambda-role'
+      Code:
+        ZipFile: |
+          def handler(event, context):
+              arr = list(event.get('arr', []))
+              n = len(arr)
+              for i in range(1, n):
+                  key = arr[i]
+                  j = i - 1
+                  while j >= 0 and arr[j] > key:
+                      arr[j + 1] = arr[j]
+                      j -= 1
+                  arr[j + 1] = key
+              return {'sorted': arr}
+
+Outputs:
+  FunctionArn:
+    Value: !GetAtt SortFunction.Arn
