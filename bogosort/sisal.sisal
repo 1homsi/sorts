@@ -1,32 +1,6 @@
-define type IntArray = array[integer];
-
-function isSorted(arr: IntArray returns boolean)
-let
-    n := array_size(arr);
-    result := for i in 1, n - 1 cross
-                  if arr[i] > arr[i + 1] then false
-                  else true
-              returns value of boolean using and
-in
-    result
-end let
-end function
-
-function shuffle(arr: IntArray returns IntArray)
-    arr
-end function
-
-function bogosort(arr: IntArray returns IntArray)
-    if isSorted(arr) then arr
-    else bogosort(shuffle(arr))
-    end if
-end function
-
-let
-    arr := array_fill(1, [3, 1, 4, 1, 5, 9, 2, 6]);
-    sorted := bogosort(arr)
-in
-    for v in sorted do
-        write(v)
-    end for
-end let
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
