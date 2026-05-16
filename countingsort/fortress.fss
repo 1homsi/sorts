@@ -1,0 +1,35 @@
+component CountingSort
+  export Executable
+
+  countingsort(arr: Array[ZZ32, ZZ32]): Array[ZZ32, ZZ32] = do
+    if arr.size = 0 then
+      return arr
+    end
+
+    max: ZZ32 := 0
+    for i <- arr.indices do
+      if arr[i] > max then
+        max := arr[i]
+      end
+    end
+
+    count: Array[ZZ32, ZZ32] := array[ZZ32](max + 1, 0)
+    for i <- arr.indices do
+      count[arr[i]] := count[arr[i]] + 1
+    end
+
+    output: Array[ZZ32, ZZ32] := empty[ZZ32]()
+    for i <- 0 : max + 1 do
+      for _j <- 0 : count[i] do
+        output := append[ZZ32](output, i)
+      end
+    end
+
+    output
+  end
+
+  run(): () = do
+    arr = array[ZZ32](5, 2, 8, 1, 9, 3)
+    println(countingsort(arr))
+  end
+end
