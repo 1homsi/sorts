@@ -1,0 +1,32 @@
+local cocktailsort := func(arr) {
+  local n := length(arr);
+  local i := 0;
+  while (i < n) {
+    local swapped := nil;
+    for (local k := 0; k < n - i - 1; k++) {
+      if (arr[k] > arr[k + 1]) {
+        local temp := arr[k];
+        arr[k] := arr[k + 1];
+        arr[k + 1] := temp;
+        swapped := true;
+      };
+    };
+    if (not swapped) break;
+    i := i + 1;
+    swapped := nil;
+    for (local k := n - i - 2; k >= 0; k--) {
+      if (arr[k] > arr[k + 1]) {
+        local temp := arr[k];
+        arr[k] := arr[k + 1];
+        arr[k + 1] := temp;
+        swapped := true;
+      };
+    };
+    if (not swapped) break;
+    i := i + 1;
+  };
+  return arr;
+};
+
+local arr := [5, 2, 8, 1, 9, 3];
+Print(cocktailsort(arr));
