@@ -1,16 +1,15 @@
-(defn shell-sort [coll]
-  (let [arr (int-array coll)
-        n (count arr)]
-    (loop [gap (quot n 2)]
-      (when (> gap 0)
-        (doseq [i (range gap n)]
-          (let [temp (aget arr i)]
-            (loop [j i]
-              (when (and (>= j gap) (> (aget arr (- j gap)) temp))
-                (aset arr j (aget arr (- j gap)))
-                (recur (- j gap)))
-              (aset arr j temp)))
-        (recur (quot gap 2))))
-    (seq arr)))
-
-(println (shell-sort [64 34 25 12 22 11 90]))
+(defn shellsort [arr]
+    (let [n (count arr)
+          arr (vec arr)]
+        (loop [arr arr gap (quot n 2)]
+            (if (zero? gap)
+                (vec arr)
+                (loop [arr arr i gap]
+                    (if (>= i n)
+                        arr
+                        (let [temp (arr i)]
+                            (loop [arr arr j i]
+                                (if (or (< j gap) (<= (arr (- j gap)) temp))
+                                    (recur arr (+ j 1))
+                                    (recur (assoc arr j (arr (- j gap))) (- j gap)))))))
+                (recur arr (quot gap 2)))))))
