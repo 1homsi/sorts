@@ -1,0 +1,41 @@
+PROGRAM BITONICSORT;
+    DECLARE ARR(8) FIXED;
+    DECLARE LO FIXED;
+    DECLARE CNT FIXED;
+    DECLARE DIR FIXED;
+    DECLARE K FIXED;
+    DECLARE I FIXED;
+    DECLARE TMP FIXED;
+
+    BITONICSORT: PROCEDURE(A, L, C, D);
+        IF C > 1 THEN DO;
+            K = C / 2;
+            CALL BITONICSORT(A, L, K, 1);
+            CALL BITONICSORT(A, L + K, K, 0);
+            CALL BITONICMERGE(A, L, C, D);
+        END;
+    END;
+
+    BITONICMERGE: PROCEDURE(A, L, C, D);
+        IF C > 1 THEN DO;
+            K = C / 2;
+            DO I = L WHILE I < L + C - K;
+                IF (A(I) > A(I + K)) = (D = 1) THEN DO;
+                    TMP = A(I);
+                    A(I) = A(I + K);
+                    A(I + K) = TMP;
+                END;
+                I = I + 1;
+            END;
+            CALL BITONICMERGE(A, L, K, D);
+            CALL BITONICMERGE(A, L + K, K, D);
+        END;
+    END;
+
+    ARR(1) = 5; ARR(2) = 2; ARR(3) = 8; ARR(4) = 1;
+    ARR(5) = 9; ARR(6) = 3; ARR(7) = 7; ARR(8) = 4;
+
+    CALL BITONICSORT(ARR, 1, 8, 1);
+
+    DISPLAY ARR;
+END;
