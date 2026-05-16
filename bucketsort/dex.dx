@@ -1,0 +1,15 @@
+def bucket_sort(arr: List Int, maxVal: Int) -> List Int =
+  case maxVal of
+    0 -> arr
+    _ -> 
+      buckets = for i in (range maxVal). []
+      buckets' = for num in arr.
+        if num >= 0 && num < maxVal then
+          buckets' = buckets' with (buckets'.i).(append_elem num)
+        buckets'
+      result = []
+      for bucket in buckets'.
+        result = result ++ bucket
+      result
+
+print (bucket_sort [5, 2, 8, 1, 9, 3] 10)
