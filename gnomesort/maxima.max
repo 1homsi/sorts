@@ -1,0 +1,16 @@
+gnome_sort(lst) := block(
+    [arr: copylist(lst), n: length(lst), i: 1, tmp],
+    while i <= n do (
+        if i = 1 or arr[i] >= arr[i-1] then
+            i: i + 1
+        else (
+            tmp: arr[i],
+            arr[i]: arr[i-1],
+            arr[i-1]: tmp,
+            i: i - 1
+        )
+    ),
+    arr
+);
+
+gnome_sort([5, 3, 8, 1, 9, 2, 7, 4, 6, 0]);
