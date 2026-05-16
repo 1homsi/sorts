@@ -1,0 +1,8 @@
+function shellsort(a) =
+  let gap = 1 in
+  let gap = while (gap <= #a) gap * 3 + 1 in
+  let a = while (gap > 0)
+    let gap = gap / 3 in
+    let a = from x in a keep x in a
+  in a;
+shellsort([5, 2, 8, 1, 9, 3]);
