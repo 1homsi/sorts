@@ -1,0 +1,25 @@
+define bitonicsort(arr, lo, cnt, dir);
+    if cnt > 1 then
+        lvars k = cnt div 2;
+        bitonicsort(arr, lo, k, 1);
+        bitonicsort(arr, lo + k, k, 0);
+        bitonicmerge(arr, lo, cnt, dir);
+    endif;
+enddefine;
+
+define bitonicmerge(arr, lo, cnt, dir);
+    if cnt > 1 then
+        lvars k = cnt div 2, i;
+        for i from 0 to cnt - k - 1 do
+            if (arr(lo + i) > arr(lo + i + k)) == (dir == 1) then
+                lvars tmp = arr(lo + i);
+                arr(lo + i) := arr(lo + i + k);
+                arr(lo + i + k) := tmp;
+            endif;
+        endfor;
+        bitonicmerge(arr, lo, k, dir);
+        bitonicmerge(arr, lo + k, k, dir);
+    endif;
+enddefine;
+
+{5, 2, 8, 1, 9, 3, 7, 4} -> bitonicsort(%, 0, 8, 1);
