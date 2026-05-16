@@ -1,0 +1,23 @@
+func comb_sort(var arr : array of int) is
+  var gap := arr'Length
+  var swapped := true
+  loop
+    exit when gap <= 1 and not swapped
+    gap := gap * 10 / 13
+    if gap < 1 then
+      gap := 1
+    end if
+    swapped := false
+    for i in arr'Range .. arr'Last - gap loop
+      if arr[i] > arr[i + gap] then
+        let temp := arr[i]
+        arr[i] := arr[i + gap]
+        arr[i + gap] := temp
+        swapped := true
+      end if
+    end loop
+  end loop
+end func comb_sort
+
+let sample : array of int := [5, 2, 8, 1, 9, 3]
+comb_sort(sample)
