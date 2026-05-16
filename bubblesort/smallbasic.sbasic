@@ -1,0 +1,20 @@
+arr[1] = 64 : arr[2] = 34 : arr[3] = 25 : arr[4] = 12
+arr[5] = 22 : arr[6] = 11 : arr[7] = 90
+n = 7
+swapped = 1
+While swapped = 1
+    swapped = 0
+    For i = 1 To n - 1
+        If arr[i] > arr[i + 1] Then
+            tmp = arr[i]
+            arr[i] = arr[i + 1]
+            arr[i + 1] = tmp
+            swapped = 1
+        EndIf
+    Next
+    n = n - 1
+Wend
+For i = 1 To 7
+    Print arr[i]; " ";
+Next
+Print
