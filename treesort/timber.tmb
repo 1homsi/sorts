@@ -1,0 +1,20 @@
+module TreeSort where
+
+data Node = Leaf | Node Int Node Node
+
+insert :: Node -> Int -> Node
+insert Leaf v = Node v Leaf Leaf
+insert (Node x l r) v
+  | v < x = Node x (insert l v) r
+  | v > x = Node x l (insert r v)
+  | otherwise = Node x l r
+
+inorder :: Node -> [Int]
+inorder Leaf = []
+inorder (Node x l r) = inorder l ++ [x] ++ inorder r
+
+treeSort :: [Int] -> [Int]
+treeSort arr = inorder (foldr insert Leaf arr)
+
+main :: IO ()
+main = print (treeSort [5, 2, 8, 1, 9, 3])
