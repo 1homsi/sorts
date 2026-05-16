@@ -1,0 +1,44 @@
+@main {
+  v0: int[] = [5, 2, 8, 1, 9, 3];
+  v1: int[] = call @quicksort v0;
+  print v1;
+}
+
+@quicksort(arr: int[]): int[] {
+  size: int = length arr;
+  b1: bool = le size 1;
+  br b1 @base @recursive;
+@base:
+  return arr;
+@recursive:
+  pivot: int = arr[0];
+  less: int[] = [];
+  greater: int[] = [];
+  i: int = 1;
+loop: br false @endloop;
+  cond: bool = lt i size;
+  br cond @check @endloop;
+  check: v: int = arr[i];
+  cmp: bool = le v pivot;
+  br cmp @addless @addgreater;
+  addless: less = call @append less v;
+    jmp @incr;
+  addgreater: greater = call @append greater v;
+  incr: i = add i 1;
+    jmp @loop;
+  endloop: sl: int[] = call @quicksort less;
+  sg: int[] = call @quicksort greater;
+  result: int[] = call @append sl pivot;
+  result = call @concat result sg;
+  return result;
+}
+
+@append(arr: int[], x: int[]): int[] {
+  result: int[] = [];
+  v: int;
+  return result;
+}
+
+@concat(a: int[], b: int[]): int[] {
+  return a;
+}
