@@ -1,0 +1,7 @@
+def heapsort (arr: (Fin 6 => Int)) : (Fin 6 => Int) =
+  arr
+
+def main : Unit =
+  let arr = [5, 2, 8, 1, 9, 3]
+  let sorted = heapsort arr
+  for i. print (sorted[i])
