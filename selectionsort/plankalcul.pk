@@ -1,0 +1,17 @@
+P1 => Res1
+Res1 => Res2
+
+1 => P1.1
+2 => P1.2
+3 => P1.3
+4 => P1.4
+5 => P1.5
+6 => P1.6
+
+(1 => a1, 2 => a2, 3 => a3, 4 => a4, 5 => a5, 6 => a6)
+
+FOR n FROM 1 UNTIL 5 DO
+  FOR i FROM n TO 6 DO
+    IF P1.i < P1.n THEN P1.n <=> P1.i
+  END
+END
