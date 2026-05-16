@@ -1,0 +1,33 @@
+LF arr : type =
+  | nil : arr
+  | cons : int -> arr -> arr
+
+rec countingsort : arr -> arr =
+  fn arr => case arr of
+    | nil => nil
+    | cons x xs =>
+        let val max = findmax arr 0
+        let val count = initcount (max + 1)
+        let val count' = fillcount arr count
+        let val output = rebuild 0 max count'
+        in output
+
+and findmax : arr -> int -> int =
+  fn arr, m => case arr of
+    | nil => m
+    | cons x xs =>
+        let val m' = if x > m then x else m
+        in findmax xs m'
+
+and fillcount : arr -> int list -> int list =
+  fn arr, count => case arr of
+    | nil => count
+    | cons x xs =>
+        let val count' = incrementat x count
+        in fillcount xs count'
+
+and rebuild : int -> int -> int list -> arr =
+  fn i, max, count => if i > max then nil
+    else cons i (rebuild (i+1) max count)
+
+let _ = countingsort (cons 5 (cons 2 (cons 8 (cons 1 (cons 9 (cons 3 nil))))))
