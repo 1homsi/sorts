@@ -1,0 +1,6 @@
+let bubblesort : List Nat -> List Nat
+bubblesort [] = []
+bubblesort [x] = [x]
+bubblesort (x :: xs) = 
+  if x <= head xs then x :: bubblesort xs
+  else head xs :: bubblesort (x :: tail xs)
