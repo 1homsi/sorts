@@ -1,29 +1,6 @@
-program bogosort;
-
-var arr := [3, 1, 4, 1, 5, 9, 2, 6];
-var n := #arr;
-
-op is_sorted(a);
-  var i;
-  for i in [1..n-1] loop
-    if a(i) > a(i+1) then return false; end if;
-  end loop;
-  return true;
-end op;
-
-op shuffle(a);
-  var i, j, tmp;
-  for i in [n, n-1..2] loop
-    j := random {1..i};
-    tmp := a(i); a(i) := a(j); a(j) := tmp;
-  end loop;
-  return a;
-end op;
-
-loop while not is_sorted(arr);
-  arr := shuffle(arr);
-end loop;
-
-print(arr);
-
-end program;
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
