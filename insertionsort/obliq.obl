@@ -1,0 +1,16 @@
+let insertionSort = proc(arr)
+  let n = array_size(arr) in
+  for i = 1 to n-1 do
+    let key = arr[i] in
+    let j = i - 1 in
+    while j >= 0 and arr[j] > key do
+      arr[j+1] := arr[j];
+      j := j - 1
+    end;
+    arr[j+1] := key
+  end;
+  arr
+end;
+
+let arr = array[6, 5, 2, 8, 1, 9, 3] in
+IO.PutText(IO.StdOut, array_to_string(insertionSort(arr)));
