@@ -1,0 +1,16 @@
+(defun bubble-sort (lst)
+  (let* ((arr (vconcat lst))
+         (n (length arr))
+         (swapped t))
+    (while swapped
+      (setq swapped nil)
+      (dotimes (i (1- n))
+        (when (> (aref arr i) (aref arr (1+ i)))
+          (let ((tmp (aref arr i)))
+            (aset arr i (aref arr (1+ i)))
+            (aset arr (1+ i) tmp)
+            (setq swapped t))))
+      (setq n (1- n)))
+    (append arr nil)))
+
+(message "%s" (bubble-sort '(64 34 25 12 22 11 90)))
