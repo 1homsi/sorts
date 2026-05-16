@@ -1,1 +1,6 @@
-print("Bogosort implementation for kql.kql")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
