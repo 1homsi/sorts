@@ -1,0 +1,11 @@
+fun cycle_sort [] = []
+  | cycle_sort (x::xs) =
+      let val pos = length (filter (fn y => y < x) xs)
+      in insert_at x pos (cycle_sort xs)
+      end
+
+and insert_at x 0 ys = x::ys
+  | insert_at x n (y::ys) = y :: insert_at x (n-1) ys
+  | insert_at x _ [] = [x]
+
+val result = cycle_sort [5, 4, 3, 2, 1]
