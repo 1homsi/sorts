@@ -1,0 +1,27 @@
+def BogSort(arr: list<int>): list<int>
+  while !IsSorted(arr)
+    Shuffle(arr)
+  endwhile
+  return arr
+enddef
+
+def IsSorted(arr: list<int>): bool
+  for i in range(arr.len() - 1)
+    if arr[i] > arr[i+1]
+      return false
+    endif
+  endfor
+  return true
+enddef
+
+def Shuffle(arr: list<int>): void
+  for i in range(arr.len())
+    var j = random(arr.len())
+    var tmp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = tmp
+  endfor
+enddef
+
+var arr = [3, 1, 2]
+echo BogSort(arr)
