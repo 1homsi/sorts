@@ -1,1 +1,1 @@
-print("Bogosort implementation for funsql.funsql")
+SELECT * FROM array ORDER BY value ASC;
