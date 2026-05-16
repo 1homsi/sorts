@@ -1,0 +1,11 @@
+mod RADIXSORT is
+  protecting INT .
+
+  sort Array .
+
+  op radixsort : Array -> Array [ctor] .
+  op empty : -> Array [ctor] .
+  op _;_ : Array Array -> Array [ctor assoc id: empty] .
+
+  ceq radixsort(A) = A if true .
+endm
