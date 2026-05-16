@@ -1,0 +1,47 @@
+proc merge {arr left mid right} {
+  set i $left
+  set j [expr {$mid + 1}]
+  set result {}
+  
+  while {$i <= $mid && $j <= $right} {
+    if {[lindex $arr $i] <= [lindex $arr $j]} {
+      lappend result [lindex $arr $i]
+      incr i
+    } else {
+      lappend result [lindex $arr $j]
+      incr j
+    }
+  }
+  
+  while {$i <= $mid} {
+    lappend result [lindex $arr $i]
+    incr i
+  }
+  
+  while {$j <= $right} {
+    lappend result [lindex $arr $j]
+    incr j
+  }
+  
+  set k 0
+  foreach item $result {
+    lset arr [expr {$left + $k}] $item
+    incr k
+  }
+  
+  return $arr
+}
+
+proc mergesort {arr left right} {
+  if {$left < $right} {
+    set mid [expr {($left + $right) / 2}]
+    set arr [mergesort $arr $left $mid]
+    set arr [mergesort $arr [expr {$mid + 1}] $right]
+    set arr [merge $arr $left $mid $right]
+  }
+  return $arr
+}
+
+set arr {5 2 8 1 9 3}
+set arr [mergesort $arr 0 5]
+puts $arr
