@@ -1,0 +1,35 @@
+        ARR = '4 2 2 8 3 3 1'
+        N = 7
+        MN = 1
+        MX = 8
+        RANGE = MX - MN + 1
+
+        COUNT = ARRAY(RANGE, 0)
+        OUTPUT_ARR = ARRAY(N, 0)
+
+        I = 1
+COUNTLOOP
+        COUNT<ARR<I> - MN + 1> = COUNT<ARR<I> - MN + 1> + 1
+        I = I + 1
+        LE(I, N)                :S(COUNTLOOP)
+
+        I = 2
+PREFIXLOOP
+        COUNT<I> = COUNT<I> + COUNT<I - 1>
+        I = I + 1
+        LE(I, RANGE)            :S(PREFIXLOOP)
+
+        I = N
+OUTPUTLOOP
+        IDX = ARR<I> - MN + 1
+        COUNT<IDX> = COUNT<IDX> - 1
+        OUTPUT_ARR<COUNT<IDX> + 1> = ARR<I>
+        I = I - 1
+        GE(I, 1)                :S(OUTPUTLOOP)
+
+        I = 1
+PRINTLOOP
+        OUTPUT = OUTPUT_ARR<I>
+        I = I + 1
+        LE(I, N)                :S(PRINTLOOP)
+END
