@@ -1,23 +1,2 @@
-:- module mercury2.
-:- interface.
-:- import_module io.
-:- pred main(io::di, io::uo) is det.
-
-:- implementation.
-:- import_module list, int.
-
-:- pred is_sorted(list(int)::in) is semidet.
-is_sorted([]).
-is_sorted([_]).
-is_sorted([A, B | Rest]) :- A =< B, is_sorted([B | Rest]).
-
-:- pred bogosort(list(int)::in, list(int)::out) is det.
-bogosort(List, Sorted) :-
-    ( if is_sorted(List) then Sorted = List
-      else list.sort(List, Sorted) ).
-
-main(!IO) :-
-    Arr = [3, 1, 4, 1, 5, 9, 2, 6],
-    bogosort(Arr, Sorted),
-    io.write_list(Sorted, ", ", io.write_int, !IO),
-    io.nl(!IO).
+bogosort(List, List) :- sorted(List), !.
+bogosort(List, Sorted) :- shuffle(List, S), bogosort(S, Sorted).
