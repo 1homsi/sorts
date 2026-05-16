@@ -1,0 +1,53 @@
+effect Array : {
+  get : int -> int
+  set : int -> int -> unit
+  len : unit -> int
+}
+
+let timsort arr min_size =
+  mergesort arr min_size
+
+let rec mergesort arr min_size =
+  let len = (with Array -> len ()) in
+  if len <= 1 then
+    arr
+  else if len <= min_size then
+    insertionsort arr
+  else
+    let mid = len / 2 in
+    let left = arr in
+    let right = arr in
+    merge (mergesort left min_size) (mergesort right min_size)
+
+let rec insertionsort arr =
+  let len = (with Array -> len ()) in
+  let () =
+    (for i = 1 to len - 1 do
+      let key = (with Array -> get i) in
+      let j = ref (i - 1) in
+      (while !j >= 0 && (with Array -> get !j) > key do
+        with Array -> set (!j + 1) (with Array -> get !j);
+        j := !j - 1
+      done);
+      with Array -> set (!j + 1) key
+    done)
+  in
+  arr
+
+let rec merge left right =
+  let llen = (with Array -> len ()) in
+  let rlen = (with Array -> len ()) in
+  let result = [] in
+  let i = ref 0 in
+  let j = ref 0 in
+  (while !i < llen && !j < rlen do
+    let lval = (with Array -> get !i) in
+    let rval = (with Array -> get !j) in
+    if lval <= rval then
+      result := !result @ [lval];
+      i := !i + 1
+    else
+      result := !result @ [rval];
+      j := !j + 1
+  done;
+  !result)
