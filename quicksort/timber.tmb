@@ -1,0 +1,11 @@
+main :: Tree (Signal Int)
+main = forever (do { putStr "Sorted: ";
+                      putStrLn (quicksort [5, 2, 8, 1, 9, 3]);
+                    })
+
+quicksort :: [Int] -> [Int]
+quicksort [] = []
+quicksort [x] = [x]
+quicksort (x:xs) = quicksort less ++ [x] ++ quicksort greater
+  where less = [y | y <- xs, y <= x]
+        greater = [y | y <- xs, y > x]
