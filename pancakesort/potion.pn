@@ -1,0 +1,19 @@
+pancakesort = (arr) :
+    n = arr length
+    i = 0
+    while (i < n - 1) :
+        j = 0
+        while (j < n - i - 1) :
+            if (arr[j] > arr[j + 1]) :
+                temp = arr[j]
+                arr[j] = arr[j + 1]
+                arr[j + 1] = temp
+            end
+            j++
+        end
+        i++
+    end
+    return arr
+
+arr = [5, 2, 8, 1, 9, 3]
+print("Pancake Sort: ", pancakesort(arr))
