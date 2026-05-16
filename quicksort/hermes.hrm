@@ -1,0 +1,13 @@
+func quicksort(arr: Array<Int>): Array<Int> {
+  if arr.size() <= 1 {
+    return arr
+  }
+  let pivot = arr[0]
+  let less = arr.filter { x => x <= pivot }
+  let greater = arr.filter { x => x > pivot }
+  return quicksort(less) + [pivot] + quicksort(greater)
+}
+
+func main() {
+  print(quicksort([5, 2, 8, 1, 9, 3]))
+}
