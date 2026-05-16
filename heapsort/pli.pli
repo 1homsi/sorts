@@ -1,0 +1,25 @@
+HEAPSORT: PROCEDURE OPTIONS(MAIN);
+  DECLARE arr(0:5) FIXED BINARY(31);
+  DECLARE (n, i, largest, left, right, tmp) FIXED BINARY(31);
+
+  HEAPIFY: PROCEDURE(pn, pi) RECURSIVE;
+    DECLARE (pn, pi) FIXED BINARY(31);
+    DECLARE (lg, l, r, t) FIXED BINARY(31);
+    lg = pi; l = 2*pi+1; r = 2*pi+2;
+    IF l < pn & arr(l) > arr(lg) THEN lg = l;
+    IF r < pn & arr(r) > arr(lg) THEN lg = r;
+    IF lg ^= pi THEN DO;
+      t = arr(pi); arr(pi) = arr(lg); arr(lg) = t;
+      CALL HEAPIFY(pn, lg);
+    END;
+  END HEAPIFY;
+
+  arr(0)=12; arr(1)=11; arr(2)=13; arr(3)=5; arr(4)=6; arr(5)=7;
+  n = 6;
+  DO i = n/2-1 TO 0 BY -1; CALL HEAPIFY(n, i); END;
+  DO i = n-1 TO 1 BY -1;
+    tmp = arr(0); arr(0) = arr(i); arr(i) = tmp;
+    CALL HEAPIFY(i, 0);
+  END;
+  DO i = 0 TO n-1; PUT SKIP LIST(arr(i)); END;
+END HEAPSORT;
