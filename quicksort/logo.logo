@@ -1,0 +1,19 @@
+to quicksort :array
+  ifempty :array [output []]
+  local "pivot
+  local "less
+  local "greater
+  make "pivot first :array
+  make "less []
+  make "greater []
+  foreach butfirst :array [
+    ifelse :item <= :pivot [
+      make "less lput :item :less
+    ] [
+      make "greater lput :item :greater
+    ]
+  ]
+  output sentence (quicksort :less) :pivot (quicksort :greater)
+end
+
+show quicksort [5 2 8 1 9 3]
