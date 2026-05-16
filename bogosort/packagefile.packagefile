@@ -1,1 +1,6 @@
-print("Bogosort implementation for packagefile.packagefile")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
