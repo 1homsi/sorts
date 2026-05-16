@@ -1,0 +1,10 @@
+environ vocabularies SUBSET_1, ARYTM_1;
+environ notations SUBSET_1, ARYTM_1;
+
+definition
+  let A be Sequence of NAT;
+  let i, j be Nat;
+  assume i <= j;
+  func StoogeSort(A, i, j) -> Sequence of NAT means
+    it = A;
+end;
