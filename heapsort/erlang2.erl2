@@ -1,0 +1,40 @@
+-module(erlang2).
+-export([heapsort/1, main/0]).
+
+heapify(Arr, N, I) ->
+    Left = 2 * I + 1,
+    Right = 2 * I + 2,
+    Largest0 = case Left < N andalso element(Left+1, Arr) > element(I+1, Arr) of
+        true -> Left;
+        false -> I
+    end,
+    Largest = case Right < N andalso element(Right+1, Arr) > element(Largest0+1, Arr) of
+        true -> Right;
+        false -> Largest0
+    end,
+    case Largest =:= I of
+        true -> Arr;
+        false ->
+            VI = element(I+1, Arr),
+            VL = element(Largest+1, Arr),
+            Arr1 = setelement(I+1, Arr, VL),
+            Arr2 = setelement(Largest+1, Arr1, VI),
+            heapify(Arr2, N, Largest)
+    end.
+
+heapsort(List) ->
+    N = length(List),
+    Arr = list_to_tuple(List),
+    Heap = lists:foldl(fun(I, A) -> heapify(A, N, I) end, Arr, lists:seq(N div 2 - 1, 0, -1)),
+    Sorted = lists:foldl(
+        fun(I, A) ->
+            V0 = element(1, A), VI = element(I+1, A),
+            A1 = setelement(1, A, VI),
+            A2 = setelement(I+1, A1, V0),
+            heapify(A2, I, 0)
+        end,
+        Heap, lists:seq(N-1, 1, -1)),
+    tuple_to_list(Sorted).
+
+main() ->
+    io:format("~p~n", [heapsort([12, 11, 13, 5, 6, 7])]).
