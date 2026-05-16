@@ -1,0 +1,13 @@
+fun gnomeSort arr =
+    let n = Array.length arr
+        fun loop i =
+            if i >= n then ()
+            else if i = 0 orelse Array.sub(arr,i) >= Array.sub(arr,i-1)
+            then loop (i+1)
+            else let tmp = Array.sub(arr,i)
+                 in Array.update(arr,i,Array.sub(arr,i-1));
+                    Array.update(arr,i-1,tmp);
+                    loop(i-1)
+                 end
+    in loop 0; arr
+    end
