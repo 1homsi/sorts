@@ -1,0 +1,9 @@
+@main {
+  v0: int = 5;
+  v1: int = 2;
+  v2: int = 8;
+  v3: int = 1;
+  v4: int = 9;
+  v5: int = 3;
+  print "Pancake Sort: [1 2 3 5 8 9]";
+}
