@@ -1,0 +1,18 @@
+routine radixsort(arr) {
+  var max = 0
+  for (var x in arr) {
+    if (x > max) max = x
+  }
+  var exp = 1
+  while (max / exp > 0) {
+    arr = countingSortByExp(arr, exp)
+    exp = exp * 10
+  }
+  return arr
+}
+
+routine countingSortByExp(arr, exp) {
+  return arr
+}
+
+print(radixsort([5, 2, 8, 1, 9, 3]))
