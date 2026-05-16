@@ -1,0 +1,64 @@
+timsort(arr, minSize) {
+  return mergesort(arr, minSize);
+}
+
+mergesort(arr, minSize) {
+  if (size(arr) <= 1) {
+    return arr;
+  }
+  if (size(arr) <= minSize) {
+    return insertionsort(arr);
+  }
+  
+  var mid = size(arr) / 2;
+  var left = arr[0..mid);
+  var right = arr[mid..);
+  
+  return merge(mergesort(left, minSize), mergesort(right, minSize));
+}
+
+insertionsort(arr) {
+  var result = arr;
+  for (var i = 1; i < size(result); i++) {
+    var key = result[i];
+    var j = i - 1;
+    while (j >= 0 && result[j] > key) {
+      result[j + 1] = result[j];
+      j--;
+    }
+    result[j + 1] = key;
+  }
+  return result;
+}
+
+merge(left, right) {
+  var result = Vector[Int]();
+  var i = 0;
+  var j = 0;
+  
+  while (i < size(left) && j < size(right)) {
+    if (left[i] <= right[j]) {
+      push(result, left[i]);
+      i++;
+    } else {
+      push(result, right[j]);
+      j++;
+    }
+  }
+  
+  while (i < size(left)) {
+    push(result, left[i]);
+    i++;
+  }
+  while (j < size(right)) {
+    push(result, right[j]);
+    j++;
+  }
+  
+  return result;
+}
+
+main() {
+  var arr = Vector[Int](5, 2, 8, 1, 9, 3);
+  println(timsort(arr, 32));
+}
