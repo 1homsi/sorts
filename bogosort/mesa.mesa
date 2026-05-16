@@ -1,33 +1,6 @@
-DIRECTORY Bogosort USING [ Main ];
-
-Bogosort: CEDAR PROGRAM =
-BEGIN
-
-arr: ARRAY [1..8] OF INTEGER ← [3, 1, 4, 1, 5, 9, 2, 6];
-n: INTEGER = 8;
-
-IsSorted: PROCEDURE RETURNS [BOOLEAN] = {
-  FOR i: INTEGER IN [1..n-1] DO
-    IF arr[i] > arr[i+1] THEN RETURN [FALSE];
-  ENDLOOP;
-  RETURN [TRUE]
-};
-
-Shuffle: PROCEDURE = {
-  FOR i: INTEGER DECREASING IN [2..n] DO
-    j: INTEGER ← Random.ChooseInt[lower: 1, upper: i];
-    tmp: INTEGER ← arr[i];
-    arr[i] ← arr[j];
-    arr[j] ← tmp;
-  ENDLOOP
-};
-
-Main: PROCEDURE = {
-  UNTIL IsSorted[] DO Shuffle[] ENDLOOP;
-  FOR i: INTEGER IN [1..n] DO
-    IO.PutFR[IO.stdout, "%d ", IO.int[arr[i]]];
-  ENDLOOP;
-  IO.PutRope[IO.stdout, "\n"]
-};
-
-END.
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
