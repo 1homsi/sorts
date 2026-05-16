@@ -1,1 +1,1 @@
-print("Bogosort implementation for flinksql.flinksql")
+SELECT * FROM array ORDER BY value ASC;
