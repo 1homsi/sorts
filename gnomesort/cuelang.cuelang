@@ -1,0 +1,7 @@
+package gnomesort
+
+import "list"
+
+input: [5, 3, 8, 1, 9, 2, 7, 4, 6, 0]
+
+sorted: list.Sort(input, list.Ascending)
