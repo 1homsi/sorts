@@ -1,0 +1,36 @@
+def insertionSort(List<Double> bucket) {
+    int n = bucket.size()
+    for (int i = 1; i < n; i++) {
+        double key = bucket[i]
+        int j = i - 1
+        while (j >= 0 && bucket[j] > key) {
+            bucket[j + 1] = bucket[j]
+            j--
+        }
+        bucket[j + 1] = key
+    }
+    bucket
+}
+
+def bucketSort(List<Double> arr) {
+    int n = arr.size()
+    if (n == 0) return arr
+    double minV = arr.min()
+    double maxV = arr.max()
+    List<List<Double>> buckets = (0..<n).collect { [] }
+    arr.each { num ->
+        int idx = ((num - minV) / (maxV - minV + 1) * n).toInteger()
+        if (idx >= n) idx = n - 1
+        buckets[idx] << num
+    }
+    buckets.collectMany { insertionSort(it) }
+}
+
+task sort {
+    doLast {
+        def data = [0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68]
+        println bucketSort(data)
+    }
+}
+
+defaultTasks 'sort'
