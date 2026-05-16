@@ -1,0 +1,21 @@
+#lang racket
+
+(define (bubble-pass! vec n)
+  (define swapped #f)
+  (for ([i (in-range (- n 1))])
+    (when (> (vector-ref vec i) (vector-ref vec (+ i 1)))
+      (define tmp (vector-ref vec i))
+      (vector-set! vec i (vector-ref vec (+ i 1)))
+      (vector-set! vec (+ i 1) tmp)
+      (set! swapped #t)))
+  swapped)
+
+(define (bubble-sort! vec)
+  (let loop ((n (vector-length vec)))
+    (when (> n 1)
+      (when (bubble-pass! vec n)
+        (loop (- n 1))))))
+
+(define arr (vector 64 34 25 12 22 11 90))
+(bubble-sort! arr)
+(displayln arr)
