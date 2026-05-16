@@ -1,0 +1,22 @@
+task SelectionSort : void
+{
+  sort [5, 2, 8, 1, 9, 3];
+}
+
+method sort(data : array of int) : void
+{
+  integer n = data.size();
+  integer i, j, minIdx, tmp;
+  
+  for i = 0 to n - 2 {
+    minIdx = i;
+    for j = i + 1 to n - 1 {
+      if data[j] < data[minIdx] then {
+        minIdx = j;
+      }
+    }
+    tmp = data[i];
+    data[i] = data[minIdx];
+    data[minIdx] = tmp;
+  }
+}
