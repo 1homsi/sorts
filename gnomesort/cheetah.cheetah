@@ -1,0 +1,21 @@
+##
+#def gnome_sort($arr)
+    #set $a = list($arr)
+    #set $n = len($a)
+    #set $i = 0
+    #while $i < $n
+        #if $i == 0 or $a[$i] >= $a[$i-1]
+            #set $i = $i + 1
+        #else
+            #set $tmp = $a[$i]
+            #set $a[$i] = $a[$i-1]
+            #set $a[$i-1] = $tmp
+            #set $i = $i - 1
+        #end if
+    #end while
+    #return $a
+#end def
+
+#set $data = [5, 3, 8, 1, 9, 2, 7, 4, 6, 0]
+#set $result = $gnome_sort($data)
+$result
