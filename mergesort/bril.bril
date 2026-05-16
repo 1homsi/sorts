@@ -1,0 +1,34 @@
+@merge(arr: ref[int], left: int, mid: int, right: int) {
+  i: int = id left;
+  j: int = id (mid + 1);
+  result: ref[int] = alloc 100;
+  k: int = id 0;
+  
+  loop {
+    check_i: bool = le i mid;
+    check_j: bool = le j right;
+    both: bool = and check_i check_j;
+    br both loop_body loop_end;
+    
+  loop_body:
+    i_val: int = load arr i;
+    j_val: int = load arr j;
+    cmp: bool = le i_val j_val;
+    br cmp assign_i assign_j;
+    
+  assign_i:
+    i_val2: int = load arr i;
+    store result k i_val2;
+    i = add i 1;
+    jmp loop;
+    
+  assign_j:
+    j_val2: int = load arr j;
+    store result k j_val2;
+    j = add j 1;
+    jmp loop;
+    
+  loop_end:
+  }
+  print arr;
+}
