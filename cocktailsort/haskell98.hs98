@@ -1,0 +1,39 @@
+module CocktailSort98 where
+
+import Data.Array (Array, listArray, (!), (//), elems, bounds)
+import Data.List (foldl')
+
+type IntArray = Array Int Int
+
+swapArr :: IntArray -> Int -> Int -> IntArray
+swapArr arr i j = arr // [(i, arr!j), (j, arr!i)]
+
+forward :: IntArray -> Int -> Int -> (IntArray, Bool)
+forward arr i end
+    | i >= end  = (arr, False)
+    | arr!i > arr!(i+1) = let arr' = swapArr arr i (i+1)
+                               (arr'', _) = forward arr' (i+1) end
+                           in (arr'', True)
+    | otherwise = forward arr (i+1) end
+
+backward :: IntArray -> Int -> Int -> (IntArray, Bool)
+backward arr i start
+    | i < start = (arr, False)
+    | arr!i > arr!(i+1) = let arr' = swapArr arr i (i+1)
+                               (arr'', _) = backward arr' (i-1) start
+                           in (arr'', True)
+    | otherwise = backward arr (i-1) start
+
+cocktailSort :: [Int] -> [Int]
+cocktailSort [] = []
+cocktailSort xs =
+    let n   = length xs
+        arr = listArray (0, n-1) xs
+        go a s e
+            | s >= e = a
+            | otherwise =
+                let (a1, sw1) = forward a s e
+                in if not sw1 then a1
+                   else let (a2, sw2) = backward a1 (e-1) s
+                        in if sw2 then go a2 (s+1) (e-1) else a2
+    in elems (go arr 0 (n-1))
