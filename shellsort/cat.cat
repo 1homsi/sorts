@@ -1,0 +1,13 @@
+[5 2 8 1 9 3] -> (shellsort) | display
+shellsort
+    (1 -> gap
+    (gap 3 * 1 + -> gap) whilst (gap over? not)
+    (gap 0 over?
+        ((gap 3 div -> gap
+        (gap 0 < not)
+            (i gap + -> i)
+            (i 6 < (i 1 +) (i 1 +) if)
+        ) whilst
+        )
+    ) whilst
+    )
