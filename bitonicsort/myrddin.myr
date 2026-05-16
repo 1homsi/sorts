@@ -1,0 +1,31 @@
+use std
+
+fn bitonicsort(arr : int[:], lo : int, cnt : int, dir : int) -> void
+    if cnt > 1
+        var k = cnt / 2
+        bitonicsort(arr, lo, k, 1)
+        bitonicsort(arr, lo + k, k, 0)
+        bitonicmerge(arr, lo, cnt, dir)
+    ;;
+;;
+
+fn bitonicmerge(arr : int[:], lo : int, cnt : int, dir : int) -> void
+    if cnt > 1
+        var k = cnt / 2
+        for var i = lo; i < lo + cnt - k; i++
+            if (arr[i] > arr[i + k]) == (dir == 1)
+                var tmp = arr[i]
+                arr[i] = arr[i + k]
+                arr[i + k] = tmp
+            ;;
+        ;;
+        bitonicmerge(arr, lo, k, dir)
+        bitonicmerge(arr, lo + k, k, dir)
+    ;;
+;;
+
+const main = {
+    var arr = [5, 2, 8, 1, 9, 3, 7, 4][:]
+    bitonicsort(arr, 0, 8, 1)
+    std.exit(0)
+}
