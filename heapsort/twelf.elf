@@ -1,0 +1,8 @@
+heapsort : list -> list -> type.
+hs-nil : heapsort [] [].
+hs-cons : heapsort (X :: XS) YS -> heapsort YS ZS -> type.
+
+siftdown : int -> int -> list -> list -> type.
+sd-base : siftdown _ _ [] [].
+
+main : heapsort [5, 2, 8, 1, 9, 3] X -> {X : list}.
