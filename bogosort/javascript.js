@@ -1,23 +1,9 @@
-function isSorted(arr) {
-    for (let i = 0; i < arr.length - 1; i++) {
-        if (arr[i] > arr[i + 1]) return false;
-    }
-    return true;
-}
-
-function shuffle(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-}
-
 function bogosort(arr) {
-    while (!isSorted(arr)) {
-        shuffle(arr);
+    while (!arr.every((v, i, a) => i === 0 || a[i-1] <= v)) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
     }
     return arr;
 }
-
-const arr = [3, 1, 4, 1, 5, 9, 2, 6];
-console.log(bogosort(arr));
