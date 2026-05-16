@@ -1,0 +1,26 @@
+WITH data AS (
+    SELECT val FROM (VALUES
+        (0.78), (0.17), (0.39), (0.26), (0.72),
+        (0.94), (0.21), (0.12), (0.23), (0.68)
+    ) AS t(val)
+),
+stats AS (
+    SELECT MIN(val) AS min_v, MAX(val) AS max_v, COUNT(*) AS n FROM data
+),
+bucketed AS (
+    SELECT
+        val,
+        LEAST(n - 1, CAST(FLOOR((val - min_v) / (max_v - min_v + 1) * n) AS BIGINT)) AS bucket_idx
+    FROM data, stats
+),
+ranked AS (
+    SELECT
+        val,
+        bucket_idx,
+        ROW_NUMBER() OVER (PARTITION BY bucket_idx ORDER BY val) AS rank_in_bucket,
+        ROW_NUMBER() OVER (ORDER BY bucket_idx, val) AS final_rank
+    FROM bucketed
+)
+SELECT val
+FROM ranked
+ORDER BY final_rank
