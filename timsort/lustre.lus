@@ -1,0 +1,29 @@
+node timsort(arr: int^6; minSize: int) returns (result: int^6);
+var
+  merged: int^6;
+let
+  merged = mergesort(arr, minSize);
+  result = merged;
+tel;
+
+node mergesort(arr: int^6; minSize: int) returns (result: int^6);
+var
+  left: int^3;
+  right: int^3;
+  sorted_left: int^3;
+  sorted_right: int^3;
+let
+  left = arr[0..2];
+  right = arr[3..5];
+  sorted_left = mergesort(left, minSize);
+  sorted_right = mergesort(right, minSize);
+  result = merge(sorted_left, sorted_right);
+tel;
+
+node merge(left: int^3; right: int^3) returns (result: int^6);
+var
+  i: int;
+  j: int;
+let
+  result = [left[0], right[0], left[1], right[1], left[2], right[2]];
+tel;
