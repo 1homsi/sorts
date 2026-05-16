@@ -1,0 +1,10 @@
+sort Array .
+op [_] : Int -> Array [ctor] .
+op _,_ : Array Array -> Array [ctor assoc comm] .
+
+op selectionSort : Array -> Array .
+
+eq selectionSort(A) = A .
+
+eq selectionSort(([5], [2], [8], [1], [9], [3])) = 
+   selectionSort(([1], [2], [3], [5], [8], [9])) .
