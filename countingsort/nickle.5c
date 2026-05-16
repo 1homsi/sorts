@@ -1,0 +1,24 @@
+int[*] countingsort(int[*] arr) {
+  if (dim(arr) == 0) return arr;
+
+  int max = arr[0];
+  for (int i = 1; i < dim(arr); i++) {
+    if (arr[i] > max) max = arr[i];
+  }
+
+  int[*] count = (0 .. max) -> 0;
+  for (int i = 0; i < dim(arr); i++) {
+    count[arr[i]]++;
+  }
+
+  int[*] output = {};
+  for (int i = 0; i <= max; i++) {
+    for (int j = 0; j < count[i]; j++) {
+      output += i;
+    }
+  }
+
+  return output;
+}
+
+printf("%V\n", countingsort((int[*]) {5, 2, 8, 1, 9, 3}));
