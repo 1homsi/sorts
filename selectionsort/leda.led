@@ -1,0 +1,24 @@
+LEDA_BEGIN_NAMESPACE
+
+extern void selection_sort(list<int>& L) {
+  forall (int& x, int& y) {
+    if (x > y) swap(x, y);
+  }
+}
+
+int main() {
+  list<int> arr;
+  arr.append(5);
+  arr.append(2);
+  arr.append(8);
+  arr.append(1);
+  arr.append(9);
+  arr.append(3);
+  
+  selection_sort(arr);
+  arr.print();
+  
+  return 0;
+}
+
+LEDA_END_NAMESPACE
