@@ -1,0 +1,21 @@
+            FUNCTION COMBSORT.(ARR, N)
+            INTEGER ARR(100), N, GAP, I, TMP
+            BOOLEAN SORTED
+            GAP = N
+            SORTED = .FALSE.
+OUTER       WHENEVER SORTED, RETURN
+            GAP = GAP*10/13
+            WHENEVER GAP .LE. 1
+                GAP = 1
+                SORTED = .TRUE.
+            END OF CONDITIONAL
+            FOR I = 1, 1, N-GAP
+                WHENEVER ARR(I) .G. ARR(I+GAP)
+                    TMP = ARR(I)
+                    ARR(I) = ARR(I+GAP)
+                    ARR(I+GAP) = TMP
+                    SORTED = .FALSE.
+                END OF CONDITIONAL
+            END OF LOOP
+            TRANSFER TO OUTER
+            END OF FUNCTION
