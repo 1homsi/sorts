@@ -1,0 +1,14 @@
+def gnomeSort (arr : Array Int) : Array Int :=
+  let n := arr.size
+  let rec loop (a : Array Int) (i : Nat) : Array Int :=
+    if h : i >= n then a
+    else if i == 0 then loop a (i + 1)
+    else
+      let x := a.get! i
+      let y := a.get! (i - 1)
+      if x >= y then loop a (i + 1)
+      else
+        let a' := (a.set! i y).set! (i - 1) x
+        loop a' (i - 1)
+  termination_by n - i
+  loop arr 0
