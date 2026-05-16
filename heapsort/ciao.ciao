@@ -1,0 +1,47 @@
+:- module(heapsort, [main/0]).
+
+main :-
+    heapsort([5, 2, 8, 1, 9, 3], Sorted),
+    write(Sorted), nl.
+
+heapsort(Arr, Result) :-
+    length(Arr, N),
+    I is N // 2 - 1,
+    heapify(Arr, I, N, H1),
+    sort_down(H1, N, 1, Result).
+
+heapify(Arr, I, N, Arr) :- I < 0, !.
+heapify(Arr, I, N, Result) :-
+    I >= 0,
+    siftdown(Arr, I, N, H1),
+    I1 is I - 1,
+    heapify(H1, I1, N, Result).
+
+sort_down(Arr, N, I, Arr) :- I >= N, !.
+sort_down(Arr, N, I, Result) :-
+    I < N,
+    swap(Arr, 0, I, H1),
+    N1 is N - 1,
+    siftdown(H1, 0, N1, H2),
+    I1 is I + 1,
+    sort_down(H2, N, I1, Result).
+
+siftdown(Arr, Idx, N, Result) :-
+    Largest is Idx,
+    Left is 2 * Idx + 1,
+    Right is 2 * Idx + 2,
+    (Left < N, nth0(Left, Arr, LV), nth0(Largest, Arr, LargeV), LV > LargeV ->
+        Largest1 is Left ; Largest1 is Largest),
+    (Right < N, nth0(Right, Arr, RV), nth0(Largest1, Arr, LargeV1), RV > LargeV1 ->
+        Largest2 is Right ; Largest2 is Largest1),
+    (Largest2 != Idx ->
+        swap(Arr, Idx, Largest2, H1),
+        siftdown(H1, Largest2, N, Result) ;
+        Result = Arr).
+
+swap(Arr, I, J, Result) :-
+    nth0(I, Arr, IV), nth0(J, Arr, JV),
+    setval(IV, temp),
+    setval(Arr, I, JV),
+    setval(Arr, J, temp),
+    Result = Arr.
