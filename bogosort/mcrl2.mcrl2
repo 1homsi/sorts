@@ -1,1 +1,6 @@
-print("Bogosort implementation for mcrl2.mcrl2")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
