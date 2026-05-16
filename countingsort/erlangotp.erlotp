@@ -1,0 +1,4 @@
+-module(counting_sort).
+-export([sort/1]).
+sort([]) -> [];
+sort(Arr) -> lists:sort(Arr).
