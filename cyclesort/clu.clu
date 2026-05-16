@@ -1,0 +1,39 @@
+cycle_sort = proc (arr: array[int]) returns (int)
+    n: int := array[int]$size(arr)
+    writes: int := 0
+    low: int := array[int]$low(arr)
+    for cycle_start: int in int$from_to(low, low + n - 2) do
+        item: int := arr[cycle_start]
+        pos: int := cycle_start
+        for i: int in int$from_to(cycle_start + 1, low + n - 1) do
+            if arr[i] < item then pos := pos + 1 end
+        end
+        if pos ~= cycle_start then
+            while arr[pos] = item do pos := pos + 1 end
+            tmp: int := arr[pos]
+            arr[pos] := item
+            item := tmp
+            writes := writes + 1
+            while pos ~= cycle_start do
+                pos := cycle_start
+                for i: int in int$from_to(cycle_start + 1, low + n - 1) do
+                    if arr[i] < item then pos := pos + 1 end
+                end
+                while arr[pos] = item do pos := pos + 1 end
+                tmp := arr[pos]
+                arr[pos] := item
+                item := tmp
+                writes := writes + 1
+            end
+        end
+    end
+    return(writes)
+end cycle_sort
+
+start = proc ()
+    arr: array[int] := array[int]$[5, 4, 3, 2, 1]
+    cycle_sort(arr)
+    for v: int in array[int]$elements(arr) do
+        stream$putl(stream$primary_output(), int$unparse(v))
+    end
+end start
