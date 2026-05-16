@@ -1,0 +1,67 @@
+interface TimSort<Element is Comparable<>> is
+
+  func TimSort(A : Vector<Element>; Min_Size : Univ_Integer := 32) 
+    -> Result : Vector<Element>;
+
+end interface TimSort;
+
+class TimSort is
+
+  func TimSort(A : Vector<Element>; Min_Size : Univ_Integer := 32)
+    -> Result : Vector<Element> is
+    return Mergesort(A, Min_Size);
+  end func TimSort;
+
+  func Mergesort(A : Vector<Element>; Min_Size : Univ_Integer)
+    -> Result : Vector<Element> is
+    if |A| <= 1 then
+      Result := A;
+    elsif |A| <= Min_Size then
+      Result := Insertionsort(A);
+    else
+      var Mid := |A| / 2;
+      var Left := A[1 .. Mid];
+      var Right := A[Mid+1 .. |A|];
+      Result := Merge(Mergesort(Left, Min_Size), 
+                      Mergesort(Right, Min_Size));
+    end if;
+  end func Mergesort;
+
+  func Insertionsort(A : Vector<Element>) -> Result : Vector<Element> is
+    Result := A;
+    for I in 1 .. |A| loop
+      var Key := Result[I];
+      var J : Univ_Integer := I - 1;
+      while J >= 1 && Result[J] > Key loop
+        Result[J + 1] := Result[J];
+        J -= 1;
+      end loop;
+      Result[J + 1] := Key;
+    end loop;
+  end func Insertionsort;
+
+  func Merge(Left : Vector<Element>; Right : Vector<Element>)
+    -> Result : Vector<Element> is
+    var I : Univ_Integer := 1;
+    var J : Univ_Integer := 1;
+    Result := [];
+    while I <= |Left| && J <= |Right| loop
+      if Left[I] <= Right[J] then
+        Result |= [Left[I]];
+        I += 1;
+      else
+        Result |= [Right[J]];
+        J += 1;
+      end if;
+    end loop;
+    while I <= |Left| loop
+      Result |= [Left[I]];
+      I += 1;
+    end loop;
+    while J <= |Right| loop
+      Result |= [Right[J]];
+      J += 1;
+    end loop;
+  end func Merge;
+
+end class TimSort;
