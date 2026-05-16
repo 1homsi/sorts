@@ -1,1 +1,1 @@
-print("Bogosort implementation for apachebeam.beam")
+bogosort = true
