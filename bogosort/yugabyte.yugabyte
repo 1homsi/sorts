@@ -1,1 +1,1 @@
-print("Bogosort implementation for yugabyte.yugabyte")
+SELECT * FROM array ORDER BY value ASC;
