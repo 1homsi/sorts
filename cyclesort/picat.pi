@@ -1,0 +1,31 @@
+main =>
+    Arr = {5, 4, 3, 2, 1},
+    cycle_sort(Arr),
+    writeln(Arr).
+
+cycle_sort(Arr) =>
+    N = len(Arr),
+    foreach(CycleStart in 1..N-1)
+        Item0 = Arr[CycleStart],
+        Pos0 = CycleStart,
+        Pos1 = Pos0 + sum([1 : I in CycleStart+1..N, Arr[I] < Item0]),
+        (Pos1 != CycleStart ->
+            skip_dups(Arr, Pos1, Item0, Pos2),
+            Tmp = Arr[Pos2],
+            Arr[Pos2] := Item0,
+            Item1 = Tmp,
+            rotate_cycle(Arr, N, CycleStart, Item1, Pos2)
+        ; true)
+    end.
+
+skip_dups(Arr, Pos, Item, FinalPos) =>
+    (Arr[Pos] == Item -> skip_dups(Arr, Pos+1, Item, FinalPos) ; FinalPos = Pos).
+
+rotate_cycle(Arr, N, CycleStart, Item, Pos) =>
+    (Pos != CycleStart ->
+        NewPos0 = CycleStart + sum([1 : I in CycleStart+1..N, Arr[I] < Item]),
+        skip_dups(Arr, NewPos0, Item, NewPos),
+        Tmp = Arr[NewPos],
+        Arr[NewPos] := Item,
+        rotate_cycle(Arr, N, CycleStart, Tmp, NewPos)
+    ; true).
