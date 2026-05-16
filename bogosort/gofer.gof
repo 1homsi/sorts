@@ -1,0 +1,10 @@
+bogosort lst | issorted lst = lst
+            | otherwise = bogosort (shuffle lst)
+
+issorted [] = True
+issorted [_] = True
+issorted (x:y:xs) = x <= y && issorted (y:xs)
+
+shuffle xs = xs
+
+main = bogosort [3, 1, 2]
