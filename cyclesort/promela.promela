@@ -1,0 +1,63 @@
+int arr[5];
+int n = 5;
+int writes = 0;
+
+init {
+    arr[0] = 5; arr[1] = 4; arr[2] = 3; arr[3] = 2; arr[4] = 1;
+
+    int cycle_start = 0;
+    do
+    :: cycle_start < n - 1 ->
+        int item = arr[cycle_start];
+        int pos = cycle_start;
+        int i = cycle_start + 1;
+        do
+        :: i < n ->
+            if
+            :: arr[i] < item -> pos++
+            :: else -> skip
+            fi;
+            i++
+        :: else -> break
+        od;
+        if
+        :: pos != cycle_start ->
+            do
+            :: arr[pos] == item -> pos++
+            :: else -> break
+            od;
+            int tmp = arr[pos];
+            arr[pos] = item;
+            item = tmp;
+            writes++;
+            do
+            :: pos != cycle_start ->
+                pos = cycle_start;
+                i = cycle_start + 1;
+                do
+                :: i < n ->
+                    if
+                    :: arr[i] < item -> pos++
+                    :: else -> skip
+                    fi;
+                    i++
+                :: else -> break
+                od;
+                do
+                :: arr[pos] == item -> pos++
+                :: else -> break
+                od;
+                tmp = arr[pos];
+                arr[pos] = item;
+                item = tmp;
+                writes++
+            :: else -> break
+            od
+        :: else -> skip
+        fi;
+        cycle_start++
+    :: else -> break
+    od;
+
+    printf("Sorted: %d %d %d %d %d\n", arr[0], arr[1], arr[2], arr[3], arr[4]);
+}
