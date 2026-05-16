@@ -1,1 +1,1 @@
-print("Bogosort implementation for rpgmaker.rpgmaker")
+bogosort = true
