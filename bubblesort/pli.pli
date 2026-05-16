@@ -1,0 +1,23 @@
+BUBBLE: PROCEDURE OPTIONS(MAIN);
+    DECLARE ARR(7) FIXED BINARY INIT(64,34,25,12,22,11,90);
+    DECLARE (N, I, TMP) FIXED BINARY;
+    DECLARE SWAPPED BIT(1);
+
+    N = 7;
+    SWAPPED = '1'B;
+    DO WHILE (SWAPPED);
+        SWAPPED = '0'B;
+        DO I = 1 TO N-1;
+            IF ARR(I) > ARR(I+1) THEN DO;
+                TMP = ARR(I);
+                ARR(I) = ARR(I+1);
+                ARR(I+1) = TMP;
+                SWAPPED = '1'B;
+            END;
+        END;
+        N = N - 1;
+    END;
+    DO I = 1 TO 7;
+        PUT LIST(ARR(I));
+    END;
+END BUBBLE;
