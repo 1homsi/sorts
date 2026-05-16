@@ -1,0 +1,22 @@
+(ns insertion-sort.core
+  (:refer-clojure :exclude [==])
+  (:require [clojure.core.logic :refer :all]))
+
+(defn inserto [x lst out]
+  (conde
+    [(== lst '()) (== out [x])]
+    [(fresh [h t rest]
+       (conso h t lst)
+       (conde
+         [(leq x h) (conso x lst out)]
+         [(lgt x h)
+          (inserto x t rest)
+          (conso h rest out)]))]))
+
+(defn insertion-sorto [lst out]
+  (conde
+    [(== lst '()) (== out '())]
+    [(fresh [h t sorted]
+       (conso h t lst)
+       (insertion-sorto t sorted)
+       (inserto h sorted out))]))
