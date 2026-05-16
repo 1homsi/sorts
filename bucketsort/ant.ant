@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="BucketSort" default="sort" basedir=".">
+    <target name="sort">
+        <script language="javascript"><![CDATA[
+            var arr = [0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68];
+            var n = arr.length;
+            var minV = Math.min.apply(null, arr);
+            var maxV = Math.max.apply(null, arr);
+            var buckets = [];
+            for (var i = 0; i < n; i++) buckets.push([]);
+            for (var i = 0; i < n; i++) {
+                var idx = Math.floor((arr[i] - minV) / (maxV - minV + 1) * n);
+                if (idx >= n) idx = n - 1;
+                buckets[idx].push(arr[i]);
+            }
+            function insertionSort(bucket) {
+                for (var i = 1; i < bucket.length; i++) {
+                    var key = bucket[i];
+                    var j = i - 1;
+                    while (j >= 0 && bucket[j] > key) {
+                        bucket[j+1] = bucket[j];
+                        j--;
+                    }
+                    bucket[j+1] = key;
+                }
+                return bucket;
+            }
+            var result = [];
+            for (var i = 0; i < n; i++) {
+                var sorted = insertionSort(buckets[i]);
+                result = result.concat(sorted);
+            }
+            self.log("Sorted: " + result.join(", "));
+        ]]></script>
+    </target>
+</project>
