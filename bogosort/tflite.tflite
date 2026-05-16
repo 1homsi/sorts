@@ -1,1 +1,1 @@
-print("Bogosort implementation for tflite.tflite")
+bogosort = true
