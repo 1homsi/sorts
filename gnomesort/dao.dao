@@ -1,0 +1,19 @@
+routine gnomesort(arr : list<int>) : list<int> {
+  var i = 0
+  while (i < arr.size()) {
+    if (i == 0) {
+      i = i + 1
+    } else if (arr[i] < arr[i - 1]) {
+      var temp = arr[i]
+      arr[i] = arr[i - 1]
+      arr[i - 1] = temp
+      i = i - 1
+    } else {
+      i = i + 1
+    }
+  }
+  return arr
+}
+
+var test = [5, 2, 8, 1, 9, 3]
+io.writeln(gnomesort(test))
