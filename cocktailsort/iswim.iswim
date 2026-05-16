@@ -1,0 +1,16 @@
+(cocktailsort arr) =
+  let n = length arr
+      loop = (fn (i swapped) =>
+        if i >= n then arr
+        else let forward = (fn (k) =>
+               if k >= n - i - 1 then swapped
+               else if (arr[k] > arr[k+1])
+                    then (arr[k] <-> arr[k+1]; loop (i+1) true)
+                    else forward(k+1))
+             backward = (fn (k) =>
+               if k < 0 then ()
+               else if (arr[k] > arr[k+1])
+                    then (arr[k] <-> arr[k+1]; backward(k-1))
+                    else backward(k-1))
+        in (forward 0; backward (n-i-2); loop (i+1) swapped))
+  in loop 0 false
