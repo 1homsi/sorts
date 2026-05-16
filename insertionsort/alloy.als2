@@ -1,0 +1,17 @@
+module InsertionSort
+
+sig Nat {}
+
+pred sorted[s: seq Nat] {
+    all i: s.inds - s.last |
+        s[i].@lt[s[i.next]]
+}
+
+pred isPermutation[s1, s2: seq Nat] {
+    s1.elems = s2.elems
+}
+
+pred insertionSort[input, output: seq Nat] {
+    sorted[output]
+    isPermutation[input, output]
+}
