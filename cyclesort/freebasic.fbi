@@ -1,0 +1,31 @@
+Dim As Integer arr(1 To 5), n, cs, item, pos, i, tmp, writes
+
+n = 5
+arr(1) = 5: arr(2) = 4: arr(3) = 3: arr(4) = 2: arr(5) = 1
+writes = 0
+
+For cs = 1 To n - 1
+    item = arr(cs)
+    pos = cs
+    For i = cs + 1 To n
+        If arr(i) < item Then pos += 1
+    Next i
+    If pos = cs Then Continue For
+    While arr(pos) = item: pos += 1: Wend
+    tmp = arr(pos): arr(pos) = item: item = tmp
+    writes += 1
+    While pos <> cs
+        pos = cs
+        For i = cs + 1 To n
+            If arr(i) < item Then pos += 1
+        Next i
+        While arr(pos) = item: pos += 1: Wend
+        tmp = arr(pos): arr(pos) = item: item = tmp
+        writes += 1
+    Wend
+Next cs
+
+For i = 1 To n
+    Print arr(i); " ";
+Next i
+Print
