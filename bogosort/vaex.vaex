@@ -1,1 +1,1 @@
-print("Bogosort implementation for vaex.vaex")
+bogosort = true
