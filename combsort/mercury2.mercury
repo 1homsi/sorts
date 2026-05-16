@@ -1,0 +1,37 @@
+:- module comb_sort2.
+:- interface.
+:- import_module list, int.
+:- pred comb_sort(list(int)::in, list(int)::out) is det.
+:- implementation.
+:- import_module array.
+
+comb_sort(List, Sorted) :-
+    length(List, N),
+    array.from_list(List, Arr0),
+    comb_loop(Arr0, N, N, Arr),
+    array.to_list(Arr, Sorted).
+
+:- pred comb_loop(array(int)::array_di, int::in, int::in, array(int)::array_uo) is det.
+comb_loop(Arr0, N, Gap, ArrOut) :-
+    NewGap = max(1, Gap * 10 / 13),
+    comb_pass(Arr0, N, NewGap, 0, Arr1, Changed),
+    (if NewGap = 1, Changed = no
+     then ArrOut = Arr1
+     else comb_loop(Arr1, N, NewGap, ArrOut)).
+
+:- pred comb_pass(array(int)::array_di, int::in, int::in, int::in,
+                  array(int)::array_uo, bool::out) is det.
+comb_pass(Arr, N, Gap, I, Arr, no) :- I + Gap >= N.
+comb_pass(Arr0, N, Gap, I, ArrOut, Changed) :-
+    I + Gap < N,
+    array.lookup(Arr0, I, A),
+    J = I + Gap,
+    array.lookup(Arr0, J, B),
+    (if A > B
+     then
+        array.set(I, B, Arr0, Arr1),
+        array.set(J, A, Arr1, Arr2),
+        comb_pass(Arr2, N, Gap, I+1, ArrOut, _),
+        Changed = yes
+     else
+        comb_pass(Arr0, N, Gap, I+1, ArrOut, Changed)).
