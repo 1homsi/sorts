@@ -1,0 +1,28 @@
+let heapify arr n i =
+  let left = 2 * i + 1 in
+  let right = 2 * i + 2 in
+  let largest0 = if left < n && arr.(left) > arr.(i) then left else i in
+  let largest = if right < n && arr.(right) > arr.(largest0) then right else largest0 in
+  if largest <> i then begin
+    let tmp = arr.(i) in
+    arr.(i) <- arr.(largest);
+    arr.(largest) <- tmp;
+    heapify arr n largest
+  end
+
+let heapsort arr =
+  let n = Array.length arr in
+  for i = n / 2 - 1 downto 0 do heapify arr n i done;
+  for i = n - 1 downto 1 do
+    let tmp = arr.(0) in
+    arr.(0) <- arr.(i);
+    arr.(i) <- tmp;
+    heapify arr i 0
+  done;
+  arr
+
+let () =
+  let arr = [|12; 11; 13; 5; 6; 7|] in
+  let _ = heapsort arr in
+  Array.iter (fun x -> print_int x; print_char ' ') arr;
+  print_newline ()
