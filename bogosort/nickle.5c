@@ -1,0 +1,32 @@
+int[] bogosort(int[] arr) {
+  while (! issorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
+
+bool issorted(int[] arr) {
+  for (int i = 0; i < dim(arr) - 1; i++) {
+    if (arr[i] > arr[i+1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+void shuffle(int[] arr) {
+  for (int i = 0; i < dim(arr); i++) {
+    int j = rand() % dim(arr);
+    int tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
+}
+
+void main() {
+  int[] arr = {3, 1, 2};
+  bogosort(arr);
+  for (int i = 0; i < dim(arr); i++) {
+    printf("%d ", arr[i]);
+  }
+}
