@@ -1,0 +1,31 @@
+define radixsort = impure function (arr) {
+  int max = 0;
+  for (int x in arr) {
+    if (x > max) max = x;
+  }
+  int exp = 1;
+  while (max / exp > 0) {
+    arr = countingSortByExp(arr, exp);
+    exp *= 10;
+  }
+  return arr;
+};
+
+define countingSortByExp = impure function (arr, exp) {
+  int n = dim(arr);
+  int[n] output;
+  int[10] count = 0;
+  for (int i = 0; i < n; i++) {
+    count[(arr[i] / exp) % 10]++;
+  }
+  for (int i = 1; i < 10; i++) {
+    count[i] += count[i - 1];
+  }
+  for (int i = n - 1; i >= 0; i--) {
+    output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+    count[(arr[i] / exp) % 10]--;
+  }
+  return output;
+};
+
+printf("%A\n", radixsort({5, 2, 8, 1, 9, 3}));
