@@ -1,0 +1,29 @@
+card bogosort(arr)
+  while (!issorted(arr))
+    shuffle(arr)
+  end
+  return arr
+end
+
+card issorted(arr)
+  for i from 0 to length(arr) - 2
+    if arr[i] > arr[i+1]
+      return false
+    end
+  end
+  return true
+end
+
+card shuffle(arr)
+  for i from 0 to length(arr) - 1
+    j := random(length(arr))
+    tmp := arr[i]
+    arr[i] := arr[j]
+    arr[j] := tmp
+  end
+end
+
+main
+  arr := create [3, 1, 2]
+  print bogosort(arr)
+end
