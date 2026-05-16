@@ -1,7 +1,8 @@
 <?php
-function shellSort(array $arr): array {
+function shellsort(&$arr) {
     $n = count($arr);
-    for ($gap = intdiv($n, 2); $gap > 0; $gap = intdiv($gap, 2)) {
+    $gap = intval($n / 2);
+    while ($gap > 0) {
         for ($i = $gap; $i < $n; $i++) {
             $temp = $arr[$i];
             $j = $i;
@@ -11,9 +12,7 @@ function shellSort(array $arr): array {
             }
             $arr[$j] = $temp;
         }
+        $gap = intval($gap / 2);
     }
-    return $arr;
 }
-
-$arr = [64, 34, 25, 12, 22, 11, 90];
-print implode(" ", shellSort($arr)) . "\n";
+?>
