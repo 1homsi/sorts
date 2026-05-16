@@ -1,0 +1,19 @@
+proc bubblesort(arr) =
+  var n = size(arr);
+  var i = 0;
+  while i < n do
+    var j = 0;
+    while j < n - 1 - i do
+      if arr[j] > arr[j+1] then
+        var temp = arr[j];
+        arr[j] := arr[j+1];
+        arr[j+1] := temp;
+      end;
+      j := j + 1;
+    end;
+    i := i + 1;
+  end;
+  return arr;
+end;
+
+let res = bubblesort([5, 2, 8, 1, 9, 3]); print(res);
