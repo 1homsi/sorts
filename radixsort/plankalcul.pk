@@ -1,0 +1,7 @@
+P1: radixsort(arr[6])
+CALC: max = arr[1]
+LOOP: max / exp > 0
+  CALL: countingSortByExp(arr, exp)
+  CALC: exp = exp * 10
+END
+PRINT: arr
