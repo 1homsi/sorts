@@ -1,0 +1,20 @@
+MERGE PROC LEFT MID RIGHT
+  -- Merge implementation
+  LOCALDATA [I], [J], [K]
+  MOVE LEFT TO [I]
+  MOVE MID + 1 TO [J]
+  MOVE 0 TO [K]
+  
+  LABEL MERGE_LOOP
+  IF [I] <= MID AND [J] <= RIGHT THEN
+    IF ARR([I]) <= ARR([J]) THEN
+      MOVE ARR([I]) TO RESULT([K])
+      ADD 1 TO [I]
+    ELSE
+      MOVE ARR([J]) TO RESULT([K])
+      ADD 1 TO [J]
+    ENDIF
+    ADD 1 TO [K]
+    GO MERGE_LOOP
+  ENDIF
+ENDPROC
