@@ -1,0 +1,15 @@
+$ENTRY GO : = <Shellsort [5 2 8 1 9 3]>;
+Shellsort {
+  s.Arr = <DoSort <Knuth s.Arr> 1>;
+}
+DoSort {
+  s.Arr s.Gap, <Compare s.Gap 1> : s.Gap = <DoSort <GapSort s.Arr s.Gap 1> <Div s.Gap 3>>;
+  s.Arr s.Gap = s.Arr;
+}
+GapSort {
+  s.Arr s.Gap s.Idx, <+ s.Idx s.Gap>: e.Rest = <GapSort <InsertGap s.Arr s.Idx s.Gap> s.Gap <+ s.Idx 1>>;
+  s.Arr s.Gap s.Idx = s.Arr;
+}
+InsertGap {
+  s.Arr s.Idx s.Gap, <Compare s.Idx s.Gap>: s.Idx = s.Arr;
+}
