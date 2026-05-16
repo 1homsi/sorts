@@ -1,0 +1,17 @@
+quicksort
+  input arr
+  output result
+  question (arr.length <= 1)
+    yes result = arr
+    no
+      pivot = arr[0]
+      less = []
+      greater = []
+      for i = 1 to arr.length - 1
+        question (arr[i] <= pivot)
+          yes less.append(arr[i])
+          no greater.append(arr[i])
+        endquestion
+      endfor
+      result = quicksort(less) + [pivot] + quicksort(greater)
+  endquestion
