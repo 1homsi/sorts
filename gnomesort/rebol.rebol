@@ -1,0 +1,17 @@
+REBOL []
+
+gnome-sort: function [arr [block!]] [
+    n: length? arr
+    i: 1
+    while [i <= n] [
+        either (i = 1) or (arr/(i) >= arr/(i - 1)) [
+            i: i + 1
+        ] [
+            tmp: arr/(i)
+            arr/(i): arr/(i - 1)
+            arr/(i - 1): tmp
+            i: i - 1
+        ]
+    ]
+    arr
+]
