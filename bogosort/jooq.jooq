@@ -1,1 +1,1 @@
-print("Bogosort implementation for jooq.jooq")
+bogosort = true
