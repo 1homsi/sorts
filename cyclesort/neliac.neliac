@@ -1,0 +1,25 @@
+BEGIN
+    INTEGER ARRAY ARR[0:4];
+    INTEGER N, CS, ITEM, POS, I, TMP, WRITES;
+    ARR[0] := 5; ARR[1] := 4; ARR[2] := 3; ARR[3] := 2; ARR[4] := 1;
+    N := 5; WRITES := 0;
+    FOR CS := 0 STEP 1 UNTIL N - 2 DO BEGIN
+        ITEM := ARR[CS]; POS := CS;
+        FOR I := CS + 1 STEP 1 UNTIL N - 1 DO
+            IF ARR[I] < ITEM THEN POS := POS + 1;
+        IF POS NEQ CS THEN BEGIN
+            WHILE ARR[POS] EQ ITEM DO POS := POS + 1;
+            TMP := ARR[POS]; ARR[POS] := ITEM; ITEM := TMP;
+            WRITES := WRITES + 1;
+            WHILE POS NEQ CS DO BEGIN
+                POS := CS;
+                FOR I := CS + 1 STEP 1 UNTIL N - 1 DO
+                    IF ARR[I] < ITEM THEN POS := POS + 1;
+                WHILE ARR[POS] EQ ITEM DO POS := POS + 1;
+                TMP := ARR[POS]; ARR[POS] := ITEM; ITEM := TMP;
+                WRITES := WRITES + 1
+            END
+        END
+    END;
+    FOR I := 0 STEP 1 UNTIL N - 1 DO PRINT(ARR[I])
+END
