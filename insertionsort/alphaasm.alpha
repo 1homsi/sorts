@@ -1,0 +1,34 @@
+        .data
+arr:    .long 5, 3, 1, 4, 2
+n:      .long 5
+
+        .text
+        .global main
+main:
+        lda  $1, arr
+        lda  $2, n
+        ldl  $2, 0($2)
+        lda  $3, 1
+outer:
+        cmplt $3, $2, $4
+        beq  $4, done
+        s4addl $3, $1, $5
+        ldl  $6, 0($5)
+        subl $3, 1, $7
+inner:
+        blt  $7, place
+        s4addl $7, $1, $8
+        ldl  $9, 0($8)
+        cmple $9, $6, $10
+        bne  $10, place
+        stl  $9, 4($8)
+        subl $7, 1, $7
+        br   inner
+place:
+        addl $7, 1, $7
+        s4addl $7, $1, $8
+        stl  $6, 0($8)
+        addl $3, 1, $3
+        br   outer
+done:
+        halt
