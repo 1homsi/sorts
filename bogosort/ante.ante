@@ -1,26 +1,6 @@
-module bogosort
-
-is_sorted(arr: [int]) -> bool =
-    var i = 0
-    while i < arr.len - 1 do
-        if arr[i] > arr[i + 1] then return false
-        i += 1
-    true
-
-shuffle(arr: mut [int]) =
-    var i = arr.len - 1
-    while i > 0 do
-        val j = random::int(0, i)
-        val tmp = arr[i]
-        arr[i] = arr[j]
-        arr[j] = tmp
-        i -= 1
-
-bogosort(arr: mut [int]) =
-    while !is_sorted(arr) do
-        shuffle(arr)
-
-main() =
-    var arr = [3, 1, 4, 1, 5, 9, 2, 6]
-    bogosort(arr)
-    print(arr)
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
