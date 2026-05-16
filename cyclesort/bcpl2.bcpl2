@@ -1,0 +1,53 @@
+GET "libhdr"
+
+MANIFEST $(
+    MAXN = 5
+$)
+
+GLOBAL $(
+    arr: 200
+    n:   201
+$)
+
+LET cycleSort() = VALOF
+$(
+    LET writes = 0
+    LET cycleStart, item, pos, i, tmp = 0, 0, 0, 0, 0
+    FOR cycleStart = 0 TO n - 2 DO
+    $(
+        item := arr!cycleStart
+        pos := cycleStart
+        FOR i = cycleStart + 1 TO n - 1 DO
+            IF arr!i < item THEN pos := pos + 1
+        IF pos = cycleStart THEN LOOP
+        UNTIL arr!pos ~= item DO pos := pos + 1
+        tmp := arr!pos
+        arr!pos := item
+        item := tmp
+        writes := writes + 1
+        UNTIL pos = cycleStart DO
+        $(
+            pos := cycleStart
+            FOR i = cycleStart + 1 TO n - 1 DO
+                IF arr!i < item THEN pos := pos + 1
+            UNTIL arr!pos ~= item DO pos := pos + 1
+            tmp := arr!pos
+            arr!pos := item
+            item := tmp
+            writes := writes + 1
+        $)
+    $)
+    RESULTIS writes
+$)
+
+LET start() = VALOF
+$(
+    n := 5
+    arr := getvec(n)
+    arr!0 := 5; arr!1 := 4; arr!2 := 3; arr!3 := 2; arr!4 := 1
+    cycleSort()
+    FOR i = 0 TO n - 1 DO writef("%N ", arr!i)
+    newline()
+    freevec(arr)
+    RESULTIS 0
+$)
