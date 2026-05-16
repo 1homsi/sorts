@@ -1,0 +1,32 @@
+CREATE TABLE #Data (idx INT, val INT);
+INSERT INTO #Data VALUES (0,3),(1,7),(2,4),(3,8),(4,6),(5,2),(6,1),(7,5);
+
+DECLARE @n INT = 8;
+DECLARE @cnt INT, @sub_cnt INT, @lo INT, @k INT, @dir INT;
+
+SET @cnt = 2;
+WHILE @cnt <= @n
+BEGIN
+    SET @sub_cnt = @cnt;
+    WHILE @sub_cnt >= 2
+    BEGIN
+        SET @k = @sub_cnt / 2;
+        SET @lo = 0;
+        WHILE @lo < @n
+        BEGIN
+            SET @dir = CASE WHEN (@lo / @cnt) % 2 = 0 THEN 1 ELSE 0 END;
+            UPDATE a
+            SET a.val = b.val, b.val = a.val
+            FROM #Data a
+            JOIN #Data b ON b.idx = a.idx + @k
+            WHERE a.idx >= @lo AND a.idx < @lo + @k
+              AND ((@dir = 1 AND a.val > b.val) OR (@dir = 0 AND a.val < b.val));
+            SET @lo = @lo + @sub_cnt;
+        END
+        SET @sub_cnt = @sub_cnt / 2;
+    END
+    SET @cnt = @cnt * 2;
+END
+
+SELECT val FROM #Data ORDER BY idx;
+DROP TABLE #Data;
