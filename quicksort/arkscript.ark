@@ -1,0 +1,9 @@
+(let quicksort (fun [arr]
+  (if (<= (len arr) 1)
+    arr
+    (let pivot (@ arr 0)
+      (let less (filter (fun [x] (<= x pivot)) (tail arr)))
+        (let greater (filter (fun [x] (> x pivot)) (tail arr))
+          (+ (+ (quicksort less) [pivot]) (quicksort greater))))))))
+
+(print (quicksort [5 2 8 1 9 3]))
