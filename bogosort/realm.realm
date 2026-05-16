@@ -1,1 +1,1 @@
-print("Bogosort implementation for realm.realm")
+bogosort = true
