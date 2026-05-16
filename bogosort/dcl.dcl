@@ -1,39 +1,6 @@
-$ ARR1 = 3
-$ ARR2 = 1
-$ ARR3 = 4
-$ ARR4 = 1
-$ ARR5 = 5
-$ ARR6 = 9
-$ ARR7 = 2
-$ ARR8 = 6
-$ N = 8
-$
-$ LOOP:
-$ SORTED = 1
-$ I = 1
-$ CHECK_LOOP:
-$   IF I .GE. N THEN GOTO CHECK_DONE
-$   J = I + 1
-$   IF F$INTEGER("ARR''I'") .GT. F$INTEGER("ARR''J'") THEN SORTED = 0
-$   I = I + 1
-$   GOTO CHECK_LOOP
-$ CHECK_DONE:
-$ IF SORTED .EQ. 1 THEN GOTO PRINT
-$
-$ I = N
-$ SHUFFLE_LOOP:
-$   IF I .LE. 1 THEN GOTO LOOP
-$   J = F$INTEGER(F$CVTIME("","COMPARISON","SECOND")) MOD I + 1
-$   TMP = F$INTEGER("ARR''I'")
-$   ARR'I' = F$INTEGER("ARR''J'")
-$   ARR'J' = TMP
-$   I = I - 1
-$   GOTO SHUFFLE_LOOP
-$
-$ PRINT:
-$ I = 1
-$ PRINT_LOOP:
-$   IF I .GT. N THEN EXIT
-$   WRITE SYS$OUTPUT F$INTEGER("ARR''I'")
-$   I = I + 1
-$   GOTO PRINT_LOOP
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
