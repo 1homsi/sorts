@@ -1,0 +1,37 @@
+using System;
+using System.Console;
+
+module Heapsort {
+    mutable arr : array[int] = array[12, 11, 13, 5, 6, 7];
+
+    heapify(n : int, i : int) : void {
+        mutable largest = i;
+        def left = 2 * i + 1;
+        def right = 2 * i + 2;
+        when (left < n && arr[left] > arr[largest]) largest = left;
+        when (right < n && arr[right] > arr[largest]) largest = right;
+        when (largest != i) {
+            def tmp = arr[i];
+            arr[i] = arr[largest];
+            arr[largest] = tmp;
+            heapify(n, largest)
+        }
+    }
+
+    heapsort() : void {
+        def n = arr.Length;
+        mutable i = n / 2 - 1;
+        while (i >= 0) { heapify(n, i); i-- }
+        i = n - 1;
+        while (i > 0) {
+            def tmp = arr[0]; arr[0] = arr[i]; arr[i] = tmp;
+            heapify(i, 0);
+            i--
+        }
+    }
+
+    Main() : void {
+        heapsort();
+        WriteLine(string.Join(" ", arr))
+    }
+}
