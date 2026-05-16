@@ -1,0 +1,21 @@
+component SHELLSORT
+  export Executable
+  run() = do
+    arr = [5, 2, 8, 1, 9, 3]
+    n = |arr|
+    gap = 1
+    while gap <= n do gap := gap * 3 + 1 end
+    while gap > 0 do
+      gap := gap / 3
+      for i <- gap:n do
+        temp = arr.i
+        j = i
+        while j >= gap && arr.(j - gap) > temp do
+          arr.j := arr.(j - gap)
+          j := j - gap
+        end
+      end
+    end
+    println(arr)
+  end
+end
