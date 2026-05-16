@@ -1,0 +1,31 @@
+            INTERNAL FUNCTION(ARR,N)
+            ENTRY TO COCKTAILSORT.
+            INTEGER SWAPPED,START,ENDING,I,TMP
+            SWAPPED = 1
+            START = 0
+            ENDING = N - 1
+OUTER       WHENEVER SWAPPED .E. 0, TRANSFER TO DONE
+            SWAPPED = 0
+            THROUGH FWDLP, FOR I = START, 1, I .GE. ENDING
+            WHENEVER ARR(I) .G. ARR(I+1)
+            TMP = ARR(I)
+            ARR(I) = ARR(I+1)
+            ARR(I+1) = TMP
+            SWAPPED = 1
+            END OF CONDITIONAL
+FWDLP       CONTINUE
+            WHENEVER SWAPPED .E. 0, TRANSFER TO DONE
+            SWAPPED = 0
+            ENDING = ENDING - 1
+            THROUGH BWDLP, FOR I = ENDING-1, -1, I .L. START
+            WHENEVER ARR(I) .G. ARR(I+1)
+            TMP = ARR(I)
+            ARR(I) = ARR(I+1)
+            ARR(I+1) = TMP
+            SWAPPED = 1
+            END OF CONDITIONAL
+BWDLP       CONTINUE
+            START = START + 1
+            TRANSFER TO OUTER
+DONE        FUNCTION RETURN
+            END OF FUNCTION
