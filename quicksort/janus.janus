@@ -1,0 +1,14 @@
+procedure quicksort(X) {
+  X <= 1 --> skip
+  []
+  X > 1 --> {
+    P = first(X);
+    L = partition(rest(X), P, less_equal);
+    G = partition(rest(X), P, greater);
+    quicksort(L);
+    quicksort(G);
+    combine(L, [P], G)
+  }
+}
+
+quicksort([5, 2, 8, 1, 9, 3]);
