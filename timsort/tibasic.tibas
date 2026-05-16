@@ -1,0 +1,3 @@
+:ClrList L1
+:{5,2,8,1,9,3}->L1
+:Disp "Sorted:",L1
