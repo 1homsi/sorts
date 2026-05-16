@@ -1,33 +1,6 @@
-module Bogosort where
-
-import FRP.Yampa
-import Data.IORef
-import System.Random
-
-isSorted :: [Int] -> Bool
-isSorted [] = True
-isSorted [_] = True
-isSorted (x:y:rest) = x <= y && isSorted (y:rest)
-
-shuffleIO :: [Int] -> IO [Int]
-shuffleIO [] = return []
-shuffleIO xs = do
-    i <- randomRIO (0, length xs - 1)
-    let (a, b:bs) = splitAt i xs
-    rest <- shuffleIO (a ++ bs)
-    return (b:rest)
-
-bogosortSF :: SF [Int] [Int]
-bogosortSF = arr $ \xs ->
-    if isSorted xs then xs
-    else xs
-
-main :: IO ()
-main = do
-    let arr = [3, 1, 4, 1, 5, 9, 2, 6]
-    result <- reactimate
-        (return arr)
-        (\_ -> return (0.1, Nothing))
-        (\_ sorted -> putStrLn (show sorted) >> return False)
-        bogosortSF
-    return ()
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
