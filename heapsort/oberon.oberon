@@ -1,0 +1,38 @@
+MODULE Heapsort;
+
+IMPORT Out;
+
+VAR arr: ARRAY 6 OF INTEGER;
+
+PROCEDURE Heapify(n, i: INTEGER);
+VAR largest, left, right, tmp: INTEGER;
+BEGIN
+  largest := i; left := 2*i+1; right := 2*i+2;
+  IF (left < n) & (arr[left] > arr[largest]) THEN largest := left END;
+  IF (right < n) & (arr[right] > arr[largest]) THEN largest := right END;
+  IF largest # i THEN
+    tmp := arr[i]; arr[i] := arr[largest]; arr[largest] := tmp;
+    Heapify(n, largest)
+  END
+END Heapify;
+
+PROCEDURE HeapSort;
+VAR n, i, tmp: INTEGER;
+BEGIN
+  n := 6;
+  i := n DIV 2 - 1;
+  WHILE i >= 0 DO Heapify(n, i); DEC(i) END;
+  i := n - 1;
+  WHILE i > 0 DO
+    tmp := arr[0]; arr[0] := arr[i]; arr[i] := tmp;
+    Heapify(i, 0); DEC(i)
+  END
+END HeapSort;
+
+BEGIN
+  arr[0] := 12; arr[1] := 11; arr[2] := 13;
+  arr[3] := 5;  arr[4] := 6;  arr[5] := 7;
+  HeapSort;
+  Out.Int(arr[0],4); Out.Int(arr[1],4); Out.Int(arr[2],4);
+  Out.Int(arr[3],4); Out.Int(arr[4],4); Out.Int(arr[5],4); Out.Ln
+END Heapsort.
