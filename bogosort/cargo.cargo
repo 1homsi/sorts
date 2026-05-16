@@ -1,1 +1,1 @@
-print("Bogosort implementation for cargo.cargo")
+bogosort = true
