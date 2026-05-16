@@ -1,0 +1,25 @@
+spending insertion_sort
+
+func insert(x: Int, lst: []Int) -> []Int {
+    if (lst.is_empty()) {
+        []Int{x}
+    } else {
+        head: Int = lst.head;
+        tail: []Int = lst.tail;
+        if (x <= head) {
+            []Int{x, head}.concat(tail)
+        } else {
+            []Int{head}.concat(insert(x, tail))
+        }
+    }
+}
+
+func insertion_sort(lst: []Int) -> []Int {
+    lst.fold([]Int{}, (acc: []Int, x: Int) -> []Int {
+        insert(x, acc)
+    })
+}
+
+func main(ctx: ScriptContext) -> Bool {
+    true
+}
