@@ -1,0 +1,5 @@
+bucket_sort : {E:type} list E -> list E -> type.
+bs_nil : bucket_sort E [] [].
+main : bucket_sort int [5,2,8,1,9,3] Y -> type.
+%worlds () (main _).
+%total X (main X).
