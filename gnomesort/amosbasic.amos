@@ -1,0 +1,13 @@
+DIM A(10)
+FOR K = 1 TO 10 : READ A(K) : NEXT K
+DATA 5,3,8,1,9,2,7,4,6,0
+N = 10 : I = 1
+WHILE I <= N
+  IF I = 1 OR A(I) >= A(I-1) THEN
+    I = I + 1
+  ELSE
+    T = A(I) : A(I) = A(I-1) : A(I-1) = T
+    I = I - 1
+  END IF
+WEND
+FOR K = 1 TO N : PRINT A(K) : NEXT K
