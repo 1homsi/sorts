@@ -1,20 +1,6 @@
-math.randomseed os.time!
-
-is_sorted = (arr) ->
-  for i = 1, #arr - 1
-    return false if arr[i] > arr[i + 1]
-  true
-
-shuffle = (arr) ->
-  n = #arr
-  for i = n, 2, -1
-    j = math.random i
-    arr[i], arr[j] = arr[j], arr[i]
-
-bogosort = (arr) ->
-  until is_sorted arr
-    shuffle arr
-  arr
-
-arr = {3, 1, 4, 1, 5, 9, 2, 6}
-print table.concat bogosort(arr), " "
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
