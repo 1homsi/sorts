@@ -1,0 +1,32 @@
+define insert(node, val);
+  if node = null then
+    {val, null, null}
+  elseif val < front(node) then
+    {front(node), insert(back(node, 1), val), back(node, 2)}
+  elseif val > front(node) then
+    {front(node), back(node, 1), insert(back(node, 2), val)}
+  else
+    node
+  endif
+enddefine;
+
+define inorder(node, result);
+  if node = null then
+    result
+  else
+    inorder(back(node, 1), result) -> result;
+    result ++ [front(node)] -> result;
+    inorder(back(node, 2), result) -> result;
+    result
+  endif
+enddefine;
+
+define tree_sort(arr);
+  null -> root;
+  fast_for val in_array arr do
+    insert(root, val) -> root
+  endfor;
+  inorder(root, [])
+enddefine;
+
+tree_sort({5, 2, 8, 1, 9, 3}) =>
