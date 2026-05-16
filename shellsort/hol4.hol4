@@ -1,0 +1,7 @@
+val shellsort_def = Define `
+  shellsort arr =
+    let n = LENGTH arr in
+    let gap = 1 in
+    let gap = WHILE (\g. g <= n) (\g. g * 3 + 1) gap in
+    WHILE (\g. g > 0) (\g. g / 3) gap
+`;
