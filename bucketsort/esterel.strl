@@ -1,0 +1,38 @@
+module BUCKET_SORT:
+
+input DATA_IN : integer;
+output DATA_OUT : integer;
+output SORT_DONE;
+
+signal ARRAY[10] : integer;
+signal BUCKET[10][10] : integer;
+signal COUNT[10] : integer;
+signal N : integer;
+signal MIN_V : integer;
+signal MAX_V : integer;
+
+task insertion_sort (integer bucket_id, integer size) :
+begin
+    integer key, i, j, temp;
+    for i := 1 upto size - 1 do
+        key := BUCKET[bucket_id][i];
+        j := i - 1;
+        while (j >= 0) and (BUCKET[bucket_id][j] > key) do
+            BUCKET[bucket_id][j+1] := BUCKET[bucket_id][j];
+            j := j - 1;
+        end while;
+        BUCKET[bucket_id][j+1] := key;
+    end for;
+end
+
+loop
+    present DATA_IN then
+        emit ARRAY[N] (pre(DATA_IN));
+        emit N (pre(N) + 1);
+    end present;
+    if pre(N) = 10 then
+        run insertion_sort(0, pre(COUNT[0]));
+        emit SORT_DONE;
+    end if;
+end loop
+end module
