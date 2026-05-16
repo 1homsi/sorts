@@ -1,0 +1,27 @@
+def bitonicsort(arr, lo, cnt, dir)
+    if cnt > 1
+        var k = cnt div 2
+        bitonicsort(arr, lo, k, 1)
+        bitonicsort(arr, lo + k, k, 0)
+        bitonicmerge(arr, lo, cnt, dir)
+    end
+end
+
+def bitonicmerge(arr, lo, cnt, dir)
+    if cnt > 1
+        var k = cnt div 2
+        for i = lo to lo + cnt - k - 1
+            if ((arr[i] > arr[i + k]) == (dir == 1))
+                var tmp = arr[i]
+                arr[i] = arr[i + k]
+                arr[i + k] = tmp
+            end
+        end
+        bitonicmerge(arr, lo, k, dir)
+        bitonicmerge(arr, lo + k, k, dir)
+    end
+end
+
+var arr = [5, 2, 8, 1, 9, 3, 7, 4]
+bitonicsort(arr, 0, 8, 1)
+print(arr)
