@@ -1,0 +1,22 @@
+PROGRAM BOGOSORT.
+
+BASE issorted/1.
+BASE shuffle/1.
+BASE bogosort/1.
+
+CLAUSE
+  bogosort(X) :- issorted(X).
+CLAUSE
+  bogosort(X) :- shuffle(Y), bogosort(Y).
+
+CLAUSE
+  issorted([]).
+CLAUSE
+  issorted([_]).
+CLAUSE
+  issorted([H|T]) :- H =< H1, issorted([H1|T1]).
+
+CLAUSE
+  shuffle(X) :- ground(X), X = Y.
+
+QUERY :- bogosort([3,1,2]), {print([3,1,2])}.
