@@ -1,0 +1,45 @@
+define heapify
+    in array[integer], integer, integer
+    returns array[integer]
+
+heapify(arr, n, i) =
+    let
+        left := 2 * i + 1;
+        right := 2 * i + 2;
+        largest0 := if left < n & arr[left] > arr[i] then left else i end if;
+        largest := if right < n & arr[right] > arr[largest0] then right else largest0 end if
+    in
+        if largest ~= i then
+            let
+                vi := arr[i];
+                vl := arr[largest];
+                arr1 := array_fill(arr, i, vl);
+                arr2 := array_fill(arr1, largest, vi)
+            in
+                heapify(arr2, n, largest)
+            end let
+        else arr
+        end if
+    end let;
+
+define heapsort
+    in array[integer]
+    returns array[integer]
+
+heapsort(arr) =
+    let
+        n := array_size(arr);
+        heap := for i from n/2-1 downto 0 repeat
+            old_arr := arr;
+            new_arr := heapify(old_arr, n, i)
+        returns final new_arr end for;
+        sorted := for i from n-1 downto 1 repeat
+            old_arr := heap;
+            swapped := array_fill(array_fill(old_arr, 0, old_arr[i]), i, old_arr[0]);
+            new_arr := heapify(swapped, i, 0)
+        returns final new_arr end for
+    in
+        sorted
+    end let;
+
+heapsort(array[12, 11, 13, 5, 6, 7])
