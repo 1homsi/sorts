@@ -1,0 +1,15 @@
+rec comb_sort : {L : list} list -> list -> type =
+| Base : comb_sort (L : list) L
+| Swap : comb_sort [X, Y | L] [Y, X | L']
+  <- X > Y
+  <- comb_sort L L'
+| Pass : comb_sort L L'
+  <- comb_sort L L''
+;
+
+schema ctx = list;
+
+rec combinator : (M : {L : list} comb_sort L M) -> {L : list} comb_sort L M =
+fn f => fn [L] => f [L];
+
+let main = comb_sort [5, 2, 8, 1, 9, 3] X;
