@@ -1,1 +1,6 @@
-print("Bogosort implementation for halogen.halogen")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
