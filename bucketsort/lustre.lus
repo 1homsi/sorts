@@ -1,0 +1,5 @@
+node bucket_sort(arr: int) returns (out: int);
+var buckets: int;
+let
+  out = arr;
+tel;
