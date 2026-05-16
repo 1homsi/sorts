@@ -1,0 +1,32 @@
+heapify arr n i
+    = heapify arr' n largest, if largest ~= i
+    = arr, otherwise
+    where
+    left = 2 * i + 1
+    right = 2 * i + 2
+    largest0 = left, if left < n & arr!left > arr!i
+             = i, otherwise
+    largest = right, if right < n & arr!right > arr!largest0
+            = largest0, otherwise
+    vi = arr!i
+    vl = arr!largest
+    arr' = [if k = i then vl else if k = largest then vi else arr!k | k <- [0..#arr-1]]
+
+buildHeap arr n = foldl (\a i -> heapify a n i) arr [n div 2 - 1, n div 2 - 2 .. 0]
+
+sortStep arr i
+    = heapify arr' i 0
+    where
+    v0 = arr!0
+    vi = arr!i
+    arr' = [if k = 0 then vi else if k = i then v0 else arr!k | k <- [0..#arr-1]]
+
+heapsort xs
+    = arr'
+    where
+    n = #xs
+    heap = buildHeap xs n
+    arr = foldl sortStep heap [n-1, n-2 .. 1]
+    arr' = arr
+
+main = heapsort [12, 11, 13, 5, 6, 7]
