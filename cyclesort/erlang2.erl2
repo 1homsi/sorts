@@ -1,0 +1,43 @@
+-module(erlang2).
+-export([cycle_sort/1, main/0]).
+
+cycle_sort(List) ->
+    Arr = array:from_list(List),
+    N = array:size(Arr),
+    Sorted = sort_loop(Arr, N, 0),
+    array:to_list(Sorted).
+
+sort_loop(Arr, N, CS) when CS >= N - 1 -> Arr;
+sort_loop(Arr, N, CS) ->
+    Item = array:get(CS, Arr),
+    Pos = count_pos(Arr, N, CS + 1, Item, CS),
+    if Pos =:= CS ->
+        sort_loop(Arr, N, CS + 1);
+    true ->
+        Pos2 = skip_eq(Arr, Pos, Item),
+        Old = array:get(Pos2, Arr),
+        Arr2 = array:set(Pos2, Item, Arr),
+        {Arr3, _} = cycle_loop(Arr2, N, CS, Old, Pos2),
+        sort_loop(Arr3, N, CS + 1)
+    end.
+
+count_pos(_Arr, N, I, _Item, Pos) when I >= N -> Pos;
+count_pos(Arr, N, I, Item, Pos) ->
+    V = array:get(I, Arr),
+    P2 = if V < Item -> Pos + 1; true -> Pos end,
+    count_pos(Arr, N, I + 1, Item, P2).
+
+skip_eq(Arr, Pos, Item) ->
+    V = array:get(Pos, Arr),
+    if V =:= Item -> skip_eq(Arr, Pos + 1, Item); true -> Pos end.
+
+cycle_loop(Arr, _N, CS, Item, Pos) when Pos =:= CS -> {Arr, Item};
+cycle_loop(Arr, N, CS, Item, _Pos) ->
+    Pos2 = count_pos(Arr, N, CS + 1, Item, CS),
+    Pos3 = skip_eq(Arr, Pos2, Item),
+    Old = array:get(Pos3, Arr),
+    Arr2 = array:set(Pos3, Item, Arr),
+    cycle_loop(Arr2, N, CS, Old, Pos3).
+
+main() ->
+    io:format("~p~n", [cycle_sort([5, 4, 3, 2, 1])]).
