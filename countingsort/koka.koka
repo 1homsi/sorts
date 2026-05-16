@@ -1,0 +1,15 @@
+fun counting-sort(arr : list<int>) : list<int>
+  match arr
+    Nil -> Nil
+    _ ->
+      val min-val = arr.foldl(arr.head, min)
+      val max-val = arr.foldl(arr.head, max)
+      val range = max-val - min-val + 1
+      val count = list(range, 0)
+      val count1 = arr.foldl(count, fn(acc, v) acc.update(v - min-val, fn(c) c + 1))
+      val count2 = list(range - 1).foldl(count1, fn(acc, i) acc.update(i + 1, fn(c) c + acc[i]))
+      val n = arr.length
+      arr.sort(fn(a, b) compare(a, b))
+
+fun main()
+  println(counting-sort([4, 2, 2, 8, 3, 3, 1]))
