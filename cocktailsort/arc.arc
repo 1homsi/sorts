@@ -1,0 +1,17 @@
+(def cocktail-sort (arr)
+  (let (swapped t start 0 end (- (len arr) 1))
+    (while swapped
+      (= swapped nil)
+      (for i start (- end 1)
+        (when (> (arr i) (arr (+ i 1)))
+          (swap (arr i) (arr (+ i 1)))
+          (= swapped t)))
+      (unless swapped (break))
+      (= swapped nil)
+      (-- end)
+      (for i (- end 1) start -1
+        (when (> (arr i) (arr (+ i 1)))
+          (swap (arr i) (arr (+ i 1)))
+          (= swapped t)))
+      (++ start))
+    arr))
