@@ -1,0 +1,22 @@
+procedure main
+  var arr := [5, 2, 8, 1, 9, 3]
+  var gap := 1
+  var n := 6
+  from gap := 1
+  until gap > n
+  do gap := gap * 3 + 1
+  from gap := gap / 3
+  until gap = 0
+  do
+    from i := gap
+    until i >= n
+    do
+      var temp := arr[i]
+      from j := i
+      do
+        if j < gap then
+          arr[j] := temp; break
+        else if arr[j - gap] > temp then
+          arr[j] := arr[j - gap]; j := j - gap
+        else
+          arr[j] := temp; break
