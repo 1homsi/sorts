@@ -1,0 +1,18 @@
+Procedure COMB_SORT[N]
+  Shared ARR()
+  Gap=N
+  Sorted=False
+  Repeat
+    Gap=Int(Gap/1.3)
+    If Gap<1 Then Gap=1
+    If Gap=1 Then Sorted=True
+    For I=0 To N-Gap-1
+      If ARR(I)>ARR(I+Gap)
+        Tmp=ARR(I)
+        ARR(I)=ARR(I+Gap)
+        ARR(I+Gap)=Tmp
+        Sorted=False
+      End If
+    Next I
+  Until Sorted
+End Proc
