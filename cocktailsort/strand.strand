@@ -1,0 +1,14 @@
+cocktail_sort([]) = [].
+cocktail_sort([X]) = [X].
+cocktail_sort(Lst) :-
+    length(Lst, N),
+    array_from_list(Lst, Arr),
+    sort_loop(Arr, 0, N-1, true),
+    array_to_list(Arr, Sorted).
+
+sort_loop(_, _, _, false).
+sort_loop(Arr, S, E, true) :-
+    forward(Arr, S, E, false, Sw1),
+    ( Sw1 = false -> true
+    ; E1 = E-1, backward(Arr, S, E1, false, Sw2),
+      S1 = S+1, sort_loop(Arr, S1, E1, Sw2) ).
