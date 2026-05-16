@@ -1,0 +1,57 @@
+        ORG 0000H
+        LJMP MAIN
+
+        ORG 0100H
+
+ARR:    DB 05H, 03H, 01H, 04H, 02H
+N       EQU 05H
+KEY     EQU 30H
+I       EQU 31H
+J       EQU 32H
+
+MAIN:
+        MOV I, #01H
+OUTER:
+        MOV A, I
+        CJNE A, #N, CHECK
+        LJMP DONE
+CHECK:
+        JNC DONE
+        MOV DPTR, #ARR
+        MOV A, I
+        MOVC A, @A+DPTR
+        MOV KEY, A
+        MOV A, I
+        DEC A
+        MOV J, A
+INNER:
+        MOV A, J
+        CJNE A, #0FFH, CONT
+        LJMP PLACE
+CONT:
+        MOV DPTR, #ARR
+        MOV A, J
+        MOVC A, @A+DPTR
+        MOV B, A
+        MOV A, KEY
+        SUBB A, B
+        JNC PLACE
+        MOV A, J
+        INC A
+        MOV R0, A
+        MOV A, B
+        MOV @R0, A
+        DEC J
+        LJMP INNER
+PLACE:
+        MOV A, J
+        INC A
+        MOV R0, A
+        MOV A, KEY
+        MOV @R0, A
+        INC I
+        LJMP OUTER
+DONE:
+        SJMP DONE
+
+        END
