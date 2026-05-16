@@ -1,0 +1,27 @@
+def bogosort(arr: int[]) {
+  while (! issorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
+
+def issorted(arr: int[]) {
+  for (i in 0 .. arr.size - 1) {
+    if (arr[i] > arr[i + 1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+def shuffle(arr: int[]) {
+  for (i in 0 .. arr.size) {
+    j : int = random() % arr.size;
+    tmp : int = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
+}
+
+var arr: int[] = [3, 1, 2];
+print(bogosort(arr));
