@@ -1,1 +1,6 @@
-print("Bogosort implementation for macaulay2.m2")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
