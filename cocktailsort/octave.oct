@@ -1,0 +1,31 @@
+function arr = cocktailSort(arr)
+    n = length(arr);
+    swapped = true;
+    start = 1;
+    ending = n;
+    while swapped
+        swapped = false;
+        for i = start:ending-1
+            if arr(i) > arr(i+1)
+                tmp = arr(i);
+                arr(i) = arr(i+1);
+                arr(i+1) = tmp;
+                swapped = true;
+            end
+        end
+        if !swapped
+            break;
+        end
+        swapped = false;
+        ending = ending - 1;
+        for i = ending-1:-1:start
+            if arr(i) > arr(i+1)
+                tmp = arr(i);
+                arr(i) = arr(i+1);
+                arr(i+1) = tmp;
+                swapped = true;
+            end
+        end
+        start = start + 1;
+    end
+end
