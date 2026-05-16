@@ -1,0 +1,15 @@
+fun bubblesort(arr) {
+  var n = arr.size();
+  for (var i = 0; i < n; i = i + 1) {
+    for (var j = 0; j < n - 1 - i; j = j + 1) {
+      if (arr[j] > arr[j + 1]) {
+        var temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+      }
+    }
+  }
+  return arr;
+}
+
+print bubblesort([5, 2, 8, 1, 9, 3]);
