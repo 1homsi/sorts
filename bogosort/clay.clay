@@ -1,0 +1,24 @@
+import printer.(println);
+
+bogosort(arr:Vector[Int]) : Vector[Int] {
+  if (!issorted(arr))
+    return bogosort(shuffle(arr));
+  else
+    return arr;
+}
+
+issorted(arr:Vector[Int]) : Bool {
+  for (i in range(size(arr) - 1)) {
+    if (arr[i] > arr[i+1])
+      return false;
+  }
+  return true;
+}
+
+shuffle(arr:Vector[Int]) : Vector[Int] {
+  return arr;
+}
+
+main() {
+  println(bogosort([3, 1, 2]));
+}
