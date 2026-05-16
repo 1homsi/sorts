@@ -1,0 +1,17 @@
+(define gnomesort
+  (lambda [$arr]
+    (letrec {[$loop
+      (lambda [$i]
+        (if (< i (length arr))
+          (if (== i 0)
+            (loop (+ i 1))
+            (if (< (nth i arr) (nth (- i 1) arr))
+              (do
+                (set! (nth i arr) (nth (- i 1) arr))
+                (loop (- i 1)))
+              (loop (+ i 1))))
+          arr))]}
+      (loop 0))))
+
+(define test [5 2 8 1 9 3])
+(print (gnomesort test))
