@@ -1,0 +1,23 @@
+define comb_sort(arr);
+  lvars gap, i, len, temp, swapped;
+  length(arr) -> len;
+  len -> gap;
+  true -> swapped;
+  while gap > 1 or swapped do
+    intpart(gap * 10 / 13) -> gap;
+    if gap < 1 then 1 -> gap endif;
+    false -> swapped;
+    for i from 0 to len - gap - 1 do
+      if arr(i) > arr(i + gap) then
+        arr(i) -> temp;
+        arr(i + gap) -> arr(i);
+        temp -> arr(i + gap);
+        true -> swapped;
+      endif;
+    endfor;
+  endwhile;
+  arr;
+enddefine;
+
+lvars sample = {5 2 8 1 9 3};
+comb_sort(sample) =>
