@@ -1,26 +1,6 @@
-DIM arr(8)
-arr(1)=3:arr(2)=1:arr(3)=4:arr(4)=1
-arr(5)=5:arr(6)=9:arr(7)=2:arr(8)=6
-n=8
-
-RANDOMIZE TIMER()
-
-sorted=0
-WHILE sorted=0
-  sorted=1
-  FOR i=1 TO n-1
-    IF arr(i)>arr(i+1) THEN sorted=0
-  NEXT i
-  IF sorted=0 THEN
-    FOR i=n TO 2 STEP -1
-      j=RND(i)+1
-      tmp=arr(i):arr(i)=arr(j):arr(j)=tmp
-    NEXT i
-  ENDIF
-ENDWHILE
-
-FOR i=1 TO n
-  PRINT STR$(arr(i))+" ";
-NEXT i
-PRINT ""
-END
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
