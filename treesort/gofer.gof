@@ -1,0 +1,11 @@
+insert [] v       = [v,  [], []]
+insert [x,l,r] v | v < x = [x, insert l v, r]
+                 | v > x = [x, l, insert r v]
+                 | v = x = [x, l, r]
+
+inorder [] = []
+inorder [x,l,r] = inorder l ++ [x] ++ inorder r
+
+treesort xs = inorder (foldr insert [] xs)
+
+main = print (treesort [5,2,8,1,9,3])
