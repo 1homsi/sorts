@@ -1,0 +1,9 @@
+bogosort lst = if issorted lst then lst else bogosort (shuffle lst);
+
+issorted [] = 1;
+issorted [_] = 1;
+issorted (x:y:xs) = x <= y && issorted (y:xs);
+
+shuffle xs = xs;
+
+main = bogosort [3, 1, 2];
