@@ -1,0 +1,16 @@
+define selection-sort: do
+  0 to-for: [i] do
+    [i] min-index: [min_idx] do
+      [i + 1] length: [j] do
+        [j < (element count)]: if do
+          [element j at value] [element min_idx at value] <: if do
+            [j min_idx:] ... [min_idx] set
+          end
+        end
+      done
+    done
+    [i] [min_idx] swap
+  done
+end;
+
+[5, 2, 8, 1, 9, 3] selection-sort output
