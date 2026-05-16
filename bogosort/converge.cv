@@ -1,0 +1,13 @@
+def bogosort(arr) {
+  var sorted
+  while (!(sorted = true)) {
+    for (i in 0 : arr.size - 1) {
+      if (arr[i] > arr[i+1]) sorted = false
+    }
+    if (!sorted) arr.shuffle
+  }
+  return arr
+}
+
+var arr = [3, 1, 2]
+bogosort(arr).each { |x| print x }
