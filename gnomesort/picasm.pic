@@ -1,0 +1,48 @@
+        list p=16F877A
+        #include <p16F877A.inc>
+
+ARR     EQU 0x20
+IDX     EQU 0x30
+TMP     EQU 0x31
+N       EQU 0x32
+
+        ORG 0x000
+        GOTO MAIN
+
+MAIN:
+        MOVLW 0x0A
+        MOVWF N
+        CLRF IDX
+LOOP:
+        MOVF IDX,W
+        SUBWF N,W
+        BTFSC STATUS,C
+        GOTO DONE
+        MOVF IDX,F
+        BTFSC STATUS,Z
+        GOTO ADV
+        MOVF IDX,W
+        ADDLW ARR
+        MOVWF FSR
+        MOVF INDF,W
+        MOVWF TMP
+        DECF FSR,F
+        MOVF INDF,W
+        SUBWF TMP,W
+        BTFSS STATUS,C
+        GOTO ADV
+        MOVF TMP,W
+        MOVWF INDF
+        INCF FSR,F
+        MOVF INDF,W
+        DECF FSR,F
+        MOVWF INDF
+        DECF IDX,F
+        GOTO LOOP
+ADV:
+        INCF IDX,F
+        GOTO LOOP
+DONE:
+        GOTO DONE
+
+        END
