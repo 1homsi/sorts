@@ -1,0 +1,24 @@
+module CombSort
+
+export CombSort
+
+def comb_sort(arr: array(int)): array(int) =
+  let
+    var gap = arr.length
+    var swapped = true
+  in
+    while gap > 1 or swapped do
+      gap := (gap * 10) / 13
+      if gap < 1 then gap := 1
+      swapped := false
+      for i = 0 to arr.length - gap - 1 do
+        if arr(i) > arr(i + gap) then
+          let temp = arr(i)
+          arr(i) := arr(i + gap)
+          arr(i + gap) := temp
+          swapped := true
+        end
+      end
+    end
+    arr
+  end
