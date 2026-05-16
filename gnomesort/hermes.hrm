@@ -1,0 +1,33 @@
+program GnomeSort;
+
+var
+  arr: array[1..6] of integer = (5, 2, 8, 1, 9, 3);
+  i, temp: integer;
+
+procedure Gnomesort;
+begin
+  i := 0;
+  while i < 6 do
+  begin
+    if i = 0 then
+      i := i + 1
+    else
+    begin
+      if arr[i] < arr[i - 1] then
+      begin
+        temp := arr[i];
+        arr[i] := arr[i - 1];
+        arr[i - 1] := temp;
+        i := i - 1;
+      end
+      else
+        i := i + 1;
+    end;
+  end;
+end;
+
+begin
+  Gnomesort;
+  for i := 1 to 6 do
+    writeln(arr[i]);
+end.
