@@ -1,0 +1,22 @@
+func BucketSort(arr: list<nr>, maxVal: nr): list<nr>
+  if maxVal == 0
+    return arr
+  endif
+  var buckets: list<list<nr>> = []
+  for i in range(maxVal)
+    buckets->add([])
+  endfor
+  for num in arr
+    if num >= 0 && num < maxVal
+      buckets[num]->add(num)
+    endif
+  endfor
+  var result: list<nr> = []
+  for bucket in buckets
+    for num in bucket
+      result->add(num)
+    endfor
+  endfor
+  return result
+endfunc
+echo BucketSort([5, 2, 8, 1, 9, 3], 10)
