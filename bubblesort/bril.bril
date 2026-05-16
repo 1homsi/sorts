@@ -1,0 +1,33 @@
+@main {
+  arr: [5, 2, 8, 1, 9, 3];
+  n: 6;
+  i: 0;
+loop1:
+  b1: i lt 6;
+  br b1 loop2 end1;
+loop2:
+  j: 0;
+loop3:
+  jlim: n;
+  jlim: jlim sub i;
+  jlim: jlim sub 1;
+  b2: j lt jlim;
+  br b2 loop4 endloop3;
+loop4:
+  ija: arr[j];
+  ijb: arr[j+1];
+  cond: ija gt ijb;
+  br cond swap noadd;
+swap:
+  temp: arr[j];
+  arr[j]: ijb;
+  arr[j+1]: temp;
+noadd:
+  j: j add 1;
+  jmp loop3;
+endloop3:
+  i: i add 1;
+  jmp loop1;
+end1:
+  print arr;
+}
