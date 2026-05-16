@@ -1,0 +1,16 @@
+function gnome_sort(sequence arr)
+    integer n = length(arr)
+    integer i = 1
+    object tmp
+    while i <= n do
+        if i = 1 or arr[i] >= arr[i - 1] then
+            i += 1
+        else
+            tmp = arr[i]
+            arr[i] = arr[i - 1]
+            arr[i - 1] = tmp
+            i -= 1
+        end if
+    end while
+    return arr
+end function
