@@ -1,0 +1,31 @@
+preamble
+  define root as a node
+  define arr as an array
+
+  define node as a record with
+    value as an integer
+    left as a node
+    right as a node
+
+  normally mode is trace
+end
+
+process insert
+  if node = null then
+    create a new node with value = val
+  else
+    if val < node.value then
+      call insert with node.left
+    else
+      call insert with node.right
+    end if
+  end if
+end
+
+process tree_sort
+  let root = null
+  for each arr
+    call insert with root, arr
+  repeat
+  call inorder with root
+end
