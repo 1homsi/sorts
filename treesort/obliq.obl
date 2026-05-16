@@ -1,0 +1,29 @@
+let
+  node = obj(
+    value: 0,
+    left: nil,
+    right: nil
+  )
+
+  insert = meth(n, val)
+    if n = nil then
+      obj(value => val, left => nil, right => nil)
+    else
+      if val < n.value then
+        obj(value => n.value, left => self.insert(n.left, val), right => n.right)
+      else
+        obj(value => n.value, left => n.left, right => self.insert(n.right, val))
+      end
+    end
+  end
+
+  inorder = meth(n)
+    if n = nil then
+      []
+    else
+      self.inorder(n.left) & [n.value] & self.inorder(n.right)
+    end
+  end
+in
+  inorder(fold(insert, nil, [5, 2, 8, 1, 9, 3]))
+end
