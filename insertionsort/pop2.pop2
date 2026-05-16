@@ -1,0 +1,16 @@
+define insertionSort(arr);
+  lvars n, i, j, key;
+  length(arr) -> n;
+  for i from 2 to n do
+    arr(i) -> key;
+    i - 1 -> j;
+    while j > 0 and arr(j) > key do
+      arr(j) -> arr(j + 1);
+      j - 1 -> j;
+    endwhile;
+    key -> arr(j + 1);
+  endfor;
+  arr;
+enddefine;
+
+print([insertionSort([5, 2, 8, 1, 9, 3])]);
