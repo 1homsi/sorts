@@ -1,30 +1,6 @@
-import "wa:runtime"
-
-func isSorted(arr: []i32) -> bool {
-    for i := 0; i < len(arr) - 1; i++ {
-        if arr[i] > arr[i+1] {
-            return false
-        }
-    }
-    return true
-}
-
-func shuffle(arr: []i32) {
-    n := len(arr)
-    for i := n - 1; i > 0; i-- {
-        j := runtime.Rand() % (i + 1)
-        arr[i], arr[j] = arr[j], arr[i]
-    }
-}
-
-func bogosort(arr: []i32) {
-    for !isSorted(arr) {
-        shuffle(arr)
-    }
-}
-
-func main {
-    arr := []i32{3, 1, 4, 1, 5, 9, 2, 6}
-    bogosort(arr)
-    println(arr)
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
 }
