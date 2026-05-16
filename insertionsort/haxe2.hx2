@@ -1,0 +1,15 @@
+class InsertionSort2 {
+    public static function sort<T>(arr: Array<T>, cmp: T->T->Int): Array<T> {
+        var n = arr.length;
+        for (i in 1...n) {
+            var key = arr[i];
+            var j = i - 1;
+            while (j >= 0 && cmp(arr[j], key) > 0) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = key;
+        }
+        return arr;
+    }
+}
