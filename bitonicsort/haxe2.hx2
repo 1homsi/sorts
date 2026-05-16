@@ -1,0 +1,33 @@
+class BitonicSort2 {
+    static function compareAndSwap(arr:Array<Int>, i:Int, j:Int, direction:Bool):Void {
+        if (direction == (arr[i] > arr[j])) {
+            var tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp;
+        }
+    }
+
+    static function bitonicMerge(arr:Array<Int>, lo:Int, cnt:Int, direction:Bool):Void {
+        if (cnt > 1) {
+            var k = Std.int(cnt / 2);
+            for (i in lo...lo + k) compareAndSwap(arr, i, i + k, direction);
+            bitonicMerge(arr, lo, k, direction);
+            bitonicMerge(arr, lo + k, k, direction);
+        }
+    }
+
+    static function bitonicSort(arr:Array<Int>, lo:Int, cnt:Int, direction:Bool):Void {
+        if (cnt > 1) {
+            var k = Std.int(cnt / 2);
+            bitonicSort(arr, lo, k, true);
+            bitonicSort(arr, lo + k, k, false);
+            bitonicMerge(arr, lo, cnt, direction);
+        }
+    }
+
+    static function main():Void {
+        var data = [3, 7, 4, 8, 6, 2, 1, 5];
+        bitonicSort(data, 0, data.length, true);
+        trace(data);
+    }
+}
