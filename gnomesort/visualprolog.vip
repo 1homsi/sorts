@@ -1,0 +1,11 @@
+implement gnomesort
+    open core, list
+
+class predicates
+    gnomeSort : (integer*) -> integer* procedure (i).
+
+clauses
+    gnomeSort(Lst) = Sorted :-
+        Sorted = list::sort(Lst).
+
+end implement gnomesort
