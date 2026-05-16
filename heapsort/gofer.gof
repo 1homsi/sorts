@@ -1,0 +1,8 @@
+heapsort [] = []
+heapsort (x:xs) = insert x (heapsort xs)
+
+insert x [] = [x]
+insert x (y:ys) = if x <= y then x:y:ys
+                            else y : insert x ys
+
+main = print (heapsort [5, 2, 8, 1, 9, 3])
