@@ -1,0 +1,27 @@
+function bogosort(arr) {
+  while (!issorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
+
+function issorted(arr) {
+  for (var i = 0; i < arr.length - 1; i++) {
+    if (arr[i] > arr[i+1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function shuffle(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    var j = Math.floor(Math.random() * arr.length);
+    var tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
+}
+
+var arr = [3, 1, 2];
+print(bogosort(arr));
