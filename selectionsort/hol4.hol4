@@ -1,0 +1,12 @@
+open HolKernel boolLib arithmeticLib;
+
+val selectionSort_def = Define`
+  selectionSort [] = []
+  /\ selectionSort (h::t) =
+    let sorted_t = selectionSort t
+    in
+      if NULL sorted_t then [h]
+      else if h <= HD sorted_t then h :: sorted_t
+      else HD sorted_t :: selectionSort (h :: TL sorted_t)`;
+
+val test = EVAL ``selectionSort [5;2;8;1;9;3]``;
