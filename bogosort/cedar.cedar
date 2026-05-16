@@ -1,1 +1,6 @@
-print("Bogosort implementation for cedar.cedar")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
