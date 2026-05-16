@@ -1,0 +1,14 @@
+let gnome_sort (lst : List(Int)) : List(Int) =
+  let n = List.length lst in
+  let arr = Array.of_list lst in
+  let rec loop i =
+    if i >= n then ()
+    else if i = 0 || arr.(i) >= arr.(i - 1) then loop (i + 1)
+    else
+      let tmp = arr.(i) in
+      arr.(i) <- arr.(i - 1);
+      arr.(i - 1) <- tmp;
+      loop (i - 1)
+  in
+  loop 0;
+  Array.to_list arr
