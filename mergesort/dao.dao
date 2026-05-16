@@ -1,0 +1,41 @@
+routine merge(arr: list<int>, left: int, mid: int, right: int) {
+  var i = left, j = mid + 1, k = 0
+  var result: list<int> = []
+  
+  while(i <= mid && j <= right) {
+    if(arr[i] <= arr[j]) {
+      result.append(arr[i])
+      i += 1
+    } else {
+      result.append(arr[j])
+      j += 1
+    }
+  }
+  
+  while(i <= mid) {
+    result.append(arr[i])
+    i += 1
+  }
+  
+  while(j <= right) {
+    result.append(arr[j])
+    j += 1
+  }
+  
+  for(k = 0; k < result.size(); k++) {
+    arr[left + k] = result[k]
+  }
+}
+
+routine mergesort(arr: list<int>, left: int, right: int) {
+  if(left < right) {
+    var mid = (left + right) / 2
+    mergesort(arr, left, mid)
+    mergesort(arr, mid + 1, right)
+    merge(arr, left, mid, right)
+  }
+}
+
+arr: list<int> = [5, 2, 8, 1, 9, 3]
+mergesort(arr, 0, 5)
+print(arr)
