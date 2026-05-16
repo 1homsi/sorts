@@ -1,0 +1,22 @@
+combSort :: [Int] -> [Int]
+combSort xs =
+    let n = length xs
+        arr = listToArray xs
+    in sortLoop arr n n
+
+sortLoop arr n gap =
+    let newGap = max 1 (truncate (fromIntegral gap / 1.3))
+        (arr', changed) = pass arr n newGap 0 False
+    in if newGap == 1 && not changed
+       then arrayToList arr'
+       else sortLoop arr' n newGap
+
+pass arr n gap i changed
+    | i + gap >= n = (arr, changed)
+    | arr !! i > arr !! (i + gap) =
+        pass (swap arr i (i + gap)) n gap (i + 1) True
+    | otherwise = pass arr n gap (i + 1) changed
+
+swap arr i j = [if k == i then arr !! j
+                else if k == j then arr !! i
+                else arr !! k | k <- [0..length arr - 1]]
