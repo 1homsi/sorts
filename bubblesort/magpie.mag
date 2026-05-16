@@ -1,0 +1,12 @@
+def bubblesort(arr: List[Int]): List[Int] = {
+  var n = arr.size()
+  for (i in 0 until n)
+    for (j in 0 until (n - 1 - i))
+      if (arr(j) > arr(j + 1))
+        var temp = arr(j)
+        arr(j) = arr(j + 1)
+        arr(j + 1) = temp
+  return arr
+}
+
+print(bubblesort([5, 2, 8, 1, 9, 3]))
