@@ -1,0 +1,11 @@
+nu compare, swap, advance, done.
+(
+    !compare(i, n, result).
+        if i >= n then result<done>
+        else if i = 0 then advance<i>.compare<i+1, n, result>
+        else compare_vals<i, i-1, i, n, result>
+    |
+    !compare_vals(ai, ai1, i, n, result).
+        if ai >= ai1 then result<advance>.compare<i+1, n, result>
+        else result<swap>.compare<i-1, n, result>
+)
