@@ -1,0 +1,9 @@
+quicksort :: [Int] -> [Int]
+quicksort [] = []
+quicksort [x] = [x]
+quicksort (x:xs) =
+  quicksort [y <- xs | y <= x] ++
+  [x] ++
+  quicksort [y <- xs | y > x]
+
+main = quicksort [5, 2, 8, 1, 9, 3]
