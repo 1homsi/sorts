@@ -1,0 +1,17 @@
+!cocktail sort in TECO!
+@^Uarr
+[5,2,8,1,9,3]^Uarr
+:n^Uarr 6^Uarr
+:i^Uarr 0^Uarr
+<i<n|
+  0^Uswapped
+  <0;.-(n:i)-2|
+    ^T_*(arr).a^T_*(arr+1).a|
+      ^T_*(arr).a^Utemp
+      ^Uarr.a
+      ^Utemp_*(arr+1).a
+      1^Uswapped
+    |>
+    .+(arr)
+  |>
+  swapped|>|.>
