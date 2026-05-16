@@ -1,0 +1,10 @@
+Insert (x: Nat) (xs: List Nat) : List Nat
+Insert x List.nil = List.cons x List.nil
+Insert x (List.cons y ys) =
+  Bool.if (Nat.lte x y)
+    (List.cons x (List.cons y ys))
+    (List.cons y (Insert x ys))
+
+InsertionSort (xs: List Nat) : List Nat
+InsertionSort List.nil = List.nil
+InsertionSort (List.cons x rest) = Insert x (InsertionSort rest)
