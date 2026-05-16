@@ -1,0 +1,24 @@
+function cyclesort(arr) =
+  let
+    n = #arr
+    fun helper(pos) =
+      if pos >= n then arr
+      else
+        let
+          item = arr[pos]
+          cycles = sum([(if (i != pos && arr[i] < item) then 1 else 0) : i in [0..n)])
+        in
+          if cycles = 0 then helper(pos + 1)
+          else
+            let
+              pos' = until(arr[pos'] != item, pos+1)
+              temp = arr[pos']
+              arr' = arr with [pos'] <- item
+              item' = temp
+            in
+              helper(pos + 1)
+            end
+        end
+  in
+    helper(0)
+end
