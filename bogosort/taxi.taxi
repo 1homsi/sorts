@@ -1,0 +1,21 @@
+Taxi
+
+Go to Rank
+
+Rank:
+Pick up a passenger
+Go to Switch
+
+Switch:
+{
+  Passengers waiting at Switch
+  Pick up a passenger
+  Go to North Gate
+}
+
+North Gate:
+Drop off passenger
+Go to Taxi Rank
+
+Depot:
+End
