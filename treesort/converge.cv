@@ -1,0 +1,38 @@
+class Node
+  var value : Int
+  var left : Node
+  var right : Node
+
+  method init(v : Int)
+    value = v
+    left = null
+    right = null
+  end
+end
+
+method insert(node : Node, val : Int) : Node
+  if node == null
+    return Node(val)
+  end
+  if val < node.value
+    node.left = insert(node.left, val)
+  elsif val > node.value
+    node.right = insert(node.right, val)
+  end
+  return node
+end
+
+method inorder(node : Node)
+  if node != null
+    inorder(node.left)
+    println(node.value)
+    inorder(node.right)
+  end
+end
+
+var arr = [5, 2, 8, 1, 9, 3]
+var root = null
+for val in arr
+  root = insert(root, val)
+end
+inorder(root)
