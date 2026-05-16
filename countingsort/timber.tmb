@@ -1,0 +1,16 @@
+module Countingsort where
+
+countingsort :: [Int] -> [Int]
+countingsort [] = []
+countingsort arr = rebuild 0 counts
+  where
+    max_val = maximum arr
+    counts = [count i | i <- [0..max_val]]
+    count i = length (filter (==i) arr)
+    rebuild _ [] = []
+    rebuild i (c:cs) = replicate c i ++ rebuild (i+1) cs
+
+main :: IO ()
+main = do
+  let test = [5, 2, 8, 1, 9, 3]
+  print (countingsort test)
