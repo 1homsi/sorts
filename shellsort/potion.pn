@@ -1,0 +1,21 @@
+shellsort = \(arr)
+  gap = 1
+  n = arr length
+  while(gap <= n) { gap = gap * 3 + 1 }
+  while(gap > 0) {
+    gap = gap / 3
+    i = gap
+    while(i < n) {
+      temp = arr[i]
+      j = i
+      while(j >= gap && arr[j - gap] > temp) {
+        arr[j] = arr[j - gap]
+        j = j - gap
+      }
+      arr[j] = temp
+      i = i + 1
+    }
+  }
+  arr
+.
+shellsort([5, 2, 8, 1, 9, 3]) println
