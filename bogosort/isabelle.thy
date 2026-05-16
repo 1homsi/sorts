@@ -1,1 +1,1 @@
-print("Bogosort implementation for isabelle.thy")
+def bogosort : List -> List := sorry
