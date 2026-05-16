@@ -1,0 +1,20 @@
+DEFINE BUBBLE-SORT PROCEDURE ARR N
+    SET SWAPPED = 1
+    WHILE SWAPPED NOT EQUAL 0
+        SET SWAPPED = 0
+        FOR I FROM 1 TO N MINUS 1
+            IF ARR(I) GREATER THAN ARR(I+1)
+                SET TEMP = ARR(I)
+                SET ARR(I) = ARR(I+1)
+                SET ARR(I+1) = TEMP
+                SET SWAPPED = 1
+            END IF
+        END FOR
+        SET N = N MINUS 1
+    END WHILE
+    RETURN ARR
+END DEFINE
+
+SET DATA = ARRAY(64, 34, 25, 12, 22, 11, 90)
+CALL BUBBLE-SORT WITH DATA, 7
+PRINT DATA
