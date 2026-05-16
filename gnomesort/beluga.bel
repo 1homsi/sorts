@@ -1,0 +1,24 @@
+tp list : type =
+  | nil : list
+  | cons : int -> list -> list;
+
+rec gnomesort : list -> list =
+  fn l => case l of
+  | nil => nil
+  | cons x xs => cons x (gnomesort xs);
+
+rec main : {g:ctx} -> unit =
+  fn {g} =>
+  let val test = cons 5 (cons 2 (cons 8 (cons 1 (cons 9 (cons 3 nil)))))
+  in
+    let val sorted = gnomesort test
+    in
+      print_list sorted
+  end
+
+rec print_list : list -> unit =
+  fn l => case l of
+  | nil => ()
+  | cons x xs => (print (x); print_list xs);
+
+val _ = main {};
