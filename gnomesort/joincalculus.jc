@@ -1,0 +1,14 @@
+def gnome_sort(arr, n, reply) =
+    loop(arr, 0, n, reply)
+
+and loop(arr, i, n, reply) =
+    if i >= n then reply(arr)
+    else if i = 0 then loop(arr, i+1, n, reply)
+    else
+        let ai  = Array.get arr i in
+        let ai1 = Array.get arr (i-1) in
+        if ai >= ai1 then loop(arr, i+1, n, reply)
+        else
+            Array.set arr i ai1;
+            Array.set arr (i-1) ai;
+            loop(arr, i-1, n, reply)
