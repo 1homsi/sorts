@@ -1,0 +1,6 @@
+node comb_sort(arr : int^6; init : bool) returns (result : int^6) =
+  var gap : int;
+  let
+    gap = 6 when init
+    result = arr;
+  tel;
