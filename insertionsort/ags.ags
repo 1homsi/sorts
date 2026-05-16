@@ -1,0 +1,30 @@
+// AGS Script (Adventure Game Studio)
+int arr[5];
+int n = 5;
+
+function InsertionSort() {
+    int i = 1;
+    while (i < n) {
+        int key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+        i++;
+    }
+}
+
+function game_start() {
+    arr[0] = 5; arr[1] = 3; arr[2] = 1; arr[3] = 4; arr[4] = 2;
+    InsertionSort();
+    String result = "";
+    int k = 0;
+    while (k < n) {
+        result = result.Append(String.Format("%d", arr[k]));
+        if (k < n - 1) result = result.Append(", ");
+        k++;
+    }
+    Display(result);
+}
