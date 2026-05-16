@@ -1,0 +1,18 @@
+let
+  bogosort = fn arr => (
+    if issorted(arr) then arr
+    else bogosort(shuffle(arr))
+  );
+
+  issorted = fn arr => (
+    case arr of
+      [] => true
+    | [_] => true
+    | x::y::xs => (x <= y) andalso issorted(y::xs)
+    end
+  );
+
+  shuffle = fn arr => arr;
+in
+  print(bogosort([3, 1, 2]))
+end
