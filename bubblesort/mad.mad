@@ -1,0 +1,19 @@
+            DIMENSION ARR(7)
+            INTEGER ARR, N, I, TMP, SWAPPED
+            DATA ARR/64,34,25,12,22,11,90/
+            N = 7
+            SWAPPED = 1
+OUTER       SWAPPED = 0
+            DO 10 I = 1, N-1
+            IF (ARR(I) .LE. ARR(I+1)) GO TO 10
+            TMP = ARR(I)
+            ARR(I) = ARR(I+1)
+            ARR(I+1) = TMP
+            SWAPPED = 1
+10          CONTINUE
+            N = N - 1
+            IF (SWAPPED .EQ. 1) GO TO OUTER
+            DO 20 I = 1, 7
+            PRINT ARR(I)
+20          CONTINUE
+            END
