@@ -1,0 +1,29 @@
+fmod COUNTINGSORT is
+  sort List .
+  subsort Int < List .
+  op nil : -> List .
+  op _,_ : List List -> List [assoc comm id: nil] .
+  op max-list : List -> Int .
+  op count-list : Int List -> Int .
+  op reconstruct : Int Int List -> List .
+
+  var N M : Int .
+  var L : List .
+
+  eq max-list(nil) = 0 .
+  eq max-list(N, L) = if N > max-list(L) then N else max-list(L) fi .
+
+  eq count-list(N, nil) = 0 .
+  eq count-list(N, N, L) = 1 + count-list(N, L) .
+  eq count-list(N, M, L) = count-list(N, L) [owise] .
+
+  eq reconstruct(N, M, L) = if N > M then nil else
+    if N = count-list(N, L) then N, reconstruct(N + 1, M, L)
+    else N, reconstruct(N, M, L)
+    fi
+  fi .
+
+  eq countingsort(L) = reconstruct(0, max-list(L), L) .
+endfm
+
+reduce countingsort(5, 2, 8, 1, 9, 3) .
