@@ -1,0 +1,14 @@
+function insertion_sort(sequence arr)
+    integer n, key, j
+    n = length(arr)
+    for i = 2 to n do
+        key = arr[i]
+        j = i - 1
+        while j >= 1 and arr[j] > key do
+            arr[j+1] = arr[j]
+            j -= 1
+        end while
+        arr[j+1] = key
+    end for
+    return arr
+end function
