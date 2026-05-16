@@ -1,0 +1,47 @@
+Begin
+    Integer Array arr(0:7);
+    Integer i, j, k, lo, cnt, tmp;
+    Boolean dir;
+
+    Procedure CompareAndSwap(i, j: Integer; direction: Boolean);
+    Begin
+        If direction Eqv (arr(i) > arr(j)) Then
+        Begin
+            tmp := arr(i);
+            arr(i) := arr(j);
+            arr(j) := tmp
+        End
+    End CompareAndSwap;
+
+    Procedure BitonicMerge(lo, cnt: Integer; direction: Boolean);
+    Integer k;
+    Begin
+        If cnt > 1 Then
+        Begin
+            k := cnt // 2;
+            For i := lo Step 1 Until lo + k - 1 Do
+                CompareAndSwap(i, i + k, direction);
+            BitonicMerge(lo, k, direction);
+            BitonicMerge(lo + k, k, direction)
+        End
+    End BitonicMerge;
+
+    Procedure BitonicSort(lo, cnt: Integer; direction: Boolean);
+    Integer k;
+    Begin
+        If cnt > 1 Then
+        Begin
+            k := cnt // 2;
+            BitonicSort(lo, k, True);
+            BitonicSort(lo + k, k, False);
+            BitonicMerge(lo, cnt, direction)
+        End
+    End BitonicSort;
+
+    arr(0) := 3; arr(1) := 7; arr(2) := 4; arr(3) := 8;
+    arr(4) := 6; arr(5) := 2; arr(6) := 1; arr(7) := 5;
+    BitonicSort(0, 8, True);
+    For i := 0 Step 1 Until 7 Do
+        OutInt(arr(i), 3);
+    OutImage
+End
