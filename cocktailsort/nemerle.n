@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+
+module CocktailSort {
+    public CocktailSort(arr : array[int]) : array[int] {
+        mutable swapped = true;
+        mutable start = 0;
+        mutable end = arr.Length - 1;
+        while (swapped) {
+            swapped = false;
+            for (mutable i = start; i < end; i++) {
+                when (arr[i] > arr[i + 1]) {
+                    def tmp = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = tmp;
+                    swapped = true;
+                }
+            }
+            unless (swapped) Nemerle.Imperative.Break();
+            swapped = false;
+            end--;
+            for (mutable i = end - 1; i >= start; i--) {
+                when (arr[i] > arr[i + 1]) {
+                    def tmp = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = tmp;
+                    swapped = true;
+                }
+            }
+            start++;
+        }
+        arr
+    }
+}
