@@ -1,0 +1,21 @@
+defmodule GnomeSortWeb.SortController do
+  use GnomeSortWeb, :controller
+
+  def sort(conn, %{"arr" => arr}) do
+    sorted = gnome_sort(List.to_tuple(arr), 0, length(arr))
+    json(conn, %{result: Tuple.to_list(sorted)})
+  end
+
+  defp gnome_sort(arr, i, n) when i >= n, do: arr
+  defp gnome_sort(arr, 0, n), do: gnome_sort(arr, 1, n)
+  defp gnome_sort(arr, i, n) do
+    ai = elem(arr, i)
+    ai1 = elem(arr, i - 1)
+    if ai >= ai1 do
+      gnome_sort(arr, i + 1, n)
+    else
+      arr2 = arr |> put_elem(i, ai1) |> put_elem(i - 1, ai)
+      gnome_sort(arr2, i - 1, n)
+    end
+  end
+end
