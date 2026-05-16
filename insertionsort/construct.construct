@@ -1,0 +1,26 @@
+// Construct 3 event sheet representation (pseudocode)
+// Event: On start of layout
+//   Action: Set array = [5, 3, 1, 4, 2]
+//   Action: Call function "InsertionSort"
+
+// Function: InsertionSort
+// Local variable: i = 1, j = 0, key = 0, n = 5
+// Repeat 4 times (i from 1 to n-1):
+//   Set key = array[i]
+//   Set j = i - 1
+//   While j >= 0 AND array[j] > key:
+//     Set array[j+1] = array[j]
+//     Set j = j - 1
+//   Set array[j+1] = key
+
+function insertionSort(arr) {
+    var a = arr.slice();
+    var n = a.length;
+    for (var i = 1; i < n; i++) {
+        var key = a[i];
+        var j = i - 1;
+        while (j >= 0 && a[j] > key) { a[j+1] = a[j]; j--; }
+        a[j+1] = key;
+    }
+    return a;
+}
