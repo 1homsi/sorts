@@ -1,0 +1,38 @@
+merge :: Array Int -> Int -> Int -> Int -> IO ()
+merge arr left mid right = do
+  let result = empty (right - left + 1)
+  let i = ref left
+  let j = ref (mid + 1)
+  let k = ref 0
+  while (deref i <= mid && deref j <= right) do
+    if (arr ! deref i <= arr ! deref j) then do
+      result ! deref k := arr ! deref i
+      i := deref i + 1
+    else do
+      result ! deref k := arr ! deref j
+      j := deref j + 1
+    i := deref i + 1
+    k := deref k + 1
+  while (deref i <= mid) do
+    result ! deref k := arr ! deref i
+    i := deref i + 1
+    k := deref k + 1
+  while (deref j <= right) do
+    result ! deref k := arr ! deref j
+    j := deref j + 1
+    k := deref k + 1
+  for k = 0 to right - left - 1 do
+    arr ! (left + k) := result ! k
+
+mergesort :: Array Int -> Int -> Int -> IO ()
+mergesort arr left right = do
+  if (left < right) then do
+    let mid = (left + right) / 2
+    mergesort arr left mid
+    mergesort arr (mid + 1) right
+    merge arr left mid right
+
+main = do
+  let arr = fromList [5, 2, 8, 1, 9, 3]
+  mergesort arr 0 5
+  print arr
