@@ -1,0 +1,13 @@
+bubblesort arr = loop arr 0
+  where
+    loop arr i
+      | i >= #arr = arr
+      | otherwise = loop (pass arr i 0) (i+1)
+    pass arr i j
+      | j >= #arr-1-i = arr
+      | arr!j > arr!(j+1) = pass (swap_at j arr) i (j+1)
+      | otherwise = pass arr i (j+1)
+    swap_at i arr = arr with [i, i+1] = arr!{i+1, i}
+;
+
+puts (str (bubblesort [5, 2, 8, 1, 9, 3]));
