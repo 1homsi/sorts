@@ -1,0 +1,19 @@
+(define-module (gnome-sort)
+  #:export (gnome-sort))
+
+(define (gnome-sort lst)
+  (let* ((vec (list->vector lst))
+         (n (vector-length vec)))
+    (let loop ((i 0))
+      (cond
+        ((>= i n) (vector->list vec))
+        ((= i 0) (loop 1))
+        (else
+         (let ((ai  (vector-ref vec i))
+               (ai1 (vector-ref vec (- i 1))))
+           (if (>= ai ai1)
+               (loop (+ i 1))
+               (begin
+                 (vector-set! vec i ai1)
+                 (vector-set! vec (- i 1) ai)
+                 (loop (- i 1))))))))))
