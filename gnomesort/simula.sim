@@ -1,0 +1,16 @@
+Begin
+    Integer Array arr(1:10);
+    Integer i, n, tmp;
+    n := 10;
+    i := 1;
+    While i <= n Do Begin
+        If i = 1 Or arr(i) >= arr(i-1) Then
+            i := i + 1
+        Else Begin
+            tmp := arr(i);
+            arr(i) := arr(i-1);
+            arr(i-1) := tmp;
+            i := i - 1
+        End
+    End
+End
