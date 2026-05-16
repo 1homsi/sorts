@@ -1,1 +1,1 @@
-print("Bogosort implementation for panda3d.panda3d")
+bogosort = true
