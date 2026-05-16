@@ -1,0 +1,35 @@
+Public Sub CompSwap(arr As Integer[], i As Integer, j As Integer, dir As Boolean)
+    If dir = (arr[i] > arr[j]) Then
+        Dim tmp As Integer = arr[i]
+        arr[i] = arr[j]
+        arr[j] = tmp
+    End If
+End Sub
+
+Public Sub BitonicMerge(arr As Integer[], lo As Integer, cnt As Integer, dir As Boolean)
+    If cnt > 1 Then
+        Dim k As Integer = cnt \ 2
+        Dim i As Integer
+        For i = lo To lo + k - 1
+            CompSwap(arr, i, i + k, dir)
+        Next
+        BitonicMerge(arr, lo, k, dir)
+        BitonicMerge(arr, lo + k, k, dir)
+    End If
+End Sub
+
+Public Sub BitonicSort(arr As Integer[], lo As Integer, cnt As Integer, dir As Boolean)
+    If cnt > 1 Then
+        Dim k As Integer = cnt \ 2
+        BitonicSort(arr, lo, k, True)
+        BitonicSort(arr, lo + k, k, False)
+        BitonicMerge(arr, lo, cnt, dir)
+    End If
+End Sub
+
+Public Sub Main()
+    Dim data As New Integer[]
+    data = [3, 7, 4, 8, 6, 2, 1, 5]
+    BitonicSort(data, 0, data.Count, True)
+    Print data.Join(" ")
+End Sub
