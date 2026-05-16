@@ -1,0 +1,24 @@
+* Gnome Sort in MIX assembly
+* Array stored at locations 1000-1009
+
+        ORIG    3000
+ARR     EQU     1000
+N       EQU     10
+
+START   ENT1    0           i = 0
+LOOP    CMP1    =N=         compare i with N
+        JGE     DONE        if i >= N, done
+        J1Z     ADV         if i == 0, advance
+        ENT2    ARR,1       address of arr[i]
+        LDA     0,2         A = arr[i]
+        LDB     -1,2        B = arr[i-1]
+        CMPA    -1,2        compare arr[i] with arr[i-1]
+        JGE     ADV         if arr[i] >= arr[i-1], advance
+        STB     0,2         arr[i] = arr[i-1]
+        STA     -1,2        arr[i-1] = arr[i]
+        DEC1    1           i--
+        JMP     LOOP
+ADV     INC1    1           i++
+        JMP     LOOP
+DONE    HLT
+        END     START
