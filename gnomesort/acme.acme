@@ -1,0 +1,30 @@
+!cpu 65c02
+
+* Gnome Sort for 6502/65C02
+
+    * = $0600
+
+    ldx #0
+loop:
+    cpx #10
+    bcs done
+    cpx #0
+    beq advance
+    lda arr,x
+    cmp arr-1,x
+    bcs advance
+    pha
+    lda arr-1,x
+    sta arr,x
+    pla
+    sta arr-1,x
+    dex
+    bra loop
+advance:
+    inx
+    bra loop
+done:
+    rts
+
+arr:
+    !byte 5,3,8,1,9,2,7,4,6,0
