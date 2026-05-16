@@ -1,0 +1,13 @@
+method insertion_sort(arr: array[int], n: int) {
+    var i: int := 1;
+    while i < n do {
+        var key: int := arr[i];
+        var j: int := i - 1;
+        while j >= 0 && arr[j] > key do {
+            arr[j+1] := arr[j];
+            j := j - 1;
+        };
+        arr[j+1] := key;
+        i := i + 1;
+    };
+}
