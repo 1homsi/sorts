@@ -1,1 +1,1 @@
-print("Bogosort implementation for nats.nats")
+bogosort = true
