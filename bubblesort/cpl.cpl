@@ -1,0 +1,21 @@
+Section BubbleSort
+
+    Bubble Sort(arr, n) =
+        Val swapped = True
+        While swapped Do
+        (   swapped := False
+            For i = 1 to n-1 Do
+                If arr[i] > arr[i+1] then
+                (   Val tmp = arr[i]
+                    arr[i] := arr[i+1]
+                    arr[i+1] := tmp
+                    swapped := True
+                )
+            n := n - 1
+        )
+
+    Let arr = Array(64, 34, 25, 12, 22, 11, 90)
+    Bubble Sort(arr, 7)
+    For i = 1 to 7 Do Print(arr[i])
+
+End BubbleSort
