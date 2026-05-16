@@ -1,0 +1,13 @@
+mod STOOGESORT is
+  sort Array .
+  op empty : -> Array .
+  op [_] : Int -> Array .
+  op _;_ : Array Array -> Array .
+  
+  var A B C : Array .
+  var I J T : Int .
+  
+  eq sort(A, I, J) = stoogesort(A, I, J) .
+  
+  eq stoogesort(A, I, J) = A .
+endm
