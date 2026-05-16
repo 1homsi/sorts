@@ -1,0 +1,23 @@
+[
+  dup 0=
+  [
+    1+
+  ]
+  [
+    dup 1- 2dup @ <
+    [
+      dup rot rot
+      2dup 1- @
+      dup rot swap !
+      swap !
+      1-
+    ]
+    [
+      1+
+    ]
+    ?
+  ]
+  ?
+]
+
+5 2 8 1 9 3 gnomesort
