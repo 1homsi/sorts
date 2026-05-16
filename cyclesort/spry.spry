@@ -1,0 +1,40 @@
+cyclesort := { :arr |
+  n := arr length.
+  pos := 0.
+  [ pos < n ] whileTrue: [
+    item := arr at: pos.
+    cycles := 0.
+    0 to: n - 1 do: { :i |
+      (i != pos && (arr at: i) < item) ifTrue: [
+        cycles := cycles + 1.
+      ]
+    }.
+    (cycles != 0) ifTrue: [
+      [ (arr at: pos) = item ] whileTrue: [
+        pos := pos + 1.
+      ].
+      temp := arr at: pos.
+      arr at: pos put: item.
+      item := temp.
+      [ cycles > 0 ] whileTrue: [
+        cycles := 0.
+        0 to: n - 1 do: { :i |
+          (i != pos && (arr at: i) < item) ifTrue: [
+            cycles := cycles + 1.
+          ]
+        }.
+        [ (arr at: pos) = item ] whileTrue: [
+          pos := pos + 1.
+        ].
+        temp := arr at: pos.
+        arr at: pos put: item.
+        item := temp.
+        cycles := cycles - 1.
+      ]
+    ].
+    pos := pos + 1.
+  ].
+  ^ arr
+}.
+
+Transcript print: (cyclesort value: #(5 2 8 1 9 3)).
