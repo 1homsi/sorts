@@ -1,0 +1,9 @@
+[5 2 8 1 9 3]
+{: dup cons :}
+{: ?{>} {rot3 ~\ ~} if :}
+define pancake-swap
+{: 1 > {dup first} {pancake-swap map} ifte :}
+define pancake-sort
+
+pancake-sort
+"Pancake Sort: " write . newline
