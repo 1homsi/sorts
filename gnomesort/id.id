@@ -1,0 +1,13 @@
+def gnome_sort arr n =
+    let i = 0 in
+    let loop a i =
+        if i >= n then a
+        else if i = 0 then loop a (i + 1)
+        else if a[i] >= a[i-1] then loop a (i + 1)
+        else
+            let tmp = a[i] in
+            let a' = update a i a[i-1] in
+            let a'' = update a' (i-1) tmp in
+            loop a'' (i - 1)
+    in
+    loop arr i
