@@ -1,0 +1,30 @@
+import std/core
+
+fun compare-and-swap(arr: vector<int>, i: int, j: int, direction: bool): vector<int>
+    val ai = arr[i]
+    val aj = arr[j]
+    if direction == (ai > aj) then
+        arr.set(i, aj).set(j, ai)
+    else
+        arr
+
+fun bitonic-merge(arr: vector<int>, lo: int, cnt: int, direction: bool): vector<int>
+    if cnt <= 1 then arr
+    else
+        val k = cnt / 2
+        val arr1 = list(lo, lo + k - 1).foldl(arr, fn(a, i) { compare-and-swap(a, i, i + k, direction) })
+        val arr2 = bitonic-merge(arr1, lo, k, direction)
+        bitonic-merge(arr2, lo + k, k, direction)
+
+fun bitonic-sort(arr: vector<int>, lo: int, cnt: int, direction: bool): vector<int>
+    if cnt <= 1 then arr
+    else
+        val k = cnt / 2
+        val arr1 = bitonic-sort(arr, lo, k, True)
+        val arr2 = bitonic-sort(arr1, lo + k, k, False)
+        bitonic-merge(arr2, lo, cnt, direction)
+
+fun main()
+    val data = vector([3, 7, 4, 8, 6, 2, 1, 5])
+    val sorted = bitonic-sort(data, 0, data.length, True)
+    println(sorted.list.show)
