@@ -1,0 +1,17 @@
+FUNCTION CombSort(n)
+    gap = n
+    sorted = 0
+    WHILE sorted = 0
+        gap = INT(gap / 1.3)
+        IF gap < 1 THEN gap = 1
+        IF gap = 1 THEN sorted = 1
+        FOR i = 0 TO n - gap - 1
+            IF arr(i) > arr(i + gap) THEN
+                tmp = arr(i)
+                arr(i) = arr(i + gap)
+                arr(i + gap) = tmp
+                sorted = 0
+            ENDIF
+        NEXT i
+    ENDWHILE
+ENDFUNCTION
