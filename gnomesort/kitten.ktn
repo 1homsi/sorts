@@ -1,0 +1,24 @@
+define gnomesort ((Int*) -> (Int*)):
+  var i 0;
+  while (dup len i <) do
+    if (i 0 =) then
+      i 1 + -> i
+    else
+      if (over i take over i 1 - take <) then
+        var temp;
+        i take -> temp;
+        i 1 - take -> (i take);
+        temp -> (i 1 - take);
+        i 1 - -> i;
+      else
+        i 1 + -> i;
+      end;
+    end;
+  done;
+;
+
+define main ((Int*) -> ...):
+  say (gnomesort ([5 2 8 1 9 3]));
+;
+
+[5 2 8 1 9 3] main
