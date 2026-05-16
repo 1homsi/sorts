@@ -1,0 +1,22 @@
+import java.util.Arrays;
+
+public class CountingSort {
+    static int[] countingSort(int[] arr) {
+        if (arr.length == 0) return arr;
+        int max = arr[0], min = arr[0];
+        for (int v : arr) { if (v > max) max = v; if (v < min) min = v; }
+        int range = max - min + 1;
+        int[] count = new int[range];
+        for (int v : arr) count[v - min]++;
+        for (int i = 1; i < range; i++) count[i] += count[i - 1];
+        int[] output = new int[arr.length];
+        for (int i = arr.length - 1; i >= 0; i--) {
+            output[--count[arr[i] - min]] = arr[i];
+        }
+        return output;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(countingSort(new int[]{4, 2, 2, 8, 3, 3, 1})));
+    }
+}
