@@ -1,0 +1,46 @@
+     H DFTACTGRP(*NO)
+     D Arr             S              5I 0 DIM(8)
+     D I               S              5I 0
+     D Lo              S              5I 0
+     D Cnt             S              5I 0
+     D Dir             S               N
+     D K               S              5I 0
+     D Tmp             S              5I 0
+
+     C                   EVAL      Arr(1) = 3
+     C                   EVAL      Arr(2) = 7
+     C                   EVAL      Arr(3) = 4
+     C                   EVAL      Arr(4) = 8
+     C                   EVAL      Arr(5) = 6
+     C                   EVAL      Arr(6) = 2
+     C                   EVAL      Arr(7) = 1
+     C                   EVAL      Arr(8) = 5
+     C                   EVAL      Lo = 1
+     C                   EVAL      Cnt = 8
+     C                   EVAL      Dir = *ON
+     C                   EXSR      BSort
+     C     I             DO        8
+     C                   DSPLY     Arr(I)
+     C                   ENDDO
+     C                   RETURN
+
+     C     BSort         BEGSR
+     C                   IF        Cnt > 1
+     C                   EVAL      K = Cnt / 2
+     C                   EXSR      BSort
+     C                   EVAL      Lo = Lo + K
+     C                   EVAL      Dir = *OFF
+     C                   EXSR      BSort
+     C                   EVAL      Lo = Lo - K
+     C                   EVAL      Dir = *ON
+     C                   EXSR      BMerge
+     C                   ENDIF
+     C                   ENDSR
+
+     C     BMerge        BEGSR
+     C                   IF        Cnt > 1
+     C                   EVAL      K = Cnt / 2
+     C     I             DO        K    I         5I 0
+     C                   ENDDO
+     C                   ENDIF
+     C                   ENDSR
