@@ -1,0 +1,22 @@
+cyclesort(Arr, Sorted) :-
+  length(Arr, N),
+  cyclesort_loop(Arr, 0, N, Sorted).
+
+cyclesort_loop(Arr, Pos, N, Arr) :- Pos >= N, !.
+cyclesort_loop(Arr, Pos, N, Result) :-
+  Pos < N,
+  arg(Pos, Arr, Item),
+  count_less(Arr, Pos, Item, Cycles),
+  (Cycles = 0 ->
+    Pos1 is Pos + 1,
+    cyclesort_loop(Arr, Pos1, N, Result)
+  ;
+    process_cycle(Arr, Pos, Item, Cycles, Arr1),
+    Pos1 is Pos + 1,
+    cyclesort_loop(Arr1, Pos1, N, Result)
+  ).
+
+count_less(Arr, Pos, Item, Count) :-
+  length(Arr, N),
+  findall(1, (between(0, N, I), I \= Pos, arg(I, Arr, Val), Val < Item), L),
+  length(L, Count).
