@@ -1,0 +1,23 @@
+func radixsort(arr) :
+  max := arr.max()
+  exp := 1
+  while max / exp > 0 :
+    arr := counting_sort_by_exp(arr, exp)
+    exp := exp * 10
+  return arr
+
+func counting_sort_by_exp(arr, exp) :
+  n := arr.len()
+  output := Array(n)
+  count := Array(10, 0)
+  for i in 0 ... n :
+    count[(arr[i] / exp) % 10] += 1
+  for i in 1 ... 10 :
+    count[i] += count[i - 1]
+  for i in n - 1 ... -1 ... 0 :
+    output[count[(arr[i] / exp) % 10] - 1] := arr[i]
+    count[(arr[i] / exp) % 10] -= 1
+  return output
+
+func main() :
+  print(radixsort([5, 2, 8, 1, 9, 3]))
