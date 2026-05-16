@@ -1,0 +1,23 @@
+CLASS BubbleSort
+
+    METHOD bubbleSort(arr : Array of Integer) : Array of Integer
+        n := arr size
+        swapped := true
+        WHILE swapped DO
+            swapped := false
+            i := 1
+            WHILE i < n DO
+                IF (arr at: i) > (arr at: i+1) THEN
+                    tmp := arr at: i
+                    arr at: i put: (arr at: i+1)
+                    arr at: i+1 put: tmp
+                    swapped := true
+                FI
+                i := i + 1
+            OD
+            n := n - 1
+        OD
+        RETURN arr
+    END
+
+END CLASS
