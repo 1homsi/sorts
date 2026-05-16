@@ -1,0 +1,20 @@
+cocktailsort arr::array = cocktailsort_impl (array arr) (len arr);
+
+cocktailsort_impl arr n = case (n>0) of
+  True = cocktailsort_pass 0 (n-1) True 0 arr n;
+  False = arr;
+end;
+
+cocktailsort_pass k end_idx swapped i arr n = case (swapped && i < n) of
+  True = case (k < end_idx) of
+    True = case ((arr!k) > (arr!(k+1))) of
+      True = cocktailsort_pass (k+1) end_idx True i (array_swap k (k+1) arr) n;
+      False = cocktailsort_pass (k+1) end_idx swapped i arr n;
+    end;
+    False = cocktailsort_pass (n-i-2) 0 False (i+1) arr n;
+  end;
+  False = arr;
+end;
+
+arr = {5, 2, 8, 1, 9, 3};
+puts (cocktailsort arr);
