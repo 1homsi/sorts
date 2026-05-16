@@ -1,26 +1,6 @@
-| arr isSorted shuffle bogosort |
-
-arr := #(3 1 4 1 5 9 2 6) asOrderedCollection.
-
-isSorted := [:a |
-    | sorted |
-    sorted := true.
-    1 to: a size - 1 do: [:i |
-        (a at: i) > (a at: i + 1) ifTrue: [sorted := false]].
-    sorted].
-
-shuffle := [:a |
-    | n j tmp |
-    n := a size.
-    n to: 2 by: -1 do: [:i |
-        j := (Random new nextInt: i) + 1.
-        tmp := a at: i.
-        a at: i put: (a at: j).
-        a at: j put: tmp].
-    a].
-
-bogosort := [:a |
-    [isSorted value: a] whileFalse: [shuffle value: a].
-    a].
-
-Transcript showCr: (bogosort value: arr) printString.
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
