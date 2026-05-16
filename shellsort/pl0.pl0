@@ -1,0 +1,25 @@
+VAR arr, n, gap, i, j, temp;
+PROCEDURE shellsort;
+  n := 6;
+  gap := 1;
+  WHILE gap <= n DO gap := gap * 3 + 1;
+  WHILE gap > 0 DO BEGIN
+    gap := gap / 3;
+    i := gap;
+    WHILE i <= n DO BEGIN
+      temp := arr[i];
+      j := i;
+      WHILE j > gap AND arr[j - gap] > temp DO BEGIN
+        arr[j] := arr[j - gap];
+        j := j - gap;
+      END;
+      arr[j] := temp;
+      i := i + 1;
+    END;
+  END;
+END;
+BEGIN
+  arr[1] := 5; arr[2] := 2; arr[3] := 8;
+  arr[4] := 1; arr[5] := 9; arr[6] := 3;
+  CALL shellsort;
+END.
