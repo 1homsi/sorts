@@ -1,0 +1,21 @@
+GNOMESORT = FUNCTION(ARR)
+  I = 0
+  WHILE I < LENGTH(ARR) DO
+    IF I = 0 THEN
+      I = I + 1
+    ELSE
+      IF ARR(I) < ARR(I - 1) THEN
+        TEMP = ARR(I)
+        ARR(I) = ARR(I - 1)
+        ARR(I - 1) = TEMP
+        I = I - 1
+      ELSE
+        I = I + 1
+      END
+    END
+  END
+  RETURN ARR
+END
+
+TEST = (5, 2, 8, 1, 9, 3)
+PRINT GNOMESORT(TEST)
