@@ -1,0 +1,10 @@
+process COCKTAIL_SORT =
+{ integer signal CLK, SORTED;
+  integer array(10) signal DATA_IN;
+  integer array(10) signal DATA_OUT;
+|
+  loop
+    DATA_OUT := DATA_IN
+    every CLK
+  end loop
+};
