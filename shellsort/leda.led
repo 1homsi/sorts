@@ -1,0 +1,24 @@
+MODULE SHELLSORT;
+TYPE ARRAY = ARRAY OF INTEGER;
+PROCEDURE ShellSort(VAR arr : ARRAY);
+VAR n, gap, i, j, temp : INTEGER;
+BEGIN
+  n := LEN(arr);
+  gap := 1;
+  WHILE gap <= n DO
+    gap := gap * 3 + 1;
+  END;
+  WHILE gap > 0 DO
+    gap := gap DIV 3;
+    FOR i := gap TO n - 1 DO
+      temp := arr[i];
+      j := i;
+      WHILE j >= gap AND arr[j - gap] > temp DO
+        arr[j] := arr[j - gap];
+        j := j - gap;
+      END;
+      arr[j] := temp;
+    END;
+  END;
+END ShellSort;
+END SHELLSORT.
