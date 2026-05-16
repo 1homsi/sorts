@@ -1,0 +1,15 @@
+vars arr = [5 2 8 1 9 3];
+vars n = length(arr);
+vars i, j, temp;
+
+for i from 1 to n-1 do
+    for j from 1 to n-i do
+        if arr(j) > arr(j+1) then
+            -> temp := arr(j);
+            -> arr(j) := arr(j+1);
+            -> arr(j+1) := temp;
+        endif
+    endfor
+endfor
+
+printf('Pancake Sort: %p\n', [arr]);
