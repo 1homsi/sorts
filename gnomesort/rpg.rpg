@@ -1,0 +1,19 @@
+     D GnomeSort       PR
+     D  arr                        10I 0 DIM(100)
+     D  n                          10I 0
+     P GnomeSort       B
+     D i               S           10I 0 INZ(1)
+     D tmp             S           10I 0
+      /FREE
+       dow i <= n;
+         if i = 1 or arr(i) >= arr(i-1);
+           i += 1;
+         else;
+           tmp = arr(i);
+           arr(i) = arr(i-1);
+           arr(i-1) = tmp;
+           i -= 1;
+         endif;
+       enddo;
+      /END-FREE
+     P GnomeSort       E
