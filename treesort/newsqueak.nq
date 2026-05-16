@@ -1,0 +1,29 @@
+(
+  Insert := {
+    |node val|
+    node == nil ifTrue: [^{value = val. left. right.}].
+    val < node.value ifTrue: [
+      node.left := self value: node.left value: val.
+    ] ifFalse: [
+      val > node.value ifTrue: [
+        node.right := self value: node.right value: val.
+      ].
+    ].
+    ^node.
+  }.
+
+  Inorder := {
+    |node|
+    node == nil ifFalse: [
+      self value: node.left.
+      node.value print.
+      self value: node.right.
+    ].
+  }.
+)
+
+| arr root |
+arr := #(5 2 8 1 9 3).
+root := nil.
+arr do: [:val | root := Insert value: root value: val].
+Inorder value: root.
