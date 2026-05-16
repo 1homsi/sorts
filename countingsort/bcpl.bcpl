@@ -1,0 +1,37 @@
+GET "libhdr"
+
+LET counting.sort(arr, n) BE {
+    LET min = arr!0, max = arr!0
+    LET count = VEC 256
+    LET output = VEC 100
+    LET i, idx = 0, 0
+
+    FOR i = 1 TO n-1 DO {
+        IF arr!i < min THEN min := arr!i
+        IF arr!i > max THEN max := arr!i
+    }
+
+    LET range = max - min + 1
+    FOR i = 0 TO range-1 DO count!i := 0
+    FOR i = 0 TO n-1 DO {
+        idx := arr!i - min
+        count!idx := count!idx + 1
+    }
+    FOR i = 1 TO range-1 DO count!i := count!i + count!(i-1)
+    FOR i = n-1 TO 0 BY -1 DO {
+        idx := arr!i - min
+        count!idx := count!idx - 1
+        output!(count!idx) := arr!i
+    }
+    FOR i = 0 TO n-1 DO arr!i := output!i
+}
+
+LET start() = VALOF {
+    LET data = VEC 6
+    data!0 := 4; data!1 := 2; data!2 := 2; data!3 := 8
+    data!4 := 3; data!5 := 3; data!6 := 1
+    counting.sort(data, 7)
+    FOR i = 0 TO 6 DO writef("%N ", data!i)
+    wrch('*N')
+    RESULTIS 0
+}
