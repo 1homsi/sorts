@@ -1,4 +1,4 @@
-function shellSort(arr)
+function shellsort(arr)
     local n = #arr
     local gap = math.floor(n / 2)
     while gap > 0 do
@@ -15,8 +15,3 @@ function shellSort(arr)
     end
     return arr
 end
-
-local arr = {64, 34, 25, 12, 22, 11, 90}
-shellSort(arr)
-for _, v in ipairs(arr) do io.write(v .. " ") end
-print()
