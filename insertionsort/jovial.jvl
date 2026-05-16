@@ -1,0 +1,14 @@
+PROC INSERTION SORT(ARR(N), N INT);
+BEGIN
+    FOR I := 1 STEP 1 UNTIL N - 1;
+    BEGIN
+        KEY := ARR(I);
+        J := I - 1;
+        WHILE J >= 0 AND ARR(J) > KEY;
+        BEGIN
+            ARR(J+1) := ARR(J);
+            J := J - 1;
+        END;
+        ARR(J+1) := KEY;
+    END;
+END;
