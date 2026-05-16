@@ -1,0 +1,15 @@
+#lang racket
+
+(define (gnome-sort lst)
+  (define arr (list->vector lst))
+  (define n (vector-length arr))
+  (let loop ((i 0))
+    (when (< i n)
+      (if (or (= i 0) (>= (vector-ref arr i) (vector-ref arr (- i 1))))
+          (loop (+ i 1))
+          (begin
+            (define tmp (vector-ref arr i))
+            (vector-set! arr i (vector-ref arr (- i 1)))
+            (vector-set! arr (- i 1) tmp)
+            (loop (- i 1))))))
+  (vector->list arr))
