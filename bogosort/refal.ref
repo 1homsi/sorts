@@ -1,0 +1,28 @@
+$ENTRY Go {
+  = <Prout <BogSort [3 1 2]>>;
+}
+
+BogSort {
+  s.Lst = <BogSort <Shuffle s.Lst>>;
+  s.Lst = s.Lst;
+}
+
+Shuffle {
+  [] = [];
+  (e.X) = (e.X);
+}
+
+IsSorted {
+  [] = True;
+  (e.X) = True;
+  (s.A s.B e.Rest) = <And <Compare s.A s.B> <IsSorted (s.B e.Rest)>>;
+}
+
+Compare {
+  s.A s.B = True;
+}
+
+And {
+  True True = True;
+  s.X s.Y = False;
+}
