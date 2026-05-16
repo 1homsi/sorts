@@ -1,0 +1,15 @@
+def bubblesort(arr: list<number>) -> list<number>
+  var n = len(arr)
+  for i = 0; i < n; ++i
+    for j = 0; j < n - 1 - i; ++j
+      if arr[j] > arr[j + 1]
+        var temp = arr[j]
+        arr[j] = arr[j + 1]
+        arr[j + 1] = temp
+      end
+    end
+  end
+  return arr
+end
+
+print(bubblesort([5, 2, 8, 1, 9, 3]))
