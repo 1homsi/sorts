@@ -1,0 +1,30 @@
+(define $heapsort
+  (lambda [$arr]
+    (let {[$n (length arr)]}
+      (let {[$sorted
+        (foldl (lambda [$h $i] (siftdown h i n)) arr (range 0 (/ n 2) 1))]}
+        (foldl (lambda [$h $i]
+          (let {[$temp (ref h 0)]}
+            (do
+              (set-ref h 0 (ref h i))
+              (set-ref h i temp)
+              (siftdown h 0 (- i 1))))) sorted (range (- n 1) 0 -1))))))
+
+(define $siftdown
+  (lambda [$arr $idx $n]
+    (let {[$largest idx]
+          [$left (+ (* 2 idx) 1)]
+          [$right (+ (* 2 idx) 2)]}
+      (do
+        (if (and (< left n) (> (ref arr left) (ref arr largest)))
+          (set! largest left))
+        (if (and (< right n) (> (ref arr right) (ref arr largest)))
+          (set! largest right))
+        (if (ne? largest idx)
+          (let {[$temp (ref arr idx)]}
+            (do
+              (set-ref arr idx (ref arr largest))
+              (set-ref arr largest temp)
+              (siftdown arr largest n))))))))
+
+(print (heapsort [5 2 8 1 9 3]))
