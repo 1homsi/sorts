@@ -1,0 +1,13 @@
+module InsertionSort where
+
+import Clash.Prelude
+
+insertSorted :: KnownNat n => Int -> Vec n Int -> Vec n Int
+insertSorted x Nil = x :> Nil
+insertSorted x (y :> ys)
+    | x <= y    = x :> y :> ys
+    | otherwise = y :> insertSorted x ys
+
+insertionSort :: KnownNat n => Vec n Int -> Vec n Int
+insertionSort Nil = Nil
+insertionSort (x :> xs) = insertSorted x (insertionSort xs)
