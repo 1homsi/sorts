@@ -1,0 +1,10 @@
+shellsort arr = shell arr 1 where
+  n = #arr;
+  shell a gap | gap > 0 = shell (gapsort a gap 0) (gap / 3)
+             | otherwise = a;
+  gapsort a gap i | i < n = gapsort (insert a gap i) gap (i + 1)
+                  | otherwise = a;
+  insert a gap i | i < gap || a!(i - gap) <= a!i = a
+                 | otherwise = insert (set_element a gap i) gap (i - gap);
+end;
+println (shellsort {5, 2, 8, 1, 9, 3});
