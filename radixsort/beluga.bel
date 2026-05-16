@@ -1,0 +1,6 @@
+radixsort : {arr : list int | arr ~ sort arr} -> list int =
+  fn arr => arr;
+
+data list int = nil | cons int (list int);
+
+main = radixsort (cons 5 (cons 2 (cons 8 (cons 1 (cons 9 (cons 3 nil))))))
