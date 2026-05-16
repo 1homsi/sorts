@@ -1,0 +1,29 @@
+module Main exposing (..)
+
+import Array exposing (Array)
+import Debug
+
+bubblePass : Int -> Array Int -> ( Array Int, Bool )
+bubblePass n arr =
+    List.foldl
+        (\i ( a, sw ) ->
+            case ( Array.get i a, Array.get (i + 1) a ) of
+                ( Just x, Just y ) ->
+                    if x > y then
+                        ( a |> Array.set i y |> Array.set (i + 1) x, True )
+                    else
+                        ( a, sw )
+                _ -> ( a, sw )
+        )
+        ( arr, False )
+        (List.range 0 (n - 2))
+
+bubbleSort : Int -> Array Int -> Array Int
+bubbleSort fuel arr =
+    if fuel <= 0 then arr
+    else
+        let ( sorted, swapped ) = bubblePass (Array.length arr) arr
+        in if swapped then bubbleSort (fuel - 1) sorted else sorted
+
+main =
+    Debug.log "sorted" (bubbleSort 50 (Array.fromList [ 64, 34, 25, 12, 22, 11, 90 ]))
