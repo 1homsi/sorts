@@ -1,0 +1,25 @@
+var arr[6];
+
+procedure stoogesort(i, j);
+  var temp, t;
+  if arr[j] < arr[i] then
+  begin
+    temp := arr[j];
+    arr[j] := arr[i];
+    arr[i] := temp;
+  end;
+  if j - i > 1 then
+  begin
+    t := (j - i + 1) / 3;
+    call stoogesort(i, j - t);
+    call stoogesort(i + t, j);
+    call stoogesort(i, j - t);
+  end;
+end;
+
+begin
+  arr[0] := 5; arr[1] := 2; arr[2] := 8;
+  arr[3] := 1; arr[4] := 9; arr[5] := 3;
+  call stoogesort(0, 5);
+  ! arr[0].
+end.
