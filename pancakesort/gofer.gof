@@ -1,0 +1,5 @@
+pancake [] = []
+pancake xs = m : pancake (remove1 m xs)
+    where m = minimum xs
+
+main = print (pancake [5,2,8,1,9,3])
