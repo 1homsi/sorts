@@ -1,0 +1,32 @@
+Public Sub CycleSort(arr As Integer[])
+    Dim n As Integer = arr.Count
+    Dim writes As Integer = 0
+    Dim cycleStart, item, pos, i, tmp As Integer
+
+    For cycleStart = 0 To n - 2
+        item = arr[cycleStart]
+        pos = cycleStart
+        For i = cycleStart + 1 To n - 1
+            If arr[i] < item Then pos += 1
+        Next
+        If pos = cycleStart Then Continue
+        While item = arr[pos] : pos += 1 : Wend
+        tmp = arr[pos] : arr[pos] = item : item = tmp
+        writes += 1
+        While pos <> cycleStart
+            pos = cycleStart
+            For i = cycleStart + 1 To n - 1
+                If arr[i] < item Then pos += 1
+            Next
+            While item = arr[pos] : pos += 1 : Wend
+            tmp = arr[pos] : arr[pos] = item : item = tmp
+            writes += 1
+        Wend
+    Next
+End
+
+Public Sub Main()
+    Dim arr As New Integer[]{5, 4, 3, 2, 1}
+    CycleSort(arr)
+    Print arr.Join(" ")
+End
