@@ -1,0 +1,42 @@
+define merge = (arr, left, mid, right) {
+  auto i = left;
+  auto j = mid + 1;
+  auto result = {};
+  
+  while (i <= mid && j <= right) {
+    if (arr[i] <= arr[j]) {
+      result[dim(result)] = arr[i];
+      i++;
+    } else {
+      result[dim(result)] = arr[j];
+      j++;
+    }
+  }
+  
+  while (i <= mid) {
+    result[dim(result)] = arr[i];
+    i++;
+  }
+  
+  while (j <= right) {
+    result[dim(result)] = arr[j];
+    j++;
+  }
+  
+  for (auto k = 0; k < dim(result); k++) {
+    arr[left + k] = result[k];
+  }
+};
+
+define mergesort = (arr, left, right) {
+  if (left < right) {
+    auto mid = (left + right) / 2;
+    mergesort(arr, left, mid);
+    mergesort(arr, mid + 1, right);
+    merge(arr, left, mid, right);
+  }
+};
+
+auto arr = {5, 2, 8, 1, 9, 3};
+mergesort(arr, 0, 5);
+print(arr, "\n");
