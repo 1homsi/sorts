@@ -1,0 +1,40 @@
+CycleSort = object(arr)
+  var n = arr$count()
+  var pos = 0
+  while pos < n:
+    var item = arr$access(pos)
+    var cycles = 0
+    for i = 0 to n-1:
+      if i != pos and arr$access(i) < item:
+        cycles := cycles + 1
+      endif
+    endfor
+    if cycles != 0:
+      while arr$access(pos) = item:
+        pos := pos + 1
+      endwhile
+      var temp = arr$access(pos)
+      arr$set(pos, item)
+      item := temp
+      while cycles > 0:
+        cycles := 0
+        for i = 0 to n-1:
+          if i != pos and arr$access(i) < item:
+            cycles := cycles + 1
+          endif
+        endfor
+        while arr$access(pos) = item:
+          pos := pos + 1
+        endwhile
+        temp := arr$access(pos)
+        arr$set(pos, item)
+        item := temp
+        cycles := cycles - 1
+      endwhile
+    endif
+    pos := pos + 1
+  endwhile
+  return arr
+end
+
+Print(CycleSort([5, 2, 8, 1, 9, 3]))
