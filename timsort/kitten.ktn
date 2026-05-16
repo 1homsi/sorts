@@ -1,0 +1,52 @@
+define timsort(minSize -> sorted) {
+  mergesort(minSize, -> sorted);
+}
+
+define mergesort(minSize -> sorted) {
+  { dup count 1 <= } { } {
+    { dup count minSize <= } { insertionsort -> sorted } {
+      dup count 2 / -> mid
+      dup 0 mid take
+      swap mid swap - drop take
+      mergesort(minSize)
+      swap mergesort(minSize)
+      merge -> sorted
+    } choose
+  } choose
+}
+
+define insertionsort(-> sorted) {
+  dup -> sorted
+  1 over count { -> i
+    i dup 1 - { -> j
+      over j get -> key
+      j { -> pos
+        pos 1 - over pos get over over swap > {
+          over pos get over pos 1 + set -> pos
+          pos 1 - -> pos
+          pos -1 ==
+        } { true } choose
+      }
+      key over pos 1 + set -> sorted
+    }
+  } for
+}
+
+define merge(-> merged) {
+  -> right
+  -> left
+  { } -> merged
+  0 -> i
+  0 -> j
+  { i left count < j right count < and } {
+    left i get right j get <= {
+      merged left i get append -> merged
+      i 1 + -> i
+    } {
+      merged right j get append -> merged
+      j 1 + -> j
+    } choose
+  } while
+}
+
+[5 2 8 1 9 3] timsort(32) dump
