@@ -1,0 +1,20 @@
+import taichi as ti
+
+ti.init(arch=ti.cpu)
+
+@ti.kernel
+def gnome_sort(arr: ti.template(), n: int):
+    i = 0
+    while i < n:
+        if i == 0 or arr[i] >= arr[i-1]:
+            i += 1
+        else:
+            tmp = arr[i]
+            arr[i] = arr[i-1]
+            arr[i-1] = tmp
+            i -= 1
+
+arr = ti.field(dtype=ti.i32, shape=10)
+arr.from_numpy([5, 3, 8, 1, 9, 2, 7, 4, 6, 0])
+gnome_sort(arr, 10)
+print(arr.to_numpy())
