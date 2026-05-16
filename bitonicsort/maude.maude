@@ -1,0 +1,30 @@
+fmod BITONICSORT is
+  protecting INT .
+  protecting LIST{Int} .
+
+  op bitonicsort : List Int Int Int -> List .
+  op bitonicmerge : List Int Int Int -> List .
+
+  var L : List .
+  var Lo Cnt K Dir I : Int .
+
+  eq bitonicsort(L, Lo, Cnt, Dir) =
+    if Cnt > 1
+    then
+      let K = Cnt / 2 in
+      bitonicmerge(
+        bitonicsort(bitonicsort(L, Lo, K, 1), Lo + K, K, 0),
+        Lo, Cnt, Dir)
+    else L
+    fi .
+
+  eq bitonicmerge(L, Lo, Cnt, Dir) =
+    if Cnt > 1
+    then
+      let K = Cnt / 2 in
+      bitonicmerge(
+        bitonicmerge(L, Lo, K, Dir),
+        Lo + K, K, Dir)
+    else L
+    fi .
+endfm
