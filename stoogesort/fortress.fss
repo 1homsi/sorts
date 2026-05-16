@@ -1,0 +1,21 @@
+component stoogesort_test
+  export Executable
+  
+  stoogesort(a: ZZ32[], i: ZZ32, j: ZZ32): () = do
+    if a[j] < a[i] then
+      (a[j], a[i]) := (a[i], a[j])
+    end
+    if j - i > 1 then
+      t = (j - i + 1) DIV 3
+      stoogesort(a, i, j - t)
+      stoogesort(a, i + t, j)
+      stoogesort(a, i, j - t)
+    end
+  end
+  
+  run(): () = do
+    a = [5, 2, 8, 1, 9, 3]
+    stoogesort(a, 0, 5)
+    println(a)
+  end
+end
