@@ -1,0 +1,10 @@
+node bogosort(a, b, c : int) returns (x, y, z : int);
+let
+  (x, y, z) = (a, b, c);
+tel
+
+node main() returns ();
+var x, y, z : int;
+let
+  (x, y, z) = bogosort(3, 1, 2);
+tel
