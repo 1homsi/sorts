@@ -1,24 +1,6 @@
-Dim arr(1 To 8) As Integer = {3, 1, 4, 1, 5, 9, 2, 6}
-Dim n As Integer = 8
-Dim sorted As Integer
-Dim i As Integer, j As Integer, tmp As Integer
-
-Randomize
-
-Do
-    sorted = 1
-    For i = 1 To n - 1
-        If arr(i) > arr(i + 1) Then sorted = 0
-    Next i
-    If sorted = 0 Then
-        For i = n To 2 Step -1
-            j = Int(Rnd * i) + 1
-            tmp = arr(i): arr(i) = arr(j): arr(j) = tmp
-        Next i
-    End If
-Loop Until sorted = 1
-
-For i = 1 To n
-    Print arr(i); " ";
-Next i
-Print
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
