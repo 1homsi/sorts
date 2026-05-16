@@ -1,0 +1,3 @@
+ARRAY A 5 2 8 1 9 3
+SORT A
+PRINT A
