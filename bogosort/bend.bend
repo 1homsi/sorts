@@ -1,1 +1,6 @@
-print("Bogosort implementation for bend.bend")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
