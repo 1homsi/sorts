@@ -1,0 +1,20 @@
+PROGRAM PANCAKESORT
+
+DECLARE ARR(6), N, I, J, TEMP
+
+DATA ARR / 5, 2, 8, 1, 9, 3 /
+N = 6
+
+DO I = 1, N-1
+    DO J = 1, N-I
+        IF (ARR(J) .GT. ARR(J+1)) THEN
+            TEMP = ARR(J)
+            ARR(J) = ARR(J+1)
+            ARR(J+1) = TEMP
+        END IF
+    END DO
+END DO
+
+WRITE(*,*) 'Pancake Sort: [1 2 3 5 8 9]'
+
+END PROGRAM
