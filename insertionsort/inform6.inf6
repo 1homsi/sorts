@@ -1,0 +1,19 @@
+[ InsertionSort arr n
+    i j key tmp;
+    for (i=1: i<n: i++) {
+        key = arr-->i;
+        j = i - 1;
+        while (j >= 0 && arr-->j > key) {
+            arr-->(j+1) = arr-->j;
+            j--;
+        }
+        arr-->(j+1) = key;
+    }
+];
+
+Array data --> 5 3 1 4 2;
+
+[ Initialise;
+    InsertionSort(data, 5);
+    print data-->0, ", ", data-->1, ", ", data-->2, ", ", data-->3, ", ", data-->4, "^";
+];
