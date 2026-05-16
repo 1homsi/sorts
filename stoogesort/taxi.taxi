@@ -1,0 +1,16 @@
+Stoogesort is a place in Algorithms.
+
+Go to Stoogesort.
+Go to Comparison.
+  If the value is less, go back.
+Go to Recursion.
+
+Comparison is a place.
+  Pick up passenger.
+  Go to Sorting.
+  Drop off passenger.
+
+Recursion is a place.
+
+Sorting is a place.
+  Go back.
