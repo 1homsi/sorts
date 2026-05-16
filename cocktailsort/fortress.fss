@@ -1,0 +1,38 @@
+component cocktailsort
+  import Builtins
+  
+  test cocktailsort() = do
+    arr = array[Int, Nat](5, 2, 8, 1, 9, 3)
+    n = |arr|
+    i = 0
+    while i < n do
+      swapped = false
+      for k <- 0 # (n - i - 2) do
+        if arr[k] > arr[k + 1] then
+          temp = arr[k]
+          arr[k] := arr[k + 1]
+          arr[k + 1] := temp
+          swapped := true
+        end
+      end
+      if not swapped then
+        exit
+      end
+      i := i + 1
+      swapped := false
+      for k <- (n - i - 2) # 0 do
+        if arr[k] > arr[k + 1] then
+          temp = arr[k]
+          arr[k] := arr[k + 1]
+          arr[k + 1] := temp
+          swapped := true
+        end
+      end
+      if not swapped then
+        exit
+      end
+      i := i + 1
+    end
+    println(arr)
+  end
+end
