@@ -1,0 +1,16 @@
+module Bubble where
+import Prelude
+
+bubblesort :: [Int] -> [Int]
+bubblesort [] = []
+bubblesort [x] = [x]
+bubblesort xs = bubblesort (bubble xs)
+
+bubble :: [Int] -> [Int]
+bubble [] = []
+bubble [x] = [x]
+bubble (x:y:xs) | x > y = y : bubble (x:xs)
+                | otherwise = x : bubble (y:xs)
+
+main :: IO ()
+main = print (bubblesort [5, 2, 8, 1, 9, 3])
