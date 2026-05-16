@@ -1,0 +1,11 @@
+
+flowchart mergesort (left, right) returns void
+  decision
+    left < right
+    yes -> calculate mid = (left + right) / 2
+           call mergesort(left, mid)
+           call mergesort(mid + 1, right)
+           call merge(left, mid, right)
+           exit
+    no -> exit
+end
