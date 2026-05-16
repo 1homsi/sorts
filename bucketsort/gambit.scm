@@ -1,0 +1,11 @@
+(define (bucket-sort arr max-val)
+  (if (= max-val 0)
+      arr
+      (let ((buckets (make-vector max-val '())))
+        (for-each (lambda (num)
+                    (if (and (>= num 0) (< num max-val))
+                        (vector-set! buckets num 
+                                     (cons num (vector-ref buckets num)))))
+                  arr)
+        (apply append (vector->list buckets)))))
+(bucket-sort '(5 2 8 1 9 3) 10)
