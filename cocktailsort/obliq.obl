@@ -1,0 +1,18 @@
+let cocktailsort = fun (arr) =>
+  let n = ar_size(arr) in
+  let i = create_mutable_cell(0) in
+  let swapped = create_mutable_cell(true) in
+  loop while (i.get() < n) do
+    swapped.set(false);
+    for k = 0 to n - i.get() - 2 do
+      if ar_get(arr, k) > ar_get(arr, k + 1) then
+        let temp = ar_get(arr, k) in
+        ar_put(arr, k, ar_get(arr, k + 1));
+        ar_put(arr, k + 1, temp);
+        swapped.set(true)
+      end
+    end;
+    if not(swapped.get()) then exit loop end;
+    i.set(i.get() + 1)
+  end;
+  arr
