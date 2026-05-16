@@ -1,1 +1,1 @@
-print("Bogosort implementation for pocketbase.pocketbase")
+bogosort = true
