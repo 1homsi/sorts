@@ -1,0 +1,17 @@
+object BubbleSort
+  bubble(arr: ZZ32[]): ZZ32[] = do
+    n = |arr|
+    for i <- 0:n do
+      for j <- 0:(n-1-i) do
+        if arr[j] > arr[j+1] then
+          temp = arr[j]
+          arr[j] := arr[j+1]
+          arr[j+1] := temp
+        end
+      end
+    end
+    arr
+  end
+end
+
+test() = do println(BubbleSort.bubble([5, 2, 8, 1, 9, 3])) end
