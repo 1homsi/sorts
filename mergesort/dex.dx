@@ -1,0 +1,34 @@
+def merge(arr, left, mid, right) -> Void =
+  i = left
+  j = mid + 1
+  result = []
+  
+  while i <= mid && j <= right:
+    if arr[i] <= arr[j]:
+      result.append(arr[i])
+      i = i + 1
+    else:
+      result.append(arr[j])
+      j = j + 1
+  
+  while i <= mid:
+    result.append(arr[i])
+    i = i + 1
+  
+  while j <= right:
+    result.append(arr[j])
+    j = j + 1
+  
+  for k in range(len(result)):
+    arr[left + k] = result[k]
+
+def mergesort(arr, left, right) -> Void =
+  if left < right:
+    mid = (left + right) // 2
+    mergesort(arr, left, mid)
+    mergesort(arr, mid + 1, right)
+    merge(arr, left, mid, right)
+
+arr = [5, 2, 8, 1, 9, 3]
+mergesort(arr, 0, 5)
+print(arr)
