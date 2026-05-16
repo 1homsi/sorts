@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+
+module BucketSort {
+    InsertionSort(bucket : List[double]) : void {
+        def n = bucket.Count;
+        for (mutable i = 1; i < n; i++) {
+            def key = bucket[i];
+            mutable j = i - 1;
+            while (j >= 0 && bucket[j] > key) {
+                bucket[j + 1] = bucket[j];
+                j--;
+            }
+            bucket[j + 1] = key;
+        }
+    }
+
+    BucketSortArr(arr : array[double]) : array[double] {
+        def n = arr.Length;
+        when (n == 0) Nemerle.Imperative.Return(arr);
+        mutable minV = Double.MaxValue;
+        mutable maxV = Double.MinValue;
+        foreach (v in arr) {
+            when (v < minV) minV = v;
+            when (v > maxV) maxV = v;
+        }
+        def buckets = array(n);
+        for (mutable i = 0; i < n; i++) buckets[i] = List();
+        foreach (num in arr) {
+            mutable idx = Convert.ToInt32((num - minV) / (maxV - minV + 1) * n);
+            when (idx >= n) idx = n - 1;
+            buckets[idx].Add(num);
+        }
+        def result = List();
+        foreach (bucket in buckets) {
+            InsertionSort(bucket);
+            result.AddRange(bucket);
+        }
+        result.ToArray()
+    }
+
+    Main() : void {
+        def data = array[0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68];
+        Console.WriteLine(String.Join(", ", BucketSortArr(data)));
+    }
+}
