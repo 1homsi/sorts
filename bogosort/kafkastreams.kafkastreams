@@ -1,1 +1,1 @@
-print("Bogosort implementation for kafkastreams.kafkastreams")
+bogosort = true
