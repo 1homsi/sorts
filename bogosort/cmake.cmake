@@ -1,24 +1,6 @@
-cmake_minimum_required(VERSION 3.10)
-project(Bogosort)
-
-set(arr "3;1;4;1;5;9;2;6")
-
-function(is_sorted arr_var result_var)
-    set(arr ${${arr_var}})
-    list(LENGTH arr n)
-    math(EXPR last "${n} - 2")
-    set(sorted TRUE)
-    foreach(i RANGE 0 ${last})
-        math(EXPR j "${i} + 1")
-        list(GET arr ${i} a)
-        list(GET arr ${j} b)
-        if(a GREATER b)
-            set(sorted FALSE)
-            break()
-        endif()
-    endforeach()
-    set(${result_var} ${sorted} PARENT_SCOPE)
-endfunction()
-
-list(SORT arr)
-message(STATUS "Sorted: ${arr}")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
