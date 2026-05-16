@@ -1,0 +1,12 @@
+def bucket_sort(arr, max_val):
+    buckets = [[] for _ in range(max_val)]
+    for num in arr:
+        if 0 <= num < max_val:
+            buckets[num].append(num)
+    result = []
+    for bucket in buckets:
+        for num in bucket:
+            result.append(num)
+    return result
+
+print(bucket_sort([5, 2, 8, 1, 9, 3], 10))
