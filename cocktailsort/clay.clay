@@ -1,0 +1,25 @@
+import printer.*;
+
+cocktailsort(arr : Vector[Int]) {
+    var n = size(arr);
+    var i = 0;
+    while (i < n) {
+        var swapped = false;
+        for (k in 0..n - i - 2) {
+            if (arr[k] > arr[k + 1]) {
+                var temp = arr[k];
+                arr[k] = arr[k + 1];
+                arr[k + 1] = temp;
+                swapped = true;
+            }
+        }
+        if (!swapped) break;
+        i = i + 1;
+    }
+}
+
+main() = {
+    var arr = Vector(5, 2, 8, 1, 9, 3);
+    cocktailsort(arr);
+    printSequence(arr);
+}
