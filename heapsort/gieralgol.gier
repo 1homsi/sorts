@@ -1,0 +1,27 @@
+begin
+  integer array arr[0:5];
+  integer n, i, tmp;
+
+  procedure heapify(integer value pn, pi);
+  begin
+    integer largest, left, right, t;
+    largest := pi;
+    left := 2 × pi + 1;
+    right := 2 × pi + 2;
+    if left < pn ∧ arr[left] > arr[largest] then largest := left;
+    if right < pn ∧ arr[right] > arr[largest] then largest := right;
+    if largest ≠ pi then begin
+      t := arr[pi]; arr[pi] := arr[largest]; arr[largest] := t;
+      heapify(pn, largest)
+    end
+  end;
+
+  arr[0]:=12; arr[1]:=11; arr[2]:=13; arr[3]:=5; arr[4]:=6; arr[5]:=7;
+  n := 6;
+  for i := n÷2-1 step -1 until 0 do heapify(n, i);
+  for i := n-1 step -1 until 1 do begin
+    tmp := arr[0]; arr[0] := arr[i]; arr[i] := tmp;
+    heapify(i, 0)
+  end;
+  for i := 0 step 1 until n-1 do print(arr[i])
+end
