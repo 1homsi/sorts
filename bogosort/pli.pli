@@ -1,24 +1,6 @@
-BOGOSORT: PROC OPTIONS(MAIN);
-  DCL ARR(8) FIXED BIN(31) INIT(3,1,4,1,5,9,2,6);
-  DCL N FIXED BIN(31) INIT(8);
-  DCL (I, J, TMP) FIXED BIN(31);
-  DCL SORTED BIT(1);
-  DCL RAND BUILTIN;
-
-  DO WHILE('1'B);
-    SORTED = '1'B;
-    DO I = 1 TO N - 1;
-      IF ARR(I) > ARR(I+1) THEN SORTED = '0'B;
-    END;
-    IF SORTED THEN LEAVE;
-    DO I = N TO 2 BY -1;
-      J = FLOOR(RAND() * I) + 1;
-      TMP = ARR(I); ARR(I) = ARR(J); ARR(J) = TMP;
-    END;
-  END;
-
-  DO I = 1 TO N;
-    PUT EDIT(ARR(I))(F(4));
-  END;
-  PUT SKIP;
-END BOGOSORT;
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
