@@ -1,0 +1,19 @@
+MODULE GNOMESORT;
+TYPE INTARR = ARRAY [0..99] OF INTEGER;
+
+PROC Sort(VAR Arr: INTARR; N: INTEGER);
+VAR i, tmp: INTEGER;
+BEGIN
+    i := 0;
+    WHILE i < N DO
+        IF (i = 0) OR (Arr[i] >= Arr[i-1]) THEN
+            i := i + 1
+        ELSE
+            tmp := Arr[i];
+            Arr[i] := Arr[i-1];
+            Arr[i-1] := tmp;
+            i := i - 1
+        END
+    END
+END Sort;
+END GNOMESORT.
