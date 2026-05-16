@@ -1,0 +1,21 @@
+define gnomesort(arr) -> result;
+  lvars i, len, temp;
+  0 -> i;
+  length(arr) -> len;
+  while i < len do
+    if i == 0 then
+      i + 1 -> i;
+    elseif arr(i) < arr(i-1) then
+      arr(i) -> temp;
+      arr(i-1) -> arr(i);
+      temp -> arr(i-1);
+      i - 1 -> i;
+    else
+      i + 1 -> i;
+    endif;
+  endwhile;
+  arr -> result;
+enddefine;
+
+lvars test = {5 2 8 1 9 3};
+gnomesort(test) =>
