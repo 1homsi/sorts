@@ -1,0 +1,16 @@
+function bubble_sort(arr : array int) : array int {
+  var n = arr.length;
+  for var i = 0; i < n; i = i + 1 {
+    for var j = 0; j < n - 1 - i; j = j + 1 {
+      if arr[j] > arr[j + 1] {
+        var temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+      }
+    }
+  }
+  return arr;
+}
+
+var res = bubble_sort([5, 2, 8, 1, 9, 3]);
+print(res);
