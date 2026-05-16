@@ -1,0 +1,22 @@
+defmodule GnomeSort do
+  @spec gnome_sort(list(integer())) :: list(integer())
+  def gnome_sort(lst) do
+    arr = List.to_tuple(lst)
+    n = length(lst)
+    arr |> gnome_loop(0, n) |> Tuple.to_list()
+  end
+
+  @spec gnome_loop(tuple(), integer(), integer()) :: tuple()
+  defp gnome_loop(arr, i, n) when i >= n, do: arr
+  defp gnome_loop(arr, 0, n), do: gnome_loop(arr, 1, n)
+  defp gnome_loop(arr, i, n) do
+    ai  = elem(arr, i)
+    ai1 = elem(arr, i - 1)
+    if ai >= ai1 do
+      gnome_loop(arr, i + 1, n)
+    else
+      arr2 = arr |> put_elem(i, ai1) |> put_elem(i - 1, ai)
+      gnome_loop(arr2, i - 1, n)
+    end
+  end
+end
