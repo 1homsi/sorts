@@ -1,0 +1,13 @@
+bitonicsort : list -> int -> int -> int -> list -> type.
+bitonic_sort_nil : bitonicsort [] _ _ _ [].
+bitonic_sort_cons : bitonicsort L Lo Cnt Dir L'
+    <- {D1:bitonicsort L Lo K 1 L1}
+    <- {D2:bitonicsort L1 (Lo + K) K 0 L2}
+    <- {D3:bitonicmerge L2 Lo Cnt Dir L'}
+    <- Plus K K Cnt
+    bitonicsort L Lo Cnt Dir L'
+    :- Cnt > 1.
+
+bitonicmerge : list -> int -> int -> int -> list -> type.
+bitonicmerge_nil : bitonicmerge [] _ _ _ [].
+bitonicmerge_base : bitonicmerge L _ 1 _ L.
