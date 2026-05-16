@@ -1,0 +1,34 @@
+class CycleSort usingPlatform: platform = (
+    |
+        private Array = platform collections Array.
+    |
+)(
+    public cycleSort: arr = (
+        | n writes cycleStart item pos tmp |
+        n := arr size.
+        writes := 0.
+        cycleStart := 1.
+        [cycleStart <= n - 1] whileTrue: [
+            item := arr at: cycleStart.
+            pos := cycleStart.
+            (cycleStart + 1) to: n do: [:i |
+                (arr at: i) < item ifTrue: [pos := pos + 1]].
+            pos = cycleStart ifFalse: [
+                [(arr at: pos) = item] whileTrue: [pos := pos + 1].
+                tmp := arr at: pos.
+                arr at: pos put: item.
+                item := tmp.
+                writes := writes + 1.
+                [pos = cycleStart] whileFalse: [
+                    pos := cycleStart.
+                    (cycleStart + 1) to: n do: [:i |
+                        (arr at: i) < item ifTrue: [pos := pos + 1]].
+                    [(arr at: pos) = item] whileTrue: [pos := pos + 1].
+                    tmp := arr at: pos.
+                    arr at: pos put: item.
+                    item := tmp.
+                    writes := writes + 1]].
+            cycleStart := cycleStart + 1].
+        arr
+    )
+)
