@@ -1,0 +1,15 @@
+gnome_sort is operation arr {
+    n := tally arr;
+    i := 0;
+    while i < n do
+        if i = 0 or arr@i >= arr@(i-1) then
+            i := i + 1
+        else
+            tmp := arr@i;
+            arr@i := arr@(i-1);
+            arr@(i-1) := tmp;
+            i := i - 1
+        endif
+    endwhile;
+    arr
+}
