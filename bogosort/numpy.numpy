@@ -1,1 +1,1 @@
-print("Bogosort implementation for numpy.numpy")
+bogosort = true
