@@ -1,0 +1,36 @@
+let insert_sorted = fun x lst ->
+  case lst of
+  | [] -> [x]
+  | h :: t -> if x <= h then x :: h :: t else h :: insert_sorted x t
+  end
+
+let insertion_sort = fun lst ->
+  case lst of
+  | [] -> []
+  | h :: t -> insert_sorted h (insertion_sort t)
+  end
+
+let get_idx = fun num mn mx n ->
+  let raw = Float.to_int ((num -. mn) /. (mx -. mn +. 1.0) *. (Float.of_int n)) in
+  Int.min (n - 1) raw
+
+let bucket_sort = fun arr ->
+  let n = List.length arr in
+  case n of
+  | 0 -> arr
+  | _ ->
+    let mn = List.fold_left Float.min (List.hd arr) arr in
+    let mx = List.fold_left Float.max (List.hd arr) arr in
+    let buckets = List.init n (fun _ -> []) in
+    let filled = List.fold_left (fun bs x ->
+      let idx = get_idx x mn mx n in
+      List.mapi (fun i b -> if i = idx then b @ [x] else b) bs
+    ) buckets arr in
+    List.concat_map insertion_sort filled
+  end
+
+let _ =
+  let data = [0.78; 0.17; 0.39; 0.26; 0.72; 0.94; 0.21; 0.12; 0.23; 0.68] in
+  let sorted = bucket_sort data in
+  List.iter (fun x -> print_float x; print_char ' ') sorted;
+  print_newline ()
