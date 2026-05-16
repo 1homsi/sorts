@@ -1,0 +1,19 @@
+dec cycle_sort : list(num) -> list(num);
+--- cycle_sort [] <= [];
+--- cycle_sort (x :: xs) <=
+    let pos == length (filter (lambda y => y < x) xs)
+    in  insert_at x pos (cycle_sort xs);
+
+dec insert_at : num # num # list(num) -> list(num);
+--- insert_at x 0 ys <= x :: ys;
+--- insert_at x n (y :: ys) <= y :: insert_at x (n - 1) ys;
+
+dec filter : (num -> truval) # list(num) -> list(num);
+--- filter p [] <= [];
+--- filter p (x :: xs) <= if p x then x :: filter p xs else filter p xs;
+
+dec length : list(num) -> num;
+--- length [] <= 0;
+--- length (x :: xs) <= 1 + length xs;
+
+! cycle_sort [5, 4, 3, 2, 1];
