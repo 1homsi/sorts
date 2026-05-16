@@ -1,0 +1,12 @@
+Procedure INSERTION_SORT[A(), N]
+  Local I, J, KEY
+  For I = 2 To N
+    KEY = A(I)
+    J = I - 1
+    While J >= 1 And A(J) > KEY
+      A(J+1) = A(J)
+      J = J - 1
+    Wend
+    A(J+1) = KEY
+  Next I
+End Proc
