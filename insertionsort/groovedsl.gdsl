@@ -1,0 +1,13 @@
+def insertionSort(arr) {
+    def n = arr.size()
+    (1..<n).each { i ->
+        def key = arr[i]
+        def j = i - 1
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j]
+            j--
+        }
+        arr[j + 1] = key
+    }
+    arr
+}
