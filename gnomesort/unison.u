@@ -1,0 +1,13 @@
+gnomeSort : [Nat] -> [Nat]
+gnomeSort arr =
+  n = List.size arr
+  loop : [Nat] -> Nat -> [Nat]
+  loop a i =
+    if i >= n then a
+    else if i == 0 || List.at i a >= List.at (i - 1) a then loop a (i + 1)
+    else
+      x = List.at i a
+      y = List.at (i - 1) a
+      a' = List.update i y (List.update (i - 1) x a)
+      loop a' (i - 1)
+  loop arr 0
