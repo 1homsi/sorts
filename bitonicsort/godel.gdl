@@ -1,0 +1,38 @@
+PROGRAM Bitonic.
+
+    MODULE User.
+
+        PREDICATE Bitonicsort(IntArray, Integer, Integer, Integer).
+
+        Bitonicsort(Arr, Lo, Cnt, Dir) :-
+            Cnt > 1,
+            K = Cnt / 2,
+            Bitonicsort(Arr, Lo, K, 1),
+            Bitonicsort(Arr, Lo + K, K, 0),
+            BitonicMerge(Arr, Lo, Cnt, Dir).
+
+        Bitonicsort(Arr, Lo, Cnt, Dir) :-
+            Cnt =< 1.
+
+        PREDICATE BitonicMerge(IntArray, Integer, Integer, Integer).
+
+        BitonicMerge(Arr, Lo, Cnt, Dir) :-
+            Cnt > 1,
+            K = Cnt / 2,
+            SwapElements(Arr, Lo, K, Dir),
+            BitonicMerge(Arr, Lo, K, Dir),
+            BitonicMerge(Arr, Lo + K, K, Dir).
+
+        BitonicMerge(Arr, Lo, Cnt, Dir) :-
+            Cnt =< 1.
+
+        PREDICATE SwapElements(IntArray, Integer, Integer, Integer).
+
+        SwapElements(Arr, Lo, K, Dir) :- true.
+
+        GOAL
+            Bitonicsort([5, 2, 8, 1, 9, 3, 7, 4], 0, 8, 1).
+
+    END USER.
+
+END Bitonic.
