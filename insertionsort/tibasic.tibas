@@ -1,0 +1,11 @@
+:L1 consists of 5 2 8 1 9 3
+:For(I,2,dim(L1))
+:L1(I) -> X
+:I-1 -> J
+:While J>0 and L1(J)>X
+:L1(J+1) -> L1(J)
+:J-1 -> J
+:End
+:X -> L1(J+1)
+:End
+:Disp L1
