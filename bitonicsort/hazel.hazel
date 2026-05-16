@@ -1,0 +1,30 @@
+let compare_and_swap (arr: Array<Int>) (i: Int) (j: Int) (dir: Bool): Array<Int> =
+  let ai = Array.get arr i in
+  let aj = Array.get arr j in
+  if dir == (ai > aj) then
+    Array.set (Array.set arr i aj) j ai
+  else
+    arr
+
+let rec bitonic_merge (arr: Array<Int>) (lo: Int) (cnt: Int) (dir: Bool): Array<Int> =
+  if cnt <= 1 then arr
+  else
+    let k = cnt / 2 in
+    let arr1 = List.fold_left
+      (fun a i -> compare_and_swap a i (i + k) dir)
+      arr
+      (List.range lo (lo + k)) in
+    let arr2 = bitonic_merge arr1 lo k dir in
+    bitonic_merge arr2 (lo + k) k dir
+
+let rec bitonic_sort (arr: Array<Int>) (lo: Int) (cnt: Int) (dir: Bool): Array<Int> =
+  if cnt <= 1 then arr
+  else
+    let k = cnt / 2 in
+    let arr1 = bitonic_sort arr lo k true in
+    let arr2 = bitonic_sort arr1 (lo + k) k false in
+    bitonic_merge arr2 lo cnt dir
+
+let data = Array.of_list [3; 7; 4; 8; 6; 2; 1; 5] in
+let sorted = bitonic_sort data 0 (Array.length data) true in
+Array.print sorted
