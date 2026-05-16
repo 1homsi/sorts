@@ -1,0 +1,42 @@
+module Heapsort2 exposing (main)
+
+import Array exposing (Array, get, set, length)
+import Browser
+import Html exposing (text)
+
+heapify : Array Int -> Int -> Int -> Array Int
+heapify arr n i =
+    let
+        left = 2 * i + 1
+        right = 2 * i + 2
+        vi = Maybe.withDefault 0 (get i arr)
+        vl = Maybe.withDefault 0 (get left arr)
+        vr = Maybe.withDefault 0 (get right arr)
+        largest0 = if left < n && vl > vi then left else i
+        vl2 = Maybe.withDefault 0 (get largest0 arr)
+        largest = if right < n && vr > vl2 then right else largest0
+    in
+    if largest /= i then
+        let
+            arr2 = arr |> set i (Maybe.withDefault 0 (get largest arr)) |> set largest vi
+        in
+        heapify arr2 n largest
+    else arr
+
+heapsort : Array Int -> Array Int
+heapsort arr =
+    let
+        n = length arr
+        build a k = if k < 0 then a else build (heapify a n k) (k - 1)
+        heap = build arr (n // 2 - 1)
+        step a k =
+            if k <= 0 then a
+            else
+                let
+                    v0 = Maybe.withDefault 0 (get 0 a)
+                    vk = Maybe.withDefault 0 (get k a)
+                    a2 = a |> set 0 vk |> set k v0
+                in step (heapify a2 k 0) (k - 1)
+    in step heap (n - 1)
+
+main = text (Debug.toString (heapsort (Array.fromList [12, 11, 13, 5, 6, 7])))
