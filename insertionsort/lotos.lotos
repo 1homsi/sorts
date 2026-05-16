@@ -1,0 +1,14 @@
+specification InsertionSort [SORT, RESULT] : noexit
+
+behaviour
+    SORT; RESULT
+
+where
+
+process SORT [SORT, RESULT] : noexit :=
+    SORT;
+    RESULT;
+    stop
+endproc
+
+endspec
