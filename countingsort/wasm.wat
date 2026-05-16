@@ -1,0 +1,38 @@
+(module
+  (memory 1)
+  (func $counting_sort (param $arr_ptr i32) (param $n i32) (param $min i32) (param $max i32)
+    (local $range i32)
+    (local $count_ptr i32)
+    (local $out_ptr i32)
+    (local $i i32)
+    (local $v i32)
+    (local $idx i32)
+    (local $pos i32)
+    (local.set $range (i32.add (i32.sub (local.get $max) (local.get $min)) (i32.const 1)))
+    (local.set $count_ptr (i32.const 4096))
+    (local.set $out_ptr (i32.const 8192))
+    (local.set $i (i32.const 0))
+    (block $b
+      (loop $l
+        (br_if $b (i32.ge_s (local.get $i) (local.get $range)))
+        (i32.store (i32.add (local.get $count_ptr) (i32.mul (local.get $i) (i32.const 4))) (i32.const 0))
+        (local.set $i (i32.add (local.get $i) (i32.const 1)))
+        (br $l)
+      )
+    )
+    (local.set $i (i32.const 0))
+    (block $b2
+      (loop $l2
+        (br_if $b2 (i32.ge_s (local.get $i) (local.get $n)))
+        (local.set $v (i32.load (i32.add (local.get $arr_ptr) (i32.mul (local.get $i) (i32.const 4)))))
+        (local.set $idx (i32.sub (local.get $v) (local.get $min)))
+        (i32.store
+          (i32.add (local.get $count_ptr) (i32.mul (local.get $idx) (i32.const 4)))
+          (i32.add (i32.const 1) (i32.load (i32.add (local.get $count_ptr) (i32.mul (local.get $idx) (i32.const 4))))))
+        (local.set $i (i32.add (local.get $i) (i32.const 1)))
+        (br $l2)
+      )
+    )
+  )
+  (export "counting_sort" (func $counting_sort))
+)
