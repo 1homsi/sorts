@@ -1,0 +1,16 @@
+(let stoogesort (fun (a i j) (
+  (if (< (at a j) (at a i)) (do
+    (mut (at a j) (at a i))
+    (mut (at a i) (at a j))
+  ))
+  (if (> (- j i) 1) (do
+    (let t (/ (+ (- j i) 1) 3))
+    (stoogesort a i (- j t))
+    (stoogesort a (+ i t) j)
+    (stoogesort a i (- j t))
+  ))
+)))
+
+(let arr [5 2 8 1 9 3])
+(stoogesort arr 0 5)
+(print arr)
