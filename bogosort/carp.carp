@@ -1,25 +1,6 @@
-(defn is-sorted [arr]
-  (let-do [n (Array.length arr)
-           sorted true]
-    (for [i 0 (Int.- n 1)]
-      (when (Int.> @(Array.nth arr i) @(Array.nth arr (Int.+ i 1)))
-        (set! sorted false)))
-    sorted))
-
-(defn shuffle [arr]
-  (let-do [n (Array.length arr)]
-    (for [i (Int.- n 1) 0]
-      (let [j (Int.mod (Int.abs (Random.int)) (Int.+ i 1))
-            tmp @(Array.nth arr i)]
-        (Array.aset! arr i @(Array.nth arr j))
-        (Array.aset! arr j tmp)))
-    arr))
-
-(defn bogosort [arr]
-  (let-do [a (Array.copy arr)]
-    (while (not (is-sorted &a))
-      (ignore (shuffle &a)))
-    a))
-
-(def arr [3 1 4 1 5 9 2 6])
-(IO.println &(str (bogosort &arr)))
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
