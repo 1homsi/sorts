@@ -1,0 +1,16 @@
+(ns gnome-sort.core
+  (:require [clojure.core.logic :as l]))
+
+(defn gnome-sort [lst]
+  (let [arr (int-array lst)
+        n (count lst)]
+    (loop [i 0]
+      (when (< i n)
+        (if (or (= i 0) (>= (aget arr i) (aget arr (dec i))))
+          (recur (inc i))
+          (do
+            (let [tmp (aget arr i)]
+              (aset arr i (aget arr (dec i)))
+              (aset arr (dec i) tmp))
+            (recur (dec i))))))
+    (vec arr)))
