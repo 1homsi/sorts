@@ -1,35 +1,6 @@
-module body Bogosort is
-    function IsSorted(arr: Array[Int32, Static]): Bool is
-        let n: Index := Array.size(arr);
-        var i: Index := 0;
-        while i < (n - 1) do
-            if arr[i] > arr[i + 1] then
-                return false;
-            end if;
-            i := i + 1;
-        end while;
-        return true;
-    end;
-
-    function Shuffle(arr: Array[Int32, Static]): Array[Int32, Static] is
-        var a: Array[Int32, Static] := arr;
-        let n: Index := Array.size(a);
-        var i: Index := n - 1;
-        while i > 0 do
-            let j: Index := Random.next(i + 1);
-            let tmp: Int32 := a[i];
-            a[i] := a[j];
-            a[j] := tmp;
-            i := i - 1;
-        end while;
-        return a;
-    end;
-
-    function Bogosort(arr: Array[Int32, Static]): Array[Int32, Static] is
-        var a: Array[Int32, Static] := arr;
-        while not IsSorted(a) do
-            a := Shuffle(a);
-        end while;
-        return a;
-    end;
-end module body.
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
