@@ -1,0 +1,59 @@
+to cyclesort :array
+  let "n" length :array
+  let "pos" 0
+  while :pos < :n
+    [
+      let "item" item :pos + 1 :array
+      let "cycles" 0
+      let "i" 0
+      while :i < :n
+        [
+          if equal :i :pos
+            [let :i :i + 1 continue]
+          if greaterp (item :i + 1 :array) :item
+            [let :cycles :cycles + 1]
+          let :i :i + 1
+        ]
+      if equal :cycles 0
+        [let :pos :pos + 1 continue]
+      while equal (item :pos + 1 :array) :item
+        [let :pos :pos + 1]
+      let "temp" item :pos + 1 :array
+      setitem :pos + 1 :array :item
+      setitem :pos + 1 :array :temp
+      let :item :temp
+      let :cycles 0
+      let :i 0
+      while :i < :n
+        [
+          if equal :i :pos
+            [let :i :i + 1 continue]
+          if greaterp (item :i + 1 :array) :item
+            [let :cycles :cycles + 1]
+          let :i :i + 1
+        ]
+      while greaterp :cycles 0
+        [
+          while equal (item :pos + 1 :array) :item
+            [let :pos :pos + 1]
+          let "temp" item :pos + 1 :array
+          setitem :pos + 1 :array :item
+          setitem :pos + 1 :array :temp
+          let :item :temp
+          let :cycles :cycles - 1
+          let :i 0
+          while :i < :n
+            [
+              if equal :i :pos
+                [let :i :i + 1 continue]
+              if greaterp (item :i + 1 :array) :item
+                [let :cycles :cycles + 1]
+              let :i :i + 1
+            ]
+        ]
+      let :pos :pos + 1
+    ]
+  print :array
+end
+
+cyclesort [5 2 8 1 9 3]
