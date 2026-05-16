@@ -1,0 +1,10 @@
+procedure treesort;
+var x;
+call setup;
+end;
+
+procedure setup;
+begin
+  x := [5, 2, 8, 1, 9, 3];
+  write x;
+end;
