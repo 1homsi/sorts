@@ -1,0 +1,13 @@
+environ
+
+begin
+  reserve i,j,n,temp,largest,left,right for Nat;
+  
+  theorem heapsort_example:
+    ex arr being Sequence st arr = <*5,2,8,1,9,3*>
+  proof
+    take <*5,2,8,1,9,3*>;
+    trivial;
+  end;
+  
+end
