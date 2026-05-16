@@ -1,0 +1,24 @@
+fun bogosort(arr: list[int]): list[int] = {
+  if issorted(arr) then arr
+  else bogosort(shuffle(arr))
+};
+
+fun issorted(arr: list[int]): bool =
+  match arr with
+  | [] => true
+  | [_] => true
+  | h::t =>
+    match t with
+    | [] => true
+    | h2::_ => h <= h2 and issorted(t)
+    endmatch
+  endmatch
+;
+
+fun shuffle(arr: list[int]): list[int] = {
+  var x = arr;
+  return x;
+};
+
+val arr = list(3, 1, 2);
+println$ bogosort(arr);
