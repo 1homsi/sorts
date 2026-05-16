@@ -1,0 +1,25 @@
+def bitonicsort(arr: uint[] | uint, lo: uint | uint, cnt: uint | uint, dir: uint | uint) {
+    if (cnt > 1) {
+        var k: uint = cnt / 2;
+        bitonicsort(arr, lo, k, 1);
+        bitonicsort(arr, lo + k, k, 0);
+        bitonicmerge(arr, lo, cnt, dir);
+    }
+    return arr;
+}
+
+def bitonicmerge(arr: uint[] | uint, lo: uint | uint, cnt: uint | uint, dir: uint | uint) {
+    if (cnt > 1) {
+        var k: uint = cnt / 2;
+        for (var i: uint = lo; i < lo + cnt - k; i++) {
+            if ((arr[i] > arr[i + k]) == (dir == 1)) {
+                var tmp: uint = arr[i];
+                arr[i] = arr[i + k];
+                arr[i + k] = tmp;
+            }
+        }
+        bitonicmerge(arr, lo, k, dir);
+        bitonicmerge(arr, lo + k, k, dir);
+    }
+    return arr;
+}
