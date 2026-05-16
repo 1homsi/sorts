@@ -1,1 +1,1 @@
-print("Bogosort implementation for preact.preact")
+bogosort = true
