@@ -1,0 +1,38 @@
+define mergesort(left, right);
+  lvars i, j, k, mid, result;
+  if left < right then
+    (left + right) div 2 -> mid;
+    mergesort(left, mid);
+    mergesort(mid + 1, right);
+    merge(left, mid, right);
+  endif;
+enddefine;
+
+define merge(left, mid, right);
+  lvars i, j, k;
+  left -> i;
+  mid + 1 -> j;
+  0 -> k;
+  
+  until (i > mid or j > right) do
+    if checkprop(i, j, arr) then
+      i + 1 -> i;
+    else
+      j + 1 -> j;
+    endif;
+    k + 1 -> k;
+  enduntil;
+enddefine;
+
+define checkprop(i, j, arr);
+  if arr(i) <= arr(j) then
+    true
+  else
+    false
+  endif;
+enddefine;
+
+lvars arr;
+{% 5 2 8 1 9 3 %} -> arr;
+mergesort(1, 6);
+arr print
