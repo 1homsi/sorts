@@ -1,0 +1,29 @@
+(de insert-sorted (X Lst)
+   (cond
+      ((not Lst) (list X))
+      ((>= (car Lst) X) (cons X Lst))
+      (T (cons (car Lst) (insert-sorted X (cdr Lst)))) ) )
+
+(de insertion-sort (Lst)
+   (if (not Lst)
+      NIL
+      (insert-sorted (car Lst) (insertion-sort (cdr Lst))) ) )
+
+(de get-idx (Num Mn Mx N)
+   (min (dec N)
+      (fix (floor (*/ (- Num Mn) N (+ (- Mx Mn) 1)))) ) )
+
+(de bucket-sort (Arr)
+   (if (not Arr)
+      Arr
+      (let (N (length Arr)
+            Mn (apply min Arr)
+            Mx (apply max Arr)
+            Buckets (make (do N (link NIL))) )
+         (for Num Arr
+            (let Idx (get-idx Num Mn Mx N)
+               (set (nth Buckets (inc Idx))
+                  (append (car (nth Buckets (inc Idx))) (list Num))) ) )
+         (apply append (mapcar insertion-sort Buckets)) ) ) )
+
+(println (bucket-sort (0.78 0.17 0.39 0.26 0.72 0.94 0.21 0.12 0.23 0.68)))
