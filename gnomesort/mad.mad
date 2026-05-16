@@ -1,0 +1,14 @@
+            GNOME SORT
+            DIMENSION ARR(100)
+            INTEGER I,N,TMP
+            I=1
+LOOP        WHENEVER I.G.N, TRANSFER TO DONE
+            WHENEVER I.E.1.OR.ARR(I).GE.ARR(I-1), TRANSFER TO ADVANCE
+            TMP=ARR(I)
+            ARR(I)=ARR(I-1)
+            ARR(I-1)=TMP
+            I=I-1
+            TRANSFER TO LOOP
+ADVANCE     I=I+1
+            TRANSFER TO LOOP
+DONE        END OF FUNCTION
