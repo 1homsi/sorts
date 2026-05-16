@@ -1,0 +1,29 @@
+DEFINE
+    insert-sorted ==
+        [null] [cons] []
+        [[dup2 <=] [swapd cons] [pop2 swap cons] ifte] linrec;
+
+    insertion-sort ==
+        [] [insert-sorted] fold;
+
+    get-idx ==
+        4 roll 4 roll sub
+        4 roll 4 roll sub 1 add
+        div mul floor
+        swap 1 sub min;
+
+    bucket-sort ==
+        dup size 0 =
+        []
+        [
+            dup size i
+            dup [min] fold
+            dup [max] fold
+            swap2 dup size [] cons replicate
+            [4 roll 4 roll 4 roll 4 roll get-idx
+             dup2 [] at append swap put] forall
+            [insertion-sort] map concat
+        ]
+        ifte;
+
+[0.78 0.17 0.39 0.26 0.72 0.94 0.21 0.12 0.23 0.68] bucket-sort print.
