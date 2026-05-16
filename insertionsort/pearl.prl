@@ -1,0 +1,17 @@
+DECLARE insertion_sort PROC (arr ARRAY, len INT) RETURNS (ARRAY);
+BEGIN
+  DECLARE i, j, key INT;
+  FOR i FROM 2 TO len DO
+    key := arr[i];
+    j := i - 1;
+    WHILE j >= 1 AND arr[j] > key DO
+      arr[j+1] := arr[j];
+      j := j - 1;
+    END;
+    arr[j+1] := key;
+  END;
+  RETURN arr;
+END;
+
+DECLARE arr ARRAY[1:6] INT := (5,2,8,1,9,3);
+PRINT insertion_sort(arr, 6);
