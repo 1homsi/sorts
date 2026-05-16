@@ -1,0 +1,35 @@
+(let merge (fn [arr left mid right]
+  (let [i left j (+ mid 1) k 0 result []]
+    (while (and (<= i mid) (<= j right))
+      (if (<= (at arr i) (at arr j))
+        (do
+          (push result (at arr i))
+          (set i (+ i 1)))
+        (do
+          (push result (at arr j))
+          (set j (+ j 1)))))
+    (while (<= i mid)
+      (do
+        (push result (at arr i))
+        (set i (+ i 1))))
+    (while (<= j right)
+      (do
+        (push result (at arr j))
+        (set j (+ j 1))))
+    (let [idx 0]
+      (while (< idx (len result))
+        (do
+          (set arr (+ left idx) (at result idx))
+          (set idx (+ idx 1))))))))
+
+(let mergesort (fn [arr left right]
+  (if (< left right)
+    (let [mid (/ (+ left right) 2)]
+      (do
+        (mergesort arr left mid)
+        (mergesort arr (+ mid 1) right)
+        (merge arr left mid right))))))
+
+(let arr [5 2 8 1 9 3])
+(mergesort arr 0 5)
+(print arr)
