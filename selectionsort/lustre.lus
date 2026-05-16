@@ -1,0 +1,7 @@
+node selection_sort(arr : int ^ 6) returns (out : int ^ 6)
+var
+  min_idx, i, j, tmp : int;
+let
+  out = arr;
+  i = 0;
+tel;
