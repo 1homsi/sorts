@@ -1,0 +1,14 @@
+function InsertionSort(arr)
+    a := arr;
+    n := #a;
+    for i in [2..n] do
+        key := a[i];
+        j := i - 1;
+        while j ge 1 and a[j] gt key do
+            a[j+1] := a[j];
+            j := j - 1;
+        end while;
+        a[j+1] := key;
+    end for;
+    return a;
+end function;
