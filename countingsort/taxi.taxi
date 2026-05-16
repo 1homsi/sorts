@@ -1,0 +1,41 @@
+Haack's Counting Sort
+
+[5, 2, 8, 1, 9, 3] is the array.
+
+Go to Start.
+
+Start:
+  Pickup a value.
+  A passenger is waiting.
+
+Sort:
+  Switch to Forward Gear
+  Get Max
+  Get Count
+  Rebuild
+  Drop passenger off.
+
+Forward Gear:
+  Proceed.
+  Look at array[i].
+  If greater than max, update max.
+  Next passenger waiting?
+  Go back to Sort if yes.
+
+Get Max:
+  max is 0.
+  For each value in array.
+  If value > max, max := value.
+
+Get Count:
+  count[0..9] := 0.
+  For each value in array.
+  count[value]++.
+
+Rebuild:
+  output := empty.
+  For i = 0 to max.
+  For j = 0 to count[i].
+  output += i.
+
+Print result.
