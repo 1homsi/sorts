@@ -1,0 +1,15 @@
+effect Swap = fun(int, int, int) { } 
+
+let bubblesort arr =
+  let n = Array.length arr in
+  for i = 0 to n - 1 do
+    for j = 0 to n - 1 - i - 1 do
+      if arr.(j) > arr.(j+1) then
+        let temp = arr.(j) in
+        arr.(j) <- arr.(j+1);
+        arr.(j+1) <- temp
+    done
+  done;
+  arr
+
+let () = bubblesort [|5; 2; 8; 1; 9; 3|] |> Array.to_list |> print_int
