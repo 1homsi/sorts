@@ -1,0 +1,35 @@
+cycle_sort := func(arr, n);
+    writes := 0;
+    cycle_start := 1;
+    while cycle_start <= n - 1 do
+        item := arr(cycle_start);
+        pos := cycle_start;
+        i := cycle_start + 1;
+        while i <= n do
+            if arr(i) < item then pos := pos + 1 end;
+            i := i + 1
+        end;
+        if pos /= cycle_start then
+            while arr(pos) = item do pos := pos + 1 end;
+            tmp := arr(pos); arr(pos) := item; item := tmp;
+            writes := writes + 1;
+            while pos /= cycle_start do
+                pos := cycle_start;
+                i := cycle_start + 1;
+                while i <= n do
+                    if arr(i) < item then pos := pos + 1 end;
+                    i := i + 1
+                end;
+                while arr(pos) = item do pos := pos + 1 end;
+                tmp := arr(pos); arr(pos) := item; item := tmp;
+                writes := writes + 1
+            end
+        end;
+        cycle_start := cycle_start + 1
+    end;
+    arr
+end;
+
+arr := func(i); [5,4,3,2,1](i) end;
+result := cycle_sort(arr, 5);
+print(result);
