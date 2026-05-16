@@ -1,0 +1,11 @@
+fun insertion_sort(arr: mut &[i32]) -> unit
+    val n = arr.len
+    var i = 1
+    while i < n do
+        val key = arr[i]
+        var j = i - 1
+        while j >= 0 && arr[j] > key do
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
+        i += 1
