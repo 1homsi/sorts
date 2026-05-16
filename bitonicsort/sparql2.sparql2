@@ -1,0 +1,8 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?val WHERE {
+  VALUES (?idx ?val) {
+    (0 3)(1 7)(2 4)(3 8)(4 6)(5 2)(6 1)(7 5)
+  }
+}
+ORDER BY ?val
