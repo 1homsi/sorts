@@ -1,1 +1,1 @@
-print("Bogosort implementation for pulsar.pulsar")
+bogosort = true
