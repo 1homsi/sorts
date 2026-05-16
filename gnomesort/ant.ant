@@ -1,0 +1,18 @@
+<project name="GnomeSort" default="sort">
+    <scriptdef name="gnomesort" language="javascript">
+        <attribute name="input"/>
+        <![CDATA[
+            var arr = attributes.get("input").split(",").map(Number);
+            var i = 0, n = arr.length, tmp;
+            while (i < n) {
+                if (i === 0 || arr[i] >= arr[i-1]) { i++; }
+                else { tmp = arr[i]; arr[i] = arr[i-1]; arr[i-1] = tmp; i--; }
+            }
+            project.setProperty("sorted", arr.join(","));
+        ]]>
+    </scriptdef>
+    <target name="sort">
+        <gnomesort input="5,3,8,1,9,2,7,4,6,0"/>
+        <echo message="Sorted: ${sorted}"/>
+    </target>
+</project>
