@@ -1,4 +1,1 @@
-isSorted:{all x[1+til -1+count x]>=x[til -1+count x]}
-shuffle:{x iasc count[x]?count x}
-bogosort:{while[not isSorted x;x:shuffle x];x}
-show bogosort 3 1 4 1 5 9 2 6
+SELECT * FROM array ORDER BY value ASC;
