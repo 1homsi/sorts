@@ -1,0 +1,12 @@
+DEF PROCinsertionsort(arr(), n%)
+  LOCAL i%, j%, key%
+  FOR i% = 1 TO n% - 1
+    key% = arr(i%)
+    j% = i% - 1
+    WHILE j% >= 0 AND arr(j%) > key%
+      arr(j%+1) = arr(j%)
+      j% = j% - 1
+    ENDWHILE
+    arr(j%+1) = key%
+  NEXT i%
+ENDPROC
