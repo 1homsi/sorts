@@ -1,0 +1,21 @@
+use ark_ff::Field;
+use ark_r1cs_std::{alloc::AllocVar, eq::EqGadget, fields::fp::FpVar};
+use ark_relations::r1cs::{ConstraintSynthesizer, ConstraintSystemRef, SynthesisError};
+
+pub struct GnomeSortCircuit<F: Field> {
+    pub input: Vec<F>,
+    pub sorted: Vec<F>,
+}
+
+impl<F: Field> ConstraintSynthesizer<F> for GnomeSortCircuit<F> {
+    fn generate_constraints(self, cs: ConstraintSystemRef<F>) -> Result<(), SynthesisError> {
+        let n = self.input.len();
+        let sorted_vars: Vec<FpVar<F>> = self.sorted.iter().enumerate()
+            .map(|(i, &v)| FpVar::new_witness(cs.clone(), || Ok(v)).unwrap())
+            .collect();
+        for i in 0..n-1 {
+            sorted_vars[i].enforce_cmp(&sorted_vars[i+1], core::cmp::Ordering::Less, true)?;
+        }
+        Ok(())
+    }
+}
