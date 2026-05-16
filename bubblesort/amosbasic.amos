@@ -1,0 +1,15 @@
+Dim A(7)
+For I=1 To 7 : Read A(I) : Next I
+Data 64,34,25,12,22,11,90
+N=7
+Repeat
+  SW=0
+  For I=1 To N-1
+    If A(I)>A(I+1)
+      T=A(I) : A(I)=A(I+1) : A(I+1)=T : SW=1
+    End If
+  Next I
+  N=N-1
+Until SW=0
+For I=1 To 7 : Print A(I);" " : Next I
+Print
