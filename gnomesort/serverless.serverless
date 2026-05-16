@@ -1,0 +1,13 @@
+service: gnome-sort
+
+provider:
+  name: aws
+  runtime: python3.11
+
+functions:
+  gnomeSort:
+    handler: handler.gnome_sort
+    events:
+      - http:
+          path: sort
+          method: post
