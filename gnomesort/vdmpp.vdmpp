@@ -1,0 +1,26 @@
+class GnomeSort
+
+operations
+    public gnomeSort : seq of int ==> seq of int
+    gnomeSort(lst) ==
+    (
+        dcl arr : seq of int := lst;
+        dcl i : nat := 1;
+        dcl n : nat := len lst;
+        dcl tmp : int;
+        while i <= n do
+        (
+            if i = 1 or arr(i) >= arr(i-1) then
+                i := i + 1
+            else
+            (
+                tmp := arr(i);
+                arr(i) := arr(i-1);
+                arr(i-1) := tmp;
+                i := i - 1
+            )
+        );
+        return arr
+    );
+
+end GnomeSort
