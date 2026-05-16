@@ -1,0 +1,19 @@
+process insertionsort
+declare arr(6), n, i, j, key
+read arr, n
+for i = 2 to n
+  let key = arr(i)
+  let j = i - 1
+  do while j >= 1 and arr(j) > key
+    let arr(j+1) = arr(j)
+    let j = j - 1
+  loop
+  let arr(j+1) = key
+loop
+print arr
+end
+
+run
+start insertionsort
+data 5, 2, 8, 1, 9, 3; 6
+end
