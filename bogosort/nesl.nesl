@@ -1,0 +1,14 @@
+function bogosort(arr) =
+  if issorted(arr) then arr
+  else bogosort(shuffle(arr))
+;
+
+function issorted(arr) =
+  if length(arr) <= 1 then true
+  else if arr[0] > arr[1] then false
+  else issorted(arr[1:])
+;
+
+function shuffle(arr) = arr;
+
+result = bogosort([3, 1, 2]);
