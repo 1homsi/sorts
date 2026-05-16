@@ -1,0 +1,21 @@
+DEFINE SHELLSORT(ARR)
+  N = LENGTH(ARR)
+  GAP = 1
+  DO WHILE GAP <= N
+    GAP = GAP * 3 + 1
+  END DO
+  DO WHILE GAP > 0
+    GAP = INT(GAP / 3)
+    DO I = GAP TO N
+      TEMP = ARR(I)
+      J = I
+      DO WHILE J > GAP AND ARR(J - GAP) > TEMP
+        ARR(J) = ARR(J - GAP)
+        J = J - GAP
+      END DO
+      ARR(J) = TEMP
+    END DO
+  END DO
+  PRINT ARR
+END DEFINE
+CALL SHELLSORT([5, 2, 8, 1, 9, 3])
