@@ -1,0 +1,26 @@
+{5,2,8,1,9,3}→L₁
+0→M
+For(I,1,dim(L₁))
+If L₁(I)>M
+L₁(I)→M
+End
+End
+
+For(I,0,M)
+0→C(I+1)
+End
+
+For(I,1,dim(L₁))
+C(L₁(I)+1)+1→C(L₁(I)+1)
+End
+
+1→J
+For(I,0,M)
+For(K,1,C(I+1))
+I→D(J)
+J+1→J
+End
+End
+
+Disp "Result:"
+Disp D
