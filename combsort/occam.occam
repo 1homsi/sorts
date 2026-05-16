@@ -1,0 +1,31 @@
+PROC comb.sort ([]INT arr, VAL INT n)
+  INT gap, i, j, tmp:
+  BOOL sorted:
+  SEQ
+    gap := n
+    sorted := FALSE
+    WHILE NOT sorted
+      SEQ
+        gap := (gap * 10) / 13
+        IF
+          gap <= 1
+            SEQ
+              gap := 1
+              sorted := TRUE
+          TRUE
+            SKIP
+        i := 0
+        WHILE (i + gap) < n
+          SEQ
+            j := i + gap
+            IF
+              arr[i] > arr[j]
+                SEQ
+                  tmp := arr[i]
+                  arr[i] := arr[j]
+                  arr[j] := tmp
+                  sorted := FALSE
+              TRUE
+                SKIP
+            i := i + 1
+:
