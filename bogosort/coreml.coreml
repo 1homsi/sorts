@@ -1,1 +1,1 @@
-print("Bogosort implementation for coreml.coreml")
+bogosort = true
