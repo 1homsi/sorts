@@ -1,0 +1,35 @@
+FUNCTION PBMAIN() AS LONG
+    DIM arr(1 TO 5) AS INTEGER
+    DIM n AS INTEGER, cs AS INTEGER, item AS INTEGER
+    DIM pos AS INTEGER, i AS INTEGER, tmp AS INTEGER, writes AS INTEGER
+
+    n = 5
+    arr(1) = 5: arr(2) = 4: arr(3) = 3: arr(4) = 2: arr(5) = 1
+    writes = 0
+
+    FOR cs = 1 TO n - 1
+        item = arr(cs)
+        pos = cs
+        FOR i = cs + 1 TO n
+            IF arr(i) < item THEN pos = pos + 1
+        NEXT i
+        IF pos = cs THEN ITERATE FOR
+        WHILE arr(pos) = item: pos = pos + 1: WEND
+        tmp = arr(pos): arr(pos) = item: item = tmp
+        writes = writes + 1
+        WHILE pos <> cs
+            pos = cs
+            FOR i = cs + 1 TO n
+                IF arr(i) < item THEN pos = pos + 1
+            NEXT i
+            WHILE arr(pos) = item: pos = pos + 1: WEND
+            tmp = arr(pos): arr(pos) = item: item = tmp
+            writes = writes + 1
+        WEND
+    NEXT cs
+
+    FOR i = 1 TO n
+        PRINT arr(i); " ";
+    NEXT i
+    PRINT
+END FUNCTION
