@@ -1,0 +1,46 @@
+arr[0] = 12
+arr[1] = 11
+arr[2] = 13
+arr[3] = 5
+arr[4] = 6
+arr[5] = 7
+n = 6
+
+For i = Math.Floor(n / 2) - 1 To 0 Step -1
+  HeapifyN = n
+  HeapifyI = i
+  GoSub Heapify
+Next
+
+For i = n - 1 To 1 Step -1
+  tmp = arr[0]
+  arr[0] = arr[i]
+  arr[i] = tmp
+  HeapifyN = i
+  HeapifyI = 0
+  GoSub Heapify
+Next
+
+For i = 0 To n - 1
+  TextWindow.Write(arr[i] + " ")
+Next
+TextWindow.WriteLine("")
+
+Sub Heapify
+  largest = HeapifyI
+  left = 2 * HeapifyI + 1
+  right = 2 * HeapifyI + 2
+  If left < HeapifyN And arr[left] > arr[largest] Then
+    largest = left
+  EndIf
+  If right < HeapifyN And arr[right] > arr[largest] Then
+    largest = right
+  EndIf
+  If largest <> HeapifyI Then
+    tmp = arr[HeapifyI]
+    arr[HeapifyI] = arr[largest]
+    arr[largest] = tmp
+    HeapifyI = largest
+    GoSub Heapify
+  EndIf
+EndSub
