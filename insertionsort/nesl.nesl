@@ -1,0 +1,6 @@
+function insertionSort(arr)
+  return reduce(insert, [], arr);
+where
+  function insert(x, sorted)
+    return {y : y in sorted, y <= x} ++ [x] ++ {y : y in sorted, y > x};
+end;
