@@ -1,0 +1,26 @@
+module BitonicSort98 where
+
+bitonicMerge :: Ord a => Bool -> [a] -> [a]
+bitonicMerge _ [] = []
+bitonicMerge _ [x] = [x]
+bitonicMerge dir xs =
+    let k = length xs `div` 2
+        (left, right) = splitAt k xs
+        pairs = zip left right
+        swapped = map (\(a,b) -> if dir == (a > b) then (b,a) else (a,b)) pairs
+        nl = map fst swapped
+        nr = map snd swapped
+    in bitonicMerge dir nl ++ bitonicMerge dir nr
+
+bitonicSort :: Ord a => Bool -> [a] -> [a]
+bitonicSort _ [] = []
+bitonicSort _ [x] = [x]
+bitonicSort dir xs =
+    let k = length xs `div` 2
+        (left, right) = splitAt k xs
+        sl = bitonicSort True left
+        sr = bitonicSort False right
+    in bitonicMerge dir (sl ++ sr)
+
+main :: IO ()
+main = print (bitonicSort True ([3, 7, 4, 8, 6, 2, 1, 5] :: [Int]))
