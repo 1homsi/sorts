@@ -1,0 +1,18 @@
+(define (gnomesort arr)
+  (let ((i 0))
+    (let loop ()
+      (if (< i (vector-length arr))
+        (begin
+          (if (= i 0)
+            (set! i (+ i 1))
+            (if (< (vector-ref arr i) (vector-ref arr (- i 1)))
+              (let ((temp (vector-ref arr i)))
+                (vector-set! arr i (vector-ref arr (- i 1)))
+                (vector-set! arr (- i 1) temp)
+                (set! i (- i 1)))
+              (set! i (+ i 1))))
+          (loop))))
+    arr))
+
+(define test (vector 5 2 8 1 9 3))
+(print (gnomesort test))
