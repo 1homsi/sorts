@@ -1,0 +1,46 @@
+let
+  merge = lambda(arr, left, mid, right)
+    let i = ref left
+    and j = ref (mid + 1)
+    and result = array(right - left + 1)
+    and k = ref 0
+    in
+      while (!i <= mid && !j <= right) do (
+        if arr sub !i <= arr sub !j then (
+          result sub !k := arr sub !i;
+          i := !i + 1
+        ) else (
+          result sub !k := arr sub !j;
+          j := !j + 1
+        );
+        k := !k + 1
+      );
+      while (!i <= mid) do (
+        result sub !k := arr sub !i;
+        i := !i + 1;
+        k := !k + 1
+      );
+      while (!j <= right) do (
+        result sub !k := arr sub !j;
+        j := !j + 1;
+        k := !k + 1
+      );
+      for l = 0 step 1 until right - left do
+        arr sub (left + l) := result sub l
+    end
+in
+  let
+    mergesort = lambda(arr, left, right)
+      if left < right then (
+        let mid = (left + right) / 2 in
+        mergesort(arr, left, mid);
+        mergesort(arr, mid + 1, right);
+        merge(arr, left, mid, right)
+      )
+  in
+    let arr = array(5, 2, 8, 1, 9, 3)
+    in
+      mergesort(arr, 0, 5);
+      print arr
+  end
+end
