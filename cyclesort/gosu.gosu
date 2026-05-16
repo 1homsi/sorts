@@ -1,0 +1,36 @@
+uses java.util.ArrayList
+
+function cycleSort(arr: ArrayList<Integer>): int {
+    var writes = 0
+    var n = arr.size()
+    for (cycleStart in 0..|n - 1) {
+        var item = arr.get(cycleStart)
+        var pos = cycleStart
+        for (i in cycleStart + 1..|n) {
+            if (arr.get(i) < item) pos++
+        }
+        if (pos == cycleStart) continue
+        while (item == arr.get(pos)) pos++
+        var tmp = arr.get(pos)
+        arr.set(pos, item)
+        item = tmp
+        writes++
+        while (pos != cycleStart) {
+            pos = cycleStart
+            for (i in cycleStart + 1..|n) {
+                if (arr.get(i) < item) pos++
+            }
+            while (item == arr.get(pos)) pos++
+            tmp = arr.get(pos)
+            arr.set(pos, item)
+            item = tmp
+            writes++
+        }
+    }
+    return writes
+}
+
+var arr = new ArrayList<Integer>()
+arr.add(5); arr.add(4); arr.add(3); arr.add(2); arr.add(1)
+cycleSort(arr)
+print(arr)
