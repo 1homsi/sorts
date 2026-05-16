@@ -1,0 +1,17 @@
+var n, buckets, result;
+call bucketSort;
+return;
+
+procedure bucketSort
+  var arr, i, idx;
+  arr := [5,2,8,1,9,3];
+  for i := 0 to 5 do begin
+    buckets[arr[i]] := arr[i]
+  end;
+  result := [];
+  for i := 0 to 9 do begin
+    if buckets[i] <> 0 then begin
+      result[i] := buckets[i]
+    end
+  end
+end;
