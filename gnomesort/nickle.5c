@@ -1,0 +1,23 @@
+void gnomesort(int[...] arr) {
+  int i = 0;
+  int temp;
+
+  while (i < dim(arr)) {
+    if (i == 0) {
+      i++;
+    } else if (arr[i] < arr[i - 1]) {
+      temp = arr[i];
+      arr[i] = arr[i - 1];
+      arr[i - 1] = temp;
+      i--;
+    } else {
+      i++;
+    }
+  }
+}
+
+int test[] = { 5, 2, 8, 1, 9, 3 };
+gnomesort(test);
+for (int i = 0; i < dim(test); i++) {
+  printf("%d ", test[i]);
+}
