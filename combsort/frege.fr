@@ -1,0 +1,20 @@
+module CombSort where
+
+import Data.Array
+
+combSort :: [Int] -> [Int]
+combSort xs = elems $ sortLoop arr n n
+  where
+    n = length xs
+    arr = listArray (0, n-1) xs :: Array Int Int
+    sortLoop a sz gap
+        | gap == 1 = a
+        | otherwise =
+            let newGap = max 1 (gap * 10 `div` 13)
+                a' = foldl (\acc i ->
+                    let j = i + newGap
+                    in if acc ! i > acc ! j
+                       then acc // [(i, acc ! j), (j, acc ! i)]
+                       else acc)
+                    a [0..sz - newGap - 1]
+            in sortLoop a' sz newGap
