@@ -1,0 +1,31 @@
+P1 [] =df 5; 2; 8; 1; 9; 3
+
+P2 [] =df timsort(P1, 32)
+
+timsort(A, M) =df mergesort(A, M)
+
+mergesort(A, M) =df 
+  if |A| <= 1 then A
+  else if |A| <= M then insertionsort(A)
+  else merge(mergesort(A[1:|A|/2], M), mergesort(A[|A|/2:|A|], M))
+
+insertionsort(A) =df
+  let I := 1
+  in rec insert(A, I)
+     where insert(A, I) =df 
+       if I >= |A| then A
+       else let K := A[I]
+            in rec loop(A, I-1)
+               where loop(A, J) =df
+                 if J < 0 then A
+                 else if A[J] <= K then A
+                 else shift_and_loop(A, J)
+            endlet
+
+merge(L, R) =df rec m(L, R, ())
+  where m(L, R, Acc) =df
+    if L = () then append(Acc, R)
+    else if R = () then append(Acc, L)
+    else if head(L) <= head(R) 
+         then m(tail(L), R, append(Acc, head(L)))
+         else m(L, tail(R), append(Acc, head(R)))
