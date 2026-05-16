@@ -1,1 +1,1 @@
-print("Bogosort implementation for sqlalchemy.sqlalchemy")
+SELECT * FROM array ORDER BY value ASC;
