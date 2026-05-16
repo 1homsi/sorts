@@ -1,0 +1,8 @@
+(define $pancake-sort
+  (lambda [$xs]
+    (match-all xs
+      (list _)
+      [$ (unique-sort (lambda [$a $b] (<= a b)) xs)])))
+
+(print (pancake-sort [5 2 8 1 9 3]))
+(print "\n")
