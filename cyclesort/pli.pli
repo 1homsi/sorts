@@ -1,0 +1,39 @@
+ CYCLESORT: PROCEDURE OPTIONS(MAIN);
+    DECLARE ARR(5) FIXED BINARY(31);
+    DECLARE (N, CS, ITEM, POS, I, TMP, WRITES) FIXED BINARY(31);
+
+    N = 5;
+    ARR(1) = 5; ARR(2) = 4; ARR(3) = 3; ARR(4) = 2; ARR(5) = 1;
+    WRITES = 0;
+
+    DO CS = 1 TO N - 1;
+        ITEM = ARR(CS);
+        POS = CS;
+        DO I = CS + 1 TO N;
+            IF ARR(I) < ITEM THEN POS = POS + 1;
+        END;
+        IF POS ^= CS THEN DO;
+            DO WHILE (ARR(POS) = ITEM);
+                POS = POS + 1;
+            END;
+            TMP = ARR(POS); ARR(POS) = ITEM; ITEM = TMP;
+            WRITES = WRITES + 1;
+            DO WHILE (POS ^= CS);
+                POS = CS;
+                DO I = CS + 1 TO N;
+                    IF ARR(I) < ITEM THEN POS = POS + 1;
+                END;
+                DO WHILE (ARR(POS) = ITEM);
+                    POS = POS + 1;
+                END;
+                TMP = ARR(POS); ARR(POS) = ITEM; ITEM = TMP;
+                WRITES = WRITES + 1;
+            END;
+        END;
+    END;
+
+    DO I = 1 TO N;
+        PUT EDIT(ARR(I)) (F(4));
+    END;
+    PUT SKIP;
+ END CYCLESORT;
