@@ -1,24 +1,6 @@
-class Bogosort
-    def isSorted(arr as List<of int>) as bool
-        for i in 0 : arr.count - 1
-            if arr[i] > arr[i + 1]
-                return false
-        return true
-
-    def shuffle(arr as List<of int>)
-        rng = System.Random()
-        n = arr.count
-        for i in n - 1 : 0 : -1
-            j = rng.next(i + 1)
-            tmp = arr[i]
-            arr[i] = arr[j]
-            arr[j] = tmp
-
-    def bogosort(arr as List<of int>) as List<of int>
-        while not .isSorted(arr)
-            .shuffle(arr)
-        return arr
-
-    def main
-        arr = List<of int>([3, 1, 4, 1, 5, 9, 2, 6])
-        print .bogosort(arr)
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
