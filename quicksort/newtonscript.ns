@@ -1,0 +1,19 @@
+local quicksort := func(arr) {
+  if arr.length() <= 1 then {
+    return arr;
+  } else {
+    local pivot = arr[0];
+    local less = [];
+    local greater = [];
+    for local i := 1 to arr.length() - 1 do {
+      if arr[i] <= pivot then {
+        less := less || [arr[i]];
+      } else {
+        greater := greater || [arr[i]];
+      };
+    };
+    return quicksort(less) || [pivot] || quicksort(greater);
+  };
+};
+
+print(quicksort([5, 2, 8, 1, 9, 3]));
