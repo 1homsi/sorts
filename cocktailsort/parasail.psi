@@ -1,0 +1,23 @@
+interface Cocktail_Sort is
+  procedure Sort(in out Arr : Array<Integer>) -> Integer;
+end interface Cocktail_Sort;
+
+class Cocktail_Sort is
+  procedure Sort(in out Arr : Array<Integer>) -> Integer is
+    N : Integer := Length(Arr);
+    I : Integer := 0;
+  begin
+    while I < N loop
+      var Swapped : Boolean := False;
+      for K in 0 .. N - I - 2 forward loop
+        if Arr[K] > Arr[K + 1] then
+          Arr[K] :=: Arr[K + 1];
+          Swapped := True;
+        end if;
+      end loop;
+      exit when not Swapped;
+      I += 1;
+    end loop;
+    return 0;
+  end procedure Sort;
+end class Cocktail_Sort;
