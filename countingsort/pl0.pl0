@@ -1,0 +1,45 @@
+VAR arr, count, max, i, j, output;
+PROCEDURE countingsort;
+  VAR k;
+  max := 0;
+  i := 0;
+  DO i < 6
+    BEGIN
+      IF arr[i] > max THEN max := arr[i];
+      i := i + 1
+    END;
+
+  k := 0;
+  DO k <= max
+    BEGIN
+      count[k] := 0;
+      k := k + 1
+    END;
+
+  i := 0;
+  DO i < 6
+    BEGIN
+      count[arr[i]] := count[arr[i]] + 1;
+      i := i + 1
+    END;
+
+  i := 0;
+  j := 0;
+  DO i <= max
+    BEGIN
+      DO j < count[i]
+        BEGIN
+          ! output[output_idx] := i;
+          j := j + 1
+        END;
+      i := i + 1;
+      j := 0
+    END;
+.
+
+BEGIN
+  arr[0] := 5; arr[1] := 2; arr[2] := 8;
+  arr[3] := 1; arr[4] := 9; arr[5] := 3;
+  CALL countingsort;
+  ? output
+END.
