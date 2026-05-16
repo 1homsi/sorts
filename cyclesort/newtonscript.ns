@@ -1,0 +1,35 @@
+cycleSort := func(arr) begin
+  local n := length(arr);
+  local pos := 0;
+  while pos < n do begin
+    local item := arr[pos];
+    local cycles := 0;
+    for local i := 0 to n-1 do
+      if i != pos && arr[i] < item then
+        cycles := cycles + 1;
+    if cycles != 0 then begin
+      while arr[pos] = item do
+        pos := pos + 1;
+      local temp := arr[pos];
+      arr[pos] := item;
+      item := temp;
+      while cycles > 0 do begin
+        cycles := 0;
+        for local i := 0 to n-1 do
+          if i != pos && arr[i] < item then
+            cycles := cycles + 1;
+        while arr[pos] = item do
+          pos := pos + 1;
+        temp := arr[pos];
+        arr[pos] := item;
+        item := temp;
+        cycles := cycles - 1;
+      end;
+    end;
+    pos := pos + 1;
+  end;
+  return arr;
+end;
+
+local result := cycleSort([5, 2, 8, 1, 9, 3]);
+print(result);
