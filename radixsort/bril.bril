@@ -1,0 +1,4 @@
+@main {
+  v0: int[] = const [5, 2, 8, 1, 9, 3];
+  print v0;
+}
