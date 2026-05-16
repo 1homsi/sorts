@@ -1,0 +1,23 @@
+bitonicMerge dir xs
+    = xs, if #xs <= 1
+    = bitonicMerge dir newL ++ bitonicMerge dir newR, otherwise
+    where
+    k = #xs div 2
+    left = take k xs
+    right = drop k xs
+    pairs = zip2 left right
+    swapped = map swap pairs
+    swap (a,b) = (b,a), if dir = (a>b)
+               = (a,b), otherwise
+    newL = map fst swapped
+    newR = map snd swapped
+
+bitonicSort dir xs
+    = xs, if #xs <= 1
+    = bitonicMerge dir (sl++sr), otherwise
+    where
+    k = #xs div 2
+    sl = bitonicSort True (take k xs)
+    sr = bitonicSort False (drop k xs)
+
+main = bitonicSort True [3,7,4,8,6,2,1,5]
