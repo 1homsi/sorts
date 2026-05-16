@@ -1,0 +1,21 @@
+$ INSERTION_SORT: SUBROUTINE
+$   N = 10
+$   I = 2
+$ OUTER_LOOP:
+$   IF I .GT. N THEN GOTO DONE
+$   KEY = ARR_'I'
+$   J = I - 1
+$ INNER_LOOP:
+$   IF J .LT. 1 THEN GOTO PLACE
+$   IF ARR_'J' .LE. KEY THEN GOTO PLACE
+$   JP1 = J + 1
+$   ARR_'JP1' = ARR_'J'
+$   J = J - 1
+$   GOTO INNER_LOOP
+$ PLACE:
+$   JP1 = J + 1
+$   ARR_'JP1' = KEY
+$   I = I + 1
+$   GOTO OUTER_LOOP
+$ DONE:
+$ ENDSUBROUTINE
