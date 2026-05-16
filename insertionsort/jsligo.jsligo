@@ -1,0 +1,14 @@
+const insert = (x: int, lst: list<int>): list<int> => {
+  return match(lst) {
+    when ([]): list([x]);
+    when ([h, ...t]):
+      x <= h ? list([x, h, ...t]) : list([h, ...insert(x, t)]);
+  };
+};
+
+const insertion_sort = (lst: list<int>): list<int> => {
+  return match(lst) {
+    when ([]): list([]);
+    when ([h, ...t]): insert(h, insertion_sort(t));
+  };
+};
