@@ -1,0 +1,13 @@
+cocktailsort arr = sort' 0 arr
+  where
+    sort' i _ | i >= length arr = arr
+    sort' i a =
+      let swapped = pass_forward 0 False a
+          a' = fst swapped
+          s = snd swapped
+      in if not s then a' else sort' (i + 1) a'
+    pass_forward k s a
+      | k >= length a - 1 = (a, s)
+      | arr[k] > arr[k+1] = pass_forward (k + 1) True (swap k (k + 1) a)
+      | otherwise = pass_forward (k + 1) s a
+    swap i j xs = take i xs ++ [xs!!j] ++ (take (j-i-1) (drop (i+1) xs)) ++ [xs!!i] ++ drop (j+1) xs
