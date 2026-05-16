@@ -1,0 +1,30 @@
+Counting_Sort = procedure (A) returns (array)
+  var max, i, j, count, output;
+
+  max := 0;
+  for i in 0 to length(A) - 1 do
+    if A[i] > max then
+      max := A[i];
+    fi;
+  od;
+
+  count := array new with capacity (max + 1);
+  for i in 0 to max do
+    count[i] := 0;
+  od;
+
+  for i in 0 to length(A) - 1 do
+    count[A[i]] := count[A[i]] + 1;
+  od;
+
+  output := array new with capacity (length(A));
+  for i in 0 to max do
+    for j in 0 to count[i] - 1 do
+      output := append(output, i);
+    od;
+  od;
+
+  return output;
+end;
+
+write(Counting_Sort([5, 2, 8, 1, 9, 3]));
