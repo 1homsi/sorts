@@ -1,0 +1,35 @@
+begin
+  integer array arr[1:6];
+  integer n, i, k, temp;
+  logical swapped;
+  
+  arr[1] := 5; arr[2] := 2; arr[3] := 8; arr[4] := 1; arr[5] := 9; arr[6] := 3;
+  n := 6;
+  i := 0;
+  
+  while i < n do begin
+    swapped := false;
+    for k := 1 step 1 until n - i - 1 do begin
+      if arr[k] > arr[k + 1] then begin
+        temp := arr[k];
+        arr[k] := arr[k + 1];
+        arr[k + 1] := temp;
+        swapped := true;
+      end;
+    end;
+    if not swapped then go to done;
+    i := i + 1;
+    swapped := false;
+    for k := n - i - 1 step -1 until 1 do begin
+      if arr[k] > arr[k + 1] then begin
+        temp := arr[k];
+        arr[k] := arr[k + 1];
+        arr[k + 1] := temp;
+        swapped := true;
+      end;
+    end;
+    if not swapped then go to done;
+    i := i + 1;
+  end;
+  done: write(arr);
+end
