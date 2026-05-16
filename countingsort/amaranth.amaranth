@@ -1,0 +1,29 @@
+-- Counting Sort Hardware - Amaranth HDL
+-- Implements counting sort in hardware description language
+-- Input: array [4, 2, 2, 8, 3, 3, 1]
+-- Output: sorted array [1, 2, 2, 3, 3, 4, 8]
+
+module counting_sort (
+    input  wire        clk,
+    input  wire        rst_n,
+    input  wire [7:0]  data_in [0:6],
+    output reg  [7:0]  data_out [0:6],
+    output reg         done
+);
+    integer count [0:255];
+    integer i, j, k;
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            done <= 0;
+        end else begin
+            for (i = 0; i < 256; i = i + 1) count[i] = 0;
+            for (i = 0; i < 7; i = i + 1) count[data_in[i]] = count[data_in[i]] + 1;
+            k = 0;
+            for (j = 0; j < 256; j = j + 1)
+                for (i = 0; i < count[j]; i = i + 1) begin
+                    data_out[k] <= j; k = k + 1;
+                end
+            done <= 1;
+        end
+    end
+endmodule
