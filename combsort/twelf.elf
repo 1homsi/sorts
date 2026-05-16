@@ -1,0 +1,12 @@
+comb_sort : {L : list} list -> list -> type.
+
+comb_sort_base : comb_sort (L : list) L.
+
+comb_sort_swap : comb_sort [X, Y | L] [Y, X | L']
+  <- X > Y
+  <- comb_sort L L'.
+
+comb_sort_pass : comb_sort L L'
+  <- comb_sort L L''.
+
+%query 1 1 comb_sort [5, 2, 8, 1, 9, 3] X.
