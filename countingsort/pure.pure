@@ -1,0 +1,16 @@
+countingsort arr = reverse (loop [] arr) where
+  loop acc [] = acc;
+  loop acc (x:xs) = loop ((take x (repeat 0)) ++ acc) xs;
+
+max_val [] = 0;
+max_val (x:xs) = max x (max_val xs);
+
+countingsort2 arr = rebuild 0 counts where
+  mx = max_val arr;
+  counts = [count i | i in 0..mx] with count i = length (filter (==i) arr);
+  rebuild i [] = [];
+  rebuild i (c:cs) = (replicate c i) ++ (rebuild (i+1) cs);
+
+main = do
+  let arr = [5, 2, 8, 1, 9, 3];
+  println (countingsort2 arr);
