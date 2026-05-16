@@ -1,0 +1,23 @@
+(defun heapify (arr n i)
+  (let* ((largest i)
+         (left (+ (* 2 i) 1))
+         (right (+ (* 2 i) 2)))
+    (when (and (< left n) (> (aref arr left) (aref arr largest)))
+      (setf largest left))
+    (when (and (< right n) (> (aref arr right) (aref arr largest)))
+      (setf largest right))
+    (when (/= largest i)
+      (rotatef (aref arr i) (aref arr largest))
+      (heapify arr n largest))))
+
+(defun heapsort (arr)
+  (let ((n (length arr)))
+    (loop for i from (1- (floor n 2)) downto 0 do (heapify arr n i))
+    (loop for i from (1- n) downto 1 do
+          (rotatef (aref arr 0) (aref arr i))
+          (heapify arr i 0)))
+  arr)
+
+(let ((arr (vector 12 11 13 5 6 7)))
+  (heapsort arr)
+  (print arr))
