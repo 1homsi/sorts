@@ -1,0 +1,20 @@
+comb_sort := [| arr |
+  arr clone do: [| arr2 gap swapped |
+    gap := arr2 size.
+    swapped := True.
+    [(gap > 1) | swapped] whileTrue: [
+      gap := (gap * 10) // 13.
+      gap < 1 ifTrue: [gap := 1].
+      swapped := False.
+      0 to: arr2 size - gap - 1 do: [| i |
+        (arr2 at: i) > (arr2 at: i + gap) ifTrue: [
+          arr2 swap: i with: i + gap.
+          swapped := True.
+        ].
+      ].
+    ].
+    arr2
+  ]
+].
+
+(comb_sort applyTo: {5. 2. 8. 1. 9. 3}) printLine.
