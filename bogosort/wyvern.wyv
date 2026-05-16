@@ -1,30 +1,6 @@
-require stdout
-
-def isSorted(arr: List[Int]): Boolean
-    var i: Int = 0
-    while (i < arr.length - 1)
-        if arr.get(i) > arr.get(i + 1)
-            false
-        i = i + 1
-    true
-
-def shuffle(arr: List[Int]): List[Int]
-    val a = arr.copy()
-    val n = a.length
-    var i: Int = n - 1
-    while (i > 0)
-        val j = Math.randomInt(i + 1)
-        val tmp = a.get(i)
-        a.set(i, a.get(j))
-        a.set(j, tmp)
-        i = i - 1
-    a
-
-def bogosort(arr: List[Int]): List[Int]
-    var a = arr
-    while (!isSorted(a))
-        a = shuffle(a)
-    a
-
-val arr = List.of(3, 1, 4, 1, 5, 9, 2, 6)
-stdout.print(bogosort(arr).toString())
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
