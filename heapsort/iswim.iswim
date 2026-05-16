@@ -1,0 +1,7 @@
+let f = lambda arr .
+  let n = length arr in
+  let i = n / 2 - 1 in
+  iterate (lambda heap . 
+    if i < 0 then heap 
+    else siftdown heap i n) arr
+in f [5, 2, 8, 1, 9, 3]
