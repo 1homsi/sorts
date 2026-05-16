@@ -1,0 +1,9 @@
+dec cocktailSort : list(num) -> list(num);
+--- cocktailSort(nil) <= nil;
+--- cocktailSort(x::nil) <= x::nil;
+--- cocktailSort(lst) <=
+    let n == #lst
+    and arr == listToArray(lst)
+    in
+        sortLoop(arr, 0, n-1, true);
+        arrayToList(arr);
