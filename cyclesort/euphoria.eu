@@ -1,0 +1,45 @@
+include std/io.e
+
+function cycle_sort(sequence arr)
+    integer n = length(arr)
+    integer writes = 0
+    integer item, pos, i, tmp
+    for cycle_start = 1 to n - 1 do
+        item = arr[cycle_start]
+        pos = cycle_start
+        for i = cycle_start + 1 to n do
+            if arr[i] < item then
+                pos += 1
+            end if
+        end for
+        if pos != cycle_start then
+            while arr[pos] = item do
+                pos += 1
+            end while
+            tmp = arr[pos]
+            arr[pos] = item
+            item = tmp
+            writes += 1
+            while pos != cycle_start do
+                pos = cycle_start
+                for i = cycle_start + 1 to n do
+                    if arr[i] < item then
+                        pos += 1
+                    end if
+                end for
+                while arr[pos] = item do
+                    pos += 1
+                end while
+                tmp = arr[pos]
+                arr[pos] = item
+                item = tmp
+                writes += 1
+            end while
+        end if
+    end for
+    return arr
+end function
+
+sequence result = cycle_sort({5, 4, 3, 2, 1})
+print(1, result)
+puts(1, "\n")
