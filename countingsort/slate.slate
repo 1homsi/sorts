@@ -1,0 +1,14 @@
+(define: #Array countingsort [| max count output |
+  (self isEmpty) ifTrue: [^ self].
+  max := 0.
+  count := (self maximum) + 1.
+  count do: [| :i | i := 0].
+  self do: [| :val | count at: val put: ((count at: val) + 1)].
+  output := {}.
+  0 to: (self maximum) do: [| :i |
+    (count at: i) times: [output addLast: i]
+  ].
+  ^ output
+].
+
+{5. 2. 8. 1. 9. 3} countingsort printLine.
