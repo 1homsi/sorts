@@ -1,0 +1,12 @@
+GNOMESORT      WORKSPACE
+               I = 0 + i
+               N = 0 + n
+LOOP           (I >= N) -> DONE
+               (I = 0) -> ADVANCE
+               ARR.I >= ARR.(I-1) -> ADVANCE
+               TMP = ARR.I
+               ARR.I = ARR.(I-1)
+               ARR.(I-1) = TMP
+               I = I - 1 -> LOOP
+ADVANCE        I = I + 1 -> LOOP
+DONE           END
