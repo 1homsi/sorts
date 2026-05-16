@@ -1,0 +1,8 @@
+quicksort(arr) ->
+  arr.size() <= 1 ? arr :
+  let pivot = arr[0],
+      less = arr.slice(1).filter(x -> x <= pivot),
+      greater = arr.slice(1).filter(x -> x > pivot)
+  in quicksort(less) ++ [pivot] ++ quicksort(greater)
+
+print(quicksort([5, 2, 8, 1, 9, 3]))
