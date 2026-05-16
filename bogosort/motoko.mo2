@@ -1,1 +1,6 @@
-print("Bogosort implementation for motoko.mo2")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
