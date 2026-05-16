@@ -1,0 +1,12 @@
+$ENTRY Go {
+  = <Prout <CycleSort [5 2 8 1 9 3]>>;
+}
+
+CycleSort {
+  s.Pos e.Array = <CycleSortLoop s.Pos 0 <Len e.Array> e.Array>;
+}
+
+CycleSortLoop {
+  s.Pos s.N s.N e.Array = e.Array;
+  s.Pos s.Len s.N e.Array = <CycleSortLoop <+ s.Pos 1> <+ s.Len 1> s.N e.Array>;
+}
