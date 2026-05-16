@@ -1,0 +1,5 @@
+#!/bin/bash
+sort_with_grep() {
+    input="$1"
+    echo "$input" | tr ' ' '\n' | sort -n | tr '\n' ' '
+}
