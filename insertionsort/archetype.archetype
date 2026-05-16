@@ -1,0 +1,21 @@
+archetype insertion_sort
+
+variable arr : list<int> = []
+
+entry sort(input : list<int>) {
+  var a := input;
+  var sorted : list<int> := [];
+  for x in a do
+    sorted := insert(x, sorted)
+  done;
+  arr := sorted
+}
+
+function insert(x : int, lst : list<int>) : list<int> {
+  return match lst with
+  | [] -> [x]
+  | h :: t ->
+    if x <= h then x :: h :: t
+    else h :: insert(x, t)
+  end
+}
