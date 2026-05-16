@@ -1,0 +1,4 @@
+cycleSort : (n : Nat) -> Fin n -> Fin n -> Set where
+  sort_zero : cycleSort Z v _ = []
+  sort_succ : cycleSort (S n) (F v) _ = 
+    v :: cycleSort n v _
