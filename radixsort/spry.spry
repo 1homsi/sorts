@@ -1,0 +1,11 @@
+[5 2 8 1 9 3] | { :arr |
+  var max
+  max = 0
+  arr each { :x | x > max? { max = x } }
+  var exp = 1
+  { max / exp > 0 } whileTrue {
+    arr = [arr exp] | countingSortByExp
+    exp = exp * 10
+  }
+  arr
+}
