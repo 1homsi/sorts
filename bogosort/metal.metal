@@ -1,1 +1,1 @@
-print("Bogosort implementation for metal.metal")
+bogosort = true
