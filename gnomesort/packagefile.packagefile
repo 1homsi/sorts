@@ -1,0 +1,11 @@
+{
+  "name": "gnome-sort",
+  "version": "1.0.0",
+  "description": "Gnome sort implementation",
+  "main": "index.js",
+  "scripts": {
+    "sort": "node index.js"
+  },
+  "keywords": ["sort", "gnome"],
+  "license": "MIT"
+}
