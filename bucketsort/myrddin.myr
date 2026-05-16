@@ -1,0 +1,20 @@
+const bucketSort = {arr, maxVal
+    var buckets : int[maxVal][:]
+    for i in 0:maxVal
+        buckets[i] = []
+    ;;
+    for num in arr
+        if num >= 0 && num < maxVal
+            buckets[num] = std.slpush(buckets[num], num)
+        ;;
+    ;;
+    var result : int[:]
+    for i in 0:maxVal
+        result = std.slcat(result, buckets[i])
+    ;;
+    result
+}
+
+const main = {
+    std.slprint(bucketSort([5, 2, 8, 1, 9, 3], 10))
+}
