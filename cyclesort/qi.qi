@@ -1,0 +1,16 @@
+(define count-smaller
+  [] _ -> 0
+  [X|Xs] Item -> (if (< X Item)
+                    (+ 1 (count-smaller Xs Item))
+                    (count-smaller Xs Item)))
+
+(define cycle-sort
+  [] -> []
+  [X|Xs] -> (let Pos (count-smaller Xs X)
+             (insert X Pos (cycle-sort Xs))))
+
+(define insert
+  X 0 Xs -> [X|Xs]
+  X N [Y|Ys] -> [Y|(insert X (- N 1) Ys)])
+
+(output (cycle-sort [5 4 3 2 1]))
