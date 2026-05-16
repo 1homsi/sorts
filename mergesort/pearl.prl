@@ -1,0 +1,53 @@
+PROBLEM MERGESORT;
+DECLARE
+  ARRAY ARR[1:6];
+  INTEGER I, J, K, LEFT, MID, RIGHT;
+
+BEGIN
+  ARR[1] := 5; ARR[2] := 2; ARR[3] := 8; ARR[4] := 1; ARR[5] := 9; ARR[6] := 3;
+  
+  PROCEDURE MERGE(LEFT, MID, RIGHT);
+    DECLARE ARRAY RESULT[1:RIGHT-LEFT+1];
+    INTEGER K;
+    
+    I := LEFT;
+    J := MID + 1;
+    K := 1;
+    
+    WHILE I <= MID AND J <= RIGHT DO
+      IF ARR[I] <= ARR[J] THEN
+        RESULT[K] := ARR[I];
+        I := I + 1;
+      ELSE
+        RESULT[K] := ARR[J];
+        J := J + 1;
+      END;
+      K := K + 1;
+    END;
+    
+    WHILE I <= MID DO
+      RESULT[K] := ARR[I];
+      I := I + 1;
+      K := K + 1;
+    END;
+    
+    WHILE J <= RIGHT DO
+      RESULT[K] := ARR[J];
+      J := J + 1;
+      K := K + 1;
+    END;
+  END;
+  
+  PROCEDURE MERGESORT(LEFT, RIGHT);
+    DECLARE INTEGER MID;
+    IF LEFT < RIGHT THEN
+      MID := (LEFT + RIGHT) / 2;
+      MERGESORT(LEFT, MID);
+      MERGESORT(MID + 1, RIGHT);
+      MERGE(LEFT, MID, RIGHT);
+    END;
+  END;
+  
+  MERGESORT(1, 6);
+  OUTPUT ARR;
+END.
