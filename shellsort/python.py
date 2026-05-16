@@ -1,4 +1,4 @@
-def shell_sort(arr):
+def shellsort(arr):
     n = len(arr)
     gap = n // 2
     while gap > 0:
@@ -11,6 +11,3 @@ def shell_sort(arr):
             arr[j] = temp
         gap //= 2
     return arr
-
-arr = [64, 34, 25, 12, 22, 11, 90]
-print(shell_sort(arr))
