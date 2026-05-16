@@ -1,4 +1,6 @@
-MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO
-MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO
-MoO MoO MoO MoO MoO MoO MoO MoO mOo MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO
-MOO OOM MMM OOM MMM moo mOo mOo MOO OOM MMM OOM MMM moo mOo mOo
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
