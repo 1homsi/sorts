@@ -1,0 +1,15 @@
+merge : list -> list -> list
+[  ] ++ L = L
+L ++ [  ] = L
+(X :: L1) ++ (Y :: L2) = if X <= Y then X :: L1 ++ (Y :: L2) else Y :: (X :: L1) ++ L2
+
+mergesort : list -> list
+[] = []
+[X] = [X]
+(X :: Y :: XS) = let (L, R) = split (X :: Y :: XS) in merge (mergesort L) (mergesort R)
+
+print_result : list -> ()
+[] -> ()
+(X :: XS) -> print X ; print_result XS
+
+mergesort [5, 2, 8, 1, 9, 3] & print_result
