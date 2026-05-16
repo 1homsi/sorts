@@ -1,0 +1,14 @@
+Define InsertionSort(arr)
+  a := arr;
+  n := len(a);
+  For i := 2 To n Do
+    key := a[i];
+    j := i - 1;
+    While j >= 1 And a[j] > key Do
+      a[j+1] := a[j];
+      j := j - 1;
+    EndWhile;
+    a[j+1] := key;
+  EndFor;
+  Return a;
+EndDefine;
