@@ -1,13 +1,7 @@
-is_sorted [] = True
-is_sorted [x] = True
-is_sorted (x:y:rest) = x <= y & is_sorted (y:rest)
-
-bogosort lst
-    = lst, if is_sorted lst
-    = bogosort (shuffle lst), otherwise
-
-shuffle lst = [lst!i | i <- random_permutation [0..#lst-1]]
-
-random_permutation xs = xs
-
-main = print (bogosort [3, 1, 4, 1, 5, 9, 2, 6])
+; bogosort IR
+loop:
+  cmp sorted, 1
+  je done
+  call shuffle
+  jmp loop
+done:
