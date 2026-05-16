@@ -1,0 +1,18 @@
+DEF PROC_CombSort(N%)
+  LOCAL Gap%, Sorted%, I%, Tmp%
+  Gap% = N%
+  Sorted% = FALSE
+  REPEAT
+    Gap% = INT(Gap% / 1.3)
+    IF Gap% < 1 THEN Gap% = 1
+    IF Gap% = 1 THEN Sorted% = TRUE
+    FOR I% = 0 TO N% - Gap% - 1
+      IF Arr%(I%) > Arr%(I% + Gap%) THEN
+        Tmp% = Arr%(I%)
+        Arr%(I%) = Arr%(I% + Gap%)
+        Arr%(I% + Gap%) = Tmp%
+        Sorted% = FALSE
+      ENDIF
+    NEXT I%
+  UNTIL Sorted%
+ENDPROC
