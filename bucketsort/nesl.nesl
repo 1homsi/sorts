@@ -1,0 +1,15 @@
+function bucket_sort(arr, maxVal) =
+  let
+    bucket_init(n) = if (n == 0) then []
+                     else [] ++ bucket_init(n - 1);
+    buckets = bucket_init(maxVal);
+    fill_buckets = scan(
+      (lambda ((b, num), old_b) =>
+        if (0 <= num && num < maxVal) then
+          old_b with [num] at num
+        else old_b),
+      buckets, zip(arr, [0 : length(arr) - 1]));
+    result = collect(fill_buckets);
+  in result;
+
+bucket_sort([5, 2, 8, 1, 9, 3], 10);
