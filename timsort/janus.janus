@@ -1,0 +1,74 @@
+function TimSort(arr, minSize)
+  return MergeSort(arr, minSize)
+end
+
+function MergeSort(arr, minSize)
+  if #arr <= 1 then
+    return arr
+  end
+  if #arr <= minSize then
+    return InsertionSort(arr)
+  end
+  
+  local mid = math.floor(#arr / 2)
+  local left = {}
+  local right = {}
+  
+  for i = 1, mid do
+    left[i] = arr[i]
+  end
+  for i = mid + 1, #arr do
+    right[i - mid] = arr[i]
+  end
+  
+  return Merge(MergeSort(left, minSize), MergeSort(right, minSize))
+end
+
+function InsertionSort(arr)
+  local result = {}
+  for i = 1, #arr do
+    result[i] = arr[i]
+  end
+  
+  for i = 2, #result do
+    local key = result[i]
+    local j = i - 1
+    while j >= 1 and result[j] > key do
+      result[j + 1] = result[j]
+      j = j - 1
+    end
+    result[j + 1] = key
+  end
+  
+  return result
+end
+
+function Merge(left, right)
+  local result = {}
+  local i = 1
+  local j = 1
+  
+  while i <= #left and j <= #right do
+    if left[i] <= right[j] then
+      table.insert(result, left[i])
+      i = i + 1
+    else
+      table.insert(result, right[j])
+      j = j + 1
+    end
+  end
+  
+  while i <= #left do
+    table.insert(result, left[i])
+    i = i + 1
+  end
+  while j <= #right do
+    table.insert(result, right[j])
+    j = j + 1
+  end
+  
+  return result
+end
+
+local arr = {5, 2, 8, 1, 9, 3}
+print(TimSort(arr, 32))
