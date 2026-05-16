@@ -1,0 +1,15 @@
+PROC gnome.sort ([]INT arr, VAL INT n)
+  INT i, tmp:
+  SEQ
+    i := 0
+    WHILE i < n
+      IF
+        (i = 0) OR (arr[i] >= arr[i - 1])
+          i := i + 1
+        TRUE
+          SEQ
+            tmp := arr[i]
+            arr[i] := arr[i - 1]
+            arr[i - 1] := tmp
+            i := i - 1
+:
