@@ -1,0 +1,31 @@
+package cocktailsort
+
+function cocktailSort(arr: int[]) : int[] {
+    var swapped = true
+    var start = 0
+    var end = arr.length - 1
+    while (swapped) {
+        swapped = false
+        for (var i = start; i < end; i++) {
+            if (arr[i] > arr[i + 1]) {
+                var tmp = arr[i]
+                arr[i] = arr[i + 1]
+                arr[i + 1] = tmp
+                swapped = true
+            }
+        }
+        if (!swapped) break
+        swapped = false
+        end--
+        for (var i = end - 1; i >= start; i--) {
+            if (arr[i] > arr[i + 1]) {
+                var tmp = arr[i]
+                arr[i] = arr[i + 1]
+                arr[i + 1] = tmp
+                swapped = true
+            }
+        }
+        start++
+    }
+    return arr
+}
