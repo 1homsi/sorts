@@ -1,0 +1,10 @@
+function countingsort(arr) = {
+  let max_val = max(arr);
+  let count = [#[i] sum([(arr[j] == i) ? 1 : 0 : j in [0:length(arr)]]) : i in [0:max_val+1]];
+  let positions = [sum([count[j] : j in [0:i]]) : i in [0:max_val+1]];
+  let output = [0 : i in [0:length(arr)]];
+  let _ = [output[positions[arr[j]]] := arr[j] : j in [0:length(arr)]];
+  output
+};
+
+countingsort([5, 2, 8, 1, 9, 3]);
