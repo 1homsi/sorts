@@ -1,0 +1,9 @@
+$ENTRY Go {
+  e.X = <Prout <InsertionSort [5 2 8 1 9 3]>>;
+}
+
+InsertionSort {
+  [s.I] e.T, <H [e.R] s.I e.Tail> = [e.R s.I e.Tail];
+  [s.I] e.T, <H [e.R s.J e.M] s.I e.Tail> = <InsertionSort [e.R s.J e.M s.I e.Tail]>;
+  [] e.T = e.T;
+}
