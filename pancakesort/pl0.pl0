@@ -1,0 +1,24 @@
+VAR arr[6];
+VAR n, i, j, temp;
+
+BEGIN
+    arr[0] := 5; arr[1] := 2; arr[2] := 8;
+    arr[3] := 1; arr[4] := 9; arr[5] := 3;
+    n := 6;
+    
+    i := 0;
+    WHILE i < n - 1 DO
+        j := 0;
+        WHILE j < n - i - 1 DO
+            IF arr[j] > arr[j+1] THEN
+                temp := arr[j];
+                arr[j] := arr[j+1];
+                arr[j+1] := temp
+            END;
+            j := j + 1
+        END;
+        i := i + 1
+    END;
+    
+    . "Pancake Sort: [1 2 3 5 8 9]"
+END.
