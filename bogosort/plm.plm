@@ -1,32 +1,6 @@
-BOGOSORT: DO;
-  DECLARE ARR(8) WORD;
-  DECLARE (N, I, J, TMP, SORTED) WORD;
-
-  ARR(1) = 3; ARR(2) = 1; ARR(3) = 4; ARR(4) = 1;
-  ARR(5) = 5; ARR(6) = 9; ARR(7) = 2; ARR(8) = 6;
-  N = 8;
-
-  IS_SORTED: PROCEDURE BYTE;
-    DECLARE K WORD;
-    DO K = 1 TO N - 1;
-      IF ARR(K) > ARR(K + 1) THEN RETURN 0;
-    END;
-    RETURN 1;
-  END IS_SORTED;
-
-  SHUFFLE: PROCEDURE;
-    DECLARE (K, R, T) WORD;
-    DO K = N TO 2 BY -1;
-      R = (K MOD (K + 1)) + 1;
-      T = ARR(K); ARR(K) = ARR(R); ARR(R) = T;
-    END;
-  END SHUFFLE;
-
-  DO WHILE NOT IS_SORTED;
-    CALL SHUFFLE;
-  END;
-
-  DO I = 1 TO N;
-    CALL WRITE(ARR(I));
-  END;
-END BOGOSORT;
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
