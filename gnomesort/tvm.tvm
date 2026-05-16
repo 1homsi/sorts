@@ -1,0 +1,19 @@
+import tvm
+from tvm import te
+import numpy as np
+
+def gnome_sort_numpy(arr):
+    arr = arr.copy()
+    n = len(arr)
+    i = 0
+    while i < n:
+        if i == 0 or arr[i] >= arr[i-1]:
+            i += 1
+        else:
+            arr[i], arr[i-1] = arr[i-1], arr[i]
+            i -= 1
+    return arr
+
+data = np.array([5, 3, 8, 1, 9, 2, 7, 4, 6, 0], dtype=np.int32)
+result = gnome_sort_numpy(data)
+print(result)
