@@ -1,0 +1,35 @@
+type node = struct
+  value: int
+  left: node#
+  right: node#
+;;
+
+function insert(node: node#, val: int) : node#
+  if node == null
+    -> alloc([
+      .value = val,
+      .left = null,
+      .right = null
+    ])
+  elif val < node.value
+    node.left = insert(node.left, val)
+  elif val > node.value
+    node.right = insert(node.right, val)
+  ;;
+  -> node
+;
+
+function inorder(node: node#)
+  if node != null
+    inorder(node.left)
+    std.put("{}", node.value)
+    inorder(node.right)
+  ;;
+;
+
+var arr = [5, 2, 8, 1, 9, 3]
+var root: node# = null
+for val in arr
+  root = insert(root, val)
+end
+inorder(root)
