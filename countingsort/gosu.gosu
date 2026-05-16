@@ -1,0 +1,27 @@
+package gosu.lang.annotations
+
+uses java.util.ArrayList
+
+function countingSort(arr: int[]) : int[] {
+  var n = arr.length
+  if (n == 0) { return arr }
+  var mn = arr[0]
+  var mx = arr[0]
+  for (v in arr) {
+    if (v < mn) { mn = v }
+    if (v > mx) { mx = v }
+  }
+  var range = mx - mn + 1
+  var count = new int[range]
+  for (v in arr) { count[v - mn]++ }
+  for (i in 1..|range) { count[i] += count[i - 1] }
+  var output = new int[n]
+  for (i in n-1..0 step -1) {
+    count[arr[i] - mn]--
+    output[count[arr[i] - mn]] = arr[i]
+  }
+  return output
+}
+
+var result = countingSort({4, 2, 2, 8, 3, 3, 1})
+print(result)
