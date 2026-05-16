@@ -1,0 +1,44 @@
+use Array: all;
+use StdIO: all;
+
+int[.] compareAndSwap(int[.] arr, int i, int j, bool dir) {
+    ai = arr[i];
+    aj = arr[j];
+    if (dir == (ai > aj)) {
+        arr[i] = aj;
+        arr[j] = ai;
+    }
+    return arr;
+}
+
+int[.] bitonicMerge(int[.] arr, int lo, int cnt, bool dir) {
+    if (cnt > 1) {
+        k = cnt / 2;
+        for (i = lo; i < lo + k; i++) {
+            arr = compareAndSwap(arr, i, i + k, dir);
+        }
+        arr = bitonicMerge(arr, lo, k, dir);
+        arr = bitonicMerge(arr, lo + k, k, dir);
+    }
+    return arr;
+}
+
+int[.] bitonicSort(int[.] arr, int lo, int cnt, bool dir) {
+    if (cnt > 1) {
+        k = cnt / 2;
+        arr = bitonicSort(arr, lo, k, true);
+        arr = bitonicSort(arr, lo + k, k, false);
+        arr = bitonicMerge(arr, lo, cnt, dir);
+    }
+    return arr;
+}
+
+int main() {
+    data = [3, 7, 4, 8, 6, 2, 1, 5];
+    data = bitonicSort(data, 0, shape(data)[0], true);
+    for (i = 0; i < shape(data)[0]; i++) {
+        printf("%d ", data[i]);
+    }
+    printf("\n");
+    return 0;
+}
