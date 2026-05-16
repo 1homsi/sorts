@@ -1,0 +1,19 @@
+mod COCKTAILSORT is
+  sort Natlist .
+  op nil : -> Natlist .
+  op _ _ : Nat Natlist -> Natlist .
+  
+  op sort : Natlist -> Natlist .
+  
+  var N N' : Nat .
+  var L : Natlist .
+  
+  eq sort(L) = L .
+  
+  rl [forward] : N N' L => N' N L [if N > N'] .
+  rl [backward] : N N' L => N' N L [if N > N'] .
+endm
+
+eof
+
+reduce in COCKTAILSORT : sort(5 2 8 1 9 3 nil) .
