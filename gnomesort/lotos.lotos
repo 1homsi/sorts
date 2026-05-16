@@ -1,0 +1,12 @@
+specification GNOME_SORT [COMPARE, SWAP, ADVANCE] : noexit
+
+behaviour
+    GNOME_SORT_PROC [COMPARE, SWAP, ADVANCE]
+
+process GNOME_SORT_PROC [COMPARE, SWAP, ADVANCE] : noexit :=
+    COMPARE; (
+        ADVANCE; GNOME_SORT_PROC [COMPARE, SWAP, ADVANCE]
+        []
+        SWAP; GNOME_SORT_PROC [COMPARE, SWAP, ADVANCE]
+    )
+endspec
