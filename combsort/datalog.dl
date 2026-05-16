@@ -1,0 +1,9 @@
+.decl input_arr(idx: number, val: number)
+.decl new_gap(gap: number, new_gap: number)
+.decl sorted_arr(idx: number, val: number)
+
+new_gap(G, NG) :-
+    G > 1,
+    NG = max(1, G * 10 / 13).
+
+.output sorted_arr
