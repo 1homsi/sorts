@@ -1,0 +1,27 @@
+import * as cdk from 'aws-cdk-lib';
+
+function insertionSort(arr: number[]): number[] {
+    const a = [...arr];
+    const n = a.length;
+    for (let i = 1; i < n; i++) {
+        const key = a[i];
+        let j = i - 1;
+        while (j >= 0 && a[j] > key) {
+            a[j + 1] = a[j];
+            j--;
+        }
+        a[j + 1] = key;
+    }
+    return a;
+}
+
+class InsertionSortStack extends cdk.Stack {
+    constructor(scope: cdk.App, id: string) {
+        super(scope, id);
+        const sorted = insertionSort([5, 3, 1, 4, 2]);
+        new cdk.CfnOutput(this, 'SortedArray', { value: sorted.join(',') });
+    }
+}
+
+const app = new cdk.App();
+new InsertionSortStack(app, 'InsertionSortStack');
