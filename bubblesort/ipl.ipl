@@ -1,0 +1,19 @@
+BUBBLE-SORT
+    DESCRIPTION: Sort a list using bubble sort algorithm
+    INPUT: LIST = (64 34 25 12 22 11 90)
+    N = LENGTH(LIST)
+    SWAPPED = T
+    WHILE SWAPPED
+        SWAPPED = NIL
+        I = 1
+        WHILE LESS(I, N)
+            XI = NTH(I, LIST)
+            XI1 = NTH(ADD1(I), LIST)
+            IF GREATER(XI, XI1)
+                SET-NTH(I, LIST, XI1)
+                SET-NTH(ADD1(I), LIST, XI)
+                SWAPPED = T
+            I = ADD1(I)
+        N = SUB1(N)
+    RETURN LIST
+END
