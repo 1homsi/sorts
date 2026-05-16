@@ -1,0 +1,17 @@
+insertionSort: {
+  n = arr length
+  i = 1
+  { i < n } {
+    key = arr n: i
+    j = i - 1
+    { j >= 0 ; arr n: j ; > key } {
+      arr n: j + 1 set: (arr n: j)
+      j = j - 1
+    }
+    arr n: j + 1 set: key
+    i = i + 1
+  }
+  return: arr
+}
+
+println (insertionSort [5 2 8 1 9 3])
