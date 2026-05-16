@@ -1,0 +1,15 @@
+module InsertionSort
+
+let rec insert = (x, lst) => {
+  match (lst) {
+    | [] => [x],
+    | [h, ...t] => if (x <= h) [x, h, ...t] else [h, ...insert(x, t)]
+  }
+}
+
+let rec insertionSort = (lst) => {
+  match (lst) {
+    | [] => [],
+    | [h, ...t] => insert(h, insertionSort(t))
+  }
+}
