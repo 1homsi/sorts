@@ -1,0 +1,27 @@
+USE
+CREATE TABLE nums (pos N(2), val N(3))
+INSERT INTO nums VALUES (1, 64)
+INSERT INTO nums VALUES (2, 34)
+INSERT INTO nums VALUES (3, 25)
+INSERT INTO nums VALUES (4, 12)
+INSERT INTO nums VALUES (5, 22)
+INSERT INTO nums VALUES (6, 11)
+INSERT INTO nums VALUES (7, 90)
+
+DECLARE arr(7)
+SELECT val FROM nums ORDER BY pos INTO ARRAY arr
+n = 7
+swapped = .T.
+DO WHILE swapped
+    swapped = .F.
+    FOR i = 1 TO n-1
+        IF arr(i) > arr(i+1)
+            tmp = arr(i)
+            arr(i) = arr(i+1)
+            arr(i+1) = tmp
+            swapped = .T.
+        ENDIF
+    NEXT
+    n = n - 1
+ENDDO
+FOR i = 1 TO 7 : ? arr(i) : NEXT
