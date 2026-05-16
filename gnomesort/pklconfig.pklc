@@ -1,0 +1,6 @@
+module GnomeSortConfig
+
+arr: List<Int> = List(5, 3, 8, 1, 9, 2, 7, 4, 6, 0)
+n: Int = arr.length
+
+sorted: List<Int> = arr.toList().sort()
