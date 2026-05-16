@@ -1,0 +1,16 @@
+Insertion Sort is a room.
+
+To insertion sort (arr - a list of numbers):
+    let n be the number of entries in arr;
+    repeat with i running from 2 to n:
+        let key be entry i of arr;
+        let j be i minus 1;
+        while j >= 1 and entry j of arr > key:
+            now entry (j + 1) of arr is entry j of arr;
+            decrease j by 1;
+        now entry (j + 1) of arr is key.
+
+When play begins:
+    let data be {5, 3, 1, 4, 2};
+    insertion sort data;
+    say "[data].";
