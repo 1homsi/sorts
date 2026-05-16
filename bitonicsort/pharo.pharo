@@ -1,0 +1,39 @@
+Object subclass: #BitonicSort
+    instanceVariableNames: 'arr'
+    classVariableNames: ''
+    package: 'BitonicSort'
+
+BitonicSort >> compareAndSwap: i with: j direction: dir [
+    | ai aj |
+    ai := arr at: i.
+    aj := arr at: j.
+    (dir = (ai > aj)) ifTrue: [
+        arr at: i put: aj.
+        arr at: j put: ai
+    ]
+]
+
+BitonicSort >> bitonicMerge: lo count: cnt direction: dir [
+    | k |
+    cnt > 1 ifFalse: [ ^self ].
+    k := cnt // 2.
+    lo to: lo + k - 1 do: [:i |
+        self compareAndSwap: i with: i + k direction: dir].
+    self bitonicMerge: lo count: k direction: dir.
+    self bitonicMerge: lo + k count: k direction: dir
+]
+
+BitonicSort >> bitonicSort: lo count: cnt direction: dir [
+    | k |
+    cnt > 1 ifFalse: [ ^self ].
+    k := cnt // 2.
+    self bitonicSort: lo count: k direction: true.
+    self bitonicSort: lo + k count: k direction: false.
+    self bitonicMerge: lo count: cnt direction: dir
+]
+
+BitonicSort >> run [
+    arr := #(3 7 4 8 6 2 1 5) asOrderedCollection.
+    self bitonicSort: 1 count: arr size direction: true.
+    Transcript show: arr printString
+]
