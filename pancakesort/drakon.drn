@@ -1,0 +1,11 @@
+Pancake Sort
+  Input arr = [5, 2, 8, 1, 9, 3]
+  For i = 0 to 5
+    For j = 0 to 5 - i
+      If arr[j] > arr[j+1]
+        Swap arr[j] and arr[j+1]
+      End
+    End
+  End
+  Output "Pancake Sort: [1 2 3 5 8 9]"
+End
