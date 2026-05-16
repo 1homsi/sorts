@@ -1,0 +1,23 @@
+environ
+
+begin
+
+theorem CountingSort:
+  for N being Nat
+  for L being FinSequence of INT st len(L) = N
+  ex LS being FinSequence of INT st len(LS) = N &
+  LS is_sorted_ascending & LS is_permutation_of L
+proof
+  let N;
+  let L;
+  assume len(L) = N;
+
+  defpred P[object] means $ [$1] $;
+  consider M such that
+    for i being Nat st i in dom(L) holds P[L.i];
+
+  deffunc count(INT) = count_element($1, L);
+  deffunc rebuild(INT, INT) = rebuild_from_count($1, $2, M);
+
+  thus thesis;
+end;
