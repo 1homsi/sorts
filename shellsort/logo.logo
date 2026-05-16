@@ -1,0 +1,28 @@
+to shellsort :arr
+  local "n
+  make "n count :arr
+  local "gap
+  make "gap 1
+  while [:gap <= :n] [
+    make "gap :gap * 3 + 1
+  ]
+  while [:gap > 0] [
+    make "gap round :gap / 3
+    local "i
+    make "i :gap + 1
+    while [:i <= :n] [
+      local "temp
+      make "temp item :i :arr
+      local "j
+      make "j :i
+      while [and [:j > :gap] [item (:j - :gap) :arr > :temp]] [
+        setitem :j :arr item (:j - :gap) :arr
+        make "j :j - :gap
+      ]
+      setitem :j :arr :temp
+      make "i :i + 1
+    ]
+  ]
+  output :arr
+end
+print shellsort [5 2 8 1 9 3]
