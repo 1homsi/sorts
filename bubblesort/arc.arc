@@ -1,0 +1,16 @@
+(def bubble-sort (lst)
+  (withs (arr (coerce lst 'vector)
+          n   (len arr)
+          swapped t)
+    (while swapped
+      (= swapped nil)
+      (for i 0 (- n 2)
+        (when (> (arr i) (arr (+ i 1)))
+          (let tmp (arr i)
+            (= (arr i) (arr (+ i 1)))
+            (= (arr (+ i 1)) tmp)
+            (= swapped t))))
+      (-- n))
+    (coerce arr 'cons)))
+
+(prn (bubble-sort '(64 34 25 12 22 11 90)))
