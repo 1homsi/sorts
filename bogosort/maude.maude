@@ -1,0 +1,14 @@
+fmod BOGOSORT is
+  sort List .
+  op [] : -> List .
+  op __ : List List -> List [assoc id: []] .
+  op sort : List -> List .
+
+  eq sort(L) = if isSorted(L) then L else sort(shuffle(L)) fi .
+
+  eq isSorted([]) = true .
+  eq isSorted(X) = true [owise] .
+
+  op shuffle : List -> List .
+  eq shuffle(X) = X .
+endfm
