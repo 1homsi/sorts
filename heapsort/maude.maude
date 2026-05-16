@@ -1,0 +1,16 @@
+fmod HEAPSORT is
+  protecting INT-LIST .
+  
+  op heapsort : IntList -> IntList .
+  op siftdown : IntList Nat Nat -> IntList .
+  
+  eq heapsort(L) = hs(L, sd(L, (size(L) / 2) - 1, size(L))) .
+  
+  eq hs(L, L') = L' .
+  
+  eq siftdown(L, I, N) = 
+    if I >= 0 then siftdown(sd(L, I, N), I - 1, N)
+    else L
+    fi .
+  
+endfm
