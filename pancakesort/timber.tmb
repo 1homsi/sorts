@@ -1,0 +1,9 @@
+main =
+    let arr = [5, 2, 8, 1, 9, 3]
+        n = length arr
+        go i a | i >= n-1 = a
+               | otherwise = go (i+1) (swaps i (n-i-1) a)
+        swaps i 0 a = a
+        swaps i j a | a !! i > a !! (i+1) = swaps (i+1) (j-1) (swap i (i+1) a)
+                    | otherwise = swaps (i+1) (j-1) a
+    in putStr "Pancake Sort: " >> print (go 0 arr)
