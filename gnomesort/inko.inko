@@ -1,0 +1,16 @@
+import std.array (Array)
+
+fn pub gnome_sort(arr: mut Array[Int]) {
+    let mut i = 0
+    let n = arr.length
+    while i < n {
+        if i == 0 || arr.get(i) >= arr.get(i - 1) {
+            i += 1
+        } else {
+            let tmp = arr.get(i)
+            arr.set(i, arr.get(i - 1))
+            arr.set(i - 1, tmp)
+            i -= 1
+        }
+    }
+}
