@@ -1,0 +1,40 @@
+(let cyclesort (fun (arr) (do
+  (let n (len arr))
+  (let pos 0)
+  (while (< pos n) (do
+    (let item (@ arr pos))
+    (let cycles 0)
+    (for (i 0 n) (do
+      (if (and (!= i pos) (< (@ arr i) item))
+        (set cycles (+ cycles 1))
+      )
+    ))
+    (if (!= cycles 0) (do
+      (while (== (@ arr pos) item)
+        (set pos (+ pos 1))
+      )
+      (let temp (@ arr pos))
+      (set-sym arr pos item)
+      (set item temp)
+      (while (> cycles 0) (do
+        (set cycles 0)
+        (for (i 0 n) (do
+          (if (and (!= i pos) (< (@ arr i) item))
+            (set cycles (+ cycles 1))
+          )
+        ))
+        (while (== (@ arr pos) item)
+          (set pos (+ pos 1))
+        )
+        (set temp (@ arr pos))
+        (set-sym arr pos item)
+        (set item temp)
+        (set cycles (- cycles 1))
+      ))
+    ))
+    (set pos (+ pos 1))
+  ))
+  arr
+)))
+
+(print (cyclesort [5 2 8 1 9 3]))
