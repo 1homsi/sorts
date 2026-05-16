@@ -1,0 +1,16 @@
+@main {
+  v0: int = const 3;
+  v1: int = const 1;
+  v2: int = const 2;
+  a: int[] = alloc 3;
+  store a 0 v0;
+  store a 1 v1;
+  store a 2 v2;
+
+  sorted: bool = const false;
+  loop:
+    cond sorted exit;
+
+  exit:
+    print a;
+}
