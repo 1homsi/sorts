@@ -1,0 +1,29 @@
+countingsort <- func(arr) {
+  if (length(arr) == 0) {
+    return arr
+  }
+
+  max <- 0
+  for (val in arr) {
+    if (val > max) {
+      max <- val
+    }
+  }
+
+  count <- array(max + 1, 0)
+  for (val in arr) {
+    count[val] <- count[val] + 1
+  }
+
+  output <- array()
+  for (i in 0..max) {
+    for (j in 0..<count[i]) {
+      output[length(output)] <- i
+    }
+  }
+
+  return output
+}
+
+result <- countingsort([5, 2, 8, 1, 9, 3])
+print(result)
