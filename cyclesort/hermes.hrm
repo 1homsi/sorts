@@ -1,0 +1,54 @@
+program cyclesort;
+var arr, n, pos, item, cycles, i, temp;
+
+  proc cyclesort_array;
+    i := 0;
+    while (i < 6) do
+      arr[i] := arr[i];
+      i := i + 1
+    od
+  endproc;
+
+begin
+  arr := [5, 2, 8, 1, 9, 3];
+  n := 6;
+  pos := 0;
+  while (pos < n) do
+    item := arr[pos];
+    cycles := 0;
+    i := 0;
+    while (i < n) do
+      if (i != pos and arr[i] < item) then
+        cycles := cycles + 1
+      fi;
+      i := i + 1
+    od;
+    if (cycles != 0) then
+      while (arr[pos] = item) do
+        pos := pos + 1
+      od;
+      temp := arr[pos];
+      arr[pos] := item;
+      item := temp;
+      while (cycles > 0) do
+        cycles := 0;
+        i := 0;
+        while (i < n) do
+          if (i != pos and arr[i] < item) then
+            cycles := cycles + 1
+          fi;
+          i := i + 1
+        od;
+        while (arr[pos] = item) do
+          pos := pos + 1
+        od;
+        temp := arr[pos];
+        arr[pos] := item;
+        item := temp;
+        cycles := cycles - 1
+      od
+    fi;
+    pos := pos + 1
+  od;
+  writeln(arr)
+end
