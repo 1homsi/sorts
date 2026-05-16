@@ -1,0 +1,7 @@
+let shellsort (xs : List Int) : List Int =
+  let n = xs.length in
+  let gap = 1 in
+  let _ = while gap <= n do
+    gap = gap * 3 + 1
+  done in
+  xs;
