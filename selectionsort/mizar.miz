@@ -1,0 +1,12 @@
+environ vocabularies ARYTM_1, INT_1;
+notation ARYTM_1;
+
+reserve x,y,z for natural number;
+
+definition let f be Function;
+redefine func f`1 -> set equals f.1;
+end;
+
+theorem ExSelection:
+  for x being finite ordinal holds
+  x in Seg 6 iff x < 6;
