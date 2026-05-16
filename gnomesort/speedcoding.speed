@@ -1,0 +1,25 @@
+LOAD  I, 0
+STORE I
+LOOP: LOAD  I
+      SUB   N
+      BGEZ  DONE
+      LOAD  I
+      BNZ   CHECK
+      LOAD  I
+      ADD   ONE
+      STORE I
+      BRA   LOOP
+CHECK: LOAD ARR+I
+      SUB   ARR+I-1
+      BGEZ  ADVANCE
+      LOAD  ARR+I
+      XCHG  ARR+I-1
+      LOAD  I
+      SUB   ONE
+      STORE I
+      BRA   LOOP
+ADVANCE: LOAD I
+         ADD  ONE
+         STORE I
+         BRA  LOOP
+DONE: HALT
