@@ -1,0 +1,14 @@
+define type IntArray = array[integer];
+
+function CocktailSort(arr: IntArray returns IntArray)
+    let n := array_size(arr) in
+    let a := arr in
+    for i in 1, n-1 cross j in n-1, 1 by -1 do
+        if a[i] > a[i+1] then
+            let tmp := a[i] in
+            a[i] := a[i+1];
+            a[i+1] := tmp
+        end if
+    end for;
+    a
+end function;
