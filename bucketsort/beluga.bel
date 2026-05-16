@@ -1,0 +1,11 @@
+rec bucket_sort : {Arr: [int]} [int] -> [int] =
+  fn arr => case arr of
+  | [] => []
+  | x :: xs => insert_sorted x (bucket_sort xs)
+and insert_sorted : {X: int} {Xs: [int]} int -> [int] -> [int] =
+  fn x => fn xs => case xs of
+  | [] => [x]
+  | y :: ys => if x <= y then [x, y] ++ ys
+               else [y] ++ insert_sorted x ys;
+
+#eval bucket_sort [5, 2, 8, 1, 9, 3];
