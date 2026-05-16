@@ -1,6 +1,6 @@
-Piet is a graphical language - this represents bogosort conceptually:
-push 3, push 1, push 4, push 1, push 5, push 9, push 2, push 6
-check_sorted: compare adjacent pairs on stack
-if not sorted: randomly permute stack contents
-loop until sorted
-output each value
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
