@@ -1,0 +1,25 @@
+{{- define "insertionSort" -}}
+{{- $arr := . -}}
+{{- $sorted := list -}}
+{{- range $arr -}}
+  {{- $x := . -}}
+  {{- $inserted := false -}}
+  {{- $newSorted := list -}}
+  {{- range $sorted -}}
+    {{- if and (not $inserted) (gt $x .) -}}
+      {{- $newSorted = append $newSorted . -}}
+    {{- else if not $inserted -}}
+      {{- $newSorted = append $newSorted $x -}}
+      {{- $inserted = true -}}
+      {{- $newSorted = append $newSorted . -}}
+    {{- else -}}
+      {{- $newSorted = append $newSorted . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $inserted -}}
+    {{- $newSorted = append $newSorted $x -}}
+  {{- end -}}
+  {{- $sorted = $newSorted -}}
+{{- end -}}
+{{- $sorted | join "," -}}
+{{- end -}}
