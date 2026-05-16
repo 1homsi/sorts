@@ -1,0 +1,23 @@
+module GNOME_SORT:
+input ARRAY_IN : integer;
+output SORTED : integer;
+
+var arr := {5, 3, 8, 1, 9} : integer[5] in
+var i := 0 : integer in
+var n := 5 : integer in
+var tmp := 0 : integer in
+loop
+  if (i >= n) then
+    exit GNOME_SORT
+  end if;
+  if (i = 0) or (arr[i] >= arr[i-1]) then
+    i := i + 1
+  else
+    tmp := arr[i];
+    arr[i] := arr[i-1];
+    arr[i-1] := tmp;
+    i := i - 1
+  end if
+end loop
+end var end var end var end var
+end module
