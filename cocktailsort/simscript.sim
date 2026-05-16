@@ -1,0 +1,33 @@
+preamble
+    declare arr as a 1d array of integers with dimension 6
+    declare n, i, k, temp, swapped as integers
+end
+
+process main
+    let arr(1) = 5
+    let arr(2) = 2
+    let arr(3) = 8
+    let arr(4) = 1
+    let arr(5) = 9
+    let arr(6) = 3
+    let n = 6
+    let i = 0
+    
+    do while i < n
+        let swapped = 0
+        for k = 1 to n - i - 1
+            if arr(k) > arr(k + 1) then
+                let temp = arr(k)
+                let arr(k) = arr(k + 1)
+                let arr(k + 1) = temp
+                let swapped = 1
+            end if
+        end for
+        if not swapped then
+            exit loop
+        end if
+        let i = i + 1
+    end do
+    
+    print arr
+end
