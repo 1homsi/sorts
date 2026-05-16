@@ -1,1 +1,1 @@
-print("Bogosort implementation for brewer.brewer")
+bogosort = true
