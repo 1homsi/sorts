@@ -1,25 +1,6 @@
-procedure is_sorted(arr)
-    every i := 1 to *arr - 1 do
-        if arr[i] > arr[i + 1] then fail
-    return
-end
-
-procedure shuffle(arr)
-    every i := *arr to 2 by -1 do {
-        j := ?i
-        arr[i] :=: arr[j]
-    }
-    return arr
-end
-
-procedure bogosort(arr)
-    until is_sorted(arr) do shuffle(arr)
-    return arr
-end
-
-procedure main()
-    arr := [3, 1, 4, 1, 5, 9, 2, 6]
-    bogosort(arr)
-    every writes(arr[1 to *arr], " ")
-    write()
-end
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
