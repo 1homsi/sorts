@@ -1,0 +1,18 @@
+let
+  bucket_sort = fn arr, max_val ->
+    if max_val = 0 then
+      arr
+    else
+      let buckets = tabulate(max_val, fn _ -> ref [])
+      let _ = map(fn num -> 
+        if num >= 0 andalso num < max_val then
+          !(buckets sub (num + 1)) := num :: !(buckets sub (num + 1))
+        else () end,
+        arr)
+      in
+        foldl(@, [], map(!, buckets))
+      end
+    end
+  in
+    bucket_sort([5, 2, 8, 1, 9, 3], 10)
+  end
