@@ -1,0 +1,19 @@
+{5,2,8,1,9,3}->L1
+6->N
+0->I
+While I<N
+  0->S
+  For(K,0,N-I-2)
+    If L1(K)>L1(K+1)
+      L1(K)->T
+      L1(K+1)->L1(K)
+      T->L1(K+1)
+      1->S
+    End
+  End
+  If S=0
+    Return L1
+  End
+  I+1->I
+End
+Disp L1
