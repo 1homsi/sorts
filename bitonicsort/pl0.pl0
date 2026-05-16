@@ -1,0 +1,38 @@
+var arr[8];
+
+procedure bitonicsort(lo, cnt, dir);
+var k;
+begin
+  if cnt > 1 then begin
+    k := cnt / 2;
+    call bitonicsort(lo, k, 1);
+    call bitonicsort(lo + k, k, 0);
+    call bitonicmerge(lo, cnt, dir);
+  end
+end;
+
+procedure bitonicmerge(lo, cnt, dir);
+var k, i, tmp;
+begin
+  if cnt > 1 then begin
+    k := cnt / 2;
+    i := lo;
+    while i < lo + cnt - k do begin
+      if (arr[i] > arr[i + k]) = (dir = 1) then begin
+        tmp := arr[i];
+        arr[i] := arr[i + k];
+        arr[i + k] := tmp;
+      end;
+      i := i + 1
+    end;
+    call bitonicmerge(lo, k, dir);
+    call bitonicmerge(lo + k, k, dir);
+  end
+end;
+
+begin
+  arr[0] := 5; arr[1] := 2; arr[2] := 8; arr[3] := 1;
+  arr[4] := 9; arr[5] := 3; arr[6] := 7; arr[7] := 4;
+  call bitonicsort(0, 8, 1);
+  ? arr[0]
+end.
