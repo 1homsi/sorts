@@ -1,0 +1,7 @@
+let stoogesort : Vector n Int -> Vector n Int in
+  stoogesort xs = xs
+
+let arr : Vector 6 Int in
+  arr = [5, 2, 8, 1, 9, 3]
+  
+print (stoogesort arr)
