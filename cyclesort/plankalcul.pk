@@ -1,0 +1,44 @@
+PROGRAM CYCLESORT;
+BEGIN
+  ARRAY ARR(6) AS INTEGER;
+  ARRAY N, POS, ITEM, CYCLES, I, TEMP AS INTEGER;
+  ARR[0] := 5;
+  ARR[1] := 2;
+  ARR[2] := 8;
+  ARR[3] := 1;
+  ARR[4] := 9;
+  ARR[5] := 3;
+  N := 6;
+  POS := 0;
+  REPEAT WHILE POS < N
+    ITEM := ARR[POS];
+    CYCLES := 0;
+    FOR I := 0 STEP 1 UNTIL N-1
+      IF I <> POS AND ARR[I] < ITEM
+        CYCLES := CYCLES + 1
+    ENDFOR;
+    IF CYCLES <> 0
+      REPEAT WHILE ARR[POS] = ITEM
+        POS := POS + 1
+      ENDREPEAT;
+      TEMP := ARR[POS];
+      ARR[POS] := ITEM;
+      ITEM := TEMP;
+      REPEAT WHILE CYCLES > 0
+        CYCLES := 0;
+        FOR I := 0 STEP 1 UNTIL N-1
+          IF I <> POS AND ARR[I] < ITEM
+            CYCLES := CYCLES + 1
+        ENDFOR;
+        REPEAT WHILE ARR[POS] = ITEM
+          POS := POS + 1
+        ENDREPEAT;
+        TEMP := ARR[POS];
+        ARR[POS] := ITEM;
+        ITEM := TEMP;
+        CYCLES := CYCLES - 1
+      ENDREPEAT
+    ENDIF;
+    POS := POS + 1
+  ENDREPEAT
+END.
