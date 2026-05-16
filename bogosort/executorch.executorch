@@ -1,1 +1,1 @@
-print("Bogosort implementation for executorch.executorch")
+bogosort = true
