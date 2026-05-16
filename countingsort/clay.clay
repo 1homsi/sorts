@@ -1,0 +1,27 @@
+countingsort(arr) {
+  if (arr.size == 0) return arr;
+
+  var max = 0;
+  for (val in arr) {
+    if (val > max) max = val;
+  }
+
+  var count = Vector[Int32](max + 1, 0);
+  for (val in arr) {
+    count[val] += 1;
+  }
+
+  var output = Vector[Int32]();
+  for (i in range(max + 1)) {
+    for (j in range(count[i])) {
+      push(output, Int32(i));
+    }
+  }
+
+  return output;
+}
+
+main() {
+  var test = Vector[Int32](5, 2, 8, 1, 9, 3);
+  println(countingsort(test));
+}
