@@ -1,0 +1,18 @@
+def combSort arr =
+  let gap = len arr
+      swapped = true
+  loop
+    if gap > 1 or swapped then
+      gap = (gap * 10) / 13
+      if gap < 1 then gap = 1
+      swapped = false
+      for i = 0 to (len arr) - gap - 1
+        if arr[i] > arr[i + gap] then
+          let temp = arr[i]
+          arr[i] = arr[i + gap]
+          arr[i + gap] = temp
+          swapped = true
+    else break
+  arr
+
+print combSort [5 2 8 1 9 3]
