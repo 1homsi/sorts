@@ -1,0 +1,53 @@
+use StdIO: all;
+use Array: all;
+use Math: all;
+
+int[.] insertionSort(int[.] bucket) {
+    n = shape(bucket)[0];
+    res = bucket;
+    for (i = 1; i < n; i++) {
+        key = res[i];
+        j = i - 1;
+        while (j >= 0 && res[j] > key) {
+            res[j+1] = res[j];
+            j--;
+        }
+        res[j+1] = key;
+    }
+    return res;
+}
+
+int[.] bucketSort(int[.] arr) {
+    n = shape(arr)[0];
+    if (n == 0) {
+        return arr;
+    }
+    minV = minval(arr);
+    maxV = maxval(arr);
+    buckets = genarray([n, n], 0);
+    counts = genarray([n], 0);
+    for (i = 0; i < n; i++) {
+        idx = min(n - 1, (arr[i] - minV) * n / (maxV - minV + 1));
+        buckets[idx, counts[idx]] = arr[i];
+        counts[idx]++;
+    }
+    result = genarray([n], 0);
+    pos = 0;
+    for (b = 0; b < n; b++) {
+        bkt = insertionSort(buckets[b, 0:counts[b]]);
+        for (i = 0; i < counts[b]; i++) {
+            result[pos++] = bkt[i];
+        }
+    }
+    return result;
+}
+
+int main() {
+    arr = [78, 17, 39, 26, 72, 94, 21, 12, 23, 68];
+    sorted = bucketSort(arr);
+    for (i = 0; i < shape(sorted)[0]; i++) {
+        printf("%d ", sorted[i]);
+    }
+    printf("\n");
+    return 0;
+}
