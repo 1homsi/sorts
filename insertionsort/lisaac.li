@@ -1,0 +1,20 @@
+Section Header + "";
+  Title : Lisaac Insertion Sort;
+  Author : ?;
+Section Inherit
+  Parent : OBJECT;
+Section Private
+Section Public
+  - insertionSort (arr : ARRAY[INT]) : ARRAY[INT] <- {
+    var n = arr.count;
+    (1).to(n - 1) do { |i|
+      var key = arr.at(i);
+      var j = i - 1;
+      {j >= 0 & {arr.at(j) > key}} whileTrue {
+        arr.put(j + 1, arr.at(j));
+        j := j - 1;
+      };
+      arr.put(j + 1, key);
+    };
+    arr
+  };
