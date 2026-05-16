@@ -1,0 +1,37 @@
+import amber_runtime
+
+fn countingsort(arr: [int]) -> [int] {
+  if arr.is_empty() {
+    return arr
+  }
+
+  var max = 0
+  for val in arr {
+    if val > max {
+      max = val
+    }
+  }
+
+  var count = new [int](max + 1)
+  for i in range(max + 1) {
+    count[i] = 0
+  }
+
+  for val in arr {
+    count[val] = count[val] + 1
+  }
+
+  var output = []
+  for i in range(max + 1) {
+    for _j in range(count[i]) {
+      output.append(i)
+    }
+  }
+
+  return output
+}
+
+fn main() {
+  var test = [5, 2, 8, 1, 9, 3]
+  println(countingsort(test))
+}
