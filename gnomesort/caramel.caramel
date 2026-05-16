@@ -1,0 +1,19 @@
+-module(gnome_sort).
+-export([sort/1]).
+
+sort(List) ->
+    Arr = list_to_tuple(List),
+    N = length(List),
+    tuple_to_list(loop(Arr, 0, N)).
+
+loop(Arr, I, N) when I >= N -> Arr;
+loop(Arr, 0, N) -> loop(Arr, 1, N);
+loop(Arr, I, N) ->
+    AI  = element(I + 1, Arr),
+    AI1 = element(I, Arr),
+    case AI >= AI1 of
+        true  -> loop(Arr, I + 1, N);
+        false ->
+            Arr2 = setelement(I + 1, setelement(I, Arr, AI), AI1),
+            loop(Arr2, I - 1, N)
+    end.
