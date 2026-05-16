@@ -1,0 +1,12 @@
+define: #quicksort &locals: [pivot less greater] as: {
+  x | (x size <= 1) ifTrue: [^ x].
+  pivot := x first.
+  less := {} settable.
+  greater := {} settable.
+  (x dropFirst) do: [| elem |
+    (elem <= pivot) ifTrue: [less += {elem}] ifFalse: [greater += {elem}]
+  ].
+  ^ ((quicksort applyTo: {less}) concatenateWith: {pivot}) concatenateWith: (quicksort applyTo: {greater})
+}.
+
+quicksort applyTo: {(5, 2, 8, 1, 9, 3) toVector}.
