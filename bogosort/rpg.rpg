@@ -1,40 +1,6 @@
-      H DFTACTGRP(*NO) ACTGRP(*NEW)
-      D ARR             S              5I 0 DIM(8)
-      D N               S              5I 0 INZ(8)
-      D I               S              5I 0
-      D J               S              5I 0
-      D TMP             S              5I 0
-      D SORTED          S               N
-      D RND             S              5I 0
-
-      C                   EVAL      ARR(1) = 3
-      C                   EVAL      ARR(2) = 1
-      C                   EVAL      ARR(3) = 4
-      C                   EVAL      ARR(4) = 1
-      C                   EVAL      ARR(5) = 5
-      C                   EVAL      ARR(6) = 9
-      C                   EVAL      ARR(7) = 2
-      C                   EVAL      ARR(8) = 6
-
-      C                   DOW       *IN10 = *OFF
-      C                   EVAL      SORTED = *ON
-      C                   DO        N - 1         I
-      C                   IF        ARR(I) > ARR(I + 1)
-      C                   EVAL      SORTED = *OFF
-      C                   ENDIF
-      C                   ENDDO
-      C                   IF        SORTED = *ON
-      C                   LEAVE
-      C                   ENDIF
-      C                   DO        N             I             DEC
-      C                   CALL      'QCMDEXC'
-      C                   EVAL      J = %REM(%ABS(%INT(I * 100)) : I) + 1
-      C                   EVAL      TMP = ARR(I)
-      C                   EVAL      ARR(I) = ARR(J)
-      C                   EVAL      ARR(J) = TMP
-      C                   ENDDO
-      C                   ENDDO
-      C                   DO        N             I
-      C                   DSPLY                   ARR(I)
-      C                   ENDDO
-      C                   EVAL      *INLR = *ON
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
