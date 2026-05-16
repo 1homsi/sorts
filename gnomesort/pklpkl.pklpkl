@@ -1,0 +1,7 @@
+module gnomesort
+
+amends "pkl:base"
+
+input: List<Int> = List(5, 3, 8, 1, 9, 2, 7, 4, 6, 0)
+
+sorted: List<Int> = input.toList().sort()
