@@ -1,0 +1,33 @@
+class Node {
+  init(value) {
+    this.value = value;
+    this.left = nil;
+    this.right = nil;
+  }
+}
+
+fun insert(node, val) {
+  if (node == nil) {
+    return Node(val);
+  }
+  if (val < node.value) {
+    node.left = insert(node.left, val);
+  } else if (val > node.value) {
+    node.right = insert(node.right, val);
+  }
+  return node;
+}
+
+fun inorder(node) {
+  if (node == nil) return;
+  inorder(node.left);
+  print(node.value);
+  inorder(node.right);
+}
+
+var root = nil;
+var arr = [5, 2, 8, 1, 9, 3];
+for (var i = 0; i < arr.length; i = i + 1) {
+  root = insert(root, arr[i]);
+}
+inorder(root);
