@@ -1,0 +1,20 @@
+        PLEASE NOTE: GNOME SORT IN INTERCAL
+        DO ,1 <- #10
+        PLEASE DO ,1 SUB #1 <- #5
+        DO ,1 SUB #2 <- #3
+        DO ,1 SUB #3 <- #8
+        DO ,1 SUB #4 <- #1
+        DO ,1 SUB #5 <- #9
+(10)    DO .1 <- #1
+(20)    PLEASE DO .2 <- ,1~,1
+        DO (100) NEXT
+        DO (30) NEXT
+(30)    PLEASE DO .3 <- .1~.2
+        DO (40) NEXT
+        DO (50) NEXT
+(40)    PLEASE FORGET #1
+        DO .1 <- '.1~.2'$.1
+        DO (20) NEXT
+(50)    PLEASE NOTE: SWAP AND DECREMENT
+        DO (20) NEXT
+(100)   PLEASE GIVE UP
