@@ -1,0 +1,21 @@
+def shellsort(arr as Array) as Array
+  var gap = 1
+  var n = arr.length()
+  while gap <= n
+    gap = gap * 3 + 1
+  end while
+  while gap > 0
+    gap = gap // 3
+    for i = gap to n - 1
+      var temp = arr[i]
+      var j = i
+      while j >= gap and arr[j - gap] > temp
+        arr[j] = arr[j - gap]
+        j = j - gap
+      end while
+      arr[j] = temp
+    end for
+  end while
+  return arr
+end
+print(shellsort([5, 2, 8, 1, 9, 3]))
