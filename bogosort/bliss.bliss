@@ -1,40 +1,6 @@
-MODULE bogosort(IDENT = '1.0') =
-BEGIN
-
-LITERAL
-    N = 8;
-
-OWN
-    arr : VECTOR [N] INITIAL (3, 1, 4, 1, 5, 9, 2, 6);
-
-ROUTINE is_sorted =
-BEGIN
-    DECR i FROM N-2 TO 0 DO
-        IF .arr[.i] GTR .arr[.i+1] THEN RETURN 0;
-    RETURN 1
-END;
-
-ROUTINE shuffle =
-BEGIN
-    LOCAL j, tmp;
-    DECR i FROM N-1 TO 1 DO
-    BEGIN
-        j = .i MOD (.i+1);
-        tmp = .arr[.i];
-        arr[.i] = .arr[.j];
-        arr[.j] = .tmp
-    END
-END;
-
-ROUTINE bogosort =
-BEGIN
-    UNTIL is_sorted() DO shuffle();
-END;
-
-bogosort();
-
-INCR i FROM 0 TO N-1 DO
-    $FAO ('!SL ', .arr[.i]);
-
-END
-ELUDOM
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
