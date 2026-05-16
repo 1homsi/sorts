@@ -1,0 +1,11 @@
+def bubble_sort(arr):
+  n = arr.length
+  for i in 0..(n-1):
+    for j in 0..(n-1-i-1):
+      if arr[j] > arr[j+1]:
+        temp = arr[j]
+        arr[j] = arr[j+1]
+        arr[j+1] = temp
+  return arr
+
+print(bubble_sort([5, 2, 8, 1, 9, 3]))
