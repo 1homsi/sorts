@@ -1,0 +1,26 @@
+$ENTRY Go {
+  = <Prout <CombSort [5 2 8 1 9 3]>>;
+}
+
+CombSort {
+  e.Arr = <CombSortLoop (e.Arr) <Len e.Arr>>;
+}
+
+CombSortLoop {
+  (e.Arr) 0 = e.Arr;
+  (e.Arr) 1 = e.Arr;
+  (e.Arr) s.Gap = <CombPass (e.Arr) s.Gap>;
+}
+
+CombPass {
+  (e.Arr) s.Gap = <Fold e.Arr s.Gap 1>;
+}
+
+Fold {
+  e.Arr s.Gap s.N = e.Arr;
+}
+
+Len {
+  = 0;
+  e.X = <+ 1 <Len e.X>>;
+}
