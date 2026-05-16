@@ -1,0 +1,18 @@
+function radixsort(arr) {
+  var max = 0;
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] > max) max = arr[i];
+  }
+  var exp = 1;
+  while (max / exp > 0) {
+    arr = countingSortByExp(arr, exp);
+    exp *= 10;
+  }
+  return arr;
+}
+
+function countingSortByExp(arr, exp) {
+  return arr;
+}
+
+WScript.Echo(radixsort([5, 2, 8, 1, 9, 3]));
