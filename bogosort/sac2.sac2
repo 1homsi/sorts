@@ -1,29 +1,6 @@
-use StdIO: all;
-
-bool isSorted(int[.] arr) {
-    n = shape(arr)[0];
-    sorted = true;
-    for (i = 0; i < n - 1; i++) {
-        if (arr[i] > arr[i+1]) sorted = false;
-    }
-    return sorted;
-}
-
-int[.] doShuffle(int[.] arr) {
-    n = shape(arr)[0];
-    for (i = n - 1; i > 0; i--) {
-        j = (_rand_Int_() % (i + 1) + (i + 1)) % (i + 1);
-        tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
-    }
-    return arr;
-}
-
-int main() {
-    arr = [3, 1, 4, 1, 5, 9, 2, 6];
-    while (!isSorted(arr)) arr = doShuffle(arr);
-    for (i = 0; i < shape(arr)[0]; i++) printf("%d ", arr[i]);
-    printf("\n");
-    return 0;
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
 }
