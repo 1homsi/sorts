@@ -1,0 +1,29 @@
+define void quicksort(array arr)
+{
+  auto len, i, j, pivot, temp;
+
+  len = length arr;
+  if (len <= 1) return;
+
+  pivot = arr[0];
+  i = 1;
+  j = len;
+
+  while (i < j) {
+    while (i < len && arr[i] <= pivot) i++;
+    while (j > 0 && arr[j] > pivot) j--;
+
+    if (i < j) {
+      temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+      i++;
+      j--;
+    }
+  }
+
+  print arr;
+}
+
+auto arr = [5, 2, 8, 1, 9, 3];
+quicksort(arr);
