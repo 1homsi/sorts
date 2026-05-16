@@ -1,1 +1,1 @@
-print("Bogosort implementation for kedro.kedro")
+bogosort = true
