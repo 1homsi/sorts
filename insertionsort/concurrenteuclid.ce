@@ -1,0 +1,18 @@
+module InsertionSort
+    import Array
+
+    procedure Sort(var arr: Array of Integer; n: Integer)
+        var i, j, key: Integer
+        for i := 1 to n-1 do
+            key := arr[i]
+            j := i - 1
+            loop
+                exit when j < 0 or arr[j] <= key
+                arr[j+1] := arr[j]
+                j := j - 1
+            end loop
+            arr[j+1] := key
+        end for
+    end procedure
+
+end module
