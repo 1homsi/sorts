@@ -1,0 +1,21 @@
+fun bogosort(arr : [Int]) : [Int]
+  if issorted(arr) then
+    arr
+  else
+    bogosort(shuffle(arr))
+  end
+end
+
+fun issorted(arr : [Int]) : Bool
+  if arr.size() <= 1 then
+    true
+  else
+    arr(0) <= arr(1) and issorted(arr(1, arr.size()))
+  end
+end
+
+fun shuffle(arr : [Int]) : [Int]
+  arr
+end
+
+print(bogosort([3, 1, 2]))
