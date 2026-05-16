@@ -1,0 +1,26 @@
+comb_sort(Arr, N, Sorted) :-
+    comb_loop(Arr, N, N, Sorted).
+
+comb_loop(Arr, N, Gap, Sorted) :-
+    NewGap is max(1, truncate(Gap / 1.3)),
+    comb_pass(Arr, N, NewGap, 0, Arr2, Changed),
+    (NewGap =:= 1, Changed =:= 0 ->
+        Sorted = Arr2
+    ;
+        comb_loop(Arr2, N, NewGap, Sorted)
+    ).
+
+comb_pass(Arr, N, Gap, I, Arr, 0) :-
+    I + Gap >= N.
+comb_pass(Arr, N, Gap, I, ArrOut, Changed) :-
+    I + Gap < N,
+    nth(I, Arr, A),
+    J is I + Gap,
+    nth(J, Arr, B),
+    (A > B ->
+        swap_elements(Arr, I, J, Arr2),
+        comb_pass(Arr2, N, Gap, I+1, ArrOut, _),
+        Changed = 1
+    ;
+        comb_pass(Arr, N, Gap, I+1, ArrOut, Changed)
+    ).
