@@ -1,0 +1,4 @@
+g.inject([3,7,4,8,6,2,1,5]).
+  unfold().
+  order().by(asc).
+  fold()
