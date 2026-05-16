@@ -1,0 +1,10 @@
+
+    RUN TIMSORT;
+    
+    PROCEDURE TIMSORT;
+    BEGIN
+      [5 2 8 1 9 3] -> ARR;
+      32 -> MINSIZE;
+      MERGESORT ARR MINSIZE -> RESULT;
+      DISPLAY RESULT;
+    END;
