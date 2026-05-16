@@ -1,0 +1,17 @@
+CREATE arr 5 , 3 , 8 , 1 , 9 , 2 , 7 , 4 , 6 , 0 ,
+
+: arr@ ( i -- n ) cells arr + @ ;
+: arr! ( n i -- ) cells arr + ! ;
+
+: gnome-sort ( n -- )
+    0  ( n i )
+    BEGIN 2dup < WHILE
+        dup 0= IF 1+ ELSE
+            dup arr@ over 1- arr@ >= IF 1+ ELSE
+                dup arr@ over 1- arr@ over 1- arr! over arr!
+                1-
+            THEN
+        THEN
+    REPEAT 2drop ;
+
+10 gnome-sort
