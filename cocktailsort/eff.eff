@@ -1,0 +1,33 @@
+let cocktailsort arr =
+  let n = Array.length arr in
+  let i = ref 0 in
+  while !i < n do
+    let swapped = ref false in
+    for k = 0 to n - !i - 2 do
+      if arr.(k) > arr.(k + 1) then begin
+        let temp = arr.(k) in
+        arr.(k) <- arr.(k + 1);
+        arr.(k + 1) <- temp;
+        swapped := true
+      end
+    done;
+    if not !swapped then () else begin
+      swapped := false;
+      for k = n - !i - 2 downto 0 do
+        if arr.(k) > arr.(k + 1) then begin
+          let temp = arr.(k) in
+          arr.(k) <- arr.(k + 1);
+          arr.(k + 1) <- temp;
+          swapped := true
+        end
+      done
+    end;
+    incr i
+  done;
+  arr
+
+let () =
+  let arr = [|5; 2; 8; 1; 9; 3|] in
+  let _ = cocktailsort arr in
+  Array.iter (Printf.printf "%d ") arr;
+  Printf.printf "\n"
