@@ -1,0 +1,12 @@
+[5 2 8 1 9 3]d:A
+6d:n
+A n dup d:A 1-d:gap
+{gap 1> swapped or}
+{gap 10*13/d:gap gap 1< {1d:gap}if
+ 0d:i
+ {i A n gap - < i A n gap - <}
+ {A i ][ A i gap + ][ > {A i gap + A i ][ ][ A i ][ ][ ][ A i gap + ][1d:swapped}if
+  i 1+d:i}
+ #
+}
+# A .
