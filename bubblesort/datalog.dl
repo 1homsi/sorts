@@ -1,0 +1,8 @@
+.decl input(pos: number, val: number)
+input(1, 64). input(2, 34). input(3, 25). input(4, 12).
+input(5, 22). input(6, 11). input(7, 90).
+
+.decl sorted(pos: number, val: number)
+sorted(pos, val) :- input(_, val), pos = count : { input(_, v) : v < val } + 1.
+
+.output sorted
