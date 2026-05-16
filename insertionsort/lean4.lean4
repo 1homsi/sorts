@@ -1,0 +1,9 @@
+def insert (x : Int) : List Int → List Int
+  | [] => [x]
+  | h :: t => if x ≤ h then x :: h :: t else h :: insert x t
+
+def insertionSort : List Int → List Int
+  | [] => []
+  | h :: t => insert h (insertionSort t)
+
+#eval insertionSort [5, 3, 1, 4, 2]
