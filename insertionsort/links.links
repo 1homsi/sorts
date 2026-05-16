@@ -1,0 +1,15 @@
+fun insertSorted(x, lst) {
+    switch lst {
+        case [] -> [x]
+        case h :: t ->
+            if (x <= h) x :: h :: t
+            else h :: insertSorted(x, t)
+    }
+}
+
+fun insertionSort(lst) {
+    switch lst {
+        case [] -> []
+        case h :: t -> insertSorted(h, insertionSort(t))
+    }
+}
