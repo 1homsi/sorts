@@ -1,0 +1,25 @@
+environ
+
+begin :: GnomeSort
+
+definition
+  let i be Nat,
+      arr be FinSequence of INT;
+  attr arr is gnomesorted means
+  for i,j being Nat st 1 <= i & i < j & j <= len arr
+  holds arr.i <= arr.j;
+end;
+
+theorem Th1:
+  for arr being FinSequence of INT
+  holds arr is gnomesorted iff
+  for i,j being Nat st 1 <= i & i < j & j <= len arr
+  holds arr.i <= arr.j;
+proof
+  let arr be FinSequence of INT;
+  thus arr is gnomesorted iff
+  for i,j being Nat st 1 <= i & i < j & j <= len arr
+  holds arr.i <= arr.j by definition;
+end;
+
+end
