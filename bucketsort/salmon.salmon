@@ -1,0 +1,12 @@
+def bucket_sort(arr: [Int], max_val: Int) -> [Int] {
+    var buckets = Array.new(max_val) { Array.new() }
+    for num in arr:
+        if num >= 0 and num < max_val:
+            buckets[num].add(num)
+    var result = Array.new()
+    for bucket in buckets:
+        for num in bucket:
+            result.add(num)
+    return result
+}
+print(bucket_sort([5, 2, 8, 1, 9, 3], 10))
