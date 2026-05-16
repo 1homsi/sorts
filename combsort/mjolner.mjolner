@@ -1,0 +1,28 @@
+ORIGIN '~beta/basiclib/betaenv';
+
+BODY CombSort
+(# sort:
+   (# arr: ^IntArray; n: @Integer
+   enter (arr[], n)
+   do
+     (# gap, i, tmp: @Integer; sorted: @Boolean
+     do n -> gap;
+        false -> sorted;
+        (sorted not) repeat
+            (gap * 10 / 13 -> gap);
+            (gap <= 1) -> (if true // 1 -> gap; true -> sorted if);
+            1 -> i;
+            (i + gap <= n) repeat
+                (arr[i] > arr[i+gap]) -> (if true //
+                    arr[i] -> tmp;
+                    arr[i+gap] -> arr[i];
+                    tmp -> arr[i+gap];
+                    false -> sorted
+                if);
+                i + 1 -> i
+            until (i + gap > n)
+        until sorted
+     #)
+   exit arr[]
+   #);
+#)
