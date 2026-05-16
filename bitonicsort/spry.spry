@@ -1,0 +1,31 @@
+bitonicsort := { arr lo cnt dir |
+    cnt > 1 ifTrue: {
+        | k |
+        k := cnt / 2.
+        bitonicsort call(arr, lo, k, 1).
+        bitonicsort call(arr, lo + k, k, 0).
+        bitonicmerge call(arr, lo, cnt, dir).
+    }
+}.
+
+bitonicmerge := { arr lo cnt dir |
+    cnt > 1 ifTrue: {
+        | k i tmp |
+        k := cnt / 2.
+        i := lo.
+        [i < (lo + cnt - k)] whileTrue: {
+            ((arr at(i)) > (arr at(i + k))) == (dir = 1) ifTrue: {
+                tmp := arr at(i).
+                arr atPut(i, arr at(i + k)).
+                arr atPut(i + k, tmp).
+            }.
+            i := i + 1.
+        }.
+        bitonicmerge call(arr, lo, k, dir).
+        bitonicmerge call(arr, lo + k, k, dir).
+    }
+}.
+
+arr := array(5, 2, 8, 1, 9, 3, 7, 4).
+bitonicsort call(arr, 0, 8, 1).
+arr println.
