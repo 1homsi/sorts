@@ -1,0 +1,20 @@
+(define (cocktailsort arr)
+  (define (iter i swapped)
+    (if (= i (vector-length arr))
+      arr
+      (begin
+        (vector-set! swapped 0 #f)
+        (do ((k 0 (+ k 1)))
+          ((>= k (- (vector-length arr) i 1)))
+          (if (> (vector-ref arr k) (vector-ref arr (+ k 1)))
+            (let ((temp (vector-ref arr k)))
+              (vector-set! arr k (vector-ref arr (+ k 1)))
+              (vector-set! arr (+ k 1) temp)
+              (vector-set! swapped 0 #t))))
+        (if (not (vector-ref swapped 0))
+          arr
+          (iter (+ i 1) swapped)))))
+  (iter 0 (vector #f)))
+
+(display (cocktailsort (vector 5 2 8 1 9 3)))
+(newline)
