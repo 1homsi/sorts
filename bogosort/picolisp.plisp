@@ -1,17 +1,2 @@
-(de is-sorted (Lst)
-   (or
-      (not Lst)
-      (not (cdr Lst))
-      (and
-         (<= (car Lst) (cadr Lst))
-         (is-sorted (cdr Lst)))))
-
-(de shuffle (Lst)
-   (by '(NIL (rand)) sort Lst))
-
-(de bogosort (Lst)
-   (if (is-sorted Lst)
-      Lst
-      (bogosort (shuffle Lst))))
-
-(println (bogosort (3 1 4 1 5 9 2 6)))
+(defun bogosort (lst)
+  (if (sortedp lst) lst (bogosort (shuffle lst))))
