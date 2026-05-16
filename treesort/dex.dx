@@ -1,0 +1,4 @@
+
+def treeSort (arr:Fin(6) => Int) : Unit =
+  for i in arr
+    print i
