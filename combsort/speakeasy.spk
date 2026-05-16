@@ -1,0 +1,22 @@
+PROCEDURE COMBSORT(A, N)
+  GAP = N
+  SWAPPED = 1
+  REPEAT
+    GAP = INT(GAP * 10 / 13)
+    IF GAP < 1 THEN GAP = 1
+    SWAPPED = 0
+    DO I = 1 TO N - GAP
+      IF A(I) > A(I + GAP) THEN
+        TEMP = A(I)
+        A(I) = A(I + GAP)
+        A(I + GAP) = TEMP
+        SWAPPED = 1
+      END IF
+    END DO
+  UNTIL GAP EQ 1 AND SWAPPED EQ 0
+  RETURN A
+END
+
+ARRAY A(6) = [5, 2, 8, 1, 9, 3]
+CALL COMBSORT(A, 6)
+TYPE A
