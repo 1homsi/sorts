@@ -1,0 +1,33 @@
+radixsort = { list |
+  local(max exp);
+  max = 0;
+  list each { if (. > max) max = . };
+  exp = 1;
+  { max / exp > 0 } while {
+    list = list countingSortByExp(exp);
+    exp = exp * 10;
+  };
+  return list;
+};
+
+countingSortByExp = { list exp |
+  local(n output count i idx);
+  n = list size;
+  output = Array(n);
+  count = Array(10);
+  list each { |i x|
+    idx = (x / exp) % 10;
+    count(idx) = count(idx) + 1;
+  };
+  1 to: 10 do { |i|
+    count(i) = count(i) + count(i - 1);
+  };
+  (n - 1) downto: 0 do { |i|
+    idx = (list(i) / exp) % 10;
+    output(count(idx) - 1) = list(i);
+    count(idx) = count(idx) - 1;
+  };
+  return output;
+};
+
+[5 2 8 1 9 3] radixsort println;
