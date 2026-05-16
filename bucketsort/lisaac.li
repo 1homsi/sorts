@@ -1,0 +1,23 @@
+Section Header
++ name := BUCKET_SORT;
+- bucket_sort (arr: ARRAY[INTEGER], max_val: INTEGER): ARRAY[INTEGER] <- (
+  + buckets: ARRAY[ARRAY[INTEGER]];
+  + result: ARRAY[INTEGER];
+  + i: INTEGER;
+  buckets := ARRAY[ARRAY[INTEGER]].create 0 to (max_val - 1);
+  (0).to (max_val - 1) do { |j|
+    buckets.put (ARRAY[INTEGER].create 0) to j;
+  };
+  arr.do { |num|
+    ((num >= 0) & (num < max_val)).if {
+      buckets.item(num).put num;
+    };
+  };
+  result := ARRAY[INTEGER].create 0;
+  buckets.do { |bucket|
+    bucket.do { |num|
+      result.put num;
+    };
+  };
+  result
+);
