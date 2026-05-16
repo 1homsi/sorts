@@ -1,0 +1,23 @@
+arr     TETRA   5,3,8,1,9,2,7,4,6,0
+n       IS      10
+
+        LOC #100
+Main    GETA    $0,arr
+        SET     $1,n
+        SET     $2,0
+Loop    CMP     $3,$2,$1
+        BNN     $3,Done
+        BZ      $2,Adv
+        SL      $3,$2,2
+        ADD     $4,$0,$3
+        LDTU    $5,$4,0
+        LDTU    $6,$4,-4
+        CMP     $7,$5,$6
+        BNN     $7,Adv
+        STTU    $6,$4,0
+        STTU    $5,$4,-4
+        SUB     $2,$2,1
+        JMP     Loop
+Adv     ADD     $2,$2,1
+        JMP     Loop
+Done    TRAP    0,Halt,0
