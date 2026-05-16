@@ -1,0 +1,25 @@
+activity gnomesort (arr:IntArray) {
+  var i = 0;
+  var temp = 0;
+
+  while (i < arr.length) {
+    if (i == 0) {
+      i = i + 1;
+    } else if (arr[i] < arr[i - 1]) {
+      temp = arr[i];
+      arr[i] = arr[i - 1];
+      arr[i - 1] = temp;
+      i = i - 1;
+    } else {
+      i = i + 1;
+    }
+  }
+}
+
+main {
+  var test = [5, 2, 8, 1, 9, 3];
+  gnomesort(test);
+  for i in 0..5 {
+    print test[i];
+  }
+}
