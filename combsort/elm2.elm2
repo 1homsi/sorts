@@ -1,0 +1,32 @@
+module CombSort2 exposing (combSort)
+
+import Array exposing (Array, get, set, length)
+
+combSort : Array Int -> Array Int
+combSort arr =
+    let
+        n = length arr
+    in
+    sortLoop arr n
+
+sortLoop : Array Int -> Int -> Array Int
+sortLoop arr gap =
+    let
+        g = max 1 (floor (toFloat gap / 1.3))
+        (arr2, changed) = doPass arr g 0 (length arr) False
+    in
+    if g == 1 && not changed then arr2
+    else sortLoop arr2 g
+
+doPass : Array Int -> Int -> Int -> Int -> Bool -> (Array Int, Bool)
+doPass arr gap i n changed =
+    if i + gap >= n then (arr, changed)
+    else
+        case (get i arr, get (i + gap) arr) of
+            (Just a, Just b) ->
+                if a > b then
+                    let arr2 = set i b (set (i + gap) a arr)
+                    in doPass arr2 gap (i + 1) n True
+                else
+                    doPass arr gap (i + 1) n changed
+            _ -> doPass arr gap (i + 1) n changed
