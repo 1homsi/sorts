@@ -1,0 +1,39 @@
+(define $timsort
+  (lambda [$arr $minSize]
+    (mergesort arr minSize)))
+
+(define $mergesort
+  (lambda [$arr $minSize]
+    (if (<= (length arr) 1)
+      arr
+      (if (<= (length arr) minSize)
+        (insertionsort arr)
+        (let {[$mid (quotient (length arr) 2)]
+              [$left (take mid arr)]
+              [$right (drop mid arr)]}
+          (merge (mergesort left minSize) (mergesort right minSize)))))))
+
+(define $insertionsort
+  (lambda [$arr]
+    (loop $i 1 (length arr)
+      (lambda [$result]
+        (let {[$key (ith (- i 1) result)]
+              [$j (- i 2)]}
+          (loop $j (- i 2) 0
+            (lambda [$res]
+              (if (and (>= j 0) (> (ith j res) key))
+                (cons (ith (- j 1) res) (ith j res))
+                res)))))
+      arr)))
+
+(define $merge
+  (lambda [$left $right]
+    (cond
+      [(empty? left) right]
+      [(empty? right) left]
+      [(match (car left) (car right))
+       (cons (car left) (merge (cdr left) right))]
+      [else
+       (cons (car right) (merge left (cdr right)))])))
+
+(timsort [5 2 8 1 9 3] 32)
