@@ -1,0 +1,15 @@
+fun insertionSort(arr: array[int]): array[int] = {
+  val n = arr.len();
+  for i in 1 upto n do
+    val key = arr.(i-1);
+    var j = i - 2;
+    while j >= 0 && arr.(j) > key do
+      arr.(j+1) <- arr.(j);
+      j -= 1;
+    done
+    arr.(j+1) <- key;
+  done
+  return arr;
+}
+
+println$ insertionSort([5, 2, 8, 1, 9, 3]);
