@@ -1,0 +1,33 @@
+program bitonic_sort;
+
+procedure compare_and_swap(rw arr, i, j, dir);
+    ai := arr(i); aj := arr(j);
+    if dir = (ai > aj) then
+        arr(i) := aj; arr(j) := ai;
+    end if;
+end procedure;
+
+procedure bitonic_merge(rw arr, lo, cnt, dir);
+    if cnt > 1 then
+        k := cnt div 2;
+        for i in [lo..lo+k-1] loop
+            compare_and_swap(arr, i, i+k, dir);
+        end loop;
+        bitonic_merge(arr, lo, k, dir);
+        bitonic_merge(arr, lo+k, k, dir);
+    end if;
+end procedure;
+
+procedure bitonic_sort(rw arr, lo, cnt, dir);
+    if cnt > 1 then
+        k := cnt div 2;
+        bitonic_sort(arr, lo, k, true);
+        bitonic_sort(arr, lo+k, k, false);
+        bitonic_merge(arr, lo, cnt, dir);
+    end if;
+end procedure;
+
+data := [3, 7, 4, 8, 6, 2, 1, 5];
+bitonic_sort(data, 1, #data, true);
+print(data);
+end program;
