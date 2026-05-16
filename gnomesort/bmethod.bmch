@@ -1,0 +1,21 @@
+MACHINE GnomeSort
+VARIABLES arr, i, n
+INVARIANT
+    arr : seq(INTEGER) &
+    i : NATURAL &
+    n : NATURAL &
+    n = size(arr)
+INITIALISATION
+    arr := [5, 3, 8, 1, 9, 2, 7, 4, 6, 0] ||
+    n := 10 ||
+    i := 1
+OPERATIONS
+    Advance = PRE i <= n & (i = 1 or arr(i) >= arr(i-1)) THEN
+        i := i + 1
+    END;
+    Swap = PRE i > 1 & arr(i) < arr(i-1) THEN
+        arr(i) := arr(i-1) ||
+        arr(i-1) := arr(i) ||
+        i := i - 1
+    END
+END
