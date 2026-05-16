@@ -1,0 +1,40 @@
+fn heapify(arr: &mut array, n: int, i: int) -> bool
+    let largest: int = $i
+    let left: int = mul 2 $i | add 1
+    let right: int = mul 2 $i | add 2
+    if test $left -lt $n; and test $arr[$left] -gt $arr[$largest]
+        let largest: int = $left
+    end
+    if test $right -lt $n; and test $arr[$right] -gt $arr[$largest]
+        let largest: int = $right
+    end
+    if test $largest -ne $i
+        let tmp: int = $arr[$i]
+        let arr[$i]: int = $arr[$largest]
+        let arr[$largest]: int = $tmp
+        heapify $arr $n $largest
+    end
+    return true
+end
+
+fn heapsort(arr: &mut array) -> bool
+    let n: int = len $arr
+    let i: int = sub (div $n 2) 1
+    while test $i -ge 0
+        heapify $arr $n $i
+        let i: int = sub $i 1
+    end
+    let i: int = sub $n 1
+    while test $i -gt 0
+        let tmp: int = $arr[0]
+        let arr[0]: int = $arr[$i]
+        let arr[$i]: int = $tmp
+        heapify $arr $i 0
+        let i: int = sub $i 1
+    end
+    return true
+end
+
+let arr: array = [12 11 13 5 6 7]
+heapsort arr
+echo @arr
