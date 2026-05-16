@@ -1,0 +1,18 @@
+interface Radixsort is
+  func radixsort(arr : Array<Int>) -> Array<Int>;
+end interface Radixsort;
+
+class Radixsort is
+  exports
+    func radixsort(arr : Array<Int>) -> Array<Int> is
+      var max = 0;
+      for x in arr loop
+        if x > max then max := x; end if;
+      end loop;
+      var exp = 1;
+      while max / exp > 0 loop
+        exp := exp * 10;
+      end loop;
+      return arr;
+    end func radixsort;
+end class Radixsort;
