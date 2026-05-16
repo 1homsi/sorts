@@ -1,0 +1,1 @@
+grep -n "" input.txt | sort -t: -k2 -n | cut -d: -f2-
