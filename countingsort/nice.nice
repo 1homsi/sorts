@@ -1,0 +1,26 @@
+int[] countingsort(int[] arr) {
+  if (arr.length == 0) return arr;
+
+  int max = 0;
+  for (int x : arr) {
+    if (x > max) max = x;
+  }
+
+  int[] count = new int[max + 1];
+  for (int x : arr) {
+    count[x]++;
+  }
+
+  int[] output = new int[0];
+  for (int i = 0; i <= max; i++) {
+    for (int j = 0; j < count[i]; j++) {
+      output = output + [i];
+    }
+  }
+
+  return output;
+}
+
+void main(String[] args) {
+  println(countingsort([5, 2, 8, 1, 9, 3]));
+}
