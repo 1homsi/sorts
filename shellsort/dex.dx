@@ -1,0 +1,19 @@
+def shellsort (arr : n.Fin => Int) : n.Fin => Int =
+  arr_copy = copy arr
+  gap = 1
+  gap = while {gap <= size arr} {gap * 3 + 1}
+  while {gap > 0} {
+    gap = gap / 3
+    i = 0
+    while {i < size arr} {
+      temp = arr_copy[i]
+      j = i
+      while {j >= gap && arr_copy[j - gap] > temp} {
+        arr_copy[j] = arr_copy[j - gap]
+        j = j - gap
+      }
+      arr_copy[j] = temp
+      i = i + 1
+    }
+  }
+  arr_copy
