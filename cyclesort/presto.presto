@@ -1,0 +1,11 @@
+WITH input_data AS (
+    SELECT * FROM (VALUES (0,5),(1,4),(2,3),(3,2),(4,1)) AS t(idx, val)
+),
+ranked AS (
+    SELECT val,
+           COUNT(*) OVER (ORDER BY val ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING) AS pos
+    FROM input_data
+)
+SELECT pos, val
+FROM ranked
+ORDER BY pos NULLS FIRST;
