@@ -1,0 +1,9 @@
+fun insert(x: int, xs: list<int>): list<int>
+  match xs
+    Nil -> [x]
+    Cons(h, t) -> if x <= h then Cons(x, Cons(h, t)) else Cons(h, insert(x, t))
+
+fun insertion-sort(xs: list<int>): list<int>
+  match xs
+    Nil -> Nil
+    Cons(h, t) -> insert(h, insertion-sort(t))
