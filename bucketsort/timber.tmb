@@ -1,0 +1,16 @@
+module BucketSort where
+bucketSort :: [Int] -> Int -> [Int]
+bucketSort arr maxVal
+  | maxVal == 0 = arr
+  | otherwise = collectBuckets buckets
+  where
+    buckets = initBuckets maxVal
+    initBuckets 0 = []
+    initBuckets n = [] : initBuckets (n - 1)
+    putInBucket idx num = take idx buckets ++ 
+                          [num : buckets !! idx] ++ 
+                          drop (idx + 1) buckets
+    collectBuckets [] = []
+    collectBuckets (b:bs) = b ++ collectBuckets bs
+
+main = print (bucketSort [5, 2, 8, 1, 9, 3] 10)
