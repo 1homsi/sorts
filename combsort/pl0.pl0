@@ -1,0 +1,38 @@
+var arr, gap, i, len, temp, swapped;
+
+begin
+  arr := 5;
+  arr := 2;
+  arr := 8;
+  arr := 1;
+  arr := 9;
+  arr := 3;
+  len := 6;
+  gap := len;
+
+  while gap > 1 or swapped = 1 do
+  begin
+    gap := (gap * 10) / 13;
+    if gap < 1 then gap := 1;
+    swapped := 0;
+    i := 0;
+    while i < len - gap do
+    begin
+      if arr[i] > arr[i + gap] then
+      begin
+        temp := arr[i];
+        arr[i] := arr[i + gap];
+        arr[i + gap] := temp;
+        swapped := 1;
+      end;
+      i := i + 1;
+    end;
+  end;
+
+  i := 0;
+  while i < 6 do
+  begin
+    ! arr[i];
+    i := i + 1;
+  end;
+end.
