@@ -1,0 +1,25 @@
+module INSERTION_SORT:
+input TICK;
+output SORTED_STEP;
+
+var arr := {5, 3, 1, 4, 2} : integer array in
+var n := 5 : integer in
+var i := 1, j := 0, key := 0 : integer in
+  loop
+    await TICK;
+    if i < n then
+      key := arr[i];
+      j := i - 1;
+      loop
+        if j >= 0 and arr[j] > key then
+          arr[j+1] := arr[j];
+          j := j - 1;
+          emit SORTED_STEP
+        end if
+      each TICK;
+      arr[j+1] := key;
+      i := i + 1
+    end if
+  each TICK
+end var end var end var
+end module
