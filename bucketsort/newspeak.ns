@@ -1,0 +1,43 @@
+class BucketSort usingPlatform: platform = (
+    |
+        private List = platform collections List.
+    |
+)(
+    public insertionSort: bucket = (
+        | n key j |
+        n:: bucket size.
+        1 to: n - 1 do: [:i |
+            key:: bucket at: i.
+            j:: i - 1.
+            [j >= 0 and: [(bucket at: j) > key]] whileTrue: [
+                bucket at: j + 1 put: (bucket at: j).
+                j:: j - 1.
+            ].
+            bucket at: j + 1 put: key.
+        ].
+        bucket
+    )
+
+    public sort: arr = (
+        | n minV maxV buckets result idx |
+        n:: arr size.
+        n = 0 ifTrue: [^arr].
+        minV:: arr first.
+        maxV:: arr first.
+        arr do: [:v |
+            v < minV ifTrue: [minV:: v].
+            v > maxV ifTrue: [maxV:: v].
+        ].
+        buckets:: Array new: n withAll: [List new].
+        arr do: [:num |
+            idx:: ((num - minV) / (maxV - minV + 1) * n) truncated.
+            idx >= n ifTrue: [idx:: n - 1].
+            (buckets at: idx + 1) add: num.
+        ].
+        result:: List new.
+        buckets do: [:b |
+            (self insertionSort: b asArray) do: [:v | result add: v].
+        ].
+        result
+    )
+)
