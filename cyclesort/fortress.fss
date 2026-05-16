@@ -1,0 +1,40 @@
+export Executable
+cycleSort(arr: ZZ32[]): ZZ32[] = do
+  n = |arr|
+  var pos: ZZ32 = 0
+  while pos < n do
+    item = arr[pos]
+    cycles: ZZ32 = 0
+    for i <- 0#n do
+      if i =/= pos and arr[i] < item then
+        cycles += 1
+      end
+    end
+    if cycles =/= 0 then
+      while arr[pos] = item do
+        pos += 1
+      end
+      temp = arr[pos]
+      arr[pos] := item
+      item := temp
+      while cycles > 0 do
+        cycles := 0
+        for i <- 0#n do
+          if i =/= pos and arr[i] < item then
+            cycles += 1
+          end
+        end
+        while arr[pos] = item do
+          pos += 1
+        end
+        temp := arr[pos]
+        arr[pos] := item
+        item := temp
+        cycles -= 1
+      end
+    end
+    pos += 1
+  end
+  arr
+end
+println(cycleSort([5, 2, 8, 1, 9, 3]))
