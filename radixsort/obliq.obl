@@ -1,0 +1,19 @@
+proc RadixSort(arr) is
+  {
+    var max = Max(arr);
+    var exp = 1;
+    while max / exp > 0 do
+      arr := CountingSortByExp(arr, exp);
+      exp := exp * 10;
+    od;
+    return arr;
+  }
+end;
+
+proc CountingSortByExp(arr, exp) is
+  {
+    return arr;
+  }
+end;
+
+out << RadixSort([5, 2, 8, 1, 9, 3]);
