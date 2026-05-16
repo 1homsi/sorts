@@ -1,0 +1,27 @@
+MODULE GNOMESORT;
+VAR ARR (6) INT INIT (5, 2, 8, 1, 9, 3);
+VAR I INT;
+VAR TEMP INT;
+VAR N INT INIT 6;
+
+I = 0;
+WHILE I < N
+  IF I = 0 THEN
+    I = I + 1;
+  ELSE
+    IF ARR(I) < ARR(I - 1) THEN
+      TEMP = ARR(I);
+      ARR(I) = ARR(I - 1);
+      ARR(I - 1) = TEMP;
+      I = I - 1;
+    ELSE
+      I = I + 1;
+    ENDIF;
+  ENDIF;
+ENDWHILE;
+
+FOR I = 0 TO N - 1
+  WRITE ARR(I);
+ENDFOR;
+
+END.
