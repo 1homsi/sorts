@@ -1,0 +1,20 @@
+(define: #gnomesort [| :arr |
+  (var: #i := 0).
+  [(i < (arr length))] whileTrue: [
+    (i = 0)
+      ifTrue: [(i: i + 1)]
+      ifFalse: [
+        ((arr at: i) < (arr at: i - 1))
+          ifTrue: [
+            (var: #temp := (arr at: i)).
+            (arr at: i) := (arr at: i - 1).
+            (arr at: i - 1) := temp.
+            (i: i - 1)
+          ]
+          ifFalse: [(i: i + 1)]
+      ]
+  ].
+  arr
+]).
+
+((Array with: 5 with: 2 with: 8 with: 1 with: 9 with: 3) gnomesort) print.
