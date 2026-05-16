@@ -1,0 +1,36 @@
+use std
+
+fn countingsort(arr : int[:]) : int[:] =
+  if arr.len == 0
+    -> arr
+  ;;
+
+  var max = 0
+  for x in arr
+    if x > max
+      max = x
+    ;;
+  ;;
+
+  var count : int[int:] = [:]
+  for i = 0; i <= max; i++
+    count[i] = 0
+  ;;
+
+  for x in arr
+    count[x] += 1
+  ;;
+
+  var output : int[:] = []
+  for i = 0; i <= max; i++
+    for j = 0; j < count[i]; j++
+      output = std.slput(output, i)
+    ;;
+  ;;
+
+  -> output
+;;
+
+const main = {
+  std.put("Result: {}\n", countingsort([5, 2, 8, 1, 9, 3]))
+}
