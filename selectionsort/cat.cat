@@ -1,0 +1,22 @@
+def selection_sort
+  dup length :n
+  0 :i
+  [ i n 1 sub lt ]
+  [ i dup 1 add :j
+    [ j n lt ]
+    [ j dup arr get i dup arr get lt
+      [ j :min_idx ]
+      [ ]
+      if
+      j 1 add :j
+    ]
+    while
+    i dup arr get min_idx dup arr get swap
+    i arr set-at
+    min_idx arr set-at
+    i 1 add :i
+  ]
+  while
+end
+
+[5 2 8 1 9 3] selection_sort print
