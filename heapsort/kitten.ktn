@@ -1,0 +1,36 @@
+define heapsort (arr n -- arr)
+  n 2 / 1 - as i
+  (i 0 >= ) {
+    arr i n siftdown -> arr
+    i 1 - as i
+  } while
+  n 1 - as i
+  (i 0 > ) {
+    arr 0 get
+    arr i get -> temp
+    arr 0 temp set -> arr
+    arr i 0 get set -> arr
+    arr 0 i siftdown -> arr
+    i 1 - as i
+  } while
+  arr ;
+
+define siftdown (arr idx n -- arr)
+  idx as largest
+  2 idx * 1 + as left
+  2 idx * 2 + as right
+  (left n < arr left get arr largest get > &&) {
+    left as largest
+  } ?
+  (right n < arr right get arr largest get > &&) {
+    right as largest
+  } ?
+  (largest idx != ) {
+    arr idx get arr largest get -> temp
+    arr idx temp set -> arr
+    arr largest 0 get set -> arr
+    arr largest n siftdown -> arr
+  } ?
+  arr ;
+
+[5 2 8 1 9 3] 6 heapsort print
