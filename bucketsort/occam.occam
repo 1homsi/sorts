@@ -1,0 +1,67 @@
+-- Occam Bucket Sort
+
+PROC insertion.sort ([]INT bucket, VAL INT n)
+  INT key, j:
+  SEQ i = 1 FOR n - 1
+    key := bucket[i]
+    j := i - 1
+    WHILE (j >= 0) AND (bucket[j] > key)
+      SEQ
+        bucket[j + 1] := bucket[j]
+        j := j - 1
+    bucket[j + 1] := key
+:
+
+PROC bucket.sort ([]INT arr, VAL INT n)
+  INT min.v, max.v, idx, pos, range:
+  [10][10]INT buckets:
+  [10]INT counts:
+  SEQ
+    min.v := arr[0]
+    max.v := arr[0]
+    SEQ i = 0 FOR n
+      IF
+        arr[i] < min.v
+          min.v := arr[i]
+        arr[i] > max.v
+          max.v := arr[i]
+        TRUE
+          SKIP
+    range := max.v - min.v + 1
+    SEQ i = 0 FOR n
+      counts[i] := 0
+    SEQ i = 0 FOR n
+      SEQ
+        idx := (arr[i] - min.v) * n / range
+        IF
+          idx >= n
+            idx := n - 1
+          TRUE
+            SKIP
+        buckets[idx][counts[idx]] := arr[i]
+        counts[idx] := counts[idx] + 1
+    pos := 0
+    SEQ b = 0 FOR n
+      SEQ
+        insertion.sort (buckets[b], counts[b])
+        SEQ i = 0 FOR counts[b]
+          SEQ
+            arr[pos] := buckets[b][i]
+            pos := pos + 1
+:
+
+INT arr[10]:
+SEQ
+  arr[0] := 78
+  arr[1] := 17
+  arr[2] := 39
+  arr[3] := 26
+  arr[4] := 72
+  arr[5] := 94
+  arr[6] := 21
+  arr[7] := 12
+  arr[8] := 23
+  arr[9] := 68
+  bucket.sort (arr, 10)
+  SEQ i = 0 FOR 10
+    out.int (arr[i], 0, stdout)
