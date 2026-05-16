@@ -1,0 +1,17 @@
+GnomeSort
+arr : seq ℤ
+n : ℕ
+i : ℕ
+
+n = #arr
+∀ k : 1..n-1 • arr(k) ≤ arr(k+1)
+
+INIT
+arr = ⟨5, 3, 8, 1, 9, 2, 7, 4, 6, 0⟩
+n = 10
+i = 1
+
+STEP
+(i = 1 ∨ arr(i) ≥ arr(i-1)) ∧ i' = i + 1
+∨
+arr(i) < arr(i-1) ∧ arr' = arr ⊕ {i ↦ arr(i-1), i-1 ↦ arr(i)} ∧ i' = i - 1
