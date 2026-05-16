@@ -1,0 +1,24 @@
+PROBLEM SHELLSORT;
+DCL arr ARRAY(6) FIXED;
+DCL n, gap, i, j, temp FIXED;
+arr(1) := 5; arr(2) := 2; arr(3) := 8;
+arr(4) := 1; arr(5) := 9; arr(6) := 3;
+n := 6;
+gap := 1;
+WHILE gap <= n REPEAT
+  gap := gap * 3 + 1;
+END;
+WHILE gap > 0 REPEAT
+  gap := gap / 3;
+  FOR i FROM gap+1 TO n BY 1 REPEAT
+    temp := arr(i);
+    j := i;
+    WHILE j > gap REPEAT
+      IF arr(j - gap) <= temp THEN LEAVE END;
+      arr(j) := arr(j - gap);
+      j := j - gap;
+    END;
+    arr(j) := temp;
+  END;
+END;
+END;
