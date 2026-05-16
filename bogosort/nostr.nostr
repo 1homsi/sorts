@@ -1,1 +1,1 @@
-print("Bogosort implementation for nostr.nostr")
+bogosort = true
