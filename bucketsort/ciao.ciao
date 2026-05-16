@@ -1,0 +1,13 @@
+:- module(bucket_sort,[main/0]).
+main :-
+    bucket_sort([5, 2, 8, 1, 9, 3], 10, Sorted),
+    write(Sorted), nl.
+
+bucket_sort(Arr, MaxVal, Result) :-
+    length(Arr, _),
+    bucket_sort_helper(Arr, MaxVal, Result).
+
+bucket_sort_helper([], _, []).
+bucket_sort_helper([H|T], MaxVal, Result) :-
+    bucket_sort_helper(T, MaxVal, RestResult),
+    insert_into_sorted(H, RestResult, Result).
