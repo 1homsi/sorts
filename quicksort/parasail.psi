@@ -1,0 +1,23 @@
+procedure Quicksort(Arr : Vector; Result : out Vector) is
+  if Arr'Length <= 1 then
+    Result := Arr;
+  else
+    const Pivot := Arr[Arr'First];
+    var Less : Vector := [];
+    var Greater : Vector := [];
+
+    for I in Arr'First+1 .. Arr'Last loop
+      if Arr[I] <= Pivot then
+        Less := Less & Arr[I];
+      else
+        Greater := Greater & Arr[I];
+      end if;
+    end loop;
+
+    var SortedLess : Vector;
+    Quicksort(Less, SortedLess);
+    var SortedGreater : Vector;
+    Quicksort(Greater, SortedGreater);
+    Result := SortedLess & [Pivot] & SortedGreater;
+  end if;
+end Quicksort;
