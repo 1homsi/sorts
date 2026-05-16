@@ -1,0 +1,30 @@
+cocktailSort: arr = (
+    | swapped start end tmp |
+    swapped: true.
+    start: 0.
+    end: arr size - 1.
+    [swapped] whileTrue: [
+        swapped: false.
+        start to: end - 1 do: [:i |
+            (arr at: i) > (arr at: i + 1) ifTrue: [
+                tmp: arr at: i.
+                arr at: i put: (arr at: i + 1).
+                arr at: i + 1 put: tmp.
+                swapped: true.
+            ].
+        ].
+        swapped ifFalse: [^arr].
+        swapped: false.
+        end: end - 1.
+        end - 1 to: start by: -1 do: [:i |
+            (arr at: i) > (arr at: i + 1) ifTrue: [
+                tmp: arr at: i.
+                arr at: i put: (arr at: i + 1).
+                arr at: i + 1 put: tmp.
+                swapped: true.
+            ].
+        ].
+        start: start + 1.
+    ].
+    arr
+)
