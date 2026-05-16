@@ -1,0 +1,30 @@
+module gnome_sort #(parameter N=10) (
+    input clk, rst,
+    input [31:0] arr_in [N-1:0],
+    output reg [31:0] arr_out [N-1:0],
+    output reg done
+);
+    reg [31:0] arr [N-1:0];
+    reg [3:0] i;
+    reg [31:0] tmp;
+
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            arr <= arr_in;
+            i <= 0;
+            done <= 0;
+        end else if (!done) begin
+            if (i >= N) begin
+                arr_out <= arr;
+                done <= 1;
+            end else if (i == 0 || arr[i] >= arr[i-1]) begin
+                i <= i + 1;
+            end else begin
+                tmp <= arr[i];
+                arr[i] <= arr[i-1];
+                arr[i-1] <= tmp;
+                i <= i - 1;
+            end
+        end
+    end
+endmodule
