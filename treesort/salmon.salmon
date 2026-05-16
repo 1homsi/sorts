@@ -1,0 +1,29 @@
+class TreeNode {
+  int value;
+  TreeNode left;
+  TreeNode right;
+
+  new(int v) { value = v; }
+}
+
+TreeNode insert(TreeNode node, int val) {
+  if (node == null) return new TreeNode(val);
+  if (val < node.value) node.left = insert(node.left, val);
+  else if (val > node.value) node.right = insert(node.right, val);
+  return node;
+}
+
+void inorder(TreeNode node) {
+  if (node != null) {
+    inorder(node.left);
+    println(node.value);
+    inorder(node.right);
+  }
+}
+
+void main() {
+  int arr[] = [5, 2, 8, 1, 9, 3];
+  TreeNode root = null;
+  for (int v : arr) root = insert(root, v);
+  inorder(root);
+}
