@@ -1,0 +1,37 @@
+import structure Array from "x-alice:/lib/data/Array"
+import structure TextIO from "x-alice:/lib/io/TextIO"
+
+fun heapify (arr, n, i) =
+    let val largest = ref i
+        val left = 2 * i + 1
+        val right = 2 * i + 2
+        val _ = if left < n andalso Array.sub(arr, left) > Array.sub(arr, !largest)
+                then largest := left else ()
+        val _ = if right < n andalso Array.sub(arr, right) > Array.sub(arr, !largest)
+                then largest := right else ()
+    in
+        if !largest <> i then
+            let val tmp = Array.sub(arr, i)
+            in Array.update(arr, i, Array.sub(arr, !largest));
+               Array.update(arr, !largest, tmp);
+               heapify(arr, n, !largest)
+            end
+        else ()
+    end
+
+fun heapsort arr =
+    let val n = Array.length arr
+        val _ = List.app (fn i => heapify(arr, n, i)) (List.tabulate(n div 2, fn i => n div 2 - 1 - i))
+        val _ = List.app (fn i =>
+                    let val tmp = Array.sub(arr, 0)
+                    in Array.update(arr, 0, Array.sub(arr, i));
+                       Array.update(arr, i, tmp);
+                       heapify(arr, i, 0)
+                    end)
+                (List.tabulate(n - 1, fn i => n - 1 - i))
+    in arr end
+
+val arr = Array.fromList [12, 11, 13, 5, 6, 7]
+val _ = heapsort arr
+val _ = Array.app (fn x => TextIO.print(Int.toString x ^ " ")) arr
+val _ = TextIO.print "\n"
