@@ -1,0 +1,18 @@
+ACTIVITY Main
+  INPUT array
+  CALL Shellsort
+  OUTPUT array
+  STOP
+
+ACTIVITY Shellsort
+  SET gap = 1
+  QUESTION gap <= length?
+    YES: SET gap = gap * 3 + 1
+    NO: CONTINUE
+  WHILE gap > 0
+    SET gap = gap / 3
+    FOR i = gap TO length
+      CALL GapSort
+    END FOR
+  END WHILE
+END
