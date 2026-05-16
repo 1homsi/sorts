@@ -1,0 +1,31 @@
+let bitonicsort = proc(arr, lo, cnt, dir)
+  if cnt > 1 then
+    let k = cnt / 2 in
+    bitonicsort(arr, lo, k, 1) |
+    bitonicsort(arr, lo + k, k, 0) |
+    bitonicmerge(arr, lo, cnt, dir)
+  else
+    arr
+  end
+end
+
+let bitonicmerge = proc(arr, lo, cnt, dir)
+  if cnt > 1 then
+    let k = cnt / 2 in
+    (for i in lo .. lo + cnt - k - 1 do
+      if (arr[i] > arr[i + k]) = (dir = 1) then
+        let tmp = arr[i] in
+        arr[i] := arr[i + k];
+        arr[i + k] := tmp
+      end
+    end) |
+    bitonicmerge(arr, lo, k, dir) |
+    bitonicmerge(arr, lo + k, k, dir)
+  else
+    arr
+  end
+end
+
+let arr = [5, 2, 8, 1, 9, 3, 7, 4]
+bitonicsort(arr, 0, 8, 1)
+println(arr)
