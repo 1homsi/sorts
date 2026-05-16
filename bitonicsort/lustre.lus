@@ -1,0 +1,26 @@
+node bitonicsort(arr: int^8; lo, cnt, dir: int) returns (result: int^8);
+var
+    k: int;
+    arr1, arr2: int^8;
+let
+    result = if cnt > 1 then
+        k = cnt / 2;
+        arr1 = bitonicsort(arr, lo, k, 1);
+        arr2 = bitonicsort(arr1, lo + k, k, 0);
+        bitonicmerge(arr2, lo, cnt, dir)
+    else
+        arr;
+tel;
+
+node bitonicmerge(arr: int^8; lo, cnt, dir: int) returns (result: int^8);
+var
+    k: int;
+    arr1, arr2: int^8;
+let
+    result = if cnt > 1 then
+        k = cnt / 2;
+        arr1 = bitonicmerge(arr, lo, k, dir);
+        result = bitonicmerge(arr1, lo + k, k, dir)
+    else
+        arr;
+tel;
