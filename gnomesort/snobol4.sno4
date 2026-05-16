@@ -1,0 +1,14 @@
+        ARRAY = ARRAY(10)
+        I = 1 : N = 10
+        ARRAY<1> = 5: ARRAY<2> = 3: ARRAY<3> = 8: ARRAY<4> = 1
+        ARRAY<5> = 9: ARRAY<6> = 2: ARRAY<7> = 7: ARRAY<8> = 4
+        ARRAY<9> = 6: ARRAY<10> = 0
+LOOP    GT(I, N) :S(END)
+        EQ(I, 1) :S(ADV)
+        GE(ARRAY<I>, ARRAY<I-1>) :S(ADV)
+        TMP = ARRAY<I>
+        ARRAY<I> = ARRAY<I-1>
+        ARRAY<I-1> = TMP
+        I = I - 1 :(LOOP)
+ADV     I = I + 1 :(LOOP)
+END
