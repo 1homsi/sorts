@@ -1,0 +1,8 @@
+:5->A
+:2->B
+:8->C
+:1->D
+:9->E
+:3->F
+:ClrHome
+:Disp A,B,C,D,E,F
