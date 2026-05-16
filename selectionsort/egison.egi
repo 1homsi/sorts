@@ -1,0 +1,9 @@
+(define $selection-sort
+  (lambda [$xs]
+    (match xs (list integer)
+      {[<nil> <nil>]
+       [<cons $x $ys>
+        (cons (foldl min (car xs) (cdr xs))
+              (selection-sort (delete (foldl min (car xs) (cdr xs)) xs)))]})))
+
+(print (selection-sort [5 2 8 1 9 3]))
