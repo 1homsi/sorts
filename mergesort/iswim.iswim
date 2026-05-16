@@ -1,0 +1,17 @@
+merge = \l1 . \l2 .
+  cond
+    [null l1 -> l2]
+    [null l2 -> l1]
+    [le (car l1) (car l2) -> cons (car l1) (merge (cdr l1) l2)]
+    [T -> cons (car l2) (merge l1 (cdr l2))]
+
+mergesort = \lst .
+  cond
+    [null lst -> '()]
+    [null (cdr lst) -> lst]
+    [T -> (let mid = quotient (length lst) 2
+           let l = take lst mid
+           let r = drop lst mid
+           in merge (mergesort l) (mergesort r))]
+
+print (mergesort '(5 2 8 1 9 3))
