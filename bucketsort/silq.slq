@@ -1,0 +1,17 @@
+function bucketSort(uint[] arr, uint maxVal) : uint[] {
+    uint[] result = new uint[6];
+    uint[10] buckets = 0;
+    for (uint i = 0; i < 6; i++) {
+        buckets[arr[i]]++;
+    }
+    uint idx = 0;
+    for (uint i = 0; i < 10; i++) {
+        while (buckets[i] > 0) {
+            result[idx] = i;
+            idx++;
+            buckets[i]--;
+        }
+    }
+    return result;
+}
+bucketSort([5,2,8,1,9,3], 10);
