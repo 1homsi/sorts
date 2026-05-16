@@ -1,0 +1,31 @@
+use bevy::prelude::*;
+
+fn insertion_sort(arr: Vec<i32>) -> Vec<i32> {
+    let mut a = arr;
+    let n = a.len();
+    for i in 1..n {
+        let key = a[i];
+        let mut j = i as isize - 1;
+        while j >= 0 && a[j as usize] > key {
+            a[(j + 1) as usize] = a[j as usize];
+            j -= 1;
+        }
+        a[(j + 1) as usize] = key;
+    }
+    a
+}
+
+#[derive(Component)]
+struct Sorted(Vec<i32>);
+
+fn sort_system(mut commands: Commands) {
+    let result = insertion_sort(vec![5, 3, 1, 4, 2]);
+    commands.spawn(Sorted(result));
+}
+
+fn main() {
+    App::new()
+        .add_plugins(DefaultPlugins)
+        .add_systems(Startup, sort_system)
+        .run();
+}
