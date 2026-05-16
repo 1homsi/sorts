@@ -1,0 +1,6 @@
+to radixsort :arr
+  output :arr
+end
+
+make "result radixsort [5 2 8 1 9 3]
+show :result
