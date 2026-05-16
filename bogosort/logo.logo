@@ -1,0 +1,26 @@
+to bogosort :list
+  if sorted :list [output :list]
+  output bogosort shuffle :list
+end
+
+to sorted :list
+  if emptyp :list [output "true]
+  if emptyp butfirst :list [output "true]
+  if (first :list) > (first butfirst :list) [output "false]
+  output sorted butfirst :list
+end
+
+to shuffle :list
+  output shuffle_helper :list []
+end
+
+to shuffle_helper :list :result
+  if emptyp :list [output :result]
+  output shuffle_helper butfirst :list (lput (pick :list) :result)
+end
+
+to pick :list
+  output item (random (length :list)) :list
+end
+
+print bogosort [3 1 2]
