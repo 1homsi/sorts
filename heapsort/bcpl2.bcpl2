@@ -1,0 +1,34 @@
+GET "libhdr"
+
+GLOBAL
+    arr2: 200
+
+LET heapify2(n, i) BE
+{ LET largest = i
+  LET left = 2*i + 1
+  LET right = 2*i + 2
+  LET tmp = 0
+  IF left < n & arr2!left > arr2!largest DO largest := left
+  IF right < n & arr2!right > arr2!largest DO largest := right
+  IF largest ~= i DO
+  { tmp := arr2!i; arr2!i := arr2!largest; arr2!largest := tmp
+    heapify2(n, largest)
+  }
+}
+
+LET start() = VALOF
+{ arr2 := getvec(6)
+  arr2!0 := 12; arr2!1 := 11; arr2!2 := 13
+  arr2!3 := 5;  arr2!4 := 6;  arr2!5 := 7
+  LET n = 6
+  FOR i = n/2-1 TO 0 BY -1 DO heapify2(n, i)
+  FOR i = n-1 TO 1 BY -1 DO
+  { LET tmp = arr2!0
+    arr2!0 := arr2!i; arr2!i := tmp
+    heapify2(i, 0)
+  }
+  FOR i = 0 TO n-1 DO writef("%N ", arr2!i)
+  newline()
+  freevec(arr2)
+  RESULTIS 0
+}
