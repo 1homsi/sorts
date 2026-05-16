@@ -1,0 +1,19 @@
+to bucketSort :arr :maxVal
+  if :maxVal = 0 [output :arr]
+  local "buckets
+  make "buckets array :maxVal
+  repeat :maxVal [setitem repcount :buckets (list)]
+  foreach :arr [
+    make "idx (word ? + 1)
+    setitem :idx :buckets (lput ? item :idx :buckets)
+  ]
+  local "result
+  make "result (list)
+  repeat :maxVal [
+    foreach item repcount :buckets [
+      make "result (lput ? :result)
+    ]
+  ]
+  output :result
+end
+print bucketSort [5 2 8 1 9 3] 9
