@@ -1,0 +1,12 @@
+let quicksort be function(arr : array of integer) returns array of integer
+  if arr.length <= 1 then
+    arr
+  else
+    let pivot = arr[0]
+    let less = filter(arr, fn(x) => x <= pivot)
+    let greater = filter(arr, fn(x) => x > pivot)
+    quicksort(less) concatenate [pivot] concatenate quicksort(greater)
+  endif
+end
+
+print(quicksort(array(5, 2, 8, 1, 9, 3)))
