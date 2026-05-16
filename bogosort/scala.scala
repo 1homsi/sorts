@@ -1,16 +1,6 @@
-import scala.util.Random
-
-def isSorted(arr: List[Int]): Boolean =
-  arr.sliding(2).forall { case List(a, b) => a <= b; case _ => true }
-
-def bogosort(arr: List[Int]): List[Int] = {
-  var result = arr
-  while (!isSorted(result)) {
-    result = Random.shuffle(result)
-  }
-  result
+def bogosort(arr: Array[Int]): Array[Int] = {
+    while (!arr.dropRight(1).zipWithIndex.forall { case (v, i) => v <= arr(i + 1) }) {
+        scala.util.Random.shuffle(arr.toList).copyToArray(arr)
+    }
+    arr
 }
-
-@main def run(): Unit =
-  val arr = List(3, 1, 4, 1, 5, 9, 2, 6)
-  println(bogosort(arr))
