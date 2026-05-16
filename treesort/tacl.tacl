@@ -1,0 +1,6 @@
+begin
+  add value := 5;
+  add value := 2;
+  add value := 8;
+  display;
+end
