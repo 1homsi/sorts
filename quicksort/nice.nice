@@ -1,0 +1,26 @@
+int[] quicksort(int[] arr) {
+  if (arr.length <= 1)
+    return arr;
+
+  int pivot = arr[0];
+  List<Integer> less = new ArrayList<Integer>();
+  List<Integer> greater = new ArrayList<Integer>();
+
+  for (int i = 1; i < arr.length; i++) {
+    if (arr[i] <= pivot)
+      less.add(arr[i]);
+    else
+      greater.add(arr[i]);
+  }
+
+  int[] result = new int[arr.length];
+  int idx = 0;
+  for (int x : quicksort(less.toArray(new int[0])))
+    result[idx++] = x;
+  result[idx++] = pivot;
+  for (int x : quicksort(greater.toArray(new int[0])))
+    result[idx++] = x;
+  return result;
+}
+
+quicksort(new int[]{5, 2, 8, 1, 9, 3}) |> println;
