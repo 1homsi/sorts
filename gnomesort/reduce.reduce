@@ -1,0 +1,19 @@
+procedure gnomeSort(lst);
+begin
+    scalar arr, n, i, tmp;
+    arr := mkvect(length lst - 1);
+    for k := 1 : length lst do putv(arr, k-1, nth(lst, k));
+    n := length lst;
+    i := 0;
+    while i < n do begin
+        if i = 0 or getv(arr, i) >= getv(arr, i-1) then
+            i := i + 1
+        else begin
+            tmp := getv(arr, i);
+            putv(arr, i, getv(arr, i-1));
+            putv(arr, i-1, tmp);
+            i := i - 1
+        end
+    end;
+    return arr
+end;
