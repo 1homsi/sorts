@@ -1,0 +1,52 @@
+.class public GnomeSort
+.super java/lang/Object
+
+.method public static gnomeSort([I)V
+    .limit stack 4
+    .limit locals 4
+    iconst_0
+    istore_1
+loop:
+    iload_1
+    aload_0
+    arraylength
+    if_icmpge done
+    iload_1
+    ifeq advance
+    aload_0
+    iload_1
+    iaload
+    istore_2
+    aload_0
+    iload_1
+    iconst_1
+    isub
+    iaload
+    istore_3
+    iload_2
+    iload_3
+    if_icmpge advance
+    aload_0
+    iload_1
+    iload_3
+    iastore
+    aload_0
+    iload_1
+    iconst_1
+    isub
+    iload_2
+    iastore
+    iload_1
+    iconst_1
+    isub
+    istore_1
+    goto loop
+advance:
+    iload_1
+    iconst_1
+    iadd
+    istore_1
+    goto loop
+done:
+    return
+.end method
