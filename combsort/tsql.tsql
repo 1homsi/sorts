@@ -1,0 +1,28 @@
+CREATE TABLE #SortData (idx INT PRIMARY KEY, val INT);
+
+CREATE PROCEDURE CombSort AS
+BEGIN
+    DECLARE @n INT, @gap INT, @sorted BIT, @tmp INT, @a INT, @b INT, @i INT;
+    SELECT @n = COUNT(*) FROM #SortData;
+    SET @gap = @n;
+    SET @sorted = 0;
+    WHILE @sorted = 0
+    BEGIN
+        SET @gap = CAST(FLOOR(CAST(@gap AS FLOAT) / 1.3) AS INT);
+        IF @gap < 1 SET @gap = 1;
+        IF @gap = 1 SET @sorted = 1;
+        SET @i = 1;
+        WHILE @i <= @n - @gap
+        BEGIN
+            SELECT @a = val FROM #SortData WHERE idx = @i;
+            SELECT @b = val FROM #SortData WHERE idx = @i + @gap;
+            IF @a > @b
+            BEGIN
+                UPDATE #SortData SET val = @b WHERE idx = @i;
+                UPDATE #SortData SET val = @a WHERE idx = @i + @gap;
+                SET @sorted = 0;
+            END
+            SET @i = @i + 1;
+        END
+    END
+END;
