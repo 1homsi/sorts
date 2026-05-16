@@ -1,15 +1,6 @@
-process BOGOSORT =
-(? integer ARR_IN;
- ! integer ARR_OUT)
-(|
-  [3, 1, 4, 1, 5, 9, 2, 6] -> ARR_IN
-  | when is_sorted(ARR_IN) -> ARR_OUT := ARR_IN
-  | when not is_sorted(ARR_IN) -> ARR_OUT := bogosort(ARR_IN)
-|)
-where
-  function is_sorted(arr) =
-    fold_and([arr[i] <= arr[i+1] : i in 0..length(arr)-2])
-  function bogosort(arr) =
-    if is_sorted(arr) then arr
-    else bogosort(shuffle(arr))
-end
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
