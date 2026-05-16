@@ -1,0 +1,9 @@
+define gnome_sort
+function gnome_sort(arr: array[integer]) returns array[integer]
+    let n := array_size(arr) in
+    let result := array_fill(1, n, 0) in
+    for i := 1 while i <= n do
+        result[i] := arr[i]
+    end for;
+    result
+end function
