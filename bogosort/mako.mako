@@ -1,1 +1,6 @@
-print("Bogosort implementation for mako.mako")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
