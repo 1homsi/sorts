@@ -1,0 +1,28 @@
+fun radixsort(arr: array[int]): array[int] {
+  if arr.len() == 0 return arr;
+  var max = arr.0;
+  for i in 0 upto arr.len() do
+    if arr.(i) > max do max = arr.(i); done
+  done
+  var exp = 1;
+  while max / exp > 0 do
+    arr = countingSortByExp(arr, exp);
+    exp = exp * 10;
+  done
+  return arr;
+}
+
+fun countingSortByExp(arr: array[int], exp: int): array[int] {
+  val n = arr.len();
+  var output = array(n, 0);
+  var count = array(10, 0);
+  for i in 0 upto n do count.((arr.(i) / exp) % 10) += 1; done
+  for i in 1 upto 10 do count.(i) += count.(i - 1); done
+  for i in n - 1 downto 0 do
+    output.(count.((arr.(i) / exp) % 10) - 1) = arr.(i);
+    count.((arr.(i) / exp) % 10) -= 1;
+  done
+  return output;
+}
+
+println$ radixsort(arrayof(int, 5, 2, 8, 1, 9, 3));
