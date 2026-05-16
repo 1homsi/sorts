@@ -1,0 +1,31 @@
+component BogSort
+  export Executable
+
+  run(args:() -> ()): () = do
+    arr = [3, 1, 2]
+    sorted_arr = bogosort(arr)
+    println(sorted_arr)
+  end
+
+  bogosort(arr: Vector[\ZZ32\]): Vector[\ZZ32\] = do
+    if issorted(arr) then
+      arr
+    else
+      bogosort(shuffle(arr))
+    end
+  end
+
+  issorted(arr: Vector[\ZZ32\]): Boolean = do
+    for i <- arr.indices: bounds do
+      if i+1 < arr.size() then
+        if arr[i] > arr[i+1] then
+          return false
+        end
+      end
+    end
+    true
+  end
+
+  shuffle(arr: Vector[\ZZ32\]): Vector[\ZZ32\] = arr
+
+end
