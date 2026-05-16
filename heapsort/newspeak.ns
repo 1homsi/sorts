@@ -1,0 +1,33 @@
+class Heapsort usingPlatform: platform = (
+    | Array = platform kernel Array. |
+)
+
+(
+    heapify: arr size: n at: i = (
+        | largest left right tmp |
+        largest := i.
+        left := 2 * i + 1.
+        right := 2 * i + 2.
+        (left < n and: [arr at: left + 1 ifAbsent: [0]] > (arr at: largest + 1 ifAbsent: [0])) ifTrue: [largest := left].
+        (right < n and: [arr at: right + 1 ifAbsent: [0]] > (arr at: largest + 1 ifAbsent: [0])) ifTrue: [largest := right].
+        largest = i ifFalse: [
+            tmp := arr at: i + 1.
+            arr at: i + 1 put: (arr at: largest + 1).
+            arr at: largest + 1 put: tmp.
+            heapify: arr size: n at: largest
+        ]
+    )
+
+    sort: arr = (
+        | n tmp |
+        n := arr size.
+        n // 2 - 1 to: 0 by: -1 do: [:i | heapify: arr size: n at: i].
+        n - 1 to: 1 by: -1 do: [:i |
+            tmp := arr at: 1.
+            arr at: 1 put: (arr at: i + 1).
+            arr at: i + 1 put: tmp.
+            heapify: arr size: i at: 0
+        ].
+        arr
+    )
+)
