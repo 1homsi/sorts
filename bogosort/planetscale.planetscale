@@ -1,1 +1,1 @@
-print("Bogosort implementation for planetscale.planetscale")
+bogosort = true
