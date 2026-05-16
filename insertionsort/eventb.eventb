@@ -1,0 +1,20 @@
+machine InsertionSort
+variables arr n i j key
+invariants
+    @inv1 arr : seq(INTEGER)
+    @inv2 n : NAT
+    @inv3 i : NAT
+    @inv4 j : INT
+events
+    event INITIALISATION
+    then
+        @act1 arr := {}
+        @act2 n := 0
+    end
+    event Sort
+    where
+        @grd1 n > 0
+    then
+        @act1 arr := sorted_permutation(arr)
+    end
+end
