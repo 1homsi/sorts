@@ -1,0 +1,29 @@
+PROGRAM COMBSORT;
+
+DECLARE GAP, I, TEMP, LEN FIXED;
+DECLARE ARRAY A(6) FIXED INITIAL(5, 2, 8, 1, 9, 3);
+DECLARE SWAPPED BIT;
+
+LEN = 6;
+GAP = LEN;
+SWAPPED = 1B;
+
+DO WHILE GAP > 1 OR SWAPPED;
+  GAP = DIVIDE(TIMES(GAP, 10), 13);
+  IF GAP < 1 THEN GAP = 1;
+  SWAPPED = 0B;
+  DO I = 1 TO LEN - GAP;
+    IF A(I) > A(I + GAP) THEN
+      DO;
+        TEMP = A(I);
+        A(I) = A(I + GAP);
+        A(I + GAP) = TEMP;
+        SWAPPED = 1B;
+      END;
+  END;
+END;
+
+DO I = 1 TO 6;
+  PUT EDIT (A(I)) (F(5));
+END;
+END COMBSORT;
