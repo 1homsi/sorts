@@ -1,1 +1,1 @@
-print("Bogosort implementation for love2d.love")
+bogosort = true
