@@ -1,0 +1,40 @@
+MODULE Countingsort.
+
+PREDICATE max(LIST, INT).
+max([X], X).
+max([H|T], Max) :- max(T, MaxT), (H > MaxT -> Max = H; Max = MaxT).
+
+PREDICATE fillCount(LIST, ARRAY, ARRAY).
+fillCount([], C, C).
+fillCount([H|T], C, C1) :-
+  C[H] is C[H] + 1,
+  fillCount(T, C, C1).
+
+PREDICATE rebuild(INT, INT, ARRAY, LIST).
+rebuild(I, Max, _, []) :- I > Max.
+rebuild(I, Max, Count, Output) :-
+  I =< Max,
+  replicate(Count[I], I, Reps),
+  I1 is I + 1,
+  rebuild(I1, Max, Count, Rest),
+  append(Reps, Rest, Output).
+
+PREDICATE replicate(INT, INT, LIST).
+replicate(0, _, []).
+replicate(N, X, [X|Rest]) :-
+  N > 0,
+  N1 is N - 1,
+  replicate(N1, X, Rest).
+
+PREDICATE countingsort(LIST, LIST).
+countingsort(Arr, Output) :-
+  max(Arr, Max),
+  length(Arr, Len),
+  createCount(Max, Count),
+  fillCount(Arr, Count, Count1),
+  rebuild(0, Max, Count1, Output).
+
+PREDICATE createCount(INT, ARRAY).
+createCount(N, Array) :- Array is array[0..N] of 0.
+
+QUERY :- countingsort([5, 2, 8, 1, 9, 3], X), write(X).
