@@ -1,0 +1,23 @@
+DEFINE
+    swap-elems ==
+        [dup] dip swap [nth] dip swap [nth] dip
+        [set] dip [set] ;
+
+    heapify ==
+        [arr n i |
+         i arr n i 2 * 1 + left
+         i arr n i 2 * 2 + right
+         left n < [arr left nth arr i nth >] [false] ifte
+         [left] [i] ifte largest
+         right n < [arr right nth arr largest nth >] [false] ifte
+         [right] [largest] ifte largest
+         largest i != [arr i largest swap-elems arr n largest heapify] [] ifte] ;
+
+    heapsort ==
+        [arr |
+         arr length n
+         n 2 / 1 - 0 [heapify] for-each-descending
+         n 1 - 1 [arr 0 i swap-elems arr i 0 heapify] for-each-descending
+         arr] ;
+
+[12 11 13 5 6 7] heapsort .
