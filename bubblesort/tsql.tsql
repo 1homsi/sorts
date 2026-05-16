@@ -1,0 +1,25 @@
+DECLARE @arr TABLE (pos INT, val INT);
+INSERT INTO @arr VALUES (1,64),(2,34),(3,25),(4,12),(5,22),(6,11),(7,90);
+
+DECLARE @n INT = 7, @swapped BIT = 1, @i INT, @v1 INT, @v2 INT;
+
+WHILE @swapped = 1
+BEGIN
+    SET @swapped = 0;
+    SET @i = 1;
+    WHILE @i < @n
+    BEGIN
+        SELECT @v1 = val FROM @arr WHERE pos = @i;
+        SELECT @v2 = val FROM @arr WHERE pos = @i + 1;
+        IF @v1 > @v2
+        BEGIN
+            UPDATE @arr SET val = @v2 WHERE pos = @i;
+            UPDATE @arr SET val = @v1 WHERE pos = @i + 1;
+            SET @swapped = 1;
+        END
+        SET @i = @i + 1;
+    END
+    SET @n = @n - 1;
+END
+
+SELECT val FROM @arr ORDER BY pos;
