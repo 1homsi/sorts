@@ -1,28 +1,6 @@
-resource bogosort()
-
-    var arr[8]: int := ([3, 1, 4, 1, 5, 9, 2, 6])
-    var n := 8
-
-    procedure is_sorted() returns bool
-        for i := 1 to n-1 do
-            if arr[i] > arr[i+1] then return false fi
-        od
-        return true
-    end
-
-    procedure shuffle()
-        for i := n downto 2 do
-            var j := int(random() * i) + 1
-            var tmp := arr[i]
-            arr[i] := arr[j]
-            arr[j] := tmp
-        od
-    end
-
-    do while not is_sorted() -> shuffle() od
-
-    for i := 1 to n do
-        write(arr[i])
-    od
-
-end resource
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
