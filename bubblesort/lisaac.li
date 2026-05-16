@@ -1,0 +1,11 @@
+section Public
+
+Title : "Bubble Sort";
+
+BubbleSort : class {
+  - SELF <: COMPARABLE ;
+  
+  create := method() : SELF <- {
+    (5,2,8,1,9,3).foreach(write);
+  };
+};
