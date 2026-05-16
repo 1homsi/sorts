@@ -1,0 +1,8 @@
+PREFIX sort: <http://example.org/sort#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?pos ?val WHERE {
+    ?elem sort:pos ?pos ;
+          sort:val ?val .
+}
+ORDER BY ?val
