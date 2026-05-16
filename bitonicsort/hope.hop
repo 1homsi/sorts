@@ -1,0 +1,23 @@
+dec bitonic_sort : list(num) -> bool -> list(num);
+dec bitonic_merge : list(num) -> bool -> list(num);
+
+--- bitonic_sort [] _ <= [];
+--- bitonic_sort [x] _ <= [x];
+--- bitonic_sort xs dir <=
+    let k == (#xs) div 2 in
+    let (left, right) == split xs k in
+    let sl == bitonic_sort left true in
+    let sr == bitonic_sort right false in
+    bitonic_merge (sl ++ sr) dir;
+
+--- bitonic_merge [] _ <= [];
+--- bitonic_merge [x] _ <= [x];
+--- bitonic_merge xs dir <=
+    let k == (#xs) div 2 in
+    let (left, right) == split xs k in
+    let pairs == zip left right in
+    let swapped == map (fn (a,b) => if dir = (a > b) then (b,a) else (a,b)) pairs in
+    bitonic_merge (map fst swapped) dir ++ bitonic_merge (map snd swapped) dir;
+
+dec main : list(num);
+--- main <= bitonic_sort [3,7,4,8,6,2,1,5] true;
