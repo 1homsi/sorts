@@ -1,0 +1,31 @@
+let cocktail_sort = fun arr ->
+  let n = List.length arr in
+  let a = Array.of_list arr in
+  let swapped = ref true in
+  let start = ref 0 in
+  let ending = ref (n - 1) in
+  while !swapped do
+    swapped := false;
+    for i = !start to !ending - 1 do
+      if a.(i) > a.(i + 1) then begin
+        let tmp = a.(i) in
+        a.(i) <- a.(i + 1);
+        a.(i + 1) <- tmp;
+        swapped := true
+      end
+    done;
+    if !swapped then begin
+      swapped := false;
+      decr ending;
+      for i = !ending - 1 downto !start do
+        if a.(i) > a.(i + 1) then begin
+          let tmp = a.(i) in
+          a.(i) <- a.(i + 1);
+          a.(i + 1) <- tmp;
+          swapped := true
+        end
+      done;
+      incr start
+    end
+  done;
+  Array.to_list a
