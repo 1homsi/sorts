@@ -1,0 +1,52 @@
+function %insertion_sort(i64, i32) -> i32 system_v {
+    ss0 = explicit_slot 4
+
+block0(v0: i64, v1: i32):
+    v2 = iconst.i32 1
+    jump block1(v2)
+
+block1(v3: i32):
+    v4 = icmp slt v3, v1
+    brif v4, block2(v3), block6
+
+block2(v5: i32):
+    v6 = imul_imm v5, 4
+    v7 = uextend.i64 v6
+    v8 = iadd v0, v7
+    v9 = load.i32 notrap aligned v8
+    v10 = iadd_imm v5, -1
+    jump block3(v10)
+
+block3(v11: i32):
+    v12 = icmp sge v11, 0
+    brif v12, block4(v11), block5(v11)
+
+block4(v13: i32):
+    v14 = imul_imm v13, 4
+    v15 = uextend.i64 v14
+    v16 = iadd v0, v15
+    v17 = load.i32 notrap aligned v16
+    v18 = icmp sgt v17, v9
+    brif v18, block4a(v13), block5(v13)
+
+block4a(v19: i32):
+    v20 = iadd_imm v19, 1
+    v21 = imul_imm v20, 4
+    v22 = uextend.i64 v21
+    v23 = iadd v0, v22
+    store notrap aligned v17, v23
+    v24 = iadd_imm v19, -1
+    jump block3(v24)
+
+block5(v25: i32):
+    v26 = iadd_imm v25, 1
+    v27 = imul_imm v26, 4
+    v28 = uextend.i64 v27
+    v29 = iadd v0, v28
+    store notrap aligned v9, v29
+    v30 = iadd_imm v5, 1
+    jump block1(v30)
+
+block6:
+    return v1
+}
