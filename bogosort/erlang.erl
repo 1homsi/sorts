@@ -1,13 +1,6 @@
--module(erlang).
--export([main/0]).
-
 is_sorted([]) -> true;
 is_sorted([_]) -> true;
-is_sorted([A, B | Rest]) when A =< B -> is_sorted([B | Rest]);
-is_sorted(_) -> false.
-
-shuffle(List) ->
-    [X || {_, X} <- lists:sort([{rand:uniform(), E} || E <- List])].
+is_sorted([A, B | T]) -> A =< B andalso is_sorted([B | T]).
 
 bogosort(List) ->
     case is_sorted(List) of
@@ -15,6 +8,4 @@ bogosort(List) ->
         false -> bogosort(shuffle(List))
     end.
 
-main() ->
-    Arr = [3, 1, 4, 1, 5, 9, 2, 6],
-    io:format("~p~n", [bogosort(Arr)]).
+shuffle(List) -> List.
