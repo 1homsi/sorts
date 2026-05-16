@@ -1,0 +1,30 @@
+class Sort
+  def BitonicSort(this, arr: number[], lo: number, cnt: number, dir: number): void
+    if cnt > 1
+      var k = cnt / 2
+      this.BitonicSort(arr, lo, k, 1)
+      this.BitonicSort(arr, lo + k, k, 0)
+      this.BitonicMerge(arr, lo, cnt, dir)
+    end
+  end
+
+  def BitonicMerge(this, arr: number[], lo: number, cnt: number, dir: number): void
+    if cnt > 1
+      var k = cnt / 2
+      for i = lo; i < lo + cnt - k; i++
+        if ((arr[i] > arr[i + k]) == (dir == 1))
+          var tmp = arr[i]
+          arr[i] = arr[i + k]
+          arr[i + k] = tmp
+        end
+      end
+      this.BitonicMerge(arr, lo, k, dir)
+      this.BitonicMerge(arr, lo + k, k, dir)
+    end
+  end
+end
+
+var s = Sort{}
+var arr = [5, 2, 8, 1, 9, 3, 7, 4]
+s.BitonicSort(arr, 0, 8, 1)
+print(arr)
