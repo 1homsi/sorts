@@ -1,0 +1,25 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: insertion-sort-policy
+spec:
+  description: "Insertion sort represented as ordered policy priority rules"
+  endpointSelector:
+    matchLabels:
+      app: sorter
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        priority: "1"
+  - fromEndpoints:
+    - matchLabels:
+        priority: "2"
+  - fromEndpoints:
+    - matchLabels:
+        priority: "3"
+  - fromEndpoints:
+    - matchLabels:
+        priority: "4"
+  - fromEndpoints:
+    - matchLabels:
+        priority: "5"
