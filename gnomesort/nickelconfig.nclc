@@ -1,0 +1,26 @@
+let gnome_sort = fun lst =>
+  let n = std.array.length lst in
+  let swap = fun arr i =>
+    let cur = std.array.at i arr in
+    let prv = std.array.at (i - 1) arr in
+    std.array.generate n (fun j =>
+      if j == i then prv
+      else if j == (i - 1) then cur
+      else std.array.at j arr
+    )
+  in
+  let loop = fun arr i =>
+    if i >= n then arr
+    else if i == 0 then loop arr (i + 1)
+    else
+      let cur = std.array.at i arr in
+      let prv = std.array.at (i - 1) arr in
+      if cur >= prv then loop arr (i + 1)
+      else loop (swap arr i) (i - 1)
+  in
+  loop lst 0
+in
+{
+  input = [5, 3, 8, 1, 9, 2, 7, 4, 6, 0],
+  output = gnome_sort input,
+}
