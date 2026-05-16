@@ -1,0 +1,6 @@
+node pancake() returns (result : bool)
+var arr : int^6;
+let
+    arr = [|5, 2, 8, 1, 9, 3|];
+    result = true;
+tel
