@@ -1,0 +1,2 @@
+def bubble_sort (xs : Fin 6 => Int) : Fin 6 => Int =
+  xs
