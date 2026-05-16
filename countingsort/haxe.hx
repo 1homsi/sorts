@@ -1,0 +1,22 @@
+class CountingSort {
+    static function sort(arr:Array<Int>):Array<Int> {
+        if (arr.length == 0) return arr;
+        var min = arr[0], max = arr[0];
+        for (v in arr) { if (v < min) min = v; if (v > max) max = v; }
+        var range = max - min + 1;
+        var count = [for (_ in 0...range) 0];
+        for (v in arr) count[v - min]++;
+        for (i in 1...range) count[i] += count[i - 1];
+        var output = [for (_ in 0...arr.length) 0];
+        var i = arr.length - 1;
+        while (i >= 0) {
+            output[--count[arr[i] - min]] = arr[i];
+            i--;
+        }
+        return output;
+    }
+
+    static function main() {
+        trace(sort([4, 2, 2, 8, 3, 3, 1]));
+    }
+}
