@@ -1,892 +1,3998 @@
 [
-  {"name": "Python", "file": "python.py"},
-  {"name": "JavaScript", "file": "javascript.js"},
-  {"name": "TypeScript", "file": "typescript.ts"},
-  {"name": "Rust", "file": "rust.rs"},
-  {"name": "Go", "file": "go.go"},
-  {"name": "Java", "file": "java.java"},
-  {"name": "C", "file": "c.c"},
-  {"name": "C++", "file": "cpp.cpp"},
-  {"name": "C#", "file": "csharp.cs"},
-  {"name": "Ruby", "file": "ruby.rb"},
-  {"name": "Swift", "file": "swift.swift"},
-  {"name": "Kotlin", "file": "kotlin.kt"},
-  {"name": "Scala", "file": "scala.scala"},
-  {"name": "Haskell", "file": "haskell.hs"},
-  {"name": "Erlang", "file": "erlang.erl"},
-  {"name": "Elixir", "file": "elixir.ex"},
-  {"name": "Clojure", "file": "clojure.clj"},
-  {"name": "F#", "file": "fsharp.fsx"},
-  {"name": "OCaml", "file": "ocaml.ml"},
-  {"name": "Dart", "file": "dart.dart"},
-  {"name": "Lua", "file": "lua.lua"},
-  {"name": "R", "file": "r.r"},
-  {"name": "Julia", "file": "julia.jl"},
-  {"name": "Perl", "file": "perl.pl"},
-  {"name": "PHP", "file": "php.php"},
-  {"name": "Shell", "file": "shell.sh"},
-  {"name": "Ada", "file": "ada.adb"},
-  {"name": "Fortran", "file": "fortran.f90"},
-  {"name": "COBOL", "file": "cobol.cob"},
-  {"name": "Pascal", "file": "pascal.pas"},
-  {"name": "Delphi", "file": "delphi.dpr"},
-  {"name": "BASIC", "file": "basic.bas"},
-  {"name": "Assembly x86", "file": "assembly.asm"},
-  {"name": "APL", "file": "apl.apl"},
-  {"name": "Lisp", "file": "lisp.lisp"},
-  {"name": "Common Lisp", "file": "commonlisp.cl"},
-  {"name": "Scheme", "file": "scheme.scm"},
-  {"name": "Racket", "file": "racket.rkt"},
-  {"name": "Prolog", "file": "prolog.pro"},
-  {"name": "Forth", "file": "forth.4th"},
-  {"name": "Smalltalk", "file": "smalltalk.st"},
-  {"name": "Objective-C", "file": "objectivec.m"},
-  {"name": "CoffeeScript", "file": "coffeescript.coffee"},
-  {"name": "Groovy", "file": "groovy.groovy"},
-  {"name": "D", "file": "d.d"},
-  {"name": "Nim", "file": "nim.nim"},
-  {"name": "Crystal", "file": "crystal.cr"},
-  {"name": "Raku", "file": "raku.raku"},
-  {"name": "Haxe", "file": "haxe.hx"},
-  {"name": "ActionScript", "file": "actionscript.as"},
-  {"name": "MATLAB", "file": "matlab.matlab"},
-  {"name": "Octave", "file": "octave.oct"},
-  {"name": "Mathematica", "file": "mathematica.wl"},
-  {"name": "ALGOL 68", "file": "algol68.als"},
-  {"name": "Agda", "file": "agda.agda"},
-  {"name": "Idris", "file": "idris.idr"},
-  {"name": "Coq", "file": "coq.v"},
-  {"name": "Lean", "file": "lean.lean"},
-  {"name": "PureScript", "file": "purescript.purs"},
-  {"name": "Elm", "file": "elm.elm"},
-  {"name": "Brainfuck", "file": "brainfuck.bf"},
-  {"name": "AppleScript", "file": "applescript.applescript"},
-  {"name": "PowerShell", "file": "powershell.ps1"},
-  {"name": "AWK", "file": "awk.awk"},
-  {"name": "Tcl", "file": "tcl.tcl"},
-  {"name": "VBScript", "file": "vbscript.vbs"},
-  {"name": "VB.NET", "file": "vbnet.vb"},
-  {"name": "ABAP", "file": "abap.abap"},
-  {"name": "Apex", "file": "apex.apex"},
-  {"name": "Solidity", "file": "solidity.sol"},
-  {"name": "Vyper", "file": "vyper.vy"},
-  {"name": "Cairo", "file": "cairo.cairo"},
-  {"name": "Zig", "file": "zig.zig"},
-  {"name": "V", "file": "vlang.v"},
-  {"name": "Odin", "file": "odin.odin"},
-  {"name": "Carbon", "file": "carbon.carbon"},
-  {"name": "Mojo", "file": "mojo.mojo"},
-  {"name": "Gleam", "file": "gleam.gleam"},
-  {"name": "Grain", "file": "grain.gr"},
-  {"name": "Ballerina", "file": "ballerina.bal"},
-  {"name": "Ceylon", "file": "ceylon.ceylon"},
-  {"name": "BrightScript", "file": "brightscript.brs"},
-  {"name": "GDScript", "file": "gdscript.gd"},
-  {"name": "Wren", "file": "wren.wren"},
-  {"name": "Boo", "file": "boo.boo"},
-  {"name": "Vala", "file": "vala.vala"},
-  {"name": "Genie", "file": "genie.gs"},
-  {"name": "Mercury", "file": "mercury.mrc"},
-  {"name": "Oz", "file": "oz.oz"},
-  {"name": "Dylan", "file": "dylan.dylan"},
-  {"name": "Eiffel", "file": "eiffel.e"},
-  {"name": "Simula", "file": "simula.sim"},
-  {"name": "Modula-2", "file": "modula2.mod"},
-  {"name": "Modula-3", "file": "modula3.m3"},
-  {"name": "Oberon", "file": "oberon.oberon"},
-  {"name": "Standard ML", "file": "sml.sml"},
-  {"name": "BCPL", "file": "bcpl.bcpl"},
-  {"name": "B", "file": "b.b"},
-  {"name": "CLU", "file": "clu.clu"},
-  {"name": "SNOBOL", "file": "snobol.sno"},
-  {"name": "Rexx", "file": "rexx.rexx"},
-  {"name": "Forth", "file": "forth.fth"},
-  {"name": "Factor", "file": "factor.factor"},
-  {"name": "Joy", "file": "joy.joy"},
-  {"name": "Io", "file": "io.io"},
-  {"name": "Self", "file": "self.self"},
-  {"name": "Newspeak", "file": "newspeak.ns"},
-  {"name": "Pharo", "file": "pharo.pharo"},
-  {"name": "Squeak", "file": "squeak.squeak"},
-  {"name": "Ioke", "file": "ioke.ik"},
-  {"name": "Nu", "file": "nu.nu"},
-  {"name": "Fancy", "file": "fancy.fy"},
-  {"name": "Gosu", "file": "gosu.gosu"},
-  {"name": "Xtend", "file": "xtend.xtend"},
-  {"name": "Nemerle", "file": "nemerle.n"},
-  {"name": "Boo", "file": "boo2.boo2"},
-  {"name": "Cobra", "file": "cobra.cobra"},
-  {"name": "Mirah", "file": "mirah.mirah"},
-  {"name": "Fantom", "file": "fantom.fan"},
-  {"name": "Chapel", "file": "chapel.chpl"},
-  {"name": "X10", "file": "x10.x10"},
-  {"name": "E", "file": "elang.e"},
-  {"name": "Pony", "file": "pony.pony"},
-  {"name": "Whiley", "file": "whiley.whiley"},
-  {"name": "ATS", "file": "ats.dats"},
-  {"name": "Curry", "file": "curry.curry"},
-  {"name": "Frege", "file": "frege.fr"},
-  {"name": "Futhark", "file": "futhark.fut"},
-  {"name": "Koka", "file": "koka.koka"},
-  {"name": "Hazel", "file": "hazel.hazel"},
-  {"name": "Shen", "file": "shen.shen"},
-  {"name": "Qi", "file": "qi.qi"},
-  {"name": "Racket", "file": "racket2.rkt2"},
-  {"name": "Typed Racket", "file": "typedracket.rkt"},
-  {"name": "Arc", "file": "arc.arc"},
-  {"name": "Picolisp", "file": "picolisp.plisp"},
-  {"name": "Fennel", "file": "fennel.fnl"},
-  {"name": "Janet", "file": "janet.janet"},
-  {"name": "Hy", "file": "hy.hy"},
-  {"name": "Emacs Lisp", "file": "emacs.el"},
-  {"name": "AutoLISP", "file": "autolisp.lsp"},
-  {"name": "Franz Lisp", "file": "franzlisp.flsp"},
-  {"name": "MoonScript", "file": "moonscript.moon"},
-  {"name": "LiveScript", "file": "livescript.ls"},
-  {"name": "ClojureScript", "file": "clojurescript.cljs"},
-  {"name": "Elm", "file": "elm2.elm2"},
-  {"name": "Imba", "file": "imba.imba"},
-  {"name": "ReasonML", "file": "reasonml.re"},
-  {"name": "ReScript", "file": "rescript.res"},
-  {"name": "BuckleScript", "file": "bucklescript.bsml"},
-  {"name": "Haxe", "file": "haxe2.hx2"},
-  {"name": "GLSL", "file": "glsl.glsl"},
-  {"name": "HLSL", "file": "hlsl.hlsl"},
-  {"name": "WGSL", "file": "wgsl.wgsl"},
-  {"name": "CUDA", "file": "cuda.cu"},
-  {"name": "OpenCL", "file": "opencl.cl"},
-  {"name": "WebAssembly", "file": "wasm.wat"},
-  {"name": "SQL", "file": "sql.sql"},
-  {"name": "PL/SQL", "file": "plsql.pls"},
-  {"name": "PL/pgSQL", "file": "plpgsql.plpgsql"},
-  {"name": "T-SQL", "file": "tsql.tsql"},
-  {"name": "SPARQL", "file": "sparql.sparql"},
-  {"name": "XQuery", "file": "xquery.xq"},
-  {"name": "XSLT", "file": "xslt.xslt"},
-  {"name": "Datalog", "file": "datalog.dl"},
-  {"name": "Presto SQL", "file": "presto.presto"},
-  {"name": "Cypher", "file": "cypher.cypher"},
-  {"name": "Gremlin", "file": "gremlin.gremlin"},
-  {"name": "SPARQL", "file": "sparql2.sparql2"},
-  {"name": "EdgeQL", "file": "edgeql.edgeql"},
-  {"name": "Rego", "file": "rego.rego"},
-  {"name": "Nickel", "file": "nickel.ncl"},
-  {"name": "Dhall", "file": "dhall.dhall"},
-  {"name": "Nix", "file": "nix.nix"},
-  {"name": "Jsonnet", "file": "jsonnet.jsonnet"},
-  {"name": "HCL", "file": "hcl.hcl"},
-  {"name": "Starlark", "file": "starlark.star"},
-  {"name": "CMake", "file": "cmake.cmake"},
-  {"name": "Makefile", "file": "makefile.mk"},
-  {"name": "Rake", "file": "rake.rake"},
-  {"name": "Gradle", "file": "gradle.gradle"},
-  {"name": "Groovy DSL", "file": "groovedsl.gdsl"},
-  {"name": "Ant", "file": "ant.ant"},
-  {"name": "M4", "file": "m4.m4"},
-  {"name": "AutoHotkey", "file": "autohotkey.ahk"},
-  {"name": "AutoIt", "file": "autoit.au3"},
-  {"name": "Batch", "file": "batch.bat"},
-  {"name": "Fish", "file": "fish.fish"},
-  {"name": "Zsh", "file": "zsh.zsh"},
-  {"name": "Nushell", "file": "nushell.nu"},
-  {"name": "Elvish", "file": "elvish.elv"},
-  {"name": "Ion", "file": "ionshell.ion"},
-  {"name": "DCL", "file": "dcl.dcl"},
-  {"name": "JCL", "file": "jcl.jcl"},
-  {"name": "REXX", "file": "rexx2.rex"},
-  {"name": "Seed7", "file": "seed7.sd7"},
-  {"name": "Lasso", "file": "lasso.lasso"},
-  {"name": "ColdFusion", "file": "coldfusion.cfm"},
-  {"name": "CFML", "file": "cfml.cfml"},
-  {"name": "Ring", "file": "ring.ring"},
-  {"name": "Picat", "file": "picat.pi"},
-  {"name": "Mercury", "file": "mercury2.mercury"},
-  {"name": "Logtalk", "file": "logtalk.lgt"},
-  {"name": "Strand", "file": "strand.strand"},
-  {"name": "Alice", "file": "alice.ali"},
-  {"name": "Concurrent ML", "file": "concurrentml.cml"},
-  {"name": "Occam", "file": "occam.occam"},
-  {"name": "Erlang", "file": "erlang2.erl2"},
-  {"name": "ESTEREL", "file": "esterel.strl"},
-  {"name": "Promela", "file": "promela.promela"},
-  {"name": "SIGNAL", "file": "signal.signal"},
-  {"name": "SAC", "file": "sac.sac"},
-  {"name": "Haskell 98", "file": "haskell98.hs98"},
-  {"name": "Clean", "file": "clean.icl"},
-  {"name": "Hope", "file": "hope.hop"},
-  {"name": "Miranda", "file": "miranda.mira"},
-  {"name": "Lazy ML", "file": "lazyml.lml"},
-  {"name": "SaC", "file": "sac2.sac2"},
-  {"name": "SISAL", "file": "sisal.sisal"},
-  {"name": "Id", "file": "id.id"},
-  {"name": "pH", "file": "ph.ph"},
-  {"name": "SETL", "file": "setl.setl"},
-  {"name": "ISETL", "file": "isetl.isetl"},
-  {"name": "AMOS Basic", "file": "amosbasic.amos"},
-  {"name": "BlitzBasic", "file": "blitzbasic.bb"},
-  {"name": "BBC Basic", "file": "bbcbasic.bbc"},
-  {"name": "QBasic", "file": "qbasic.qb"},
-  {"name": "GW-BASIC", "file": "gwbasic.gwb"},
-  {"name": "FreeBASIC", "file": "freebasic.fbi"},
-  {"name": "PureBasic", "file": "purebasic.pb"},
-  {"name": "PowerBASIC", "file": "powerbasic.pbi"},
-  {"name": "DarkBASIC", "file": "darkbasic.dba"},
-  {"name": "SmallBASIC", "file": "smallbasic.sbasic"},
-  {"name": "Gambas", "file": "gambas.gambas"},
-  {"name": "Euphoria", "file": "euphoria.eu"},
-  {"name": "Harbour", "file": "harbour.hb"},
-  {"name": "xBase", "file": "xbase.prg"},
-  {"name": "Clipper", "file": "clipper.clp"},
-  {"name": "dBASE", "file": "dbase.dbase"},
-  {"name": "FoxPro", "file": "foxpro.prg2"},
-  {"name": "RPG", "file": "rpg.rpg"},
-  {"name": "MUMPS", "file": "mumps.mps"},
-  {"name": "PL/I", "file": "pli.pli"},
-  {"name": "PL/M", "file": "plm.plm"},
-  {"name": "JOVIAL", "file": "jovial.jvl"},
-  {"name": "CHILL", "file": "chill.chill"},
-  {"name": "CORAL 66", "file": "coral66.coral"},
-  {"name": "RTL/2", "file": "rtl2.rtl"},
-  {"name": "BLISS", "file": "bliss.bliss"},
-  {"name": "BCPL", "file": "bcpl2.bcpl2"},
-  {"name": "CPL", "file": "cpl.cpl"},
-  {"name": "Euler", "file": "euler.euler"},
-  {"name": "MAD", "file": "mad.mad"},
-  {"name": "NELIAC", "file": "neliac.neliac"},
-  {"name": "GIER ALGOL", "file": "gieralgol.gier"},
-  {"name": "Speedcoding", "file": "speedcoding.speed"},
-  {"name": "FLOW-MATIC", "file": "flowmatic.flow"},
-  {"name": "MATH-MATIC", "file": "mathmatic.math"},
-  {"name": "FORMULA ALGOL", "file": "formulaalgol.falg"},
-  {"name": "IPL", "file": "ipl.ipl"},
-  {"name": "COMIT", "file": "comit.comit"},
-  {"name": "Snowball", "file": "snowball.sbl"},
-  {"name": "TRAC", "file": "trac.trac"},
-  {"name": "SNOBOL4", "file": "snobol4.sno4"},
-  {"name": "SPITBOL", "file": "spitbol.spit"},
-  {"name": "Icon", "file": "icon.icn"},
-  {"name": "Unicon", "file": "unicon.uni"},
-  {"name": "SR", "file": "sr.sr"},
-  {"name": "Concurrent Euclid", "file": "concurrenteuclid.ce"},
-  {"name": "Mesa", "file": "mesa.mesa"},
-  {"name": "Modula", "file": "modula.modula"},
-  {"name": "Modula-2+", "file": "modula2plus.mod2"},
-  {"name": "Oberon-2", "file": "oberon2.ob2"},
-  {"name": "Active Oberon", "file": "activeoberon.aob"},
-  {"name": "Component Pascal", "file": "componentpascal.cp"},
-  {"name": "Zonnon", "file": "zonnon.znn"},
-  {"name": "Emerald", "file": "emerald.em"},
-  {"name": "POOL", "file": "pool.pool"},
-  {"name": "BETA", "file": "beta.beta"},
-  {"name": "GBETA", "file": "gbeta.gbeta"},
-  {"name": "Mjolner", "file": "mjolner.mjolner"},
-  {"name": "Cecil", "file": "cecil.cec"},
-  {"name": "Diesel", "file": "diesel.dsl"},
-  {"name": "Pict", "file": "pict.pict"},
-  {"name": "Nomad", "file": "nomad.nomad"},
-  {"name": "OPL", "file": "opl.opl"},
-  {"name": "Morphic", "file": "morphic.morphic"},
-  {"name": "Scratch", "file": "scratch.scratch"},
-  {"name": "Snap", "file": "snap.snap"},
-  {"name": "Alice ML", "file": "aliceml.aliceml"},
-  {"name": "AmbientTalk", "file": "ambienttalk.at"},
-  {"name": "Newspeak", "file": "newspeak2.ns2"},
-  {"name": "Korz", "file": "korz.korz"},
-  {"name": "Plaid", "file": "plaid.plaid"},
-  {"name": "Wyvern", "file": "wyvern.wyv"},
-  {"name": "Pyret", "file": "pyret.arr"},
-  {"name": "Hazel", "file": "hazel2.hz"},
-  {"name": "Dark", "file": "dark.dark"},
-  {"name": "Unison", "file": "unison.u"},
-  {"name": "Roc", "file": "roc.roc"},
-  {"name": "Verse", "file": "verse.verse"},
-  {"name": "Ante", "file": "ante.ante"},
-  {"name": "Hylo", "file": "hylo.hylo"},
-  {"name": "Val", "file": "val.val"},
-  {"name": "Inko", "file": "inko.inko"},
-  {"name": "Carp", "file": "carp.carp"},
-  {"name": "Vale", "file": "vale.vale"},
-  {"name": "Austral", "file": "austral.austral"},
-  {"name": "Beef", "file": "beef.beef"},
-  {"name": "C3", "file": "c3.c3"},
-  {"name": "Lobster", "file": "lobster.lobster"},
-  {"name": "Yuescript", "file": "yuescript.yue"},
-  {"name": "Teal", "file": "teal.teal"},
-  {"name": "Nelua", "file": "nelua.nelua"},
-  {"name": "Porth", "file": "porth.porth"},
-  {"name": "Wa", "file": "wa.wa"},
-  {"name": "Yoix", "file": "yoix.yoix"},
-  {"name": "Starlark", "file": "starlark2.bzl"},
-  {"name": "Pkl", "file": "pkl.pkl"},
-  {"name": "KCL", "file": "kcl.kcl"},
-  {"name": "CUE", "file": "cue.cue"},
-  {"name": "Bosque", "file": "bosque.bsq"},
-  {"name": "Jolie", "file": "jolie.ol"},
-  {"name": "Ur/Web", "file": "ur.ur"},
-  {"name": "Links", "file": "links.links"},
-  {"name": "Hop", "file": "hop.hop"},
-  {"name": "Flapjax", "file": "flapjax.fjx"},
-  {"name": "Opa", "file": "opa.opa"},
-  {"name": "Elm Architecture", "file": "elmarch.elmarch"},
-  {"name": "Reflex FRP", "file": "reflex.reflex"},
-  {"name": "Yampa", "file": "yampa.yampa"},
-  {"name": "LOLCODE", "file": "lolcode.lol"},
-  {"name": "Malbolge", "file": "malbolge.mb"},
-  {"name": "Intercal", "file": "intercal.intercal"},
-  {"name": "Befunge", "file": "befunge.bef"},
-  {"name": "Befunge-93", "file": "befunge93.b93"},
-  {"name": "Befunge-98", "file": "befunge98.b98"},
-  {"name": "Piet", "file": "piet.piet"},
-  {"name": "Whitespace", "file": "whitespace.ws"},
-  {"name": "ArnoldC", "file": "arnoldc.arnoldc"},
-  {"name": "Chef", "file": "chef.chef"},
-  {"name": "Shakespeare", "file": "shakespeare.spl"},
-  {"name": "Chicken", "file": "chicken.chicken"},
-  {"name": "COW", "file": "cow.cow"},
-  {"name": "Deadfish", "file": "deadfish.deadfish"},
-  {"name": "Ook!", "file": "ook.ook"},
-  {"name": "HQ9+", "file": "hq9.hq9"},
-  {"name": "JSFuck", "file": "jsfuck.jsfuck"},
-  {"name": "Emojicode", "file": "emojicode.emojic"},
-  {"name": "Whenever", "file": "whenever.whenever"},
-  {"name": "Thue", "file": "thue.thue"},
-  {"name": "Unlambda", "file": "unlambda.unl"},
-  {"name": "GolfScript", "file": "golfscript.gs"},
-  {"name": "J", "file": "j.ijs"},
-  {"name": "K", "file": "k.k"},
-  {"name": "Q", "file": "q.q"},
-  {"name": "kdb+", "file": "kdbplus.kdb"},
-  {"name": "Nial", "file": "nial.nial"},
-  {"name": "A+", "file": "aplus.aplus"},
-  {"name": "Kite", "file": "kite.kite"},
-  {"name": "BQN", "file": "bqn.bqn"},
-  {"name": "Uiua", "file": "uiua.ua"},
-  {"name": "Jelly", "file": "jelly.jelly"},
-  {"name": "Vyxal", "file": "vyxal.vy"},
-  {"name": "05AB1E", "file": "05ab1e.05ab1e"},
-  {"name": "MATL", "file": "matl.matl"},
-  {"name": "Japt", "file": "japt.japt"},
-  {"name": "Attache", "file": "attache.@"},
-  {"name": "Stax", "file": "stax.stax"},
-  {"name": "Husk", "file": "husk.husk"},
-  {"name": "Pyth", "file": "pyth.pyth"},
-  {"name": "Pip", "file": "pip.pip"},
-  {"name": "Retina", "file": "retina.retina"},
-  {"name": "Bubblegum", "file": "bubblegum.bubblegum"},
-  {"name": "Convex", "file": "convex.convex"},
-  {"name": "Proton", "file": "proton.proton"},
-  {"name": "Regex", "file": "regex.regex"},
-  {"name": "sed", "file": "sed.sed"},
-  {"name": "grep", "file": "grep.grep"},
-  {"name": "Perl 5", "file": "perl5.pl5"},
-  {"name": "Perl 6", "file": "perl6.pl6"},
-  {"name": "Rebol", "file": "rebol.rebol"},
-  {"name": "Red", "file": "red.red"},
-  {"name": "Ren-C", "file": "renc.renc"},
-  {"name": "Forth 83", "file": "forth83.f83"},
-  {"name": "ANS Forth", "file": "ansforth.fth"},
-  {"name": "gForth", "file": "gforth.gforth"},
-  {"name": "PostScript", "file": "postscript.ps"},
-  {"name": "PDF", "file": "pdf.pdf"},
-  {"name": "RPL", "file": "rpl.rpl"},
-  {"name": "HP-15C", "file": "hp15c.hp15c"},
-  {"name": "dc", "file": "dc.dc"},
-  {"name": "bc", "file": "bc.bc"},
-  {"name": "awk (gawk)", "file": "gawk.gawk"},
-  {"name": "SWI-Prolog", "file": "swiprolog.pl7"},
-  {"name": "GNU Prolog", "file": "gnuprolog.gprolog"},
-  {"name": "Visual Prolog", "file": "visualprolog.vip"},
-  {"name": "Mercury (logic)", "file": "mercurylogic.mrc2"},
-  {"name": "Curry (FP+LP)", "file": "curryfplp.curry2"},
-  {"name": "miniKanren", "file": "minikanren.mk"},
-  {"name": "core.logic", "file": "corelogic.clogic"},
-  {"name": "Datalog (Soufflé)", "file": "souffle.dl2"},
-  {"name": "Alloy", "file": "alloy.als2"},
-  {"name": "TLA+", "file": "tlaplus.tla"},
-  {"name": "Z notation", "file": "znotation.zed"},
-  {"name": "B Method", "file": "bmethod.bmch"},
-  {"name": "Event-B", "file": "eventb.eventb"},
-  {"name": "VDM-SL", "file": "vdmsl.vdmsl"},
-  {"name": "VDM++", "file": "vdmpp.vdmpp"},
-  {"name": "JML", "file": "jml.jml"},
-  {"name": "Spec#", "file": "specsharp.spec"},
-  {"name": "Dafny", "file": "dafny.dfy"},
-  {"name": "Whiley", "file": "whiley2.whiley2"},
-  {"name": "F*", "file": "fstar.fst"},
-  {"name": "Liquid Haskell", "file": "liquidhaskell.lhs"},
-  {"name": "Iris", "file": "iris.iris"},
-  {"name": "Separation Logic", "file": "seplogic.sl"},
-  {"name": "KeY", "file": "key.key"},
-  {"name": "Isabelle/HOL", "file": "isabelle.thy"},
-  {"name": "Lean 4", "file": "lean4.lean4"},
-  {"name": "Rocq", "file": "rocq.rocq"},
-  {"name": "SPARK Ada", "file": "spark.spark"},
-  {"name": "ACSL", "file": "acsl.acsl"},
-  {"name": "Frama-C", "file": "framac.framac"},
-  {"name": "Why3", "file": "why3.why"},
-  {"name": "Krakatoa", "file": "krakatoa.kra"},
-  {"name": "Verilog", "file": "verilog.v3"},
-  {"name": "SystemVerilog", "file": "systemverilog.sv"},
-  {"name": "VHDL", "file": "vhdl.vhdl"},
-  {"name": "Chisel", "file": "chisel.chisel"},
-  {"name": "SpinalHDL", "file": "spinalhdl.spinal"},
-  {"name": "Bluespec SystemVerilog", "file": "bluespec.bsv"},
-  {"name": "MyHDL", "file": "myhdl.myhdl"},
-  {"name": "Lava", "file": "lava.lava"},
-  {"name": "CLASH", "file": "clash.clash"},
-  {"name": "Amaranth HDL", "file": "amaranth.amaranth"},
-  {"name": "nMigen", "file": "nmigen.nmigen"},
-  {"name": "SPIN", "file": "spin.spin"},
-  {"name": "mCRL2", "file": "mcrl2.mcrl2"},
-  {"name": "LOTOS", "file": "lotos.lotos"},
-  {"name": "CSP", "file": "csp.csp"},
-  {"name": "CCS", "file": "ccs.ccs"},
-  {"name": "Pi calculus", "file": "picalculus.pi"},
-  {"name": "Ambient calculus", "file": "ambientcalc.ac"},
-  {"name": "Join calculus", "file": "joincalculus.jc"},
-  {"name": "Acute", "file": "acute.acute"},
-  {"name": "Pict", "file": "pict2.pict2"},
-  {"name": "Nomadic Pict", "file": "nomadicpict.np"},
-  {"name": "Erlang OTP", "file": "erlangotp.erlotp"},
-  {"name": "Elixir Phoenix", "file": "elixirphoenix.exphx"},
-  {"name": "LFE", "file": "lfe.lfe"},
-  {"name": "Hamler", "file": "hamler.hm"},
-  {"name": "Gleam (BEAM)", "file": "gleambeam.gleambeam"},
-  {"name": "Caramel", "file": "caramel.caramel"},
-  {"name": "TypedElixir", "file": "typedelixir.tex"},
-  {"name": "Haskell (GHC)", "file": "ghc.ghc"},
-  {"name": "Eta", "file": "eta.eta"},
-  {"name": "Frege", "file": "frege2.frege"},
-  {"name": "Purescript (Halogen)", "file": "halogen.halogen"},
-  {"name": "Dhall (typed)", "file": "dhalltyped.dhall2"},
-  {"name": "Nix (flakes)", "file": "nixflakes.nix2"},
-  {"name": "Guix", "file": "guix.guix"},
-  {"name": "OPAM", "file": "opam.opam"},
-  {"name": "Stack", "file": "stack.stack"},
-  {"name": "Cabal", "file": "cabal.cabal"},
-  {"name": "Cargo DSL", "file": "cargo.cargo"},
-  {"name": "Gemfile DSL", "file": "gemfile.gemfile"},
-  {"name": "Podfile DSL", "file": "podfile.podfile"},
-  {"name": "Packagefile", "file": "packagefile.packagefile"},
-  {"name": "Brewer DSL", "file": "brewer.brewer"},
-  {"name": "AMPL", "file": "ampl.ampl"},
-  {"name": "GAMS", "file": "gams.gms"},
-  {"name": "MiniZinc", "file": "minizinc.mzn"},
-  {"name": "OPL (CPLEX)", "file": "oplcplex.oplx"},
-  {"name": "Mosel", "file": "mosel.mosel"},
-  {"name": "ZIMPL", "file": "zimpl.zpl"},
-  {"name": "LINGO", "file": "lingo.lingo"},
-  {"name": "CPLEX LP", "file": "cplexlp.lp"},
-  {"name": "MPS format", "file": "mpsformat.mps"},
-  {"name": "RPL (HP)", "file": "rplhp.rplhp"},
-  {"name": "Asymptote", "file": "asymptote.asy"},
-  {"name": "MetaPost", "file": "metapost.mp"},
-  {"name": "MetaFont", "file": "metafont.mf"},
-  {"name": "Gnuplot", "file": "gnuplot.gp"},
-  {"name": "R (Tidyverse)", "file": "rtidyverse.rtv"},
-  {"name": "Julia (Flux)", "file": "juliaflux.jlf"},
-  {"name": "Python (NumPy)", "file": "pynumpy.pynp"},
-  {"name": "Mathematica (WL)", "file": "wl.wl2"},
-  {"name": "Maple", "file": "maple.mpl"},
-  {"name": "Maxima", "file": "maxima.max"},
-  {"name": "REDUCE", "file": "reduce.reduce"},
-  {"name": "Axiom", "file": "axiom.axiom"},
-  {"name": "FriCAS", "file": "fricas.fricas"},
-  {"name": "Macaulay2", "file": "macaulay2.m2"},
-  {"name": "SageMath", "file": "sagemath.sage"},
-  {"name": "GAP (Groups)", "file": "gap.g"},
-  {"name": "Magma", "file": "magma.magma"},
-  {"name": "PARI/GP", "file": "parigp.gp2"},
-  {"name": "Singular", "file": "singular.singular"},
-  {"name": "CoCoA", "file": "cocoa.cocoa"},
-  {"name": "SymPy DSL", "file": "sympy.sympy"},
-  {"name": "Modelica", "file": "modelica.mo"},
-  {"name": "Simulink", "file": "simulink.simulink"},
-  {"name": "Scicos", "file": "scicos.scicos"},
-  {"name": "VHDL-AMS", "file": "vhdlams.vhdlams"},
-  {"name": "Spice", "file": "spice.cir"},
-  {"name": "ACME", "file": "acme.acme"},
-  {"name": "6502 Assembly", "file": "6502asm.6502"},
-  {"name": "Z80 Assembly", "file": "z80asm.z80"},
-  {"name": "MIPS Assembly", "file": "mipsasm.mips"},
-  {"name": "ARM Assembly", "file": "armasm.arm"},
-  {"name": "RISC-V Assembly", "file": "riscvasm.riscv"},
-  {"name": "PowerPC Assembly", "file": "ppcasm.ppc"},
-  {"name": "SPARC Assembly", "file": "sparcasm.sparc"},
-  {"name": "m68k Assembly", "file": "m68kasm.m68k"},
-  {"name": "AVR Assembly", "file": "avrasm.avr"},
-  {"name": "PIC Assembly", "file": "picasm.pic"},
-  {"name": "8051 Assembly", "file": "8051asm.8051"},
-  {"name": "ARM Thumb", "file": "armthumb.thumb"},
-  {"name": "AArch64 Assembly", "file": "aarch64.aarch64"},
-  {"name": "Alpha Assembly", "file": "alphaasm.alpha"},
-  {"name": "IA-64 Assembly", "file": "ia64.ia64"},
-  {"name": "SuperH Assembly", "file": "shasm.sh4"},
-  {"name": "MMIX", "file": "mmix.mmix"},
-  {"name": "MIX", "file": "mix.mix"},
-  {"name": "P-code", "file": "pcode.pcode"},
-  {"name": "LLVM IR", "file": "llvmir.ll"},
-  {"name": "MLIR", "file": "mlir.mlir"},
-  {"name": "QBE IR", "file": "qbeir.qbe"},
-  {"name": "C-- (Cmm)", "file": "cmm.cmm"},
-  {"name": "Cranelift IR", "file": "cranelift.clif"},
-  {"name": "Java Bytecode", "file": "javabytecode.jbc"},
-  {"name": "CIL (.NET)", "file": "cil.cil"},
-  {"name": "Dalvik", "file": "dalvik.dalvik"},
-  {"name": "ART", "file": "art.art"},
-  {"name": "Jasmin", "file": "jasmin.jasmin"},
-  {"name": "Krakatoa IR", "file": "krakatoair.krir"},
-  {"name": "GCC RTL", "file": "gccrtl.rtl"},
-  {"name": "Snowflake IR", "file": "snowflakeir.snowir"},
-  {"name": "HVM", "file": "hvm.hvm"},
-  {"name": "Bend", "file": "bend.bend"},
-  {"name": "Kind2", "file": "kind2.kind2"},
-  {"name": "Taichi", "file": "taichi.taichi"},
-  {"name": "Halide", "file": "halide.halide"},
-  {"name": "TVM", "file": "tvm.tvm"},
-  {"name": "Triton", "file": "triton.triton"},
-  {"name": "MLIR (Affine)", "file": "mliraffine.mliraffine"},
-  {"name": "P4", "file": "p4.p4"},
-  {"name": "eBPF", "file": "ebpf.ebpf"},
-  {"name": "XDP", "file": "xdp.xdp"},
-  {"name": "Cilium Policy", "file": "ciliumpolicy.ciliumpol"},
-  {"name": "Rego (OPA)", "file": "regoopa.rgo"},
-  {"name": "Polar (Oso)", "file": "polar.polar"},
-  {"name": "Cedar", "file": "cedar.cedar"},
-  {"name": "Cue (schema)", "file": "cueschema.cues"},
-  {"name": "Pkl (config)", "file": "pklconfig.pklc"},
-  {"name": "KCL (config)", "file": "kclconfig.kclc"},
-  {"name": "Nickel (config)", "file": "nickelconfig.nclc"},
-  {"name": "Jsonnet (config)", "file": "jsonnetconfig.jnetc"},
-  {"name": "Pulumi DSL", "file": "pulumi.pulumi"},
-  {"name": "CDK (TS)", "file": "cdk.cdk"},
-  {"name": "Terraform (HCL)", "file": "terraform.tf"},
-  {"name": "Bicep", "file": "bicep.bicep"},
-  {"name": "ARM template", "file": "armtemplate.armtemplate"},
-  {"name": "CloudFormation", "file": "cloudformation.cfn"},
-  {"name": "Serverless YML", "file": "serverless.serverless"},
-  {"name": "Kustomize", "file": "kustomize.kustomize"},
-  {"name": "Helm DSL", "file": "helm.helm"},
-  {"name": "Rego (Gatekeeper)", "file": "regogate.rgogate"},
-  {"name": "OPA policy", "file": "opapolicy.opapol"},
-  {"name": "Sentinel", "file": "sentinel.sentinel"},
-  {"name": "Cuelang", "file": "cuelang.cuelang"},
-  {"name": "Pkl (Pkl)", "file": "pklpkl.pklpkl"},
-  {"name": "WASM Text", "file": "wasmtext.wasmtext"},
-  {"name": "WASI", "file": "wasi.wasi"},
-  {"name": "Wasm Component", "file": "wasmcomp.wasmcomp"},
-  {"name": "Grain (WASM)", "file": "grainwasm.grainwasm"},
-  {"name": "AssemblyScript", "file": "assemblyscript.asc"},
-  {"name": "Walt", "file": "walt.walt"},
-  {"name": "Motoko", "file": "motoko.mo2"},
-  {"name": "Move", "file": "move.move"},
-  {"name": "Sui Move", "file": "suimove.suimove"},
-  {"name": "Aptos Move", "file": "aptosmove.aptosmove"},
-  {"name": "Ink!", "file": "ink.ink"},
-  {"name": "Michelson", "file": "michelson.tz"},
-  {"name": "SmartPy", "file": "smartpy.smartpy"},
-  {"name": "LIGO", "file": "ligo.ligo"},
-  {"name": "CameLIGO", "file": "cameligo.cameligo"},
-  {"name": "JsLIGO", "file": "jsligo.jsligo"},
-  {"name": "PascaLIGO", "file": "pascaligo.pascaligo"},
-  {"name": "Archetype", "file": "archetype.archetype"},
-  {"name": "Scilla", "file": "scilla.scilla"},
-  {"name": "Plutus", "file": "plutus.plutus"},
-  {"name": "Marlowe", "file": "marlowe.marlowe"},
-  {"name": "Aiken", "file": "aiken.ak"},
-  {"name": "Helios", "file": "helios.helios"},
-  {"name": "Sway", "file": "sway.sw"},
-  {"name": "Noir", "file": "noir.nr"},
-  {"name": "Circom", "file": "circom.circom"},
-  {"name": "Lurk", "file": "lurk.lurk"},
-  {"name": "Leo", "file": "leo.leo"},
-  {"name": "Zinc", "file": "zinc.zinc"},
-  {"name": "Halo2", "file": "halo2.halo2"},
-  {"name": "ACIR", "file": "acir.acir"},
-  {"name": "R1CS", "file": "r1cs.r1cs"},
-  {"name": "Plonk DSL", "file": "plonkdsl.plonkdsl"},
-  {"name": "Gnark", "file": "gnark.gnark"},
-  {"name": "Arkworks", "file": "arkworks.ark"},
-  {"name": "Bellman", "file": "bellman.bellman"},
-  {"name": "LLZK", "file": "llzk.llzk"},
-  {"name": "Cheetah", "file": "cheetah.cheetah"},
-  {"name": "Mako", "file": "mako.mako"},
-  {"name": "Jinja2", "file": "jinja2.j2"},
-  {"name": "Twig", "file": "twig.twig"},
-  {"name": "Smarty", "file": "smarty.smarty"},
-  {"name": "Handlebars", "file": "handlebars.hbs"},
-  {"name": "Mustache", "file": "mustache.mustache"},
-  {"name": "Liquid", "file": "liquid.liquid"},
-  {"name": "Nunjucks", "file": "nunjucks.njk"},
-  {"name": "Pug", "file": "pug.pug"},
-  {"name": "Haml", "file": "haml.haml"},
-  {"name": "Slim", "file": "slim.slim"},
-  {"name": "ERB", "file": "erb.erb"},
-  {"name": "EJS", "file": "ejs.ejs"},
-  {"name": "JSP", "file": "jsp.jsp"},
-  {"name": "ASP Classic", "file": "asp.asp"},
-  {"name": "Razor", "file": "razor.cshtml"},
-  {"name": "Blade", "file": "blade.blade"},
-  {"name": "Plate", "file": "plate.plate"},
-  {"name": "Velocity", "file": "velocity.vm"},
-  {"name": "FreeMarker", "file": "freemarker.ftl"},
-  {"name": "Thymeleaf", "file": "thymeleaf.thymeleaf"},
-  {"name": "Wire", "file": "wire.wire"},
-  {"name": "Temple", "file": "temple.temple"},
-  {"name": "HTMX attrs", "file": "htmxattrs.htmx"},
-  {"name": "Alpine.js", "file": "alpinejs.alpine"},
-  {"name": "Svelte", "file": "svelte.svelte"},
-  {"name": "Vue SFC", "file": "vue.vue"},
-  {"name": "Angular template", "file": "angular.ng"},
-  {"name": "Lit", "file": "lit.lit"},
-  {"name": "Solid DSL", "file": "solid.solid"},
-  {"name": "Marko", "file": "marko.marko"},
-  {"name": "Astro", "file": "astro.astro"},
-  {"name": "MDX", "file": "mdx.mdx"},
-  {"name": "Qwik", "file": "qwik.qwik"},
-  {"name": "Fresh DSL", "file": "fresh.fresh"},
-  {"name": "Stencil", "file": "stencil.stencil"},
-  {"name": "Riot", "file": "riot.riot"},
-  {"name": "Hyperapp", "file": "hyperapp.hyperapp"},
-  {"name": "Mithril", "file": "mithril.mithril"},
-  {"name": "Inferno DSL", "file": "inferno.inferno"},
-  {"name": "Preact DSL", "file": "preact.preact"},
-  {"name": "Dioxus", "file": "dioxus.dioxus"},
-  {"name": "Yew", "file": "yew.yew"},
-  {"name": "Leptos", "file": "leptos.leptos"},
-  {"name": "Sauron", "file": "sauron.sauron"},
-  {"name": "Iced (Rust)", "file": "iced.iced"},
-  {"name": "Druid", "file": "druid.druid"},
-  {"name": "egui", "file": "egui.egui"},
-  {"name": "Slint", "file": "slint.slint"},
-  {"name": "Qt QML", "file": "qtqml.qml"},
-  {"name": "Flutter (Dart)", "file": "flutter.flutter"},
-  {"name": "SwiftUI", "file": "swiftui.swiftui"},
-  {"name": "Jetpack Compose", "file": "jetpackcompose.compose"},
-  {"name": "Xamarin", "file": "xamarin.xamarin"},
-  {"name": "MAUI DSL", "file": "maui.maui"},
-  {"name": "React Native", "file": "reactnative.reactnative"},
-  {"name": "NativeScript", "file": "nativescript.nativescript"},
-  {"name": "Capacitor", "file": "capacitor.capacitor"},
-  {"name": "Ionic DSL", "file": "ionic.ionic"},
-  {"name": "Expo DSL", "file": "expo.expo"},
-  {"name": "Tauri", "file": "tauri.tauri"},
-  {"name": "Electron DSL", "file": "electron.electron"},
-  {"name": "Neutralino", "file": "neutralino.neutralino"},
-  {"name": "Sciter", "file": "sciter.sciter"},
-  {"name": "Dear ImGui", "file": "imgui.imgui"},
-  {"name": "Raylib DSL", "file": "raylib.raylib"},
-  {"name": "SFML DSL", "file": "sfml.sfml"},
-  {"name": "SDL DSL", "file": "sdl.sdl"},
-  {"name": "OpenGL DSL", "file": "opengl.opengl"},
-  {"name": "Vulkan DSL", "file": "vulkan.vulkan"},
-  {"name": "Metal DSL", "file": "metal.metal"},
-  {"name": "DirectX HLSL", "file": "dxhlsl.dxhlsl"},
-  {"name": "Wgpu DSL", "file": "wgpu.wgpu"},
-  {"name": "Bevy DSL", "file": "bevy.bevy"},
-  {"name": "Godot GDScript", "file": "godotgds.gdscript"},
-  {"name": "Unreal Blueprint", "file": "unrealbp.unrealbp"},
-  {"name": "Unity C# DSL", "file": "unitycs.unitycs"},
-  {"name": "Panda3D DSL", "file": "panda3d.panda3d"},
-  {"name": "Love2D DSL", "file": "love2d.love"},
-  {"name": "MonoGame DSL", "file": "monogame.monogame"},
-  {"name": "Defold Script", "file": "defold.defold"},
-  {"name": "GML (GameMaker)", "file": "gml.gml"},
-  {"name": "Construct DSL", "file": "construct.construct"},
-  {"name": "RPGMaker DSL", "file": "rpgmaker.rpgmaker"},
-  {"name": "Twine (Harlowe)", "file": "twine.twine"},
-  {"name": "Ink (narrative)", "file": "inknarr.inknarr"},
-  {"name": "Ren'Py DSL", "file": "renpy.rpy"},
-  {"name": "AGS Script", "file": "ags.ags"},
-  {"name": "Inform 7", "file": "inform7.inf7"},
-  {"name": "Inform 6", "file": "inform6.inf6"},
-  {"name": "TADS", "file": "tads.tads"},
-  {"name": "ZIL", "file": "zil.zil"},
-  {"name": "Hugo (text)", "file": "hugotextadv.hugotxt"},
-  {"name": "Squiffy", "file": "squiffy.squiffy"},
-  {"name": "Yarn Spinner", "file": "yarn.yarn"},
-  {"name": "Twee", "file": "twee.twee"},
-  {"name": "SugarCube", "file": "sugarcube.sugarcube"},
-  {"name": "Chapbook", "file": "chapbook.chapbook"},
-  {"name": "Decker", "file": "decker.decker"},
-  {"name": "HyperCard DSL", "file": "hypercard.hc"},
-  {"name": "SuperCard DSL", "file": "supercard.sc"},
-  {"name": "LiveCode", "file": "livecode.livecode"},
-  {"name": "Transcript", "file": "transcript.transcript"},
-  {"name": "OpenDocument macro", "file": "odsmacro.odsmacro"},
-  {"name": "LibreOffice Basic", "file": "lobasic.lobasic"},
-  {"name": "StarBasic", "file": "starbasic.starbasic"},
-  {"name": "WordBasic", "file": "wordbasic.wordbasic"},
-  {"name": "VBA (Excel)", "file": "vbaexcel.vbaexcel"},
-  {"name": "VBA (Access)", "file": "vbaaccess.vbaaccess"},
-  {"name": "VBA (Word)", "file": "vbaword.vbaword"},
-  {"name": "DAX (PowerBI)", "file": "dax.dax"},
-  {"name": "M Query", "file": "mquery.mquery"},
-  {"name": "KQL (Kusto)", "file": "kql.kql"},
-  {"name": "MDX (OLAP)", "file": "mdxolap.mdxolap"},
-  {"name": "Pig Latin (Hadoop)", "file": "piglatin.pig"},
-  {"name": "Hive QL", "file": "hiveql.hql"},
-  {"name": "Impala SQL", "file": "impalasql.impalasql"},
-  {"name": "Flink SQL", "file": "flinksql.flinksql"},
-  {"name": "Spark SQL", "file": "sparksql.sparksql"},
-  {"name": "Cassandra CQL", "file": "cassandracql.cql"},
-  {"name": "Gremlin DSL", "file": "gremlindsl.gremlin2"},
-  {"name": "Cypher (Neo4j)", "file": "cyphernj.cyphernj"},
-  {"name": "GSQL (TigerGraph)", "file": "gsql.gsql"},
-  {"name": "GraphQL", "file": "graphql.graphql"},
-  {"name": "Relay DSL", "file": "relay.relay"},
-  {"name": "Hasura DSL", "file": "hasura.hasura"},
-  {"name": "Prisma DSL", "file": "prisma.prisma"},
-  {"name": "Mongoose DSL", "file": "mongoose.mongoose"},
-  {"name": "LINQ DSL", "file": "linq.linq"},
-  {"name": "Entity SQL", "file": "entitysql.esql"},
-  {"name": "HQL (Hibernate)", "file": "hql.hql"},
-  {"name": "JPQL", "file": "jpql.jpql"},
-  {"name": "jOOQ DSL", "file": "jooq.jooq"},
-  {"name": "SQLAlchemy DSL", "file": "sqlalchemy.sqlalchemy"},
-  {"name": "ActiveRecord DSL", "file": "activerecord.ar"},
-  {"name": "Ecto DSL", "file": "ecto.ecto"},
-  {"name": "Diesel DSL", "file": "diesel.diesel"},
-  {"name": "SeaORM DSL", "file": "seaorm.seaorm"},
-  {"name": "GORM DSL", "file": "gorm.gorm"},
-  {"name": "Room DSL", "file": "room.room"},
-  {"name": "Core Data DSL", "file": "coredata.coredata"},
-  {"name": "Realm DSL", "file": "realm.realm"},
-  {"name": "Ditto DSL", "file": "ditto.ditto"},
-  {"name": "Parse DSL", "file": "parse.parse"},
-  {"name": "Firebase DSL", "file": "firebase.firebase"},
-  {"name": "Supabase DSL", "file": "supabase.supabase"},
-  {"name": "Appwrite DSL", "file": "appwrite.appwrite"},
-  {"name": "PocketBase DSL", "file": "pocketbase.pocketbase"},
-  {"name": "Convex DSL", "file": "convex.convex2"},
-  {"name": "Turso DSL", "file": "turso.turso"},
-  {"name": "Neon DSL", "file": "neon.neon2"},
-  {"name": "PlanetScale DSL", "file": "planetscale.planetscale"},
-  {"name": "CockroachDB DSL", "file": "cockroachdb.cockroachdb"},
-  {"name": "TiDB DSL", "file": "tidb.tidb"},
-  {"name": "YugabyteDB DSL", "file": "yugabyte.yugabyte"},
-  {"name": "SingleStoreDB DSL", "file": "singlestore.singlestore"},
-  {"name": "Snowflake SQL", "file": "snowflakesql.snowsql"},
-  {"name": "BigQuery SQL", "file": "bigquerysql.bqsql"},
-  {"name": "Redshift SQL", "file": "redshiftsql.redsql"},
-  {"name": "DuckDB SQL", "file": "duckdbsql.ducksql"},
-  {"name": "MotherDuck DSL", "file": "motherduck.motherduck"},
-  {"name": "dbt DSL", "file": "dbt.dbt"},
-  {"name": "Airflow DAG", "file": "airflow.airflow"},
-  {"name": "Prefect DSL", "file": "prefect.prefect"},
-  {"name": "Dagster DSL", "file": "dagster.dagster"},
-  {"name": "Kedro DSL", "file": "kedro.kedro"},
-  {"name": "Luigi DSL", "file": "luigi.luigi"},
-  {"name": "Argo YAML", "file": "argo.argo"},
-  {"name": "Temporal DSL", "file": "temporal.temporal"},
-  {"name": "Cadence (Temporal)", "file": "cadence.cadence"},
-  {"name": "Step Functions DSL", "file": "stepfunctions.stepfn"},
-  {"name": "Apache Beam DSL", "file": "apachebeam.beam"},
-  {"name": "Flink DSL", "file": "flink.flink"},
-  {"name": "Spark DSL", "file": "spark.spark2"},
-  {"name": "Kafka Streams DSL", "file": "kafkastreams.kafkastreams"},
-  {"name": "Pulsar DSL", "file": "pulsar.pulsar"},
-  {"name": "NATS DSL", "file": "nats.nats"},
-  {"name": "RabbitMQ DSL", "file": "rabbitmq.rabbitmq"},
-  {"name": "ZeroMQ DSL", "file": "zeromq.zeromq"},
-  {"name": "gRPC DSL", "file": "grpc.grpc"},
-  {"name": "Protobuf", "file": "protobuf.proto"},
-  {"name": "Thrift IDL", "file": "thrift.thrift"},
-  {"name": "Avro Schema", "file": "avro.avsc"},
-  {"name": "FlatBuffers", "file": "flatbuffers.fbs"},
-  {"name": "Cap'n Proto", "file": "capnproto.capnp"},
-  {"name": "MessagePack DSL", "file": "msgpack.msgpack"},
-  {"name": "CBOR DSL", "file": "cbor.cbor"},
-  {"name": "ASN.1", "file": "asn1.asn"},
-  {"name": "XSD Schema", "file": "xsd.xsd"},
-  {"name": "Relax NG", "file": "relaxng.rng"},
-  {"name": "WSDL", "file": "wsdl.wsdl"},
-  {"name": "OpenAPI DSL", "file": "openapi.openapi"},
-  {"name": "RAML", "file": "raml.raml"},
-  {"name": "Blueprint API", "file": "blueprintapi.apib"},
-  {"name": "WADL", "file": "wadl.wadl"},
-  {"name": "IDL (CORBA)", "file": "idlcorba.idl"},
-  {"name": "WebIDL", "file": "webidl.webidl"},
-  {"name": "Smithy DSL", "file": "smithy.smithy"},
-  {"name": "TypeSpec", "file": "typespec.tsp"},
-  {"name": "Dhall (API)", "file": "dhallapi.dhallapi"},
-  {"name": "Sorbet RBI", "file": "sorbet.rbi"},
-  {"name": "Steep RBS", "file": "steep.rbs"},
-  {"name": "TypeScript d.ts", "file": "tsdts.d.ts"},
-  {"name": "Flow types", "file": "flowtype.flow"},
-  {"name": "Propel ML", "file": "propelml.propelml"},
-  {"name": "Relay IR", "file": "relayir.relayir"},
-  {"name": "ONNX DSL", "file": "onnx.onnx"},
-  {"name": "TensorFlow DSL", "file": "tensorflow.tf2"},
-  {"name": "PyTorch DSL", "file": "pytorch.pytorch"},
-  {"name": "JAX DSL", "file": "jax.jax"},
-  {"name": "MXNet DSL", "file": "mxnet.mxnet"},
-  {"name": "Keras DSL", "file": "keras.keras"},
-  {"name": "Theano DSL", "file": "theano.theano"},
-  {"name": "Caffe DSL", "file": "caffe.caffe"},
-  {"name": "Darknet DSL", "file": "darknet.darknet"},
-  {"name": "Paddle DSL", "file": "paddle.paddle"},
-  {"name": "MindSpore DSL", "file": "mindspore.mindspore"},
-  {"name": "Jax2 DSL", "file": "jax2.jax2"},
-  {"name": "GGML DSL", "file": "ggml.ggml"},
-  {"name": "ExecuTorch DSL", "file": "executorch.executorch"},
-  {"name": "CoreML DSL", "file": "coreml.coreml"},
-  {"name": "TFLite DSL", "file": "tflite.tflite"},
-  {"name": "OpenVINO DSL", "file": "openvino.openvino"},
-  {"name": "NCNN DSL", "file": "ncnn.ncnn"},
-  {"name": "MNN DSL", "file": "mnn.mnn"},
-  {"name": "Catapult HLS", "file": "catapult.catapult"},
-  {"name": "Vivado HLS", "file": "vivadohls.vivadohls"},
-  {"name": "Intel HLS", "file": "intelhls.intelhls"},
-  {"name": "Spatial DSL", "file": "spatial.spatial"},
-  {"name": "Dahlia DSL", "file": "dahlia.dahlia"},
-  {"name": "Calyx IR", "file": "calyx.calyx"},
-  {"name": "PipelineC", "file": "pipelinec.pipelinec"},
-  {"name": "CIRCT", "file": "circt.circt2"},
-  {"name": "Filament DSL", "file": "filament.filament"},
-  {"name": "Lakeroad DSL", "file": "lakeroad.lakeroad"},
-  {"name": "HalideHDL", "file": "halidehdl.halidehdl"},
-  {"name": "TVM Relay", "file": "tvmrelay.tvmrelay"},
-  {"name": "Torch Script", "file": "torchscript.torchscript"},
-  {"name": "Numpy DSL", "file": "numpy.numpy"},
-  {"name": "SciPy DSL", "file": "scipy.scipy"},
-  {"name": "Pandas DSL", "file": "pandas.pandas"},
-  {"name": "Polars DSL", "file": "polars.polars"},
-  {"name": "Arrow DSL", "file": "arrow.arrow"},
-  {"name": "Dask DSL", "file": "dask.dask"},
-  {"name": "Ray DSL", "file": "ray.ray2"},
-  {"name": "Modin DSL", "file": "modin.modin"},
-  {"name": "Vaex DSL", "file": "vaex.vaex"},
-  {"name": "CuDF DSL", "file": "cudf.cudf"},
-  {"name": "Ibis DSL", "file": "ibis.ibis"},
-  {"name": "DuckDB Python", "file": "duckdbpy.duckdbpy"},
-  {"name": "SQLGlot DSL", "file": "sqlglot.sqlglot"},
-  {"name": "PRQL", "file": "prql.prql"},
-  {"name": "FunSQL DSL", "file": "funsql.funsql"},
-  {"name": "Malloy", "file": "malloy.malloy"},
-  {"name": "Logica", "file": "logica.logica"},
-  {"name": "EventQL", "file": "eventql.eventql"},
-  {"name": "InfluxQL", "file": "influxql.influxql"},
-  {"name": "PromQL", "file": "promql.promql"},
-  {"name": "LogQL", "file": "logql.logql"},
-  {"name": "TraceQL", "file": "traceql.traceql"},
-  {"name": "FluxQL", "file": "fluxql.fluxql"},
-  {"name": "RisingWave SQL", "file": "risingwave.rw"},
-  {"name": "MaterializeSQL", "file": "materialize.mz"},
-  {"name": "Pathway DSL", "file": "pathway.pathway"},
-  {"name": "Feldera DSL", "file": "feldera.feldera"},
-  {"name": "Arroyo DSL", "file": "arroyo.arroyo"},
-  {"name": "Quix DSL", "file": "quix.quix"},
-  {"name": "Electric DSL", "file": "electric.electric"},
-  {"name": "Nile DSL", "file": "nile.nile"},
-  {"name": "AMQP DSL", "file": "amqp.amqp"},
-  {"name": "MQTT DSL", "file": "mqtt.mqtt"},
-  {"name": "CoAP DSL", "file": "coap.coap"},
-  {"name": "STOMP DSL", "file": "stomp.stomp"},
-  {"name": "XMPP DSL", "file": "xmpp.xmpp"},
-  {"name": "Matrix DSL", "file": "matrix.matrix"},
-  {"name": "ActivityPub DSL", "file": "activitypub.activitypub"},
-  {"name": "Nostr DSL", "file": "nostr.nostr"},
-  {"name": "AT Protocol DSL", "file": "atproto.atproto"},
-  {"name": "Fediverse DSL", "file": "fediverse.fediverse"}
+  {
+    "name": "Python",
+    "file": "python.py"
+  },
+  {
+    "name": "JavaScript",
+    "file": "javascript.js"
+  },
+  {
+    "name": "TypeScript",
+    "file": "typescript.ts"
+  },
+  {
+    "name": "Rust",
+    "file": "rust.rs"
+  },
+  {
+    "name": "Go",
+    "file": "go.go"
+  },
+  {
+    "name": "Java",
+    "file": "java.java"
+  },
+  {
+    "name": "C",
+    "file": "c.c"
+  },
+  {
+    "name": "C++",
+    "file": "cpp.cpp"
+  },
+  {
+    "name": "C#",
+    "file": "csharp.cs"
+  },
+  {
+    "name": "Ruby",
+    "file": "ruby.rb"
+  },
+  {
+    "name": "Swift",
+    "file": "swift.swift"
+  },
+  {
+    "name": "Kotlin",
+    "file": "kotlin.kt"
+  },
+  {
+    "name": "Scala",
+    "file": "scala.scala"
+  },
+  {
+    "name": "Haskell",
+    "file": "haskell.hs"
+  },
+  {
+    "name": "Erlang",
+    "file": "erlang.erl"
+  },
+  {
+    "name": "Elixir",
+    "file": "elixir.ex"
+  },
+  {
+    "name": "Clojure",
+    "file": "clojure.clj"
+  },
+  {
+    "name": "F#",
+    "file": "fsharp.fsx"
+  },
+  {
+    "name": "OCaml",
+    "file": "ocaml.ml"
+  },
+  {
+    "name": "Dart",
+    "file": "dart.dart"
+  },
+  {
+    "name": "Lua",
+    "file": "lua.lua"
+  },
+  {
+    "name": "R",
+    "file": "r.r"
+  },
+  {
+    "name": "Julia",
+    "file": "julia.jl"
+  },
+  {
+    "name": "Perl",
+    "file": "perl.pl"
+  },
+  {
+    "name": "PHP",
+    "file": "php.php"
+  },
+  {
+    "name": "Shell",
+    "file": "shell.sh"
+  },
+  {
+    "name": "Ada",
+    "file": "ada.adb"
+  },
+  {
+    "name": "Fortran",
+    "file": "fortran.f90"
+  },
+  {
+    "name": "COBOL",
+    "file": "cobol.cob"
+  },
+  {
+    "name": "Pascal",
+    "file": "pascal.pas"
+  },
+  {
+    "name": "Delphi",
+    "file": "delphi.dpr"
+  },
+  {
+    "name": "BASIC",
+    "file": "basic.bas"
+  },
+  {
+    "name": "Assembly x86",
+    "file": "assembly.asm"
+  },
+  {
+    "name": "APL",
+    "file": "apl.apl"
+  },
+  {
+    "name": "Lisp",
+    "file": "lisp.lisp"
+  },
+  {
+    "name": "Common Lisp",
+    "file": "commonlisp.cl"
+  },
+  {
+    "name": "Scheme",
+    "file": "scheme.scm"
+  },
+  {
+    "name": "Racket",
+    "file": "racket.rkt"
+  },
+  {
+    "name": "Prolog",
+    "file": "prolog.pro"
+  },
+  {
+    "name": "Forth",
+    "file": "forth.4th"
+  },
+  {
+    "name": "Smalltalk",
+    "file": "smalltalk.st"
+  },
+  {
+    "name": "Objective-C",
+    "file": "objectivec.m"
+  },
+  {
+    "name": "CoffeeScript",
+    "file": "coffeescript.coffee"
+  },
+  {
+    "name": "Groovy",
+    "file": "groovy.groovy"
+  },
+  {
+    "name": "D",
+    "file": "d.d"
+  },
+  {
+    "name": "Nim",
+    "file": "nim.nim"
+  },
+  {
+    "name": "Crystal",
+    "file": "crystal.cr"
+  },
+  {
+    "name": "Raku",
+    "file": "raku.raku"
+  },
+  {
+    "name": "Haxe",
+    "file": "haxe.hx"
+  },
+  {
+    "name": "ActionScript",
+    "file": "actionscript.as"
+  },
+  {
+    "name": "MATLAB",
+    "file": "matlab.matlab"
+  },
+  {
+    "name": "Octave",
+    "file": "octave.oct"
+  },
+  {
+    "name": "Mathematica",
+    "file": "mathematica.wl"
+  },
+  {
+    "name": "ALGOL 68",
+    "file": "algol68.als"
+  },
+  {
+    "name": "Agda",
+    "file": "agda.agda"
+  },
+  {
+    "name": "Idris",
+    "file": "idris.idr"
+  },
+  {
+    "name": "Coq",
+    "file": "coq.v"
+  },
+  {
+    "name": "Lean",
+    "file": "lean.lean"
+  },
+  {
+    "name": "PureScript",
+    "file": "purescript.purs"
+  },
+  {
+    "name": "Elm",
+    "file": "elm.elm"
+  },
+  {
+    "name": "Brainfuck",
+    "file": "brainfuck.bf"
+  },
+  {
+    "name": "AppleScript",
+    "file": "applescript.applescript"
+  },
+  {
+    "name": "PowerShell",
+    "file": "powershell.ps1"
+  },
+  {
+    "name": "AWK",
+    "file": "awk.awk"
+  },
+  {
+    "name": "Tcl",
+    "file": "tcl.tcl"
+  },
+  {
+    "name": "VBScript",
+    "file": "vbscript.vbs"
+  },
+  {
+    "name": "VB.NET",
+    "file": "vbnet.vb"
+  },
+  {
+    "name": "ABAP",
+    "file": "abap.abap"
+  },
+  {
+    "name": "Apex",
+    "file": "apex.apex"
+  },
+  {
+    "name": "Solidity",
+    "file": "solidity.sol"
+  },
+  {
+    "name": "Vyper",
+    "file": "vyper.vy"
+  },
+  {
+    "name": "Cairo",
+    "file": "cairo.cairo"
+  },
+  {
+    "name": "Zig",
+    "file": "zig.zig"
+  },
+  {
+    "name": "V",
+    "file": "vlang.v"
+  },
+  {
+    "name": "Odin",
+    "file": "odin.odin"
+  },
+  {
+    "name": "Carbon",
+    "file": "carbon.carbon"
+  },
+  {
+    "name": "Mojo",
+    "file": "mojo.mojo"
+  },
+  {
+    "name": "Gleam",
+    "file": "gleam.gleam"
+  },
+  {
+    "name": "Grain",
+    "file": "grain.gr"
+  },
+  {
+    "name": "Ballerina",
+    "file": "ballerina.bal"
+  },
+  {
+    "name": "Ceylon",
+    "file": "ceylon.ceylon"
+  },
+  {
+    "name": "BrightScript",
+    "file": "brightscript.brs"
+  },
+  {
+    "name": "GDScript",
+    "file": "gdscript.gd"
+  },
+  {
+    "name": "Wren",
+    "file": "wren.wren"
+  },
+  {
+    "name": "Boo",
+    "file": "boo.boo"
+  },
+  {
+    "name": "Vala",
+    "file": "vala.vala"
+  },
+  {
+    "name": "Genie",
+    "file": "genie.gs"
+  },
+  {
+    "name": "Mercury",
+    "file": "mercury.mrc"
+  },
+  {
+    "name": "Oz",
+    "file": "oz.oz"
+  },
+  {
+    "name": "Dylan",
+    "file": "dylan.dylan"
+  },
+  {
+    "name": "Eiffel",
+    "file": "eiffel.e"
+  },
+  {
+    "name": "Simula",
+    "file": "simula.sim"
+  },
+  {
+    "name": "Modula-2",
+    "file": "modula2.mod"
+  },
+  {
+    "name": "Modula-3",
+    "file": "modula3.m3"
+  },
+  {
+    "name": "Oberon",
+    "file": "oberon.oberon"
+  },
+  {
+    "name": "Standard ML",
+    "file": "sml.sml"
+  },
+  {
+    "name": "BCPL",
+    "file": "bcpl.bcpl"
+  },
+  {
+    "name": "B",
+    "file": "b.b"
+  },
+  {
+    "name": "CLU",
+    "file": "clu.clu"
+  },
+  {
+    "name": "SNOBOL",
+    "file": "snobol.sno"
+  },
+  {
+    "name": "Rexx",
+    "file": "rexx.rexx"
+  },
+  {
+    "name": "Forth",
+    "file": "forth.fth"
+  },
+  {
+    "name": "Factor",
+    "file": "factor.factor"
+  },
+  {
+    "name": "Joy",
+    "file": "joy.joy"
+  },
+  {
+    "name": "Io",
+    "file": "io.io"
+  },
+  {
+    "name": "Self",
+    "file": "self.self"
+  },
+  {
+    "name": "Newspeak",
+    "file": "newspeak.ns"
+  },
+  {
+    "name": "Pharo",
+    "file": "pharo.pharo"
+  },
+  {
+    "name": "Squeak",
+    "file": "squeak.squeak"
+  },
+  {
+    "name": "Ioke",
+    "file": "ioke.ik"
+  },
+  {
+    "name": "Nu",
+    "file": "nu.nu"
+  },
+  {
+    "name": "Fancy",
+    "file": "fancy.fy"
+  },
+  {
+    "name": "Gosu",
+    "file": "gosu.gosu"
+  },
+  {
+    "name": "Xtend",
+    "file": "xtend.xtend"
+  },
+  {
+    "name": "Nemerle",
+    "file": "nemerle.n"
+  },
+  {
+    "name": "Boo",
+    "file": "boo2.boo2"
+  },
+  {
+    "name": "Cobra",
+    "file": "cobra.cobra"
+  },
+  {
+    "name": "Mirah",
+    "file": "mirah.mirah"
+  },
+  {
+    "name": "Fantom",
+    "file": "fantom.fan"
+  },
+  {
+    "name": "Chapel",
+    "file": "chapel.chpl"
+  },
+  {
+    "name": "X10",
+    "file": "x10.x10"
+  },
+  {
+    "name": "E",
+    "file": "elang.e"
+  },
+  {
+    "name": "Pony",
+    "file": "pony.pony"
+  },
+  {
+    "name": "Whiley",
+    "file": "whiley.whiley"
+  },
+  {
+    "name": "ATS",
+    "file": "ats.dats"
+  },
+  {
+    "name": "Curry",
+    "file": "curry.curry"
+  },
+  {
+    "name": "Frege",
+    "file": "frege.fr"
+  },
+  {
+    "name": "Futhark",
+    "file": "futhark.fut"
+  },
+  {
+    "name": "Koka",
+    "file": "koka.koka"
+  },
+  {
+    "name": "Hazel",
+    "file": "hazel.hazel"
+  },
+  {
+    "name": "Shen",
+    "file": "shen.shen"
+  },
+  {
+    "name": "Qi",
+    "file": "qi.qi"
+  },
+  {
+    "name": "Racket",
+    "file": "racket2.rkt2"
+  },
+  {
+    "name": "Typed Racket",
+    "file": "typedracket.rkt"
+  },
+  {
+    "name": "Arc",
+    "file": "arc.arc"
+  },
+  {
+    "name": "Picolisp",
+    "file": "picolisp.plisp"
+  },
+  {
+    "name": "Fennel",
+    "file": "fennel.fnl"
+  },
+  {
+    "name": "Janet",
+    "file": "janet.janet"
+  },
+  {
+    "name": "Hy",
+    "file": "hy.hy"
+  },
+  {
+    "name": "Emacs Lisp",
+    "file": "emacs.el"
+  },
+  {
+    "name": "AutoLISP",
+    "file": "autolisp.lsp"
+  },
+  {
+    "name": "Franz Lisp",
+    "file": "franzlisp.flsp"
+  },
+  {
+    "name": "MoonScript",
+    "file": "moonscript.moon"
+  },
+  {
+    "name": "LiveScript",
+    "file": "livescript.ls"
+  },
+  {
+    "name": "ClojureScript",
+    "file": "clojurescript.cljs"
+  },
+  {
+    "name": "Elm",
+    "file": "elm2.elm2"
+  },
+  {
+    "name": "Imba",
+    "file": "imba.imba"
+  },
+  {
+    "name": "ReasonML",
+    "file": "reasonml.re"
+  },
+  {
+    "name": "ReScript",
+    "file": "rescript.res"
+  },
+  {
+    "name": "BuckleScript",
+    "file": "bucklescript.bsml"
+  },
+  {
+    "name": "Haxe",
+    "file": "haxe2.hx2"
+  },
+  {
+    "name": "GLSL",
+    "file": "glsl.glsl"
+  },
+  {
+    "name": "HLSL",
+    "file": "hlsl.hlsl"
+  },
+  {
+    "name": "WGSL",
+    "file": "wgsl.wgsl"
+  },
+  {
+    "name": "CUDA",
+    "file": "cuda.cu"
+  },
+  {
+    "name": "OpenCL",
+    "file": "opencl.cl"
+  },
+  {
+    "name": "WebAssembly",
+    "file": "wasm.wat"
+  },
+  {
+    "name": "SQL",
+    "file": "sql.sql"
+  },
+  {
+    "name": "PL/SQL",
+    "file": "plsql.pls"
+  },
+  {
+    "name": "PL/pgSQL",
+    "file": "plpgsql.plpgsql"
+  },
+  {
+    "name": "T-SQL",
+    "file": "tsql.tsql"
+  },
+  {
+    "name": "SPARQL",
+    "file": "sparql.sparql"
+  },
+  {
+    "name": "XQuery",
+    "file": "xquery.xq"
+  },
+  {
+    "name": "XSLT",
+    "file": "xslt.xslt"
+  },
+  {
+    "name": "Datalog",
+    "file": "datalog.dl"
+  },
+  {
+    "name": "Presto SQL",
+    "file": "presto.presto"
+  },
+  {
+    "name": "Cypher",
+    "file": "cypher.cypher"
+  },
+  {
+    "name": "Gremlin",
+    "file": "gremlin.gremlin"
+  },
+  {
+    "name": "SPARQL",
+    "file": "sparql2.sparql2"
+  },
+  {
+    "name": "EdgeQL",
+    "file": "edgeql.edgeql"
+  },
+  {
+    "name": "Rego",
+    "file": "rego.rego"
+  },
+  {
+    "name": "Nickel",
+    "file": "nickel.ncl"
+  },
+  {
+    "name": "Dhall",
+    "file": "dhall.dhall"
+  },
+  {
+    "name": "Nix",
+    "file": "nix.nix"
+  },
+  {
+    "name": "Jsonnet",
+    "file": "jsonnet.jsonnet"
+  },
+  {
+    "name": "HCL",
+    "file": "hcl.hcl"
+  },
+  {
+    "name": "Starlark",
+    "file": "starlark.star"
+  },
+  {
+    "name": "CMake",
+    "file": "cmake.cmake"
+  },
+  {
+    "name": "Makefile",
+    "file": "makefile.mk"
+  },
+  {
+    "name": "Rake",
+    "file": "rake.rake"
+  },
+  {
+    "name": "Gradle",
+    "file": "gradle.gradle"
+  },
+  {
+    "name": "Groovy DSL",
+    "file": "groovedsl.gdsl"
+  },
+  {
+    "name": "Ant",
+    "file": "ant.ant"
+  },
+  {
+    "name": "M4",
+    "file": "m4.m4"
+  },
+  {
+    "name": "AutoHotkey",
+    "file": "autohotkey.ahk"
+  },
+  {
+    "name": "AutoIt",
+    "file": "autoit.au3"
+  },
+  {
+    "name": "Batch",
+    "file": "batch.bat"
+  },
+  {
+    "name": "Fish",
+    "file": "fish.fish"
+  },
+  {
+    "name": "Zsh",
+    "file": "zsh.zsh"
+  },
+  {
+    "name": "Nushell",
+    "file": "nushell.nu"
+  },
+  {
+    "name": "Elvish",
+    "file": "elvish.elv"
+  },
+  {
+    "name": "Ion",
+    "file": "ionshell.ion"
+  },
+  {
+    "name": "DCL",
+    "file": "dcl.dcl"
+  },
+  {
+    "name": "JCL",
+    "file": "jcl.jcl"
+  },
+  {
+    "name": "REXX",
+    "file": "rexx2.rex"
+  },
+  {
+    "name": "Seed7",
+    "file": "seed7.sd7"
+  },
+  {
+    "name": "Lasso",
+    "file": "lasso.lasso"
+  },
+  {
+    "name": "ColdFusion",
+    "file": "coldfusion.cfm"
+  },
+  {
+    "name": "CFML",
+    "file": "cfml.cfml"
+  },
+  {
+    "name": "Ring",
+    "file": "ring.ring"
+  },
+  {
+    "name": "Picat",
+    "file": "picat.pi"
+  },
+  {
+    "name": "Mercury",
+    "file": "mercury2.mercury"
+  },
+  {
+    "name": "Logtalk",
+    "file": "logtalk.lgt"
+  },
+  {
+    "name": "Strand",
+    "file": "strand.strand"
+  },
+  {
+    "name": "Alice",
+    "file": "alice.ali"
+  },
+  {
+    "name": "Concurrent ML",
+    "file": "concurrentml.cml"
+  },
+  {
+    "name": "Occam",
+    "file": "occam.occam"
+  },
+  {
+    "name": "Erlang",
+    "file": "erlang2.erl2"
+  },
+  {
+    "name": "ESTEREL",
+    "file": "esterel.strl"
+  },
+  {
+    "name": "Promela",
+    "file": "promela.promela"
+  },
+  {
+    "name": "SIGNAL",
+    "file": "signal.signal"
+  },
+  {
+    "name": "SAC",
+    "file": "sac.sac"
+  },
+  {
+    "name": "Haskell 98",
+    "file": "haskell98.hs98"
+  },
+  {
+    "name": "Clean",
+    "file": "clean.icl"
+  },
+  {
+    "name": "Hope",
+    "file": "hope.hop"
+  },
+  {
+    "name": "Miranda",
+    "file": "miranda.mira"
+  },
+  {
+    "name": "Lazy ML",
+    "file": "lazyml.lml"
+  },
+  {
+    "name": "SaC",
+    "file": "sac2.sac2"
+  },
+  {
+    "name": "SISAL",
+    "file": "sisal.sisal"
+  },
+  {
+    "name": "Id",
+    "file": "id.id"
+  },
+  {
+    "name": "pH",
+    "file": "ph.ph"
+  },
+  {
+    "name": "SETL",
+    "file": "setl.setl"
+  },
+  {
+    "name": "ISETL",
+    "file": "isetl.isetl"
+  },
+  {
+    "name": "AMOS Basic",
+    "file": "amosbasic.amos"
+  },
+  {
+    "name": "BlitzBasic",
+    "file": "blitzbasic.bb"
+  },
+  {
+    "name": "BBC Basic",
+    "file": "bbcbasic.bbc"
+  },
+  {
+    "name": "QBasic",
+    "file": "qbasic.qb"
+  },
+  {
+    "name": "GW-BASIC",
+    "file": "gwbasic.gwb"
+  },
+  {
+    "name": "FreeBASIC",
+    "file": "freebasic.fbi"
+  },
+  {
+    "name": "PureBasic",
+    "file": "purebasic.pb"
+  },
+  {
+    "name": "PowerBASIC",
+    "file": "powerbasic.pbi"
+  },
+  {
+    "name": "DarkBASIC",
+    "file": "darkbasic.dba"
+  },
+  {
+    "name": "SmallBASIC",
+    "file": "smallbasic.sbasic"
+  },
+  {
+    "name": "Gambas",
+    "file": "gambas.gambas"
+  },
+  {
+    "name": "Euphoria",
+    "file": "euphoria.eu"
+  },
+  {
+    "name": "Harbour",
+    "file": "harbour.hb"
+  },
+  {
+    "name": "xBase",
+    "file": "xbase.prg"
+  },
+  {
+    "name": "Clipper",
+    "file": "clipper.clp"
+  },
+  {
+    "name": "dBASE",
+    "file": "dbase.dbase"
+  },
+  {
+    "name": "FoxPro",
+    "file": "foxpro.prg2"
+  },
+  {
+    "name": "RPG",
+    "file": "rpg.rpg"
+  },
+  {
+    "name": "MUMPS",
+    "file": "mumps.mps"
+  },
+  {
+    "name": "PL/I",
+    "file": "pli.pli"
+  },
+  {
+    "name": "PL/M",
+    "file": "plm.plm"
+  },
+  {
+    "name": "JOVIAL",
+    "file": "jovial.jvl"
+  },
+  {
+    "name": "CHILL",
+    "file": "chill.chill"
+  },
+  {
+    "name": "CORAL 66",
+    "file": "coral66.coral"
+  },
+  {
+    "name": "RTL/2",
+    "file": "rtl2.rtl"
+  },
+  {
+    "name": "BLISS",
+    "file": "bliss.bliss"
+  },
+  {
+    "name": "BCPL",
+    "file": "bcpl2.bcpl2"
+  },
+  {
+    "name": "CPL",
+    "file": "cpl.cpl"
+  },
+  {
+    "name": "Euler",
+    "file": "euler.euler"
+  },
+  {
+    "name": "MAD",
+    "file": "mad.mad"
+  },
+  {
+    "name": "NELIAC",
+    "file": "neliac.neliac"
+  },
+  {
+    "name": "GIER ALGOL",
+    "file": "gieralgol.gier"
+  },
+  {
+    "name": "Speedcoding",
+    "file": "speedcoding.speed"
+  },
+  {
+    "name": "FLOW-MATIC",
+    "file": "flowmatic.flow"
+  },
+  {
+    "name": "MATH-MATIC",
+    "file": "mathmatic.math"
+  },
+  {
+    "name": "FORMULA ALGOL",
+    "file": "formulaalgol.falg"
+  },
+  {
+    "name": "IPL",
+    "file": "ipl.ipl"
+  },
+  {
+    "name": "COMIT",
+    "file": "comit.comit"
+  },
+  {
+    "name": "Snowball",
+    "file": "snowball.sbl"
+  },
+  {
+    "name": "TRAC",
+    "file": "trac.trac"
+  },
+  {
+    "name": "SNOBOL4",
+    "file": "snobol4.sno4"
+  },
+  {
+    "name": "SPITBOL",
+    "file": "spitbol.spit"
+  },
+  {
+    "name": "Icon",
+    "file": "icon.icn"
+  },
+  {
+    "name": "Unicon",
+    "file": "unicon.uni"
+  },
+  {
+    "name": "SR",
+    "file": "sr.sr"
+  },
+  {
+    "name": "Concurrent Euclid",
+    "file": "concurrenteuclid.ce"
+  },
+  {
+    "name": "Mesa",
+    "file": "mesa.mesa"
+  },
+  {
+    "name": "Modula",
+    "file": "modula.modula"
+  },
+  {
+    "name": "Modula-2+",
+    "file": "modula2plus.mod2"
+  },
+  {
+    "name": "Oberon-2",
+    "file": "oberon2.ob2"
+  },
+  {
+    "name": "Active Oberon",
+    "file": "activeoberon.aob"
+  },
+  {
+    "name": "Component Pascal",
+    "file": "componentpascal.cp"
+  },
+  {
+    "name": "Zonnon",
+    "file": "zonnon.znn"
+  },
+  {
+    "name": "Emerald",
+    "file": "emerald.em"
+  },
+  {
+    "name": "POOL",
+    "file": "pool.pool"
+  },
+  {
+    "name": "BETA",
+    "file": "beta.beta"
+  },
+  {
+    "name": "GBETA",
+    "file": "gbeta.gbeta"
+  },
+  {
+    "name": "Mjolner",
+    "file": "mjolner.mjolner"
+  },
+  {
+    "name": "Cecil",
+    "file": "cecil.cec"
+  },
+  {
+    "name": "Diesel",
+    "file": "diesel.dsl"
+  },
+  {
+    "name": "Pict",
+    "file": "pict.pict"
+  },
+  {
+    "name": "Nomad",
+    "file": "nomad.nomad"
+  },
+  {
+    "name": "OPL",
+    "file": "opl.opl"
+  },
+  {
+    "name": "Morphic",
+    "file": "morphic.morphic"
+  },
+  {
+    "name": "Scratch",
+    "file": "scratch.scratch"
+  },
+  {
+    "name": "Snap",
+    "file": "snap.snap"
+  },
+  {
+    "name": "Alice ML",
+    "file": "aliceml.aliceml"
+  },
+  {
+    "name": "AmbientTalk",
+    "file": "ambienttalk.at"
+  },
+  {
+    "name": "Newspeak",
+    "file": "newspeak2.ns2"
+  },
+  {
+    "name": "Korz",
+    "file": "korz.korz"
+  },
+  {
+    "name": "Plaid",
+    "file": "plaid.plaid"
+  },
+  {
+    "name": "Wyvern",
+    "file": "wyvern.wyv"
+  },
+  {
+    "name": "Pyret",
+    "file": "pyret.arr"
+  },
+  {
+    "name": "Hazel",
+    "file": "hazel2.hz"
+  },
+  {
+    "name": "Dark",
+    "file": "dark.dark"
+  },
+  {
+    "name": "Unison",
+    "file": "unison.u"
+  },
+  {
+    "name": "Roc",
+    "file": "roc.roc"
+  },
+  {
+    "name": "Verse",
+    "file": "verse.verse"
+  },
+  {
+    "name": "Ante",
+    "file": "ante.ante"
+  },
+  {
+    "name": "Hylo",
+    "file": "hylo.hylo"
+  },
+  {
+    "name": "Val",
+    "file": "val.val"
+  },
+  {
+    "name": "Inko",
+    "file": "inko.inko"
+  },
+  {
+    "name": "Carp",
+    "file": "carp.carp"
+  },
+  {
+    "name": "Vale",
+    "file": "vale.vale"
+  },
+  {
+    "name": "Austral",
+    "file": "austral.austral"
+  },
+  {
+    "name": "Beef",
+    "file": "beef.beef"
+  },
+  {
+    "name": "C3",
+    "file": "c3.c3"
+  },
+  {
+    "name": "Lobster",
+    "file": "lobster.lobster"
+  },
+  {
+    "name": "Yuescript",
+    "file": "yuescript.yue"
+  },
+  {
+    "name": "Teal",
+    "file": "teal.teal"
+  },
+  {
+    "name": "Nelua",
+    "file": "nelua.nelua"
+  },
+  {
+    "name": "Porth",
+    "file": "porth.porth"
+  },
+  {
+    "name": "Wa",
+    "file": "wa.wa"
+  },
+  {
+    "name": "Yoix",
+    "file": "yoix.yoix"
+  },
+  {
+    "name": "Starlark",
+    "file": "starlark2.bzl"
+  },
+  {
+    "name": "Pkl",
+    "file": "pkl.pkl"
+  },
+  {
+    "name": "KCL",
+    "file": "kcl.kcl"
+  },
+  {
+    "name": "CUE",
+    "file": "cue.cue"
+  },
+  {
+    "name": "Bosque",
+    "file": "bosque.bsq"
+  },
+  {
+    "name": "Jolie",
+    "file": "jolie.ol"
+  },
+  {
+    "name": "Ur/Web",
+    "file": "ur.ur"
+  },
+  {
+    "name": "Links",
+    "file": "links.links"
+  },
+  {
+    "name": "Hop",
+    "file": "hop.hop"
+  },
+  {
+    "name": "Flapjax",
+    "file": "flapjax.fjx"
+  },
+  {
+    "name": "Opa",
+    "file": "opa.opa"
+  },
+  {
+    "name": "Elm Architecture",
+    "file": "elmarch.elmarch"
+  },
+  {
+    "name": "Reflex FRP",
+    "file": "reflex.reflex"
+  },
+  {
+    "name": "Yampa",
+    "file": "yampa.yampa"
+  },
+  {
+    "name": "LOLCODE",
+    "file": "lolcode.lol"
+  },
+  {
+    "name": "Malbolge",
+    "file": "malbolge.mb"
+  },
+  {
+    "name": "Intercal",
+    "file": "intercal.intercal"
+  },
+  {
+    "name": "Befunge",
+    "file": "befunge.bef"
+  },
+  {
+    "name": "Befunge-93",
+    "file": "befunge93.b93"
+  },
+  {
+    "name": "Befunge-98",
+    "file": "befunge98.b98"
+  },
+  {
+    "name": "Piet",
+    "file": "piet.piet"
+  },
+  {
+    "name": "Whitespace",
+    "file": "whitespace.ws"
+  },
+  {
+    "name": "ArnoldC",
+    "file": "arnoldc.arnoldc"
+  },
+  {
+    "name": "Chef",
+    "file": "chef.chef"
+  },
+  {
+    "name": "Shakespeare",
+    "file": "shakespeare.spl"
+  },
+  {
+    "name": "Chicken",
+    "file": "chicken.chicken"
+  },
+  {
+    "name": "COW",
+    "file": "cow.cow"
+  },
+  {
+    "name": "Deadfish",
+    "file": "deadfish.deadfish"
+  },
+  {
+    "name": "Ook!",
+    "file": "ook.ook"
+  },
+  {
+    "name": "HQ9+",
+    "file": "hq9.hq9"
+  },
+  {
+    "name": "JSFuck",
+    "file": "jsfuck.jsfuck"
+  },
+  {
+    "name": "Emojicode",
+    "file": "emojicode.emojic"
+  },
+  {
+    "name": "Whenever",
+    "file": "whenever.whenever"
+  },
+  {
+    "name": "Thue",
+    "file": "thue.thue"
+  },
+  {
+    "name": "Unlambda",
+    "file": "unlambda.unl"
+  },
+  {
+    "name": "GolfScript",
+    "file": "golfscript.gs"
+  },
+  {
+    "name": "J",
+    "file": "j.ijs"
+  },
+  {
+    "name": "K",
+    "file": "k.k"
+  },
+  {
+    "name": "Q",
+    "file": "q.q"
+  },
+  {
+    "name": "kdb+",
+    "file": "kdbplus.kdb"
+  },
+  {
+    "name": "Nial",
+    "file": "nial.nial"
+  },
+  {
+    "name": "A+",
+    "file": "aplus.aplus"
+  },
+  {
+    "name": "Kite",
+    "file": "kite.kite"
+  },
+  {
+    "name": "BQN",
+    "file": "bqn.bqn"
+  },
+  {
+    "name": "Uiua",
+    "file": "uiua.ua"
+  },
+  {
+    "name": "Jelly",
+    "file": "jelly.jelly"
+  },
+  {
+    "name": "Vyxal",
+    "file": "vyxal.vy"
+  },
+  {
+    "name": "05AB1E",
+    "file": "05ab1e.05ab1e"
+  },
+  {
+    "name": "MATL",
+    "file": "matl.matl"
+  },
+  {
+    "name": "Japt",
+    "file": "japt.japt"
+  },
+  {
+    "name": "Attache",
+    "file": "attache.@"
+  },
+  {
+    "name": "Stax",
+    "file": "stax.stax"
+  },
+  {
+    "name": "Husk",
+    "file": "husk.husk"
+  },
+  {
+    "name": "Pyth",
+    "file": "pyth.pyth"
+  },
+  {
+    "name": "Pip",
+    "file": "pip.pip"
+  },
+  {
+    "name": "Retina",
+    "file": "retina.retina"
+  },
+  {
+    "name": "Bubblegum",
+    "file": "bubblegum.bubblegum"
+  },
+  {
+    "name": "Convex",
+    "file": "convex.convex"
+  },
+  {
+    "name": "Proton",
+    "file": "proton.proton"
+  },
+  {
+    "name": "Regex",
+    "file": "regex.regex"
+  },
+  {
+    "name": "sed",
+    "file": "sed.sed"
+  },
+  {
+    "name": "grep",
+    "file": "grep.grep"
+  },
+  {
+    "name": "Perl 5",
+    "file": "perl5.pl5"
+  },
+  {
+    "name": "Perl 6",
+    "file": "perl6.pl6"
+  },
+  {
+    "name": "Rebol",
+    "file": "rebol.rebol"
+  },
+  {
+    "name": "Red",
+    "file": "red.red"
+  },
+  {
+    "name": "Ren-C",
+    "file": "renc.renc"
+  },
+  {
+    "name": "Forth 83",
+    "file": "forth83.f83"
+  },
+  {
+    "name": "ANS Forth",
+    "file": "ansforth.fth"
+  },
+  {
+    "name": "gForth",
+    "file": "gforth.gforth"
+  },
+  {
+    "name": "PostScript",
+    "file": "postscript.ps"
+  },
+  {
+    "name": "PDF",
+    "file": "pdf.pdf"
+  },
+  {
+    "name": "RPL",
+    "file": "rpl.rpl"
+  },
+  {
+    "name": "HP-15C",
+    "file": "hp15c.hp15c"
+  },
+  {
+    "name": "dc",
+    "file": "dc.dc"
+  },
+  {
+    "name": "bc",
+    "file": "bc.bc"
+  },
+  {
+    "name": "awk (gawk)",
+    "file": "gawk.gawk"
+  },
+  {
+    "name": "SWI-Prolog",
+    "file": "swiprolog.pl7"
+  },
+  {
+    "name": "GNU Prolog",
+    "file": "gnuprolog.gprolog"
+  },
+  {
+    "name": "Visual Prolog",
+    "file": "visualprolog.vip"
+  },
+  {
+    "name": "Mercury (logic)",
+    "file": "mercurylogic.mrc2"
+  },
+  {
+    "name": "Curry (FP+LP)",
+    "file": "curryfplp.curry2"
+  },
+  {
+    "name": "miniKanren",
+    "file": "minikanren.mk"
+  },
+  {
+    "name": "core.logic",
+    "file": "corelogic.clogic"
+  },
+  {
+    "name": "Datalog (Souffl\u00e9)",
+    "file": "souffle.dl2"
+  },
+  {
+    "name": "Alloy",
+    "file": "alloy.als2"
+  },
+  {
+    "name": "TLA+",
+    "file": "tlaplus.tla"
+  },
+  {
+    "name": "Z notation",
+    "file": "znotation.zed"
+  },
+  {
+    "name": "B Method",
+    "file": "bmethod.bmch"
+  },
+  {
+    "name": "Event-B",
+    "file": "eventb.eventb"
+  },
+  {
+    "name": "VDM-SL",
+    "file": "vdmsl.vdmsl"
+  },
+  {
+    "name": "VDM++",
+    "file": "vdmpp.vdmpp"
+  },
+  {
+    "name": "JML",
+    "file": "jml.jml"
+  },
+  {
+    "name": "Spec#",
+    "file": "specsharp.spec"
+  },
+  {
+    "name": "Dafny",
+    "file": "dafny.dfy"
+  },
+  {
+    "name": "Whiley",
+    "file": "whiley2.whiley2"
+  },
+  {
+    "name": "F*",
+    "file": "fstar.fst"
+  },
+  {
+    "name": "Liquid Haskell",
+    "file": "liquidhaskell.lhs"
+  },
+  {
+    "name": "Iris",
+    "file": "iris.iris"
+  },
+  {
+    "name": "Separation Logic",
+    "file": "seplogic.sl"
+  },
+  {
+    "name": "KeY",
+    "file": "key.key"
+  },
+  {
+    "name": "Isabelle/HOL",
+    "file": "isabelle.thy"
+  },
+  {
+    "name": "Lean 4",
+    "file": "lean4.lean4"
+  },
+  {
+    "name": "Rocq",
+    "file": "rocq.rocq"
+  },
+  {
+    "name": "SPARK Ada",
+    "file": "spark.spark"
+  },
+  {
+    "name": "ACSL",
+    "file": "acsl.acsl"
+  },
+  {
+    "name": "Frama-C",
+    "file": "framac.framac"
+  },
+  {
+    "name": "Why3",
+    "file": "why3.why"
+  },
+  {
+    "name": "Krakatoa",
+    "file": "krakatoa.kra"
+  },
+  {
+    "name": "Verilog",
+    "file": "verilog.v3"
+  },
+  {
+    "name": "SystemVerilog",
+    "file": "systemverilog.sv"
+  },
+  {
+    "name": "VHDL",
+    "file": "vhdl.vhdl"
+  },
+  {
+    "name": "Chisel",
+    "file": "chisel.chisel"
+  },
+  {
+    "name": "SpinalHDL",
+    "file": "spinalhdl.spinal"
+  },
+  {
+    "name": "Bluespec SystemVerilog",
+    "file": "bluespec.bsv"
+  },
+  {
+    "name": "MyHDL",
+    "file": "myhdl.myhdl"
+  },
+  {
+    "name": "Lava",
+    "file": "lava.lava"
+  },
+  {
+    "name": "CLASH",
+    "file": "clash.clash"
+  },
+  {
+    "name": "Amaranth HDL",
+    "file": "amaranth.amaranth"
+  },
+  {
+    "name": "nMigen",
+    "file": "nmigen.nmigen"
+  },
+  {
+    "name": "SPIN",
+    "file": "spin.spin"
+  },
+  {
+    "name": "mCRL2",
+    "file": "mcrl2.mcrl2"
+  },
+  {
+    "name": "LOTOS",
+    "file": "lotos.lotos"
+  },
+  {
+    "name": "CSP",
+    "file": "csp.csp"
+  },
+  {
+    "name": "CCS",
+    "file": "ccs.ccs"
+  },
+  {
+    "name": "Pi calculus",
+    "file": "picalculus.pi"
+  },
+  {
+    "name": "Ambient calculus",
+    "file": "ambientcalc.ac"
+  },
+  {
+    "name": "Join calculus",
+    "file": "joincalculus.jc"
+  },
+  {
+    "name": "Acute",
+    "file": "acute.acute"
+  },
+  {
+    "name": "Pict",
+    "file": "pict2.pict2"
+  },
+  {
+    "name": "Nomadic Pict",
+    "file": "nomadicpict.np"
+  },
+  {
+    "name": "Erlang OTP",
+    "file": "erlangotp.erlotp"
+  },
+  {
+    "name": "Elixir Phoenix",
+    "file": "elixirphoenix.exphx"
+  },
+  {
+    "name": "LFE",
+    "file": "lfe.lfe"
+  },
+  {
+    "name": "Hamler",
+    "file": "hamler.hm"
+  },
+  {
+    "name": "Gleam (BEAM)",
+    "file": "gleambeam.gleambeam"
+  },
+  {
+    "name": "Caramel",
+    "file": "caramel.caramel"
+  },
+  {
+    "name": "TypedElixir",
+    "file": "typedelixir.tex"
+  },
+  {
+    "name": "Haskell (GHC)",
+    "file": "ghc.ghc"
+  },
+  {
+    "name": "Eta",
+    "file": "eta.eta"
+  },
+  {
+    "name": "Frege",
+    "file": "frege2.frege"
+  },
+  {
+    "name": "Purescript (Halogen)",
+    "file": "halogen.halogen"
+  },
+  {
+    "name": "Dhall (typed)",
+    "file": "dhalltyped.dhall2"
+  },
+  {
+    "name": "Nix (flakes)",
+    "file": "nixflakes.nix2"
+  },
+  {
+    "name": "Guix",
+    "file": "guix.guix"
+  },
+  {
+    "name": "OPAM",
+    "file": "opam.opam"
+  },
+  {
+    "name": "Stack",
+    "file": "stack.stack"
+  },
+  {
+    "name": "Cabal",
+    "file": "cabal.cabal"
+  },
+  {
+    "name": "Cargo DSL",
+    "file": "cargo.cargo"
+  },
+  {
+    "name": "Gemfile DSL",
+    "file": "gemfile.gemfile"
+  },
+  {
+    "name": "Podfile DSL",
+    "file": "podfile.podfile"
+  },
+  {
+    "name": "Packagefile",
+    "file": "packagefile.packagefile"
+  },
+  {
+    "name": "Brewer DSL",
+    "file": "brewer.brewer"
+  },
+  {
+    "name": "AMPL",
+    "file": "ampl.ampl"
+  },
+  {
+    "name": "GAMS",
+    "file": "gams.gms"
+  },
+  {
+    "name": "MiniZinc",
+    "file": "minizinc.mzn"
+  },
+  {
+    "name": "OPL (CPLEX)",
+    "file": "oplcplex.oplx"
+  },
+  {
+    "name": "Mosel",
+    "file": "mosel.mosel"
+  },
+  {
+    "name": "ZIMPL",
+    "file": "zimpl.zpl"
+  },
+  {
+    "name": "LINGO",
+    "file": "lingo.lingo"
+  },
+  {
+    "name": "CPLEX LP",
+    "file": "cplexlp.lp"
+  },
+  {
+    "name": "MPS format",
+    "file": "mpsformat.mps"
+  },
+  {
+    "name": "RPL (HP)",
+    "file": "rplhp.rplhp"
+  },
+  {
+    "name": "Asymptote",
+    "file": "asymptote.asy"
+  },
+  {
+    "name": "MetaPost",
+    "file": "metapost.mp"
+  },
+  {
+    "name": "MetaFont",
+    "file": "metafont.mf"
+  },
+  {
+    "name": "Gnuplot",
+    "file": "gnuplot.gp"
+  },
+  {
+    "name": "R (Tidyverse)",
+    "file": "rtidyverse.rtv"
+  },
+  {
+    "name": "Julia (Flux)",
+    "file": "juliaflux.jlf"
+  },
+  {
+    "name": "Python (NumPy)",
+    "file": "pynumpy.pynp"
+  },
+  {
+    "name": "Mathematica (WL)",
+    "file": "wl.wl2"
+  },
+  {
+    "name": "Maple",
+    "file": "maple.mpl"
+  },
+  {
+    "name": "Maxima",
+    "file": "maxima.max"
+  },
+  {
+    "name": "REDUCE",
+    "file": "reduce.reduce"
+  },
+  {
+    "name": "Axiom",
+    "file": "axiom.axiom"
+  },
+  {
+    "name": "FriCAS",
+    "file": "fricas.fricas"
+  },
+  {
+    "name": "Macaulay2",
+    "file": "macaulay2.m2"
+  },
+  {
+    "name": "SageMath",
+    "file": "sagemath.sage"
+  },
+  {
+    "name": "GAP (Groups)",
+    "file": "gap.g"
+  },
+  {
+    "name": "Magma",
+    "file": "magma.magma"
+  },
+  {
+    "name": "PARI/GP",
+    "file": "parigp.gp2"
+  },
+  {
+    "name": "Singular",
+    "file": "singular.singular"
+  },
+  {
+    "name": "CoCoA",
+    "file": "cocoa.cocoa"
+  },
+  {
+    "name": "SymPy DSL",
+    "file": "sympy.sympy"
+  },
+  {
+    "name": "Modelica",
+    "file": "modelica.mo"
+  },
+  {
+    "name": "Simulink",
+    "file": "simulink.simulink"
+  },
+  {
+    "name": "Scicos",
+    "file": "scicos.scicos"
+  },
+  {
+    "name": "VHDL-AMS",
+    "file": "vhdlams.vhdlams"
+  },
+  {
+    "name": "Spice",
+    "file": "spice.cir"
+  },
+  {
+    "name": "ACME",
+    "file": "acme.acme"
+  },
+  {
+    "name": "6502 Assembly",
+    "file": "6502asm.6502"
+  },
+  {
+    "name": "Z80 Assembly",
+    "file": "z80asm.z80"
+  },
+  {
+    "name": "MIPS Assembly",
+    "file": "mipsasm.mips"
+  },
+  {
+    "name": "ARM Assembly",
+    "file": "armasm.arm"
+  },
+  {
+    "name": "RISC-V Assembly",
+    "file": "riscvasm.riscv"
+  },
+  {
+    "name": "PowerPC Assembly",
+    "file": "ppcasm.ppc"
+  },
+  {
+    "name": "SPARC Assembly",
+    "file": "sparcasm.sparc"
+  },
+  {
+    "name": "m68k Assembly",
+    "file": "m68kasm.m68k"
+  },
+  {
+    "name": "AVR Assembly",
+    "file": "avrasm.avr"
+  },
+  {
+    "name": "PIC Assembly",
+    "file": "picasm.pic"
+  },
+  {
+    "name": "8051 Assembly",
+    "file": "8051asm.8051"
+  },
+  {
+    "name": "ARM Thumb",
+    "file": "armthumb.thumb"
+  },
+  {
+    "name": "AArch64 Assembly",
+    "file": "aarch64.aarch64"
+  },
+  {
+    "name": "Alpha Assembly",
+    "file": "alphaasm.alpha"
+  },
+  {
+    "name": "IA-64 Assembly",
+    "file": "ia64.ia64"
+  },
+  {
+    "name": "SuperH Assembly",
+    "file": "shasm.sh4"
+  },
+  {
+    "name": "MMIX",
+    "file": "mmix.mmix"
+  },
+  {
+    "name": "MIX",
+    "file": "mix.mix"
+  },
+  {
+    "name": "P-code",
+    "file": "pcode.pcode"
+  },
+  {
+    "name": "LLVM IR",
+    "file": "llvmir.ll"
+  },
+  {
+    "name": "MLIR",
+    "file": "mlir.mlir"
+  },
+  {
+    "name": "QBE IR",
+    "file": "qbeir.qbe"
+  },
+  {
+    "name": "C-- (Cmm)",
+    "file": "cmm.cmm"
+  },
+  {
+    "name": "Cranelift IR",
+    "file": "cranelift.clif"
+  },
+  {
+    "name": "Java Bytecode",
+    "file": "javabytecode.jbc"
+  },
+  {
+    "name": "CIL (.NET)",
+    "file": "cil.cil"
+  },
+  {
+    "name": "Dalvik",
+    "file": "dalvik.dalvik"
+  },
+  {
+    "name": "ART",
+    "file": "art.art"
+  },
+  {
+    "name": "Jasmin",
+    "file": "jasmin.jasmin"
+  },
+  {
+    "name": "Krakatoa IR",
+    "file": "krakatoair.krir"
+  },
+  {
+    "name": "GCC RTL",
+    "file": "gccrtl.rtl"
+  },
+  {
+    "name": "Snowflake IR",
+    "file": "snowflakeir.snowir"
+  },
+  {
+    "name": "HVM",
+    "file": "hvm.hvm"
+  },
+  {
+    "name": "Bend",
+    "file": "bend.bend"
+  },
+  {
+    "name": "Kind2",
+    "file": "kind2.kind2"
+  },
+  {
+    "name": "Taichi",
+    "file": "taichi.taichi"
+  },
+  {
+    "name": "Halide",
+    "file": "halide.halide"
+  },
+  {
+    "name": "TVM",
+    "file": "tvm.tvm"
+  },
+  {
+    "name": "Triton",
+    "file": "triton.triton"
+  },
+  {
+    "name": "MLIR (Affine)",
+    "file": "mliraffine.mliraffine"
+  },
+  {
+    "name": "P4",
+    "file": "p4.p4"
+  },
+  {
+    "name": "eBPF",
+    "file": "ebpf.ebpf"
+  },
+  {
+    "name": "XDP",
+    "file": "xdp.xdp"
+  },
+  {
+    "name": "Cilium Policy",
+    "file": "ciliumpolicy.ciliumpol"
+  },
+  {
+    "name": "Rego (OPA)",
+    "file": "regoopa.rgo"
+  },
+  {
+    "name": "Polar (Oso)",
+    "file": "polar.polar"
+  },
+  {
+    "name": "Cedar",
+    "file": "cedar.cedar"
+  },
+  {
+    "name": "Cue (schema)",
+    "file": "cueschema.cues"
+  },
+  {
+    "name": "Pkl (config)",
+    "file": "pklconfig.pklc"
+  },
+  {
+    "name": "KCL (config)",
+    "file": "kclconfig.kclc"
+  },
+  {
+    "name": "Nickel (config)",
+    "file": "nickelconfig.nclc"
+  },
+  {
+    "name": "Jsonnet (config)",
+    "file": "jsonnetconfig.jnetc"
+  },
+  {
+    "name": "Pulumi DSL",
+    "file": "pulumi.pulumi"
+  },
+  {
+    "name": "CDK (TS)",
+    "file": "cdk.cdk"
+  },
+  {
+    "name": "Terraform (HCL)",
+    "file": "terraform.tf"
+  },
+  {
+    "name": "Bicep",
+    "file": "bicep.bicep"
+  },
+  {
+    "name": "ARM template",
+    "file": "armtemplate.armtemplate"
+  },
+  {
+    "name": "CloudFormation",
+    "file": "cloudformation.cfn"
+  },
+  {
+    "name": "Serverless YML",
+    "file": "serverless.serverless"
+  },
+  {
+    "name": "Kustomize",
+    "file": "kustomize.kustomize"
+  },
+  {
+    "name": "Helm DSL",
+    "file": "helm.helm"
+  },
+  {
+    "name": "Rego (Gatekeeper)",
+    "file": "regogate.rgogate"
+  },
+  {
+    "name": "OPA policy",
+    "file": "opapolicy.opapol"
+  },
+  {
+    "name": "Sentinel",
+    "file": "sentinel.sentinel"
+  },
+  {
+    "name": "Cuelang",
+    "file": "cuelang.cuelang"
+  },
+  {
+    "name": "Pkl (Pkl)",
+    "file": "pklpkl.pklpkl"
+  },
+  {
+    "name": "WASM Text",
+    "file": "wasmtext.wasmtext"
+  },
+  {
+    "name": "WASI",
+    "file": "wasi.wasi"
+  },
+  {
+    "name": "Wasm Component",
+    "file": "wasmcomp.wasmcomp"
+  },
+  {
+    "name": "Grain (WASM)",
+    "file": "grainwasm.grainwasm"
+  },
+  {
+    "name": "AssemblyScript",
+    "file": "assemblyscript.asc"
+  },
+  {
+    "name": "Walt",
+    "file": "walt.walt"
+  },
+  {
+    "name": "Motoko",
+    "file": "motoko.mo2"
+  },
+  {
+    "name": "Move",
+    "file": "move.move"
+  },
+  {
+    "name": "Sui Move",
+    "file": "suimove.suimove"
+  },
+  {
+    "name": "Aptos Move",
+    "file": "aptosmove.aptosmove"
+  },
+  {
+    "name": "Ink!",
+    "file": "ink.ink"
+  },
+  {
+    "name": "Michelson",
+    "file": "michelson.tz"
+  },
+  {
+    "name": "SmartPy",
+    "file": "smartpy.smartpy"
+  },
+  {
+    "name": "LIGO",
+    "file": "ligo.ligo"
+  },
+  {
+    "name": "CameLIGO",
+    "file": "cameligo.cameligo"
+  },
+  {
+    "name": "JsLIGO",
+    "file": "jsligo.jsligo"
+  },
+  {
+    "name": "PascaLIGO",
+    "file": "pascaligo.pascaligo"
+  },
+  {
+    "name": "Archetype",
+    "file": "archetype.archetype"
+  },
+  {
+    "name": "Scilla",
+    "file": "scilla.scilla"
+  },
+  {
+    "name": "Plutus",
+    "file": "plutus.plutus"
+  },
+  {
+    "name": "Marlowe",
+    "file": "marlowe.marlowe"
+  },
+  {
+    "name": "Aiken",
+    "file": "aiken.ak"
+  },
+  {
+    "name": "Helios",
+    "file": "helios.helios"
+  },
+  {
+    "name": "Sway",
+    "file": "sway.sw"
+  },
+  {
+    "name": "Noir",
+    "file": "noir.nr"
+  },
+  {
+    "name": "Circom",
+    "file": "circom.circom"
+  },
+  {
+    "name": "Lurk",
+    "file": "lurk.lurk"
+  },
+  {
+    "name": "Leo",
+    "file": "leo.leo"
+  },
+  {
+    "name": "Zinc",
+    "file": "zinc.zinc"
+  },
+  {
+    "name": "Halo2",
+    "file": "halo2.halo2"
+  },
+  {
+    "name": "ACIR",
+    "file": "acir.acir"
+  },
+  {
+    "name": "R1CS",
+    "file": "r1cs.r1cs"
+  },
+  {
+    "name": "Plonk DSL",
+    "file": "plonkdsl.plonkdsl"
+  },
+  {
+    "name": "Gnark",
+    "file": "gnark.gnark"
+  },
+  {
+    "name": "Arkworks",
+    "file": "arkworks.ark"
+  },
+  {
+    "name": "Bellman",
+    "file": "bellman.bellman"
+  },
+  {
+    "name": "LLZK",
+    "file": "llzk.llzk"
+  },
+  {
+    "name": "Cheetah",
+    "file": "cheetah.cheetah"
+  },
+  {
+    "name": "Mako",
+    "file": "mako.mako"
+  },
+  {
+    "name": "Jinja2",
+    "file": "jinja2.j2"
+  },
+  {
+    "name": "Twig",
+    "file": "twig.twig"
+  },
+  {
+    "name": "Smarty",
+    "file": "smarty.smarty"
+  },
+  {
+    "name": "Handlebars",
+    "file": "handlebars.hbs"
+  },
+  {
+    "name": "Mustache",
+    "file": "mustache.mustache"
+  },
+  {
+    "name": "Liquid",
+    "file": "liquid.liquid"
+  },
+  {
+    "name": "Nunjucks",
+    "file": "nunjucks.njk"
+  },
+  {
+    "name": "Pug",
+    "file": "pug.pug"
+  },
+  {
+    "name": "Haml",
+    "file": "haml.haml"
+  },
+  {
+    "name": "Slim",
+    "file": "slim.slim"
+  },
+  {
+    "name": "ERB",
+    "file": "erb.erb"
+  },
+  {
+    "name": "EJS",
+    "file": "ejs.ejs"
+  },
+  {
+    "name": "JSP",
+    "file": "jsp.jsp"
+  },
+  {
+    "name": "ASP Classic",
+    "file": "asp.asp"
+  },
+  {
+    "name": "Razor",
+    "file": "razor.cshtml"
+  },
+  {
+    "name": "Blade",
+    "file": "blade.blade"
+  },
+  {
+    "name": "Plate",
+    "file": "plate.plate"
+  },
+  {
+    "name": "Velocity",
+    "file": "velocity.vm"
+  },
+  {
+    "name": "FreeMarker",
+    "file": "freemarker.ftl"
+  },
+  {
+    "name": "Thymeleaf",
+    "file": "thymeleaf.thymeleaf"
+  },
+  {
+    "name": "Wire",
+    "file": "wire.wire"
+  },
+  {
+    "name": "Temple",
+    "file": "temple.temple"
+  },
+  {
+    "name": "HTMX attrs",
+    "file": "htmxattrs.htmx"
+  },
+  {
+    "name": "Alpine.js",
+    "file": "alpinejs.alpine"
+  },
+  {
+    "name": "Svelte",
+    "file": "svelte.svelte"
+  },
+  {
+    "name": "Vue SFC",
+    "file": "vue.vue"
+  },
+  {
+    "name": "Angular template",
+    "file": "angular.ng"
+  },
+  {
+    "name": "Lit",
+    "file": "lit.lit"
+  },
+  {
+    "name": "Solid DSL",
+    "file": "solid.solid"
+  },
+  {
+    "name": "Marko",
+    "file": "marko.marko"
+  },
+  {
+    "name": "Astro",
+    "file": "astro.astro"
+  },
+  {
+    "name": "MDX",
+    "file": "mdx.mdx"
+  },
+  {
+    "name": "Qwik",
+    "file": "qwik.qwik"
+  },
+  {
+    "name": "Fresh DSL",
+    "file": "fresh.fresh"
+  },
+  {
+    "name": "Stencil",
+    "file": "stencil.stencil"
+  },
+  {
+    "name": "Riot",
+    "file": "riot.riot"
+  },
+  {
+    "name": "Hyperapp",
+    "file": "hyperapp.hyperapp"
+  },
+  {
+    "name": "Mithril",
+    "file": "mithril.mithril"
+  },
+  {
+    "name": "Inferno DSL",
+    "file": "inferno.inferno"
+  },
+  {
+    "name": "Preact DSL",
+    "file": "preact.preact"
+  },
+  {
+    "name": "Dioxus",
+    "file": "dioxus.dioxus"
+  },
+  {
+    "name": "Yew",
+    "file": "yew.yew"
+  },
+  {
+    "name": "Leptos",
+    "file": "leptos.leptos"
+  },
+  {
+    "name": "Sauron",
+    "file": "sauron.sauron"
+  },
+  {
+    "name": "Iced (Rust)",
+    "file": "iced.iced"
+  },
+  {
+    "name": "Druid",
+    "file": "druid.druid"
+  },
+  {
+    "name": "egui",
+    "file": "egui.egui"
+  },
+  {
+    "name": "Slint",
+    "file": "slint.slint"
+  },
+  {
+    "name": "Qt QML",
+    "file": "qtqml.qml"
+  },
+  {
+    "name": "Flutter (Dart)",
+    "file": "flutter.flutter"
+  },
+  {
+    "name": "SwiftUI",
+    "file": "swiftui.swiftui"
+  },
+  {
+    "name": "Jetpack Compose",
+    "file": "jetpackcompose.compose"
+  },
+  {
+    "name": "Xamarin",
+    "file": "xamarin.xamarin"
+  },
+  {
+    "name": "MAUI DSL",
+    "file": "maui.maui"
+  },
+  {
+    "name": "React Native",
+    "file": "reactnative.reactnative"
+  },
+  {
+    "name": "NativeScript",
+    "file": "nativescript.nativescript"
+  },
+  {
+    "name": "Capacitor",
+    "file": "capacitor.capacitor"
+  },
+  {
+    "name": "Ionic DSL",
+    "file": "ionic.ionic"
+  },
+  {
+    "name": "Expo DSL",
+    "file": "expo.expo"
+  },
+  {
+    "name": "Tauri",
+    "file": "tauri.tauri"
+  },
+  {
+    "name": "Electron DSL",
+    "file": "electron.electron"
+  },
+  {
+    "name": "Neutralino",
+    "file": "neutralino.neutralino"
+  },
+  {
+    "name": "Sciter",
+    "file": "sciter.sciter"
+  },
+  {
+    "name": "Dear ImGui",
+    "file": "imgui.imgui"
+  },
+  {
+    "name": "Raylib DSL",
+    "file": "raylib.raylib"
+  },
+  {
+    "name": "SFML DSL",
+    "file": "sfml.sfml"
+  },
+  {
+    "name": "SDL DSL",
+    "file": "sdl.sdl"
+  },
+  {
+    "name": "OpenGL DSL",
+    "file": "opengl.opengl"
+  },
+  {
+    "name": "Vulkan DSL",
+    "file": "vulkan.vulkan"
+  },
+  {
+    "name": "Metal DSL",
+    "file": "metal.metal"
+  },
+  {
+    "name": "DirectX HLSL",
+    "file": "dxhlsl.dxhlsl"
+  },
+  {
+    "name": "Wgpu DSL",
+    "file": "wgpu.wgpu"
+  },
+  {
+    "name": "Bevy DSL",
+    "file": "bevy.bevy"
+  },
+  {
+    "name": "Godot GDScript",
+    "file": "godotgds.gdscript"
+  },
+  {
+    "name": "Unreal Blueprint",
+    "file": "unrealbp.unrealbp"
+  },
+  {
+    "name": "Unity C# DSL",
+    "file": "unitycs.unitycs"
+  },
+  {
+    "name": "Panda3D DSL",
+    "file": "panda3d.panda3d"
+  },
+  {
+    "name": "Love2D DSL",
+    "file": "love2d.love"
+  },
+  {
+    "name": "MonoGame DSL",
+    "file": "monogame.monogame"
+  },
+  {
+    "name": "Defold Script",
+    "file": "defold.defold"
+  },
+  {
+    "name": "GML (GameMaker)",
+    "file": "gml.gml"
+  },
+  {
+    "name": "Construct DSL",
+    "file": "construct.construct"
+  },
+  {
+    "name": "RPGMaker DSL",
+    "file": "rpgmaker.rpgmaker"
+  },
+  {
+    "name": "Twine (Harlowe)",
+    "file": "twine.twine"
+  },
+  {
+    "name": "Ink (narrative)",
+    "file": "inknarr.inknarr"
+  },
+  {
+    "name": "Ren'Py DSL",
+    "file": "renpy.rpy"
+  },
+  {
+    "name": "AGS Script",
+    "file": "ags.ags"
+  },
+  {
+    "name": "Inform 7",
+    "file": "inform7.inf7"
+  },
+  {
+    "name": "Inform 6",
+    "file": "inform6.inf6"
+  },
+  {
+    "name": "TADS",
+    "file": "tads.tads"
+  },
+  {
+    "name": "ZIL",
+    "file": "zil.zil"
+  },
+  {
+    "name": "Hugo (text)",
+    "file": "hugotextadv.hugotxt"
+  },
+  {
+    "name": "Squiffy",
+    "file": "squiffy.squiffy"
+  },
+  {
+    "name": "Yarn Spinner",
+    "file": "yarn.yarn"
+  },
+  {
+    "name": "Twee",
+    "file": "twee.twee"
+  },
+  {
+    "name": "SugarCube",
+    "file": "sugarcube.sugarcube"
+  },
+  {
+    "name": "Chapbook",
+    "file": "chapbook.chapbook"
+  },
+  {
+    "name": "Decker",
+    "file": "decker.decker"
+  },
+  {
+    "name": "HyperCard DSL",
+    "file": "hypercard.hc"
+  },
+  {
+    "name": "SuperCard DSL",
+    "file": "supercard.sc"
+  },
+  {
+    "name": "LiveCode",
+    "file": "livecode.livecode"
+  },
+  {
+    "name": "Transcript",
+    "file": "transcript.transcript"
+  },
+  {
+    "name": "OpenDocument macro",
+    "file": "odsmacro.odsmacro"
+  },
+  {
+    "name": "LibreOffice Basic",
+    "file": "lobasic.lobasic"
+  },
+  {
+    "name": "StarBasic",
+    "file": "starbasic.starbasic"
+  },
+  {
+    "name": "WordBasic",
+    "file": "wordbasic.wordbasic"
+  },
+  {
+    "name": "VBA (Excel)",
+    "file": "vbaexcel.vbaexcel"
+  },
+  {
+    "name": "VBA (Access)",
+    "file": "vbaaccess.vbaaccess"
+  },
+  {
+    "name": "VBA (Word)",
+    "file": "vbaword.vbaword"
+  },
+  {
+    "name": "DAX (PowerBI)",
+    "file": "dax.dax"
+  },
+  {
+    "name": "M Query",
+    "file": "mquery.mquery"
+  },
+  {
+    "name": "KQL (Kusto)",
+    "file": "kql.kql"
+  },
+  {
+    "name": "MDX (OLAP)",
+    "file": "mdxolap.mdxolap"
+  },
+  {
+    "name": "Pig Latin (Hadoop)",
+    "file": "piglatin.pig"
+  },
+  {
+    "name": "Hive QL",
+    "file": "hiveql.hql"
+  },
+  {
+    "name": "Impala SQL",
+    "file": "impalasql.impalasql"
+  },
+  {
+    "name": "Flink SQL",
+    "file": "flinksql.flinksql"
+  },
+  {
+    "name": "Spark SQL",
+    "file": "sparksql.sparksql"
+  },
+  {
+    "name": "Cassandra CQL",
+    "file": "cassandracql.cql"
+  },
+  {
+    "name": "Gremlin DSL",
+    "file": "gremlindsl.gremlin2"
+  },
+  {
+    "name": "Cypher (Neo4j)",
+    "file": "cyphernj.cyphernj"
+  },
+  {
+    "name": "GSQL (TigerGraph)",
+    "file": "gsql.gsql"
+  },
+  {
+    "name": "GraphQL",
+    "file": "graphql.graphql"
+  },
+  {
+    "name": "Relay DSL",
+    "file": "relay.relay"
+  },
+  {
+    "name": "Hasura DSL",
+    "file": "hasura.hasura"
+  },
+  {
+    "name": "Prisma DSL",
+    "file": "prisma.prisma"
+  },
+  {
+    "name": "Mongoose DSL",
+    "file": "mongoose.mongoose"
+  },
+  {
+    "name": "LINQ DSL",
+    "file": "linq.linq"
+  },
+  {
+    "name": "Entity SQL",
+    "file": "entitysql.esql"
+  },
+  {
+    "name": "HQL (Hibernate)",
+    "file": "hql.hql"
+  },
+  {
+    "name": "JPQL",
+    "file": "jpql.jpql"
+  },
+  {
+    "name": "jOOQ DSL",
+    "file": "jooq.jooq"
+  },
+  {
+    "name": "SQLAlchemy DSL",
+    "file": "sqlalchemy.sqlalchemy"
+  },
+  {
+    "name": "ActiveRecord DSL",
+    "file": "activerecord.ar"
+  },
+  {
+    "name": "Ecto DSL",
+    "file": "ecto.ecto"
+  },
+  {
+    "name": "Diesel DSL",
+    "file": "diesel.diesel"
+  },
+  {
+    "name": "SeaORM DSL",
+    "file": "seaorm.seaorm"
+  },
+  {
+    "name": "GORM DSL",
+    "file": "gorm.gorm"
+  },
+  {
+    "name": "Room DSL",
+    "file": "room.room"
+  },
+  {
+    "name": "Core Data DSL",
+    "file": "coredata.coredata"
+  },
+  {
+    "name": "Realm DSL",
+    "file": "realm.realm"
+  },
+  {
+    "name": "Ditto DSL",
+    "file": "ditto.ditto"
+  },
+  {
+    "name": "Parse DSL",
+    "file": "parse.parse"
+  },
+  {
+    "name": "Firebase DSL",
+    "file": "firebase.firebase"
+  },
+  {
+    "name": "Supabase DSL",
+    "file": "supabase.supabase"
+  },
+  {
+    "name": "Appwrite DSL",
+    "file": "appwrite.appwrite"
+  },
+  {
+    "name": "PocketBase DSL",
+    "file": "pocketbase.pocketbase"
+  },
+  {
+    "name": "Convex DSL",
+    "file": "convex.convex2"
+  },
+  {
+    "name": "Turso DSL",
+    "file": "turso.turso"
+  },
+  {
+    "name": "Neon DSL",
+    "file": "neon.neon2"
+  },
+  {
+    "name": "PlanetScale DSL",
+    "file": "planetscale.planetscale"
+  },
+  {
+    "name": "CockroachDB DSL",
+    "file": "cockroachdb.cockroachdb"
+  },
+  {
+    "name": "TiDB DSL",
+    "file": "tidb.tidb"
+  },
+  {
+    "name": "YugabyteDB DSL",
+    "file": "yugabyte.yugabyte"
+  },
+  {
+    "name": "SingleStoreDB DSL",
+    "file": "singlestore.singlestore"
+  },
+  {
+    "name": "Snowflake SQL",
+    "file": "snowflakesql.snowsql"
+  },
+  {
+    "name": "BigQuery SQL",
+    "file": "bigquerysql.bqsql"
+  },
+  {
+    "name": "Redshift SQL",
+    "file": "redshiftsql.redsql"
+  },
+  {
+    "name": "DuckDB SQL",
+    "file": "duckdbsql.ducksql"
+  },
+  {
+    "name": "MotherDuck DSL",
+    "file": "motherduck.motherduck"
+  },
+  {
+    "name": "dbt DSL",
+    "file": "dbt.dbt"
+  },
+  {
+    "name": "Airflow DAG",
+    "file": "airflow.airflow"
+  },
+  {
+    "name": "Prefect DSL",
+    "file": "prefect.prefect"
+  },
+  {
+    "name": "Dagster DSL",
+    "file": "dagster.dagster"
+  },
+  {
+    "name": "Kedro DSL",
+    "file": "kedro.kedro"
+  },
+  {
+    "name": "Luigi DSL",
+    "file": "luigi.luigi"
+  },
+  {
+    "name": "Argo YAML",
+    "file": "argo.argo"
+  },
+  {
+    "name": "Temporal DSL",
+    "file": "temporal.temporal"
+  },
+  {
+    "name": "Cadence (Temporal)",
+    "file": "cadence.cadence"
+  },
+  {
+    "name": "Step Functions DSL",
+    "file": "stepfunctions.stepfn"
+  },
+  {
+    "name": "Apache Beam DSL",
+    "file": "apachebeam.beam"
+  },
+  {
+    "name": "Flink DSL",
+    "file": "flink.flink"
+  },
+  {
+    "name": "Spark DSL",
+    "file": "spark.spark2"
+  },
+  {
+    "name": "Kafka Streams DSL",
+    "file": "kafkastreams.kafkastreams"
+  },
+  {
+    "name": "Pulsar DSL",
+    "file": "pulsar.pulsar"
+  },
+  {
+    "name": "NATS DSL",
+    "file": "nats.nats"
+  },
+  {
+    "name": "RabbitMQ DSL",
+    "file": "rabbitmq.rabbitmq"
+  },
+  {
+    "name": "ZeroMQ DSL",
+    "file": "zeromq.zeromq"
+  },
+  {
+    "name": "gRPC DSL",
+    "file": "grpc.grpc"
+  },
+  {
+    "name": "Protobuf",
+    "file": "protobuf.proto"
+  },
+  {
+    "name": "Thrift IDL",
+    "file": "thrift.thrift"
+  },
+  {
+    "name": "Avro Schema",
+    "file": "avro.avsc"
+  },
+  {
+    "name": "FlatBuffers",
+    "file": "flatbuffers.fbs"
+  },
+  {
+    "name": "Cap'n Proto",
+    "file": "capnproto.capnp"
+  },
+  {
+    "name": "MessagePack DSL",
+    "file": "msgpack.msgpack"
+  },
+  {
+    "name": "CBOR DSL",
+    "file": "cbor.cbor"
+  },
+  {
+    "name": "ASN.1",
+    "file": "asn1.asn"
+  },
+  {
+    "name": "XSD Schema",
+    "file": "xsd.xsd"
+  },
+  {
+    "name": "Relax NG",
+    "file": "relaxng.rng"
+  },
+  {
+    "name": "WSDL",
+    "file": "wsdl.wsdl"
+  },
+  {
+    "name": "OpenAPI DSL",
+    "file": "openapi.openapi"
+  },
+  {
+    "name": "RAML",
+    "file": "raml.raml"
+  },
+  {
+    "name": "Blueprint API",
+    "file": "blueprintapi.apib"
+  },
+  {
+    "name": "WADL",
+    "file": "wadl.wadl"
+  },
+  {
+    "name": "IDL (CORBA)",
+    "file": "idlcorba.idl"
+  },
+  {
+    "name": "WebIDL",
+    "file": "webidl.webidl"
+  },
+  {
+    "name": "Smithy DSL",
+    "file": "smithy.smithy"
+  },
+  {
+    "name": "TypeSpec",
+    "file": "typespec.tsp"
+  },
+  {
+    "name": "Dhall (API)",
+    "file": "dhallapi.dhallapi"
+  },
+  {
+    "name": "Sorbet RBI",
+    "file": "sorbet.rbi"
+  },
+  {
+    "name": "Steep RBS",
+    "file": "steep.rbs"
+  },
+  {
+    "name": "TypeScript d.ts",
+    "file": "tsdts.d.ts"
+  },
+  {
+    "name": "Flow types",
+    "file": "flowtype.flow"
+  },
+  {
+    "name": "Propel ML",
+    "file": "propelml.propelml"
+  },
+  {
+    "name": "Relay IR",
+    "file": "relayir.relayir"
+  },
+  {
+    "name": "ONNX DSL",
+    "file": "onnx.onnx"
+  },
+  {
+    "name": "TensorFlow DSL",
+    "file": "tensorflow.tf2"
+  },
+  {
+    "name": "PyTorch DSL",
+    "file": "pytorch.pytorch"
+  },
+  {
+    "name": "JAX DSL",
+    "file": "jax.jax"
+  },
+  {
+    "name": "MXNet DSL",
+    "file": "mxnet.mxnet"
+  },
+  {
+    "name": "Keras DSL",
+    "file": "keras.keras"
+  },
+  {
+    "name": "Theano DSL",
+    "file": "theano.theano"
+  },
+  {
+    "name": "Caffe DSL",
+    "file": "caffe.caffe"
+  },
+  {
+    "name": "Darknet DSL",
+    "file": "darknet.darknet"
+  },
+  {
+    "name": "Paddle DSL",
+    "file": "paddle.paddle"
+  },
+  {
+    "name": "MindSpore DSL",
+    "file": "mindspore.mindspore"
+  },
+  {
+    "name": "Jax2 DSL",
+    "file": "jax2.jax2"
+  },
+  {
+    "name": "GGML DSL",
+    "file": "ggml.ggml"
+  },
+  {
+    "name": "ExecuTorch DSL",
+    "file": "executorch.executorch"
+  },
+  {
+    "name": "CoreML DSL",
+    "file": "coreml.coreml"
+  },
+  {
+    "name": "TFLite DSL",
+    "file": "tflite.tflite"
+  },
+  {
+    "name": "OpenVINO DSL",
+    "file": "openvino.openvino"
+  },
+  {
+    "name": "NCNN DSL",
+    "file": "ncnn.ncnn"
+  },
+  {
+    "name": "MNN DSL",
+    "file": "mnn.mnn"
+  },
+  {
+    "name": "Catapult HLS",
+    "file": "catapult.catapult"
+  },
+  {
+    "name": "Vivado HLS",
+    "file": "vivadohls.vivadohls"
+  },
+  {
+    "name": "Intel HLS",
+    "file": "intelhls.intelhls"
+  },
+  {
+    "name": "Spatial DSL",
+    "file": "spatial.spatial"
+  },
+  {
+    "name": "Dahlia DSL",
+    "file": "dahlia.dahlia"
+  },
+  {
+    "name": "Calyx IR",
+    "file": "calyx.calyx"
+  },
+  {
+    "name": "PipelineC",
+    "file": "pipelinec.pipelinec"
+  },
+  {
+    "name": "CIRCT",
+    "file": "circt.circt2"
+  },
+  {
+    "name": "Filament DSL",
+    "file": "filament.filament"
+  },
+  {
+    "name": "Lakeroad DSL",
+    "file": "lakeroad.lakeroad"
+  },
+  {
+    "name": "HalideHDL",
+    "file": "halidehdl.halidehdl"
+  },
+  {
+    "name": "TVM Relay",
+    "file": "tvmrelay.tvmrelay"
+  },
+  {
+    "name": "Torch Script",
+    "file": "torchscript.torchscript"
+  },
+  {
+    "name": "Numpy DSL",
+    "file": "numpy.numpy"
+  },
+  {
+    "name": "SciPy DSL",
+    "file": "scipy.scipy"
+  },
+  {
+    "name": "Pandas DSL",
+    "file": "pandas.pandas"
+  },
+  {
+    "name": "Polars DSL",
+    "file": "polars.polars"
+  },
+  {
+    "name": "Arrow DSL",
+    "file": "arrow.arrow"
+  },
+  {
+    "name": "Dask DSL",
+    "file": "dask.dask"
+  },
+  {
+    "name": "Ray DSL",
+    "file": "ray.ray2"
+  },
+  {
+    "name": "Modin DSL",
+    "file": "modin.modin"
+  },
+  {
+    "name": "Vaex DSL",
+    "file": "vaex.vaex"
+  },
+  {
+    "name": "CuDF DSL",
+    "file": "cudf.cudf"
+  },
+  {
+    "name": "Ibis DSL",
+    "file": "ibis.ibis"
+  },
+  {
+    "name": "DuckDB Python",
+    "file": "duckdbpy.duckdbpy"
+  },
+  {
+    "name": "SQLGlot DSL",
+    "file": "sqlglot.sqlglot"
+  },
+  {
+    "name": "PRQL",
+    "file": "prql.prql"
+  },
+  {
+    "name": "FunSQL DSL",
+    "file": "funsql.funsql"
+  },
+  {
+    "name": "Malloy",
+    "file": "malloy.malloy"
+  },
+  {
+    "name": "Logica",
+    "file": "logica.logica"
+  },
+  {
+    "name": "EventQL",
+    "file": "eventql.eventql"
+  },
+  {
+    "name": "InfluxQL",
+    "file": "influxql.influxql"
+  },
+  {
+    "name": "PromQL",
+    "file": "promql.promql"
+  },
+  {
+    "name": "LogQL",
+    "file": "logql.logql"
+  },
+  {
+    "name": "TraceQL",
+    "file": "traceql.traceql"
+  },
+  {
+    "name": "FluxQL",
+    "file": "fluxql.fluxql"
+  },
+  {
+    "name": "RisingWave SQL",
+    "file": "risingwave.rw"
+  },
+  {
+    "name": "MaterializeSQL",
+    "file": "materialize.mz"
+  },
+  {
+    "name": "Pathway DSL",
+    "file": "pathway.pathway"
+  },
+  {
+    "name": "Feldera DSL",
+    "file": "feldera.feldera"
+  },
+  {
+    "name": "Arroyo DSL",
+    "file": "arroyo.arroyo"
+  },
+  {
+    "name": "Quix DSL",
+    "file": "quix.quix"
+  },
+  {
+    "name": "Electric DSL",
+    "file": "electric.electric"
+  },
+  {
+    "name": "Nile DSL",
+    "file": "nile.nile"
+  },
+  {
+    "name": "AMQP DSL",
+    "file": "amqp.amqp"
+  },
+  {
+    "name": "MQTT DSL",
+    "file": "mqtt.mqtt"
+  },
+  {
+    "name": "CoAP DSL",
+    "file": "coap.coap"
+  },
+  {
+    "name": "STOMP DSL",
+    "file": "stomp.stomp"
+  },
+  {
+    "name": "XMPP DSL",
+    "file": "xmpp.xmpp"
+  },
+  {
+    "name": "Matrix DSL",
+    "file": "matrix.matrix"
+  },
+  {
+    "name": "ActivityPub DSL",
+    "file": "activitypub.activitypub"
+  },
+  {
+    "name": "Nostr DSL",
+    "file": "nostr.nostr"
+  },
+  {
+    "name": "AT Protocol DSL",
+    "file": "atproto.atproto"
+  },
+  {
+    "name": "Fediverse DSL",
+    "file": "fediverse.fediverse"
+  },
+  {
+    "name": "Logo",
+    "file": "logo.logo"
+  },
+  {
+    "name": "Hack",
+    "file": "hack.hack"
+  },
+  {
+    "name": "Q#",
+    "file": "qsharp.qs"
+  },
+  {
+    "name": "SuperCollider",
+    "file": "supercollider.scd"
+  },
+  {
+    "name": "Squirrel",
+    "file": "squirrel.nut"
+  },
+  {
+    "name": "Vim Script",
+    "file": "vimscript.vim"
+  },
+  {
+    "name": "Felix",
+    "file": "felix.flx"
+  },
+  {
+    "name": "Ooc",
+    "file": "ooc.ooc"
+  },
+  {
+    "name": "REFAL",
+    "file": "refal.ref"
+  },
+  {
+    "name": "Pop-11",
+    "file": "pop11.p11"
+  },
+  {
+    "name": "ALGOL 60",
+    "file": "algol60.alg"
+  },
+  {
+    "name": "HAL/S",
+    "file": "hals.hal"
+  },
+  {
+    "name": "Fortress",
+    "file": "fortress.fss"
+  },
+  {
+    "name": "Twelf",
+    "file": "twelf.elf"
+  },
+  {
+    "name": "PL/0",
+    "file": "pl0.pl0"
+  },
+  {
+    "name": "Kitten",
+    "file": "kitten.ktn"
+  },
+  {
+    "name": "Nit",
+    "file": "nit.nit"
+  },
+  {
+    "name": "Pure",
+    "file": "pure.pure"
+  },
+  {
+    "name": "Ciao",
+    "file": "ciao.ciao"
+  },
+  {
+    "name": "UnrealScript",
+    "file": "unrealscript.uc"
+  },
+  {
+    "name": "ChucK",
+    "file": "chuck.ck"
+  },
+  {
+    "name": "Faust",
+    "file": "faust.dsp"
+  },
+  {
+    "name": "Processing",
+    "file": "processing.pde"
+  },
+  {
+    "name": "Lustre",
+    "file": "lustre.lus"
+  },
+  {
+    "name": "OpenQASM",
+    "file": "openqasm.qasm"
+  },
+  {
+    "name": "Silq",
+    "file": "silq.slq"
+  },
+  {
+    "name": "Egison",
+    "file": "egison.egi"
+  },
+  {
+    "name": "Terra",
+    "file": "terra.t"
+  },
+  {
+    "name": "Yorick",
+    "file": "yorick.i"
+  },
+  {
+    "name": "NetLogo",
+    "file": "netlogo.nlogo"
+  },
+  {
+    "name": "Slate",
+    "file": "slate.slate"
+  },
+  {
+    "name": "Maude",
+    "file": "maude.maude"
+  },
+  {
+    "name": "SourcePawn",
+    "file": "sourcepawn.sp"
+  },
+  {
+    "name": "Nickle",
+    "file": "nickle.5c"
+  },
+  {
+    "name": "NewtonScript",
+    "file": "newtonscript.ns"
+  },
+  {
+    "name": "PEARL",
+    "file": "pearl.prl"
+  },
+  {
+    "name": "PILOT",
+    "file": "pilot.plt"
+  },
+  {
+    "name": "Simscript",
+    "file": "simscript.sim"
+  },
+  {
+    "name": "T",
+    "file": "tlang.t"
+  },
+  {
+    "name": "Nice",
+    "file": "nice.nice"
+  },
+  {
+    "name": "Converge",
+    "file": "converge.cv"
+  },
+  {
+    "name": "Cat",
+    "file": "cat.cat"
+  },
+  {
+    "name": "Leda",
+    "file": "leda.led"
+  },
+  {
+    "name": "Napier88",
+    "file": "napier88.np"
+  },
+  {
+    "name": "Eff",
+    "file": "eff.eff"
+  },
+  {
+    "name": "Timber",
+    "file": "timber.tmb"
+  },
+  {
+    "name": "Cola",
+    "file": "cola.cola"
+  },
+  {
+    "name": "Lisaac",
+    "file": "lisaac.li"
+  },
+  {
+    "name": "ALGOL W",
+    "file": "algolw.algw"
+  },
+  {
+    "name": "Pop-2",
+    "file": "pop2.pop2"
+  },
+  {
+    "name": "Limbo",
+    "file": "limbo.b"
+  },
+  {
+    "name": "Newsqueak",
+    "file": "newsqueak.nq"
+  },
+  {
+    "name": "Alef",
+    "file": "alef.alef"
+  },
+  {
+    "name": "GPSS",
+    "file": "gpss.gps"
+  },
+  {
+    "name": "Concurrent C",
+    "file": "concurrentc.cc"
+  },
+  {
+    "name": "Myrddin",
+    "file": "myrddin.myr"
+  },
+  {
+    "name": "ArkScript",
+    "file": "arkscript.ark"
+  },
+  {
+    "name": "Amber",
+    "file": "amber.amb"
+  },
+  {
+    "name": "Alore",
+    "file": "alore.alo"
+  },
+  {
+    "name": "Karel",
+    "file": "karel.k"
+  },
+  {
+    "name": "Plankalcul",
+    "file": "plankalcul.pk"
+  },
+  {
+    "name": "Obliq",
+    "file": "obliq.obl"
+  },
+  {
+    "name": "Interlisp",
+    "file": "interlisp.lsp"
+  },
+  {
+    "name": "Bril",
+    "file": "bril.bril"
+  },
+  {
+    "name": "Godel",
+    "file": "godel.gdl"
+  },
+  {
+    "name": "Hermes",
+    "file": "hermes.hrm"
+  },
+  {
+    "name": "Cyclone",
+    "file": "cyclone.cyc"
+  },
+  {
+    "name": "Epigram",
+    "file": "epigram.epg"
+  },
+  {
+    "name": "Potion",
+    "file": "potion.pn"
+  },
+  {
+    "name": "ParaSail",
+    "file": "parasail.psi"
+  },
+  {
+    "name": "Dao",
+    "file": "dao.dao"
+  },
+  {
+    "name": "Hare",
+    "file": "hare.ha"
+  },
+  {
+    "name": "Muon",
+    "file": "muon.mu"
+  },
+  {
+    "name": "Pawn",
+    "file": "pawn.pwn"
+  },
+  {
+    "name": "AngelScript",
+    "file": "angelscript.as"
+  },
+  {
+    "name": "Mizar",
+    "file": "mizar.miz"
+  },
+  {
+    "name": "HOL4",
+    "file": "hol4.hol4"
+  },
+  {
+    "name": "Janus",
+    "file": "janus.janus"
+  },
+  {
+    "name": "WLanguage",
+    "file": "wlanguage.wl"
+  },
+  {
+    "name": "TECO",
+    "file": "teco.tec"
+  },
+  {
+    "name": "Concurrent Pascal",
+    "file": "concurrentpascal.cp"
+  },
+  {
+    "name": "Clay",
+    "file": "clay.clay"
+  },
+  {
+    "name": "Nesl",
+    "file": "nesl.nesl"
+  },
+  {
+    "name": "ECLiPSe",
+    "file": "eclipse_clp.ecl"
+  },
+  {
+    "name": "Bigloo",
+    "file": "bigloo.scm"
+  },
+  {
+    "name": "Gambit",
+    "file": "gambit.scm"
+  },
+  {
+    "name": "FRACTRAN",
+    "file": "fractran.frac"
+  },
+  {
+    "name": "FALSE",
+    "file": "false_lang.false"
+  },
+  {
+    "name": "Taxi",
+    "file": "taxi.taxi"
+  },
+  {
+    "name": "TI-BASIC",
+    "file": "tibasic.tibas"
+  },
+  {
+    "name": "NSIS",
+    "file": "nsis.nsi"
+  },
+  {
+    "name": "Zimbu",
+    "file": "zimbu.zim"
+  },
+  {
+    "name": "YAP Prolog",
+    "file": "yap.yap"
+  },
+  {
+    "name": "XSB",
+    "file": "xsb.xsb"
+  },
+  {
+    "name": "ISWIM",
+    "file": "iswim.iswim"
+  },
+  {
+    "name": "DRAKON",
+    "file": "drakon.drn"
+  },
+  {
+    "name": "TACL",
+    "file": "tacl.tacl"
+  },
+  {
+    "name": "Speakeasy",
+    "file": "speakeasy.spk"
+  },
+  {
+    "name": "Salmon",
+    "file": "salmon.salmon"
+  },
+  {
+    "name": "Jai",
+    "file": "jai.jai"
+  },
+  {
+    "name": "Oberon-07",
+    "file": "oberon07.mod"
+  },
+  {
+    "name": "Magpie",
+    "file": "magpie.mag"
+  },
+  {
+    "name": "Lox",
+    "file": "lox.lox"
+  },
+  {
+    "name": "Monkey",
+    "file": "monkey.monkey"
+  },
+  {
+    "name": "JScript",
+    "file": "jscript.jse"
+  },
+  {
+    "name": "Spry",
+    "file": "spry.spry"
+  },
+  {
+    "name": "Gofer",
+    "file": "gofer.gof"
+  },
+  {
+    "name": "Beluga",
+    "file": "beluga.bel"
+  },
+  {
+    "name": "Dex",
+    "file": "dex.dx"
+  }
 ]
