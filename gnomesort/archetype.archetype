@@ -1,0 +1,25 @@
+archetype gnome_sort
+
+variable arr : map<nat, int> = []
+
+entry set_array (data: list<int>) {
+    var i = 0;
+    for d in data do
+        arr[i] := d;
+        i := i + 1
+    done
+}
+
+entry sort_array (n : nat) {
+    var i : nat = 0;
+    iter while i < n do
+        if i = 0 or arr[i] >= arr[i - 1] then
+            i := i + 1
+        else begin
+            var tmp = arr[i];
+            arr[i] := arr[i - 1];
+            arr[i - 1] := tmp;
+            i := i - 1
+        end
+    done
+}
