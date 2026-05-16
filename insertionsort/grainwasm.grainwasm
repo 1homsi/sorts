@@ -1,0 +1,17 @@
+module InsertionSort
+
+from "array" include Array
+
+let insertionSort = (arr) => {
+  let n = Array.length(arr)
+  for (let mut i = 1; i < n; i += 1) {
+    let key = arr[i]
+    let mut j = i - 1
+    while (j >= 0 && arr[j] > key) {
+      arr[j + 1] = arr[j]
+      j -= 1
+    }
+    arr[j + 1] = key
+  }
+  arr
+}
