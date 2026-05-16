@@ -1,0 +1,15 @@
+def insertionSort(arr) {
+    def n := arr.length;
+    def i := 1;
+    {i < n}.whileTrue: {
+        def key := arr[i];
+        def j := i - 1;
+        {(j >= 0) and: {arr[j] > key}}.whileTrue: {
+            arr[j+1] := arr[j];
+            j := j - 1;
+        };
+        arr[j+1] := key;
+        i := i + 1;
+    };
+    arr
+}
