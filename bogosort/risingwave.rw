@@ -1,1 +1,1 @@
-print("Bogosort implementation for risingwave.rw")
+SELECT * FROM array ORDER BY value ASC;
