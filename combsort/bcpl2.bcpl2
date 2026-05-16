@@ -1,0 +1,27 @@
+GET "libhdr"
+
+LET combsort2(arr, n) BE
+$(
+    LET gap = n
+    LET sorted = FALSE
+    LET tmp = 0
+    LET i = 0
+    UNTIL sorted DO
+    $(
+        gap := FLOAT gap / 1.3 + 0.5
+        IF gap < 1 DO gap := 1
+        sorted := gap = 1
+        i := 1
+        UNTIL i > n - gap DO
+        $(
+            IF arr!i > arr!(i+gap) DO
+            $(
+                tmp := arr!i
+                arr!i := arr!(i+gap)
+                arr!(i+gap) := tmp
+                sorted := FALSE
+            $)
+            i := i + 1
+        $)
+    $)
+$)
