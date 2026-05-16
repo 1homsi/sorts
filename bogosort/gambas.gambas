@@ -1,26 +1,6 @@
-Public Sub Main()
-    Dim arr As Integer[] = [3, 1, 4, 1, 5, 9, 2, 6]
-    Dim n As Integer = arr.Count
-    Dim sorted As Boolean
-    Dim i, j, tmp As Integer
-
-    Repeat
-        sorted = True
-        For i = 0 To n - 2
-            If arr[i] > arr[i + 1] Then sorted = False
-        Next
-        If Not sorted Then
-            For i = n - 1 To 1 Step -1
-                j = Int(Rnd() * (i + 1))
-                tmp = arr[i]
-                arr[i] = arr[j]
-                arr[j] = tmp
-            Next
-        End If
-    Until sorted
-
-    For i = 0 To n - 1
-        Print arr[i]; " ";
-    Next
-    Print
-End Sub
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
