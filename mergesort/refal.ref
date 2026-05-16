@@ -1,0 +1,14 @@
+$ENTRY Go {
+  e.X = <MergeSort [5 2 8 1 9 3]>;
+}
+
+MergeSort {
+  [e.X] = [e.X];
+  e.L = <Split e.L ()>;
+  e.L = <MergeSort e.L>;
+}
+
+Split {
+  [s.X] () = [s.X];
+  [s.X s.Y e.Rest] e.L = <Split [s.X] [s.Y e.Rest]>;
+}
