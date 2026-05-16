@@ -1,0 +1,21 @@
+function selection_sort(seq)
+  if (#seq <= 1) then seq
+  else
+    let
+      min_val = min_val(seq);
+      rest = drop_first(min_val, seq);
+    in
+      [min_val] ++ selection_sort(rest)
+    end
+  endif;
+
+drop_first(x, seq) = drop(0, x, seq);
+
+drop(i, x, seq) =
+  if (seq[i] == x) then 
+    take(i, seq) ++ drop(i+1, seq)
+  else
+    drop(i+1, x, seq)
+  endif;
+
+show(selection_sort([5, 2, 8, 1, 9, 3]));
