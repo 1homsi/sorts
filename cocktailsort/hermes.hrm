@@ -1,0 +1,25 @@
+proc cocktail_sort (arr : array of integer) is
+  var n : integer;
+  var i : integer;
+  var k : integer;
+  var temp : integer;
+  var swapped : boolean;
+begin
+  n := size(arr);
+  i := 0;
+  while (i < n) loop
+    swapped := false;
+    for k in 0 .. n - i - 2 loop
+      if arr(k) > arr(k + 1) then
+        temp := arr(k);
+        arr(k) := arr(k + 1);
+        arr(k + 1) := temp;
+        swapped := true;
+      end if;
+    end loop;
+    if not swapped then
+      exit;
+    end if;
+    i := i + 1;
+  end loop;
+end proc;
