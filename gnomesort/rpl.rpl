@@ -1,0 +1,17 @@
+\<<
+    \-> arr n
+    \<<
+        0 'i' STO
+        DO
+            IF i 0 == arr i GET arr i 1 - GET \>= OR THEN
+                i 1 + 'i' STO
+            ELSE
+                arr i GET
+                arr i arr i 1 - GET PUT
+                arr SWAP i 1 - SWAP PUT 'arr' STO
+                i 1 - 'i' STO
+            END
+        UNTIL i n \>= END
+        arr
+    \>>
+\>>
