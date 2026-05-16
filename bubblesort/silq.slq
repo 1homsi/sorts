@@ -1,0 +1,14 @@
+def bubblesort(uint[6] arr) : uint[6] {
+  for uint i in [0..6) {
+    for uint j in [0..(6-1-i)) {
+      if arr[j] > arr[j+1] {
+        uint temp = arr[j];
+        arr[j] = arr[j+1];
+        arr[j+1] = temp;
+      }
+    }
+  }
+  return arr;
+}
+
+return bubblesort([5 as uint, 2 as uint, 8 as uint, 1 as uint, 9 as uint, 3 as uint]);
