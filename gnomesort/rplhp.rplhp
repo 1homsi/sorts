@@ -1,0 +1,21 @@
+« DUP SIZE
+  1 SWAP
+  1 SWAP
+  FOR i
+    i 1 > IF
+      i 1 - ROT OVER GET
+      SWAP 3 PICK GET
+      IF 2DUP < THEN
+        SWAP
+        i PUTI
+        i 1 - PUTI
+        i 1 - 'i' STO
+      ELSE
+        DROP2
+        i 1 + 'i' STO
+      END
+    ELSE
+      i 1 + 'i' STO
+    END
+  NEXT
+»
