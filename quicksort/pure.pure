@@ -1,0 +1,5 @@
+quicksort [] = [];
+quicksort [x] = [x];
+quicksort (x:xs) = quicksort (filter (<=x) xs) ++ [x] ++ quicksort (filter (>x) xs);
+
+main = quicksort [5, 2, 8, 1, 9, 3];
