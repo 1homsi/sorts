@@ -1,0 +1,17 @@
+@^@
+[D @\ Define bogosort \@
+  1;; W L bogosort$  [^C
+  [ F @|issorted| ]'(
+    [ F @|shuffle| ] G bogosort$
+  ''
+] W
+[D @\ Define issorted \@
+  0;Q_$  [^C
+  [ F @|issorted| ]'(
+    1;Q_$
+  ''
+] W
+[D @\ Define shuffle \@
+  .;Q_$  W
+] W
+^CK
