@@ -1,0 +1,11 @@
+.decl num(pos: number, val: number)
+.decl less_than_count(val: number, cnt: number)
+.decl sorted(pos: number, val: number)
+
+less_than_count(v, cnt) :-
+    num(_, v),
+    cnt = count : { num(_, w), w < v }.
+
+sorted(cnt + 1, v) :- less_than_count(v, cnt).
+
+.output sorted
