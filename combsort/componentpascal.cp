@@ -1,0 +1,27 @@
+MODULE CombSortCP;
+
+IMPORT Out;
+
+PROCEDURE Sort*(VAR a: ARRAY OF INTEGER; n: INTEGER);
+VAR
+  gap, i, tmp: INTEGER;
+  sorted: BOOLEAN;
+BEGIN
+  gap := n;
+  sorted := FALSE;
+  WHILE ~sorted DO
+    gap := ENTIER(gap / 1.3);
+    IF gap < 1 THEN gap := 1 END;
+    IF gap = 1 THEN sorted := TRUE END;
+    FOR i := 0 TO n - gap - 1 DO
+      IF a[i] > a[i + gap] THEN
+        tmp := a[i];
+        a[i] := a[i + gap];
+        a[i + gap] := tmp;
+        sorted := FALSE
+      END
+    END
+  END
+END Sort;
+
+END CombSortCP.
