@@ -1,0 +1,29 @@
+cocktailSort: anArray
+    | swapped start end tmp |
+    swapped := true.
+    start := 1.
+    end := anArray size.
+    [swapped] whileTrue: [
+        swapped := false.
+        start to: end - 1 do: [:i |
+            (anArray at: i) > (anArray at: i + 1) ifTrue: [
+                tmp := anArray at: i.
+                anArray at: i put: (anArray at: i + 1).
+                anArray at: i + 1 put: tmp.
+                swapped := true.
+            ].
+        ].
+        swapped ifFalse: [^anArray].
+        swapped := false.
+        end := end - 1.
+        end - 1 to: start by: -1 do: [:i |
+            (anArray at: i) > (anArray at: i + 1) ifTrue: [
+                tmp := anArray at: i.
+                anArray at: i put: (anArray at: i + 1).
+                anArray at: i + 1 put: tmp.
+                swapped := true.
+            ].
+        ].
+        start := start + 1.
+    ].
+    ^anArray
