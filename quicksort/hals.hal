@@ -1,0 +1,25 @@
+PROGRAM QUICKSORT;
+DECLARE ARR(6), PIVOT, I, J, TEMP;
+ARR(1) := 5; ARR(2) := 2; ARR(3) := 8;
+ARR(4) := 1; ARR(5) := 9; ARR(6) := 3;
+
+PROCEDURE SORT(A, N);
+DECLARE A, N, I, J, P, T;
+IF N <= 1 THEN RETURN;
+P := A(1);
+I := 1; J := N;
+LOOP:
+  WHILE A(I) < P DO I := I + 1;
+  WHILE A(J) > P DO J := J - 1;
+  IF I < J THEN
+    T := A(I); A(I) := A(J); A(J) := T;
+    I := I + 1; J := J - 1;
+    GOTO LOOP;
+  ENDIF;
+END;
+
+SORT(ARR, 6);
+FOR I = 1 TO 6 DO
+  WRITE ARR(I);
+ENDFOR;
+END PROGRAM.
