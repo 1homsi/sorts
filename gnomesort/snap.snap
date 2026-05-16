@@ -1,0 +1,14 @@
+define (gnome sort %arr)
+    set i to 0
+    set n to (length of arr)
+    repeat until (i = n)
+        if ((i = 0) or ((item (i) of arr) >= (item (i - 1) of arr))) then
+            change i by 1
+        else
+            set tmp to (item (i) of arr)
+            replace item (i) of arr with (item (i - 1) of arr)
+            replace item (i - 1) of arr with tmp
+            change i by -1
+        end
+    end
+    report arr
