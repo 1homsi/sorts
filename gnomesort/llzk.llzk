@@ -1,0 +1,40 @@
+module @gnome_sort {
+
+  func.func @gnome_sort(%arr: !llzk.array<10 x !llzk.felt>, %n: index) -> !llzk.array<10 x !llzk.felt> {
+    %c0 = arith.constant 0 : index
+    %c1 = arith.constant 1 : index
+    %i = memref.alloca() : memref<index>
+    memref.store %c0, %i[] : memref<index>
+    cf.br ^loop
+
+  ^loop:
+    %iv = memref.load %i[] : memref<index>
+    %done = arith.cmpi sge, %iv, %n : index
+    cf.cond_br %done, ^exit, ^body
+
+  ^body:
+    %iz = arith.cmpi eq, %iv, %c0 : index
+    cf.cond_br %iz, ^advance, ^check
+
+  ^check:
+    %prev = arith.subi %iv, %c1 : index
+    %cur = llzk.array.read %arr[%iv]
+    %prv = llzk.array.read %arr[%prev]
+    %ge = llzk.felt.cmp ge %cur, %prv
+    cf.cond_br %ge, ^advance, ^swap
+
+  ^swap:
+    %arr2 = llzk.array.write %arr[%iv] = %prv
+    %arr3 = llzk.array.write %arr2[%prev] = %cur
+    memref.store %prev, %i[] : memref<index>
+    cf.br ^loop
+
+  ^advance:
+    %next = arith.addi %iv, %c1 : index
+    memref.store %next, %i[] : memref<index>
+    cf.br ^loop
+
+  ^exit:
+    return %arr : !llzk.array<10 x !llzk.felt>
+  }
+}
