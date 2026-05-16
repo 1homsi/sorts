@@ -1,0 +1,24 @@
+10 DIM arr%(5)
+20 arr%(1)=5 : arr%(2)=4 : arr%(3)=3 : arr%(4)=2 : arr%(5)=1
+30 n%=5 : writes%=0
+40 FOR cs%=1 TO n%-1
+50   item%=arr%(cs%) : pos%=cs%
+60   FOR i%=cs%+1 TO n%
+70     IF arr%(i%)<item% THEN pos%=pos%+1
+80   NEXT i%
+90   IF pos%=cs% THEN GOTO 200
+100  WHILE arr%(pos%)=item% : pos%=pos%+1 : ENDWHILE
+110  tmp%=arr%(pos%) : arr%(pos%)=item% : item%=tmp%
+120  writes%=writes%+1
+130  WHILE pos%<>cs%
+140    pos%=cs%
+150    FOR i%=cs%+1 TO n%
+160      IF arr%(i%)<item% THEN pos%=pos%+1
+170    NEXT i%
+180    WHILE arr%(pos%)=item% : pos%=pos%+1 : ENDWHILE
+190    tmp%=arr%(pos%) : arr%(pos%)=item% : item%=tmp% : writes%=writes%+1
+195  ENDWHILE
+200 NEXT cs%
+210 FOR i%=1 TO n% : PRINT arr%(i%); " "; : NEXT i%
+220 PRINT
+230 END
