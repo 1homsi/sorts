@@ -1,0 +1,10 @@
+ACIR Representation: Gnome Sort
+
+func gnome_sort(arr: [Field; 10]) -> [Field; 10]:
+  constraints:
+    for i in 1..10:
+      assert arr_sorted[i-1] <= arr_sorted[i]
+    permutation_check(arr, arr_sorted)
+  witnesses:
+    arr_sorted: [Field; 10]
+  return arr_sorted
