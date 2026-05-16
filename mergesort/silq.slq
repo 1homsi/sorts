@@ -1,0 +1,42 @@
+def mergesort(uint[]:int arr) : int[] {
+  var n = length(arr);
+  if n <= 1 {
+    return arr;
+  }
+  var mid = n / 2;
+  var left = mergesort(arr[0:mid]);
+  var right = mergesort(arr[mid:n]);
+  return merge(left, right);
+}
+
+def merge(uint[]:int left, uint[]:int right) : int[] {
+  var result = new int[length(left) + length(right)];
+  var i = 0;
+  var j = 0;
+  var k = 0;
+  while i < length(left) && j < length(right) {
+    if left[i] <= right[j] {
+      result[k] = left[i];
+      i += 1;
+    } else {
+      result[k] = right[j];
+      j += 1;
+    }
+    k += 1;
+  }
+  while i < length(left) {
+    result[k] = left[i];
+    i += 1;
+    k += 1;
+  }
+  while j < length(right) {
+    result[k] = right[j];
+    j += 1;
+    k += 1;
+  }
+  return result;
+}
+
+def main() : () {
+  print(mergesort([5, 2, 8, 1, 9, 3]));
+}
