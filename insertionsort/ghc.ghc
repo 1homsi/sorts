@@ -1,0 +1,14 @@
+{-# LANGUAGE ScopedTypeVariables #-}
+module InsertionSortGHC where
+
+import Data.List (sortBy)
+import Data.Ord (comparing)
+
+insert :: Ord a => a -> [a] -> [a]
+insert x [] = [x]
+insert x (y:ys)
+    | x <= y    = x : y : ys
+    | otherwise = y : insert x ys
+
+insertionSort :: Ord a => [a] -> [a]
+insertionSort = foldr insert []
