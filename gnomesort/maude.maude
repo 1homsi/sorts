@@ -1,0 +1,15 @@
+fmod GNOMESORT is
+  sorts IntList .
+  subsort Int < IntList .
+  op nil : -> IntList .
+  op _::_ : IntList IntList -> IntList [assoc id: nil] .
+
+  op gnomesort : IntList -> IntList .
+  eq gnomesort(L) = gnomeHelper(0, L) .
+
+  op gnomeHelper : Nat IntList -> IntList .
+  eq gnomeHelper(N, nil) = nil .
+  eq gnomeHelper(N, L) = L [owise] .
+endfm
+
+reduce gnomesort(5 :: 2 :: 8 :: 1 :: 9 :: 3 :: nil) .
