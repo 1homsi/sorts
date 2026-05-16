@@ -1,0 +1,30 @@
+use ark_ff::Field;
+use ark_relations::r1cs::{ConstraintSynthesizer, ConstraintSystemRef, SynthesisError};
+use ark_r1cs_std::prelude::*;
+
+pub struct InsertionSortCircuit<F: Field> {
+    pub input: Vec<F>,
+    pub output: Vec<F>,
+}
+
+impl<F: Field> ConstraintSynthesizer<F> for InsertionSortCircuit<F> {
+    fn generate_constraints(self, cs: ConstraintSystemRef<F>) -> Result<(), SynthesisError> {
+        let mut a: Vec<F> = self.input.clone();
+        let n = a.len();
+        for i in 1..n {
+            let key = a[i];
+            let mut j = i as isize - 1;
+            while j >= 0 && a[j as usize] > key {
+                a[(j + 1) as usize] = a[j as usize];
+                j -= 1;
+            }
+            a[(j + 1) as usize] = key;
+        }
+        for (i, (&out, &expected)) in a.iter().zip(self.output.iter()).enumerate() {
+            let av = FpVar::new_witness(cs.clone(), || Ok(out))?;
+            let bv = FpVar::new_input(cs.clone(), || Ok(expected))?;
+            av.enforce_equal(&bv)?;
+        }
+        Ok(())
+    }
+}
