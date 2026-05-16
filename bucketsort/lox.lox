@@ -1,0 +1,21 @@
+fun bucket_sort(arr, maxVal) {
+    if (maxVal == 0) return arr;
+    var buckets = [];
+    for (var i = 0; i < maxVal; i = i + 1) {
+        buckets[i] = [];
+    }
+    for (var i = 0; i < arr.length; i = i + 1) {
+        var num = arr[i];
+        if (num >= 0 and num < maxVal) {
+            buckets[num].append(num);
+        }
+    }
+    var result = [];
+    for (var i = 0; i < maxVal; i = i + 1) {
+        for (var j = 0; j < buckets[i].length; j = j + 1) {
+            result.append(buckets[i][j]);
+        }
+    }
+    return result;
+}
+print bucket_sort([5, 2, 8, 1, 9, 3], 10);
