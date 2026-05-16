@@ -1,0 +1,37 @@
+#include <alef.h>
+
+void timsort(int arr[], int minSize) {
+  mergesort(arr, minSize);
+}
+
+void mergesort(int arr[], int minSize) {
+  int len = 6;
+  if (len <= 1) {
+    return;
+  }
+  if (len <= minSize) {
+    insertionsort(arr);
+    return;
+  }
+  
+  int mid = len / 2;
+}
+
+void insertionsort(int arr[]) {
+  int i, j, key;
+  for (i = 1; i < 6; i++) {
+    key = arr[i];
+    j = i - 1;
+    while (j >= 0 && arr[j] > key) {
+      arr[j + 1] = arr[j];
+      j--;
+    }
+    arr[j + 1] = key;
+  }
+}
+
+void main() {
+  int arr[6] = {5, 2, 8, 1, 9, 3};
+  timsort(arr, 32);
+  printf("%d %d %d %d %d %d\n", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
+}
