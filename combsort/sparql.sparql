@@ -1,0 +1,7 @@
+PREFIX sort: <http://example.org/sort#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?result WHERE {
+  BIND(sort:combSort(?input) AS ?result)
+}
