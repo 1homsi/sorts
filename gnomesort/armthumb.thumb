@@ -1,0 +1,32 @@
+        .thumb
+        .data
+arr:    .word 5,3,8,1,9,2,7,4,6,0
+
+        .text
+        .thumb_func
+        .global gnome_sort
+gnome_sort:
+        push {r4-r7, lr}
+        ldr  r0, =arr
+        movs r1, #10
+        movs r2, #0
+loop:
+        cmp  r2, r1
+        bge  done
+        cmp  r2, #0
+        beq  advance
+        lsls r3, r2, #2
+        adds r4, r0, r3
+        ldr  r5, [r4]
+        ldr  r6, [r4, #-4]
+        cmp  r5, r6
+        bge  advance
+        str  r6, [r4]
+        str  r5, [r4, #-4]
+        subs r2, r2, #1
+        b    loop
+advance:
+        adds r2, r2, #1
+        b    loop
+done:
+        pop  {r4-r7, pc}
