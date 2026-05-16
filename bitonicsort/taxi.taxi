@@ -1,0 +1,10 @@
+[a] goto b
+[b] write 5
+[c] write 2
+[d] write 8
+[e] write 1
+[f] write 9
+[g] write 3
+[h] write 7
+[i] write 4
+[i] stop
