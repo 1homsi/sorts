@@ -1,0 +1,14 @@
+sort IntList = List(Int);
+
+map gnome_sort: IntList -> IntList;
+    gnome_loop: IntList # Int # Int -> IntList;
+
+var arr: IntList;
+    i, n: Int;
+
+eqn gnome_sort(arr) = gnome_loop(arr, 0, #arr);
+    i >= n -> gnome_loop(arr, i, n) = arr;
+    i < n && i == 0 -> gnome_loop(arr, i, n) = gnome_loop(arr, i+1, n);
+    i < n && i > 0 && arr . i >= arr . (i-1) -> gnome_loop(arr, i, n) = gnome_loop(arr, i+1, n);
+    i < n && i > 0 && arr . i < arr . (i-1) ->
+        gnome_loop(arr, i, n) = gnome_loop(swap(arr, i, i-1), i-1, n);
