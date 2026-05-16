@@ -1,0 +1,27 @@
+(define comb-sort
+  { (list number) --> (list number) }
+  Xs -> (let N (length Xs)
+             Arr (list->vector Xs)
+             (comb-loop Arr N N false)
+             (vector->list Arr)))
+
+(define comb-loop
+  { (vector number) --> number --> number --> boolean --> void }
+  Arr N Gap _ ->
+    (let NewGap (max 1 (trunc (/ Gap 1.3)))
+         Sorted (= NewGap 1)
+         (comb-pass Arr N NewGap 0)
+         (if (and Sorted (not (comb-changed Arr N NewGap))) void
+             (comb-loop Arr N NewGap false))))
+
+(define comb-pass
+  { (vector number) --> number --> number --> number --> void }
+  _ N Gap I -> void where (>= (+ I Gap) N)
+  Arr N Gap I ->
+    (let A (<-vector Arr (+ I 1))
+         B (<-vector Arr (+ I Gap 1))
+         (do (if (> A B)
+                 (do (vector-> Arr (+ I 1) B)
+                     (vector-> Arr (+ I Gap 1) A))
+                 skip)
+             (comb-pass Arr N Gap (+ I 1)))))
