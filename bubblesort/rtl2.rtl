@@ -1,0 +1,32 @@
+MODULE BSORT;
+
+INTEGER ARRAY ARR[1:7] := [64,34,25,12,22,11,90];
+INTEGER N := 7, I, TMP;
+BOOLEAN SWAPPED;
+
+PROCEDURE BUBBLE_SORT;
+BEGIN
+    SWAPPED := TRUE;
+    WHILE SWAPPED DO
+    BEGIN
+        SWAPPED := FALSE;
+        I := 1;
+        WHILE I < N DO
+        BEGIN
+            IF ARR[I] > ARR[I+1] THEN
+            BEGIN
+                TMP := ARR[I];
+                ARR[I] := ARR[I+1];
+                ARR[I+1] := TMP;
+                SWAPPED := TRUE;
+            END;
+            I := I + 1;
+        END;
+        N := N - 1;
+    END;
+END;
+
+BEGIN
+    BUBBLE_SORT;
+    FOR I := 1 TO 7 DO WRITE(ARR[I]);
+END.
