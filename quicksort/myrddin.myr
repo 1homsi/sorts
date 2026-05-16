@@ -1,0 +1,23 @@
+use std
+
+const quicksort = {arr : int[:] -> int[:]
+  if arr.len <= 1
+    -> arr
+  else
+    var pivot = arr[0]
+    var less = []
+    var greater = []
+    for i in 1..arr.len
+      if arr[i] <= pivot
+        std.slpush(&less, arr[i])
+      else
+        std.slpush(&greater, arr[i])
+      ;;
+    ;;
+    -> std.slconcat(quicksort(less[:]), [pivot][:])
+  ;;
+}
+
+const main = {
+  std.put("{}", quicksort([5, 2, 8, 1, 9, 3][:]))
+}
