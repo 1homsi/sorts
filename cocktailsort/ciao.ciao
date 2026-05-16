@@ -1,0 +1,46 @@
+cocktailsort(Arr0, Arr) :-
+    length(Arr0, N),
+    cocktailsort_helper(Arr0, 0, N, Arr).
+
+cocktailsort_helper(Arr, I, N, Arr) :- I >= N, !.
+cocktailsort_helper(Arr0, I, N, Arr) :-
+    forward_pass(Arr0, 0, N, I, Arr1, true),
+    (Arr1 == Arr0 -> Arr = Arr1 ;
+    backward_pass(Arr1, N, I, Arr2, true),
+    (Arr2 == Arr1 -> Arr = Arr2 ;
+    I1 is I + 2,
+    cocktailsort_helper(Arr2, I1, N, Arr))).
+
+forward_pass(Arr, K, N, I, Arr, false) :- K >= N - I - 1, !.
+forward_pass(Arr0, K, N, I, Arr, Swapped) :-
+    K1 is K + 1,
+    arg(K, Arr0, Val1),
+    arg(K1, Arr0, Val2),
+    (Val1 > Val2 ->
+        swap_args(Arr0, K, K1, Arr1),
+        forward_pass(Arr1, K1, N, I, Arr, true)
+    ;
+        forward_pass(Arr0, K1, N, I, Arr, Swapped)).
+
+backward_pass(Arr, _, _, Arr, false) :- !.
+backward_pass(Arr0, K, I, Arr, true) :-
+    K > 0,
+    K1 is K - 1,
+    arg(K1, Arr0, Val1),
+    arg(K, Arr0, Val2),
+    (Val1 > Val2 ->
+        swap_args(Arr0, K1, K, Arr1),
+        backward_pass(Arr1, K1, I, Arr, true)
+    ;
+        backward_pass(Arr0, K1, I, Arr, _)).
+
+swap_args(Arr0, I, J, Arr) :-
+    arg(I, Arr0, VI),
+    arg(J, Arr0, VJ),
+    setarg(I, Arr0, VJ),
+    setarg(J, Arr0, VI),
+    Arr = Arr0.
+
+test :- 
+    cocktailsort([5, 2, 8, 1, 9, 3], Sorted),
+    write('Sorted: '), write(Sorted), nl.
