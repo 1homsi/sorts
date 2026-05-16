@@ -1,35 +1,6 @@
-using System;
-using System.Collections;
-
-namespace Bogosort {
-    class Program {
-        static bool IsSorted(List<int> arr) {
-            for (int i = 0; i < arr.Count - 1; i++) {
-                if (arr[i] > arr[i + 1]) return false;
-            }
-            return true;
-        }
-
-        static void Shuffle(List<int> arr) {
-            Random rng = scope Random();
-            int n = arr.Count;
-            for (int i = n - 1; i > 0; i--) {
-                int j = rng.NextI32() % (i + 1);
-                int tmp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = tmp;
-            }
-        }
-
-        static void Bogosort(List<int> arr) {
-            while (!IsSorted(arr)) Shuffle(arr);
-        }
-
-        static void Main() {
-            List<int> arr = scope List<int>() { 3, 1, 4, 1, 5, 9, 2, 6 };
-            Bogosort(arr);
-            for (int v in arr) Console.Write(scope $"{v} ");
-            Console.WriteLine();
-        }
-    }
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
 }
