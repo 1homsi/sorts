@@ -1,0 +1,13 @@
+merge : {L1 : type} list L1 -> list L1 -> list L1 -> type.
+merg-nil-l : merge [] L L.
+merg-nil-r : merge L [] L.
+merg-cons : {X : int} {Y : int} {L1 L2 L3 : list int}
+  X <= Y -> merge (X :: L1) (Y :: L2) (X :: L3) ->
+  merge (X :: L1) (Y :: L2) (X :: L3).
+
+mergesort : list int -> list int -> type.
+msort-nil : mergesort [] [].
+msort-cons : {X : int} mergesort [X] [X].
+msort-multiple : {L L1 L2 L3 : list int}
+  split L L1 L2 -> mergesort L1 L3 -> mergesort L2 L3 ->
+  merge L3 L3 L -> mergesort L L.
