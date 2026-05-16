@@ -1,0 +1,23 @@
+MODULE GNOMESORT (IDENT = 'V1') =
+BEGIN
+
+ROUTINE GNOME_SORT (ARR : REF VECTOR [, 100], N) : NOVALUE =
+    BEGIN
+    LOCAL I, TMP;
+    I = 0;
+    WHILE .I LSS .N DO
+        BEGIN
+        IF .I EQL 0 OR .ARR [.I] GEQ .ARR [.I - 1]
+        THEN I = .I + 1
+        ELSE
+            BEGIN
+            TMP = .ARR [.I];
+            ARR [.I] = .ARR [.I - 1];
+            ARR [.I - 1] = .TMP;
+            I = .I - 1
+            END
+        END
+    END;
+
+END
+ELUDOM
