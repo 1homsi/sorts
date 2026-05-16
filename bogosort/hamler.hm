@@ -1,1 +1,1 @@
-print("Bogosort implementation for hamler.hm")
+bogosort xs = if sorted xs then xs else bogosort (shuffle xs)
