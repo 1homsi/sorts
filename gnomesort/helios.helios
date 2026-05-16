@@ -1,0 +1,26 @@
+spending gnome_sort_validator
+
+func gnome_sort(lst: []Int) -> []Int {
+    n: Int = lst.length;
+    func loop(arr: []Int, i: Int) -> []Int {
+        if (i >= n) {
+            arr
+        } else if (i == 0) {
+            loop(arr, i + 1)
+        } else {
+            cur: Int = arr.get(i);
+            prv: Int = arr.get(i - 1);
+            if (cur >= prv) {
+                loop(arr, i + 1)
+            } else {
+                arr2: []Int = arr.set(i, prv).set(i - 1, cur);
+                loop(arr2, i - 1)
+            }
+        }
+    };
+    loop(lst, 0)
+}
+
+func main(ctx: ScriptContext) -> Bool {
+    true
+}
