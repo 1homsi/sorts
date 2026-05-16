@@ -1,0 +1,15 @@
+stoogesort a i j = stoogesort3
+  where
+    stoogesort3 = swap_if
+      where
+        stoogesort2 = if j - i > 1 then
+          stoogesort (stoogesort (stoogesort a i (j-t)) (i+t) j) i (j-t)
+          where t = (j - i + 1) div 3
+        else a
+        swap_if = if a!j < a!i then update_array a i j
+                  else stoogesort2
+        update_array arr i j = replace_elem arr i (arr!j) where
+          replace_elem a i v = take a i ++ [v] ++ drop (i+1) a
+  end
+
+main = stoogesort [5,2,8,1,9,3] 0 5
