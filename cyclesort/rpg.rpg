@@ -1,0 +1,38 @@
+     H DFTACTGRP(*NO)
+     D cycleSort       PR
+     D  arr                           5S 0 DIM(5)
+     D  n                             3S 0 VALUE
+
+     D cycleSort       PI
+     D  arr                           5S 0 DIM(5)
+     D  n                             3S 0 VALUE
+
+     D cs              S              3S 0
+     D item            S              5S 0
+     D pos             S              3S 0
+     D i               S              3S 0
+     D tmp             S              5S 0
+     D writes          S              3S 0
+
+     C                   EVAL      writes = 0
+     C                   FOR       cs = 1 TO n - 1
+     C                   EVAL      item = arr(cs)
+     C                   EVAL      pos = cs
+     C                   FOR       i = cs + 1 TO n
+     C                   IF        arr(i) < item
+     C                   EVAL      pos = pos + 1
+     C                   ENDIF
+     C                   ENDFOR
+     C                   IF        pos <> cs
+     C                   DOU       arr(pos) <> item
+     C                   EVAL      pos = pos + 1
+     C                   ENDDO
+     C                   EVAL      tmp = arr(pos)
+     C                   EVAL      arr(pos) = item
+     C                   EVAL      item = tmp
+     C                   EVAL      writes = writes + 1
+     C                   ENDIF
+     C                   ENDFOR
+     C                   RETURN
+
+     C                   CALLP     cycleSort(arr:5)
