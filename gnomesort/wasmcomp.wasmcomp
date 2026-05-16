@@ -1,0 +1,9 @@
+package gnomesort:component;
+
+interface sorter {
+  gnome-sort: func(arr: list<s32>) -> list<s32>;
+}
+
+world gnome-sort-world {
+  export sorter;
+}
