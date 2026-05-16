@@ -1,0 +1,27 @@
+import Control.Monad (when)
+
+bitonicsort :: [Int] -> Int -> Int -> Int -> IO ()
+bitonicsort arr lo cnt dir = do
+  when (cnt > 1) $ do
+    let k = cnt `div` 2
+    bitonicsort arr lo k 1
+    bitonicsort arr (lo + k) k 0
+    bitonicmerge arr lo cnt dir
+
+bitonicmerge :: [Int] -> Int -> Int -> Int -> IO ()
+bitonicmerge arr lo cnt dir = do
+  when (cnt > 1) $ do
+    let k = cnt `div` 2
+    mapM_ (\i -> when ((arr !! i > arr !! (i + k)) == (dir == 1)) $ do
+      let tmp = arr !! i
+      arr !! i <- arr !! (i + k)
+      arr !! (i + k) <- tmp
+      ) [lo .. lo + cnt - k - 1]
+    bitonicmerge arr lo k dir
+    bitonicmerge arr (lo + k) k dir
+
+main :: IO ()
+main = do
+  let arr = [5, 2, 8, 1, 9, 3, 7, 4]
+  bitonicsort arr 0 8 1
+  print arr
