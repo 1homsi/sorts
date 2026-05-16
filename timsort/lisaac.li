@@ -1,0 +1,66 @@
+section PUBLIC
+
+timsort(arr : ARRAY(INTEGER), minSize : INTEGER) : ARRAY(INTEGER) is
+do
+  Result := mergesort(arr, minSize);
+end;
+
+mergesort(arr : ARRAY(INTEGER), minSize : INTEGER) : ARRAY(INTEGER) is
+local
+  mid : INTEGER;
+  left : ARRAY(INTEGER);
+  right : ARRAY(INTEGER);
+do
+  if arr.count <= 1 then
+    Result := arr;
+  elseif arr.count <= minSize then
+    Result := insertionsort(arr);
+  else
+    mid := arr.count / 2;
+    left := arr.sub(0, mid);
+    right := arr.sub(mid, arr.count);
+    Result := merge(mergesort(left, minSize), mergesort(right, minSize));
+  endif;
+end;
+
+insertionsort(arr : ARRAY(INTEGER)) : ARRAY(INTEGER) is
+local
+  result : ARRAY(INTEGER);
+  i : INTEGER;
+  j : INTEGER;
+  key : INTEGER;
+do
+  result := arr.clone();
+  i := 1;
+  {i < result.count}.while_do({
+    key := result.item(i);
+    j := i - 1;
+    {j >= 0 && result.item(j) > key}.while_do({
+      result.put(j + 1, result.item(j));
+      j := j - 1;
+    });
+    result.put(j + 1, key);
+    i := i + 1;
+  });
+  Result := result;
+end;
+
+merge(left : ARRAY(INTEGER), right : ARRAY(INTEGER)) : ARRAY(INTEGER) is
+local
+  result : ARRAY(INTEGER);
+  i : INTEGER;
+  j : INTEGER;
+do
+  i := 0;
+  j := 0;
+  {i < left.count && j < right.count}.while_do({
+    if left.item(i) <= right.item(j) then
+      result.put(i + j, left.item(i));
+      i := i + 1;
+    else
+      result.put(i + j, right.item(j));
+      j := j + 1;
+    endif;
+  });
+  Result := result;
+end;
