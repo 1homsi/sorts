@@ -1,0 +1,13 @@
+when green flag clicked
+set [i v] to [0]
+set [n v] to [length of [arr v]]
+repeat until <(i) = (n)>
+  if <<(i) = [0]> or <(item (i) of [arr v]) >= (item ((i) - (1)) of [arr v])>> then
+    change [i v] by (1)
+  else
+    set [tmp v] to (item (i) of [arr v])
+    replace item (i) of [arr v] with (item ((i) - (1)) of [arr v])
+    replace item ((i) - (1)) of [arr v] with (tmp)
+    change [i v] by (-1)
+  end
+end
