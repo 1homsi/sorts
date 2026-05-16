@@ -1,0 +1,29 @@
+def countingsort(arr):
+  if arr.length() == 0:
+    return arr
+  end
+
+  var max = 0
+  for val in arr:
+    if val > max:
+      max = val
+    end
+  end
+
+  var count = Array(max + 1, 0)
+  for val in arr:
+    count[val] = count[val] + 1
+  end
+
+  var output = Array()
+  for i in range(0, max + 1):
+    for j in range(0, count[i]):
+      output.add(i)
+    end
+  end
+
+  return output
+end
+
+var test = [5, 2, 8, 1, 9, 3]
+print(countingsort(test))
