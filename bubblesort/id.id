@@ -1,0 +1,17 @@
+def bubble_sort arr =
+    let n = length arr
+    def loop swapped i arr =
+        if i >= n - 1 then
+            if swapped then loop False 0 arr
+            else arr
+        else
+            let xi = arr[i]
+            let xi1 = arr[i+1]
+            if xi > xi1 then
+                let arr' = arr with [i] = xi1, [i+1] = xi
+                loop True (i+1) arr'
+            else
+                loop swapped (i+1) arr
+    in loop False 0 arr
+
+in bubble_sort [64, 34, 25, 12, 22, 11, 90]
