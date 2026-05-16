@@ -1,0 +1,27 @@
+func bitonicsort(arr, lo, cnt, dir) is
+  if cnt > 1
+    k := cnt / 2
+    bitonicsort(arr, lo, k, 1)
+    bitonicsort(arr, lo + k, k, 0)
+    bitonicmerge(arr, lo, cnt, dir)
+  end
+end
+
+func bitonicmerge(arr, lo, cnt, dir) is
+  if cnt > 1
+    k := cnt / 2
+    for i in lo..lo + cnt - k - 1 do
+      if ((arr[i] > arr[i + k]) == (dir == 1))
+        tmp := arr[i]
+        arr[i] = arr[i + k]
+        arr[i + k] = tmp
+      end
+    end
+    bitonicmerge(arr, lo, k, dir)
+    bitonicmerge(arr, lo + k, k, dir)
+  end
+end
+
+arr := [5, 2, 8, 1, 9, 3, 7, 4]
+bitonicsort(arr, 0, 8, 1)
+println(arr)
