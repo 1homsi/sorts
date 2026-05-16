@@ -1,0 +1,17 @@
+(let bogosort (fun (lst) {
+  (if (issorted lst)
+    lst
+    (bogosort (shuffle lst)))}))
+
+(let issorted (fun (lst) {
+  (if (empty? lst)
+    true
+    (if (empty? (cdr lst))
+      true
+      (if (> (car lst) (car (cdr lst)))
+        false
+        (issorted (cdr lst)))))}))
+
+(let shuffle (fun (lst) {lst}))
+
+(print (bogosort [3 1 2]))
