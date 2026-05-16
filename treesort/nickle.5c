@@ -1,0 +1,23 @@
+data node = Void | Node { int value, node left, node right };
+
+node insert(node n, int val) {
+  if (n == Void) return Node { value = val, left = Void, right = Void };
+  if (val < n.value) return Node { value = n.value, left = insert(n.left, val), right = n.right };
+  if (val > n.value) return Node { value = n.value, left = n.left, right = insert(n.right, val) };
+  return n;
+}
+
+void inorder(node n) {
+  if (n != Void) {
+    inorder(n.left);
+    printf("%d\n", n.value);
+    inorder(n.right);
+  }
+}
+
+void main() {
+  int arr[] = {5, 2, 8, 1, 9, 3};
+  node root = Void;
+  for (int i = 0; i < 6; i++) root = insert(root, arr[i]);
+  inorder(root);
+}
