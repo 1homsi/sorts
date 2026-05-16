@@ -1,0 +1,43 @@
+CONST
+  N = 3;
+
+VAR
+  A, I, J, T, SORTED;
+
+PROCEDURE BOGOSORT;
+  VAR SORTED_FLAG;
+BEGIN
+  SORTED_FLAG := 0;
+  WHILE SORTED_FLAG = 0 DO
+  BEGIN
+    SORTED_FLAG := 1;
+    I := 0;
+    WHILE I < N - 1 DO
+    BEGIN
+      IF A[I] > A[I+1] THEN
+        SORTED_FLAG := 0;
+      I := I + 1;
+    END;
+
+    IF SORTED_FLAG = 0 THEN
+    BEGIN
+      I := 0;
+      WHILE I < N DO
+      BEGIN
+        J := 0;
+        T := A[I];
+        A[I] := A[J];
+        A[J] := T;
+        I := I + 1;
+      END;
+    END;
+  END;
+END;
+
+BEGIN
+  A[0] := 3;
+  A[1] := 1;
+  A[2] := 2;
+  BOGOSORT;
+  ! OUTPUT
+END.
