@@ -1,28 +1,6 @@
-PROCEDURE Main()
-    LOCAL arr := {3, 1, 4, 1, 5, 9, 2, 6}
-    LOCAL n := Len(arr)
-    LOCAL sorted, i, j, tmp
-
-    DO WHILE .T.
-        sorted := .T.
-        FOR i := 1 TO n - 1
-            IF arr[i] > arr[i + 1]
-                sorted := .F.
-            ENDIF
-        NEXT i
-        IF sorted
-            EXIT
-        ENDIF
-        FOR i := n TO 2 STEP -1
-            j := hb_RandomInt(1, i)
-            tmp := arr[i]
-            arr[i] := arr[j]
-            arr[j] := tmp
-        NEXT i
-    ENDDO
-
-    FOR i := 1 TO n
-        ?? Str(arr[i], 3)
-    NEXT i
-    ?
-RETURN
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
