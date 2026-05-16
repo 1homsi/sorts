@@ -1,1 +1,6 @@
-print("Bogosort implementation for gnark.gnark")
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
