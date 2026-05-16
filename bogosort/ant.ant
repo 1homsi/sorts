@@ -1,27 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="bogosort" default="run">
-    <property name="arr" value="3,1,4,1,5,9,2,6"/>
-
-    <target name="run">
-        <script language="javascript">
-            var arr = [3, 1, 4, 1, 5, 9, 2, 6];
-
-            function isSorted(a) {
-                for (var i = 0; i < a.length - 1; i++) {
-                    if (a[i] > a[i+1]) return false;
-                }
-                return true;
-            }
-
-            function shuffle(a) {
-                for (var i = a.length - 1; i > 0; i--) {
-                    var j = Math.floor(Math.random() * (i + 1));
-                    var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
-                }
-            }
-
-            while (!isSorted(arr)) shuffle(arr);
-            self.log("Sorted: " + arr.join(", "));
-        </script>
-    </target>
-</project>
+function bogosort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
