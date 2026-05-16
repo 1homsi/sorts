@@ -1,0 +1,41 @@
+timsort :: (Ref (Array Int)) -> Int -> IO ()
+timsort arr minSize = do
+  sorted <- mergesort arr minSize
+  return ()
+
+mergesort :: (Ref (Array Int)) -> Int -> IO (Array Int)
+mergesort arr minSize = do
+  a <- read arr
+  case length a of
+    0 -> return a
+    1 -> return a
+    n | n <= minSize -> insertionsort a
+      | otherwise -> do
+          let mid = n `div` 2
+          let left = take mid a
+          let right = drop mid a
+          sl <- mergesort (writeIORef arr left) minSize
+          sr <- mergesort (writeIORef arr right) minSize
+          return (merge sl sr)
+
+insertionsort :: Array Int -> IO (Array Int)
+insertionsort arr = do
+  let result = arr
+  forM_ [1..length result - 1] $ \i -> do
+    let key = result !! i
+    foldM (\j _ -> do
+      if j >= 0 && (result !! j) > key
+        then do
+          return (j - 1)
+        else return j
+      ) (i - 1) [0..i-2]
+  return result
+
+merge :: Array Int -> Array Int -> Array Int
+merge left right = go left right [] 0 0
+  where
+    go l r acc i j
+      | i >= length l = acc ++ r
+      | j >= length r = acc ++ (drop i l)
+      | l !! i <= r !! j = go l r (acc ++ [l !! i]) (i + 1) j
+      | otherwise = go l r (acc ++ [r !! j]) i (j + 1)
