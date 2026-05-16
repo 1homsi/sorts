@@ -1,0 +1,21 @@
+def countingsort(arr : Array of Integer) -> Array of Integer
+  if arr.empty()
+    return arr
+
+  var max := 0
+  for val in arr
+    if val > max
+      max := val
+
+  var count := Array of Integer(max + 1, 0)
+  for val in arr
+    count[val] := count[val] + 1
+
+  var output := Array of Integer()
+  for i in 0..max
+    for j in 0..<count[i]
+      output.append(i)
+
+  return output
+
+print(countingsort([5, 2, 8, 1, 9, 3]))
