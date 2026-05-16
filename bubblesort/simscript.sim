@@ -1,0 +1,20 @@
+process simulate
+own array arr with dimension [1:6]
+own integer n, i, j, temp
+n = 6
+arr(1) = 5
+arr(2) = 2
+arr(3) = 8
+arr(4) = 1
+arr(5) = 9
+arr(6) = 3
+for i = 1 to n
+  for j = 1 to n - i
+    if arr(j) > arr(j+1)
+      temp = arr(j)
+      arr(j) = arr(j+1)
+      arr(j+1) = temp
+    endif
+  endfor
+endfor
+end
