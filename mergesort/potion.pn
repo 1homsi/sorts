@@ -1,0 +1,34 @@
+merge = (arr, left, mid, right) :
+  i = left
+  j = mid + 1
+  result = []
+  
+  while i <= mid and j <= right :
+    if arr[i] <= arr[j] :
+      result push arr[i]
+      i = i + 1
+    else :
+      result push arr[j]
+      j = j + 1
+
+  while i <= mid :
+    result push arr[i]
+    i = i + 1
+
+  while j <= right :
+    result push arr[j]
+    j = j + 1
+
+  for k in result length :
+    arr[left + k] = result[k]
+
+mergesort = (arr, left, right) :
+  if left < right :
+    mid = (left + right) / 2
+    mergesort(arr, left, mid)
+    mergesort(arr, mid + 1, right)
+    merge(arr, left, mid, right)
+
+arr = [5, 2, 8, 1, 9, 3]
+mergesort(arr, 0, 5)
+arr print
