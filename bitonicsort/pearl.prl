@@ -1,0 +1,37 @@
+PROBLEM BITONICSORT;
+  DCL arr STATIC INIT (5, 2, 8, 1, 9, 3, 7, 4);
+  DCL lo FIXED INIT (0);
+  DCL cnt FIXED INIT (8);
+  DCL dir FIXED INIT (1);
+
+  PROC bitonicsort(lo, cnt, dir);
+    DCL lo, cnt, dir FIXED;
+    DCL k FIXED;
+    IF cnt GT 1 THEN
+      k ASSIGN cnt / 2;
+      CALL bitonicsort(lo, k, 1);
+      CALL bitonicsort(lo + k, k, 0);
+      CALL bitonicmerge(lo, cnt, dir);
+    END;
+  END;
+
+  PROC bitonicmerge(lo, cnt, dir);
+    DCL lo, cnt, dir FIXED;
+    DCL k, i, tmp FIXED;
+    IF cnt GT 1 THEN
+      k ASSIGN cnt / 2;
+      FOR i FROM lo BY 1 TO lo + cnt - k - 1 DO
+        IF (arr[i] GT arr[i + k]) EQ (dir EQ 1) THEN
+          tmp ASSIGN arr[i];
+          arr[i] ASSIGN arr[i + k];
+          arr[i + k] ASSIGN tmp;
+        END;
+      END;
+      CALL bitonicmerge(lo, k, dir);
+      CALL bitonicmerge(lo + k, k, dir);
+    END;
+  END;
+
+  CALL bitonicsort(lo, cnt, dir);
+  PRINT arr;
+END;
