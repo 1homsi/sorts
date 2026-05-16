@@ -1,0 +1,7 @@
+schema GnomeSortConfig:
+    arr: [int] = [5, 3, 8, 1, 9, 2, 7, 4, 6, 0]
+    n: int = len(arr)
+
+config = GnomeSortConfig {
+    arr = [5, 3, 8, 1, 9, 2, 7, 4, 6, 0]
+}
