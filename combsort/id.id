@@ -1,0 +1,17 @@
+def comb_sort arr n =
+    let gap = n
+        sorted = False
+    in loop gap sorted arr
+
+def loop gap sorted arr =
+    let new_gap = max 1 (gap * 10 / 13)
+        (arr', changed) = pass arr n new_gap 0
+    in if new_gap == 1 && ~changed then arr'
+       else loop new_gap False arr'
+
+def pass arr n gap i =
+    if i + gap >= n then (arr, False)
+    else if arr[i] > arr[i+gap] then
+        let arr' = (arr with [i] = arr[i+gap], [i+gap] = arr[i])
+        in pass arr' n gap (i+1) with _2 = True
+    else pass arr n gap (i+1)
