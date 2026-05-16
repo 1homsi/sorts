@@ -1,0 +1,18 @@
+component quicksort
+  export Executable
+
+  qs(arr: Array[ZeroBased]) : Array[ZeroBased] =
+    if |arr| <= 1 then
+      arr
+    else
+      pivot = arr[0]
+      less = [arr[i] | i <- 0 # |arr|, arr[i] <= pivot]
+      greater = [arr[i] | i <- 0 # |arr|, arr[i] > pivot]
+      qs(less) || [pivot] || qs(greater)
+    end
+
+  run() = do
+    arr = array(5, 2, 8, 1, 9, 3)
+    println(qs(arr))
+  end
+end
