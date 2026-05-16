@@ -1,0 +1,9 @@
+def insert(x: int, lst: list int): list int =
+    match lst with
+    | [] -> [x]
+    | h :: t -> if x <= h then x :: h :: t else h :: insert(x, t)
+
+def insertion_sort(lst: list int): list int =
+    match lst with
+    | [] -> []
+    | h :: t -> insert(h, insertion_sort(t))
