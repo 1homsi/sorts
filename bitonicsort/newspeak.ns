@@ -1,0 +1,43 @@
+Newspeak3
+'BitonicSort'
+class BitonicSort usingPlatform: platform = (
+| arr |
+
+    compareAndSwap: i with: j direction: dir = (
+        | ai aj tmp |
+        ai:: arr at: i.
+        aj:: arr at: j.
+        dir = (ai > aj) ifTrue: [
+            arr at: i put: aj.
+            arr at: j put: ai.
+        ]
+    )
+
+    bitonicMerge: lo count: cnt direction: dir = (
+        cnt > 1 ifTrue: [
+            | k |
+            k:: cnt // 2.
+            lo to: lo + k - 1 do: [:i |
+                compareAndSwap: i with: i + k direction: dir
+            ].
+            bitonicMerge: lo count: k direction: dir.
+            bitonicMerge: lo + k count: k direction: dir.
+        ]
+    )
+
+    bitonicSort: lo count: cnt direction: dir = (
+        cnt > 1 ifTrue: [
+            | k |
+            k:: cnt // 2.
+            bitonicSort: lo count: k direction: true.
+            bitonicSort: lo + k count: k direction: false.
+            bitonicMerge: lo count: cnt direction: dir.
+        ]
+    )
+
+    run = (
+        arr:: {3. 7. 4. 8. 6. 2. 1. 5} asOrderedCollection.
+        bitonicSort: 1 count: arr size direction: true.
+        platform io print: arr.
+    )
+)
