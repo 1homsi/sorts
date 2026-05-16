@@ -1,0 +1,19 @@
+CREATE OR REPLACE FUNCTION gnome_sort(arr integer[]) RETURNS integer[] AS $$
+DECLARE
+    i integer := 1;
+    n integer := array_length(arr, 1);
+    tmp integer;
+BEGIN
+    WHILE i <= n LOOP
+        IF i = 1 OR arr[i] >= arr[i - 1] THEN
+            i := i + 1;
+        ELSE
+            tmp := arr[i];
+            arr[i] := arr[i - 1];
+            arr[i - 1] := tmp;
+            i := i - 1;
+        END IF;
+    END LOOP;
+    RETURN arr;
+END;
+$$ LANGUAGE plpgsql;
