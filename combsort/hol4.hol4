@@ -1,0 +1,21 @@
+val comb_sort_def = Define `
+  comb_sort arr =
+    let gap = LENGTH arr in
+    if gap <= 1 then arr
+    else
+      let new_gap = (gap * 10) / 13 in
+      let new_gap = if new_gap < 1 then 1 else new_gap in
+      comb_sort (comb_pass arr 0 new_gap)
+`;
+
+val comb_pass_def = Define `
+  comb_pass arr i gap =
+    if i >= LENGTH arr - gap then arr
+    else if EL i arr > EL (i + gap) arr then
+      comb_pass (UPDATE arr i (EL (i + gap) arr)) (i + 1) gap
+    else
+      comb_pass arr (i + 1) gap
+`;
+
+val sample = [5, 2, 8, 1, 9, 3];
+val _ = print (comb_sort sample);
