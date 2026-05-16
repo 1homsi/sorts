@@ -1,0 +1,31 @@
+import chisel3._
+import chisel3.util._
+
+class InsertionSort(n: Int = 8) extends Module {
+    val io = IO(new Bundle {
+        val in   = Input(Vec(n, UInt(8.W)))
+        val out  = Output(Vec(n, UInt(8.W)))
+        val done = Output(Bool())
+    })
+
+    val arr  = RegInit(VecInit(Seq.fill(n)(0.U(8.W))))
+    val done = RegInit(false.B)
+
+    when (!done) {
+        arr := io.in
+        for (i <- 1 until n) {
+            val key = arr(i)
+            for (j <- (i-1) to 0 by -1) {
+                when (arr(j) > key) {
+                    arr(j+1) := arr(j)
+                } .otherwise {
+                    arr(j+1) := key
+                }
+            }
+        }
+        done := true.B
+    }
+
+    io.out  := arr
+    io.done := done
+}
