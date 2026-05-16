@@ -1,0 +1,29 @@
+fmod TIMSORT is
+  including INT-LIST .
+  
+  op timsort : List Int -> List .
+  eq timsort(L, M) = mergesort(L, M) .
+  
+  op mergesort : List Int -> List .
+  ceq mergesort(L, M) = L if size(L) <= 1 .
+  ceq mergesort(L, M) = insertionsort(L) if size(L) <= M .
+  ceq mergesort(L, M) = merge(mergesort(take(L, N), M), mergesort(drop(L, N), M))
+    if size(L) > M
+    /\ N := size(L) quo 2 .
+  
+  op insertionsort : List -> List .
+  eq insertionsort(nil) = nil .
+  eq insertionsort(X L) = insert(X, insertionsort(L)) .
+  
+  op insert : Int List -> List .
+  eq insert(X, nil) = X nil .
+  ceq insert(X, Y L) = X Y L if X <= Y .
+  eq insert(X, Y L) = Y insert(X, L) .
+  
+  op merge : List List -> List .
+  eq merge(nil, L) = L .
+  eq merge(L, nil) = L .
+  ceq merge(X L, Y L2) = X merge(L, Y L2) if X <= Y .
+  eq merge(X L, Y L2) = Y merge(X L, L2) .
+  
+endfm
