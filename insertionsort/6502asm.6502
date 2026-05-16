@@ -1,0 +1,32 @@
+        ORG $0800
+
+ARR:    DB  5, 3, 1, 4, 2
+N:      DB  5
+KEY:    DB  0
+
+START:
+        LDX #1
+OUTER:
+        CPX N
+        BCS DONE
+        LDA ARR,X
+        STA KEY
+        TXA
+        TAY
+        DEY
+INNER:
+        CPY #$FF
+        BEQ PLACE
+        LDA ARR,Y
+        CMP KEY
+        BCC PLACE
+        STA ARR+1,Y
+        DEY
+        JMP INNER
+PLACE:
+        LDA KEY
+        STA ARR+1,Y
+        INX
+        JMP OUTER
+DONE:
+        BRK
