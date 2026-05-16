@@ -1,0 +1,14 @@
+gnome_sort: PROC(arr REF ARRAY(0:99) OF INT, n INT);
+DCL i INT := 0;
+DCL tmp INT;
+DO WHILE i < n;
+    IF i = 0 OR arr(i) >= arr(i-1) THEN
+        i := i + 1;
+    ELSE
+        tmp := arr(i);
+        arr(i) := arr(i-1);
+        arr(i-1) := tmp;
+        i := i - 1;
+    FI;
+OD;
+END gnome_sort;
