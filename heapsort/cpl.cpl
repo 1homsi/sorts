@@ -1,0 +1,21 @@
+HEAPSORT = PROGRAM
+  INTEGER ARRAY arr[0:5]
+  INTEGER n, i, tmp
+
+  HEAPIFY(INTEGER n, i) ≡
+    INTEGER largest = i, left = 2×i+1, right = 2×i+2, t
+    IF left < n ∧ arr[left] > arr[largest] THEN largest := left
+    IF right < n ∧ arr[right] > arr[largest] THEN largest := right
+    IF largest ≠ i THEN (
+      t := arr[i]; arr[i] := arr[largest]; arr[largest] := t;
+      HEAPIFY(n, largest)
+    )
+
+  arr[0]:=12; arr[1]:=11; arr[2]:=13; arr[3]:=5; arr[4]:=6; arr[5]:=7
+  n := 6
+  FOR i = n÷2-1 STEP -1 TO 0 DO HEAPIFY(n, i)
+  FOR i = n-1 STEP -1 TO 1 DO (
+    tmp := arr[0]; arr[0] := arr[i]; arr[i] := tmp;
+    HEAPIFY(i, 0)
+  )
+  FOR i = 0 TO n-1 DO WRITE arr[i]
