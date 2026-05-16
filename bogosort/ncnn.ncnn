@@ -1,1 +1,1 @@
-print("Bogosort implementation for ncnn.ncnn")
+bogosort = true
