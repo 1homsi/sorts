@@ -1,0 +1,21 @@
+GnomeSort = [
+  is arr:Array of Integer,
+  let i := 0 in
+    while i < arr.size() do (
+      if i = 0 then
+        i := i + 1
+      else if arr[i] < arr[i-1] then (
+        let temp := arr[i] in (
+          arr[i] := arr[i-1];
+          arr[i-1] := temp;
+          i := i - 1
+        )
+      ) else
+        i := i + 1
+      endif;
+    );
+    arr
+];
+
+let test := Array new(Integer) of [5, 2, 8, 1, 9, 3] in
+write (GnomeSort(test))
