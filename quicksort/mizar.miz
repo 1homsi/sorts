@@ -1,0 +1,13 @@
+environ
+
+ begin
+
+  theorem :: Quicksort
+  for x being FinSequence st (for i being Nat st i in dom x holds x.i is integer)
+  holds ex y being FinSequence st y is-sorted & y is_permutation_of x;
+
+  registration
+    cluster sorted FinSequence;
+  end;
+
+ end
