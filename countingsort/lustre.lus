@@ -1,0 +1,22 @@
+node countingsort (input : int) returns (output : int);
+var max : int;
+var count : int;
+var i : int;
+var j : int;
+
+let
+  max = 9;
+  count = 0;
+
+  output = input;
+
+tel;
+
+node main () returns (result : int);
+var arr : int;
+
+let
+  arr = 5 -> pre(2 -> pre(8 -> pre(1 -> pre(9 -> pre(3 -> pre(0))))));
+  result = countingsort(arr);
+
+tel;
