@@ -1,0 +1,17 @@
+def SelectionSort(var arr: list<int>) : list<int>
+  var n = len(arr)
+  for i in 0 to n - 2
+    var min_idx = i
+    for j in i + 1 to n - 1
+      if arr[j] < arr[min_idx]
+        min_idx = j
+      end
+    end
+    var tmp = arr[i]
+    arr[i] = arr[min_idx]
+    arr[min_idx] = tmp
+  end
+  return arr
+end
+
+print(SelectionSort([5, 2, 8, 1, 9, 3]))
