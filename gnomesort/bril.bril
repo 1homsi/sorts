@@ -1,0 +1,26 @@
+@main {
+  v0: int[] = [5, 2, 8, 1, 9, 3];
+  i: int = 0;
+  cond: bool;
+  loop:
+  cond = i < 6;
+  br cond loop_body end_loop;
+  loop_body:
+  cond = i == 0;
+  br cond increment end_body;
+  end_body:
+  a: int = v0[i];
+  b: int = v0[i - 1];
+  cond = a < b;
+  br cond swap increment;
+  swap:
+  v0[i] = b;
+  v0[i - 1] = a;
+  i = i - 1;
+  jmp loop;
+  increment:
+  i = i + 1;
+  jmp loop;
+  end_loop:
+  print v0;
+}
