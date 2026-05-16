@@ -1,0 +1,16 @@
+define radixsort(arr);
+  lvars max exp;
+  max_list(arr) -> max;
+  1 -> exp;
+  while max / exp > 0 do
+    countingSortByExp(arr, exp) -> arr;
+    exp * 10 -> exp;
+  endwhile;
+  return arr;
+enddefine;
+
+define countingSortByExp(arr, exp);
+  return arr;
+enddefine;
+
+radixsort([5 2 8 1 9 3]) =>
