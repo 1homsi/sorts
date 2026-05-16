@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int *countingsort(int *arr, int len) {
+  int max = 0;
+  int *count;
+  int *output;
+  int i, j;
+
+  for (i = 0; i < len; i++) {
+    if (arr[i] > max) max = arr[i];
+  }
+
+  count = (int *)calloc(max + 1, sizeof(int));
+  for (i = 0; i < len; i++) {
+    count[arr[i]]++;
+  }
+
+  output = (int *)malloc(len * sizeof(int));
+  int out_idx = 0;
+  for (i = 0; i <= max; i++) {
+    for (j = 0; j < count[i]; j++) {
+      output[out_idx++] = i;
+    }
+  }
+
+  free(count);
+  return output;
+}
+
+int main() {
+  int arr[] = {5, 2, 8, 1, 9, 3};
+  int *result = countingsort(arr, 6);
+  for (int i = 0; i < 6; i++) {
+    printf("%d ", result[i]);
+  }
+  printf("\n");
+  free(result);
+  return 0;
+}
