@@ -1,0 +1,32 @@
+define: #cocktailsort -> [| :arr |
+  arr := arr copy.
+  (arr size) `>>` [| :n |
+    0 `upto:` (n - 1) `do:` [| :i |
+      false `>> [| :swapped |
+        0 `upto:` (n - i - 2) `do:` [| :k |
+          (arr at: k) `>` (arr at: (k + 1)) `ifTrue:` [
+            | :temp |
+            temp := arr at: k.
+            arr `at:put:` k (arr at: (k + 1)).
+            arr `at:put:` (k + 1) temp.
+            swapped := true.
+          ].
+        ].
+        swapped `ifFalse:` [^ arr].
+        (n - i - 2) `downto:` 0 `do:` [| :k |
+          (arr at: k) `>` (arr at: (k + 1)) `ifTrue:` [
+            | :temp |
+            temp := arr at: k.
+            arr `at:put:` k (arr at: (k + 1)).
+            arr `at:put:` (k + 1) temp.
+            swapped := true.
+          ].
+        ].
+        swapped `ifFalse:` [^ arr].
+      ].
+    ].
+    arr.
+  ].
+].
+
+(#cocktailsort applyTo: {5. 2. 8. 1. 9. 3.}) printLine.
