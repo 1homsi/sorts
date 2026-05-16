@@ -1,0 +1,10 @@
+insertionSort arr = insertSort 1 arr with
+  insertSort i xs | i >= #xs = xs
+  insertSort i xs = insertSort (i+1) (insert i xs)
+  insert i xs = xs[0..j] + [key] + xs[j+1..i-1] + xs[i..] when
+    j = findIndex xs i key;
+  findIndex xs i key = j when
+    (j:js) = takewhile (\x -> x > key) (reverse (xs[0..i-1])) ++ [-1];
+end;
+
+putStrLn $ str (insertionSort [5, 2, 8, 1, 9, 3]);
